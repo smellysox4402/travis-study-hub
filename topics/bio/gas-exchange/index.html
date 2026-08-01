@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B3.1 Gas Exchange — Club O₂</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* leaf plan diagram */
+  .plan{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:18px; margin:14px 0;}
+  .plan .layers{display:flex; flex-direction:column; gap:6px; margin-top:10px;}
+  .plan .ly{display:flex; align-items:center; gap:10px; border-radius:10px; padding:9px 12px; font-size:13.5px; font-weight:700; color:#0b0214;}
+  .plan .ly .nm{width:190px; flex:0 0 auto;}
+  .plan .ly small{display:block; font-weight:400; opacity:.85;}
+  .ly.ue{background:linear-gradient(90deg,#a78bfa,#c4b5fd);}
+  .ly.pm{background:linear-gradient(90deg,#4ade80,#86efac);}
+  .ly.sp{background:linear-gradient(90deg,#22d3ee,#67e8f9);}
+  .ly.le{background:linear-gradient(90deg,#fbbf24,#fcd34d);}
+  .ly.vein{background:linear-gradient(90deg,#ff2ec4,#f472b6);}
+  .plan .key{font-size:12px; color:var(--dim); margin-top:10px;}
+
+  /* spirometer/curve blocks */
+  .curvebox{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px; margin:14px 0; text-align:center;}
+  .curvebox svg{max-width:520px; width:100%; height:auto;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .cl .code.ahl{color:var(--gold);}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card,.plan,.curvebox{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#act1">ACT 1 · THE CROWD</a>
+  <a href="#act2">ACT 2 · DOOR RULES</a>
+  <a href="#act3">ACT 3 · GRADIENTS</a>
+  <a href="#act4">ACT 4 · THE BUILDING</a>
+  <a href="#act5">ACT 5 · THE LIFT</a>
+  <a href="#act6">ACT 6 · VOLUMES</a>
+  <a href="#act7">ACT 7 · THE GARDEN</a>
+  <a href="#act9">ACT 9 · WINDOWS</a>
+  <a href="#act10">ACT 10 · COURIER</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/13</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Biology · Higher Level · Theme B · Form &amp; Function</div>
+  <h1>B3.1 GAS EXCHANGE</h1>
+  <div class="sub">Welcome to Club O₂ — the party only runs if the VIP oxygen gets in and the carbon-dioxide smoke gets out. Every organism is a venue with a door policy. The door is an exchange surface. The aircon is ventilation. And the crowd never stops dancing.</div>
+  <div class="badges">
+    <span class="badge hl">B3.1 · SL + AHL</span>
+    <span class="badge ahl">AHL = B3.1.11–13 (the blood courier)</span>
+    <span class="badge">13 SYLLABUS POINTS</span>
+    <span class="badge">ANIMALS + PLANTS + BLOOD</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">B3.1.1 · Gas exchange as a vital function in all organisms</div>
+  <h2>ACT 1 · THE CROWD PROBLEM</h2>
+  <p class="aim">Every living thing runs the same two-for-one deal: absorb one gas, release another. The trick is being big enough to need a door.</p>
+
+  <div class="panel">
+    <h3>🎟 THE UNIVERSAL DEAL</h3>
+    <p class="big">All organisms exchange gases — it's how the party (metabolism) keeps running:</p>
+    <ul class="clean">
+      <li><span class="cyan">YOU (aerobic respiration):</span> O₂ in → ATP. CO₂ is the waste smoke and must be removed, or the venue fills up and the crowd dies.</li>
+      <li><span class="green">REDWOOD / LEAF (photosynthesis):</span> CO₂ in → organic molecules (carbon fixation). O₂ is the exhaust blown back out.</li>
+      <li><span class="gold">EVERYONE:</span> diffusion is the basis of it all — molecules drifting randomly from high to low concentration. Simple, slow, free.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>📏 WHY SIZE IS THE PROBLEM</h3>
+    <p>Diffusion is <span class="accent">slow</span>. It only works if the distance is short and the surface is big relative to the volume that needs gas.</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="tag gr">SMALL CLUB (flatworm, amoeba)</div>
+        <h4>🪱 Everyone's at the window</h4>
+        <p>Huge <span class="green">surface-area-to-volume ratio</span> + tiny distance from centre to exterior → the outer skin alone is enough. No doors needed.</p>
+      </div>
+      <div class="card">
+        <div class="tag p">MEGACLUB (whale, you)</div>
+        <h4>🐋 The centre can't breathe</h4>
+        <p>SA:Vol ratio <span class="accent">shrinks</span> as you grow (cube law), and the distance from the middle to the outside grows. A specialised, much larger exchange surface is required — <span class="cyan">alveoli in lungs, gills, or spongy mesophyll in a leaf</span>.</p>
+      </div>
+    </div>
+    <div class="tip"><b>EXAM GOLD:</b> always give BOTH reasons when asked why big organisms need exchange systems: ① SA:Vol ratio decreases with size ② distance from the centre of the organism to the exterior increases. One without the other = half marks.</div>
+  </div>
+
+  <div class="panel">
+    <h3>🦎 SAME SHAPE, DIFFERENT VENUES</h3>
+    <p>Exchange surfaces converge on the same trick — make tiny spheres. Spheres have the smallest SA:Vol of any shape, but make them very small and the total area explodes. Species build their own version:</p>
+    <ul class="clean">
+      <li><span class="cyan">Flatworm / axolotl:</span> direct diffusion over the body surface. Axolotls keep feathery external gills even as adults — only <b>10 µm</b> between the blood in the capillaries and the water outside. (Also: they're critically endangered — bonus general knowledge.)</li>
+      <li><span class="green">Insect:</span> tracheal tubes delivering air straight to tissues — no blood involved.</li>
+      <li><span class="gold">Fish:</span> folded gills pulling dissolved O₂ out of water.</li>
+      <li><span class="accent">Mammal:</span> spongy lungs swapping gases with the atmosphere.</li>
+    </ul>
+    <div class="nos"><b>NOS — evidence over vibes:</b> "alveoli the size of a tennis court" is a claim, not data. To test it you need evidence-based numbers: how many alveoli, and their mean surface area. Don't repeat numbers you can't source.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">B3.1.2 · Properties of gas-exchange surfaces</div>
+  <h2>ACT 2 · THE DOOR RULES</h2>
+  <p class="aim">Every venue has the same four rules posted by the door. Break one and the club suffocates.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🪩</div>
+    <div class="body">
+      <h3>RULE 1 · LARGE</h3>
+      <div class="aka">the dance floor has to fit the whole crowd</div>
+      <p>The total surface area is <span class="accent">large relative to the volume</span> of the organism. More floor = more gas swapped per second. Alveoli: ~300 million of them, total area ≈ <b>40× the outside of your body</b>. Leaf: the moist cell walls of the spongy mesophyll.</p>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🧵</div>
+    <div class="body">
+      <h3>RULE 2 · THIN</h3>
+      <div class="aka">one-cell-deep velvet rope</div>
+      <p>Gases must diffuse only a short distance — usually through a <span class="accent">single layer of cells</span>. Alveolar wall ~0.2 µm + capillary wall one cell thick. Short rope = fast entry.</p>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">💧</div>
+    <div class="body">
+      <h3>RULE 3 · MOIST</h3>
+      <div class="aka">wet floor — gases dissolve first</div>
+      <p>Gases diffuse across membranes far more easily when <span class="accent">dissolved in a film of moisture</span>. Terrestrial organisms keep the surface wet so O₂ and CO₂ can dissolve and slide through. A dry lung is a dead lung; a dry leaf shuts up shop.</p>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🚪</div>
+    <div class="body">
+      <h3>RULE 4 · PERMEABLE</h3>
+      <div class="aka">the door lets both gases through</div>
+      <p>Oxygen and carbon dioxide <span class="accent">diffuse freely</span> across the surface. No bouncer checks IDs — both gases are on the guest list. (Permeable = lets molecules pass; permeable to gases is all we need here.)</p>
+    </div>
+  </div>
+
+  <div class="tip"><b>MNEMONIC — the door sign: <span style="color:var(--gold)">S</span>urface · <span style="color:var(--gold)">M</span>oisture · <span style="color:var(--gold)">A</span>bsorptive/permeable · <span style="color:var(--gold)">R</span>ich blood network · <span style="color:var(--gold)">T</span>hin — <b>SMART.</b></b> The syllabus's four are large, thin, moist, permeable; "rich blood network" is the bonus that plugs straight into Act 3.</div>
+</section>
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">B3.1.3 · Maintenance of concentration gradients at exchange surfaces in animals</div>
+  <h2>ACT 3 · THE GRADIENT LAW</h2>
+  <p class="aim">Diffusion only flows downhill. If the inside ever matches the outside, the party stops. The club must keep the inside O₂-poor and CO₂-rich — forever.</p>
+
+  <div class="panel">
+    <h3>⛰ DIFFUSION IS LAZY</h3>
+    <p>Gas moves from high concentration to low concentration, and <span class="accent">diffusion evens things out</span> — which would slowly kill the gradient and stop all exchange. So the club runs three systems to keep the air fresh:</p>
+    <ul class="clean">
+      <li><span class="cyan">DENSE CAPILLARY NETWORKS</span> — plumbing packed around the exchange surface (alveoli are wrapped in a basket of capillaries).</li>
+      <li><span class="cyan">CONTINUOUS BLOOD FLOW</span> — the pipes never stop. Respiring blood arrives with <b>low O₂, high CO₂</b>, so O₂ keeps diffusing in and CO₂ keeps diffusing out. The blood itself is the moving staircase.</li>
+      <li><span class="cyan">VENTILATION</span> — refresh the air (or water) at the door: lungs breathe air in and out, gills pump water one way.</li>
+    </ul>
+    <p class="muted">In tiny organisms (flatworm again) there's no plumbing — it's the cells' own respiration that keeps the gradient alive: they burn O₂ and make CO₂, so inside stays low-O₂/high-CO₂ automatically.</p>
+  </div>
+
+  <div class="panel">
+    <h3>📊 READ THE STEPS (textbook Figure 4 numbers)</h3>
+    <p>Partial pressure of O₂ (mm Hg) on the journey in — the gradient staircase that drives everything:</p>
+    <table>
+      <tr><th>Location</th><th>pO₂ / mm Hg</th><th>Why</th></tr>
+      <tr><td>Atmospheric air in</td><td>159</td><td>Fresh outside air, ~21% oxygen</td></tr>
+      <tr><td>Air in the alveoli</td><td>105</td><td>Mixed with stale air left from the last exhale — this is why alveolar air isn't as rich as fresh air</td></tr>
+      <tr><td>Blood arriving at alveoli</td><td>40</td><td>Already dumped its O₂ into respiring tissues — the low end of the staircase</td></tr>
+      <tr><td>Air exhaled</td><td>120</td><td>Not all the O₂ gets taken up — you breathe out plenty of it</td></tr>
+    </table>
+    <p class="muted">CO₂ runs the same staircase backwards: blood arriving ~45 → alveoli 40 → exhaled 27 (mm Hg). High CO₂ in blood, low in air → CO₂ diffuses out.</p>
+    <div class="exam"><b>DBQ TRAP:</b> "Why is alveolar O₂ lower than inhaled air?" Two reasons: ① it mixes with stale air left in the lungs ② O₂ is constantly diffusing into the blood. And nitrogen barely diffuses at all — the blood is already saturated with it, so there's no gradient.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag gr">MAMMAL — TIDAL SYSTEM</div>
+      <h4>🫁 The in-and-out dance</h4>
+      <p>Periodically expel stale air, inhale fresh air. Prevents O₂ dropping too low and CO₂ rising too high. Ventilation rate is tuned to the <span class="accent">CO₂ concentration of the blood</span> — more CO₂, faster breathing.</p>
+    </div>
+    <div class="card">
+      <div class="tag g">FISH — ONE-WAY SYSTEM</div>
+      <h4>🐟 The counterflow queue</h4>
+      <p>Water flows in the mouth, over the gills, out the gill slits — one-way. Blood flows through the gills in the <span class="accent">opposite direction</span>, so water always meets blood that's slightly less O₂-rich than itself. Gradient holds along the whole gill. No such luck in a tidal lung.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 4 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">B3.1.4 · Adaptations of mammalian lungs for gas exchange</div>
+  <h2>ACT 4 · THE BUILDING (MAMMAL CLUB)</h2>
+  <p class="aim">All mammals use lungs — even whales. The route from the street to the VIP booths is a masterpiece of branching design.</p>
+
+  <div class="panel">
+    <h3>🏗 THE ROUTE IN</h3>
+    <ol class="steps">
+      <li><b>Trachea</b> (windpipe) — the entrance corridor, <span class="cyan">ciliated + lined with mucus</span>: the dust-trap lane that catches and expels foreign particles.</li>
+      <li><b>Bronchi</b> — two staircases (left lung has 2 lobes, right has 3; the heart squashes the left one). <span class="cyan">Cartilage</span> keeps them open like rigid ducting.</li>
+      <li><b>Bronchioles</b> — branching hallways. <span class="cyan">Smooth muscle</span> in their walls lets the venue narrow or widen the corridors (controlled by the autonomic nervous system).</li>
+      <li><b>Alveolar ducts → alveoli</b> — clusters of 5–6 air-sac booths where the actual swap happens.</li>
+    </ol>
+    <div class="tip"><b>THE FOUR EXAM ADAPTATIONS (memorise this list):</b> ① surfactant ② branched network of bronchioles ③ extensive capillary beds ④ huge surface area. Write all four, then elaborate.</div>
+  </div>
+
+  <div class="panel">
+    <h3>🎈 THE VIP BOOTHS (ALVEOLI)</h3>
+    <ul class="clean">
+      <li><span class="cyan">~300 MILLION</span> in an adult pair of lungs — total surface area ≈ <b>40× the outside of the body</b>, roughly a tennis court. Diameter 0.2–0.5 mm each.</li>
+      <li><span class="cyan">WALL = ONE LAYER OF CELLS, ~0.2 µm thick.</span> <b>Type I pneumocytes (AT1 cells)</b> are the flattened, ultra-thin booth walls that do the exchanging.</li>
+      <li><span class="cyan">SURFACTANT:</span> <b>Type II pneumocytes (AT2 cells)</b> secrete it. It forms a monolayer on the moisture film — <span class="accent">hydrophilic heads in the water, hydrophobic tails facing the air</span> — lowering surface tension so the wet walls don't stick together when you exhale. <b>Without it, the alveoli collapse.</b></li>
+      <li><span class="cyan">CAPILLARY BEDS</span> wrap each booth; blood and air end up a microscopic distance apart. The basket of capillaries is almost as big as the alveoli themselves.</li>
+      <li><span class="cyan">ELASTIC + COLLAGEN FIBRES:</span> collagen strengthens the tissue; elastic fibres stretch during inhalation and <b>recoil for passive exhalation</b> — the building springs back on its own.</li>
+    </ul>
+    <div class="exam"><b>COPD DBQ (a favourite):</b> smoking → airways narrow + fewer, larger air sacs → less gas-exchange surface. Why are COPD patients always tired? Less O₂ reaching the blood → less aerobic respiration → less ATP. Why an enlarged right heart? Damaged lungs raise blood pressure in the pulmonary circulation → the right ventricle works overtime → it hypertrophies.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 5 ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">B3.1.5 · Ventilation of the lungs</div>
+  <h2>ACT 5 · THE LIFT SYSTEM</h2>
+  <p class="aim">Ventilation is just physics with muscles: expand the room → pressure drops → air gets pulled in. Shrink the room → pressure rises → air gets pushed out.</p>
+
+  <div class="panel">
+    <h3>⚙️ THE PRESSURE GAME</h3>
+    <p>If a gas spreads into a bigger volume, its pressure falls. If it's squeezed into a smaller volume, its pressure rises. And gas always flows from high pressure to low pressure. So the chest is a box whose walls move:</p>
+    <ul class="clean">
+      <li><span class="green">INSPIRATION (inhale):</span> <b>diaphragm contracts → flattens</b> (the floor drops) + <b>external intercostals contract → ribs up and out</b> (the roof rises). Thorax volume ↑ → pressure ↓ below atmospheric → <span class="accent">air is PULLED in</span>. This is active — muscles do work.</li>
+      <li><span class="pink">EXPIRATION (exhale):</span> muscles relax → the diaphragm domes back up, ribs drop, elastic fibres recoil → volume ↓ → pressure ↑ above atmospheric → air forced out. At rest this is mostly <span class="accent">passive</span>.</li>
+      <li><span class="gold">FORCED EXPIRATION:</span> internal intercostals contract → ribs pulled down/in + <b>abdominal muscles contract</b> → push the abdominal organs and diaphragm upwards. Now it's active.</li>
+    </ul>
+    <div class="tip"><b>MNEMONIC: <span style="color:var(--green)">DROP THE FLOOR, LIFT THE ROOF, SUCK THE AIR</span> (in). <span style="color:var(--pink)">LET GO, PLUS SQUEEZE</span> (out — forced).</b> You never push air into your lungs — the pressure difference pulls it. "You don't inhale; the room does."</div>
+  </div>
+
+  <div class="panel">
+    <h3>📋 THE MUSCLE CHOREOGRAPHY (table format the examiners love)</h3>
+    <table>
+      <tr><th>Muscle / part</th><th>Inspiration</th><th>Expiration</th></tr>
+      <tr><td>Diaphragm</td><td>Contracts, flattens, moves down</td><td>Relaxes, pushed up into a dome</td></tr>
+      <tr><td>External intercostals</td><td>Contract — ribs up &amp; out</td><td>Relax — ribs return</td></tr>
+      <tr><td>Internal intercostals</td><td>Relax (stretched)</td><td>Contract — ribs down &amp; in (forced)</td></tr>
+      <tr><td>Abdominal muscles</td><td>Relax, allow diaphragm to push out</td><td>Contract — push organs + diaphragm up (forced)</td></tr>
+      <tr><td>Thorax volume / pressure</td><td>Volume ↑ → pressure ↓ → air in</td><td>Volume ↓ → pressure ↑ → air out</td></tr>
+    </table>
+    <p class="muted">Bonus: the trachea and bronchi keep their shape with cartilage; bronchioles use smooth muscle to vary their width — the venue can constrict or relax its corridors.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 6 ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">B3.1.6 · Measurement of lung volumes</div>
+  <h2>ACT 6 · THE FIRE MARSHAL'S METER</h2>
+  <p class="aim">How much air can the venue hold? The marshal measures four volumes — and so will you in the lab (AOS).</p>
+
+  <div class="panel">
+    <h3>📏 THE FOUR VOLUMES</h3>
+    <table>
+      <tr><th>Volume</th><th>Definition</th><th>Rough size</th></tr>
+      <tr><td>Tidal volume</td><td>Air in one normal breath in AND out (also the stale air exhaled each breath)</td><td>~500 mL</td></tr>
+      <tr><td>Inspiratory reserve (IRV)</td><td>Extra you can force IN after a normal inhalation</td><td>~3 L</td></tr>
+      <tr><td>Expiratory reserve (ERV)</td><td>Extra you can force OUT after a normal exhalation</td><td>~1.2 L</td></tr>
+      <tr><td>Vital capacity</td><td>Max exhale after max inhale (= IRV + tidal + ERV)</td><td>~4.5–5 L</td></tr>
+    </table>
+    <p><span class="gold">Residual volume</span> (~20% of total lung capacity) never leaves the lungs — it's why simple bell-jar apparatus is unsafe for repeat breathing: CO₂ builds up in the dead space.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag gr">AOS · HOW TO MEASURE</div>
+      <h4>🧪 Spirometer + simple gear</h4>
+      <p>A <span class="cyan">spirometer</span> (float on water + alkali to absorb CO₂) measures flow in and out; from flow, volumes are deduced. Simple version: exhale one normal breath through a delivery tube into a graduated bell jar and read the volume. Balloon + water displacement works too (1 mL = 1 cm³).</p>
+    </div>
+    <div class="card">
+      <div class="tag p">VENTILATION RATE</div>
+      <h4>⏱ Breaths per minute</h4>
+      <p>Adult at rest: <b>12–16 breaths/min</b>. Can jump ~5–6× with exercise. Bigger people (taller, higher altitude) tend to have larger capacities; smokers and obesity lower them.</p>
+    </div>
+  </div>
+
+  <div class="tip"><b>KNOW THE EQUATION:</b> <span style="color:var(--gold)">Vital capacity = IRV + tidal volume + ERV</span>. The exam will give you a spirometer trace and ask you to label or calculate — IRV sits above tidal, ERV below it, vital capacity is the whole swing.</div>
+</section>
+
+<!-- ══════════════════════ ACT 7 ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">B3.1.7 + B3.1.8 · Adaptations for gas exchange in leaves · Distribution of tissues</div>
+  <h2>ACT 7 · THE ROOFTOP GARDEN</h2>
+  <p class="aim">The plant venue is solar-powered: it takes in CO₂, blows out O₂, and brews its own sugar — while trying not to leak water. Every adaptation is a compromise between gas exchange and water conservation.</p>
+
+  <div class="panel">
+    <h3>🌿 THE VENUE'S BLUEPRINT (B3.1.7)</h3>
+    <ul class="clean">
+      <li><span class="cyan">WAXY CUTICLE</span> — the roof sealant. Waterproof layer secreted by the epidermis; low permeability to gases. Thicker on the upper surface and in dry-habitat plants. Keeps the club from leaking.</li>
+      <li><span class="cyan">EPIDERMIS</span> — the skin layer, top and bottom.</li>
+      <li><span class="green">PALISADE MESOPHYLL</span> — upper floor: tightly packed cylindrical cells stuffed with chloroplasts = the solar panels (max light absorption).</li>
+      <li><span class="cyan">SPONGY MESOPHYLL</span> — lower floor: loosely packed rounded cells with a network of <b>air spaces</b> = the lobby where the gas deals happen. The permanently moist cell walls provide a huge exchange surface: CO₂ dissolves, diffuses to chloroplasts; O₂ diffuses out.</li>
+      <li><span class="accent">STOMATA + GUARD CELLS</span> — the bouncer windows (usually on the lower epidermis). Guard cells inflate/deflate to open or shut the pore.</li>
+      <li><span class="gold">VEINS</span> — vascular bundles running through the middle: <b>xylem</b> (water + minerals up, the bar supply line) + <b>phloem</b> (sugars out, the till). Central placement = every tissue gets served.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>✏️ DRAW IT: PLAN DIAGRAM (B3.1.8)</h3>
+    <p>You must be able to draw and label a <span class="accent">plan diagram</span> of a transverse section of a dicotyledonous leaf. Plan diagrams show the <b>distribution of tissues</b> — big outlines, junctions between tissues, NO individual cells.</p>
+    <div class="plan">
+      <div class="layers">
+        <div class="ly ue"><span class="nm">UPPER EPIDERMIS <small>skin layer, under the waxy cuticle</small></span></div>
+        <div class="ly pm"><span class="nm">PALISADE MESOPHYLL <small>tight, chloroplast-packed — top, facing light</small></span></div>
+        <div class="ly vein"><span class="nm">VASCULAR BUNDLE <small>xylem + phloem in the vein — central</small></span></div>
+        <div class="ly sp"><span class="nm">SPONGY MESOPHYLL <small>loose cells + air spaces, near the stomata</small></span></div>
+        <div class="ly le"><span class="nm">LOWER EPIDERMIS <small>with stomata + guard cells (the windows)</small></span></div>
+      </div>
+      <div class="key">Top → bottom: upper epidermis · palisade · vascular bundle · spongy · lower epidermis. That's the order the examiner wants in your plan diagram.</div>
+    </div>
+    <div class="exam"><b>SUN VS SHADE LEAVES DBQ:</b> sun leaves are thicker with a thicker cuticle and more layers of palisade (more chloroplasts = more light capture, better water retention). Shade leaves are thinner with less palisade. Deduce which is which from the micrograph — then explain the trade-off.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 8 ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">B3.1.9 · Transpiration as a consequence of gas exchange in a leaf</div>
+  <h2>ACT 8 · THE WATER BILL</h2>
+  <p class="aim">The moist exchange surface is a leak. Open the windows for CO₂ and water vapour escapes. Transpiration is the price of doing business.</p>
+
+  <div class="panel">
+    <h3>💦 WHY IT LEAKS</h3>
+    <p>Gas exchange only works if the mesophyll walls are <span class="accent">moist</span>. Moisture evaporates (unless the air is saturated), and the water vapour diffuses out through the open stomata. That loss — from leaves and stems — is <span class="cyan">transpiration</span>. Water is replaced from the roots up through the xylem (the transpiration stream), and some is used in photosynthesis.</p>
+    <div class="tip"><b>KEY IDEA:</b> the leaf can't have moist exchange surfaces without paying an evaporation bill. The cuticle, stomatal placement and guard cells are all damage control on that leak.</div>
+  </div>
+
+  <div class="panel">
+    <h3>🌡 THE FOUR FACTORS (know the correlation directions)</h3>
+    <table>
+      <tr><th>Factor</th><th>Effect on transpiration</th><th>Why</th></tr>
+      <tr><td>Temperature ↑</td><td>↑ <span class="green">positive correlation</span></td><td>More energy to break hydrogen bonds → faster evaporation; warm air holds more vapour before saturating</td></tr>
+      <tr><td>Humidity ↑</td><td>↓ <span class="pink">negative correlation</span></td><td>Smaller water-vapour gradient between air spaces and outside → slower diffusion. Saturated air = zero transpiration</td></tr>
+      <tr><td>Wind ↑</td><td>↑</td><td>Blows the humid layer away → steeper gradient</td></tr>
+      <tr><td>Light ↑</td><td>↑</td><td>Stimulates stomata to open (photosynthesis needs CO₂) → more windows, more leak</td></tr>
+    </table>
+    <p class="muted">Guard cells control the aperture — wide open to fully closed. Most plants close at night (no photosynthesis, no gas exchange needed) and under water stress. Closed windows stop nearly all transpiration — but also starve photosynthesis of CO₂. Rising atmospheric CO₂ lets plants open stomata less widely — the leak gets a little cheaper.</p>
+  </div>
+
+  <div class="panel">
+    <h3>🧪 MEASURE THE LEAK: POTOMETER</h3>
+    <p>Applying techniques — a <span class="cyan">potometer</span> measures water uptake: a leafy shoot in a tube, a reservoir, and a graduated capillary tube with a bubble. As the shoot takes up water, the bubble moves; distance ÷ time = rate. Reset with the tap and repeat. This is the classic way to compare transpiration rates under different conditions (fan on/off, lamp on/off, bag over the leaves).</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 9 ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">B3.1.10 · Stomatal density</div>
+  <h2>ACT 9 · COUNT THE WINDOWS</h2>
+  <p class="aim">How many stomata per square millimetre? Count them — twice, three times, many times. The marshal always repeats the count.</p>
+
+  <div class="panel">
+    <h3>🔬 THE TWO COUNTING TECHNIQUES</h3>
+    <ol class="steps">
+      <li><b>Epidermal peel:</b> peel a sample of epidermis off the leaf (easy with <i>Commelina</i> and <i>Tradescantia</i> — fold the leaf to break tissues, or tear obliquely). Mount in water, examine.</li>
+      <li><b>Nail-varnish cast:</b> for non-hairy, smooth leaves. Paint clear varnish on upper + lower epidermis, let it dry, peel it off — the varnish holds a perfect cast with cell margins and stomata visible. Mount and examine.</li>
+    </ol>
+    <p><span class="gold">The maths:</span> fill the field of view, count stomata, repeat, find the mean, then divide by the field-of-view area:</p>
+    <p class="big" style="text-align:center;"><span class="cyan">stomatal density (per mm²) = mean number of stomata ÷ area of field of view (mm²)</span></p>
+    <div class="nos"><b>NOS — REPEAT. MEASUREMENTS. (This is the official NOS statement — quote it.)</b> Reliability of quantitative data is increased by repeating measurements. Repeated counts of stomata in the field of view show the variability of biological material and the need for replicate trials. Sample multiple leaves and plants; count multiple areas per leaf. An outlier can't wreck a mean; a single count can wreck everything. Less variation between repeats = more reliable mean.</div>
+  </div>
+
+  <div class="panel">
+    <h3>🚪 WHO CLOSES THE WINDOWS? (guard-cell mechanics)</h3>
+    <ul class="clean">
+      <li>Stomata regulate transpiration: open → high transpiration, gas exchange; closed → nearly zero transpiration.</li>
+      <li>Water stress → dehydrated mesophyll cells release <span class="accent">abscisic acid (ABA)</span>.</li>
+      <li>ABA triggers <span class="accent">K⁺ efflux</span> from guard cells → water leaves them → they lose turgor → <span class="accent">flaccid</span> guard cells block the pore.</li>
+      <li>Stomatal density itself varies with genetics and environment (e.g. plants grown under different CO₂ or light regimes).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 10 (AHL) ══════════════════════ -->
+<section class="act" id="act10">
+  <div class="acttag" style="color:var(--gold)">AHL · B3.1.11 + B3.1.12 + B3.1.13 · Haemoglobin · Bohr shift · Oxygen dissociation curves</div>
+  <h2>ACT 10 · THE VIP COURIER</h2>
+  <p class="aim">Oxygen barely dissolves in water — under 50 cm³ per dm³ at 37°C. Blood carries 200+ cm³ because of one protein: haemoglobin, the club's private courier with four seats. (AHL — HL students only.)</p>
+
+  <div class="bouncer">
+    <div class="emoji">🩸</div>
+    <div class="body">
+      <h3>THE COURIER (B3.1.11)</h3>
+      <div class="aka">haemoglobin — 4 subunits, 4 haem groups, 4 seats</div>
+      <p>Each haemoglobin = <span class="accent">4 polypeptide subunits</span>, each carrying an iron-containing <b>haem group</b> that reversibly binds one O₂. So one Hb hauls up to <b>4 O₂</b>. Carried in red blood cells, it's what makes blood a 200+ cm³ club vs water's pathetic 50.</p>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🪑</div>
+    <div class="body">
+      <h3>COOPERATIVE SEATING (B3.1.11 + the S-curve)</h3>
+      <div class="aka">the first guest unlocks the rest</div>
+      <p>When O₂ binds one haem group, the protein's shape shifts and the <span class="accent">other three seats get higher affinity</span> — easier to fill. When one O₂ leaves, affinity drops across the whole molecule. So Hb is mostly either <span class="cyan">T state (empty)</span> or <span class="cyan">R state (full)</span> — very little half-and-half. That's why saturation isn't proportional to O₂ concentration; it swings over a narrow range. Result: <span class="accent">sigmoid (S-shaped) dissociation curve</span> (B3.1.13).</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>📈 READ THE CURVE (B3.1.13)</h3>
+    <p>X-axis = O₂ concentration as <span class="accent">partial pressure (kPa)</span>. Y-axis = % saturation of haemoglobin.</p>
+    <div class="curvebox">
+      <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- axes -->
+        <line x1="60" y1="250" x2="500" y2="250" stroke="#b9a3d6" stroke-width="2"/>
+        <line x1="60" y1="250" x2="60" y2="20" stroke="#b9a3d6" stroke-width="2"/>
+        <text x="270" y="285" fill="#b9a3d6" font-size="13" text-anchor="middle">partial pressure of O₂ / kPa</text>
+        <text x="22" y="135" fill="#b9a3d6" font-size="13" transform="rotate(-90 22 135)" text-anchor="middle">% saturation</text>
+        <!-- adult HbA sigmoid -->
+        <path d="M 60 245 C 90 243, 130 238, 170 225 C 210 210, 250 175, 300 110 C 340 65, 400 38, 480 30 L 490 30"
+              fill="none" stroke="#22d3ee" stroke-width="3.5"/>
+        <text x="440" y="22" fill="#22d3ee" font-size="14" font-weight="700">HbA (adult)</text>
+        <!-- foetal HbF left -->
+        <path d="M 60 245 C 80 242, 105 235, 135 215 C 165 190, 200 140, 250 80 C 290 45, 350 28, 470 24"
+              fill="none" stroke="#ff2ec4" stroke-width="3.5"/>
+        <text x="300" y="75" fill="#ff2ec4" font-size="14" font-weight="700">HbF (foetal) — LEFT</text>
+        <!-- Bohr shift right -->
+        <path d="M 60 246 C 100 244, 150 242, 200 235 C 250 226, 300 205, 360 160 C 410 122, 460 80, 500 55"
+              fill="none" stroke="#fbbf24" stroke-width="3.5" stroke-dasharray="7 5"/>
+        <text x="360" y="195" fill="#fbbf24" font-size="14" font-weight="700">+ CO₂ (right — Bohr)</text>
+        <text x="75" y="60" fill="#4ade80" font-size="13" font-weight="700">LEFT = grips harder</text>
+        <text x="330" y="60" fill="#fbbf24" font-size="13" font-weight="700">RIGHT = releases more</text>
+        <!-- plateau marker -->
+        <line x1="300" y1="250" x2="300" y2="20" stroke="#4ade80" stroke-width="1" stroke-dasharray="3 4"/>
+        <text x="305" y="40" fill="#4ade80" font-size="12">10 kPa — full saturation above this</text>
+      </svg>
+      <p class="muted">Steep middle = small pO₂ drop → big O₂ release (that's where respiring tissues live). Plateau = lungs at 10–13 kPa, 100% loaded. Flat bottom = even severe hypoxia can't strip the last O₂.</p>
+    </div>
+    <ul class="clean">
+      <li><span class="cyan">LEFT-SHIFTED curve = HIGHER affinity.</span> Foetal Hb (HbF, gamma chains instead of beta) grips O₂ harder than adult Hb (HbA, alpha+beta). At the placenta, maternal HbA unloads O₂ and foetal HbF grabs it — the handover at the VIP hatch. HbF is replaced by HbA over the first months after birth.</li>
+      <li><span class="gold">RIGHT-SHIFTED curve = LOWER affinity.</span> That's the Bohr shift — CO₂ makes Hb let go.</li>
+    </ul>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🔥</div>
+    <div class="body">
+      <h3>THE BOHR SHIFT (B3.1.12)</h3>
+      <div class="aka">CO₂ loosens the grip — exactly where the party is hardest</div>
+      <p>Active tissues burn O₂ and dump CO₂ into the blood. High CO₂ <span class="accent">decreases Hb's affinity for O₂</span> → more O₂ released to the working muscle. Two mechanisms:</p>
+      <ol class="steps">
+        <li>In red blood cells: <b>CO₂ + H₂O → H⁺ + HCO₃⁻</b> (hydrogen + hydrogencarbonate ions). The H⁺ drops the pH — from ~7.4 in the lungs to ~7.2 in active muscle — and lower pH = lower O₂ affinity. A tiny pH change, huge effect on unloading.</li>
+        <li>CO₂ also binds <b>allosterically at the amino terminal</b> of each subunit → <b>carbaminohaemoglobin</b> → affinity drops further. Bonus: each Hb can carry 4 CO₂ back to the lungs for disposal.</li>
+      </ol>
+      <p class="muted">In the lungs, CO₂ is low → the reactions reverse → Hb regains high affinity → loads up to 100% in the alveolar capillaries. <b>Bohr shift = the right shift you see on the curve.</b></p>
+      <div class="tip"><b>EXAM ONE-LINER:</b> "Increased CO₂ → decreased Hb–O₂ affinity → greater O₂ dissociation → more oxygen delivered to actively respiring tissues." Also be ready to explain the S-shape: cooperative binding means loading gets easier as seats fill — so saturation shoots up over a narrow pO₂ range.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>🧠 WHY THE COURIER MATTERS</h3>
+    <p>Without cooperative binding, Hb would load/unload gradually and muscle would starve. With it, Hb hangs onto O₂ in the lungs, then <span class="accent">dumps it almost completely where respiration has dropped the pO₂</span>. The sigmoid curve IS that behaviour drawn on a graph. Left = locked on (foetus wins the tug-of-war), right = release (muscle wins).</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">Overview</div>
+  <h2>MIND MAP 🗺</h2>
+  <p class="aim">One glance. The whole topic in a constellation.</p>
+  <div class="mind">
+    <div class="node core">GAS EXCHANGE<br><small>Club O₂ · the universal deal</small></div>
+    <div class="arrow">→</div>
+    <div class="node">SA:VOL<br><small>B3.1.1 · big = need doors</small></div>
+    <div class="arrow">→</div>
+    <div class="node">4 DOOR RULES<br><small>B3.1.2 · large·thin·moist·permeable</small></div>
+    <div class="arrow">→</div>
+    <div class="node">GRADIENTS<br><small>B3.1.3 · capillaries + flow + ventilation</small></div>
+    <div class="arrow">→</div>
+    <div class="node">LUNGS<br><small>B3.1.4 · alveoli + surfactant</small></div>
+    <div class="arrow">→</div>
+    <div class="node">VENTILATION<br><small>B3.1.5 · diaphragm + intercostals</small></div>
+    <div class="arrow">→</div>
+    <div class="node">VOLUMES<br><small>B3.1.6 · tidal·IRV·ERV·vital</small></div>
+    <div class="arrow">→</div>
+    <div class="node">LEAF<br><small>B3.1.7–8 · cuticle·palisade·spongy·stomata</small></div>
+    <div class="arrow">→</div>
+    <div class="node">TRANSPIRATION<br><small>B3.1.9 · temp·humidity·wind·light</small></div>
+    <div class="arrow">→</div>
+    <div class="node">STOMATAL DENSITY<br><small>B3.1.10 · count + repeat (NOS)</small></div>
+    <div class="arrow">→</div>
+    <div class="node">HAEMOGLOBIN<br><small>B3.1.11 · 4 seats, cooperative</small></div>
+    <div class="arrow">→</div>
+    <div class="node">BOHR SHIFT<br><small>B3.1.12 · CO₂ → release</small></div>
+    <div class="arrow">→</div>
+    <div class="node">S-CURVE<br><small>B3.1.13 · sigmoid, left = grip</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Revision</div>
+  <h2>CHEAT SHEET ⚡</h2>
+  <p class="aim">Everything the examiner wants, compressed into 13 lines.</p>
+  <div class="marquee">
+    <div class="line">1 · EVERY ORGANISM: <span>O₂ in / CO₂ out (resp) · CO₂ in / O₂ out (photosynthesis)</span> · big = low SA:Vol + long centre-distance → need doors</div>
+    <div class="line">2 · FOUR DOOR RULES: <span>large · thin · moist · permeable</span> · SMART bonus: rich blood</div>
+    <div class="line">3 · GRADIENT LAW: <span>diffusion flows downhill</span> · dense capillaries + continuous blood flow + ventilation keep it fresh</div>
+    <div class="line">4 · LUNGS: <span>trachea → bronchi → bronchioles → alveoli</span> · 300M alveoli ≈ 40× body surface · surfactant stops collapse</div>
+    <div class="line">5 · INHALE: <span>diaphragm flattens + ribs up → volume ↑ pressure ↓ → air in</span> · exhale = relax (+ abs for forced)</div>
+    <div class="line">6 · VOLUMES: <span>tidal ~500 mL · IRV · ERV · vital = IRV+tidal+ERV</span> · residual never leaves</div>
+    <div class="line">7 · LEAF: <span>cuticle seals · palisade = solar panels · spongy + air spaces = the floor</span> · stomata = windows · veins = xylem/phloem</div>
+    <div class="line">8 · PLAN DIAGRAM: <span>upper epidermis → palisade → vascular bundle → spongy → lower epidermis</span> · tissues, not cells</div>
+    <div class="line">9 · TRANSPIRATION: <span>the leak for the moist floor</span> · temp↑ wind↑ light↑ = more · humidity↑ = less</div>
+    <div class="line">10 · STOMATAL DENSITY: <span>count ÷ field area (mm²)</span> · repeat counts for reliability (NOS) · ABA + K⁺ efflux closes</div>
+    <div class="line">11 · HAEMOGLOBIN: <span>4 subunits, 4 haem groups, 4 O₂</span> · cooperative binding → mostly empty (T) or full (R)</div>
+    <div class="line">12 · BOHR: <span>CO₂ ↑ → H⁺ + HCO₃⁻ + carbaminohaemoglobin → affinity ↓ → O₂ released</span> · right shift</div>
+    <div class="line">13 · CURVE: <span>SIGMOID = cooperative binding</span> · HbF left (grips harder, steals at placenta) · Bohr right</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ SELF TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Practice</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">Click an answer. Instant feedback. No mercy.</p>
+
+  <div class="q" data-a="savol">
+    <p>1. Why does a flatworm need no lungs but a whale does?</p>
+    <label><input type="radio" name="q1" value="savol"> Flatworm: huge SA:Vol + short centre-to-exterior distance. Whale: small SA:Vol + long distance — needs a specialised exchange surface</label>
+    <label><input type="radio" name="q1" value="wrong1"> Whales are too heavy for diffusion to work at all</label>
+    <label><input type="radio" name="q1" value="wrong2"> Flatworms photosynthesise so they don't need oxygen</label>
+    <div class="fb correct">✅ Both reasons, in order: SA:Vol shrinks with size AND the centre-to-exterior distance grows. Big organisms need alveoli/gills/spongy mesophyll.</div>
+    <div class="fb wrong">❌ It's the SA:Vol + distance double-whammy. A whale's centre is metres from the air and its surface is tiny relative to its volume.</div>
+  </div>
+
+  <div class="q" data-a="thin">
+    <p>2. Which of these is NOT one of the four properties of a gas-exchange surface (B3.1.2)?</p>
+    <label><input type="radio" name="q2" value="wrong1"> Moist — gases dissolve before diffusing</label>
+    <label><input type="radio" name="q2" value="thin"> Ciliated — hair-like projections sweep gases in</label>
+    <label><input type="radio" name="q2" value="wrong2"> Thin — single layer of cells, short diffusion distance</label>
+    <label><input type="radio" name="q2" value="wrong3"> Large — big surface area relative to volume</label>
+    <div class="fb correct">✅ Cilia are a trachea thing (dust removal), not an exchange-surface property. The four: large, thin, moist, permeable.</div>
+    <div class="fb wrong">❌ The four are large · thin · moist · permeable. Cilia belong to the trachea's mucus escalator, not the exchange surface.</div>
+  </div>
+
+  <div class="q" data-a="grad">
+    <p>3. What keeps O₂ diffusing INTO the blood at the alveoli?</p>
+    <label><input type="radio" name="q3" value="wrong1"> Muscles actively pump oxygen across the membrane</label>
+    <label><input type="radio" name="q3" value="grad"> Blood keeps arriving with low O₂ (used up by respiration) while ventilation keeps fresh air in — the gradient is maintained</label>
+    <label><input type="radio" name="q3" value="wrong2"> Haemoglobin actively drags oxygen in against the gradient</label>
+    <div class="fb correct">✅ Diffusion is passive — the gradient does the work. Continuous blood flow + ventilation maintain it. (Haemoglobin loading helps, but it rides the gradient, it doesn't pump.)</div>
+    <div class="fb wrong">❌ Nothing pumps. Diffusion flows downhill, and the club keeps the inside low-O₂ (blood flow) and the air fresh (ventilation).</div>
+  </div>
+
+  <div class="q" data-a="surf">
+    <p>4. Pulmonary surfactant's main job?</p>
+    <label><input type="radio" name="q4" value="surf"> Reduce surface tension so wet alveolar walls don't stick together and the lungs don't collapse</label>
+    <label><input type="radio" name="q4" value="wrong1"> Trap dust particles before they reach the alveoli</label>
+    <label><input type="radio" name="q4" value="wrong2"> Speed up oxygen dissolving in the moisture film</label>
+    <div class="fb correct">✅ Secreted by Type II pneumocytes (AT2), it's a monolayer (hydrophilic heads in water, tails to air) that stops the sides adhering on exhale — prevents lung collapse.</div>
+    <div class="fb wrong">❌ That's mucus's job (trachea), and gases dissolve fine without help. Surfactant = anti-stick spray for the wet booths.</div>
+  </div>
+
+  <div class="q" data-a="inspire">
+    <p>5. During inspiration, which combination happens?</p>
+    <label><input type="radio" name="q5" value="wrong1"> Diaphragm relaxes upward; internal intercostals pull ribs down</label>
+    <label><input type="radio" name="q5" value="inspire"> Diaphragm contracts and flattens; external intercostals pull ribs up and out → thorax volume ↑ → pressure ↓ → air in</label>
+    <label><input type="radio" name="q5" value="wrong2"> Abdominal muscles squeeze the lungs like bellows</label>
+    <div class="fb correct">✅ Drop the floor, lift the roof, suck the air. Pressure falls BELOW atmospheric so air is pulled in — never pushed.</div>
+    <div class="fb wrong">❌ That's expiration (relax + internal intercostals), and the abs only join in for FORCED expiration. Inspiration = diaphragm flattens + ribs up + pressure drops.</div>
+  </div>
+
+  <div class="q" data-a="vital">
+    <p>6. Vital capacity = ?</p>
+    <label><input type="radio" name="q6" value="vital"> IRV + tidal volume + ERV — the max exhale after a max inhale</label>
+    <label><input type="radio" name="q6" value="wrong1"> Just the tidal volume × breathing rate</label>
+    <label><input type="radio" name="q6" value="wrong2"> The air that permanently stays in the lungs</label>
+    <div class="fb correct">✅ The full swing: everything you can move with maximum effort. (The permanent air is residual volume.)</div>
+    <div class="fb wrong">❌ Vital = IRV + tidal + ERV. Residual volume never leaves; tidal × rate is ventilation per minute, a different number.</div>
+  </div>
+
+  <div class="q" data-a="spongy">
+    <p>7. Where does most gas exchange happen in a leaf?</p>
+    <label><input type="radio" name="q7" value="spongy"> The moist walls of the spongy mesophyll, surrounding its air spaces</label>
+    <label><input type="radio" name="q7" value="wrong1"> The waxy cuticle on the upper surface</label>
+    <label><input type="radio" name="q7" value="wrong2"> Inside the xylem vessels</label>
+    <div class="fb correct">✅ CO₂ dissolves in the moist walls and diffuses to the chloroplasts; O₂ diffuses back out through the air spaces and stomata. The cuticle is the seal, and xylem carries water.</div>
+    <div class="fb wrong">❌ The cuticle is deliberately LOW permeability (it's the leak-proofing), and xylem is a water pipe. The exchange floor is the spongy mesophyll's moist walls.</div>
+  </div>
+
+  <div class="q" data-a="humid">
+    <p>8. It's a muggy 100%-humidity day. Transpiration rate?</p>
+    <label><input type="radio" name="q8" value="humid"> Drops toward zero — no water-vapour gradient between the leaf's air spaces and the outside air</label>
+    <label><input type="radio" name="q8" value="wrong1"> Skyrockets — humid air pulls water out of the leaf</label>
+    <label><input type="radio" name="q8" value="wrong2"> Unchanged — humidity only affects mammals</label>
+    <div class="fb correct">✅ Humidity = negative correlation. Saturated air outside means diffusion of water vapour out stops — transpiration nearly zero.</div>
+    <div class="fb wrong">❌ High humidity = tiny gradient = slow diffusion. Transpiration needs a drier outside to leak into.</div>
+  </div>
+
+  <div class="q" data-a="left">
+    <p>9. Foetal haemoglobin's dissociation curve is shifted LEFT compared to adult. What does that mean?</p>
+    <label><input type="radio" name="q9" value="left"> Higher affinity for O₂ — at any pO₂ it's more saturated, so it steals O₂ from maternal HbA at the placenta</label>
+    <label><input type="radio" name="q9" value="wrong1"> Lower affinity — it dumps oxygen into the placenta</label>
+    <label><input type="radio" name="q9" value="wrong2"> It has four more haem groups than adult haemoglobin</label>
+    <div class="fb correct">✅ LEFT = LOCKED ON. HbF (gamma chains) grips harder than HbA (beta chains), making the placenta handover possible. Both still have 4 haem groups.</div>
+    <div class="fb wrong">❌ Left shift = higher affinity = grips harder. HbF grabs the O₂ that maternal HbA lets go. And it's the same 4-seat courier.</div>
+  </div>
+
+  <div class="q" data-a="bohr">
+    <p>10. During a sprint, your leg muscles flood the blood with CO₂. What happens to haemoglobin there?</p>
+    <label><input type="radio" name="q10" value="bohr"> CO₂ + H₂O → H⁺ + HCO₃⁻ drops pH, CO₂ also binds to make carbaminohaemoglobin → affinity for O₂ falls → O₂ is released to the working muscle (Bohr shift, curve shifts right)</label>
+    <label><input type="radio" name="q10" value="wrong1"> CO₂ competes with O₂ for the same haem binding sites, blocking oxygen transport</label>
+    <label><input type="radio" name="q10" value="wrong2"> CO₂ raises Hb's affinity so it stores MORE oxygen for later</label>
+    <div class="fb correct">✅ The Bohr shift: more CO₂ → lower pH + carbaminohaemoglobin → lower affinity → O₂ unloaded exactly where respiration is hottest. (CO₂ binds allosterically, not on the haem iron.)</div>
+    <div class="fb wrong">❌ CO₂ doesn't block the haem sites — it works allosterically (elsewhere on the protein) and via pH. And it lowers affinity, it doesn't raise it.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device. Gold codes = AHL.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 13 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">B3.1.1</span><span>Gas exchange as a vital function in all organisms — why SA:Vol and centre-to-exterior distance make big organisms need specialised exchange surfaces.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">B3.1.2</span><span>Properties of gas-exchange surfaces: permeable, thin tissue layer, moisture, large surface area.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">B3.1.3</span><span>Maintenance of concentration gradients in animals: dense capillary networks, continuous blood flow, ventilation with air (lungs) / water (gills).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">B3.1.4</span><span>Adaptations of mammalian lungs: alveolar lungs, surfactant, branched bronchioles, extensive capillary beds, high surface area.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">B3.1.5</span><span>Ventilation of the lungs: role of diaphragm, intercostal muscles, abdominal muscles and ribs (inspiration vs expiration).</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">B3.1.6</span><span>Measurement of lung volumes — tidal volume, vital capacity, inspiratory and expiratory reserves (AOS: make the measurements).</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">B3.1.7</span><span>Adaptations for gas exchange in leaves: waxy cuticle, epidermis, air spaces, spongy mesophyll, stomatal guard cells, veins.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">B3.1.8</span><span>Draw and label a plan diagram of tissue distribution in a transverse section of a dicotyledonous leaf.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">B3.1.9</span><span>Transpiration as a consequence of gas exchange in a leaf — factors affecting the rate.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">B3.1.10</span><span>Stomatal density (AOS: micrographs or leaf casts; NOS: repeat counts → reliability, replicate trials).</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code ahl">B3.1.11</span><span>AHL: Adaptations of foetal and adult haemoglobin — cooperative binding to haem groups, allosteric CO₂ binding.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code ahl">B3.1.12</span><span>AHL: Bohr shift — increased CO₂ causes increased dissociation of oxygen; benefits for actively respiring tissues.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code ahl">B3.1.13</span><span>AHL: Oxygen dissociation curves — affinity at different O₂ concentrations; explain the S-shape via cooperative binding.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from the <a href="https://ib.bioninja.com.au/b31-gas-exchange/" target="_blank">BioNinja</a> B3.1 pages + <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) · IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../index.html">Travis's Study Hub</a></p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='b31-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>

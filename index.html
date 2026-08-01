@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travis's Study Hub — the Nightclub Method</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 18px 80px;}
+
+  header.hero{text-align:center; padding:60px 18px 30px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(32px,6vw,56px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .stats{margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .stat{font-size:12.5px; font-weight:700; padding:7px 16px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .stat b{color:var(--pink);}
+
+  .subj{margin-top:48px;}
+  .subj-head{display:flex; align-items:center; gap:14px; margin-bottom:6px;}
+  .subj-head .icon{font-size:34px;}
+  .subj-head h2{font-size:clamp(20px,3vw,27px); font-weight:900;
+        background:linear-gradient(90deg,var(--pink),var(--violet));
+        -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .subj-head .tag{font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--cyan);
+        border:1px solid rgba(34,211,238,.4); padding:4px 10px; border-radius:999px;}
+  .subj-desc{color:var(--dim); font-size:13.5px; margin-bottom:14px;}
+  .topics{display:flex; flex-wrap:wrap; gap:10px;}
+  .topic{font-size:13.5px; font-weight:600; padding:8px 14px; border-radius:999px; border:1px solid rgba(168,85,247,.3);
+         background:var(--panel); color:var(--dim); display:inline-flex; align-items:center; gap:8px;}
+  .topic.done{background:linear-gradient(90deg,rgba(74,222,128,.14),rgba(34,211,238,.10));
+              border-color:rgba(74,222,128,.5); color:#fff; font-weight:800;}
+  .topic.done a{color:#fff; text-decoration:none;}
+  .topic.done a:hover{text-decoration:underline;}
+  .topic .soon{opacity:.55;}
+
+  .how{margin-top:56px; background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:22px;}
+  .how h3{font-size:16px; font-weight:800; margin-bottom:10px;}
+  .how p{color:var(--dim); font-size:14px;}
+  .how b{color:var(--pink);}
+
+  footer{margin-top:56px; padding-top:18px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB · ESF · Class of 2026</div>
+  <h1>TRAVIS'S STUDY HUB</h1>
+  <div class="sub">The nightclub method, one topic at a time. Every guide is a visual, memorable, exam-ready walkthrough — with an Anki deck to make it stick.</div>
+  <div class="stats">
+    <span class="stat"><b>2</b> topics published</span>
+    <span class="stat"><b>30+</b> topics queued</span>
+    <span class="stat"><b>6</b> subjects</span>
+    <span class="stat">⚡ new guides drop here</span>
+  </div>
+</header>
+
+<!-- BIOLOGY -->
+<section class="subj">
+  <div class="subj-head">
+    <div class="icon">🧬</div>
+    <h2>BIOLOGY HL</h2>
+    <span class="tag">HL · AHL included</span>
+  </div>
+  <div class="subj-desc">Higher Level theme C — the meaty AHL stuff. Each topic = comic guide + Anki cloze deck.</div>
+  <div class="topics">
+    <span class="topic done">✅ <a href="topics/bio/c2.1/index.html">C2.1 Chemical Signalling</a> <a href="topics/bio/c2.1/C2.1_Chemical_Signalling.apkg" title="download anki deck" style="color:var(--cyan)">📥</a></span>
+    <span class="topic done">✅ <a href="topics/bio/gas-exchange/index.html">B3.1 Gas Exchange</a> <a href="topics/bio/gas-exchange/B3.1_Gas_Exchange.apkg" title="download anki deck" style="color:var(--cyan)">📥</a></span>
+    <span class="topic"><span class="soon">🔜</span> C1.1 Enzymes &amp; Metabolism</span>
+    <span class="topic"><span class="soon">🔜</span> C1.2 Cell Respiration</span>
+    <span class="topic"><span class="soon">🔜</span> C1.3 Photosynthesis</span>
+    <span class="topic"><span class="soon">🔜</span> C2.2 Neural Signalling</span>
+    <span class="topic"><span class="soon">🔜</span> C3.1 Integration of Body Systems</span>
+    <span class="topic"><span class="soon">🔜</span> C3.2 Defence Against Disease</span>
+    <span class="topic"><span class="soon">🔜</span> C4.1 Populations &amp; Communities</span>
+    <span class="topic"><span class="soon">🔜</span> C4.2 Transfers of Energy &amp; Matter</span>
+  </div>
+</section>
+
+<!-- CHEMISTRY -->
+<section class="subj">
+  <div class="subj-head">
+    <div class="icon">⚗️</div>
+    <h2>CHEMISTRY HL</h2>
+    <span class="tag">target: crack the 5 barrier</span>
+  </div>
+  <div class="subj-desc">We're coming for the Chem 5. Big-picture concept guides first, then past-paper drill.</div>
+  <div class="topics">
+    <span class="topic"><span class="soon">🔜</span> Stoichiometric Relationships</span>
+    <span class="topic"><span class="soon">🔜</span> Atomic Structure &amp; Periodicity</span>
+    <span class="topic"><span class="soon">🔜</span> Chemical Bonding</span>
+    <span class="topic"><span class="soon">🔜</span> Energetics &amp; Thermochemistry</span>
+    <span class="topic"><span class="soon">🔜</span> Kinetics</span>
+    <span class="topic"><span class="soon">🔜</span> Equilibrium</span>
+    <span class="topic"><span class="soon">🔜</span> Acids &amp; Bases</span>
+    <span class="topic"><span class="soon">🔜</span> Redox</span>
+    <span class="topic"><span class="soon">🔜</span> Organic Chemistry</span>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section class="subj">
+  <div class="subj-head">
+    <div class="icon">📊</div>
+    <h2>BUSINESS HL</h2>
+    <span class="tag">case-study friendly</span>
+  </div>
+  <div class="subj-desc">Unit guides with real-company examples so the theory has somewhere to live.</div>
+  <div class="topics">
+    <span class="topic"><span class="soon">🔜</span> Unit 1 · Business Organisation</span>
+    <span class="topic"><span class="soon">🔜</span> Unit 2 · Human Resources</span>
+    <span class="topic"><span class="soon">🔜</span> Unit 3 · Finance &amp; Accounts</span>
+    <span class="topic"><span class="soon">🔜</span> Unit 4 · Marketing</span>
+    <span class="topic"><span class="soon">🔜</span> Unit 5 · Operations</span>
+    <span class="topic"><span class="soon">🔜</span> HL Extension · Strategy</span>
+  </div>
+</section>
+
+<!-- ENGLISH -->
+<section class="subj">
+  <div class="subj-head">
+    <div class="icon">📖</div>
+    <h2>ENGLISH A · LANG &amp; LIT</h2>
+    <span class="tag">analysis &amp; essays</span>
+  </div>
+  <div class="subj-desc">Paper 1 deconstruction guides and the Paper 2 comparative framework.</div>
+  <div class="topics">
+    <span class="topic"><span class="soon">🔜</span> Paper 1 · Textual Analysis</span>
+    <span class="topic"><span class="soon">🔜</span> Paper 2 · Comparative Essay</span>
+    <span class="topic"><span class="soon">🔜</span> Literary Conventions Cheats</span>
+  </div>
+</section>
+
+<!-- CHINESE -->
+<section class="subj">
+  <div class="subj-head">
+    <div class="icon">🀄</div>
+    <h2>CHINESE</h2>
+    <span class="tag">voice &amp; humour</span>
+  </div>
+  <div class="subj-desc">Writing guides that sharpen your natural voice — humour without the 矫情.</div>
+  <div class="topics">
+    <span class="topic"><span class="soon">🔜</span> Writing Voice &amp; Humour</span>
+    <span class="topic"><span class="soon">🔜</span> Paper Practice Plans</span>
+    <span class="topic"><span class="soon">🔜</span> Character &amp; Idiom Banks</span>
+  </div>
+</section>
+
+<!-- MATHS -->
+<section class="subj">
+  <div class="subj-head">
+    <div class="icon">📐</div>
+    <h2>MATHEMATICS SL</h2>
+    <span class="tag">quick-fix guides</span>
+  </div>
+  <div class="subj-desc">Short, visual rescue guides for the topics that bite.</div>
+  <div class="topics">
+    <span class="topic"><span class="soon">🔜</span> Functions &amp; Algebra</span>
+    <span class="topic"><span class="soon">🔜</span> Trigonometry</span>
+    <span class="topic"><span class="soon">🔜</span> Calculus Essentials</span>
+    <span class="topic"><span class="soon">🔜</span> Stats &amp; Probability</span>
+  </div>
+</section>
+
+<div class="how">
+  <h3>HOW IT WORKS ⚡</h3>
+  <p><b>1.</b> You pick a topic (or I queue it from your assignments) → <b>2.</b> I pull the full syllabus content from BioNinja + your textbook → <b>3.</b> You get a visual comic guide + Anki cloze deck → <b>4.</b> It lands here, bookmarked, forever.</p>
+  <p style="margin-top:8px">Every guide has: the story (metaphor), the mechanisms (exam detail), a cheat sheet, a self-test, and a tickable syllabus checklist. New topics appear on this page the day we make them.</p>
+</div>
+
+<footer>
+  <p>Travis's Study Hub · the nightclub method · running locally from your Desktop</p>
+  <p>🧬 ⚗️ 📊 📖 🀄 📐</p>
+</footer>
+
+</div>
+</body>
+</html>
