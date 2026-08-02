@@ -54,9 +54,39 @@
   .how b{color:var(--pink);}
 
   footer{margin-top:56px; padding-top:18px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* the secret doormat (shhh) */
+  .mat-secret{display:inline-block; width:34px; height:14px; border-radius:3px; cursor:pointer; margin-top:12px;
+    background:linear-gradient(180deg,#fb923c,#f97316); border:1px solid #9a3412; position:relative; opacity:.45;
+    transition:opacity .2s, transform .2s; vertical-align:middle;}
+  .mat-secret:hover{opacity:1; transform:scale(1.2) rotate(-3deg);}
+  .mat-secret::before{content:""; position:absolute; left:5px; right:5px; top:50%; height:2px; transform:translateY(-50%);
+    background:#9a3412; box-shadow:0 -4px 0 #9a3412, 0 4px 0 #9a3412; border-radius:1px;}
+
+  /* the reveal */
+  #matOverlay{position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+    flex-direction:column; gap:18px; background:rgba(11,2,20,.94); backdrop-filter:blur(8px); cursor:pointer; padding:20px; text-align:center;}
+  #matOverlay.show{display:flex;}
+  #matOverlay img{width:min(340px,72vw); animation:matWobble .55s ease-in-out infinite;
+    filter:drop-shadow(0 0 36px rgba(251,146,60,.7)) drop-shadow(0 0 80px rgba(255,46,196,.25));}
+  @keyframes matWobble{0%,100%{transform:rotate(-5deg)}25%{transform:rotate(4deg) translateY(-6px)}50%{transform:rotate(-4deg)}75%{transform:rotate(5deg) translateY(-3px)}}
+  #matBubble{font-size:clamp(26px,7vw,46px); font-weight:900; letter-spacing:.05em; color:var(--pink);
+    text-shadow:0 0 22px rgba(255,46,196,.8), 0 0 70px rgba(255,46,196,.45); animation:matPop .3s ease-out;}
+  @keyframes matPop{from{transform:scale(.4); opacity:0} to{transform:scale(1); opacity:1}}
+  #matSub{color:var(--dim); font-size:13px; letter-spacing:.05em; animation:matPop .3s ease-out .1s backwards;}
 </style>
 </head>
 <body>
+
+<a class="home-btn" href="index.html">🏠 HOME</a>
 
 <div class="wrap">
 
@@ -188,7 +218,67 @@
 <footer>
   <p>Travis's Study Hub · the nightclub method · <a href="https://github.com/smellysox4402/travis-study-hub" target="_blank" style="color:var(--cyan)">open source on GitHub</a> · live on GitHub Pages</p>
   <p>🧬 ⚗️ 📊 📖 🀄 📐</p>
+  <p><span class="mat-secret" id="matBtn" role="button" aria-label="a mysterious mat" tabindex="0"></span></p>
 </footer>
+
+<!-- the burping doormat reveal -->
+<div id="matOverlay" aria-hidden="true">
+  <div id="matBubble">BUUURP!</div>
+  <img src="assets/burping-doormat.png" alt="a neon doormat letting out an enormous burp">
+  <div id="matSub">click anywhere to make it stop</div>
+</div>
+
+<script>
+  // the secret doormat — click it, feed it, it burps
+  (function(){
+    var btn=document.getElementById('matBtn');
+    var ov=document.getElementById('matOverlay');
+    var bubble=document.getElementById('matBubble');
+    var sub=document.getElementById('matSub');
+    var lines=[
+      ['BUUURP!','the doormat has been fed'],
+      ['BUUUURP!!','one burp = one past paper done'],
+      ['BUUURP','the study gods are pleased'],
+      ['BURP.','okay, now actually study'],
+      ['BUUURP!!!','that one was a 7-pointer']
+    ];
+    var i=0;
+    function burp(){
+      try{
+        var AC=window.AudioContext||window.webkitAudioContext;
+        var ctx=new AC();
+        var o=ctx.createOscillator(), g=ctx.createGain(), lfo=ctx.createOscillator(), lg=ctx.createGain();
+        o.type='sawtooth';
+        o.frequency.setValueAtTime(160,ctx.currentTime);
+        o.frequency.exponentialRampToValueAtTime(52,ctx.currentTime+0.5);
+        lfo.type='sine'; lfo.frequency.value=16; lg.gain.value=45;
+        lfo.connect(lg); lg.connect(o.frequency);
+        g.gain.setValueAtTime(0.0001,ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.28,ctx.currentTime+0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.6);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(); o.stop(ctx.currentTime+0.65);
+      }catch(e){}
+    }
+    function show(){
+      var L=lines[i%lines.length];
+      bubble.textContent=L[0];
+      sub.textContent=L[1];
+      ov.classList.add('show');
+      ov.setAttribute('aria-hidden','false');
+      burp();
+      i++;
+    }
+    function hide(){
+      ov.classList.remove('show');
+      ov.setAttribute('aria-hidden','true');
+    }
+    btn.addEventListener('click',function(e){e.stopPropagation(); show();});
+    btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault(); show();}});
+    ov.addEventListener('click',hide);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+  })();
+</script>
 
 </div>
 </body>
