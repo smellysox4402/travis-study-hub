@@ -135,6 +135,16 @@
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
   .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+  .fig .imgwrap{position:relative; display:inline-block; max-width:100%; line-height:0;}
+  .fig .imgwrap img{display:block;}
+  .fig .tag{position:absolute; background:rgba(11,2,20,.88); border:1px solid var(--cyan); color:#fff;
+            font-size:10px; font-weight:700; letter-spacing:.4px; padding:2px 7px; border-radius:999px;
+            white-space:nowrap; transform:translateX(-50%); z-index:2;}
+  .fig .tag::after{content:''; position:absolute; left:50%; top:100%; width:1px; height:10px; background:var(--cyan);}
+  .fig .tag.gold{border-color:var(--gold);}
+  .fig .tag.gold::after{background:var(--gold);}
 
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
@@ -376,7 +386,7 @@
       <li><span class="cyan">CAPILLARY BEDS</span> wrap each booth; blood and air end up a microscopic distance apart. The basket of capillaries is almost as big as the alveoli themselves.</li>
       <li><span class="cyan">ELASTIC + COLLAGEN FIBRES:</span> collagen strengthens the tissue; elastic fibres stretch during inhalation and <b>recoil for passive exhalation</b> — the building springs back on its own.</li>
     </ul>
-    <div class="fig">
+    <div class="fig narrow">
       <svg viewBox="0 0 660 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cutaway diagram of an alveolus showing surfactant, cell types and gas diffusion">
         <defs>
           <marker id="arwO" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#fbbf24"/></marker>
@@ -445,10 +455,6 @@
       <div class="cap"><b>THE CLUB O₂ CUTAWAY:</b> one air-sac booth, drawn to order. Gold dashed line = <b>surfactant monolayer</b> (AT2's spray stops the wet walls sticking on exhale). Pink nuclei = <b>AT1</b> wall cells, one layer thin. O₂ (gold) diffuses in across the film; CO₂ (violet) diffuses out into the booth. The capillary basket with its RBCs sits a microscopic distance from the wall.</div>
     </div>
     <div class="exam"><b>COPD DBQ (a favourite):</b> smoking → airways narrow + fewer, larger air sacs → less gas-exchange surface. Why are COPD patients always tired? Less O₂ reaching the blood → less aerobic respiration → less ATP. Why an enlarged right heart? Damaged lungs raise blood pressure in the pulmonary circulation → the right ventricle works overtime → it hypertrophies.</div>
-    <div class="fig">
-      <img src="assets/lung-alveoli-histology.jpg" alt="human lung histology stained with H and E, showing the honeycomb of alveoli" loading="lazy">
-      <div class="cap"><b>THE REAL THING:</b> human lung tissue, histology stain. The pink honeycomb = hundreds of alveoli side by side (each 0.2–0.5 mm). Spots where walls look thick or empty are where larger airways or blood vessels cut through. Image: <a href="https://commons.wikimedia.org/wiki/File:Normal_lung_(3660695207).jpg" target="_blank">Yale Rosen</a>, CC BY-SA 2.0.</div>
-    </div>
   </div>
 </section>
 
@@ -533,9 +539,15 @@
       <li><span class="accent">STOMATA + GUARD CELLS</span> — the bouncer windows (usually on the lower epidermis). Guard cells inflate/deflate to open or shut the pore.</li>
       <li><span class="gold">VEINS</span> — vascular bundles running through the middle: <b>xylem</b> (water + minerals up, the bar supply line) + <b>phloem</b> (sugars out, the till). Central placement = every tissue gets served.</li>
     </ul>
-    <div class="fig">
-      <img src="assets/leaf-cross-section-iris.jpg" alt="microscope cross-section of an Iris leaf showing cuticle, palisade and spongy mesophyll" loading="lazy">
-      <div class="cap"><b>THE REAL THING:</b> Iris leaf in cross-section. Top edge = thick waxy cuticle + upper epidermis; the dense green band beneath = <b>palisade mesophyll</b> (tight chloroplast-packed cylinders); lower = <b>spongy mesophyll</b> with its air spaces; bottom edge = lower epidermis. Image: <a href="https://commons.wikimedia.org/wiki/File:Leaf_(255_21)_Cross-section_through_a_leaf_of_Iris_plant.jpg" target="_blank">Josef Reischig</a>, CC BY-SA 3.0.</div>
+    <div class="fig narrow">
+      <div class="imgwrap">
+        <img src="assets/leaf-cross-section-iris.jpg" alt="microscope cross-section of an Iris leaf with labels on cuticle, palisade and spongy mesophyll" loading="lazy">
+        <div class="tag" style="top:4%; left:50%;">WAXY CUTICLE + UPPER EPIDERMIS</div>
+        <div class="tag" style="top:17%; left:50%;">PALISADE MESOPHYLL</div>
+        <div class="tag" style="top:62%; left:50%;">SPONGY MESOPHYLL + AIR SPACES</div>
+        <div class="tag" style="top:92%; left:50%;">LOWER EPIDERMIS</div>
+      </div>
+      <div class="cap"><b>READ IT LIKE THE EXAMINER:</b> same five layers as the plan diagram above — but real tissue. This is a monocot (Iris): palisade is one thin band, veins scattered through the spongy layer. Spot the pale gaps in the spongy mesophyll = air spaces; that's where CO₂ diffuses to the chloroplasts. Image: <a href="https://commons.wikimedia.org/wiki/File:Leaf_(255_21)_Cross-section_through_a_leaf_of_Iris_plant.jpg" target="_blank">Josef Reischig</a>, CC BY-SA 3.0.</div>
     </div>
   </div>
 
@@ -601,9 +613,13 @@
     <p><span class="gold">The maths:</span> fill the field of view, count stomata, repeat, find the mean, then divide by the field-of-view area:</p>
     <p class="big" style="text-align:center;"><span class="cyan">stomatal density (per mm²) = mean number of stomata ÷ area of field of view (mm²)</span></p>
     <div class="nos"><b>NOS — REPEAT. MEASUREMENTS. (This is the official NOS statement — quote it.)</b> Reliability of quantitative data is increased by repeating measurements. Repeated counts of stomata in the field of view show the variability of biological material and the need for replicate trials. Sample multiple leaves and plants; count multiple areas per leaf. An outlier can't wreck a mean; a single count can wreck everything. Less variation between repeats = more reliable mean.</div>
-    <div class="fig">
-      <img src="assets/stomata-sem.jpg" alt="scanning electron micrograph of a leaf epidermis showing stomata and guard cells" loading="lazy">
-      <div class="cap"><b>THE REAL THING:</b> leaf epidermis under the electron microscope — the bean-shaped guard cell pairs and their pores are exactly what you'd count in a stomatal-density prac. Public domain (Dartmouth College Electron Microscope Facility, <a href="https://commons.wikimedia.org/wiki/File:Leaf_epidermis.jpg" target="_blank">via Wikimedia Commons</a>).</div>
+    <div class="fig narrow">
+      <div class="imgwrap">
+        <img src="assets/stomata-sem.jpg" alt="scanning electron micrograph of a leaf epidermis with stomata labelled" loading="lazy">
+        <div class="tag" style="top:14%; left:38%;">STOMA — pore + 2 guard cells</div>
+        <div class="tag gold" style="top:3%; left:15%;">guard cells (bean-shaped)</div>
+      </div>
+      <div class="cap"><b>COUNT BEFORE YOU READ:</b> how many stomata can you see in this field? That raw count ÷ field-of-view area (mm²) is the stomatal-density formula doing its thing — and doing it multiple times is the NOS bit. Stomata = the clefts between bean-shaped guard-cell pairs. Public domain (Dartmouth College EM Facility, <a href="https://commons.wikimedia.org/wiki/File:Leaf_epidermis.jpg" target="_blank">via Wikimedia Commons</a>).</div>
     </div>
   </div>
 
@@ -630,10 +646,6 @@
       <h3>THE COURIER (B3.1.11)</h3>
       <div class="aka">haemoglobin — 4 subunits, 4 haem groups, 4 seats</div>
       <p>Each haemoglobin = <span class="accent">4 polypeptide subunits</span>, each carrying an iron-containing <b>haem group</b> that reversibly binds one O₂. So one Hb hauls up to <b>4 O₂</b>. Carried in red blood cells, it's what makes blood a 200+ cm³ club vs water's pathetic 50.</p>
-      <div class="fig">
-        <img src="assets/rbc-sem.jpg" alt="scanning electron micrograph of red blood cells" loading="lazy">
-        <div class="cap"><b>THE COURIER FLEET:</b> red blood cells under the electron microscope — each disc is packed with ~250 million haemoglobin molecules, which is how blood carries 200+ cm³ of O₂ per dm³. Public domain (Electron Microscopy Facility, National Cancer Institute, <a href="https://commons.wikimedia.org/wiki/File:Red_White_Blood_cells.jpg" target="_blank">via Wikimedia Commons</a>).</div>
-      </div>
     </div>
   </div>
 
@@ -884,7 +896,7 @@
 <footer>
   <p>Built from the <a href="https://ib.bioninja.com.au/b31-gas-exchange/" target="_blank">BioNinja</a> B3.1 pages + <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) · IB Biology guide (first exams 2025) · SL + AHL topic</p>
   <p>📖 open → print to PDF for a poster · part of <a href="../../index.html">Travis's Study Hub</a></p>
-  <p class="credits">📷 Diagrams drawn for this page (neon originals) · Micrographs: lung histology — <a href="https://commons.wikimedia.org/wiki/File:Normal_lung_(3660695207).jpg" target="_blank">Yale Rosen</a> (CC BY-SA 2.0) · Iris leaf cross-section — <a href="https://commons.wikimedia.org/wiki/File:Leaf_(255_21)_Cross-section_through_a_leaf_of_Iris_plant.jpg" target="_blank">Josef Reischig</a> (CC BY-SA 3.0) · stomata + red blood cell SEMs — public domain (Dartmouth EM facility / NCI), all via Wikimedia Commons.</p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals) · Labelled micrographs: Iris leaf cross-section — <a href="https://commons.wikimedia.org/wiki/File:Leaf_(255_21)_Cross-section_through_a_leaf_of_Iris_plant.jpg" target="_blank">Josef Reischig</a> (CC BY-SA 3.0) · stomata SEM — public domain (Dartmouth EM facility), via Wikimedia Commons.</p>
 </footer>
 
 </div>
