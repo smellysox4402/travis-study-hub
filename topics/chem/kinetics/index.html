@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>Kinetics — The Bouncer's Door (Reactivity 2.2)</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE DOOR</a>
+  <a href="#act2">ACT 2 · THE QUEUE</a>
+  <a href="#act3">ACT 3 · THE ENERGY CURVE</a>
+  <a href="#act4">ACT 4 · THE VIP LIST</a>
+  <a href="#act5">ACT 5 · THE ARRHENIUS DOOR</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/13</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Chemistry · Higher Level · Reactivity 2.2</div>
+  <h1>KINETICS — THE BOUNCER'S DOOR</h1>
+  <div class="sub">Every reaction is a nightclub. Particles queue up to get in — but the bouncer only lets in the ones that collide <b>at the right angle</b> with <b>enough energy</b>. Kinetics is the study of who gets past the door, and how fast.</div>
+  <div class="badges">
+    <span class="badge hl">REACTIVITY 2.2 · UNIT 5</span>
+    <span class="badge ahl">R2.2.8–R2.2.13 ARE HL</span>
+    <span class="badge">13 SYLLABUS POINTS</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 · R2.2.1 · R2.2.2 · R2.2.3 · R2.2.4</div>
+  <h2>THE DOOR 🚪</h2>
+  <p class="aim">Rate is just "how many guests get in per second". And getting in is harder than it looks.</p>
+
+  <div class="panel">
+    <h3>RATE OF REACTION = CHANGE IN CONCENTRATION PER UNIT TIME</h3>
+    <p class="big">rate = <span class="accent">Δ[reactant or product] / Δt</span> — units <b>mol dm⁻³ s⁻¹</b></p>
+    <ul class="clean">
+      <li><b>Concentration of reactants ↓</b> over time; <b>concentration of products ↑</b>.</li>
+      <li><b>Average rate</b> = chord between two points on a concentration–time graph.</li>
+      <li><b>Instantaneous rate</b> = gradient of the <span class="accent">tangent</span> at a given time.</li>
+      <li><b>Initial rate</b> = gradient of the tangent at <b>t = 0</b> — the standard exam ask.</li>
+    </ul>
+    <p class="muted">Rate is NOT constant — the curve flattens as reactants run out. Initial rate is the only clean rate to compare.</p>
+  </div>
+
+  <div class="panel">
+    <h3>HOW WE MEASURE RATE (R2.2.2)</h3>
+    <div class="grid3">
+      <div class="card"><div class="tag p">GAS REACTIONS</div><h4>Gas syringe 🎈</h4><p>Volume of gas produced vs time. Or loss of mass on a balance (if gas escapes).</p></div>
+      <div class="card"><div class="tag g">COLOUR CHANGES</div><h4>Colorimetry 🎨</h4><p>Light absorbance changes as a coloured reactant is used up or a coloured product forms.</p></div>
+      <div class="card"><div class="tag v">SOLUTIONS</div><h4>Titration / pH / conductivity ⚗️</h4><p>Sample the mixture and titrate, or monitor pH / conductivity live as ions change.</p></div>
+    </div>
+    <p class="muted">Every method is secretly the same job: get concentration against time, then draw tangents.</p>
+  </div>
+
+  <div class="panel">
+    <h3>COLLISION THEORY — THE BOUNCER'S THREE RULES (R2.2.3)</h3>
+    <p>For a reaction to happen, particles must:</p>
+    <ol class="steps">
+      <li><b>Collide</b> — no contact, no reaction. Ever.</li>
+      <li><b>Collide with the right orientation</b> — the reactive ends must line up (like a key in a lock — not every angle works).</li>
+      <li><b>Collide with energy ≥ activation energy (Eₐ)</b> — enough kinetic energy to break/weaken the old bonds and start making new ones.</li>
+    </ol>
+    <p>So rate depends on the <span class="accent">frequency of successful collisions</span> — not all collisions, just the ones that pass all three checks.</p>
+  </div>
+
+  <div class="panel">
+    <h3>ACTIVATION ENERGY — THE BOUNCER'S STRENGTH CHECK (R2.2.4)</h3>
+    <p class="big"><span class="accent">Eₐ = the minimum energy colliding particles need</span> for a reaction to occur.</p>
+    <ul class="clean">
+      <li>Old bonds must <b>break or weaken</b> before new bonds fully form — that costs energy.</li>
+      <li>At the <span class="gold">transition state</span>, bonds are half-broken/half-formed — <b>highest energy point</b> of the reaction.</li>
+      <li>The <b>activated complex</b> lives at the transition state — it's not a stable molecule, just a fleeting arrangement.</li>
+    </ul>
+    <div class="tip"><b>EXAM TRAP:</b> Eₐ is NOT ΔH. Eₐ is the energy hill to climb; ΔH is the overall energy difference between start and finish. You can have a very exothermic reaction with a huge activation energy (e.g. petrol + oxygen — needs a spark first).</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">Act 2 · R2.2.6 · R2.2.5</div>
+  <h2>THE QUEUE 🎫</h2>
+  <p class="aim">Four ways to get more guests past the door per second — and one very special VIP pass.</p>
+
+  <table>
+    <tr><th>Knob you turn</th><th>What happens to rate</th><th>Why (collision theory)</th></tr>
+    <tr><td>↑ concentration</td><td>increases</td><td>more particles per volume → <b>more collisions per second</b></td></tr>
+    <tr><td>↑ pressure (gases)</td><td>increases</td><td>same as concentration — gas particles squeezed closer together</td></tr>
+    <tr><td>↑ surface area (solids)</td><td>increases</td><td>more particles exposed → more collision sites (crushed solid &gt; one lump)</td></tr>
+    <tr><td>↑ temperature</td><td><b>increases a LOT</b></td><td>two bonuses: faster particles → more collisions <b>AND</b> a far bigger share of particles with E ≥ Eₐ (see Act 3)</td></tr>
+    <tr><td>catalyst</td><td>increases</td><td>lowers Eₐ → far more collisions become successful (see below)</td></tr>
+  </table>
+
+  <div class="exam"><b>RULE OF THUMB (exam-friendly):</b> for many reactions, rate roughly <b>doubles to quadruples for every +10 °C</b> (0–100 °C). Temperature is the biggest lever — it changes <i>who has enough energy</i>, not just how often they bump.</div>
+
+  <div class="bouncer">
+    <div class="emoji">🪪</div>
+    <div class="body">
+      <h3>CATALYSTS — THE VIP PASS (R2.2.5)</h3>
+      <p class="aka">a substance that increases rate but is NOT consumed</p>
+      <ul class="clean">
+        <li>Provides an <span class="cyan">alternative pathway</span> with a <b>lower activation energy</b> (Eₐ′ &lt; Eₐ).</li>
+        <li>Is <b>regenerated unchanged</b> — technically both a reactant AND a product of the reaction.</li>
+        <li><b>Does NOT change ΔH</b> — the start and finish are the same, only the hill gets smaller.</li>
+        <li>Usually works via a <span class="cyan">reaction intermediate</span> — a stable-ish species that forms then breaks down (e.g. NO₂ catalysing SO₂ → SO₃ via NO).</li>
+      </ul>
+      <p class="muted">Pencil analogy: an intermediate = pencil balancing on its flat end (can sit there a while). A transition state = pencil on its tip (falls instantly).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">Act 3 · R2.2.7</div>
+  <h2>THE ENERGY CURVE 📈</h2>
+  <p class="aim">Why does temperature matter so much more than concentration? Because of who's in the crowd — and the Maxwell–Boltzmann curve is the crowd photo.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 400" role="img" aria-label="Maxwell-Boltzmann energy distribution curves at two temperatures">
+      <!-- axes -->
+      <line x1="60" y1="335" x2="625" y2="335" stroke="#b9a3d6" stroke-width="2"/>
+      <polygon points="625,335 612,330 612,340" fill="#b9a3d6"/>
+      <line x1="60" y1="335" x2="60" y2="40" stroke="#b9a3d6" stroke-width="2"/>
+      <polygon points="60,40 55,52 65,52" fill="#b9a3d6"/>
+      <!-- T1 curve (cyan) -->
+      <path d="M 62,335 C 85,190 135,88 205,92 C 285,97 355,205 425,282 C 475,332 530,336 570,336" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <!-- T2 curve (pink) -->
+      <path d="M 62,335 C 92,245 165,152 265,152 C 365,152 470,262 550,318 C 575,332 600,336 620,336" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <!-- Ea line -->
+      <line x1="445" y1="335" x2="445" y2="62" stroke="#fbbf24" stroke-width="2" stroke-dasharray="6,5"/>
+      <!-- labels -->
+      <text x="205" y="80" fill="#22d3ee" font-size="14" font-weight="700" text-anchor="middle">T₁ (lower T)</text>
+      <text x="300" y="138" fill="#ff2ec4" font-size="14" font-weight="700" text-anchor="middle">T₂ (higher T)</text>
+      <text x="445" y="48" fill="#fbbf24" font-size="14" font-weight="700" text-anchor="middle">Eₐ</text>
+      <text x="350" y="380" fill="#b9a3d6" font-size="12" text-anchor="middle">kinetic energy →</text>
+      <text x="30" y="190" fill="#b9a3d6" font-size="12" text-anchor="middle" transform="rotate(-90 30 190)">proportion of particles →</text>
+    </svg>
+    <div class="cap"><b>Figure 1 — Maxwell–Boltzmann distribution.</b> Higher temperature = flatter, broader curve with the peak lower and shifted right. The <b>shaded region beyond Eₐ</b> (right of the gold line) is the fraction that can react — much bigger at T₂. The area under BOTH curves is identical (same number of particles).</div>
+  </div>
+
+  <div class="panel">
+    <h3>READING THE CROWD PHOTO 📸</h3>
+    <ul class="clean">
+      <li><b>Peak of the curve</b> = kinetic energy of the largest share of particles (the most common speed).</li>
+      <li><b>Average kinetic energy (Ēₖ)</b> sits slightly to the right of the peak.</li>
+      <li><b>Area under the curve</b> = total number of particles — <b>unchanged by temperature</b>.</li>
+      <li><b>Eₐ is fixed</b> — temperature moves the crowd, not the bouncer's threshold.</li>
+    </ul>
+    <div class="tip"><b>EXAM TRAP:</b> at higher T the peak is <i>LOWER</i> and further right — students often draw it taller. It's a redistribution: the same number of particles spread thinner, with a fatter high-energy tail.</div>
+  </div>
+
+  <div class="panel">
+    <h3>TEMPERATURE vs CATALYST — TWO DIFFERENT MOVES</h3>
+    <table>
+      <tr><th></th><th>Temperature ↑</th><th>Catalyst</th></tr>
+      <tr><td>Eₐ</td><td>UNCHANGED</td><td>lowered (Eₐ′)</td></tr>
+      <tr><td>Ēₖ (average energy)</td><td>increased</td><td>UNCHANGED</td></tr>
+      <tr><td>Curve shape</td><td>flatter, broader, peak right</td><td>same curve — but the bouncer's line moves LEFT</td></tr>
+      <tr><td>Result</td><td colspan="2">both: more particles with E ≥ Eₐ → more successful collisions</td></tr>
+    </table>
+    <div class="exam"><b>MARK-GRABBER:</b> "a rise in temperature does not affect Eₐ but increases the average kinetic energy; a catalyst does not affect the average kinetic energy but reduces Eₐ." Write that sentence and you've basically banked the marks.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 4 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">Act 4 · R2.2.8 · R2.2.9 · R2.2.10 · HL ONLY</div>
+  <h2>THE VIP LIST 📋</h2>
+  <p class="aim">The bouncer's rulebook: who actually controls the queue, and how much power does each guest have?</p>
+
+  <div class="panel">
+    <h3>THE RATE EQUATION (R2.2.8)</h3>
+    <p class="big">rate = <span class="accent">k [A]ⁿ [B]ᵐ</span></p>
+    <ul class="clean">
+      <li><b>k = rate constant</b> — the bouncer's mood. Independent of concentration, but <span class="gold">changes with temperature and catalyst</span>.</li>
+      <li><b>n, m = orders of reaction</b> — the "power" each reactant has over the rate.</li>
+      <li><b>Overall order = n + m</b>.</li>
+    </ul>
+    <div class="tip"><b>EXAM TRAP — THE BIGGEST ONE IN KINETICS:</b> orders are found <b>EXPERIMENTALLY ONLY</b>. They are <b>NOT</b> the stoichiometric coefficients from the balanced equation. aA + bB → products does NOT mean rate = k[A]ª[B]ᵇ. Never, ever read orders from the equation.</div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 400" role="img" aria-label="How rate responds to concentration for zero, first and second order">
+      <!-- axes -->
+      <line x1="80" y1="330" x2="625" y2="330" stroke="#b9a3d6" stroke-width="2"/>
+      <polygon points="625,330 612,325 612,335" fill="#b9a3d6"/>
+      <line x1="80" y1="330" x2="80" y2="60" stroke="#b9a3d6" stroke-width="2"/>
+      <polygon points="80,60 75,72 85,72" fill="#b9a3d6"/>
+      <!-- zero order: horizontal -->
+      <line x1="80" y1="200" x2="600" y2="200" stroke="#22d3ee" stroke-width="3"/>
+      <!-- first order: straight line through origin -->
+      <line x1="80" y1="330" x2="600" y2="250" stroke="#a855f7" stroke-width="3"/>
+      <!-- second order: curve -->
+      <path d="M 80,330 Q 300,318 600,170" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <!-- labels -->
+      <text x="240" y="188" fill="#22d3ee" font-size="13" font-weight="700">zero order — rate flat</text>
+      <text x="380" y="258" fill="#a855f7" font-size="13" font-weight="700">first order — straight line</text>
+      <text x="420" y="150" fill="#ff2ec4" font-size="13" font-weight="700">second order — curve up</text>
+      <text x="350" y="375" fill="#b9a3d6" font-size="12" text-anchor="middle">[A] →</text>
+      <text x="32" y="195" fill="#b9a3d6" font-size="12" text-anchor="middle" transform="rotate(-90 32 195)">rate →</text>
+    </svg>
+    <div class="cap"><b>Figure 2 — How rate responds to [A].</b> Doubling [A]: 0th order → rate unchanged; 1st order → rate ×2; 2nd order → rate ×4. Note [B]ᵐ is held constant while you test [A]ⁿ.</div>
+  </div>
+
+  <div class="panel">
+    <h3>ORDERS IN PLAIN WORDS (R2.2.9)</h3>
+    <table>
+      <tr><th>Order in A</th><th>Meaning</th><th>Doubling [A] → rate</th></tr>
+      <tr><td>0</td><td>[A] doesn't matter at all ([A]⁰ = 1)</td><td>unchanged (×1)</td></tr>
+      <tr><td>1</td><td>rate ∝ [A] — one A involved in the slow step</td><td>×2</td></tr>
+      <tr><td>2</td><td>rate ∝ [A]² — two A's (or one fast step feeding two A's in)</td><td>×4</td></tr>
+    </table>
+    <p class="muted">To find orders experimentally: run the reaction, change ONE concentration, keep everything else fixed, watch how the initial rate responds. That's the initial-rates method.</p>
+  </div>
+
+  <div class="panel">
+    <h3>RATE-DETERMINING STEP — THE ONLY DOOR THAT MATTERS (R2.2.10)</h3>
+    <p>Multi-step reactions are a chain of queues. The <span class="accent">rate-determining step (RDS)</span> is the <b>slowest step</b> — it controls the whole rate, exactly like the single slowest bouncer controls the whole club's throughput.</p>
+    <ul class="clean">
+      <li>The rate equation reflects the reactants in the <b>slow step</b> (and any fast step that feeds them) — <b>not</b> the overall equation.</li>
+      <li>Example: 2NO₂ + F₂ → 2NO₂F has a slow step NO₂ + F₂ → NO₂F + F, so rate = k[NO₂][F₂] — first order in each, overall 2nd. The second NO₂ enters AFTER the slow step and never touches the rate.</li>
+      <li><b>Intermediates</b> appear in steps but NEVER in the rate equation (they're made and used within the mechanism).</li>
+    </ul>
+    <div class="nos"><b>NATURE OF SCIENCE:</b> the RDS lets us test mechanisms. If a proposed mechanism predicts rate = k[A]² but the lab says rate = k[A], the mechanism is wrong — experiment is the referee.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 5 ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">Act 5 · R2.2.11 · R2.2.12 · R2.2.13 · HL ONLY</div>
+  <h2>THE ARRHENIUS DOOR 🔐</h2>
+  <p class="aim">The bouncer's bouncer: the equation that puts a number on temperature, energy and rate.</p>
+
+  <div class="panel">
+    <h3>THE ARRHENIUS EQUATION (R2.2.11)</h3>
+    <p class="big">k = <span class="accent">A · e^(−Eₐ/RT)</span></p>
+    <ul class="clean">
+      <li><b>k</b> = rate constant (same units as the overall rate ÷ concentrations)</li>
+      <li><b>A</b> = Arrhenius / frequency factor — measures how often collisions happen with the <i>right orientation</i>. Big A = simple, symmetric particles; small A = big awkward molecules.</li>
+      <li><b>Eₐ</b> = activation energy (J mol⁻¹ — CONVERT from kJ!)</li>
+      <li><b>R</b> = 8.31 J K⁻¹ mol⁻¹ · <b>T</b> = absolute temperature in <b>kelvin</b></li>
+    </ul>
+    <p class="muted">A and Eₐ are (approximately) temperature-independent. k rises <b>exponentially</b> with T — that's the +10°C doubling in disguise.</p>
+  </div>
+
+  <div class="panel">
+    <h3>STRAIGHT-LINE VERSION — THE ARRHENIUS PLOT (R2.2.12)</h3>
+    <p class="big">ln k = <span class="accent">(−Eₐ/R)(1/T) + ln A</span> &nbsp;→&nbsp; y = mx + c</p>
+    <ul class="clean">
+      <li>Plot <b>ln k vs 1/T</b> → a straight line (do NOT plot ln k vs T — that's a curve and loses the gradient trick).</li>
+      <li><b>gradient = −Eₐ/R</b> → Eₐ = −gradient × R</li>
+      <li><b>y-intercept = ln A</b> → A = e^(intercept)</li>
+    </ul>
+    <div class="tip"><b>EXAM TRAP — UNITS:</b> Eₐ must be in <b>J mol⁻¹</b> inside the equation (divide kJ by 1000), and T must be <b>kelvin</b>. The gradient has units of K, so gradient × 8.31 gives J mol⁻¹ — then convert to kJ for a sensible answer.</div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 400" role="img" aria-label="Arrhenius plot of ln k against 1 over T">
+      <!-- axes -->
+      <line x1="70" y1="340" x2="625" y2="340" stroke="#b9a3d6" stroke-width="2"/>
+      <polygon points="625,340 612,335 612,345" fill="#b9a3d6"/>
+      <line x1="70" y1="340" x2="70" y2="40" stroke="#b9a3d6" stroke-width="2"/>
+      <polygon points="70,40 65,52 75,52" fill="#b9a3d6"/>
+      <!-- line: ln k = -(Ea/R)(1/T) + ln A, negative slope -->
+      <line x1="100" y1="95" x2="590" y2="305" stroke="#22d3ee" stroke-width="3"/>
+      <!-- data points -->
+      <circle cx="190" cy="135" r="6" fill="#ff2ec4"/>
+      <circle cx="500" cy="275" r="6" fill="#ff2ec4"/>
+      <!-- slope triangle -->
+      <line x1="190" y1="275" x2="500" y2="275" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <line x1="190" y1="135" x2="190" y2="275" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <text x="345" y="290" fill="#fbbf24" font-size="13" font-weight="700" text-anchor="middle">gradient = −Eₐ/R</text>
+      <!-- intercept -->
+      <line x1="70" y1="80" x2="100" y2="95" stroke="#4ade80" stroke-width="2" stroke-dasharray="4,4"/>
+      <text x="70" y="66" fill="#4ade80" font-size="13" font-weight="700" text-anchor="start">intercept = ln A</text>
+      <!-- point labels -->
+      <text x="196" y="120" fill="#ff2ec4" font-size="12" font-weight="600">(1/T₁, ln k₁)</text>
+      <text x="430" y="262" fill="#ff2ec4" font-size="12" font-weight="600">(1/T₂, ln k₂)</text>
+      <!-- axis labels -->
+      <text x="350" y="382" fill="#b9a3d6" font-size="12" text-anchor="middle">1/T (K⁻¹) →</text>
+      <text x="32" y="195" fill="#b9a3d6" font-size="12" text-anchor="middle" transform="rotate(-90 32 195)">ln k →</text>
+    </svg>
+    <div class="cap"><b>Figure 3 — Arrhenius plot.</b> Steeper slope → bigger Eₐ. Two-point version (no graph needed): ln(k₁/k₂) = (Eₐ/R)(1/T₂ − 1/T₁). If concentrations are constant you can substitute rates for k.</div>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED EXAMPLE (YOUR COURSE COMPANION, p.507)</h3>
+    <p>N₂O₅ decomposition (first order). The ln k vs 1/T plot passes through (0.00302, −6.8) and (0.00334, −10.8).</p>
+    <ol class="steps">
+      <li>gradient = (−6.8 − (−10.8)) / (0.00302 − 0.00334) = 4.0 / (−0.00032) = <b>−12 500 K</b></li>
+      <li>Eₐ = −gradient × R = 12 500 × 8.31 = <b>104 kJ mol⁻¹</b></li>
+      <li>Using another point (0.00296, −6.02): ln A = ln k + Eₐ/RT = −6.02 + 104000/(8.31 × 338)... → <b>A = 2.85 × 10¹³ s⁻¹</b> (same units as k for a first-order reaction)</li>
+    </ol>
+    <div class="exam"><b>METHOD CHECK:</b> pick TWO points on the best-fit line (not data points, not the origin), find the gradient, multiply by −R. If a question gives you k at two temperatures, use ln(k₁/k₂) = (Eₐ/R)(1/T₂ − 1/T₁) straight away.</div>
+  </div>
+
+  <div class="panel">
+    <h3>ENERGY PROFILE — THE HILL PICTURE 🏔</h3>
+    <ul class="clean">
+      <li>Catalyst path = <b>two small hills</b> (two transition states) with a valley (intermediate) between them.</li>
+      <li>Uncatalysed path = <b>one big hill</b>.</li>
+      <li>Both start and end at the same heights → <b>same ΔH</b>.</li>
+      <li>ΔH &lt; 0 = exothermic (products lower); ΔH &gt; 0 = endothermic (products higher).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">One picture</div>
+  <h2>MIND MAP 🗺</h2>
+  <div class="mind">
+    <div class="node core">KINETICS<br><small>how fast? why fast?</small></div>
+    <div class="arrow">→</div>
+    <div class="node">COLLISION THEORY<br><small>collide · orient · energy ≥ Eₐ</small></div>
+    <div class="arrow">→</div>
+    <div class="node">FACTORS<br><small>conc · pressure · surface area · T · catalyst</small></div>
+    <div class="arrow">→</div>
+    <div class="node">M–B CURVE<br><small>T moves crowd · catalyst moves Eₐ line</small></div>
+    <div class="arrow">→</div>
+    <div class="node">RATE = k[A]ⁿ[B]ᵐ<br><small>orders from experiments only</small></div>
+    <div class="arrow">→</div>
+    <div class="node">RDS<br><small>slowest step rules</small></div>
+    <div class="arrow">→</div>
+    <div class="node">ARRHENIUS<br><small>ln k vs 1/T → slope −Eₐ/R</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
+  <div class="marquee">
+    <div class="line">rate = Δ[c]/Δt · initial rate = tangent at t = 0 <span>· units mol dm⁻³ s⁻¹</span></div>
+    <div class="line">successful collision = contact + orientation + energy ≥ <span>Eₐ</span></div>
+    <div class="line">+10 °C → rate ×2–4 <span>(M–B tail, not just more bumps)</span></div>
+    <div class="line">catalyst: lowers Eₐ, raises k, <span>ΔH unchanged</span>, regenerated</div>
+    <div class="line">rate = k[A]ⁿ[B]ᵐ — orders <span>NEVER from the equation</span>, always from data</div>
+    <div class="line">RDS = slowest step <span>· intermediates never in the rate equation</span></div>
+    <div class="line">ln k vs 1/T: slope <span>−Eₐ/R</span> · intercept <span>ln A</span> · Eₐ in joules, T in kelvin</div>
+    <div class="line">ln(k₁/k₂) = <span>(Eₐ/R)(1/T₂ − 1/T₁)</span> — the no-graph shortcut</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">No peeking at the acts above. Pick an answer, get instant feedback.</p>
+
+  <div class="q" data-a="init">
+    <p>1. How do you get the INITIAL rate from a concentration–time graph?</p>
+    <label><input type="radio" name="q1" value="wrong1"> Gradient of a chord across the whole curve</label>
+    <label><input type="radio" name="q1" value="init"> Gradient of the tangent at t = 0</label>
+    <label><input type="radio" name="q1" value="wrong2"> The final concentration divided by total time</label>
+    <div class="fb correct">✅ Tangent at t = 0 — the steepest, cleanest point on the curve.</div>
+    <div class="fb wrong">❌ It's the tangent at t = 0. Chords give AVERAGE rates; the initial rate is the instantaneous rate at the start.</div>
+  </div>
+
+  <div class="q" data-a="ea">
+    <p>2. What is activation energy?</p>
+    <label><input type="radio" name="q2" value="wrong1"> The total energy released by the reaction</label>
+    <label><input type="radio" name="q2" value="ea"> The minimum energy colliding particles need for reaction to occur</label>
+    <label><input type="radio" name="q2" value="wrong2"> The energy difference between reactants and products</label>
+    <div class="fb correct">✅ Minimum energy needed. The ΔH answer is the trap — that's the overall energy difference, not the hill.</div>
+    <div class="fb wrong">❌ Eₐ = minimum energy for a reaction to occur. ΔH (reactants → products difference) is the tempting wrong answer.</div>
+  </div>
+
+  <div class="q" data-a="tail">
+    <p>3. When temperature rises, what happens to the Maxwell–Boltzmann curve?</p>
+    <label><input type="radio" name="q3" value="wrong1"> Peak gets taller and moves left</label>
+    <label><input type="radio" name="q3" value="tail"> Peak gets lower, curve flattens and broadens, high-energy tail fattens</label>
+    <label><input type="radio" name="q3" value="wrong2"> Nothing — only the number of particles changes</label>
+    <div class="fb correct">✅ Flatter + broader + peak shifted right. Same area, fatter tail beyond Eₐ → more reactive particles.</div>
+    <div class="fb wrong">❌ Higher T flattens and broadens the curve — peak LOWER and further right. Area stays the same.</div>
+  </div>
+
+  <div class="q" data-a="alt">
+    <p>4. How does a catalyst speed up a reaction?</p>
+    <label><input type="radio" name="q4" value="wrong1"> By raising the average kinetic energy of particles</label>
+    <label><input type="radio" name="q4" value="alt"> By providing an alternative pathway with lower activation energy</label>
+    <label><input type="radio" name="q4" value="wrong2"> By increasing the collision frequency</label>
+    <div class="fb correct">✅ Alternative pathway, lower Eₐ. It does NOT touch particle energies or collision frequency.</div>
+    <div class="fb wrong">❌ A catalyst lowers Eₐ via an alternative pathway. Raising Ēₖ is what temperature does; more collisions is concentration/pressure.</div>
+  </div>
+
+  <div class="q" data-a="unchanged">
+    <p>5. A catalyst changes the rate but what stays the SAME?</p>
+    <label><input type="radio" name="q5" value="unchanged"> ΔH (enthalpy change)</label>
+    <label><input type="radio" name="q5" value="wrong1"> The rate constant k</label>
+    <label><input type="radio" name="q5" value="wrong2"> Eₐ</label>
+    <div class="fb correct">✅ ΔH is fixed by reactants and products. k RISES (that's the point) and Eₐ falls.</div>
+    <div class="fb wrong">❌ ΔH stays the same. k increases and Eₐ decreases — those are exactly what the catalyst changes.</div>
+  </div>
+
+  <div class="q" data-a="experiment">
+    <p>6. Where do reaction orders come from?</p>
+    <label><input type="radio" name="q6" value="wrong1"> The coefficients in the balanced equation</label>
+    <label><input type="radio" name="q6" value="experiment"> Experimental data (initial rates method)</label>
+    <label><input type="radio" name="q6" value="wrong2"> The rate-determining step, always directly</label>
+    <div class="fb correct">✅ Experiments only. The balanced equation is a lying partner — orders can be 0, fractional, anything.</div>
+    <div class="fb wrong">❌ Experimental data, always. Never the balanced equation — that's the classic trap. (RDS helps explain orders, but you still MEASURE them.)</div>
+  </div>
+
+  <div class="q" data-a="x4">
+    <p>7. Reaction is 2nd order in A. You double [A]. Rate goes...</p>
+    <label><input type="radio" name="q7" value="wrong1"> ×2</label>
+    <label><input type="radio" name="q7" value="x4"> ×4</label>
+    <label><input type="radio" name="q7" value="wrong2"> unchanged</label>
+    <div class="fb correct">✅ rate ∝ [A]² → 2² = 4×. First order would be ×2, zero order ×1.</div>
+    <div class="fb wrong">❌ Second order = [A]² → doubling gives 4×. ×2 is first order, unchanged is zero order.</div>
+  </div>
+
+  <div class="q" data-a="slow">
+    <p>8. In a multi-step reaction, the rate equation matches...</p>
+    <label><input type="radio" name="q8" value="slow"> The slowest step (rate-determining step)</label>
+    <label><input type="radio" name="q8" value="wrong1"> The overall balanced equation</label>
+    <label><input type="radio" name="q8" value="wrong2"> The fastest step</label>
+    <div class="fb correct">✅ The RDS controls the rate — the club moves as fast as its slowest bouncer.</div>
+    <div class="fb wrong">❌ The rate-determining step. The overall equation says nothing about the rate; the fastest step is the opposite of the bottleneck.</div>
+  </div>
+
+  <div class="q" data-a="slope">
+    <p>9. On a plot of ln k vs 1/T, what does the gradient equal?</p>
+    <label><input type="radio" name="q9" value="wrong1"> Eₐ</label>
+    <label><input type="radio" name="q9" value="slope"> −Eₐ/R</label>
+    <label><input type="radio" name="q9" value="wrong2"> ln A</label>
+    <div class="fb correct">✅ gradient = −Eₐ/R → Eₐ = −gradient × 8.31. The intercept is ln A.</div>
+    <div class="fb wrong">❌ −Eₐ/R. Intercept = ln A; Eₐ alone would need units that don't survive the axes.</div>
+  </div>
+
+  <div class="q" data-a="joules">
+    <p>10. In the Arrhenius equation, Eₐ must be in...</p>
+    <label><input type="radio" name="q10" value="joules"> J mol⁻¹ (convert from kJ!)</label>
+    <label><input type="radio" name="q10" value="wrong1"> kJ mol⁻¹</label>
+    <label><input type="radio" name="q10" value="wrong2"> J</label>
+    <div class="fb correct">✅ J mol⁻¹ — R = 8.31 J K⁻¹ mol⁻¹ demands it. kJ must be ×1000 first, and T in kelvin.</div>
+    <div class="fb wrong">❌ J mol⁻¹. R is in J, so Eₐ must be too — convert kJ → J before plugging in.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 13 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">R2.2.1</span><span>Rate of reaction = change in concentration per unit time; units mol dm⁻³ s⁻¹.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">R2.2.2</span><span>Instantaneous rate from the gradient of a tangent; initial rate = tangent at t = 0; rate measured via gas volume, mass loss, colorimetry, titration, pH, conductivity.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">R2.2.3</span><span>Collision theory: rate depends on frequency of successful collisions — collision, correct orientation, energy ≥ Eₐ.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">R2.2.4</span><span>Activation energy = minimum energy needed for reaction; transition state is the highest-energy point; Eₐ ≠ ΔH.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">R2.2.5</span><span>Catalysts increase rate via an alternative pathway with lower Eₐ; regenerated; ΔH unchanged; intermediates vs transition states.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">R2.2.6</span><span>Effects of concentration, pressure (gases), surface area (solids) and temperature on rate — explained via collision theory.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">R2.2.7</span><span>Maxwell–Boltzmann curves: temperature flattens/broadens the curve (peak lower, right); catalyst moves Eₐ left; area = total particles.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">R2.2.8</span><span>HL: rate = k[A]ⁿ[B]ᵐ; k is temperature/catalyst-dependent but concentration-independent; overall order = n + m.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">R2.2.9</span><span>HL: orders determined experimentally (initial rates method), NOT from the balanced equation; zero/first/second order meanings.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">R2.2.10</span><span>HL: rate-determining step = slowest step; rate equation reflects the RDS; intermediates never appear in the rate equation.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">R2.2.11</span><span>HL: Arrhenius equation k = A·e^(−Eₐ/RT); A = frequency factor (orientation); Eₐ in J mol⁻¹, T in kelvin.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">R2.2.12</span><span>HL: ln k vs 1/T plot → straight line, gradient −Eₐ/R, intercept ln A.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">R2.2.13</span><span>HL: activation energy from experimental data (two-point form ln(k₁/k₂) = (Eₐ/R)(1/T₂ − 1/T₁)); worked example: N₂O₅ → Eₐ = 104 kJ mol⁻¹.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Chemistry: Course Companion</b> (Bylikin, Horner, Grant &amp; Tarcy, Oxford 2023) — Reactivity 2.2 · IB Chemistry guide (first exams 2025) · HL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='kinetics-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
