@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>D2.1 Cell &amp; Nuclear Division — Club Split</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE GUEST LIST</a>
+  <a href="#act2">ACT 2 · THE SPLIT</a>
+  <a href="#act3">ACT 3 · TWO DIVISIONS</a>
+  <a href="#act4">ACT 4 · CHROMOSOME ANATOMY</a>
+  <a href="#act5">ACT 5 · MITOSIS PMAT</a>
+  <a href="#act6">ACT 6 · MEIOSIS SHUFFLE</a>
+  <a href="#act7">ACT 7 · NON-DISJUNCTION</a>
+  <a href="#act8">ACT 8 · THE CELL CYCLE</a>
+  <a href="#act9">ACT 9 · THE BOUNCERS</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/10</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Biology · Higher Level · Theme D</div>
+  <h1>D2.1 CELL &amp; NUCLEAR DIVISION</h1>
+  <div class="sub">Welcome to <b>Club Split</b> — the club where every dancer brings a twin. One cell walks in, two walk out (mitosis) — or four half-cells with brand-new combos walk out (meiosis). Tonight's lesson: how cells copy their DNA, split their cytoplasm, and how a skipped beat at the door causes Down syndrome and cancer.</div>
+  <div class="badges">
+    <span class="badge hl">D2.1 · SL + AHL</span>
+    <span class="badge ahl">17 SYLLABUS POINTS</span>
+    <span class="badge">MITOSIS · MEIOSIS · THE CYCLE</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · D2.1.1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 · D2.1.1</div>
+  <h2>THE GUEST LIST — WHY NEW CELLS?</h2>
+  <p class="aim">Every organism needs new cells — for growth, for maintenance, and for reproduction. And there's a law: new cells only ever come from dividing pre-existing ones.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📋</div>
+    <div class="body">
+      <h3>Three reasons to throw a division</h3>
+      <div class="aka">Growth, maintenance, reproduction — the three jobs on the guest list</div>
+      <p><b class="cyan">Growth</b> — more cells, not bigger cells. An embryo goes from one zygote to trillions of cells by division.</p>
+      <p><b class="accent">Maintenance</b> — replace worn-out or damaged cells. Your skin, gut lining and blood are constantly being restocked.</p>
+      <p><b class="gold">Reproduction</b> — single-celled organisms (and quaking aspens!) reproduce by cell division, making genetically identical clones.</p>
+      <p>In cell division, the dividing cell is the <b class="accent">mother cell</b>; the products are <b class="cyan">daughter cells</b>. The mother cell disappears as an entity — it doesn't survive beside its offspring like an animal parent does.</p>
+      <div class="tip"><b>Cell theory, hard mode:</b> new cells are only ever produced by division of a pre-existing cell. Trace it back far enough and every cell in your body connects to the original zygote — and beyond that, to the earliest cells on Earth. That's the <b>continuity of life</b>.</div>
+      <p class="muted">The quaking aspen "Pando" is one of Earth's biggest organisms — a single root system sending up thousands of genetically identical stems. All one clone, all made by cell division.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 · D2.1.2 + D2.1.3 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">Act 2 · D2.1.2 · D2.1.3</div>
+  <h2>THE SPLIT — CYTOKINESIS</h2>
+  <p class="aim">Nuclear division sorts the chromosomes; cytokinesis actually cuts the cell in two. Animals pinch, plants build.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🍰</div>
+    <div class="body">
+      <h3>Two ways to slice the cake</h3>
+      <div class="aka">Cytokinesis = dividing the cytoplasm between the daughter cells</div>
+      <p><b class="cyan">Animal cells — the pinch.</b> The plasma membrane is pulled inward around the equator, forming a <b class="cyan">cleavage furrow</b>. The pulling is done by a <b class="accent">contractile ring of actin and myosin</b> — the same proteins that power muscle — sitting just inside the membrane. When the furrow reaches the centre, the cell is pinched in two.</p>
+      <p><b class="green">Plant cells — the build.</b> Plants have a stiff cell wall, so they can't pinch. Instead, <b class="gold">microtubules form a scaffold</b> across the equator, and <b class="gold">vesicles</b> travel along it and fuse into plate-shaped structures. The plates grow into <b>two complete layers of new plasma membrane</b>, then pectins are deposited between them by exocytosis — the <b class="green">middle lamella</b>. Finally each daughter cell secretes cellulose to build its own new cell wall.</p>
+      <div class="exam"><b>Exam shape:</b> animal = cleavage furrow + actin/myosin ring. Plant = vesicles → cell plate → middle lamella → two new cellulose walls. Never swap them.</div>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram comparing cytokinesis in animal and plant cells: cleavage furrow with contractile ring of actin and myosin vs cell plate formed from fusing vesicles with middle lamella">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CYTOKINESIS — PINCH vs BUILD</text>
+      <text x="165" y="58" fill="#22d3ee" font-size="12.5" font-weight="800" text-anchor="middle">ANIMAL CELL</text>
+      <text x="165" y="76" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">cleavage furrow</text>
+      <text x="475" y="58" fill="#4ade80" font-size="12.5" font-weight="800" text-anchor="middle">PLANT CELL</text>
+      <text x="475" y="76" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">cell plate</text>
+      <!-- animal cell -->
+      <circle cx="165" cy="235" r="88" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="3"/>
+      <path d="M 77 235 Q 98 214 108 235 Q 98 256 77 235" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+      <path d="M 253 235 Q 232 214 222 235 Q 232 256 253 235" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+      <ellipse cx="165" cy="235" rx="60" ry="14" fill="none" stroke="#ff2ec4" stroke-width="2" stroke-dasharray="4 3" opacity=".9"/>
+      <text x="30" y="170" fill="#ff2ec4" font-size="11" font-weight="800">CLEAVAGE FURROW</text>
+      <line x1="88" y1="178" x2="103" y2="216" stroke="#22d3ee" stroke-width="1"/>
+      <text x="30" y="310" fill="#ff2ec4" font-size="11" font-weight="800">CONTRACTILE RING</text>
+      <text x="30" y="328" fill="#b9a3d6" font-size="9.5" font-weight="700">(actin + myosin)</text>
+      <line x1="95" y1="302" x2="155" y2="248" stroke="#ff2ec4" stroke-width="1"/>
+      <!-- plant cell -->
+      <rect x="400" y="140" width="150" height="190" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="3"/>
+      <line x1="475" y1="150" x2="475" y2="320" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <rect x="468" y="150" width="14" height="170" rx="3" fill="rgba(251,191,36,.35)" stroke="#fbbf24" stroke-width="1.5"/>
+      <circle cx="475" cy="165" r="5" fill="#fbbf24"/>
+      <circle cx="475" cy="195" r="5" fill="#fbbf24"/>
+      <circle cx="475" cy="225" r="5" fill="#fbbf24"/>
+      <circle cx="475" cy="255" r="5" fill="#fbbf24"/>
+      <circle cx="475" cy="285" r="5" fill="#fbbf24"/>
+      <circle cx="475" cy="315" r="5" fill="#fbbf24"/>
+      <text x="475" y="132" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">VESICLES FUSE</text>
+      <text x="552" y="215" fill="#4ade80" font-size="11" font-weight="800">CELL PLATE</text>
+      <line x1="546" y1="210" x2="490" y2="210" stroke="#4ade80" stroke-width="1"/>
+      <text x="385" y="262" fill="#b9a3d6" font-size="10.5" font-weight="700" text-anchor="end">MIDDLE LAMELLA</text>
+      <line x1="392" y1="256" x2="468" y2="256" stroke="#b9a3d6" stroke-width="1"/>
+      <text x="552" y="290" fill="#b9a3d6" font-size="10" font-weight="700">new cell walls</text>
+      <line x1="546" y1="285" x2="492" y2="285" stroke="#b9a3d6" stroke-width="1"/>
+      <text x="320" y="425" fill="#b9a3d6" font-size="11.5" font-weight="700" text-anchor="middle">animal = pinch with an actin + myosin ring · plant = build a wall from fusing vesicles</text>
+    </svg>
+    <div class="cap"><b>THE TWO WAYS:</b> animals squeeze (contractile ring of actin + myosin); plants construct (microtubule scaffold → vesicles fuse → middle lamella → cellulose walls).</div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">⚖️</div>
+    <div class="body">
+      <h3>Equal vs unequal splits</h3>
+      <div class="aka">Sometimes the cytoplasm is shared evenly, sometimes one daughter gets the lion's share</div>
+      <p><b class="cyan">Equal cytokinesis</b> — cytoplasm split into two equal halves. Happens in growing root tips, where columns of cells all differentiate the same way.</p>
+      <p><b class="accent">Unequal cytokinesis</b> — one daughter gets most of the cytoplasm. Two classic examples:</p>
+      <ul class="clean">
+        <li><b class="gold">Budding in yeast</b> — the nucleus divides by mitosis, then a small outgrowth (the bud) receives one nucleus but only a small share of cytoplasm. A dividing wall separates them; the bud splits off, leaving a scar. Yeast doesn't even need to double in size between divisions.</li>
+        <li><b class="accent">Oogenesis in humans</b> — sperm production splits cytoplasm equally (four equal sperm). Eggs are the opposite: usually only ONE egg is made at a time, with huge food stores for the embryo. The first division makes one big cell + a tiny <b class="accent">polar body</b>; the big cell divides again — one big egg + another tiny polar body. The polar bodies get a nucleus but almost no cytoplasm, and they never develop.</li>
+      </ul>
+      <div class="tip"><b>Survival rule:</b> a small daughter cell can survive if it gets a nucleus <i>and</i> at least one of each organelle it can't assemble from scratch — like mitochondria, which can only come from division of a pre-existing mitochondrion.</div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════ ACT 3 · D2.1.4 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">Act 3 · D2.1.4</div>
+  <h2>TWO DIVISIONS, TWO JOBS</h2>
+  <p class="aim">Mitosis = continuity. Meiosis = change. Same starting point, opposite outcomes.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔁</div>
+    <div class="body">
+      <h3>Why you need a nuclear division at all</h3>
+      <div class="aka">Divide the cytoplasm without dividing the nucleus first and you make a zombie cell</div>
+      <p>If a cell divides without nuclear division first, one daughter gets the nucleus and the other is <b class="accent">anucleate</b> — no nucleus at all. Anucleate cells can't synthesise polypeptides, so they can't grow or maintain themselves. They have limited lifespans: red blood cells, which lose their nucleus, survive only ~120 days.</p>
+      <p>So before cell division, the mother cell runs either <b class="cyan">mitosis</b> or <b class="gold">meiosis</b> to make extra nuclei. Both are preceded by DNA replication.</p>
+      <div class="grid2">
+        <div class="card"><h4>🪩 MITOSIS — continuity</h4><p class="tag">same · same · same</p><p>Produces <b>genetically identical</b> cells. 2n (diploid) stays 2n. Every cell keeps the same genes — so all cells in your body have the same genome, and tissue rejection never happens within your own body. It also lets a successful genome be inherited unchanged in asexual reproduction.</p></div>
+        <div class="card"><h4>🎲 MEIOSIS — change</h4><p class="tag p">half + shuffled</p><p>Halves the chromosome number 2n → n (haploid) and generates <b>genetic diversity</b>. Gene pairs are dealt randomly to daughter cells — almost limitless combinations. That variation is the fuel for evolution by natural selection.</p></div>
+      </div>
+      <div class="exam"><b>One-liner to memorise:</b> mitosis maintains the genome and chromosome number; meiosis halves the chromosome number and shuffles the genome.</div>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram comparing mitosis and meiosis: a diploid 2n=4 parent cell producing two identical diploid daughter cells by mitosis, or four haploid varied daughter cells by meiosis">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">MITOSIS vs MEIOSIS — CONTINUITY vs CHANGE</text>
+      <!-- parent cell 2n=4 -->
+      <circle cx="320" cy="110" r="50" fill="rgba(255,46,196,.07)" stroke="#ff2ec4" stroke-width="3"/>
+      <g stroke="#ff2ec4" stroke-width="3" stroke-linecap="round">
+        <path d="M 292 86 L 308 102 M 308 86 L 292 102"/>
+        <path d="M 332 118 L 348 134 M 348 118 L 332 134"/>
+      </g>
+      <g stroke="#22d3ee" stroke-width="3" stroke-linecap="round">
+        <path d="M 332 86 L 348 102 M 348 86 L 332 102"/>
+        <path d="M 292 118 L 308 134 M 308 118 L 292 134"/>
+      </g>
+      <circle cx="300" cy="94" r="2.5" fill="#fbbf24"/>
+      <circle cx="340" cy="126" r="2.5" fill="#fbbf24"/>
+      <circle cx="340" cy="94" r="2.5" fill="#fbbf24"/>
+      <circle cx="300" cy="126" r="2.5" fill="#fbbf24"/>
+      <text x="320" y="180" fill="#b9a3d6" font-size="11" font-weight="700" text-anchor="middle">PARENT (2n = 4) — homologous pairs</text>
+      <!-- mitosis branch -->
+      <text x="150" y="200" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">MITOSIS</text>
+      <text x="150" y="218" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">one division · identical</text>
+      <line x1="300" y1="160" x2="165" y2="225" stroke="#ff2ec4" stroke-width="2" marker-end="url(#arrP)"/>
+      <circle cx="115" cy="290" r="44" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <circle cx="210" cy="290" r="44" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <g stroke="#ff2ec4" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 97 270 L 107 280 M 107 270 L 97 280"/>
+        <path d="M 127 300 L 137 310 M 137 300 L 127 310"/>
+      </g>
+      <g stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 127 270 L 137 280 M 137 270 L 127 280"/>
+        <path d="M 97 300 L 107 310 M 107 300 L 97 310"/>
+      </g>
+      <g stroke="#ff2ec4" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 192 270 L 202 280 M 202 270 L 192 280"/>
+        <path d="M 222 300 L 232 310 M 232 300 L 222 310"/>
+      </g>
+      <g stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 222 270 L 232 280 M 232 270 L 222 280"/>
+        <path d="M 192 300 L 202 310 M 202 300 L 192 310"/>
+      </g>
+      <text x="162" y="352" fill="#b9a3d6" font-size="11" font-weight="700" text-anchor="middle">2 daughter cells</text>
+      <text x="162" y="370" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">2n = 4 · IDENTICAL</text>
+      <!-- meiosis branch -->
+      <text x="470" y="200" fill="#22d3ee" font-size="13" font-weight="900" text-anchor="middle">MEIOSIS</text>
+      <text x="470" y="218" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">two divisions · variation</text>
+      <line x1="340" y1="160" x2="470" y2="225" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrC)"/>
+      <circle cx="400" cy="300" r="34" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <circle cx="530" cy="300" r="34" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <circle cx="400" cy="380" r="34" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <circle cx="530" cy="380" r="34" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <g stroke="#ff2ec4" stroke-width="3" stroke-linecap="round">
+        <line x1="386" y1="296" x2="402" y2="292"/>
+        <line x1="516" y1="292" x2="532" y2="296"/>
+        <line x1="386" y1="376" x2="402" y2="372"/>
+        <line x1="516" y1="372" x2="532" y2="376"/>
+      </g>
+      <g stroke="#22d3ee" stroke-width="3" stroke-linecap="round">
+        <line x1="388" y1="308" x2="404" y2="304"/>
+        <line x1="514" y1="304" x2="530" y2="308"/>
+        <line x1="388" y1="388" x2="404" y2="384"/>
+        <line x1="514" y1="384" x2="530" y2="388"/>
+      </g>
+      <text x="465" y="262" fill="#b9a3d6" font-size="10.5" font-weight="700" text-anchor="middle">4 daughter cells</text>
+      <text x="465" y="434" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">n = 2 · VARIED</text>
+      <defs>
+        <marker id="arrP" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#ff2ec4"/></marker>
+        <marker id="arrC" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#22d3ee"/></marker>
+      </defs>
+      <text x="320" y="448" fill="#b9a3d6" font-size="11.5" font-weight="700" text-anchor="middle">mitosis = same genome (continuity) · meiosis = half the set + new combos (change)</text>
+    </svg>
+    <div class="cap"><b>CONTINUITY vs CHANGE:</b> pink + cyan = a homologous pair. Mitosis keeps both members in every daughter (2n). Meiosis splits each pair and shuffles the alleles (n) — four unique half-cells.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 4 · D2.1.5 + D2.1.6 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">Act 4 · D2.1.5 · D2.1.6</div>
+  <h2>CHROMOSOME ANATOMY — THE TWIN CLUB</h2>
+  <p class="aim">Before any division, DNA must be replicated. The result: chromosomes that are now pairs of identical twins, holding hands.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧬</div>
+    <div class="body">
+      <h3>From single to twin chromatids</h3>
+      <div class="aka">DNA replication is a prerequisite for BOTH mitosis and meiosis</div>
+      <p>Before replication, each chromosome is <b class="cyan">one long DNA molecule</b> — so thin that light microscopes can't see it. After replication there are <b class="accent">two identical DNA molecules</b>, still considered ONE chromosome, held together by loops of a protein complex called <b class="gold">cohesin</b>.</p>
+      <p>Each single DNA molecule is a <b class="cyan">chromatid</b>. So a replicated chromosome = <b class="accent">two sister chromatids</b> (genetically identical) joined at a <b class="gold">centromere</b>. Chromatids on different chromosomes are <b>non-sister chromatids</b> and usually differ.</p>
+      <ul class="clean">
+        <li><b class="accent">Condensation</b> — during early mitosis/meiosis, DNA packs tighter and the chromosome becomes shorter and fatter — visible at last. The two strands can then be seen.</li>
+        <li><b class="cyan">Movement</b> — chromosomes get hauled to opposite poles by <b>microtubules</b> growing from <b class="gold">microtubule organising centres (MTOCs)</b>. Microtubules attach at the centromere region, at a protein structure called the <b class="accent">kinetochore</b>.</li>
+        <li><b class="green">The cut</b> — cohesin loops are NOT cut until the <b>start of anaphase</b>. Only then do the sister chromatids finally separate and get pulled to opposite poles. (Old hypothesis: the centromere itself divided. Falsified.)</li>
+      </ul>
+      <div class="tip"><b>Memorise the timeline:</b> replication (interphase) → condensation (prophase) → alignment (metaphase) → cohesin cut + separation (anaphase) → nuclei reform (telophase). The cohesin cut is the moment the twins let go.</div>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram of chromosome structure before and after DNA replication: single chromatid with one DNA molecule, then a chromosome with two sister chromatids held by cohesin loops, centromere and kinetochore">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CHROMOSOME — BEFORE &amp; AFTER REPLICATION</text>
+      <text x="160" y="58" fill="#22d3ee" font-size="12.5" font-weight="800" text-anchor="middle">BEFORE (G1)</text>
+      <text x="160" y="76" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">one long DNA molecule</text>
+      <path d="M 160 100 C 135 130 185 150 160 180 C 135 210 185 230 160 260 C 135 290 185 310 160 340" fill="none" stroke="#ff2ec4" stroke-width="4" stroke-linecap="round"/>
+      <text x="212" y="195" fill="#ff2ec4" font-size="11" font-weight="800">single chromatid</text>
+      <line x1="205" y1="191" x2="172" y2="191" stroke="#ff2ec4" stroke-width="1"/>
+      <text x="212" y="233" fill="#b9a3d6" font-size="10" font-weight="700">(1 DNA molecule)</text>
+      <line x1="205" y1="229" x2="178" y2="229" stroke="#b9a3d6" stroke-width="1"/>
+      <text x="320" y="250" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">DNA REPLICATION (S phase)</text>
+      <line x1="255" y1="268" x2="300" y2="268" stroke="#fbbf24" stroke-width="1.5"/>
+      <line x1="385" y1="268" x2="340" y2="268" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="480" y="58" fill="#4ade80" font-size="12.5" font-weight="800" text-anchor="middle">AFTER (S → G2)</text>
+      <text x="480" y="76" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">two identical DNA molecules</text>
+      <line x1="450" y1="110" x2="510" y2="330" stroke="#4ade80" stroke-width="4" stroke-linecap="round"/>
+      <line x1="510" y1="110" x2="450" y2="330" stroke="#4ade80" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="480" cy="220" r="9" fill="#fbbf24" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="480" cy="220" r="14" fill="none" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="462" cy="140" r="6" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <circle cx="498" cy="170" r="6" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <circle cx="462" cy="300" r="6" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <circle cx="498" cy="270" r="6" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <text x="545" y="130" fill="#4ade80" font-size="11" font-weight="800">SISTER CHROMATIDS</text>
+      <text x="545" y="148" fill="#b9a3d6" font-size="9.5" font-weight="700">(identical DNA)</text>
+      <line x1="538" y1="138" x2="512" y2="150" stroke="#4ade80" stroke-width="1"/>
+      <text x="545" y="240" fill="#a855f7" font-size="11" font-weight="800">COHESIN LOOPS</text>
+      <text x="545" y="258" fill="#b9a3d6" font-size="9.5" font-weight="700">(hold twins together)</text>
+      <line x1="538" y1="246" x2="500" y2="246" stroke="#a855f7" stroke-width="1"/>
+      <text x="545" y="315" fill="#fbbf24" font-size="11" font-weight="800">CENTROMERE</text>
+      <text x="545" y="333" fill="#b9a3d6" font-size="9.5" font-weight="700">+ kinetochore</text>
+      <line x1="538" y1="308" x2="494" y2="224" stroke="#fbbf24" stroke-width="1"/>
+      <text x="320" y="425" fill="#b9a3d6" font-size="11.5" font-weight="700" text-anchor="middle">cohesin is CUT at the start of anaphase → sister chromatids finally separate</text>
+      <text x="320" y="443" fill="#b9a3d6" font-size="11" font-weight="700" text-anchor="middle">kinetochore = where spindle microtubules attach (MTOC end)</text>
+    </svg>
+    <div class="cap"><b>THE TWINS:</b> one chromosome, two sister chromatids, cohesin loops holding them, centromere at the pinch point, kinetochore where the spindle grabs on. Cut the cohesin and the twins split.</div>
+  </div>
+</section>
+<!-- ══════════════════════ ACT 5 · D2.1.7 + D2.1.8 ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">Act 5 · D2.1.7 · D2.1.8</div>
+  <h2>MITOSIS — THE PMAT DANCE FLOOR</h2>
+  <p class="aim">Four phases, one perfectly choreographed night: condense, line up, split, reform. PMAT.</p>
+
+  <div class="bouncer">
+    <div class="emoji">💃</div>
+    <div class="body">
+      <h3>The four moves (and the interlude before)</h3>
+      <div class="aka">Interphase is the pre-game — the actual division is PMAT</div>
+      <p><b class="cyan">Interphase (before):</b> chromosomes are just dispersed chromatin — too thin to see individually. All DNA gets replicated, so every chromosome becomes two elongated sister chromatids.</p>
+      <ol class="steps">
+        <li><b class="accent">Prophase</b> (pro = before) — chromosomes condense by packing DNA tightly, becoming thick enough to see. Toward the end, microtubules grow from MTOCs at the poles to form the spindle. The nuclear membrane breaks down.</li>
+        <li><b class="gold">Metaphase</b> (meta = after) — spindle microtubules attach to each chromatid's centromere/kinetochore. Sister chromatids attach to <b>opposite poles</b>. Tension tests the attachment. At the end, chromosomes are fully condensed and aligned on the <b class="gold">equator</b>.</li>
+        <li><b class="green">Anaphase</b> (ana = up) — the cohesin loops are CUT, so sister chromatids become separate chromosomes. The kinetochore shortens the microtubules, pulling each chromosome to its pole. Chromosome arms trail behind in the viscous cytoplasm.</li>
+        <li><b class="violet" style="color:#a855f7">Telophase</b> (telos = finally) — chromosomes reach the poles and are pulled into a tight group; a nuclear membrane reforms around each set; chromosomes decondense back into chromatin. Genes can be transcribed again. Cytokinesis usually completes the split during/after this.</li>
+      </ol>
+      <div class="exam"><b>Exam shape:</b> "identify the phase" from a micrograph → look for the clues: condensed visible chromosomes scattered = prophase; lined up on the equator = metaphase; chromosomes pulled apart toward two poles = anaphase; two nuclei forming = telophase; no visible chromosomes = interphase.</div>
+      <div class="tip"><b>Lab skill — root tip squash:</b> grow garlic roots → fix in 70% ethanol + ethanoic acid (24 h) → treat with 0.1 mol dm⁻³ HCl at 40 °C to loosen cell walls → stain with toluidine blue (binds DNA!) → squash under a coverslip → scan low power, then medium power. Count ~100 cells and classify each as interphase or a mitosis phase → <b class="gold">mitotic index</b> = cells in mitosis ÷ total cells.</div>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram of the five stages of mitosis: interphase with dispersed chromatin, prophase with condensed chromosomes, metaphase with chromosomes on the equator, anaphase with sister chromatids separating to opposite poles, telophase with nuclei reforming and a cleavage furrow">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">MITOSIS — ONE NUCLEUS IN, TWO OUT</text>
+      <!-- panel 1 interphase -->
+      <text x="75" y="54" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">INTERPHASE</text>
+      <circle cx="75" cy="175" r="42" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="2.5"/>
+      <circle cx="75" cy="175" r="26" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <path d="M 58 168 C 66 162 70 170 78 164 C 84 160 88 170 94 164" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+      <text x="75" y="240" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">chromatin spread out</text>
+      <text x="75" y="255" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">(not visible)</text>
+      <!-- panel 2 prophase -->
+      <text x="195" y="54" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">PROPHASE</text>
+      <circle cx="195" cy="175" r="42" fill="rgba(255,46,196,.06)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <circle cx="195" cy="175" r="26" fill="none" stroke="#ff2ec4" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <g stroke="#ff2ec4" stroke-width="2" stroke-linecap="round">
+        <path d="M 186 158 L 196 168 M 196 158 L 186 168"/>
+        <path d="M 200 184 L 210 194 M 210 184 L 200 194"/>
+      </g>
+      <circle cx="191" cy="163" r="1.8" fill="#fbbf24"/>
+      <circle cx="205" cy="189" r="1.8" fill="#fbbf24"/>
+      <text x="195" y="240" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">chromosomes condense</text>
+      <text x="195" y="255" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">→ visible</text>
+      <!-- panel 3 metaphase -->
+      <text x="315" y="54" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">METAPHASE</text>
+      <circle cx="315" cy="175" r="42" fill="rgba(251,191,36,.06)" stroke="#fbbf24" stroke-width="2.5"/>
+      <line x1="315" y1="135" x2="315" y2="215" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <g stroke="#fbbf24" stroke-width="2" stroke-linecap="round">
+        <path d="M 305 160 L 315 170 M 315 160 L 305 170"/>
+        <path d="M 315 172 L 325 182 M 325 172 L 315 182"/>
+        <path d="M 305 184 L 315 194 M 315 184 L 305 194"/>
+      </g>
+      <text x="315" y="240" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">aligned on the equator</text>
+      <text x="315" y="255" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">spindle attached</text>
+      <!-- panel 4 anaphase -->
+      <text x="435" y="54" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">ANAPHASE</text>
+      <circle cx="435" cy="175" r="42" fill="rgba(74,222,128,.06)" stroke="#4ade80" stroke-width="2.5"/>
+      <line x1="435" y1="135" x2="435" y2="215" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <g stroke="#4ade80" stroke-width="2" stroke-linecap="round">
+        <path d="M 412 155 L 418 167 M 418 155 L 412 167"/>
+        <path d="M 405 180 L 411 192 M 411 180 L 405 192"/>
+        <path d="M 458 155 L 464 167 M 464 155 L 458 167"/>
+        <path d="M 465 180 L 471 192 M 471 180 L 465 192"/>
+      </g>
+      <text x="435" y="240" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">cohesin cut</text>
+      <text x="435" y="255" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">→ to opposite poles</text>
+      <!-- panel 5 telophase -->
+      <text x="555" y="54" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">TELOPHASE</text>
+      <circle cx="555" cy="175" r="42" fill="rgba(168,85,247,.06)" stroke="#a855f7" stroke-width="2.5"/>
+      <circle cx="543" cy="160" r="15" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+      <circle cx="567" cy="190" r="15" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+      <path d="M 555 133 Q 548 140 555 147" fill="none" stroke="#ff2ec4" stroke-width="2"/>
+      <path d="M 555 203 Q 548 210 555 217" fill="none" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="555" y="240" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">nuclei reform</text>
+      <text x="555" y="255" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">cytokinesis begins</text>
+      <!-- bottom -->
+      <text x="320" y="300" fill="#f3e8ff" font-size="12" font-weight="800" text-anchor="middle">PMAT = Prophase · Metaphase · Anaphase · Telophase</text>
+      <text x="320" y="322" fill="#b9a3d6" font-size="11" font-weight="700" text-anchor="middle">condense → line up → split apart → reform · then cytokinesis halves the cell</text>
+    </svg>
+    <div class="cap"><b>THE FIVE-CARD SET:</b> interphase (invisible chromatin) → prophase (condensed) → metaphase (equator) → anaphase (twins split to poles) → telophase (two nuclei + furrow).</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 6 · D2.1.9 + D2.1.11 ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">Act 6 · D2.1.9 · D2.1.11</div>
+  <h2>MEIOSIS — THE VARIATION SHUFFLE</h2>
+  <p class="aim">Meiosis is a reduction division: 2n → n. Two divisions, four unique haploid cells. And it's where the genetic mixing happens.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎲</div>
+    <div class="body">
+      <h3>Why haploid? The doubling trap</h3>
+      <div class="aka">If gametes were diploid, chromosome numbers would explode every generation</div>
+      <p><b class="cyan">Diploid (2n)</b> = two sets of chromosomes → homologous pairs. <b class="accent">Haploid (n)</b> = one set, all non-homologous. In humans n = 23, so body cells are 2n = 46.</p>
+      <p>Gametes MUST be haploid, because fertilization fuses two gametes: n + n = 2n. If gametes were 2n, the zygote would be 4n, its gametes 4n → offspring 8n — the number doubles every generation. Meiosis is the <b class="accent">reduction division</b> that cancels this: two rounds of chromosome segregation produce <b class="green">four haploid cells</b> from one diploid mother cell.</p>
+      <p>Homologous chromosomes have the same sequence of genes but can carry <b>different alleles</b>. Meiosis exploits this with two shuffle mechanisms:</p>
+      <ul class="clean">
+        <li><b class="accent">Crossing over</b> — in prophase I, homologues pair up (synapsis) forming a <b class="accent">bivalent</b> (4 DNA molecules). Non-sister chromatids swap segments at points called <b class="gold">chiasmata</b>. Result: chromatids with brand-new combinations of alleles.</li>
+        <li><b class="cyan">Random orientation</b> — at metaphase I, each bivalent lines up on the equator facing either way by chance (50/50). With n bivalents, there are <b class="gold">2ⁿ possible combinations</b>. In humans: 2²³ = 8.4 million — before crossing over even joins in.</li>
+      </ul>
+      <div class="exam"><b>Exam fact:</b> crossing over + random orientation + (in meiosis II, sister chromatids finally separate) = almost limitless variety in gametes. That's why sexual reproduction generates variation for natural selection.</div>
+      <p class="muted">Meiosis I separates HOMOLOGOUS chromosomes (2n → n). Meiosis II separates SISTER CHROMATIDS (like mitosis, but no replication in between). First division = reduction; second = the chromatid split.</p>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram of meiosis I showing a bivalent with crossing over at a chiasma, then random orientation of bivalents producing 2 to the n possible combinations">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">MEIOSIS I — THE VARIATION SHUFFLE</text>
+      <text x="320" y="58" fill="#b9a3d6" font-size="11" font-weight="800" text-anchor="middle">SYNAPSIS → BIVALENT (homologous pair)</text>
+      <line x1="200" y1="95" x2="440" y2="95" stroke="#ff2ec4" stroke-width="6" stroke-linecap="round"/>
+      <line x1="200" y1="115" x2="440" y2="115" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
+      <g stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 314 88 L 326 122 M 326 88 L 314 122"/>
+      </g>
+      <text x="320" y="145" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">chiasma = crossover point</text>
+      <line x1="320" y1="136" x2="320" y2="128" stroke="#b9a3d6" stroke-width="1"/>
+      <text x="320" y="182" fill="#ff2ec4" font-size="11.5" font-weight="800" text-anchor="middle">CROSSING OVER</text>
+      <text x="320" y="200" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">non-sister chromatids swap allele segments</text>
+      <!-- swapped rods -->
+      <line x1="200" y1="228" x2="430" y2="228" stroke="#ff2ec4" stroke-width="6" stroke-linecap="round"/>
+      <line x1="290" y1="228" x2="350" y2="228" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
+      <line x1="200" y1="248" x2="430" y2="248" stroke="#22d3ee" stroke-width="6" stroke-linecap="round"/>
+      <line x1="290" y1="248" x2="350" y2="248" stroke="#ff2ec4" stroke-width="6" stroke-linecap="round"/>
+      <text x="320" y="288" fill="#22d3ee" font-size="11.5" font-weight="800" text-anchor="middle">RANDOM ORIENTATION</text>
+      <text x="320" y="306" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">each bivalent faces either way — by chance</text>
+      <!-- two orientations -->
+      <circle cx="215" cy="380" r="45" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="215" y1="340" x2="215" y2="420" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="195" y1="362" x2="235" y2="362" stroke="#ff2ec4" stroke-width="4" stroke-linecap="round"/>
+      <line x1="195" y1="398" x2="235" y2="398" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/>
+      <text x="215" y="330" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">option A</text>
+      <circle cx="425" cy="380" r="45" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="425" y1="340" x2="425" y2="420" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="405" y1="362" x2="445" y2="362" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/>
+      <line x1="405" y1="398" x2="445" y2="398" stroke="#ff2ec4" stroke-width="4" stroke-linecap="round"/>
+      <text x="425" y="330" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">option B</text>
+      <text x="320" y="452" fill="#fbbf24" font-size="11.5" font-weight="800" text-anchor="middle">2ⁿ combos — humans: 2²³ = 8.4 MILLION + crossing over</text>
+    </svg>
+    <div class="cap"><b>TWO SHUFFLES, ONE RESULT:</b> crossing over mixes alleles within a chromosome; random orientation mixes whole chromosomes between daughter cells. 2²³ possible chromosome combos in every human gamete — before crossing over is even counted.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 7 · D2.1.10 ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">Act 7 · D2.1.10</div>
+  <h2>WHEN THE DJ SKIPS — NON-DISJUNCTION</h2>
+  <p class="aim">Sometimes chromosomes fail to separate. The result: gametes with an extra — or a missing — chromosome.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⚠️</div>
+    <div class="body">
+      <h3>One skipped beat at anaphase</h3>
+      <div class="aka">Non-disjunction = a pair that should split, doesn't</div>
+      <p>Normally: homologous chromosomes separate at <b class="accent">anaphase I</b>, and sister chromatids separate at <b class="accent">anaphase II</b>. When a pair moves to the SAME pole instead of opposite ones — that's <b class="accent">non-disjunction</b>. The result: cells with one chromosome extra or missing.</p>
+      <p>A <b>missing</b> chromosome is usually lethal fast — essential genes are gone. An <b class="accent">extra</b> chromosome is also usually lethal, but a few trisomies survive. The famous one:</p>
+      <div class="grid2">
+        <div class="card"><h4>🧬 DOWN SYNDROME</h4><p class="tag">trisomy 21</p><p>A non-disjunction event gives a person <b>three copies of chromosome 21</b> instead of two. Features vary: hearing loss, heart and vision disorders. The most common viable human trisomy.</p></div>
+        <div class="card"><h4>⚧ SEX CHROMOSOME ANOMALIES</h4><p class="tag p">non-lethal</p><p>Klinefelter's syndrome = <b>XXY</b>. Turner's syndrome = just <b>one X</b>. Both come from non-disjunction of the sex chromosomes.</p></div>
+      </div>
+      <div class="tip"><b>Maternal age link:</b> the incidence of non-disjunction (and Down syndrome) rises steeply with maternal age — from ~1 in 1,500 at 20 to ~1 in 30 by 45. Older eggs have spent longer in a halted state and are more error-prone.</div>
+      <div class="exam"><b>Exam shape:</b> "explain how non-disjunction leads to Down syndrome" → anaphase I or II error → gamete with two copies of chr 21 → fertilization with a normal gamete → zygote with three copies (trisomy 21).</div>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram of non-disjunction in anaphase I producing an n+1 gamete with two copies of chromosome 21 and an n-1 gamete, then fertilisation producing a trisomy 21 zygote with Down syndrome">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">NON-DISJUNCTION → DOWN SYNDROME</text>
+      <text x="320" y="52" fill="#b9a3d6" font-size="11" font-weight="800" text-anchor="middle">ANAPHASE I ERROR — the chr 21 pair both go to one pole</text>
+      <circle cx="320" cy="120" r="48" fill="rgba(255,46,196,.06)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <line x1="320" y1="76" x2="320" y2="164" stroke="#ff2ec4" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <g stroke="#ff2ec4" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 296 92 L 308 104 M 308 92 L 296 104"/>
+        <path d="M 336 96 L 348 108 M 348 96 L 336 108"/>
+      </g>
+      <g stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 290 150 L 302 162 M 302 150 L 290 162"/>
+        <path d="M 348 148 L 360 160 M 360 148 L 348 160"/>
+      </g>
+      <text x="320" y="195" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">both chr 21 copies dragged to the same pole</text>
+      <!-- gametes -->
+      <text x="320" y="235" fill="#fbbf24" font-size="11.5" font-weight="800" text-anchor="middle">GAMETES AFTER MEIOSIS</text>
+      <circle cx="205" cy="305" r="42" fill="rgba(251,191,36,.06)" stroke="#fbbf24" stroke-width="2.5"/>
+      <g stroke="#ff2ec4" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 190 288 L 200 298 M 200 288 L 190 298"/>
+        <path d="M 216 292 L 226 302 M 226 292 L 216 302"/>
+      </g>
+      <g stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 200 320 L 210 330 M 210 320 L 200 330"/>
+      </g>
+      <text x="205" y="360" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">n + 1 gamete</text>
+      <text x="205" y="376" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">(2 × chr 21)</text>
+      <circle cx="435" cy="305" r="42" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="2.5"/>
+      <g stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round">
+        <path d="M 420 298 L 430 308 M 430 298 L 420 308"/>
+      </g>
+      <text x="435" y="360" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">n − 1 gamete</text>
+      <text x="435" y="376" fill="#b9a3d6" font-size="9.5" font-weight="700" text-anchor="middle">(0 × chr 21 → dies)</text>
+      <!-- fertilisation -->
+      <text x="320" y="410" fill="#4ade80" font-size="11.5" font-weight="800" text-anchor="middle">n+1 gamete + normal gamete → ZYGOTE</text>
+      <text x="320" y="432" fill="#ff2ec4" font-size="12.5" font-weight="900" text-anchor="middle">TRISOMY 21 = DOWN SYNDROME</text>
+    </svg>
+    <div class="cap"><b>THE ERROR CHAIN:</b> anaphase I failure → gamete with 2 copies of chr 21 (n+1) → fertilise with a normal gamete → zygote with 3 copies → Down syndrome. Missing-chromosome gametes (n−1) usually die.</div>
+  </div>
+</section>
+<!-- ══════════════════════ ACT 8 · D2.1.12 + D2.1.13 + D2.1.14 ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">Act 8 · D2.1.12 · D2.1.13 · D2.1.14 · AHL</div>
+  <h2>THE CELL CYCLE — ONE NIGHT, ROUND AND ROUND</h2>
+  <p class="aim">Cell proliferation follows a repeating cycle: a long prep phase (interphase), then the big split (mitosis + cytokinesis).</p>
+
+  <div class="bouncer">
+    <div class="emoji">🪩</div>
+    <div class="body">
+      <h3>Proliferation — the whole point</h3>
+      <div class="aka">Rapid increase in cell number: division faster than death</div>
+      <p><b class="cyan">Cell proliferation</b> powers <b class="accent">growth</b> (embryos; growth plates in bones during childhood; plant meristems at root and shoot tips), <b class="gold">cell replacement</b> (skin epidermis — cells divide in the basal layer, make keratin, dry out, and get rubbed off at the surface) and <b class="green">tissue repair</b> (wounds heal via stem cells that divide then differentiate).</p>
+      <div class="grid2">
+        <div class="card"><h4>G1 — Gap 1</h4><p class="tag gr">post-mitosis</p><p>After mitosis, before replication. Each chromosome is a single DNA molecule. Active growth phase.</p></div>
+        <div class="card"><h4>S — Synthesis</h4><p class="tag">copy time</p><p>ALL DNA in the nucleus is replicated → identical pairs of DNA molecules held by cohesin loops. These persist until the end of metaphase.</p></div>
+        <div class="card"><h4>G2 — Gap 2</h4><p class="tag g">pre-division</p><p>After replication, before mitosis. Each chromosome = two chromatids. Growth resumes while preparing for mitosis.</p></div>
+        <div class="card"><h4>M — Mitosis</h4><p class="tag p">the split</p><p>Mitosis (nuclear division) + cytokinesis (cell division). Then back to G1 — or out the door to G0.</p></div>
+      </div>
+      <p><b class="gold">G0 (Gap zero)</b> — cells that leave the cycle after mitosis/cytokinesis. They grow and differentiate for a specific role and never divide again (or only rarely).</p>
+      <div class="tip"><b>Interphase is NOT rest:</b> cells typically double in size. DNA replicates; the cytoplasm grows (new enzymes); membranes expand (more phospholipids, membrane proteins, cholesterol); organelles multiply — mitochondria and chloroplasts can only come from division of existing ones (they have DNA), Golgi bodies bud off existing ones, ribosomes are assembled in the nucleolus. Interphase is where the real work happens.</div>
+      <p class="muted">Heterochromatin (gene-poor DNA) stays condensed in interphase; the rest decondenses into chromatin so genes can be transcribed → protein synthesis.</p>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram of the cell cycle: G1, S phase, G2 and M phase around a circle, with G0 exit and G1/S and G2/M checkpoints">
+      <rect width="640" height="460" rx="14" fill="#150a26"/>
+      <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CELL CYCLE — ONE NIGHT AT CLUB SPLIT</text>
+      <circle cx="320" cy="240" r="150" fill="rgba(168,85,247,.05)" stroke="#a855f7" stroke-width="4"/>
+      <line x1="320" y1="90" x2="320" y2="390" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <line x1="170" y1="240" x2="470" y2="240" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text x="320" y="120" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">G1</text>
+      <text x="320" y="140" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">growth</text>
+      <text x="428" y="240" fill="#22d3ee" font-size="13" font-weight="900" text-anchor="middle">S</text>
+      <text x="428" y="260" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">DNA replicates</text>
+      <text x="320" y="368" fill="#fbbf24" font-size="13" font-weight="900" text-anchor="middle">G2</text>
+      <text x="320" y="388" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">prep for mitosis</text>
+      <text x="212" y="240" fill="#4ade80" font-size="13" font-weight="900" text-anchor="middle">M</text>
+      <text x="212" y="260" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">mitosis + cytokinesis</text>
+      <text x="320" y="232" fill="#f3e8ff" font-size="12" font-weight="800" text-anchor="middle">INTERPHASE</text>
+      <text x="320" y="252" fill="#b9a3d6" font-size="10.5" font-weight="700" text-anchor="middle">= G1 + S + G2</text>
+      <text x="320" y="270" fill="#b9a3d6" font-size="10" font-weight="700" text-anchor="middle">M = the split</text>
+      <!-- arrows clockwise -->
+      <path d="M 390 148 A 125 125 0 0 1 442 205" fill="none" stroke="#67e8f9" stroke-width="2.5" marker-end="url(#arrG)"/>
+      <path d="M 445 275 A 125 125 0 0 1 380 342" fill="none" stroke="#67e8f9" stroke-width="2.5" marker-end="url(#arrG)"/>
+      <path d="M 250 342 A 125 125 0 0 1 195 275" fill="none" stroke="#67e8f9" stroke-width="2.5" marker-end="url(#arrG)"/>
+      <path d="M 195 205 A 125 125 0 0 1 250 148" fill="none" stroke="#67e8f9" stroke-width="2.5" marker-end="url(#arrG)"/>
+      <!-- G0 exit -->
+      <line x1="320" y1="90" x2="150" y2="72" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrG)"/>
+      <text x="85" y="66" fill="#fbbf24" font-size="12.5" font-weight="900">G0</text>
+      <text x="85" y="84" fill="#b9a3d6" font-size="9.5" font-weight="700">resting — no division</text>
+      <!-- checkpoints -->
+      <circle cx="470" cy="240" r="5" fill="#fbbf24"/>
+      <text x="510" y="232" fill="#fbbf24" font-size="10" font-weight="800">G1/S CHECKPOINT</text>
+      <text x="510" y="248" fill="#b9a3d6" font-size="9" font-weight="700">"ready to copy?"</text>
+      <line x1="500" y1="238" x2="476" y2="240" stroke="#fbbf24" stroke-width="1"/>
+      <circle cx="170" cy="240" r="5" fill="#fbbf24"/>
+      <text x="56" y="232" fill="#fbbf24" font-size="10" font-weight="800">G2/M CHECKPOINT</text>
+      <text x="56" y="248" fill="#b9a3d6" font-size="9" font-weight="700">"ready to split?"</text>
+      <line x1="116" y1="238" x2="164" y2="240" stroke="#fbbf24" stroke-width="1"/>
+      <defs>
+        <marker id="arrG" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#67e8f9"/></marker>
+      </defs>
+      <text x="320" y="440" fill="#b9a3d6" font-size="11.5" font-weight="700" text-anchor="middle">cyclins switch on CDKs → pass checkpoints → next phase (see Act 9)</text>
+    </svg>
+    <div class="cap"><b>ONE NIGHT AT CLUB SPLIT:</b> G1 (arrive, grow) → S (copy your DNA) → G2 (check the outfit) → M (the split). G0 = the VIP lounge — present but never dancing again. Checkpoints = the bouncers.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 9 · D2.1.15 + D2.1.16 + D2.1.17 ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">Act 9 · D2.1.15 · D2.1.16 · D2.1.17 · AHL</div>
+  <h2>THE BOUNCERS &amp; THE CRASHERS</h2>
+  <p class="aim">The cell cycle has checkpoints, cyclins, and brakes. When the brakes fail, you get a tumour.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚦</div>
+    <div class="body">
+      <h3>Cyclins — the DJs that keep the night moving</h3>
+      <div class="aka">Control of the cell cycle using cyclins</div>
+      <p>The cycle needs a coordinated sequence of changes, with <b class="gold">checkpoints</b> that hold cells until it's appropriate to move on — and stop division once a tissue has enough cells.</p>
+      <p><b class="accent">Cyclins</b> are proteins whose levels rise and fall through the cycle. They activate <b class="cyan">cyclin-dependent kinases (CDKs)</b>, which add phosphate to other proteins, switching them on. Each cyclin activates the proteins needed at a specific phase — so actions happen at the right time, and the cell only passes checkpoints when it benefits the whole organism. Unless cyclins reach a <b class="gold">threshold concentration</b>, the cell doesn't advance.</p>
+      <table>
+        <tr><th>Cyclin</th><th>Job at the club</th></tr>
+        <tr><td>Cyclin D</td><td>Triggers movement from G0 → G1 and G1 → S.</td></tr>
+        <tr><td>Cyclin E</td><td>Prepares the cell for DNA replication in S phase.</td></tr>
+        <tr><td>Cyclin A</td><td>Activates DNA replication inside the nucleus (S phase).</td></tr>
+        <tr><td>Cyclin B</td><td>Promotes assembly of the mitotic spindle + other prep for mitosis.</td></tr>
+      </table>
+      <div class="exam"><b>Exam graph:</b> cyclin concentration vs cell cycle phase — levels rise and fall as peaks. Cyclin D spikes in G1, E at the G1/S border, A in S, B at G2/M. Read the graph by matching the peak to the phase.</div>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">💥</div>
+    <div class="body">
+      <h3>When control is lost — mutations and tumours</h3>
+      <div class="aka">Two classes of mutagen · two classes of gene · benign vs malignant</div>
+      <p>A cell that loses cycle control divides out of control, and its daughters inherit the loss — the group grows <b class="accent">exponentially</b>. That's a tumour. <b class="gold">Mutagens</b> raise the odds: carcinogenic chemicals (IARC lists 50+ as "definitely carcinogenic") and high-energy radiation (X-rays, UV — not visible light).</p>
+      <div class="grid2">
+        <div class="card"><h4>🚀 PROTO-ONCOGENES → ONCOGENES</h4><p class="tag p">the stuck accelerator</p><p>Proto-oncogenes normally promote cell proliferation (regulating expression, secondary messengers, growth factors/receptors). A mutation can turn one into an <b class="accent">oncogene</b> that actively promotes proliferation — genetically DOMINANT: one mutated copy of the pair is enough. Often a missense mutation makes the protein super-active.</p></div>
+        <div class="card"><h4>🛑 TUMOUR-SUPPRESSOR GENES</h4><p class="tag gr">the failed brakes</p><p>These prevent proliferation: brakes at checkpoints, DNA-repair machinery, or apoptosis for irreparably damaged cells. Mutations that stop them working are <b class="accent">recessive</b> — one functioning copy still produces enough protein. Base substitutions that create a stop codon → truncated, non-functional polypeptide.</p></div>
+      </div>
+      <p>One mutation is rarely enough — some tumours need ~<b class="gold">10 mutations</b> in a single cell. The odds per cell are tiny, but you have vast numbers of cells and a long lifetime — and each division that speeds up creates a bigger pool for the next mutation (evolution, in miniature). Most people develop tumours at some point; most are harmless or treatable.</p>
+      <div class="tip"><b>Benign vs malignant (D2.1.17):</b> benign = cells stick together as a single mass, unlikely to cause harm — NOT cancer. Malignant = poor cell-to-cell adhesion → cells detach, <b class="accent">invade neighbouring tissue</b>, or ride blood/lymph to elsewhere — <b class="accent">metastasis</b> → secondary tumours. Malignant = cancer. Hormone-stimulated tissues (breast, ovary, testis, thyroid) are more prone to malignancy.</div>
+      <div class="exam"><b>Mitotic index (skill):</b> mitotic index = number of cells in mitosis ÷ total number of cells observed. In a micrograph of a tumour, count ~100 cells, tally interphase vs mitosis stages, and compute the ratio. High mitotic index = fast division — a cancer red flag. Same technique on a root-tip squash.</div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">Revision</div>
+  <h2>🗺 MIND MAP</h2>
+  <p class="aim">Follow the club layout from the guest list to the VIP lounge.</p>
+  <div class="mind">
+    <div class="node core">CELL &amp; NUCLEAR DIVISION<small>D2.1 · SL + AHL</small></div>
+    <div class="arrow">→</div>
+    <div class="node">NEW CELLS<small>D2.1.1 · growth · maintenance · reproduction · mother → daughters</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CYTOKINESIS<small>D2.1.2-3 · animal furrow vs plant plate · equal vs unequal (yeast · eggs)</small></div>
+    <div class="arrow">→</div>
+    <div class="node">TWO DIVISIONS<small>D2.1.4 · mitosis = continuity · meiosis = change</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CHROMOSOMES<small>D2.1.5-6 · sister chromatids · cohesin · kinetochores · spindle</small></div>
+    <div class="arrow">→</div>
+    <div class="node">MITOSIS<small>D2.1.7-8 · PMAT · root-tip squash · mitotic index</small></div>
+    <div class="arrow">→</div>
+    <div class="node">MEIOSIS<small>D2.1.9,11 · 2n → n · crossing over · random orientation 2²³</small></div>
+    <div class="arrow">→</div>
+    <div class="node">NON-DISJUNCTION<small>D2.1.10 · trisomy 21 → Down · XXY · XO</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CELL CYCLE<small>D2.1.12-14 · G1 S G2 M · G0 · interphase growth</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CONTROL<small>D2.1.15 · cyclins + CDKs · checkpoints</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CANCER<small>D2.1.16-17 · oncogenes vs suppressors · benign vs malignant · metastasis</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT SHEET ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Revision</div>
+  <h2>⚡ THE 60-SECOND CHEAT</h2>
+  <div class="marquee">
+    <div class="line">🪩 <span>CLUB SPLIT:</span> G1 (grow) → S (copy DNA) → G2 (prep) → M (split) · <span>G0</span> = resting, no division</div>
+    <div class="line">🍰 <span>CYTOKINESIS:</span> animal = cleavage furrow (actin + myosin ring) · plant = vesicles → cell plate → middle lamella → cellulose walls</div>
+    <div class="line">🧬 <span>CHROMOSOME:</span> 1 DNA molecule = 1 chromatid · after S phase: 2 sister chromatids + <span>cohesin loops</span></div>
+    <div class="line">✂️ <span>COHESIN</span> is cut at the START of anaphase → only then do twins separate</div>
+    <div class="line">💃 <span>PMAT:</span> Prophase (condense) · Metaphase (equator) · Anaphase (apart) · Telophase (nuclei reform)</div>
+    <div class="line">⚖️ <span>MITOSIS</span> = continuity (2n → 2n identical) · <span>MEIOSIS</span> = change (2n → n, four varied cells)</div>
+    <div class="line">🎲 <span>VARIATION:</span> crossing over (chiasmata) + random orientation → 2²³ = 8.4 million combos in humans</div>
+    <div class="line">⚠️ <span>NON-DISJUNCTION:</span> pair fails to split → trisomy 21 = Down syndrome · risk ↑ with maternal age</div>
+    <div class="line">🚦 <span>CYCLINS</span> switch on CDKs → pass checkpoints · D (G1) · E (S prep) · A (replication) · B (spindle)</div>
+    <div class="line">🎯 <span>TUMOURS:</span> oncogene = stuck accelerator (dominant) · suppressor = failed brakes (recessive) · malignant = metastasises</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Practice</div>
+  <h2>✍ THE BOUNCER'S QUIZ</h2>
+  <p class="aim">Ten questions, instant feedback. No peeking at the cheat sheet.</p>
+
+  <div class="q" data-a="pre">
+    <p>1. Which of these is a reason cells divide?</p>
+    <label><input type="radio" name="q1" value="bigger"> To make individual cells bigger</label>
+    <label><input type="radio" name="q1" value="pre"> Growth, maintenance and reproduction</label>
+    <label><input type="radio" name="q1" value="dna"> To destroy old DNA</label>
+    <div class="fb correct">✅ Growth (more cells), maintenance (replace lost cells) and reproduction — plus repair. Cells don't divide to get bigger themselves.</div>
+    <div class="fb wrong">❌ Division makes MORE cells, not bigger ones. The three reasons: growth, maintenance, reproduction.</div>
+  </div>
+
+  <div class="q" data-a="furrow">
+    <p>2. How does an ANIMAL cell carry out cytokinesis?</p>
+    <label><input type="radio" name="q2" value="furrow"> A cleavage furrow pinches the cell in two using an actin + myosin ring</label>
+    <label><input type="radio" name="q2" value="plate"> Vesicles fuse to build a cell plate across the equator</label>
+    <label><input type="radio" name="q2" value="wall"> A new cell wall grows down the middle</label>
+    <div class="fb correct">✅ Animals pinch: a contractile ring of actin and myosin pulls the membrane inward until the cell splits.</div>
+    <div class="fb wrong">❌ That's the plant way! Animals use the cleavage furrow + contractile ring; plants build a cell plate from vesicles.</div>
+  </div>
+
+  <div class="q" data-a="oocyte">
+    <p>3. During human oogenesis, cytokinesis is…</p>
+    <label><input type="radio" name="q3" value="equal"> Equal — four identical cells are produced</label>
+    <label><input type="radio" name="q3" value="oocyte"> Unequal — one large oocyte + tiny polar bodies</label>
+    <label><input type="radio" name="q3" value="none"> Cytokinesis doesn't happen in eggs</label>
+    <div class="fb correct">✅ Eggs hoard cytoplasm for the embryo: one big oocyte gets almost everything; tiny polar bodies get a nucleus but little cytoplasm and never develop.</div>
+    <div class="fb wrong">❌ Oogenesis is the classic UNEQUAL split. (Equal division is what happens in sperm production and root tips.)</div>
+  </div>
+
+  <div class="q" data-a="ident">
+    <p>4. Mitosis produces cells that are…</p>
+    <label><input type="radio" name="q4" value="ident"> Genetically identical, with the same chromosome number (2n)</label>
+    <label><input type="radio" name="q4" value="half"> Haploid, with half the chromosome number (n)</label>
+    <label><input type="radio" name="q4" value="rand"> Genetically random, with new allele combos</label>
+    <div class="fb correct">✅ Mitosis = continuity: identical genome, 2n maintained. It's how your body cells are made and how asexual reproduction works.</div>
+    <div class="fb wrong">❌ Halving and shuffling is MEIOSIS. Mitosis keeps everything identical.</div>
+  </div>
+
+  <div class="q" data-a="cohesin">
+    <p>5. What holds sister chromatids together until anaphase?</p>
+    <label><input type="radio" name="q5" value="spindle"> The spindle microtubules</label>
+    <label><input type="radio" name="q5" value="cohesin"> Loops of a protein complex called cohesin</label>
+    <label><input type="radio" name="q5" value="kinet"> The kinetochore</label>
+    <div class="fb correct">✅ Cohesin loops bind the two sister chromatids. They're cut at the START of anaphase so the twins can separate.</div>
+    <div class="fb wrong">❌ The kinetochore is where microtubules attach; the spindle pulls. The "glue" between chromatids is cohesin.</div>
+  </div>
+
+  <div class="q" data-a="metaphase">
+    <p>6. In which phase do chromosomes line up on the equator?</p>
+    <label><input type="radio" name="q6" value="prophase"> Prophase</label>
+    <label><input type="radio" name="q6" value="metaphase"> Metaphase</label>
+    <label><input type="radio" name="q6" value="anaphase"> Anaphase</label>
+    <div class="fb correct">✅ Metaphase: fully condensed chromosomes aligned on the equator, tension-testing their spindle attachments.</div>
+    <div class="fb wrong">❌ Prophase = condensation, anaphase = separation. The equator lineup is the metaphase signature.</div>
+  </div>
+
+  <div class="q" data-a="reduction">
+    <p>7. Why must meiosis halve the chromosome number?</p>
+    <label><input type="radio" name="q7" value="reduction"> So fertilization (n + n) restores 2n instead of doubling every generation</label>
+    <label><input type="radio" name="q7" value="energy"> To save energy by making smaller cells</label>
+    <label><input type="radio" name="q7" value="repair"> To repair damaged chromosomes</label>
+    <div class="fb correct">✅ Gametes must be haploid: two haploid gametes fuse to make a diploid zygote. Without the reduction division, chromosome numbers would double every generation.</div>
+    <div class="fb wrong">❌ The halving exists to cancel the doubling of fertilization — keeping chromosome number constant across generations.</div>
+  </div>
+
+  <div class="q" data-a="nondis">
+    <p>8. Down syndrome is caused by…</p>
+    <label><input type="radio" name="q8" value="mutation"> A single gene mutation inherited from a parent</label>
+    <label><input type="radio" name="q8" value="nondis"> Non-disjunction → three copies of chromosome 21 (trisomy 21)</label>
+    <label><input type="radio" name="q8" value="virus"> A viral infection during pregnancy</label>
+    <div class="fb correct">✅ Non-disjunction gives a gamete two copies of chr 21; fertilization adds a third → trisomy 21. Risk rises with maternal age.</div>
+    <div class="fb wrong">❌ It's a chromosome-number error (trisomy 21), not a single-gene mutation and not infectious.</div>
+  </div>
+
+  <div class="q" data-a="cross">
+    <p>9. Which two mechanisms generate variation in meiosis?</p>
+    <label><input type="radio" name="q9" value="cross"> Crossing over (chiasmata) + random orientation of bivalents</label>
+    <label><input type="radio" name="q9" value="muta"> Mutation + DNA repair</label>
+    <label><input type="radio" name="q9" value="cohe"> Cohesin cutting + kinetochore shortening</label>
+    <div class="fb correct">✅ Crossing over swaps allele segments between non-sister chromatids; random orientation gives 2ⁿ chromosome combos (2²³ in humans).</div>
+    <div class="fb wrong">❌ Cohesin/kinetochores are mechanics, not variation sources. Variation = crossing over + random orientation.</div>
+  </div>
+
+  <div class="q" data-a="oncogene">
+    <p>10. A proto-oncogene that mutates into an oncogene acts like…</p>
+    <label><input type="radio" name="q10" value="brake"> A failed brake — cell division can't be stopped</label>
+    <label><input type="radio" name="q10" value="oncogene"> A stuck accelerator — actively promotes cell proliferation (dominant)</label>
+    <label><input type="radio" name="q10" value="repair"> A broken DNA-repair machine</label>
+    <div class="fb correct">✅ Oncogenes promote proliferation and are dominant — one mutated copy of the pair is enough. (Failed brakes = tumour-suppressor genes, which are recessive.)</div>
+    <div class="fb wrong">❌ The accelerator/stuck-on is the oncogene story. Brakes failing is the tumour-suppressor story — and that's recessive.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 10 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">D2.1.1</span><span>New cells arise only by division of pre-existing cells — for growth, maintenance and reproduction. Mother cell → daughter cells; continuity of life back to the earliest cells.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">D2.1.2</span><span>Cytokinesis splits the cytoplasm: animal = cleavage furrow (contractile ring of actin + myosin); plant = microtubule scaffold + vesicles → cell plate → middle lamella → two new cellulose walls.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">D2.1.3</span><span>Equal vs unequal cytokinesis: equal in root tips; unequal in yeast budding (small bud, one nucleus) and oogenesis (one big oocyte + polar bodies). Small cells need a nucleus + one of each essential organelle.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">D2.1.4</span><span>Mitosis = continuity (identical cells, 2n maintained, same genome, prevents tissue rejection, asexual reproduction). Meiosis = change (halve 2n → n, variation → natural selection). Anucleate cells can't synthesise polypeptides (RBCs ~120 days).</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">D2.1.5</span><span>DNA replication is a prerequisite for mitosis and meiosis. Replicated chromosome = two sister chromatids (identical DNA molecules) held by cohesin loops; cohesin cut at the start of anaphase.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">D2.1.6</span><span>Condensation makes chromosomes visible (thin DNA → short fat chromosomes). Movement: microtubules from MTOCs attach to kinetochores at centromeres and pull chromosomes to opposite poles.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">D2.1.7-8</span><span>Phases of mitosis: Prophase (condensation) · Metaphase (equator) · Anaphase (cohesin cut, chromatids to poles) · Telophase (nuclei reform, decondense). Identify phases in a stained root-tip squash; mitotic index = cells in mitosis ÷ total.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">D2.1.9-10</span><span>Meiosis = reduction division (2n → n): two divisions → four haploid cells; essential so fertilization restores 2n. Non-disjunction (anaphase I or II) → trisomy 21 = Down syndrome; also Klinefelter XXY and Turner XO.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">D2.1.11</span><span>Variation in meiosis: crossing over (bivalents, synapsis, chiasmata, non-sister chromatids swap segments) + random orientation of bivalents → 2ⁿ combos; humans 2²³ = 8.4 million.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">D2.1.12-17</span><span>AHL: cell cycle G1 → S → G2 → M, with G0 resting; interphase growth (DNA, organelles, membranes). Cyclins activate CDKs at checkpoints (D, E, A, B). Oncogenes = dominant accelerators; tumour-suppressor genes = recessive brakes (checkpoints, DNA repair, apoptosis). Benign (stuck together) vs malignant (invade + metastasise) = cancer. Mutagens: chemicals + high-energy radiation.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) D2.1 chapter + BioNinja + IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='d21-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
