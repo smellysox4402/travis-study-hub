@@ -45,7 +45,7 @@ for page in PAGES:
         # bump width so labels are legible in screenshots; keep aspect via viewBox
         standalone = (
             "<!doctype html><html><head><meta charset='utf-8'>"
-            "<style>body{margin:0;background:#150a26}svg{display:block;width:880px;height:auto}</style>"
+            "<style>body{margin:0;background:#150a26;font-family:'Segoe UI',system-ui,-apple-system,sans-serif}svg{display:block;width:880px;height:auto}</style>"
             f"</head><body>{svg}</body></html>"
         )
         with open(out_path, "w", encoding="utf-8") as f:
