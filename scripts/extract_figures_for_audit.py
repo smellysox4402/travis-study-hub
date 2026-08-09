@@ -15,6 +15,7 @@ PAGES = [
     "topics/bio/muscle-motility/index.html",
     "topics/bio/cell-division/index.html",
     "topics/bio/inheritance/index.html",
+    "topics/bio/homeostasis/index.html",
     "topics/chem/kinetics/index.html",
 ]
 

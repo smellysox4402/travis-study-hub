@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>D3.3 Homeostasis — Club Setpoint</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE SETTINGS</a>
+  <a href="#act2">ACT 2 · THE BOUNCER</a>
+  <a href="#act3">ACT 3 · SUGAR FLOOR</a>
+  <a href="#act4">ACT 4 · SUGAR CRASH</a>
+  <a href="#act5">ACT 5 · THE THERMOSTAT</a>
+  <a href="#act6">ACT 6 · HEAT CONTROL</a>
+  <a href="#act7">ACT 7 · KIDNEY CLUB</a>
+  <a href="#act8">ACT 8 · THE FILTER</a>
+  <a href="#act9">ACT 9 · SALT LADDER</a>
+  <a href="#act10">ACT 10 · WATER BOSS</a>
+  <a href="#act11">ACT 11 · BLOOD ROUTER</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/10</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Physiology · SL + AHL · D3.3.1 – D3.3.11</div>
+  <h1>CLUB SETPOINT</h1>
+  <p class="sub">Your body runs the tightest nightclub in biology: no matter how cold, hot, sugary or salty the world outside gets, the dance floor inside stays at the perfect setting. Every DJ, bouncer and water-valve on this page exists for one job — drag the vibe back to the set point.</p>
+  <div class="badges">
+    <span class="badge">SL + AHL</span>
+    <span class="badge ahl">11 statements</span>
+    <span class="badge">Negative feedback</span>
+    <span class="badge">Kidney · ADH</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · THE SETTINGS ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">D3.3.1</div>
+  <h2>THE SETTINGS</h2>
+  <p class="aim">Homeostasis = keeping the internal environment inside preset limits, no matter what the outside world throws at you.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎚️</div>
+    <div class="body">
+      <h3>Four dials the club never lets drift</h3>
+      <p class="aka">internal environment · set point · tolerance limits · disease</p>
+      <p>Every cell in your body swims in an internal environment — the tissue fluid around it. Homeostasis is the maintenance of that internal environment, keeping variables within <span class="accent">preset limits</span> even when the external environment fluctuates wildly. In humans the big four are <span class="cyan">core temperature</span>, <span class="cyan">blood pH</span>, <span class="cyan">blood glucose</span> and <span class="cyan">blood osmotic concentration</span>.</p>
+      <p>If a variable drifts outside its narrow tolerance band, <span class="gold">disease</span> is the result — that's what "disrupted homeostasis" means. The whole point of being multicellular is that the internal environment can be regulated to stay near-optimal for every cell, which lets organisms live in hostile places (ice swimmers, desert camels, you).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="dashboard of four homeostatic set point dials in a nightclub mixer: core temperature 37 degrees, blood pH 7.4, blood glucose 5 mmol per litre and blood osmotic concentration 300 milliosmoles, each with a tolerance band and a needle pinned at the set point">
+      <rect width="660" height="320" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CLUB SETPOINT — THE FOUR DIALS</text>
+      <!-- dial 1: temperature -->
+      <g>
+        <circle cx="110" cy="160" r="72" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="2.5"/>
+        <path d="M 110 160 A 72 72 0 0 1 179 122" fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 41 122 A 72 72 0 0 1 110 88" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round"/>
+        <line x1="110" y1="160" x2="152" y2="106" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="110" cy="160" r="7" fill="#fbbf24"/>
+        <text x="110" y="252" fill="#f3e8ff" font-size="15" font-weight="900" text-anchor="middle">37°C</text>
+        <text x="110" y="272" fill="#b9a3d6" font-size="11" text-anchor="middle">core temperature</text>
+        <text x="110" y="292" fill="#b9a3d6" font-size="10.5" text-anchor="middle">36–38°C band</text>
+      </g>
+      <!-- dial 2: pH -->
+      <g>
+        <circle cx="286" cy="160" r="72" fill="rgba(168,85,247,.05)" stroke="#a855f7" stroke-width="2.5"/>
+        <path d="M 286 160 A 72 72 0 0 1 355 122" fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 217 122 A 72 72 0 0 1 286 88" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round"/>
+        <line x1="286" y1="160" x2="326" y2="104" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="286" cy="160" r="7" fill="#fbbf24"/>
+        <text x="286" y="252" fill="#f3e8ff" font-size="15" font-weight="900" text-anchor="middle">pH 7.4</text>
+        <text x="286" y="272" fill="#b9a3d6" font-size="11" text-anchor="middle">blood pH</text>
+        <text x="286" y="292" fill="#b9a3d6" font-size="10.5" text-anchor="middle">7.35–7.45 band</text>
+      </g>
+      <!-- dial 3: glucose -->
+      <g>
+        <circle cx="462" cy="160" r="72" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+        <path d="M 462 160 A 72 72 0 0 1 531 122" fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 393 122 A 72 72 0 0 1 462 88" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round"/>
+        <line x1="462" y1="160" x2="502" y2="104" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="462" cy="160" r="7" fill="#fbbf24"/>
+        <text x="462" y="252" fill="#f3e8ff" font-size="15" font-weight="900" text-anchor="middle">≈5 mmol L⁻¹</text>
+        <text x="462" y="272" fill="#b9a3d6" font-size="11" text-anchor="middle">blood glucose</text>
+        <text x="462" y="292" fill="#b9a3d6" font-size="10.5" text-anchor="middle">narrow range</text>
+      </g>
+      <!-- dial 4: osmolarity -->
+      <g>
+        <circle cx="582" cy="130" r="58" fill="rgba(74,222,128,.05)" stroke="#4ade80" stroke-width="2.5"/>
+        <line x1="582" y1="130" x2="612" y2="92" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="582" cy="130" r="6" fill="#fbbf24"/>
+        <text x="582" y="212" fill="#f3e8ff" font-size="14" font-weight="900" text-anchor="middle">≈300 mOsm</text>
+        <text x="582" y="232" fill="#b9a3d6" font-size="11" text-anchor="middle">blood osmolarity</text>
+        <text x="582" y="252" fill="#b9a3d6" font-size="10.5" text-anchor="middle">osmoles L⁻¹</text>
+      </g>
+      <text x="330" y="310" fill="#b9a3d6" font-size="11" text-anchor="middle">Needle pinned on the set point — every system on this page exists to drag it back when it drifts</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — The four dials of the club. A <i>set point</i> is the level the body tries to hold (37°C, pH 7.4, ~5 mmol L⁻¹ glucose, ~300 mOsm); each variable swings inside a tolerance band without triggering a response.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 · THE BOUNCER ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">D3.3.2</div>
+  <h2>THE BOUNCER</h2>
+  <p class="aim">Negative feedback = the bouncer who pushes the crowd back to the set point from above OR below. Positive feedback is the mosh pit that amplifies — great for childbirth, useless for stability.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🪪</div>
+    <div class="body">
+      <h3>Negative feedback: the reverse-gear rule</h3>
+      <p class="aka">stimulus → receptor → control centre → effector → response</p>
+      <p>A change is detected by a <span class="accent">receptor</span>, a <span class="accent">control centre</span> (usually the brain or a gland) compares it against the set point, then an <span class="accent">effector</span> produces a response that <b>reverses the change</b> — pushing the variable back to the set point. Because the response opposes the stimulus, the loop is self-correcting: it works from values <span class="cyan">above AND below</span> the set point.</p>
+      <p>Why negative and not positive for homeostasis? Negative feedback <span class="gold">decreases the gap</span> between current level and set point — it restores balance. Positive feedback <span class="gold">increases the gap</span>, amplifying the change until the stimulus is removed — it promotes change, not stability, so it's unsuitable for homeostasis (though perfect for childbirth contractions, ovulation and lactation).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="circular negative feedback loop diagram: set point at centre, a stimulus pushes a variable above or below the set point, receptor detects, control centre compares, effector responds to reverse the change, and the response feeds back to cancel the stimulus">
+      <rect width="660" height="400" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE BOUNCER — NEGATIVE FEEDBACK LOOP</text>
+      <!-- set point centre -->
+      <circle cx="330" cy="200" r="34" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="3"/>
+      <text x="330" y="196" fill="#fbbf24" font-size="12" font-weight="900" text-anchor="middle">SET</text>
+      <text x="330" y="212" fill="#fbbf24" font-size="12" font-weight="900" text-anchor="middle">POINT</text>
+      <!-- stimulus node (top) -->
+      <rect x="255" y="40" width="150" height="44" rx="10" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="330" y="60" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">STIMULUS</text>
+      <text x="330" y="76" fill="#b9a3d6" font-size="10" text-anchor="middle">variable drifts off set point</text>
+      <!-- receptor (right) -->
+      <rect x="500" y="150" width="130" height="48" rx="10" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="565" y="170" fill="#a855f7" font-size="12" font-weight="800" text-anchor="middle">RECEPTOR</text>
+      <text x="565" y="187" fill="#b9a3d6" font-size="10" text-anchor="middle">detects the change</text>
+      <!-- control centre (bottom) -->
+      <rect x="255" y="320" width="150" height="48" rx="10" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="330" y="340" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">CONTROL CENTRE</text>
+      <text x="330" y="357" fill="#b9a3d6" font-size="10" text-anchor="middle">compares vs set point</text>
+      <!-- effector (left) -->
+      <rect x="30" y="150" width="130" height="48" rx="10" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="95" y="170" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">EFFECTOR</text>
+      <text x="95" y="187" fill="#b9a3d6" font-size="10" text-anchor="middle">muscle / gland / tissue</text>
+      <!-- arrows -->
+      <defs>
+        <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#22d3ee"/>
+        </marker>
+      </defs>
+      <path d="M 330 84 L 330 152" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 370 84 C 470 90 540 110 556 148" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 565 198 C 565 280 470 320 406 332" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 253 332 C 190 320 95 280 95 200" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 95 148 C 95 110 190 90 288 84" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <!-- response tag -->
+      <text x="160" y="252" fill="#4ade80" font-size="11" font-weight="700" text-anchor="middle">response REVERSES</text>
+      <text x="160" y="268" fill="#b9a3d6" font-size="10" text-anchor="middle">the change</text>
+      <!-- above/below note -->
+      <text x="330" y="120" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">drift ABOVE or BELOW → same loop, opposite response</text>
+      <text x="330" y="396" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Positive feedback = same wiring but the response AMPLIFIES the change (childbirth, ovulation, lactation)</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — The bouncer's loop. Negative feedback <i>reduces</i> the gap to the set point and works from both directions; positive feedback <i>grows</i> the gap, so it's only used where an avalanche is wanted (birth, ovulation, milk let-down).</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag gr">NEGATIVE</div>
+      <h4>Reverse gear 🪪</h4>
+      <p>Response opposes the stimulus. Returns the variable to set point from above or below. Basis of ALL homeostatic systems: thermoregulation, blood sugar, osmoregulation.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">POSITIVE</div>
+      <h4>Amplifier 🎸</h4>
+      <p>Response reinforces the stimulus — the gap grows until the stimulus stops. Examples: childbirth (contraction → more stretching → stronger contraction), ovulation, lactation. Not for homeostasis.</p>
+    </div>
+  </div>
+
+  <div class="tip"><b>Exam trap:</b> the question "why negative rather than positive feedback?" wants exactly this — negative feedback <b>decreases the gap</b> between the variable and the set point and restores balance; positive feedback <b>increases the gap</b> and promotes change, which is the opposite of what homeostasis needs.</div>
+</section>
+
+<!-- ══════════════════════ ACT 3 · SUGAR FLOOR ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">D3.3.3</div>
+  <h2>THE SUGAR FLOOR</h2>
+  <p class="aim">Blood glucose is a dance floor kept perfectly crowded: when it's too full, insulin clears people out; when it's too empty, glucagon lets more in.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🍬</div>
+    <div class="body">
+      <h3>Insulin and glucagon — the antagonistic DJ pair</h3>
+      <p class="aka">islets of Langerhans · α cells · β cells · liver · target cells</p>
+      <p>Glucose is the fuel for <span class="accent">ATP via cell respiration</span>, but demand fluctuates — and high glucose in the blood is damaging (it makes the blood hypertonic and damages cells). Two antagonistic hormones from the <span class="accent">islets of Langerhans</span> in the pancreas keep it in range, acting mainly on the <span class="accent">liver</span>: <span class="cyan">insulin</span> (β cells) lowers it, <span class="gold">glucagon</span> (α cells) raises it.</p>
+      <p>Hormones travel in the blood to reach their <span class="accent">target cells</span>, which carry specific receptors. The whole loop runs on negative feedback: high glucose → insulin → glucose falls → insulin secretion stops; low glucose → glucagon → glucose rises → glucagon stops.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 452" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="blood glucose regulation diagram: pancreas with beta cells releasing insulin when glucose is high, lowering glucose by glycogen formation, glucose uptake and respiration; alpha cells releasing glucagon when glucose is low, raising glucose by glycogen breakdown and glucose release">
+      <rect width="660" height="452" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">SUGAR FLOOR — INSULIN vs GLUCAGON</text>
+      <!-- set point -->
+      <rect x="225" y="180" width="210" height="56" rx="12" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="330" y="203" fill="#fbbf24" font-size="12" font-weight="900" text-anchor="middle">BLOOD GLUCOSE ≈ 5 mmol L⁻¹</text>
+      <text x="330" y="221" fill="#b9a3d6" font-size="10.5" text-anchor="middle">the dance floor's target capacity</text>
+      <!-- high state (top left) -->
+      <rect x="30" y="60" width="250" height="88" rx="12" fill="rgba(255,46,196,.07)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="155" y="82" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">GLUCOSE HIGH ⬆ (after a meal)</text>
+      <text x="155" y="100" fill="#b9a3d6" font-size="10.5" text-anchor="middle">β cells secrete INSULIN</text>
+      <text x="155" y="116" fill="#b9a3d6" font-size="10.5" text-anchor="middle">→ glucose → glycogen (liver)</text>
+      <text x="155" y="132" fill="#b9a3d6" font-size="10.5" text-anchor="middle">→ uptake by liver + fat</text>
+      <text x="155" y="146" fill="#b9a3d6" font-size="10.5" text-anchor="middle">→ faster respiration (ATP)</text>
+      <!-- low state (bottom left) -->
+      <rect x="30" y="290" width="250" height="88" rx="12" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="155" y="312" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">GLUCOSE LOW ⬇ (after exercise)</text>
+      <text x="155" y="330" fill="#b9a3d6" font-size="10.5" text-anchor="middle">α cells secrete GLUCAGON</text>
+      <text x="155" y="346" fill="#b9a3d6" font-size="10.5" text-anchor="middle">→ glycogen → glucose (liver)</text>
+      <text x="155" y="362" fill="#b9a3d6" font-size="10.5" text-anchor="middle">→ glucose released to blood</text>
+      <text x="155" y="376" fill="#b9a3d6" font-size="10.5" text-anchor="middle">→ slower respiration</text>
+      <!-- pancreas -->
+      <ellipse cx="560" cy="215" rx="70" ry="44" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="560" y="208" fill="#a855f7" font-size="12" font-weight="800" text-anchor="middle">PANCREAS</text>
+      <text x="560" y="224" fill="#b9a3d6" font-size="10" text-anchor="middle">islets of Langerhans</text>
+      <text x="560" y="240" fill="#b9a3d6" font-size="10" text-anchor="middle">β cells: insulin · α: glucagon</text>
+      <!-- arrows high → pancreas -->
+      <path d="M 280 104 L 488 190" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="5 4"/>
+      <text x="370" y="130" fill="#ff2ec4" font-size="10.5" font-weight="700" text-anchor="middle">detects high → insulin</text>
+      <!-- arrows low → pancreas -->
+      <path d="M 280 334 L 488 240" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="5 4"/>
+      <text x="360" y="300" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">detects low → glucagon</text>
+      <!-- feedback arrows down/up -->
+      <path d="M 560 171 L 560 60 L 330 60 L 330 176" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="3 4"/>
+      <text x="440" y="52" fill="#ff2ec4" font-size="10.5" font-weight="700" text-anchor="middle">insulin lowers glucose</text>
+      <path d="M 560 259 L 560 400 L 330 400 L 330 240" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="3 4"/>
+      <text x="440" y="412" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">glucagon raises glucose</text>
+      <!-- loop label -->
+      <text x="330" y="438" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Two antagonistic hormones, one negative feedback loop — the DJ pair keeps the floor at capacity</text>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — The sugar floor. <b>Insulin</b> (β cells) acts on the liver + fat: glycogen formation (glycogenesis), glucose uptake, faster respiration → glucose falls. <b>Glucagon</b> (α cells): glycogen breakdown (glycogenolysis), glucose release → glucose rises.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag p">INSULIN · β CELLS</div>
+      <h4>Lowers glucose 🍬⬇</h4>
+      <p>Stimulates glucose → glycogen in liver &amp; muscle; boosts glucose uptake by liver and adipose tissue; speeds up respiration. Secretion starts minutes after eating and lasts hours.</p>
+    </div>
+    <div class="card">
+      <div class="tag v">GLUCAGON · α CELLS</div>
+      <h4>Raises glucose 🍬⬆</h4>
+      <p>Stimulates glycogen → glucose in the liver (glycogenolysis); promotes glucose release from liver and fat; slows respiration to save glucose.</p>
+    </div>
+    <div class="card">
+      <div class="tag g">PANCREAS</div>
+      <h4>Two glands in one 🫘</h4>
+      <p>Mostly exocrine (digestive enzymes into ducts to the gut) + islands of endocrine tissue (islets of Langerhans) that pour hormones straight into the blood.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the textbook's glucose balance diagram lists four ways glucose enters the blood (absorption from gut; glycogen breakdown; production from amino acids/glycerol) and three ways it leaves (respiration; glycogen conversion; fat conversion). Insulin and glucagon simply turn those taps — they are <b>antagonistic</b> because they act in opposite directions on the same variable.</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 · SUGAR CRASH ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">D3.3.4</div>
+  <h2>THE SUGAR CRASH</h2>
+  <p class="aim">Diabetes = the club that can't clear the dance floor. Type 1: the DJ (insulin) never shows up. Type 2: the speakers (receptors) are blown.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📉</div>
+    <div class="body">
+      <h3>Diabetes mellitus: hyperglycaemia that won't clear</h3>
+      <p class="aka">type 1 · type 2 · risk factors · prevention · treatment</p>
+      <p>In diabetes, blood glucose stays elevated even during fasting. Normally insulin binds receptors on target cells and opens glucose channels; when the signal fails, glucose piles up in the blood → <span class="accent">hyperglycaemia</span> → glucose spills into urine, water reabsorption suffers, and the person is thirsty, tired, and urinating constantly.</p>
+      <p><span class="cyan">Type 1</span>: the body can't <b>produce</b> enough insulin — autoimmune destruction of β cells, early onset, treated with insulin injections (timing matters: insulin doesn't last long in the blood). <span class="gold">Type 2</span>: the body can't <b>respond</b> — insulin receptors down-regulated, later onset, managed with diet, exercise and weight loss.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="side by side comparison of type 1 and type 2 diabetes: type 1 has destroyed beta cells in the pancreas producing no insulin, type 2 has normal insulin but fewer receptors on target cells so cells cannot respond">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">SUGAR CRASH — TYPE 1 vs TYPE 2</text>
+      <!-- type 1 panel -->
+      <rect x="20" y="48" width="295" height="270" rx="12" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="167" y="72" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">TYPE 1 · no DJ</text>
+      <!-- pancreas -->
+      <ellipse cx="110" cy="140" rx="52" ry="34" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2"/>
+      <text x="110" y="144" fill="#b9a3d6" font-size="10" text-anchor="middle">β cells destroyed</text>
+      <text x="110" y="158" fill="#b9a3d6" font-size="10" text-anchor="middle">(autoimmune)</text>
+      <line x1="60" y1="108" x2="160" y2="172" stroke="#ff2ec4" stroke-width="3"/>
+      <line x1="160" y1="108" x2="60" y2="172" stroke="#ff2ec4" stroke-width="3"/>
+      <!-- blood glucose line -->
+      <text x="167" y="205" fill="#b9a3d6" font-size="10" text-anchor="middle">✗ no insulin released</text>
+      <text x="167" y="222" fill="#b9a3d6" font-size="10" text-anchor="middle">✗ glucose channels stay shut</text>
+      <text x="167" y="239" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">⬆ hyperglycaemia</text>
+      <text x="167" y="262" fill="#b9a3d6" font-size="10" text-anchor="middle">early onset · autoimmune</text>
+      <text x="167" y="278" fill="#b9a3d6" font-size="10" text-anchor="middle">treated: insulin injections</text>
+      <text x="167" y="294" fill="#b9a3d6" font-size="10" text-anchor="middle">(timing critical — insulin is short-lived)</text>
+      <!-- type 2 panel -->
+      <rect x="345" y="48" width="295" height="270" rx="12" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="492" y="72" fill="#fbbf24" font-size="13" font-weight="900" text-anchor="middle">TYPE 2 · blown speakers</text>
+      <!-- pancreas intact -->
+      <ellipse cx="435" cy="140" rx="52" ry="34" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2"/>
+      <text x="435" y="138" fill="#b9a3d6" font-size="10" text-anchor="middle">insulin IS produced</text>
+      <text x="435" y="152" fill="#b9a3d6" font-size="10" text-anchor="middle">(β cells intact)</text>
+      <!-- target cell -->
+      <circle cx="555" cy="140" r="30" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="555" y="138" fill="#4ade80" font-size="9.5" text-anchor="middle">target cell</text>
+      <text x="555" y="152" fill="#ff2ec4" font-size="9.5" text-anchor="middle">✗ few receptors</text>
+      <!-- blood glucose line -->
+      <text x="492" y="205" fill="#b9a3d6" font-size="10" text-anchor="middle">insulin present but ignored</text>
+      <text x="492" y="222" fill="#b9a3d6" font-size="10" text-anchor="middle">✗ receptors down-regulated</text>
+      <text x="492" y="239" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">⬆ hyperglycaemia</text>
+      <text x="492" y="262" fill="#b9a3d6" font-size="10" text-anchor="middle">later onset · lifestyle-linked</text>
+      <text x="492" y="278" fill="#b9a3d6" font-size="10" text-anchor="middle">risk: sugary/fatty diet, obesity,</text>
+      <text x="492" y="294" fill="#b9a3d6" font-size="10" text-anchor="middle">no exercise + genetics</text>
+      <!-- bottom note -->
+      <text x="330" y="340" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Type 2 prevention/treatment: low-glycaemic-index foods, frequent small meals, fibre, exercise, weight loss</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — Type 1 = <b>production failure</b> (no insulin, β cells destroyed by the immune system); Type 2 = <b>response failure</b> (receptors down-regulated, insulin ignored). Both end in hyperglycaemia.</div>
+  </div>
+
+  <table>
+    <tr><th></th><th>Type 1 diabetes</th><th>Type 2 diabetes</th></tr>
+    <tr><td>Cause</td><td>Autoimmune destruction of β cells → no insulin produced</td><td>Insulin receptors / glucose transporters deficient → cells can't respond</td></tr>
+    <tr><td>Onset</td><td>Early (childhood, often sudden)</td><td>Later (adult; slow, can go unnoticed for years)</td></tr>
+    <tr><td>Risk factors</td><td>Genetics (autoimmune)</td><td>Sugary/fatty diet, obesity, lack of exercise, genetics</td></tr>
+    <tr><td>Treatment</td><td>Regular insulin injections (timing matters — insulin is degraded quickly); future: implanted pumps, stem-cell β cells</td><td>Diet control (low glycaemic index foods, high fibre, small frequent meals), exercise, weight loss</td></tr>
+    <tr><td>Diagnosis</td><td colspan="2">Persistently high fasting glucose; glucose in urine; glucose tolerance test (blood glucose response curve)</td></tr>
+  </table>
+
+  <div class="nos"><b>Nature of Science:</b> the glucose tolerance test is a model — a standard glucose drink, then repeated blood glucose measurements. A diabetic curve peaks higher and takes far longer to fall back to baseline. Fasting glucose predicts higher-than-normal values in diabetes because the liver keeps releasing glucose and nothing is clearing it.</div>
+</section>
+
+<!-- ══════════════════════ ACT 5 · THE THERMOSTAT ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">D3.3.5</div>
+  <h2>THE THERMOSTAT</h2>
+  <p class="aim">Core temperature is held near 37°C by a hypothalamus that reads the room, then switches on heaters or air-con via nerves and hormones.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌡️</div>
+    <div class="body">
+      <h3>Set point 37°C, controlled by the hypothalamus</h3>
+      <p class="aka">thermoreceptors · hypothalamus · TRH → TSH → thyroxin · muscle &amp; adipose effectors</p>
+      <p>Temperature is detected by <span class="accent">thermoreceptors</span>: peripheral ones in the skin (which let you react before the core even changes — you feel the cold door handle, not just a cold core) and central ones deep in the body. The <span class="accent">hypothalamus</span> is the integrating centre: it compares blood temperature against the 37°C set point.</p>
+      <p>When the core is too cold, the hypothalamus works with the pituitary to boost <span class="accent">thyroxin</span>: hypothalamus secretes <span class="cyan">TRH</span> (tripeptide) → anterior pituitary secretes <span class="cyan">TSH</span> (glycoprotein hormone) → thyroid gland secretes <span class="cyan">thyroxin</span> (contains iodine) → <b>increases metabolic rate</b> in liver, muscle and brain → more heat generated. The effectors are <span class="gold">muscle and adipose tissue</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thermoregulation chain diagram: cold detected by thermoreceptors, hypothalamus secretes TRH, anterior pituitary secretes TSH, thyroid secretes thyroxin which increases metabolic rate in liver muscle and brain generating heat">
+      <rect width="660" height="420" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE THERMOSTAT — COLD CHAIN OF COMMAND</text>
+      <!-- cold trigger -->
+      <rect x="30" y="70" width="180" height="56" rx="12" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="120" y="92" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">CORE TOO COLD ⬇</text>
+      <text x="120" y="110" fill="#b9a3d6" font-size="10" text-anchor="middle">thermoreceptors detect</text>
+      <!-- hypothalamus -->
+      <rect x="30" y="180" width="180" height="56" rx="12" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="120" y="202" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">HYPOTHALAMUS</text>
+      <text x="120" y="220" fill="#b9a3d6" font-size="10" text-anchor="middle">integrating centre + secretes TRH</text>
+      <!-- pituitary -->
+      <rect x="240" y="180" width="180" height="56" rx="12" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="330" y="202" fill="#fbbf24" font-size="12" font-weight="800" text-anchor="middle">ANTERIOR PITUITARY</text>
+      <text x="330" y="220" fill="#b9a3d6" font-size="10" text-anchor="middle">secretes TSH (glycoprotein)</text>
+      <!-- thyroid -->
+      <rect x="450" y="180" width="180" height="56" rx="12" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="540" y="202" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">THYROID GLAND</text>
+      <text x="540" y="220" fill="#b9a3d6" font-size="10" text-anchor="middle">secretes thyroxin (has iodine)</text>
+      <!-- effectors -->
+      <rect x="240" y="310" width="390" height="56" rx="12" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="435" y="332" fill="#a855f7" font-size="12" font-weight="800" text-anchor="middle">EFFECTORS: LIVER · MUSCLE · BRAIN</text>
+      <text x="435" y="350" fill="#b9a3d6" font-size="10" text-anchor="middle">metabolic rate increases → more heat → core returns to 37°C</text>
+      <!-- arrows -->
+      <path d="M 120 126 L 120 176" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 210 208 L 236 208" stroke="#ff2ec4" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="223" y="198" fill="#b9a3d6" font-size="9.5" text-anchor="middle">TRH</text>
+      <path d="M 420 208 L 446 208" stroke="#fbbf24" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="433" y="198" fill="#b9a3d6" font-size="9.5" text-anchor="middle">TSH</text>
+      <path d="M 540 240 L 540 280 L 435 280 L 435 306" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="500" y="272" fill="#b9a3d6" font-size="9.5" text-anchor="middle">thyroxin</text>
+      <!-- feedback -->
+      <path d="M 435 366 L 435 400 L 120 400 L 120 240" stroke="#a855f7" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="4 4"/>
+      <text x="280" y="412" fill="#a855f7" font-size="10.5" font-weight="700" text-anchor="middle">heat restores set point → TRH secretion stops (negative feedback)</text>
+      <!-- warm path note -->
+      <text x="330" y="60" fill="#4ade80" font-size="10.5" text-anchor="middle">Core too hot? Same centre, opposite output — heat-loss responses (Act 6), not thyroxin</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — Cold chain: thermoreceptors → hypothalamus (<b>TRH</b>, a tripeptide) → anterior pituitary (<b>TSH</b>, a glycoprotein) → thyroid (<b>thyroxin</b>, iodine-containing) → faster metabolism in liver/muscle/brain → heat. Notice thyroxin is a <i>hormonal</i> pathway — slower but long-lasting, layered on top of instant nervous shivering.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> TRH is a <b>tripeptide</b> (3 amino acids), TSH is a <b>glycoprotein</b>, thyroxin <b>contains iodine</b> — these are classic data-about-hormones questions. Iodine deficiency → no thyroxin → low metabolic rate → feeling cold (goitre).</div>
+</section>
+
+<!-- ══════════════════════ ACT 6 · HEAT CONTROL ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">D3.3.6</div>
+  <h2>HEAT CONTROL</h2>
+  <p class="aim">When you're too hot: vasodilation + sweating. Too cold: vasoconstriction, shivering, hair raising, and brown fat burning without ATP.</p>
+
+  <div class="bouncer">
+    <div class="emoji">❄️🔥</div>
+    <div class="body">
+      <h3>Effector moves — the rapid-response toolkit</h3>
+      <p class="aka">vasodilation · vasoconstriction · shivering · sweating · piloerection · brown fat</p>
+      <p><span class="accent">Too hot?</span> Skin arterioles <span class="cyan">dilate</span> (vasodilation) → more warm blood at the surface → heat radiates away (and skin looks pink). <span class="cyan">Sweat glands</span> secrete sweat; evaporation pulls off latent heat — the most powerful cooling tool. <span class="gold">Too cold?</span> Arterioles <span class="gold">constrict</span> (vasoconstriction) → less blood at the surface → less heat loss (skin looks pale). <span class="gold">Shivering</span>: rapid involuntary muscle contractions generate heat from the effort. <span class="gold">Piloerection</span>: hair muscles raise hairs — a dead end in humans (traps a thin air layer if you're furry).</p>
+      <p>The heavyweight: <span class="accent">uncoupled respiration in brown adipose tissue</span> — mitochondria burn fuel but make <b>no ATP</b>, releasing all the energy as heat. Vital in new-borns and hibernating mammals.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two panel heat control diagram: left panel hot response with dilated skin arterioles and sweat droplets cooling the skin; right panel cold response with constricted arterioles, shivering muscle, raised hairs and brown fat releasing heat without ATP">
+      <rect width="660" height="400" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">HEAT CONTROL — HOT vs COLD TOOLKIT</text>
+      <!-- HOT panel -->
+      <rect x="20" y="48" width="295" height="310" rx="12" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="167" y="64" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">HOT ⬆ → LOSE HEAT</text>
+      <!-- skin -->
+      <rect x="45" y="110" width="245" height="70" rx="10" fill="rgba(255,46,196,.04)" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="167" y="128" fill="#b9a3d6" font-size="10" text-anchor="middle">skin surface — hot &amp; pink</text>
+      <!-- wide arteriole -->
+      <ellipse cx="120" cy="210" rx="60" ry="14" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="120" y="214" fill="#22d3ee" font-size="9.5" text-anchor="middle">arteriole DILATED</text>
+      <text x="120" y="240" fill="#b9a3d6" font-size="10" text-anchor="middle">more blood to skin →</text>
+      <text x="120" y="256" fill="#b9a3d6" font-size="10" text-anchor="middle">heat radiates away</text>
+      <!-- sweat -->
+      <circle cx="230" cy="150" r="5" fill="#22d3ee"/>
+      <circle cx="248" cy="140" r="5" fill="#22d3ee"/>
+      <circle cx="266" cy="152" r="5" fill="#22d3ee"/>
+      <text x="240" y="180" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">sweat evaporates</text>
+      <text x="240" y="196" fill="#b9a3d6" font-size="9.5" text-anchor="middle">latent heat of vaporisation</text>
+      <text x="167" y="300" fill="#ff2ec4" font-size="10.5" font-weight="700" text-anchor="middle">pink skin · sweating</text>
+      <text x="167" y="318" fill="#b9a3d6" font-size="9.5" text-anchor="middle">sweat: up to 2 L per hour</text>
+      <text x="167" y="334" fill="#b9a3d6" font-size="9.5" text-anchor="middle">sodium left on skin (salty sweat)</text>
+      <!-- COLD panel -->
+      <rect x="345" y="48" width="295" height="310" rx="12" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="492" y="64" fill="#22d3ee" font-size="13" font-weight="900" text-anchor="middle">COLD ⬇ → KEEP HEAT</text>
+      <!-- skin -->
+      <rect x="370" y="110" width="245" height="70" rx="10" fill="rgba(34,211,238,.04)" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="492" y="128" fill="#b9a3d6" font-size="10" text-anchor="middle">skin surface — pale &amp; cold</text>
+      <!-- narrow arteriole -->
+      <ellipse cx="445" cy="210" rx="30" ry="9" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
+      <text x="445" y="214" fill="#a855f7" font-size="9.5" text-anchor="middle">CONSTRICTED</text>
+      <text x="445" y="240" fill="#b9a3d6" font-size="10" text-anchor="middle">less blood to skin →</text>
+      <text x="445" y="256" fill="#b9a3d6" font-size="10" text-anchor="middle">less heat lost</text>
+      <!-- shivering -->
+      <text x="560" y="180" fill="#4ade80" font-size="10" font-weight="700" text-anchor="middle">shivering ⚡⚡</text>
+      <text x="560" y="196" fill="#b9a3d6" font-size="9.5" text-anchor="middle">muscle contraction heats</text>
+      <!-- hairs -->
+      <line x1="410" y1="86" x2="408" y2="72" stroke="#fbbf24" stroke-width="2"/>
+      <line x1="492" y1="86" x2="492" y2="72" stroke="#fbbf24" stroke-width="2"/>
+      <line x1="574" y1="86" x2="576" y2="72" stroke="#fbbf24" stroke-width="2"/>
+      <text x="492" y="100" fill="#b9a3d6" font-size="9.5" text-anchor="middle">hairs raised (piloerection)</text>
+      <text x="492" y="300" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">pale skin · shivering · goosebumps</text>
+      <text x="492" y="318" fill="#b9a3d6" font-size="9.5" text-anchor="middle">brown fat: uncoupled respiration</text>
+      <text x="492" y="334" fill="#b9a3d6" font-size="9.5" text-anchor="middle">no ATP made — ALL energy → heat</text>
+      <!-- bottom note -->
+      <text x="330" y="386" fill="#b9a3d6" font-size="10.5" text-anchor="middle">New-borns &amp; hibernators rely on brown fat; adults keep a little around the neck and shoulders</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — Hot toolkit: dilated arterioles + sweat (up to 2 L/hr) shed heat. Cold toolkit: constricted arterioles + shivering + piloerection + brown-fat uncoupled respiration, where mitochondria burn fuel <i>without</i> making ATP so all the energy becomes heat.</div>
+  </div>
+
+  <div class="exam"><b>Exam trap:</b> arterioles don't "move" — only their <b>diameter changes</b>, which alters blood flow through skin capillaries. And vasodilation alone is mild; sweating is the serious cooler (that's why humid heat is miserable — sweat can't evaporate).</div>
+</section>
+
+<!-- ══════════════════════ ACT 7 · KIDNEY CLUB ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">AHL · D3.3.7</div>
+  <h2>THE KIDNEY CLUB</h2>
+  <p class="aim">The kidneys are the club's two bouncers at the back door: they chuck out toxic waste (excretion) and hold the door policy on water (osmoregulation).</p>
+
+  <div class="bouncer">
+    <div class="emoji">🫘</div>
+    <div class="body">
+      <h3>Excretion vs osmoregulation — two jobs, one organ</h3>
+      <p class="aka">urea · osmolarity · nephron · cortex · medulla</p>
+      <p><span class="accent">Excretion</span> = removing metabolic waste from the blood. The big one is <span class="cyan">urea</span> (made in the liver from excess amino acids — deamination), plus excess salt and water. <span class="accent">Osmoregulation</span> = controlling the <span class="cyan">osmotic concentration of body fluids</span>, measured in <span class="cyan">osmoles per litre (osmol L⁻¹)</span>. A solute gradient in the kidney medulla drives water reabsorption.</p>
+      <p>The working unit is the <span class="accent">nephron</span> — about a million per kidney. Each nephron: <span class="gold">Bowman's capsule + glomerulus</span> (filter), <span class="gold">proximal convoluted tubule</span> (reabsorption), <span class="gold">loop of Henle</span> (salt ladder), <span class="gold">distal convoluted tubule + collecting duct</span> (final tuning under ADH). The whole system filters ~180 L of fluid per day and returns almost all of it — you pee only ~1.5 L.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="nephron structure diagram: glomerulus inside bowman's capsule, proximal convoluted tubule, loop of henle with descending and ascending limbs in the medulla, distal convoluted tubule, collecting duct, vasa recta, cortex and medulla labelled">
+      <rect width="660" height="460" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE KIDNEY CLUB — ONE NEPHRON</text>
+      <!-- cortex band -->
+      <rect x="20" y="60" width="620" height="120" rx="8" fill="rgba(168,85,247,.05)" stroke="none"/>
+      <text x="330" y="78" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">CORTEX (outer)</text>
+      <!-- medulla band -->
+      <rect x="20" y="180" width="620" height="240" rx="8" fill="rgba(34,211,238,.04)" stroke="none"/>
+      <text x="330" y="406" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">MEDULLA (inner — salty gradient 300 → 1200 mOsm)</text>
+      <!-- glomerulus + bowman's -->
+      <circle cx="180" cy="120" r="26" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="180" y="124" fill="#ff2ec4" font-size="9" text-anchor="middle">glomerulus</text>
+      <path d="M 180 94 A 40 40 0 0 1 220 130 A 40 40 0 0 1 180 168 A 40 40 0 0 1 150 130 A 30 30 0 0 1 180 94 Z" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="180" y="185" fill="#a855f7" font-size="9.5" text-anchor="middle">Bowman's capsule</text>
+      <!-- PCT -->
+      <path d="M 220 130 C 280 110 320 100 340 120 C 360 140 380 130 380 110" fill="none" stroke="#fbbf24" stroke-width="3"/>
+      <text x="300" y="100" fill="#fbbf24" font-size="9.5" text-anchor="middle">PCT</text>
+      <!-- loop of Henle -->
+      <path d="M 380 110 C 380 170 340 300 320 340 C 300 380 280 300 260 340 C 240 380 230 240 230 180" fill="none" stroke="#4ade80" stroke-width="3"/>
+      <text x="430" y="290" fill="#4ade80" font-size="9.5" text-anchor="middle">loop of Henle</text>
+      <text x="430" y="306" fill="#b9a3d6" font-size="9" text-anchor="middle">descending ↓ / ascending ↑</text>
+      <!-- DCT -->
+      <path d="M 230 180 C 220 160 210 140 260 140 C 310 140 320 130 340 130" fill="none" stroke="#fbbf24" stroke-width="3"/>
+      <text x="290" y="152" fill="#fbbf24" font-size="9.5" text-anchor="middle">DCT</text>
+      <!-- collecting duct -->
+      <path d="M 500 130 L 500 410" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+      <text x="530" y="270" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">collecting duct</text>
+      <text x="530" y="288" fill="#b9a3d6" font-size="9" text-anchor="middle">ADH-controlled water loss</text>
+      <!-- vasa recta -->
+      <path d="M 555 130 L 555 410" stroke="#ff2ec4" stroke-width="2" stroke-dasharray="4 4"/>
+      <text x="596" y="270" fill="#ff2ec4" font-size="9.5" text-anchor="middle">vasa recta</text>
+      <!-- flow arrows -->
+      <path d="M 40 120 L 130 120" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="60" y="110" fill="#b9a3d6" font-size="9" text-anchor="middle">blood in (afferent)</text>
+      <path d="M 226 120 L 320 120" stroke="#fbbf24" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="500" y="60" fill="#b9a3d6" font-size="9.5" text-anchor="middle">filtrate path: PCT → loop → DCT → collecting duct</text>
+      <text x="330" y="440" fill="#b9a3d6" font-size="10.5" text-anchor="middle">~180 L filtered daily · ~1.5 L urine out · the rest reabsorbed</text>
+    </svg>
+    <div class="cap"><b>FIG 7</b> — The nephron: filter at the top (glomerulus + Bowman's capsule, cortex), reabsorption along the PCT, a salt-ladder loop of Henle diving into the medulla, and the ADH-tuned collecting duct. The vasa recta is the blood vessel hugging the loop so salts don't leak away.</div>
+  </div>
+
+  <table>
+    <tr><th></th><th>Excretion</th><th>Osmoregulation</th></tr>
+    <tr><td>Job</td><td>Remove metabolic waste (urea, excess salts &amp; water) from the blood</td><td>Keep the osmotic concentration of body fluids at ~300 mOsm L⁻¹</td></tr>
+    <tr><td>Key waste</td><td>Urea — made in the liver by deamination of excess amino acids</td><td>—</td></tr>
+    <tr><td>Units</td><td>mg / g per day</td><td>osmoles per litre (osmol L⁻¹)</td></tr>
+    <tr><td>Where</td><td>Nephrons filter blood; urea stays in filtrate and leaves in urine</td><td>Loop of Henle builds the medulla salt gradient; ADH tunes the collecting duct</td></tr>
+  </table>
+
+  <div class="tip"><b>Units matter:</b> exam answers that write "concentration" get marked down — write <b>osmol L⁻¹</b> (osmolarity). The medulla gradient runs roughly 300 mOsm L⁻¹ (cortex) up to ~1200 mOsm L⁻¹ (deep medulla) — that gradient is what pulls water out of the collecting duct.</div>
+</section>
+
+<!-- ══════════════════════ ACT 8 · THE FILTER ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">AHL · D3.3.8</div>
+  <h2>THE FILTER</h2>
+  <p class="aim">Blood is pushed through a high-pressure filter at the glomerulus, then everything valuable gets grabbed back in the proximal tubule.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🕸️</div>
+    <div class="body">
+      <h3>Ultrafiltration, then selective reabsorption</h3>
+      <p class="aka">glomerulus · fenestrations · basement membrane · podocytes · PCT · microvilli</p>
+      <p><span class="accent">Ultrafiltration</span> at the glomerulus: blood arrives under high pressure (the afferent arteriole is wider than the efferent), so fluid is forced through the capillary wall into Bowman's capsule. The filter is three layers: <span class="cyan">fenestrated capillary endothelium</span> (pores ~100 nm), the <span class="cyan">basement membrane</span> (glycoprotein mesh — the real filter; it's negatively charged so it repels plasma proteins), and <span class="cyan">podocyte foot processes</span> (slit pores). Result: <b>water, ions, glucose, amino acids and urea pass</b>; <b>blood cells, platelets and plasma proteins stay behind</b>.</p>
+      <p><span class="accent">Selective reabsorption</span> in the PCT: all glucose and amino acids, ~80% of water and mineral ions are pumped back into the blood. The PCT is built for it: <span class="gold">microvilli</span> (huge surface area), <span class="gold">tight junctions</span> (nothing leaks between cells — everything goes through them), <span class="gold">many mitochondria</span> (energy for active transport). Glucose is moved by <b>cotransport with Na⁺</b>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ultrafiltration filter diagram: fenestrated capillary endothelium, negatively charged basement membrane, podocyte foot processes with slits, showing small molecules passing through while blood cells and plasma proteins are held back; PCT reabsorption shown with microvilli and mitochondria">
+      <rect width="660" height="430" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE FILTER — ULTRAFILTRATION STACK</text>
+      <!-- capillary -->
+      <rect x="80" y="60" width="500" height="60" rx="10" fill="rgba(255,46,196,.06)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="330" y="82" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">GLOMERULAR CAPILLARY (high pressure)</text>
+      <text x="330" y="100" fill="#b9a3d6" font-size="10" text-anchor="middle">fenestrated endothelium — pores ~100 nm</text>
+      <!-- held back -->
+      <circle cx="150" cy="118" r="12" fill="rgba(255,46,196,.2)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <circle cx="190" cy="116" r="8" fill="rgba(168,85,247,.25)" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="170" y="142" fill="#ff2ec4" font-size="9.5" text-anchor="middle">cells + platelets</text>
+      <text x="300" y="120" fill="#a855f7" font-size="9.5" text-anchor="middle">plasma proteins ✗ (repelled by −charge)</text>
+      <!-- basement membrane -->
+      <rect x="80" y="150" width="500" height="26" fill="rgba(251,191,36,.14)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="168" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">BASEMENT MEMBRANE — the real filter (negatively charged glycoprotein mesh)</text>
+      <!-- podocytes -->
+      <rect x="80" y="210" width="500" height="40" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="226" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">PODOCYTE FOOT PROCESSES</text>
+      <text x="330" y="242" fill="#b9a3d6" font-size="10" text-anchor="middle">slit pores between the "feet" → filtrate passes</text>
+      <!-- passing particles -->
+      <text x="580" y="196" fill="#22d3ee" font-size="9.5" text-anchor="middle">↓ water · ions</text>
+      <text x="580" y="210" fill="#22d3ee" font-size="9.5" text-anchor="middle">↓ glucose · amino</text>
+      <text x="580" y="224" fill="#22d3ee" font-size="9.5" text-anchor="middle">↓ acids · urea</text>
+      <path d="M 560 130 L 560 176 L 560 208" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <!-- Bowman's space -->
+      <rect x="80" y="290" width="500" height="34" rx="8" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="330" y="312" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">BOWMAN'S SPACE → filtrate enters the tubule</text>
+      <!-- PCT reabsorption -->
+      <rect x="80" y="350" width="500" height="60" rx="10" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="330" y="372" fill="#a855f7" font-size="12" font-weight="800" text-anchor="middle">PCT — SELECTIVE REABSORPTION</text>
+      <text x="330" y="392" fill="#b9a3d6" font-size="10" text-anchor="middle">microvilli surface · tight junctions · mitochondria power active transport</text>
+      <text x="330" y="408" fill="#b9a3d6" font-size="10" text-anchor="middle">ALL glucose &amp; amino acids · ~80% water &amp; ions back to blood</text>
+      <text x="330" y="424" fill="#b9a3d6" font-size="9.5" text-anchor="middle">glucose rides in with Na⁺ (cotransport) → no glucose in healthy urine</text>
+    </svg>
+    <div class="cap"><b>FIG 8</b> — The filter stack: fenestrations (big pores) → basement membrane (charged glycoprotein mesh that actually decides) → podocyte slits (small gaps). What passes: water, ions, glucose, amino acids, urea. What stays: cells, platelets, plasma proteins.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold — "why does the basement membrane block plasma proteins?"</b> Two reasons: pore size <b>and</b> negative charge repelling the negatively charged proteins (and most are simply too big). That's why kidney damage shows protein in urine — the filter has failed.</div>
+</section>
+
+<!-- ══════════════════════ ACT 9 · SALT LADDER ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">AHL · D3.3.9</div>
+  <h2>THE SALT LADDER</h2>
+  <p class="aim">The loop of Henle builds a salty escalator in the medulla — the gradient that later lets the collecting duct drain water out of the filtrate.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🪜</div>
+    <div class="body">
+      <h3>Countercurrent multiplier: climbing to 1200 mOsm</h3>
+      <p class="aka">descending limb · ascending limb · active transport · countercurrent · vasa recta</p>
+      <p>The loop of Henle has two limbs with opposite personalities. The <span class="accent">descending limb</span> lets <span class="cyan">water leave</span> but not salts — so the filtrate gets saltier as it descends. The <span class="accent">ascending limb</span> lets <span class="cyan">salts leave but not water</span> — Na⁺ is pumped out by <span class="accent">active transport</span> (each pump cycle pushing ~200 mOsm of salt out). The two limbs run side by side, so the salt pumped out of the ascending limb makes the surrounding fluid saltier, which pulls more water out of the descending limb, making it even saltier, which lets the ascending limb pump even more… <b>multiplied, round after round</b>.</p>
+      <p>Result: the medulla interstitial fluid runs <span class="gold">300 mOsm L⁻¹</span> at the cortex down to <span class="gold">~1200 mOsm L⁻¹</span> deep in the medulla. The <span class="accent">vasa recta</span> (blood vessel alongside the loop) flows in the same countercurrent pattern so it doesn't wash the gradient away. This gradient is what the collecting duct uses in Act 10.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="countercurrent multiplier diagram of the loop of henle: descending limb loses water to the salty medulla, ascending limb actively pumps sodium out and is impermeable to water, medulla gradient builds from 300 to 1200 milliosmoles, vasa recta countercurrent protects the gradient">
+      <rect width="660" height="440" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE SALT LADDER — LOOP OF HENLE</text>
+      <!-- medulla gradient band -->
+      <rect x="420" y="60" width="200" height="330" rx="10" fill="rgba(34,211,238,.04)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="520" y="80" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">MEDULLA SALTINESS</text>
+      <text x="520" y="120" fill="#4ade80" font-size="11" text-anchor="middle">300 mOsm</text>
+      <text x="520" y="220" fill="#fbbf24" font-size="11" text-anchor="middle">~750 mOsm</text>
+      <text x="520" y="360" fill="#ff2ec4" font-size="11" text-anchor="middle">~1200 mOsm</text>
+      <!-- descending limb -->
+      <path d="M 230 70 C 230 200 190 300 170 350" fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round"/>
+      <text x="110" y="120" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">DESCENDING</text>
+      <text x="110" y="138" fill="#b9a3d6" font-size="9.5" text-anchor="middle">water OUT (leaves),</text>
+      <text x="110" y="152" fill="#b9a3d6" font-size="9.5" text-anchor="middle">salts stay → filtrate</text>
+      <text x="110" y="166" fill="#b9a3d6" font-size="9.5" text-anchor="middle">gets saltier</text>
+      <!-- ascending limb -->
+      <path d="M 170 350 C 150 300 110 200 110 70" fill="none" stroke="#ff2ec4" stroke-width="5" stroke-linecap="round"/>
+      <text x="30" y="240" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">ASCENDING</text>
+      <text x="30" y="258" fill="#b9a3d6" font-size="9.5" text-anchor="middle">Na⁺ pumped OUT (active),</text>
+      <text x="30" y="272" fill="#b9a3d6" font-size="9.5" text-anchor="middle">water can't follow →</text>
+      <text x="30" y="286" fill="#b9a3d6" font-size="9.5" text-anchor="middle">filtrate gets dilute</text>
+      <!-- Na+ pumps -->
+      <circle cx="200" cy="200" r="8" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="215" y="204" fill="#ff2ec4" font-size="9" font-weight="800">Na⁺</text>
+      <circle cx="180" cy="260" r="8" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="195" y="264" fill="#ff2ec4" font-size="9" font-weight="800">Na⁺</text>
+      <circle cx="150" cy="320" r="8" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="165" y="324" fill="#ff2ec4" font-size="9" font-weight="800">Na⁺</text>
+      <!-- water leaving descending -->
+      <circle cx="270" cy="180" r="6" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.5"/>
+      <circle cx="290" cy="260" r="6" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.5"/>
+      <circle cx="280" cy="330" r="6" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="310" y="200" fill="#22d3ee" font-size="9.5" text-anchor="middle">H₂O out</text>
+      <!-- vasa recta -->
+      <path d="M 370 70 L 370 400" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="395" y="240" fill="#fbbf24" font-size="9.5" text-anchor="middle">vasa recta (countercurrent,</text>
+      <text x="395" y="256" fill="#fbbf24" font-size="9.5" text-anchor="middle">keeps gradient intact)</text>
+      <!-- multiplier note -->
+      <text x="330" y="420" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Why "multiplier": salt pumped out of the ascending limb pulls water out of the descending limb → saltier filtrate → more salt pumped… each cycle amplifies the gradient</text>
+    </svg>
+    <div class="cap"><b>FIG 9</b> — Opposite limbs, one multiplier: descending = water out (salts stay), ascending = salts out (water stays). Each pass boosts the medulla gradient toward 1200 mOsm L⁻¹, and the vasa recta's parallel flow stops blood from rinsing it away.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold — "explain how the loop of Henle creates the gradient":</b> (1) ascending limb actively transports Na⁺ out, (2) that salt raises the osmolarity of medulla fluid, (3) the descending limb responds by losing water → filtrate gets saltier, (4) the saltier filtrate lets the ascending limb pump out even more Na⁺, (5) repeated cycling multiplies the gradient to ~1200 mOsm L⁻¹. Mention <b>countercurrent</b> and the <b>vasa recta</b> to top out the marks.</div>
+</section>
+
+<!-- ══════════════════════ ACT 10 · WATER BOSS ══════════════════════ -->
+<section class="act" id="act10">
+  <div class="acttag">AHL · D3.3.10</div>
+  <h2>THE WATER BOSS</h2>
+  <p class="aim">ADH is the bouncer at the door of the collecting duct: when you're dehydrated he opens more water channels; when you're topped up he lets water walk out.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚰</div>
+    <div class="body">
+      <h3>ADH: osmoreceptors → pituitary → aquaporins</h3>
+      <p class="aka">osmoreceptors · hypothalamus · posterior pituitary · aquaporins · collecting duct</p>
+      <p><span class="accent">Osmoreceptors</span> in the hypothalamus monitor blood osmolarity. If it rises (dehydrated — you're salty), they signal the <span class="accent">posterior pituitary</span> to release <span class="accent">ADH</span> (antidiuretic hormone, also called vasopressin). ADH travels to the kidney and makes the <span class="accent">collecting duct</span> more permeable to water: <b>aquaporin</b> channels stored in vesicles move to and fuse with the cell membrane, so water can escape the filtrate into the salty medulla and be reabsorbed. More ADH → more aquaporins → less water in urine → <span class="gold">concentrated, low-volume urine</span>.</p>
+      <p>Drink lots? Osmolarity falls → less ADH → aquaporins return to vesicles → dilute urine. That's the whole loop — <span class="cyan">negative feedback on blood osmolarity</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ADH osmoregulation diagram: osmoreceptors in hypothalamus detect high blood osmolarity, posterior pituitary releases ADH, ADH triggers aquaporin vesicles to fuse with collecting duct cell membrane so water is reabsorbed into the salty medulla, producing concentrated urine">
+      <rect width="660" height="420" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE WATER BOSS — ADH LOOP</text>
+      <!-- osmoreceptors -->
+      <rect x="30" y="70" width="200" height="56" rx="12" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="130" y="92" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">BLOOD TOO SALTY ⬆</text>
+      <text x="130" y="110" fill="#b9a3d6" font-size="10" text-anchor="middle">osmoreceptors in hypothalamus</text>
+      <!-- pituitary -->
+      <rect x="30" y="180" width="200" height="56" rx="12" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="130" y="202" fill="#fbbf24" font-size="12" font-weight="800" text-anchor="middle">POSTERIOR PITUITARY</text>
+      <text x="130" y="220" fill="#b9a3d6" font-size="10" text-anchor="middle">releases ADH (vasopressin)</text>
+      <!-- collecting duct -->
+      <rect x="340" y="140" width="290" height="210" rx="12" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="485" y="164" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">COLLECTING DUCT</text>
+      <!-- aquaporins -->
+      <circle cx="410" cy="230" r="9" fill="rgba(74,222,128,.25)" stroke="#4ade80" stroke-width="2"/>
+      <text x="410" y="233" fill="#4ade80" font-size="8" font-weight="800" text-anchor="middle">AQ</text>
+      <circle cx="450" cy="250" r="9" fill="rgba(74,222,128,.25)" stroke="#4ade80" stroke-width="2"/>
+      <text x="450" y="253" fill="#4ade80" font-size="8" font-weight="800" text-anchor="middle">AQ</text>
+      <circle cx="500" cy="230" r="9" fill="rgba(74,222,128,.25)" stroke="#4ade80" stroke-width="2"/>
+      <text x="500" y="233" fill="#4ade80" font-size="8" font-weight="800" text-anchor="middle">AQ</text>
+      <text x="520" y="280" fill="#4ade80" font-size="9.5" font-weight="700" text-anchor="middle">aquaporins fuse</text>
+      <text x="520" y="296" fill="#b9a3d6" font-size="9" text-anchor="middle">(from vesicles) → walls</text>
+      <text x="520" y="310" fill="#b9a3d6" font-size="9" text-anchor="middle">permeable to water</text>
+      <!-- water out -->
+      <text x="600" y="330" fill="#22d3ee" font-size="9.5" text-anchor="middle">H₂O out → reabsorbed</text>
+      <path d="M 580 320 L 580 360 L 500 360" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="380" y="330" fill="#b9a3d6" font-size="9" text-anchor="middle">urine: concentrated · low volume</text>
+      <!-- arrows -->
+      <path d="M 130 126 L 130 176" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 230 208 L 336 208" stroke="#fbbf24" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="283" y="198" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">ADH</text>
+      <!-- feedback -->
+      <path d="M 340 350 L 130 350 L 130 240" stroke="#a855f7" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="4 4"/>
+      <text x="235" y="368" fill="#a855f7" font-size="10" font-weight="700" text-anchor="middle">water reabsorbed → osmolarity falls → ADH stops (negative feedback)</text>
+      <!-- hydrated branch -->
+      <text x="330" y="404" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Well hydrated? Little ADH → aquaporins stay in vesicles → dilute, high-volume urine</text>
+    </svg>
+    <div class="cap"><b>FIG 10</b> — The water boss: high osmolarity → osmoreceptors → posterior pituitary → ADH → aquaporin vesicles fuse into the collecting duct wall → water is dragged out by the medulla's salt gradient → concentrated urine. Negative feedback shuts ADH off as osmolarity falls.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Are De Hydrated":</b> ADH is secreted when you ARE DEhydrated. And remember: ADH is <b>made in the hypothalamus</b>, <b>released by the posterior pituitary</b> — an exam favourite.</div>
+
+  <div class="exam"><b>Data question skill:</b> given urine volume + osmolarity curves, high urine osmolarity + low volume = high ADH; low osmolarity + high volume = low ADH. Aquaporin density in the duct wall rises with ADH — that's the mechanism questions want.</div>
+</section>
+
+<!-- ══════════════════════ ACT 11 · BLOOD ROUTER ══════════════════════ -->
+<section class="act" id="act11">
+  <div class="acttag">AHL · D3.3.11</div>
+  <h2>THE BLOOD ROUTER</h2>
+  <p class="aim">The heart pumps the same blood every minute — the art is who gets it. Arterioles are the traffic lights that reroute flow to whatever organ is working.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚦</div>
+    <div class="body">
+      <h3>Blood flow follows demand</h3>
+      <p class="aka">cardiac output · arterioles · precapillary sphincters · shunt vessels</p>
+      <p><span class="accent">Cardiac output</span> (blood pumped per minute) rises with activity — from ~4 L min⁻¹ asleep to ~5 at rest to ~25 L min⁻¹ in hard exercise. But the brain always gets its share: <span class="cyan">~20% of cardiac output</span> at all times, because it can't store fuel. Blood is distributed by <span class="accent">arteriole diameter</span>: vasodilation opens a capillary bed, vasoconstriction shuts it; <span class="accent">precapillary sphincters</span> are the valves at each bed, and <span class="accent">shunt vessels</span> bypass beds entirely.</p>
+      <p>During exercise: muscle beds <span class="gold">open wide</span>; gut and kidneys <span class="gold">constrict</span> (digestion and urine can wait). In sleep: muscles shut down, kidneys reduce flow (no midnight toilet trips), and the <span class="cyan">brain gets extra</span> during REM. Wakeful rest sits in between.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="bar chart of blood distribution across organs during exercise, sleep and wakeful rest: skeletal muscle huge during exercise, gut and kidneys reduced during exercise, brain constant at about 20 percent of cardiac output">
+      <rect width="660" height="430" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE BLOOD ROUTER — WHO GETS THE BLOOD?</text>
+      <!-- axes -->
+      <line x1="80" y1="70" x2="80" y2="380" stroke="#b9a3d6" stroke-width="2"/>
+      <line x1="80" y1="380" x2="620" y2="380" stroke="#b9a3d6" stroke-width="2"/>
+      <text x="40" y="90" fill="#b9a3d6" font-size="10" text-anchor="middle">high</text>
+      <text x="40" y="380" fill="#b9a3d6" font-size="10" text-anchor="middle">low</text>
+      <text x="350" y="410" fill="#b9a3d6" font-size="10.5" text-anchor="middle">skeletal muscle · gut · kidneys · brain</text>
+      <!-- muscle -->
+      <rect x="110" y="120" width="52" height="260" fill="rgba(255,46,196,.35)" stroke="#ff2ec4" stroke-width="2"/>
+      <rect x="170" y="300" width="52" height="80" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <rect x="230" y="220" width="52" height="160" fill="rgba(255,46,196,.25)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="136" y="108" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">EXERCISE</text>
+      <text x="196" y="288" fill="#b9a3d6" font-size="9" text-anchor="middle">SLEEP</text>
+      <text x="256" y="208" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">REST</text>
+      <!-- gut -->
+      <rect x="320" y="260" width="52" height="120" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="1.5"/>
+      <rect x="380" y="200" width="52" height="180" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="2"/>
+      <rect x="440" y="240" width="52" height="140" fill="rgba(34,211,238,.22)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="346" y="250" fill="#b9a3d6" font-size="9" text-anchor="middle">EX</text>
+      <text x="406" y="190" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">REST</text>
+      <text x="466" y="230" fill="#b9a3d6" font-size="9" text-anchor="middle">SL</text>
+      <!-- kidneys -->
+      <rect x="490" y="250" width="42" height="130" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="1.5"/>
+      <rect x="540" y="240" width="42" height="140" fill="rgba(251,191,36,.25)" stroke="#fbbf24" stroke-width="2"/>
+      <rect x="580" y="270" width="42" height="110" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="511" y="240" fill="#b9a3d6" font-size="9" text-anchor="middle">EX</text>
+      <text x="561" y="230" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">REST</text>
+      <text x="601" y="260" fill="#b9a3d6" font-size="9" text-anchor="middle">SL</text>
+      <!-- brain -->
+      <rect x="110" y="330" width="52" height="50" fill="rgba(74,222,128,.35)" stroke="#4ade80" stroke-width="2"/>
+      <rect x="170" y="330" width="52" height="50" fill="rgba(74,222,128,.35)" stroke="#4ade80" stroke-width="2"/>
+      <rect x="230" y="330" width="52" height="50" fill="rgba(74,222,128,.35)" stroke="#4ade80" stroke-width="2"/>
+      <text x="196" y="322" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">brain: ~20% always</text>
+      <text x="196" y="398" fill="#b9a3d6" font-size="9.5" text-anchor="middle">constant, all states — can't store fuel</text>
+      <!-- note -->
+      <text x="350" y="60" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Arterioles + precapillary sphincters + shunt vessels = the traffic-light system</text>
+      <text x="330" y="426" fill="#b9a3d6" font-size="10" text-anchor="middle">Exercise ~25 L min⁻¹ · rest ~5 · sleep ~4 · brain ~20% of cardiac output</text>
+    </svg>
+    <div class="cap"><b>FIG 11</b> — Blood routing: muscle gets a flood in exercise, gut/kidneys are throttled back; sleep reroutes away from muscle and kidneys toward the brain (especially in REM). The brain's ~20% share never drops.</div>
+  </div>
+
+  <div class="nos"><b>Nature of Science:</b> the textbook data come from invasive catheter studies plus modern non-invasive flow imaging — a classic story of measurement technology changing what we can claim about the body. Expect a data question: identify which organ a line on a graph represents by matching its pattern (muscle = exercise spike, brain = flat, gut/kidney = reciprocal).</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">The whole club in one map</div>
+  <h2>MIND MAP 🗺️</h2>
+  <p class="aim">One night at Club Setpoint: everything connects back to the dials.</p>
+  <div class="mind">
+    <div class="node core">HOMEOSTASIS<small>D3.3 · Club Setpoint</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">SET POINTS<small>37°C · pH 7.4 · ~5 mmol L⁻¹ · ~300 mOsm</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">NEGATIVE FEEDBACK<small>stimulus → receptor → centre → effector → reverse</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">GLUCOSE<small>insulin ↓ · glucagon ↑ · liver</small></div>
+    <div class="node">DIABETES<small>type 1 no insulin · type 2 no response</small></div>
+    <div class="node">TEMPERATURE<small>hypothalamus · TRH → TSH → thyroxin</small></div>
+    <div class="node">HEAT CONTROL<small>vaso- dilation/constriction · sweat · shiver</small></div>
+    <div class="node">KIDNEY<small>excretion + osmoregulation · nephron</small></div>
+    <div class="node">FILTER<small>fenestrations → basement membrane → podocytes</small></div>
+    <div class="node">SALT LADDER<small>loop of Henle · 300 → 1200 mOsm</small></div>
+    <div class="node">WATER BOSS<small>ADH · aquaporins · collecting duct</small></div>
+    <div class="node">BLOOD ROUTER<small>arterioles · brain ~20% · exercise flood</small></div>
+    <div class="node">POSITIVE FEEDBACK<small>childbirth · ovulation · lactation</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT SHEET ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">60-second recap</div>
+  <h2>THE CHEAT ⚡</h2>
+  <div class="marquee">
+    <div class="line">🎚️ Homeostasis = keeping the <span>internal environment</span> within preset limits (37°C · pH 7.4 · ~5 mmol L⁻¹ glucose · ~300 mOsm) despite the outside world.</div>
+    <div class="line">🪪 Negative feedback <span>reverses the change</span> — works from above AND below the set point · positive feedback <span>amplifies</span> (childbirth, ovulation, lactation).</div>
+    <div class="line">🍬 Insulin (β cells) <span>lowers</span> glucose: glycogen formation, uptake, faster respiration · glucagon (α cells) <span>raises</span> it: glycogen breakdown. Antagonistic pair, liver is the stage.</div>
+    <div class="line">📉 Diabetes: type 1 = <span>no insulin</span> (autoimmune, injections) · type 2 = <span>no response</span> (receptor deficiency, diet + exercise).</div>
+    <div class="line">🌡️ Cold: thermoreceptors → hypothalamus <span>TRH</span> → pituitary <span>TSH</span> → thyroid <span>thyroxin</span> (iodine!) → faster metabolism → heat.</div>
+    <div class="line">❄️🔥 Hot: <span>vasodilation + sweating</span> (up to 2 L/hr) · cold: <span>vasoconstriction + shivering + piloerection + brown fat</span> (no ATP, all heat).</div>
+    <div class="line">🫘 Kidney = <span>excretion</span> (urea from deamination) + <span>osmoregulation</span> (osmol L⁻¹) · ~180 L filtered, ~1.5 L urine.</div>
+    <div class="line">🕸️ Filter stack: fenestrations → <span>basement membrane</span> (negatively charged — blocks proteins) → podocyte slits · PCT grabs back <span>all glucose + amino acids</span>.</div>
+    <div class="line">🪜 Loop of Henle: descending loses <span>water</span>, ascending pumps out <span>Na⁺</span> (active) → medulla <span>300 → 1200 mOsm</span> · vasa recta saves the gradient.</div>
+    <div class="line">🚰 Dehydrated? Osmoreceptors → posterior pituitary → <span>ADH</span> → aquaporins fuse into collecting duct → concentrated urine · hydrated? Little ADH → dilute urine.</div>
+    <div class="line">🚦 Blood routing: arterioles + precapillary sphincters + shunts · muscle floods in exercise, gut/kidneys throttle · <span>brain ~20% always</span>.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Bouncer check</div>
+  <h2>THE TEST ✍️</h2>
+  <p class="aim">10 questions. Pick an answer and you'll instantly see why.</p>
+
+  <div class="q" data-a="narrow">
+    <p>1. Homeostasis is best described as…</p>
+    <label><input type="radio" name="q1" value="narrow"> Maintaining the internal environment within preset limits, despite external changes</label>
+    <label><input type="radio" name="q1" value="constant"> Keeping every internal variable perfectly constant at all times</label>
+    <label><input type="radio" name="q1" value="external"> Matching the internal environment to the external environment</label>
+    <div class="fb correct">✅ Set points have tolerance bands — the variable swings slightly without triggering a response, and responses push it back. "Perfectly constant" is wrong; so is matching the outside.</div>
+    <div class="fb wrong">❌ Homeostasis keeps variables near a set point within preset limits — it doesn't freeze them, and it actively resists the external environment.</div>
+  </div>
+
+  <div class="q" data-a="reverse">
+    <p>2. Why does homeostasis rely on negative feedback?</p>
+    <label><input type="radio" name="q2" value="reverse"> The response reverses the change, decreasing the gap back to the set point — restoring balance</label>
+    <label><input type="radio" name="q2" value="amplify"> The response amplifies the change, driving the variable further away</label>
+    <label><input type="radio" name="q2" value="neutral"> The response has no effect; the variable returns by itself</label>
+    <div class="fb correct">✅ Negative feedback responses oppose the stimulus and shrink the gap to the set point — that's exactly what stability needs. Positive feedback grows the gap, which suits childbirth, not homeostasis.</div>
+    <div class="fb wrong">❌ Amplifying is positive feedback — the opposite. Negative feedback decreases the gap and restores balance.</div>
+  </div>
+
+  <div class="q" data-a="insulin">
+    <p>3. After a sugary meal, blood glucose falls because…</p>
+    <label><input type="radio" name="q3" value="glucagon"> Glucagon from α cells speeds up glycogen breakdown</label>
+    <label><input type="radio" name="q3" value="insulin"> Insulin from β cells drives glucose → glycogen, uptake and faster respiration</label>
+    <label><input type="radio" name="q3" value="kidney"> The kidneys filter the excess glucose straight into urine</label>
+    <div class="fb correct">✅ Insulin (β cells, islets of Langerhans) clears glucose: liver converts it to glycogen, tissues take it up, respiration speeds up. Glucagon does the opposite and only appears when glucose is LOW.</div>
+    <div class="fb wrong">❌ Glucagon RAISES glucose (glycogen → glucose), and healthy kidneys don't leak glucose into urine — that's a diabetes symptom.</div>
+  </div>
+
+  <div class="q" data-a="type2">
+    <p>4. Type 2 diabetes is fundamentally…</p>
+    <label><input type="radio" name="q4" value="type1"> Autoimmune destruction of β cells → no insulin produced</label>
+    <label><input type="radio" name="q4" value="type2"> Deficient response to insulin — receptors/transporters don't work, insulin is ignored</label>
+    <label><input type="radio" name="q4" value="pituitary"> Failure of the pituitary to secrete ADH</label>
+    <div class="fb correct">✅ Type 2 = response failure: insulin is made but target cells don't respond (down-regulated receptors). Risk factors: sugary/fatty diet, obesity, no exercise, genetics. Managed with diet + exercise + weight loss.</div>
+    <div class="fb wrong">❌ That's Type 1 (autoimmune, no insulin, injections). ADH failure is diabetes INSIPIDUS, not mellitus — a different disease entirely.</div>
+  </div>
+
+  <div class="q" data-a="hypothal">
+    <p>5. The control centre for temperature regulation is…</p>
+    <label><input type="radio" name="q5" value="thyroid"> The thyroid gland, which releases thyroxin directly</label>
+    <label><input type="radio" name="q5" value="hypothal"> The hypothalamus, which compares blood temperature against the 37°C set point</label>
+    <label><input type="radio" name="q5" value="skin"> The skin, where peripheral thermoreceptors live</label>
+    <div class="fb correct">✅ Hypothalamus = integrating centre (compares vs set point). It triggers TRH → TSH → thyroxin for long-term heat, and nervous responses for instant heat control. The thyroid is just an effector; skin receptors are inputs.</div>
+    <div class="fb wrong">❌ The thyroid is an effector in the chain; the skin holds receptors (inputs). The comparing and deciding happens in the hypothalamus.</div>
+  </div>
+
+  <div class="q" data-a="uncoupled">
+    <p>6. Brown adipose tissue generates heat by…</p>
+    <label><input type="radio" name="q6" value="shiver"> Rapid involuntary muscle contractions (shivering)</label>
+    <label><input type="radio" name="q6" value="uncoupled"> Uncoupled respiration — fuel burned without making ATP, all energy released as heat</label>
+    <label><input type="radio" name="q6" value="pilo"> Piloerection trapping an insulating air layer</label>
+    <div class="fb correct">✅ Brown fat mitochondria run "uncoupled" respiration: no ATP is produced, so the energy comes straight out as heat. Crucial in new-borns and hibernators; shivering is muscle-based and piloerection barely works in humans.</div>
+    <div class="fb wrong">❌ Shivering is skeletal muscle, and hair-raising is a dead end in humans. Brown fat's trick is burning fuel without making ATP.</div>
+  </div>
+
+  <div class="q" data-a="basement">
+    <p>7. In ultrafiltration, the structure that actually blocks plasma proteins is…</p>
+    <label><input type="radio" name="q7" value="fenestrations"> The fenestrations — pores ~100 nm in the capillary endothelium</label>
+    <label><input type="radio" name="q7" value="basement"> The basement membrane — a negatively charged glycoprotein mesh that repels proteins</label>
+    <label><input type="radio" name="q7" value="podocytes"> The podocyte foot processes, which act as a solid barrier</label>
+    <div class="fb correct">✅ The basement membrane is the real filter: its negative charge repels the negatively charged plasma proteins (plus size matters). Fenestrations are big; podocyte slits are gaps, not a solid wall.</div>
+    <div class="fb wrong">❌ Fenestrations are ~100 nm pores (big enough to let almost anything through). It's the charged basement membrane that does the selecting.</div>
+  </div>
+
+  <div class="q" data-a="multiplier">
+    <p>8. The loop of Henle builds the medulla salt gradient because…</p>
+    <label><input type="radio" name="q8" value="pump"> The ascending limb actively pumps Na⁺ out while the descending limb loses water — each cycle makes the filtrate saltier, multiplying the gradient</label>
+    <label><input type="radio" name="q8" value="evap"> Water evaporates from the descending limb, concentrating the filtrate</label>
+    <label><input type="radio" name="q8" value="adh"> ADH pumps salt into the medulla directly</label>
+    <div class="fb correct">✅ Countercurrent multiplier: ascending pumps Na⁺ out (active), that salt pulls water from the descending limb, the saltier filtrate lets the ascending pump even more — the gradient multiplies to ~1200 mOsm L⁻¹.</div>
+    <div class="fb wrong">❌ No evaporation in the kidney; ADH controls water permeability of the collecting duct, not medulla salt. The gradient is built by the loop's two opposite limbs.</div>
+  </div>
+
+  <div class="q" data-a="aquaporins">
+    <p>9. When you're dehydrated, ADH causes…</p>
+    <label><input type="radio" name="q9" value="aquaporins"> Aquaporin vesicles to fuse with collecting duct membranes → more water reabsorbed → concentrated, low-volume urine</label>
+    <label><input type="radio" name="q9" value="less"> Fewer aquaporins in the collecting duct → less water reabsorbed</label>
+    <label><input type="radio" name="q9" value="pct"> The PCT to stop reabsorbing glucose</label>
+    <div class="fb correct">✅ ADH (from the posterior pituitary, made in the hypothalamus) puts aquaporins into the collecting duct wall; water flows out into the salty medulla and is reabsorbed. More ADH = more aquaporins = concentrated urine.</div>
+    <div class="fb wrong">❌ Dehydration means MORE water retention, so MORE aquaporins. Fewer aquaporins = dilute urine (well-hydrated state).</div>
+  </div>
+
+  <div class="q" data-a="brain">
+    <p>10. Which organ's blood supply stays at ~20% of cardiac output in ALL states?</p>
+    <label><input type="radio" name="q10" value="muscle"> Skeletal muscle</label>
+    <label><input type="radio" name="q10" value="gut"> The gut</label>
+    <label><input type="radio" name="q10" value="brain"> The brain — it can't store fuel, so its supply never drops</label>
+    <div class="fb correct">✅ The brain always gets ~20% of cardiac output (asleep, awake, exercising). Muscle floods in exercise but rests in sleep; gut and kidneys throttle back when the body is busy.</div>
+    <div class="fb wrong">❌ Muscle and gut are exactly the organs that get rerouted depending on activity. The brain's ~20% is non-negotiable.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 10 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">D3.3.1</span><span>Homeostasis maintains the internal environment within preset limits (37°C, pH 7.4, ~5 mmol L⁻¹ glucose, ~300 mOsm); set points vs tolerance bands; failure = disease.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">D3.3.2</span><span>Negative feedback: stimulus → receptor → control centre → effector → response REVERSES the change, working from above and below the set point. Positive feedback amplifies (childbirth, ovulation, lactation) — not for homeostasis.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">D3.3.3</span><span>Blood glucose: insulin (β cells) lowers it (glycogen formation, uptake, faster respiration); glucagon (α cells) raises it (glycogen breakdown, glucose release). Antagonistic hormones from islets of Langerhans, acting on the liver; negative feedback loop.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">D3.3.4</span><span>Diabetes: Type 1 = autoimmune destruction of β cells, no insulin, injections (timing matters); Type 2 = receptor deficiency/response failure, lifestyle-linked, treated with diet + exercise. Diagnosis: fasting glucose, glucose in urine, tolerance test.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">D3.3.5</span><span>Thermoregulation: peripheral + central thermoreceptors → hypothalamus (37°C set point); cold → TRH (tripeptide) → TSH (glycoprotein) → thyroxin (contains iodine) → higher metabolic rate in liver/muscle/brain → heat.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">D3.3.6</span><span>Heat loss: vasodilation + sweating (up to 2 L/hr, latent heat of vaporisation). Heat gain: vasoconstriction, shivering, piloerection, brown-fat uncoupled respiration (no ATP, all heat). Arterioles change diameter — they don't move.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">D3.3.7</span><span>Kidneys: excretion (urea from deamination in the liver) + osmoregulation (osmolarity in osmol L⁻¹). Nephron: Bowman's + glomerulus, PCT, loop of Henle, DCT, collecting duct. ~180 L filtered/day, ~1.5 L urine.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">D3.3.8</span><span>Ultrafiltration: fenestrations (~100 nm) → negatively charged basement membrane (blocks plasma proteins) → podocyte slits. PCT reabsorbs ALL glucose + amino acids, ~80% water/ions (microvilli, tight junctions, mitochondria; Na⁺ cotransport).</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">D3.3.9</span><span>Loop of Henle: descending loses water (salts stay); ascending pumps Na⁺ out actively (water stays); countercurrent multiplier builds medulla gradient 300 → ~1200 mOsm L⁻¹; vasa recta preserves it.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">D3.3.10-11</span><span>ADH: osmoreceptors in hypothalamus → posterior pituitary releases ADH → aquaporins fuse into collecting duct → concentrated urine; low ADH → dilute. Blood routing: arterioles/sphincters/shunts; muscle floods in exercise, gut/kidneys throttle; brain ~20% always.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) D3.3 chapter + IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='d33-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
