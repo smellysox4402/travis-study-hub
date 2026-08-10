@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>THE CONDUCTOR'S DESK — C3.1 Integration of Body Systems · Bio HL</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE CONDUCTOR</a>
+  <a href="#act2">ACT 2 · THREE CHANNELS</a>
+  <a href="#act3">ACT 3 · THE DJ BOOTH</a>
+  <a href="#act4">ACT 4 · THE BACK OFFICE</a>
+  <a href="#act5">ACT 5 · WIRED MICS</a>
+  <a href="#act6">ACT 6 · CABLE BUNDLES</a>
+  <a href="#act7">ACT 7 · PAIN EXPRESS</a>
+  <a href="#act8">ACT 8 · FLOOR MANAGER</a>
+  <a href="#act9">ACT 9 · NIGHT SHIFT</a>
+  <a href="#act10">ACT 10 · OVERDRIVE</a>
+  <a href="#act11">ACT 11 · CONTROL ROOM</a>
+  <a href="#act12">ACT 12 · AUTO-PILOTS</a>
+  <a href="#act13">ACT 13 · GREEN ROOM</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/11</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Physiology · SL + AHL · C3.1.1 – C3.1.23</div>
+  <h1>THE CONDUCTOR'S DESK</h1>
+  <p class="sub">IB Biology HL · C3.1 Integration of Body Systems (SL + AHL)</p>
+  <p class="sub">Your body is one club run by a head conductor. The <b>brain</b> is the DJ and manager at the desk, <b>nerves</b> are the wired mics that carry a signal straight to one speaker, <b>hormones</b> are radio signals that broadcast to anyone tuned in, and <b>blood</b> is the roadie crew hauling fuel, oxygen and rubbish between every room.</p>
+  <div class="badges">
+    <span class="badge">SL + AHL</span>
+    <span class="badge ahl">23 statements</span>
+    <span class="badge">Brain · Nerves · Hormones</span>
+    <span class="badge">Blood · Phytohormones</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · THE CONDUCTOR ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">C3.1.1 – C3.1.2</div>
+  <h2>THE CONDUCTOR</h2>
+  <p class="aim">System integration = subsystems working together so the whole organism performs its overall function — and the body is built as a hierarchy of smaller subsystems inside bigger ones.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎛️</div>
+    <div class="body">
+      <h3>One club, many rooms, one conductor</h3>
+      <p class="aka">system integration · subsystems · hierarchy · emergent properties</p>
+      <p><span class="accent">System integration</span> is the coordination of the component parts of a body so they work together to perform an overall function. A cheetah is only a lethal hunter because its <span class="cyan">skeletal, muscular, respiratory and circulatory systems</span> all fire in sequence — study any single system alone and you can't predict the sprint. That's an <span class="cyan">emergent property</span>: the whole does something no part can do.</p>
+      <p>Integration is <span class="accent">hierarchical</span>: organelles are components of cells, cells of tissues, tissues of organs, organs of organ systems, and organ systems of the whole organism. Failure of even one small group of cells can kill the organism — kidney failure kills the whole club, not just the kidney. In humans, eleven organ systems are integrated this way.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="hierarchy ladder of body subsystems: organelles inside cells, cells forming tissues, tissues forming organs, organs forming organ systems, organ systems forming the whole organism, with a note that the cheetah sprint emerges only when all systems integrate">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CONDUCTOR — HIERARCHY OF SUBSYSTEMS</text>
+      <!-- ladder rungs -->
+      <rect x="230" y="52" width="200" height="38" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="68" fill="#ff2ec4" font-size="11.5" font-weight="800" text-anchor="middle">ORGANISM</text>
+      <text x="330" y="82" fill="#b9a3d6" font-size="9.5" text-anchor="middle">the whole club — cheetah sprinting</text>
+
+      <rect x="230" y="110" width="200" height="38" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="126" fill="#a855f7" font-size="11.5" font-weight="800" text-anchor="middle">ORGAN SYSTEMS</text>
+      <text x="330" y="140" fill="#b9a3d6" font-size="9.5" text-anchor="middle">11 in humans · e.g. circulatory</text>
+
+      <rect x="230" y="168" width="200" height="38" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="184" fill="#fbbf24" font-size="11.5" font-weight="800" text-anchor="middle">ORGANS</text>
+      <text x="330" y="198" fill="#b9a3d6" font-size="9.5" text-anchor="middle">groups of tissues · e.g. kidney</text>
+
+      <rect x="230" y="226" width="200" height="38" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="242" fill="#22d3ee" font-size="11.5" font-weight="800" text-anchor="middle">TISSUES</text>
+      <text x="330" y="256" fill="#b9a3d6" font-size="9.5" text-anchor="middle">groups of cells · sometimes 2+ types</text>
+
+      <rect x="230" y="284" width="200" height="38" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="300" fill="#4ade80" font-size="11.5" font-weight="800" text-anchor="middle">CELLS</text>
+      <text x="330" y="314" fill="#b9a3d6" font-size="9.5" text-anchor="middle">organelles are their components</text>
+
+      <!-- up arrows between rungs -->
+      <path d="M 330 90 L 330 106" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 330 148 L 330 164" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 330 206 L 330 222" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 330 264 L 330 280" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <!-- side notes -->
+      <text x="60" y="200" fill="#ff2ec4" font-size="10.5" font-weight="700" text-anchor="middle">EMERGENT PROPERTY</text>
+      <text x="60" y="216" fill="#b9a3d6" font-size="9.5" text-anchor="middle">sprint speed can't be</text>
+      <text x="60" y="230" fill="#b9a3d6" font-size="9.5" text-anchor="middle">predicted from one system</text>
+      <text x="600" y="200" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">FRAGILE CLUB</text>
+      <text x="600" y="216" fill="#b9a3d6" font-size="9.5" text-anchor="middle">one failing cell group</text>
+      <text x="600" y="230" fill="#b9a3d6" font-size="9.5" text-anchor="middle">(kidney) can kill the organism</text>
+      <text x="330" y="346" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Each level is a subsystem of the level above — integration runs both ways</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — The hierarchy ladder: organelles → cells → tissues → organs → organ systems → organism. Integration means each level's parts cooperate so the level above can do its overall job — and a single broken component can bring the whole club down.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag p">C3.1.1</div>
+      <h4>System integration 🎛️</h4>
+      <p>Component parts of the body are coordinated so the whole performs an overall function. Example: cheetah hunting needs skeleton + muscle + respiration + circulation working as one.</p>
+    </div>
+    <div class="card">
+      <div class="tag v">C3.1.2</div>
+      <h4>Hierarchy of subsystems 🪜</h4>
+      <p>Organelles → cells → tissues → organs → organ systems → organism. Tissues can contain more than one cell type (e.g. alveolar type 1 + type 2 cells in the lungs).</p>
+    </div>
+    <div class="card">
+      <div class="tag g">FRAGILITY</div>
+      <h4>Weakest link 💥</h4>
+      <p>Because subsystems depend on each other, failure of a single group of cells (kidney failure, heart failure) threatens the whole organism — no system is an island.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "integration" questions want a <b>specific example of coordination between systems</b> — e.g. during a sprint, the nervous system signals muscles (Act 5), the heart speeds up (Act 12), ventilation rises (Act 12) and epinephrine redirects blood (Act 10). Name at least two systems working together, not just one organ.</div>
+</section>
+<!-- ══════════════════════ ACT 2 · THREE CHANNELS ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">C3.1.3</div>
+  <h2>THE THREE CHANNELS</h2>
+  <p class="aim">The conductor talks to the club through three channels: nerves (wired mics), hormones (radio signals) and blood (roadies hauling gear). Each has its own speed, reach and job.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎙️</div>
+    <div class="body">
+      <h3>Wired mics, radio signals and roadies</h3>
+      <p class="aka">nervous signalling · hormonal signalling · blood transport · effectors</p>
+      <p><span class="accent">Nervous signalling</span> is the wired mic: electrical impulses travel along neurons directly to one specific target — a muscle or gland — in <span class="cyan">milliseconds</span>. <span class="accent">Hormonal signalling</span> is the radio broadcast: chemical messengers travel in the bloodstream and reach <span class="cyan">every cell</span>, but only cells with the matching receptor (tuned-in listeners) respond. It's slower — seconds to minutes — but lasts longer and reaches everywhere.</p>
+      <p>The third channel is <span class="accent">blood transport itself</span>: the roadie crew. Blood carries materials (glucose, oxygen, amino acids) and energy between organs, and removes carbon dioxide and other wastes. Production-line systems like the digestive, gas-exchange, urinary and reproductive systems all plug into the blood to deliver or collect goods. Every system in the club is wired into all three channels at once.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three communication channels diagram: nervous signalling as a wired microphone from brain directly to a muscle, hormonal signalling as radio waves broadcast from a gland through the blood to cells with receptors, blood transport as a truck carrying glucose and oxygen while removing carbon dioxide">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE THREE CHANNELS — HOW THE CONDUCTOR TALKS</text>
+      <!-- brain centre -->
+      <rect x="250" y="52" width="160" height="52" rx="12" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="330" y="72" fill="#ff2ec4" font-size="12" font-weight="900" text-anchor="middle">THE CONDUCTOR</text>
+      <text x="330" y="90" fill="#b9a3d6" font-size="9.5" text-anchor="middle">brain · DJ + manager</text>
+
+      <!-- channel 1: nervous (wired mic) -->
+      <path d="M 250 78 L 120 78" stroke="#22d3ee" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="185" y="68" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">WIRED MIC · nervous</text>
+      <rect x="20" y="140" width="170" height="64" rx="10" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="105" y="160" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">MUSCLE / GLAND</text>
+      <text x="105" y="176" fill="#b9a3d6" font-size="9.5" text-anchor="middle">one target, one message</text>
+      <text x="105" y="192" fill="#b9a3d6" font-size="9.5" text-anchor="middle">milliseconds · precise</text>
+
+      <!-- channel 2: hormonal (radio) -->
+      <rect x="250" y="160" width="160" height="52" rx="12" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="330" y="180" fill="#a855f7" font-size="12" font-weight="900" text-anchor="middle">GLAND</text>
+      <text x="330" y="198" fill="#b9a3d6" font-size="9.5" text-anchor="middle">broadcasts a hormone</text>
+      <path d="M 330 212 C 330 260 160 250 150 300" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 330 212 C 330 280 500 260 510 300" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+      <text x="330" y="248" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">RADIO SIGNAL · hormonal</text>
+      <text x="330" y="264" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reaches every cell —</text>
+      <text x="330" y="278" fill="#b9a3d6" font-size="9.5" text-anchor="middle">only tuned-in receptors respond</text>
+      <circle cx="150" cy="320" r="16" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="150" y="317" fill="#a855f7" font-size="8.5" text-anchor="middle">tuned</text>
+      <text x="150" y="328" fill="#a855f7" font-size="8.5" text-anchor="middle">cell</text>
+      <circle cx="510" cy="320" r="16" fill="rgba(168,85,247,.06)" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="510" y="317" fill="#b9a3d6" font-size="8" text-anchor="middle">ignores</text>
+      <text x="510" y="328" fill="#b9a3d6" font-size="8" text-anchor="middle">signal</text>
+
+      <!-- channel 3: blood (roadies) -->
+      <rect x="440" y="52" width="200" height="90" rx="12" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="540" y="72" fill="#4ade80" font-size="11.5" font-weight="900" text-anchor="middle">BLOOD · the roadies</text>
+      <text x="540" y="90" fill="#b9a3d6" font-size="9.5" text-anchor="middle">carries glucose · O₂ · amino acids</text>
+      <text x="540" y="106" fill="#b9a3d6" font-size="9.5" text-anchor="middle">+ energy between organs</text>
+      <text x="540" y="122" fill="#b9a3d6" font-size="9.5" text-anchor="middle">hauls away CO₂ + wastes</text>
+      <path d="M 540 142 L 540 190" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="580" y="170" fill="#4ade80" font-size="9.5" text-anchor="middle">to every room</text>
+
+      <!-- bottom note -->
+      <text x="330" y="366" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Nerves = fast, focused · Hormones = slow, widespread · Blood = transport for both + everything else</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — Three channels, three speeds. Nervous: wired, millisecond, one target. Hormonal: broadcast via blood, slower, but any cell with the receptor can respond. Blood: the physical transport system that moves materials, energy and the hormones themselves.</div>
+  </div>
+
+  <table>
+    <tr><th></th><th>Nervous signalling</th><th>Hormonal signalling</th><th>Blood transport</th></tr>
+    <tr><td>Signal</td><td>Electrical impulses along neurons</td><td>Chemical messengers (hormones) in blood</td><td>Physical movement of materials</td></tr>
+    <tr><td>Speed</td><td>Very fast — milliseconds</td><td>Slower — seconds to minutes</td><td>Fast (circulation) but bulk</td></tr>
+    <tr><td>Reach</td><td>One specific neuron → one target</td><td>Widespread — but only receptor cells respond</td><td>All organs via vessels</td></tr>
+    <tr><td>Duration</td><td>Short-lived response</td><td>Long-lasting until hormone is broken down</td><td>Continuous</td></tr>
+    <tr><td>Effectors</td><td>Muscles and glands</td><td>Any tissue with matching receptors</td><td>— (support channel)</td></tr>
+  </table>
+
+  <div class="exam"><b>Exam gold:</b> the classic comparison question asks "explain why hormonal responses are slower but longer-lasting than nervous ones." Answer: hormones must <b>diffuse into the blood, circulate to target cells and bind receptors</b> (slow), but they <b>persist until metabolised</b> (long). Nervous impulses are <b>instant and stop when the signal stops</b>.</div>
+</section>
+
+<!-- ══════════════════════ ACT 3 · THE DJ BOOTH ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">C3.1.4</div>
+  <h2>THE DJ BOOTH</h2>
+  <p class="aim">The brain is the central integration organ — every sensory input lands on the desk, gets processed, some of it is stored as memory, and instructions go back out to muscles and glands.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧠</div>
+    <div class="body">
+      <h3>All inputs in, all instructions out</h3>
+      <p class="aka">sensory receptors · cerebrum · memory · learning · decision making</p>
+      <p>The brain receives information from <span class="accent">sensory receptors</span> — not just the sense organs in the head (eyes, ears, nose, tongue, skin) but receptors buried inside other organs too, like <span class="cyan">pressure receptors in blood vessel walls</span>. The brain <span class="cyan">processes</span> this information, <span class="cyan">stores</span> some of it as memory, and sends <span class="cyan">instructions to muscles and glands</span>.</p>
+      <p>Learning is essential for memory — you can't store what you never learned. The <span class="accent">cerebrum</span>, the folded upper part of the brain, is where memory and learning live. Processing the input → deciding → signalling effectors: that's the DJ deciding which track to play next, based on what the crowd (receptors) is telling him.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="brain as DJ booth integration diagram: sensory inputs from eye, ear, skin, taste, smell and internal pressure receptors feed into the brain, which processes, stores memory and sends instructions out to muscles and glands">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE DJ BOOTH — BRAIN AS INTEGRATION CENTRE</text>
+      <!-- inputs -->
+      <rect x="30" y="60" width="150" height="34" rx="9" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="105" y="81" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">👁 EYES · light</text>
+      <rect x="30" y="106" width="150" height="34" rx="9" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="105" y="127" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">👂 EARS · sound</text>
+      <rect x="30" y="152" width="150" height="34" rx="9" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="105" y="173" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">👃👅 NOSE · TONGUE</text>
+      <rect x="30" y="198" width="150" height="34" rx="9" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="105" y="219" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">🖐 SKIN · touch / temp</text>
+      <rect x="30" y="244" width="150" height="44" rx="9" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="105" y="262" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">🫀 INTERNAL</text>
+      <text x="105" y="278" fill="#b9a3d6" font-size="9" text-anchor="middle">pressure receptors in vessels</text>
+
+      <!-- arrows in -->
+      <path d="M 180 77 L 250 77" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 180 123 L 250 123" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 180 169 L 250 169" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 180 215 L 250 215" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 180 266 L 250 266" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+
+      <!-- brain -->
+      <ellipse cx="385" cy="170" rx="95" ry="92" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="385" y="140" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">BRAIN</text>
+      <text x="385" y="158" fill="#b9a3d6" font-size="9.5" text-anchor="middle">processes the input</text>
+      <text x="385" y="174" fill="#b9a3d6" font-size="9.5" text-anchor="middle">stores memory (cerebrum)</text>
+      <text x="385" y="190" fill="#b9a3d6" font-size="9.5" text-anchor="middle">makes decisions</text>
+      <text x="385" y="206" fill="#b9a3d6" font-size="9.5" text-anchor="middle">learning → memory</text>
+
+      <!-- memory box -->
+      <rect x="300" y="272" width="170" height="34" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="385" y="293" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">MEMORY STORE · cerebrum</text>
+      <path d="M 385 262 L 385 268" stroke="#fbbf24" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <!-- outputs -->
+      <rect x="500" y="106" width="140" height="40" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="570" y="123" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">MUSCLES</text>
+      <text x="570" y="138" fill="#b9a3d6" font-size="9" text-anchor="middle">contract</text>
+      <rect x="500" y="170" width="140" height="40" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="570" y="187" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">GLANDS</text>
+      <text x="570" y="202" fill="#b9a3d6" font-size="9" text-anchor="middle">secrete</text>
+      <path d="M 480 126 L 496 126" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 480 190 L 496 190" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+
+      <!-- top note -->
+      <text x="330" y="50" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Sensory receptors → brain processes → stores / decides → instructions out to effectors</text>
+      <text x="330" y="342" fill="#b9a3d6" font-size="10.5" text-anchor="middle">The cerebrum is the folded upper part of the brain — the seat of learning and memory</text>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — The DJ booth: information flows in from external sense organs AND internal receptors (e.g. pressure receptors in blood vessel walls), the brain integrates it, stores what matters, and sends instructions to muscles and glands. Learning is the door into memory.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> "central integration" means the brain <b>combines many inputs at once</b> — it's not a reflex relay, it's a decision desk. And memory requires learning first: no learning, nothing to store.</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 · THE BACK OFFICE ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">C3.1.5</div>
+  <h2>THE BACK OFFICE</h2>
+  <p class="aim">The spinal cord is the back office that handles unconscious business — reflexes and automatic jobs — so the DJ booth upstairs doesn't have to think about everything.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🗄️</div>
+    <div class="body">
+      <h3>Conscious vs unconscious control</h3>
+      <p class="aka">CNS · grey matter · white matter · reflex · voluntary vs involuntary</p>
+      <p>The <span class="accent">central nervous system (CNS)</span> = brain + spinal cord. The spinal cord sits in the vertebral column and connects to the body via <span class="cyan">31 pairs of spinal nerves</span>. In cross-section: <span class="cyan">white matter</span> outside (myelinated axons carrying signals to and from the brain) and <span class="cyan">grey matter</span> inside (cell bodies of motor neurons + interneurons, packed with synapses).</p>
+      <p>The spinal cord <span class="accent">coordinates unconscious processes</span> — especially reflexes — which are faster because the signal never travels up to the brain and back. <span class="cyan">Conscious control</span> happens only when you're awake, is voluntary, uses striated (skeletal) muscle, and is coordinated by the cerebral hemispheres. <span class="cyan">Unconscious control</span> runs awake or asleep, is involuntary, and drives gland secretion + smooth muscle contraction. Swallowing starts consciously (tongue push) but becomes unconscious once food hits the pharynx; vomiting is unconscious (abdominal muscles, not gut-wall muscle).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="spinal cord cross section and conscious versus unconscious control diagram: grey matter butterfly inside white matter, 31 pairs of spinal nerves, conscious voluntary control via cerebral hemispheres for striated muscle when awake, unconscious control for reflexes and smooth muscle and glands">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE BACK OFFICE — SPINAL CORD</text>
+      <!-- cord cross section -->
+      <circle cx="160" cy="190" r="86" fill="rgba(168,85,247,.06)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="160" y="66" fill="#a855f7" font-size="10" font-weight="700" text-anchor="middle">WHITE MATTER</text>
+      <text x="160" y="82" fill="#b9a3d6" font-size="8.5" text-anchor="middle">myelinated axons to/from brain</text>
+      <!-- grey butterfly -->
+      <path d="M 160 190 C 120 150 90 160 78 190 C 90 220 120 230 160 190 Z" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/>
+      <path d="M 160 190 C 200 150 230 160 242 190 C 230 220 200 230 160 190 Z" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="160" y="185" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">GREY MATTER</text>
+      <text x="160" y="200" fill="#b9a3d6" font-size="8.5" text-anchor="middle">motor neuron cell bodies</text>
+      <text x="160" y="214" fill="#b9a3d6" font-size="8.5" text-anchor="middle">+ interneurons + synapses</text>
+      <!-- spinal nerves -->
+      <line x1="74" y1="150" x2="30" y2="120" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="74" y1="230" x2="30" y2="260" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="246" y1="150" x2="290" y2="120" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="246" y1="230" x2="290" y2="260" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="30" y="105" fill="#22d3ee" font-size="9" text-anchor="middle">spinal</text>
+      <text x="30" y="117" fill="#22d3ee" font-size="9" text-anchor="middle">nerves</text>
+      <text x="290" y="93" fill="#22d3ee" font-size="9" text-anchor="middle">31 pairs</text>
+      <!-- conscious box -->
+      <rect x="380" y="70" width="250" height="110" rx="12" fill="rgba(74,222,128,.06)" stroke="#4ade80" stroke-width="2"/>
+      <text x="505" y="92" fill="#4ade80" font-size="12" font-weight="900" text-anchor="middle">CONSCIOUS</text>
+      <text x="505" y="110" fill="#b9a3d6" font-size="9.5" text-anchor="middle">only while awake · voluntary</text>
+      <text x="505" y="126" fill="#b9a3d6" font-size="9.5" text-anchor="middle">striated (skeletal) muscle</text>
+      <text x="505" y="142" fill="#b9a3d6" font-size="9.5" text-anchor="middle">coordinated by cerebral hemispheres</text>
+      <text x="505" y="160" fill="#b9a3d6" font-size="9.5" text-anchor="middle">e.g. standing up, writing</text>
+      <!-- unconscious box -->
+      <rect x="380" y="210" width="250" height="110" rx="12" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="505" y="232" fill="#22d3ee" font-size="12" font-weight="900" text-anchor="middle">UNCONSCIOUS</text>
+      <text x="505" y="250" fill="#b9a3d6" font-size="9.5" text-anchor="middle">awake or asleep · involuntary</text>
+      <text x="505" y="266" fill="#b9a3d6" font-size="9.5" text-anchor="middle">gland secretion + smooth muscle</text>
+      <text x="505" y="282" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reflexes coordinated by spinal cord</text>
+      <text x="505" y="300" fill="#b9a3d6" font-size="9.5" text-anchor="middle">e.g. reflexes, peristalsis (Act 12)</text>
+      <!-- brain link -->
+      <path d="M 246 120 C 320 110 340 120 376 120" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ah)" fill="none"/>
+      <text x="310" y="108" fill="#4ade80" font-size="9" text-anchor="middle">brain coordinates voluntary moves</text>
+      <!-- bottom note -->
+      <text x="330" y="366" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Reflexes are fast because the spinal cord decides — no detour up to the brain</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — The back office. The spinal cord's grey matter (motor neuron cell bodies + interneurons + synapses) coordinates unconscious reflexes; white matter carries signals to and from the brain. Conscious control = awake, voluntary, striated muscle, cerebral hemispheres. Unconscious = involuntary, glands + smooth muscle, works asleep.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag gr">CONSCIOUS</div>
+      <h4>Front-of-house control 🎤</h4>
+      <p>Only when awake · voluntary · striated (skeletal) muscle · coordinated by the cerebral hemispheres. Examples: standing up, choosing to speak, deliberate swallowing start.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">UNCONSCIOUS</div>
+      <h4>Back-office control 🗄️</h4>
+      <p>Awake or asleep · involuntary · gland secretion + smooth muscle contraction · reflexes coordinated by the spinal cord. Examples: pain reflex (Act 7), heart rate (Act 12).</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> swallowing is the classic boundary case — it <b>begins voluntarily</b> (tongue pushes food back, striated muscle) then becomes <b>unconscious</b> once touch receptors in the pharynx fire and the brainstem takes over. Vomiting uses abdominal muscles, not gut-wall muscle — the gut's own muscle would push the wrong way.</div>
+</section>
+<!-- ══════════════════════ ACT 5 · WIRED MICS ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">C3.1.6 – C3.1.7</div>
+  <h2>THE WIRED MICS</h2>
+  <p class="aim">Sensory neurons carry input from receptors into the CNS (the mics picking up the crowd); motor neurons carry output from the cerebral hemispheres to muscles (the speakers). One wire in, one wire out.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔌</div>
+    <div class="body">
+      <h3>Sensory in · motor out</h3>
+      <p class="aka">sensory neuron · afferent · motor neuron · efferent · receptor · effector · cerebral hemispheres</p>
+      <p><span class="accent">Sensory neurons</span> (afferent = "carrying in") convey impulses from <span class="cyan">receptor cells or nerve endings</span> to the CNS. Receptors come in all flavours: nerve endings in the skin for touch and heat, specialised receptor cells like the rods and cones of the retina, plus internal monitors — stretch receptors in muscles, baroreceptors in artery walls, chemoreceptors in blood vessel walls. A sensory axon can be nearly a metre long (big toe → spinal cord).</p>
+      <p><span class="accent">Motor neurons</span> (efferent = "carrying out") convey impulses from the CNS to muscles. The <span class="cyan">primary motor cortex</span> in the cerebral hemispheres starts the signal; it travels down to a motor neuron whose cell body and dendrites sit in the <span class="cyan">grey matter</span> of the spinal cord, and whose axon synapses with a second motor neuron that reaches one specific muscle. The impulse makes muscle fibres contract — or gland cells secrete. Voluntary moves like standing up run this whole wire.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="sensory and motor pathway diagram: receptor in the foot sends signal up a sensory neuron to the spinal cord and brain, motor output from the cerebral hemispheres travels down motor neurons to skeletal muscle causing contraction">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">WIRED MICS — SENSORY IN, MOTOR OUT</text>
+      <!-- brain -->
+      <ellipse cx="330" cy="86" rx="80" ry="44" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="330" y="84" fill="#ff2ec4" font-size="11" font-weight="900" text-anchor="middle">CEREBRAL HEMISPHERES</text>
+      <text x="330" y="100" fill="#b9a3d6" font-size="9" text-anchor="middle">primary motor cortex starts</text>
+      <text x="330" y="113" fill="#b9a3d6" font-size="9" text-anchor="middle">the voluntary signal</text>
+
+      <!-- spinal cord -->
+      <rect x="305" y="160" width="50" height="130" rx="10" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="185" fill="#a855f7" font-size="9" font-weight="800" text-anchor="middle">SPINAL</text>
+      <text x="330" y="197" fill="#a855f7" font-size="9" font-weight="800" text-anchor="middle">CORD</text>
+      <text x="330" y="236" fill="#b9a3d6" font-size="8.5" text-anchor="middle">grey matter:</text>
+      <text x="330" y="249" fill="#b9a3d6" font-size="8.5" text-anchor="middle">motor neuron</text>
+      <text x="330" y="262" fill="#b9a3d6" font-size="8.5" text-anchor="middle">cell bodies</text>
+
+      <!-- sensory side -->
+      <path d="M 130 300 L 130 240 C 130 220 250 200 300 200" stroke="#22d3ee" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <rect x="40" y="300" width="150" height="40" rx="10" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="115" y="316" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">RECEPTOR (foot)</text>
+      <text x="115" y="332" fill="#b9a3d6" font-size="8.5" text-anchor="middle">nerve ending / receptor cell</text>
+      <text x="180" y="282" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">SENSORY NEURON · afferent</text>
+      <text x="180" y="296" fill="#b9a3d6" font-size="9" text-anchor="middle">input → CNS · axon up to ~1 m</text>
+
+      <!-- motor side -->
+      <path d="M 355 200 C 400 200 480 220 500 300" stroke="#4ade80" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <path d="M 355 230 L 400 230" stroke="#4ade80" stroke-width="3" fill="none"/>
+      <text x="470" y="250" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">MOTOR NEURON · efferent</text>
+      <text x="470" y="264" fill="#b9a3d6" font-size="9" text-anchor="middle">output → muscle</text>
+      <rect x="440" y="300" width="160" height="40" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="520" y="316" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">SKELETAL MUSCLE</text>
+      <text x="520" y="332" fill="#b9a3d6" font-size="8.5" text-anchor="middle">fibres contract · or gland secretes</text>
+
+      <!-- descending path from brain -->
+      <path d="M 330 130 L 330 156" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="372" y="148" fill="#ff2ec4" font-size="9" text-anchor="middle">↓ motor output</text>
+
+      <!-- ascending note -->
+      <text x="330" y="346" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Sensory = in (afferent) · Motor = out (efferent) · two neurons relay the voluntary motor signal</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — One wire in, one wire out. Sensory neurons carry receptor input to the CNS; the motor cortex in the cerebral hemispheres sends output through motor neurons to specific skeletal muscles (or glands). Sensory axons can stretch nearly a metre from toe to spinal cord.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag">SENSORY · C3.1.6</div>
+      <h4>Input wire 🎙️</h4>
+      <p>Receptors: skin nerve endings (touch, heat) · specialised cells (rods/cones) · internal: stretch receptors in muscles, baroreceptors in artery walls, chemoreceptors in vessel walls. 12 cranial + 31 spinal nerve pairs.</p>
+    </div>
+    <div class="card">
+      <div class="tag gr">MOTOR · C3.1.7</div>
+      <h4>Output wire 🔊</h4>
+      <p>Primary motor cortex (cerebral hemispheres) → motor neuron in spinal grey matter → second motor neuron → one specific muscle. Impulse = contraction, or secretion from a gland.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> learn the direction words — sensory neurons are <b>afferent</b> (arriving), motor neurons are <b>efferent</b> (exiting). And motor control is a <b>two-neuron relay</b>: the signal crosses a synapse in the spinal cord grey matter before reaching the muscle — that's the synapse an exam diagram will ask you to label.</div>
+</section>
+
+<!-- ══════════════════════ ACT 6 · CABLE BUNDLES ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">C3.1.8</div>
+  <h2>THE CABLE BUNDLES</h2>
+  <p class="aim">Nerves are bundles of nerve fibres wrapped in a protective sheath — the club's cable looms. Some fibres are insulated (myelinated) for speed, some run bare.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧵</div>
+    <div class="body">
+      <h3>Fibres, sheaths and insulation</h3>
+      <p class="aka">nerve fibre · protective sheath · myelinated · unmyelinated · myelin sheath · axon</p>
+      <p>A <span class="accent">nerve</span> is a bundle of <span class="cyan">nerve fibres</span> (axons) enclosed in a <span class="cyan">protective sheath</span>. Sizes vary wildly: the sciatic nerve in the thigh is about <span class="gold">20 mm wide</span>; the optic nerve packs <span class="gold">770,000 to 1.7 million fibres</span>; small nerves have fewer than 100. Most nerves carry <b>both sensory and motor fibres</b> — but the optic nerve is purely sensory and the oculomotor nerve purely motor.</p>
+      <p>In a transverse section you can see the difference: <span class="accent">myelinated fibres</span> show a dark ring of <span class="cyan">myelin sheath</span> around the axon (an insulator that speeds up impulses), while <span class="accent">unmyelinated fibres</span> have no sheath and conduct more slowly. The myelin comes from Schwann cells wrapping the axon.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="transverse section of a nerve showing the protective sheath around a bundle of nerve fibres, with myelinated fibres shown as dark rings around axons and unmyelinated fibres shown as plain circles, plus a legend comparing conduction speed">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CABLE BUNDLES — TRANSVERSE SECTION OF A NERVE</text>
+      <!-- outer sheath -->
+      <circle cx="250" cy="200" r="120" fill="rgba(168,85,247,.05)" stroke="#a855f7" stroke-width="3"/>
+      <text x="250" y="86" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">PROTECTIVE SHEATH</text>
+      <text x="250" y="102" fill="#b9a3d6" font-size="9" text-anchor="middle">wraps the whole bundle</text>
+      <!-- myelinated fibres -->
+      <circle cx="210" cy="180" r="24" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="6"/>
+      <circle cx="210" cy="180" r="12" fill="rgba(34,211,238,.25)" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="280" cy="160" r="22" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="5.5"/>
+      <circle cx="280" cy="160" r="11" fill="rgba(34,211,238,.25)" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="240" cy="240" r="20" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="5"/>
+      <circle cx="240" cy="240" r="10" fill="rgba(34,211,238,.25)" stroke="#22d3ee" stroke-width="2"/>
+      <!-- unmyelinated fibres -->
+      <circle cx="310" cy="220" r="14" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="190" cy="230" r="12" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="330" cy="180" r="10" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <!-- labels -->
+      <text x="120" y="300" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">MYELINATED</text>
+      <text x="120" y="316" fill="#b9a3d6" font-size="9" text-anchor="middle">dark myelin ring around axon</text>
+      <text x="120" y="330" fill="#b9a3d6" font-size="9" text-anchor="middle">insulated → FAST conduction</text>
+      <text x="390" y="300" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">UNMYELINATED</text>
+      <text x="390" y="316" fill="#b9a3d6" font-size="9" text-anchor="middle">no sheath around axon</text>
+      <text x="390" y="330" fill="#b9a3d6" font-size="9" text-anchor="middle">SLOWER conduction</text>
+      <!-- facts -->
+      <text x="560" y="120" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">SIZE RANGE</text>
+      <text x="560" y="138" fill="#b9a3d6" font-size="9" text-anchor="middle">sciatic ~20 mm wide</text>
+      <text x="560" y="154" fill="#b9a3d6" font-size="9" text-anchor="middle">optic: 0.77 – 1.7 M fibres</text>
+      <text x="560" y="170" fill="#b9a3d6" font-size="9" text-anchor="middle">small nerves &lt; 100 fibres</text>
+      <text x="560" y="196" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">MIXED BUNDLES</text>
+      <text x="560" y="214" fill="#b9a3d6" font-size="9" text-anchor="middle">most nerves: sensory + motor</text>
+      <text x="560" y="230" fill="#b9a3d6" font-size="9" text-anchor="middle">optic = sensory only</text>
+      <text x="560" y="246" fill="#b9a3d6" font-size="9" text-anchor="middle">oculomotor = motor only</text>
+      <text x="330" y="366" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Myelin sheath = Schwann cell wrapping · speeds up impulse conduction</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — A nerve in cross-section: protective sheath outside, mixed fibres inside. Myelinated fibres show a dark myelin ring and conduct fast; unmyelinated fibres run bare and slower. Most nerves mix sensory and motor fibres; a few are single-purpose.</div>
+  </div>
+
+  <div class="tip"><b>Data question skill:</b> examiners love a photomicrograph of a nerve section with a scale bar. Read the <b>magnification</b> off the scale bar, count or measure the fibres, and use the ring pattern to distinguish myelinated (ring visible) from unmyelinated (no ring).</div>
+</section>
+
+<!-- ══════════════════════ ACT 7 · PAIN EXPRESS ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">C3.1.9</div>
+  <h2>THE PAIN EXPRESS</h2>
+  <p class="aim">The pain reflex is the fastest ride in the club: three neurons, one synapse short-cut in the spinal cord, and the foot is off the drawing pin before the brain even hears about it.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⚡</div>
+    <div class="body">
+      <h3>The reflex arc — minimum crew, maximum speed</h3>
+      <p class="aka">reflex arc · free sensory nerve ending · interneuron · grey matter · motor neuron · effector</p>
+      <p>A <span class="accent">reflex</span> is a rapid, involuntary response to a stimulus, wired with the <span class="cyan">fewest possible neurons</span>. Pain needs no special receptor cell — a <span class="cyan">free sensory nerve ending</span> in the skin does the job. The <span class="accent">pain reflex arc</span>: free nerve ending → <span class="cyan">sensory neuron</span> → <span class="cyan">single interneuron</span> (relay) in the grey matter of the spinal cord → <span class="cyan">motor neuron</span> → <span class="cyan">skeletal muscle</span> (the effector) contracts and the foot lifts off the sharp object.</p>
+      <p>The brain is <b>not</b> part of the circuit — that's why it's fast. You feel the pain <i>after</i> the foot has already moved. Some reflexes do involve the brain: pupil constriction in bright light is coordinated by the brain, not the cord. The whole sequence of cells is the <span class="accent">reflex arc</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="pain reflex arc diagram: drawing pin pierces skin, free sensory nerve ending detects pain, sensory neuron carries impulse into the spinal cord grey matter where a single interneuron relays to a motor neuron, motor neuron makes skeletal muscle contract so the foot lifts, brain receives the signal later">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE PAIN EXPRESS — REFLEX ARC</text>
+      <!-- pin + foot -->
+      <polygon points="70,120 90,120 80,170" fill="rgba(251,191,36,.4)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="80" y="108" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">PIN</text>
+      <rect x="40" y="170" width="90" height="26" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="85" y="187" fill="#fbbf24" font-size="9" text-anchor="middle">SKIN</text>
+      <text x="85" y="214" fill="#b9a3d6" font-size="8.5" text-anchor="middle">free sensory nerve ending</text>
+      <text x="85" y="228" fill="#b9a3d6" font-size="8.5" text-anchor="middle">= pain receptor</text>
+
+      <!-- spinal cord -->
+      <rect x="290" y="120" width="80" height="170" rx="12" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="144" fill="#a855f7" font-size="10" font-weight="900" text-anchor="middle">SPINAL</text>
+      <text x="330" y="158" fill="#a855f7" font-size="10" font-weight="900" text-anchor="middle">CORD</text>
+      <text x="330" y="196" fill="#ff2ec4" font-size="8.5" font-weight="800" text-anchor="middle">GREY MATTER</text>
+      <text x="330" y="210" fill="#b9a3d6" font-size="8.5" text-anchor="middle">single interneuron</text>
+      <text x="330" y="224" fill="#b9a3d6" font-size="8.5" text-anchor="middle">relays the signal</text>
+
+      <!-- sensory neuron -->
+      <path d="M 135 190 C 200 190 230 200 286 200" stroke="#22d3ee" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="210" y="180" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">SENSORY NEURON</text>
+      <text x="210" y="194" fill="#b9a3d6" font-size="8.5" text-anchor="middle">into grey matter</text>
+
+      <!-- interneuron -->
+      <circle cx="330" cy="280" r="16" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="277" fill="#ff2ec4" font-size="8" text-anchor="middle">INTER-</text>
+      <text x="330" y="288" fill="#ff2ec4" font-size="8" text-anchor="middle">NEURON</text>
+
+      <!-- motor neuron -->
+      <path d="M 374 280 C 440 280 470 300 500 330" stroke="#4ade80" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="455" y="270" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">MOTOR NEURON</text>
+      <text x="455" y="284" fill="#b9a3d6" font-size="8.5" text-anchor="middle">to effector</text>
+
+      <!-- muscle effector -->
+      <rect x="500" y="330" width="120" height="30" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="560" y="349" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">SKELETAL MUSCLE</text>
+      <text x="560" y="330" fill="#b9a3d6" font-size="9" text-anchor="middle">contracts → foot lifts ⬆</text>
+
+      <!-- brain detour note -->
+      <path d="M 330 120 C 330 60 120 60 120 90" stroke="#b9a3d6" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)" fill="none"/>
+      <text x="225" y="52" fill="#b9a3d6" font-size="9.5" text-anchor="middle">pain felt AFTER — brain not in the loop</text>
+
+      <!-- bottom -->
+      <text x="330" y="372" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Sensory → interneuron → motor = minimum crew for maximum speed</text>
+    </svg>
+    <div class="cap"><b>FIG 7</b> — The pain express. A free sensory nerve ending detects the pin; the sensory neuron enters the spinal cord grey matter, a single interneuron relays to a motor neuron, and skeletal muscle lifts the foot. Only three cells — the brain hears about it afterwards.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag">1</div>
+      <h4>Receptor 🎯</h4>
+      <p>Free sensory nerve ending in the skin — no separate receptor cell needed for pain or heat.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">2</div>
+      <h4>Relay 🧩</h4>
+      <p>Single interneuron in the grey matter of the spinal cord passes the signal straight across.</p>
+    </div>
+    <div class="card">
+      <div class="tag gr">3</div>
+      <h4>Effector 💪</h4>
+      <p>Motor neuron → skeletal muscle contracts → limb withdraws. Reflex arc complete.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "why is a reflex faster than a conscious response?" — the impulse only travels <b>sensory → interneuron → motor</b> in the spinal cord; a conscious response would need the extra <b>journey up to the brain and back</b>. Also know one counter-example: pupil constriction is a reflex <b>coordinated by the brain</b>, so not all reflexes bypass it.</div>
+</section>
+<!-- ══════════════════════ ACT 8 · FLOOR MANAGER ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">C3.1.10</div>
+  <h2>THE FLOOR MANAGER</h2>
+  <p class="aim">The cerebellum is the floor manager at the back of the venue: it doesn't decide which muscles work, but it coordinates their timing so every move is smooth and balanced.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🕺</div>
+    <div class="body">
+      <h3>Coordination, not decision</h3>
+      <p class="aka">cerebellum · coordination · balance · muscle tone · motor timing</p>
+      <p>The <span class="accent">cerebellum</span> ("little brain") sits below the cerebral hemispheres at the rear of the skull. Its job: <span class="cyan">coordinate skeletal muscle contraction and balance</span>. It does <b>not</b> decide which muscles contract — that's the motor cortex — but it <span class="cyan">fine-tunes the timing</span> of contractions so movements are smooth, precise and balanced.</p>
+      <p>Standing still, walking, riding a bike, typing without looking — all rely on the cerebellum quietly adjusting muscle timing. It regulates gait, maintains <span class="cyan">muscle tone</span> and keeps your balance, but it never initiates a contraction itself. Damage to it = clumsy, uncoordinated, off-balance movement (ataxia).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cerebellum coordination diagram: cerebellum at the rear base of the brain coordinates timing of skeletal muscle contractions and balance, receiving inputs from balance organs and muscles while motor cortex decides which muscles contract">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE FLOOR MANAGER — CEREBELLUM</text>
+      <!-- brain outline -->
+      <ellipse cx="330" cy="150" rx="140" ry="90" fill="rgba(168,85,247,.06)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="110" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">CEREBRAL HEMISPHERES</text>
+      <text x="330" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">decide WHICH muscles contract</text>
+      <text x="330" y="142" fill="#b9a3d6" font-size="9.5" text-anchor="middle">(primary motor cortex)</text>
+      <!-- cerebellum -->
+      <ellipse cx="330" cy="248" rx="95" ry="42" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="330" y="240" fill="#ff2ec4" font-size="12" font-weight="900" text-anchor="middle">CEREBELLUM</text>
+      <text x="330" y="258" fill="#b9a3d6" font-size="9.5" text-anchor="middle">fine-tunes TIMING of contractions</text>
+      <text x="330" y="274" fill="#b9a3d6" font-size="9.5" text-anchor="middle">balance · posture · muscle tone</text>
+      <!-- inputs -->
+      <text x="110" y="210" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">inputs:</text>
+      <text x="110" y="228" fill="#b9a3d6" font-size="9.5" text-anchor="middle">inner-ear balance organs</text>
+      <text x="110" y="244" fill="#b9a3d6" font-size="9.5" text-anchor="middle">muscle stretch receptors</text>
+      <path d="M 165 220 L 232 232" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <!-- outputs -->
+      <text x="545" y="210" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">output:</text>
+      <text x="545" y="228" fill="#b9a3d6" font-size="9.5" text-anchor="middle">timing corrections to</text>
+      <text x="545" y="244" fill="#b9a3d6" font-size="9.5" text-anchor="middle">skeletal muscles</text>
+      <path d="M 428 242 L 495 232" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <!-- examples -->
+      <text x="330" y="330" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">riding a bike · typing · standing still — smooth because the floor manager adjusts timing</text>
+      <text x="330" y="348" fill="#b9a3d6" font-size="9.5" text-anchor="middle">damage → clumsy, uncoordinated, off-balance (ataxia) · never initiates a contraction</text>
+    </svg>
+    <div class="cap"><b>FIG 8</b> — The floor manager at work. The motor cortex decides which muscles contract; the cerebellum receives input from balance organs and stretch receptors and fine-tunes the timing so movement stays smooth, precise and balanced. It coordinates — it never initiates.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the standard two-mark question: "what does the cerebellum do?" — <b>(1) coordinates skeletal muscle contraction and (2) maintains balance</b>. And the trap to avoid: it does <b>not</b> initiate contractions or make decisions — those belong to the motor cortex / cerebral hemispheres.</div>
+</section>
+
+<!-- ══════════════════════ ACT 9 · NIGHT SHIFT ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">C3.1.11</div>
+  <h2>THE NIGHT SHIFT</h2>
+  <p class="aim">The body runs on a ~24-hour internal clock. When the lights go down, the pineal gland broadcasts melatonin — the radio signal that tells every room it's time to sleep.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌙</div>
+    <div class="body">
+      <h3>Circadian rhythms, the SCN and melatonin</h3>
+      <p class="aka">circadian rhythm · SCN · hypothalamus · pineal gland · melatonin · 460–480 nm light</p>
+      <p><span class="accent">Circadian rhythms</span> are cycles of about <span class="cyan">24 hours</span> that persist even with no external cues — they're generated internally. The clock lives in the <span class="accent">suprachiasmatic nuclei (SCN)</span>, two small groups of cells in the hypothalamus. The SCN controls <span class="cyan">melatonin</span> secretion by the <span class="accent">pineal gland</span>: melatonin rises in the evening, peaks during the night and drops at dawn — and because the liver removes it rapidly, blood levels swing fast. High melatonin = drowsiness and sleep; falling melatonin = waking. It also helps drive the night-time drop in core body temperature.</p>
+      <p>Light keeps the clock on track: <span class="cyan">special retinal ganglion cells</span> detect light at <span class="gold">460–480 nm</span> (blue light) and signal the SCN to adjust melatonin to the day-night cycle. Without light cues the rhythm drifts to slightly longer than 24 hours — which is why jet lag and night shifts feel so rough. Babies only develop a regular day-night rhythm at about 3 months.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="circadian rhythm diagram: 24 hour timeline with day and night bands, melatonin curve rising in the evening peaking at night and falling at dawn, SCN clock in the hypothalamus controlling the pineal gland, blue light detected by retinal ganglion cells resets the clock">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE NIGHT SHIFT — CIRCADIAN RHYTHM</text>
+      <!-- day/night band -->
+      <rect x="60" y="70" width="540" height="24" rx="6" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="150" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">DAY ☀</text>
+      <rect x="390" y="70" width="120" height="24" rx="6" fill="rgba(168,85,247,.25)" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="450" y="86" fill="#a855f7" font-size="9" text-anchor="middle">NIGHT 🌙</text>
+      <rect x="510" y="70" width="90" height="24" rx="6" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="555" y="86" fill="#fbbf24" font-size="9" text-anchor="middle">DAY ☀</text>
+      <text x="60" y="62" fill="#b9a3d6" font-size="9" text-anchor="middle">morning</text>
+      <text x="330" y="62" fill="#b9a3d6" font-size="9" text-anchor="middle">evening</text>
+      <text x="600" y="62" fill="#b9a3d6" font-size="9" text-anchor="middle">dawn</text>
+      <!-- melatonin curve -->
+      <path d="M 60 300 C 150 300 200 300 230 300 C 280 300 330 150 390 130 C 450 110 480 170 510 230 C 540 290 570 300 600 300" fill="none" stroke="#22d3ee" stroke-width="3.5"/>
+      <circle cx="390" cy="130" r="5" fill="#22d3ee"/>
+      <text x="390" y="112" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">MELATONIN PEAK</text>
+      <text x="390" y="126" fill="#b9a3d6" font-size="8.5" text-anchor="middle">night · deep sleep</text>
+      <text x="205" y="318" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">rises at dusk → drowsy</text>
+      <text x="530" y="318" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">falls at dawn → wake</text>
+      <!-- clock chain -->
+      <rect x="60" y="140" width="150" height="52" rx="10" fill="rgba(255,46,196,.07)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="135" y="158" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">RETINAL GANGLION CELLS</text>
+      <text x="135" y="174" fill="#b9a3d6" font-size="8.5" text-anchor="middle">detect blue light 460–480 nm</text>
+      <path d="M 210 166 L 252 166" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <rect x="256" y="140" width="150" height="52" rx="10" fill="rgba(251,191,36,.07)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="331" y="158" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">SCN · HYPOTHALAMUS</text>
+      <text x="331" y="174" fill="#b9a3d6" font-size="8.5" text-anchor="middle">the internal ~24 h clock</text>
+      <path d="M 406 166 L 448 166" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <rect x="452" y="140" width="150" height="52" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="527" y="158" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">PINEAL GLAND</text>
+      <text x="527" y="174" fill="#b9a3d6" font-size="8.5" text-anchor="middle">secretes melatonin</text>
+      <!-- melatonin to curve -->
+      <path d="M 527 192 C 527 230 420 250 400 135" stroke="#4ade80" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah)" fill="none"/>
+      <!-- bottom -->
+      <text x="330" y="366" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Without light cues the rhythm runs slightly longer than 24 h — light resets it daily</text>
+    </svg>
+    <div class="cap"><b>FIG 9</b> — The night shift. Blue light (460–480 nm) hits retinal ganglion cells → SCN in the hypothalamus → pineal gland secretes melatonin. Melatonin climbs at dusk, peaks overnight (deep sleep + cooler core temperature) and is cleared fast by the liver at dawn — waking you up.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag">THE CLOCK</div>
+      <h4>SCN ⏰</h4>
+      <p>Two groups of cells in the hypothalamus. Generates the ~24 h rhythm internally — it keeps ticking even in constant light or darkness.</p>
+    </div>
+    <div class="card">
+      <div class="tag g">THE SIGNAL</div>
+      <h4>Melatonin 💤</h4>
+      <p>Secreted by the pineal gland. Rises in the evening, peaks at night, cleared rapidly by the liver at dawn. High = drowsy; falling = wake.</p>
+    </div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "PMS":</b> <b>P</b>ineal → <b>M</b>elatonin → <b>S</b>leep. And the exam favourite: the wavelength of light that resets the clock is <b>460–480 nm</b> (blue) — that's why screens before bed can delay sleep.</div>
+</section>
+
+<!-- ══════════════════════ ACT 10 · THE OVERDRIVE ══════════════════════ -->
+<section class="act" id="act10">
+  <div class="acttag">C3.1.12</div>
+  <h2>THE OVERDRIVE</h2>
+  <p class="aim">Adrenaline (epinephrine) is the club's emergency broadcast: one radio signal from the adrenal glands and the whole venue switches to fight-or-flight mode.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚀</div>
+    <div class="body">
+      <h3>Epinephrine: prepare for vigorous activity</h3>
+      <p class="aka">adrenaline · adrenal glands · adrenergic receptors · fight or flight · glycogen → glucose</p>
+      <p><span class="accent">Epinephrine</span> (adrenaline) is secreted by the <span class="cyan">adrenal glands</span>, perched above the kidneys. It binds <span class="cyan">adrenergic receptors</span> on target cells across the body — a radio broadcast with many tuned-in listeners. Its effects all prepare the body for <span class="gold">vigorous activity</span>:</p>
+      <ul class="clean">
+        <li><b>Fuel:</b> muscle glycogen → glucose for muscles; liver glycogen → glucose released into blood.</li>
+        <li><b>Air:</b> bronchi and bronchioles dilate (smooth muscle relaxes) → easier, faster ventilation.</li>
+        <li><b>Pump:</b> SAN speeds up → higher heart rate and cardiac output.</li>
+        <li><b>Routing:</b> arterioles to muscle and liver dilate (more blood); arterioles to gut, kidneys, skin and extremities constrict (less blood).</li>
+      </ul>
+      <p>Secretion is triggered by the brain — the amygdala spots danger, the hypothalamus signals the adrenals. That's why pre-race routines and nerves work: athletes deliberately raise their own epinephrine.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="epinephrine effects diagram: adrenal gland above the kidney secretes epinephrine into the blood, radio signal reaches heart to speed up, airways to dilate, muscle and liver to release glucose, and redirects blood flow away from gut kidney and skin toward muscle">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE OVERDRIVE — EPINEPHRINE BROADCAST</text>
+      <!-- adrenal + kidney -->
+      <ellipse cx="150" cy="170" rx="46" ry="30" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="150" y="166" fill="#fbbf24" font-size="10" font-weight="900" text-anchor="middle">ADRENAL</text>
+      <text x="150" y="180" fill="#fbbf24" font-size="10" font-weight="900" text-anchor="middle">GLAND</text>
+      <ellipse cx="150" cy="250" rx="52" ry="34" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="150" y="246" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">KIDNEY</text>
+      <text x="150" y="260" fill="#b9a3d6" font-size="8.5" text-anchor="middle">(gland sits on top)</text>
+      <!-- broadcast -->
+      <path d="M 196 170 C 260 170 260 120 330 120" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 196 170 C 280 220 300 300 380 310" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 196 170 C 300 170 400 170 460 150" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+      <text x="260" y="110" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">epinephrine → blood</text>
+      <!-- heart -->
+      <rect x="330" y="96" width="150" height="52" rx="10" fill="rgba(255,46,196,.07)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="405" y="114" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">HEART (SAN)</text>
+      <text x="405" y="130" fill="#b9a3d6" font-size="8.5" text-anchor="middle">faster rate → cardiac output ↑</text>
+      <!-- airways -->
+      <rect x="330" y="170" width="150" height="52" rx="10" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="405" y="188" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">AIRWAYS</text>
+      <text x="405" y="204" fill="#b9a3d6" font-size="8.5" text-anchor="middle">bronchi dilate → easier breathing</text>
+      <!-- muscle + liver -->
+      <rect x="380" y="244" width="120" height="52" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="440" y="262" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">MUSCLE + LIVER</text>
+      <text x="440" y="278" fill="#b9a3d6" font-size="8.5" text-anchor="middle">glycogen → glucose</text>
+      <!-- blood routing -->
+      <rect x="510" y="280" width="130" height="60" rx="10" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2"/>
+      <text x="575" y="298" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">BLOOD ROUTING</text>
+      <text x="575" y="314" fill="#4ade80" font-size="8.5" text-anchor="middle">muscle/liver: dilated</text>
+      <text x="575" y="328" fill="#ff2ec4" font-size="8.5" text-anchor="middle">gut/kidney/skin: constricted</text>
+      <text x="330" y="366" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Brain → adrenal glands → epinephrine → fuel + air + pump + routing, all at once</text>
+    </svg>
+    <div class="cap"><b>FIG 10</b> — The emergency broadcast. Epinephrine from the adrenal glands hits the heart (faster), airways (wider), muscle and liver (glycogen → glucose) and arterioles (blood rerouted to working muscle, away from gut, kidneys and skin). One signal, whole-club response.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag">FUEL</div>
+      <h4>Glycogen → glucose 🍬</h4>
+      <p>Muscle glycogen feeds the muscles directly; liver glycogen releases glucose into the blood for everyone else.</p>
+    </div>
+    <div class="card">
+      <div class="tag">AIR + PUMP</div>
+      <h4>Breathe + beat 💨💓</h4>
+      <p>Bronchi/bronchioles dilate, ventilation rate rises, the SAN speeds up — oxygen delivery maxed out.</p>
+    </div>
+    <div class="card">
+      <div class="tag gr">ROUTING</div>
+      <h4>Blood to the action 🩸</h4>
+      <p>Arterioles dilate to muscle/liver; constrict to gut, kidneys, skin, extremities. Priorities set.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> note the <b>contrast with nervous signalling</b>: epinephrine reaches ALL cells, but only cells with <b>adrenergic receptors</b> respond — that's the "tuned-in listeners" idea from Act 2. And "adrenaline" and "epinephrine" are the <b>same hormone</b> — both names are accepted.</div>
+</section>
+<!-- ══════════════════════ ACT 11 · CONTROL ROOM ══════════════════════ -->
+<section class="act" id="act11">
+  <div class="acttag">C3.1.13</div>
+  <h2>THE CONTROL ROOM</h2>
+  <p class="aim">The hypothalamus is the control room linking the nervous system to the endocrine system, and the pituitary gland below it is the broadcast tower that puts its orders on air.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎚️</div>
+    <div class="body">
+      <h3>Hypothalamus → pituitary → blood</h3>
+      <p class="aka">hypothalamus · pituitary · anterior lobe · posterior lobe · ADH · GnRH · LH · FSH</p>
+      <p>The <span class="accent">hypothalamus</span> is a small region of the brain that links the nervous and endocrine systems. Its nuclei contain <span class="cyan">sensors</span> for blood temperature, glucose, osmolarity and hormone concentrations, and it receives inputs from sense organs, the medulla, the hippocampus and the amygdala. Below it hangs the <span class="accent">pituitary gland</span> on a narrow stalk.</p>
+      <p>The pituitary has two lobes, both releasing hormones into blood capillaries under the hypothalamus' direction: the <span class="cyan">anterior lobe</span> (HGH, TSH, LH, FSH, prolactin) and the <span class="cyan">posterior lobe</span> (ADH, oxytocin). Two exam-ready examples: <span class="gold">osmoregulation</span> — osmoreceptors in the hypothalamus trigger ADH release from the posterior pituitary when blood is too salty (see Act 4 of homeostasis); and <span class="gold">puberty</span> — the hypothalamus releases GnRH → pituitary releases LH and FSH → gonads produce testosterone / oestradiol and progesterone.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="hypothalamus pituitary control diagram: hypothalamus with sensors for temperature glucose osmolarity and hormones, pituitary with anterior lobe releasing HGH TSH LH FSH prolactin and posterior lobe releasing ADH and oxytocin, hormones into blood capillaries">
+      <rect width="660" height="380" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CONTROL ROOM — HYPOTHALAMUS + PITUITARY</text>
+      <!-- hypothalamus -->
+      <rect x="60" y="70" width="220" height="86" rx="12" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="170" y="92" fill="#ff2ec4" font-size="12" font-weight="900" text-anchor="middle">HYPOTHALAMUS</text>
+      <text x="170" y="110" fill="#b9a3d6" font-size="9" text-anchor="middle">sensors: blood temp · glucose</text>
+      <text x="170" y="124" fill="#b9a3d6" font-size="9" text-anchor="middle">osmolarity · hormone levels</text>
+      <text x="170" y="140" fill="#b9a3d6" font-size="9" text-anchor="middle">+ inputs from senses, medulla, amygdala</text>
+      <!-- stalk -->
+      <path d="M 170 156 L 170 186" stroke="#ff2ec4" stroke-width="3" marker-end="url(#ah)" fill="none"/>
+      <text x="200" y="176" fill="#b9a3d6" font-size="8.5" text-anchor="middle">narrow stalk</text>
+      <!-- anterior -->
+      <rect x="60" y="192" width="220" height="74" rx="12" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="170" y="212" fill="#22d3ee" font-size="11" font-weight="900" text-anchor="middle">ANTERIOR PITUITARY</text>
+      <text x="170" y="230" fill="#b9a3d6" font-size="9" text-anchor="middle">HGH · TSH · LH · FSH · prolactin</text>
+      <text x="170" y="246" fill="#b9a3d6" font-size="9" text-anchor="middle">→ blood capillaries</text>
+      <!-- posterior -->
+      <rect x="60" y="282" width="220" height="74" rx="12" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="170" y="302" fill="#4ade80" font-size="11" font-weight="900" text-anchor="middle">POSTERIOR PITUITARY</text>
+      <text x="170" y="320" fill="#b9a3d6" font-size="9" text-anchor="middle">ADH · oxytocin</text>
+      <text x="170" y="336" fill="#b9a3d6" font-size="9" text-anchor="middle">released on hypothalamus orders</text>
+      <!-- examples -->
+      <rect x="360" y="86" width="270" height="74" rx="12" fill="rgba(251,191,36,.07)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="495" y="106" fill="#fbbf24" font-size="11" font-weight="900" text-anchor="middle">EXAMPLE 1 · OSMOREGULATION</text>
+      <text x="495" y="124" fill="#b9a3d6" font-size="9" text-anchor="middle">blood too salty → osmoreceptors</text>
+      <text x="495" y="140" fill="#b9a3d6" font-size="9" text-anchor="middle">→ ADH from posterior pituitary</text>
+      <rect x="360" y="180" width="270" height="74" rx="12" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="495" y="200" fill="#4ade80" font-size="11" font-weight="900" text-anchor="middle">EXAMPLE 2 · PUBERTY</text>
+      <text x="495" y="218" fill="#b9a3d6" font-size="9" text-anchor="middle">hypothalamus → GnRH → LH + FSH</text>
+      <text x="495" y="234" fill="#b9a3d6" font-size="9" text-anchor="middle">→ testosterone / oestradiol + progesterone</text>
+      <text x="495" y="300" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Nervous system in, hormones out —</text>
+      <text x="495" y="318" fill="#b9a3d6" font-size="10.5" text-anchor="middle">the bridge between both channels</text>
+      <text x="330" y="370" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Hypothalamus senses and decides · pituitary broadcasts · blood delivers</text>
+    </svg>
+    <div class="cap"><b>FIG 11</b> — The control room. The hypothalamus monitors blood temperature, glucose, osmolarity and hormones, then directs the pituitary. Anterior lobe: HGH, TSH, LH, FSH, prolactin. Posterior lobe: ADH, oxytocin. Two must-know loops: osmoregulation (ADH) and puberty (GnRH → LH/FSH).</div>
+  </div>
+
+  <div class="tip"><b>Remember the direction:</b> the hypothalamus <b>makes and controls</b>; the pituitary <b>releases</b>. ADH is made in the hypothalamus and secreted by the posterior pituitary — the classic trick question.</div>
+</section>
+
+<!-- ══════════════════════ ACT 12 · AUTO-PILOTS ══════════════════════ -->
+<section class="act" id="act12">
+  <div class="acttag">C3.1.14 – C3.1.16</div>
+  <h2>THE AUTO-PILOTS</h2>
+  <p class="aim">Three automatic systems run without you thinking: heart rate and ventilation are tuned by negative feedback in the brainstem, and peristalsis is driven by the gut's own nervous system.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🤖</div>
+    <div class="body">
+      <h3>Heart rate · ventilation · peristalsis</h3>
+      <p class="aka">SAN · medulla · baroreceptors · chemoreceptors · respiratory centres · enteric nervous system</p>
+      <p><span class="accent">Heart rate (C3.1.14):</span> the <span class="cyan">sinoatrial node (SAN)</span> in the right atrium wall sets the pace. The cardiovascular centre in the <span class="cyan">medulla oblongata</span> tunes it: a <b>sympathetic nerve speeds it up</b> (up to 3× resting), the <b>vagus nerve slows it down</b>. Baroreceptors in the aorta and carotid arteries report blood pressure; chemoreceptors there report O₂ and pH. Negative feedback: low blood pressure → speed up; high → slow down. Epinephrine (Act 10) overrides during emergencies.</p>
+      <p><span class="accent">Ventilation (C3.1.15):</span> respiratory centres in the brainstem drive the diaphragm and intercostals. Stretch receptors in the lungs stop inhalation before over-inflation. Chemoreceptors in the aorta and carotids monitor <b>blood pH</b> (via acid-sensing ion channels): CO₂ rises → pH falls → the centres shorten the gap between breaths → you breathe faster and blow off CO₂ until pH recovers. Normal blood pH is 7.35–7.45; below 6.8 is fatal.</p>
+      <p><span class="accent">Peristalsis (C3.1.16):</span> the gut wall has two smooth-muscle layers — outer longitudinal, inner circular. Peristalsis = waves of contraction: circular muscle squeezes <i>behind</i> the food, longitudinal muscle shortens where the food is, pushing it one way (away from the mouth). The <span class="cyan">enteric nervous system (ENS)</span> — the gut's own microcircuits — runs it without CNS input. Swallowing starts voluntarily, then the ENS takes over for good.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three autopilot systems diagram: heart with SAN pacemaker and medulla feedback via baroreceptors and chemoreceptors, lungs with respiratory centres and pH chemoreceptors, gut with enteric nervous system driving peristalsis waves of circular and longitudinal muscle">
+      <rect width="660" height="400" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE AUTO-PILOTS — THREE UNCONSCIOUS LOOPS</text>
+      <!-- heart panel -->
+      <rect x="20" y="56" width="300" height="150" rx="12" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="170" y="76" fill="#ff2ec4" font-size="11.5" font-weight="900" text-anchor="middle">HEART RATE · C3.1.14</text>
+      <path d="M 170 120 a 30 30 0 0 1 60 0 a 30 30 0 0 1 -60 0 Z" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="200" cy="120" r="6" fill="#22d3ee"/>
+      <text x="236" y="116" fill="#b9a3d6" font-size="8.5" text-anchor="middle">SAN</text>
+      <text x="170" y="150" fill="#b9a3d6" font-size="9" text-anchor="middle">medulla: sympathetic ↑ · vagus ↓</text>
+      <text x="170" y="164" fill="#b9a3d6" font-size="9" text-anchor="middle">baroreceptors: blood pressure</text>
+      <text x="170" y="178" fill="#b9a3d6" font-size="9" text-anchor="middle">chemoreceptors: O₂ + pH</text>
+      <text x="170" y="196" fill="#b9a3d6" font-size="9" text-anchor="middle">low BP → speed up (negative feedback)</text>
+      <!-- lungs panel -->
+      <rect x="340" y="56" width="300" height="150" rx="12" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="490" y="76" fill="#22d3ee" font-size="11.5" font-weight="900" text-anchor="middle">VENTILATION · C3.1.15</text>
+      <ellipse cx="440" cy="140" rx="34" ry="44" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="540" cy="140" rx="34" ry="44" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="490" y="150" fill="#b9a3d6" font-size="9" text-anchor="middle">diaphragm + intercostals</text>
+      <text x="490" y="164" fill="#b9a3d6" font-size="9" text-anchor="middle">stretch receptors stop over-inflation</text>
+      <text x="490" y="178" fill="#b9a3d6" font-size="9" text-anchor="middle">chemoreceptors: blood pH</text>
+      <text x="490" y="196" fill="#b9a3d6" font-size="9" text-anchor="middle">CO₂ ↑ → pH ↓ → breathe faster</text>
+      <!-- gut panel -->
+      <rect x="20" y="226" width="620" height="150" rx="12" fill="rgba(74,222,128,.05)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="246" fill="#4ade80" font-size="11.5" font-weight="900" text-anchor="middle">PERISTALSIS · C3.1.16 — THE GUT'S OWN NERVOUS SYSTEM</text>
+      <!-- gut tube -->
+      <rect x="60" y="280" width="540" height="40" rx="20" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2"/>
+      <text x="105" y="306" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">FOOD →</text>
+      <!-- contraction rings -->
+      <rect x="300" y="272" width="26" height="56" rx="6" fill="rgba(255,46,196,.35)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="313" y="264" fill="#ff2ec4" font-size="8.5" text-anchor="middle">circular</text>
+      <text x="313" y="274" fill="#ff2ec4" font-size="8.5" text-anchor="middle">squeeze</text>
+      <rect x="420" y="272" width="26" height="56" rx="6" fill="rgba(255,46,196,.35)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="433" y="264" fill="#ff2ec4" font-size="8.5" text-anchor="middle">circular</text>
+      <text x="433" y="274" fill="#ff2ec4" font-size="8.5" text-anchor="middle">squeeze</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">outer longitudinal + inner circular smooth muscle · waves push food one way (away from mouth)</text>
+      <text x="330" y="346" fill="#b9a3d6" font-size="9.5" text-anchor="middle">enteric nervous system microcircuits run it WITHOUT CNS input · swallowing starts voluntary, ENS finishes it</text>
+      <text x="330" y="366" fill="#b9a3d6" font-size="9.5" text-anchor="middle">normal blood pH 7.35 – 7.45 · below 6.8 = fatal</text>
+    </svg>
+    <div class="cap"><b>FIG 12</b> — Three auto-pilots. Heart: SAN + medulla with baroreceptor/chemoreceptor feedback. Ventilation: brainstem centres tuned by blood-pH chemoreceptors. Gut: the enteric nervous system runs peristalsis waves (circular squeeze behind, longitudinal push ahead) with no CNS input needed.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag p">C3.1.14</div>
+      <h4>Heart rate ❤️</h4>
+      <p>SAN = pacemaker. Sympathetic ↑ (up to 3×), vagus ↓. Baroreceptors (pressure) + chemoreceptors (O₂, pH) → medulla → negative feedback.</p>
+    </div>
+    <div class="card">
+      <div class="tag">C3.1.15</div>
+      <h4>Ventilation 🫁</h4>
+      <p>Brainstem centres → diaphragm + intercostals. Stretch receptors cap inhalation. pH chemoreceptors: CO₂ ↑ → pH ↓ → faster breathing → CO₂ blown off.</p>
+    </div>
+    <div class="card">
+      <div class="tag gr">C3.1.16</div>
+      <h4>Peristalsis 🌀</h4>
+      <p>Two smooth-muscle layers + enteric nervous system microcircuits. One-direction waves. Swallowing: voluntary start → ENS takeover. Defecation: sphincter control learned young.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> both heart-rate and ventilation control share the same feedback trick — <b>chemoreceptors in the aorta and carotid arteries</b> monitoring blood chemistry, with the <b>medulla</b> as the coordinating centre. And the key peristalsis fact: the ENS works <b>without CNS input</b>, but swallowing is initiated voluntarily — two different bosses for one tube.</div>
+</section>
+
+<!-- ══════════════════════ ACT 13 · THE GREEN ROOM ══════════════════════ -->
+<section class="act" id="act13">
+  <div class="acttag">AHL · C3.1.17 – C3.1.23</div>
+  <h2>THE GREEN ROOM</h2>
+  <p class="aim">Plants have their own conductor's desk: phytohormones like auxin, gibberellin and ethylene coordinate growth, bending toward light and ripening fruit — with positive feedback for the finale.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌱</div>
+    <div class="body">
+      <h3>Tropisms, auxin and ethylene — plant integration</h3>
+      <p class="aka">tropism · phototropism · phytohormones · auxin · efflux carriers · ethylene · positive feedback</p>
+      <p><span class="accent">Tropisms (C3.1.17)</span> are differential growth responses to directional stimuli — <span class="cyan">positive</span> = growing toward the stimulus, <span class="cyan">negative</span> = away. Roots are positively gravitropic; shoots are positively phototropic and negatively gravitropic. Seedling experiments let you observe curvature qualitatively (diagrams) or quantitatively (angle of curvature). <span class="accent">Phototropism (C3.1.18):</span> shoots grow toward the brightest light because the shaded side grows faster — maximising light capture for photosynthesis.</p>
+      <p><span class="accent">Phytohormones (C3.1.19)</span> are plant signalling chemicals controlling growth and development — auxin, gibberellins (stem growth: semi-dwarf wheat), cytokinins, ethylene, abscisic acid, brassinosteroids, jasmonic acid. The star is <span class="cyan">auxin</span>: made in shoot tips, moved cell-to-cell by <span class="cyan">efflux carriers (C3.1.20)</span> — membrane proteins that pump auxin out directionally, building a concentration gradient. Auxin then <span class="cyan">promotes cell elongation (C3.1.21)</span>: it triggers proton pumps that acidify the cell wall, weakening crosslinks so the wall extends and the cell grows. A side-on light gradient → uneven auxin → one side elongates more → the shoot bends. <span class="cyan">Auxin + cytokinin (C3.1.22)</span> work synergistically in stem/root apices (division + enlargement) but antagonistically on lateral roots and buds (auxin inhibits, cytokinin stimulates — apical dominance). And <span class="cyan">ethylene (C3.1.23)</span> drives fruit ripening via <span class="gold">positive feedback</span>: ripening fruit makes ethylene, which speeds ripening, which makes more ethylene — one bad apple really does turn the whole bowl.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="plant phototropism and auxin diagram: shoot bending toward light from the left, auxin concentrated on the shaded side causing faster elongation, auxin efflux carrier pumping auxin out of a cell, ethylene positive feedback loop ripening fruit">
+      <rect width="660" height="400" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE GREEN ROOM — PHOTOTROPISM + AUXIN + ETHYLENE</text>
+      <!-- light arrows -->
+      <text x="40" y="90" fill="#fbbf24" font-size="11" font-weight="900" text-anchor="middle">LIGHT ☀</text>
+      <path d="M 60 100 L 120 120" stroke="#fbbf24" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 60 120 L 120 140" stroke="#fbbf24" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 60 140 L 120 160" stroke="#fbbf24" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <!-- shoot -->
+      <path d="M 150 350 C 150 280 150 200 150 170" stroke="#4ade80" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M 150 170 C 165 130 190 120 210 118" stroke="#4ade80" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <ellipse cx="214" cy="118" rx="26" ry="10" fill="rgba(74,222,128,.3)" stroke="#4ade80" stroke-width="2" transform="rotate(-20 214 118)"/>
+      <text x="185" y="160" fill="#4ade80" font-size="9.5" text-anchor="middle">shoot bends toward light</text>
+      <!-- shaded side faster -->
+      <path d="M 150 170 C 138 150 140 130 150 118" stroke="#ff2ec4" stroke-width="3" stroke-dasharray="4 3" fill="none"/>
+      <text x="60" y="220" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">shaded side:</text>
+      <text x="60" y="236" fill="#b9a3d6" font-size="9" text-anchor="middle">more auxin → cells</text>
+      <text x="60" y="250" fill="#b9a3d6" font-size="9" text-anchor="middle">elongate faster</text>
+      <text x="258" y="236" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">bright side: less auxin</text>
+      <text x="258" y="252" fill="#b9a3d6" font-size="9" text-anchor="middle">slower elongation</text>
+      <!-- efflux carrier inset -->
+      <rect x="250" y="280" width="380" height="110" rx="12" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="440" y="300" fill="#22d3ee" font-size="11" font-weight="900" text-anchor="middle">AUXIN EFFLUX CARRIER · C3.1.20</text>
+      <rect x="330" y="318" width="90" height="34" rx="8" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="375" y="332" fill="#22d3ee" font-size="9" text-anchor="middle">CELL</text>
+      <text x="375" y="345" fill="#b9a3d6" font-size="8" text-anchor="middle">cytoplasm</text>
+      <rect x="460" y="318" width="120" height="34" rx="8" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="520" y="332" fill="#a855f7" font-size="9" text-anchor="middle">CELL WALL</text>
+      <text x="520" y="345" fill="#b9a3d6" font-size="8" text-anchor="middle">acidic apoplast</text>
+      <rect x="420" y="326" width="28" height="18" rx="4" fill="rgba(255,46,196,.3)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="434" y="339" fill="#ff2ec4" font-size="8" font-weight="800" text-anchor="middle">PUMP</text>
+      <path d="M 420 335 L 408 335 L 402 335" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="300" y="356" fill="#b9a3d6" font-size="8.5" text-anchor="middle">auxin⁻ trapped inside, pumped out →</text>
+      <text x="300" y="370" fill="#b9a3d6" font-size="8.5" text-anchor="middle">carriers on one side = directional flow</text>
+      <!-- ethylene loop -->
+      <rect x="20" y="280" width="200" height="110" rx="12" fill="rgba(74,222,128,.05)" stroke="#4ade80" stroke-width="2"/>
+      <text x="120" y="300" fill="#4ade80" font-size="11" font-weight="900" text-anchor="middle">ETHYLENE · C3.1.23</text>
+      <circle cx="80" cy="340" r="18" fill="rgba(74,222,128,.15)" stroke="#4ade80" stroke-width="2"/>
+      <text x="80" y="336" fill="#4ade80" font-size="8" text-anchor="middle">ripening</text>
+      <text x="80" y="347" fill="#4ade80" font-size="8" text-anchor="middle">fruit</text>
+      <circle cx="170" cy="340" r="16" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="170" y="344" fill="#ff2ec4" font-size="8" text-anchor="middle">ethylene</text>
+      <path d="M 98 340 C 120 340 130 340 150 340" stroke="#4ade80" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 170 324 C 150 300 100 300 80 318" stroke="#ff2ec4" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ah)" fill="none"/>
+      <text x="120" y="376" fill="#b9a3d6" font-size="8.5" text-anchor="middle">positive feedback: ethylene →</text>
+      <text x="120" y="388" fill="#b9a3d6" font-size="8.5" text-anchor="middle">more ripening → more ethylene</text>
+    </svg>
+    <div class="cap"><b>FIG 13</b> — The green room in one figure: light from one side piles auxin on the shaded side via efflux carriers, so those cells elongate faster and the shoot bends toward the light (C3.1.17–21). Meanwhile ethylene gas from a ripening fruit feeds back positively to ripen the whole bowl (C3.1.23).</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag gr">C3.1.17 – 18</div>
+      <h4>Tropisms 🌻</h4>
+      <p>Differential growth toward (positive) or away from (negative) a stimulus. Roots: +gravitropic. Shoots: +phototropic, −gravitropic. Bending = shaded side grows faster.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">C3.1.19 – 21</div>
+      <h4>Phytohormones + auxin 🧪</h4>
+      <p>Auxin, gibberellins, cytokinins, ethylene, ABA, brassinosteroids, jasmonic acid. Auxin: made in shoot tips, moved directionally by efflux carriers, elongates cells via wall acidification.</p>
+    </div>
+    <div class="card">
+      <div class="tag">C3.1.22 – 23</div>
+      <h4>Auxin + cytokinin · ethylene 🍌</h4>
+      <p>Synergistic in apices (division + growth); antagonistic on lateral roots/buds (apical dominance). Ethylene ripens fruit via positive feedback — gas spreads to neighbours.</p>
+    </div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Auxin = Away from the sun… no wait":</b> auxin piles up on the <b>shaded</b> side, and that side grows <b>faster</b>, bending the shoot <b>toward</b> the light. Shaded side = more auxin = faster growth = bends toward light. Repeat it until it sticks.</div>
+
+  <div class="nos"><b>Nature of Science:</b> tropism studies are a classic <b>accuracy vs precision vs reliability</b> playground: measure the angle of curvature (quantitative) rather than just sketching (qualitative); repeat measurements to test reliability, and compare with controls (uniform light) for validity. Expect a data question on seedling curvature experiments.</div>
+</section>
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">The whole club in one map</div>
+  <h2>MIND MAP 🗺️</h2>
+  <p class="aim">One night at the Conductor's Desk: every room plugs into the same three channels.</p>
+  <div class="mind">
+    <div class="node core">THE CONDUCTOR'S DESK<small>C3.1 · Integration of Body Systems</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">HIERARCHY<small>C3.1.1-2 · subsystems integrate · emergent properties</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">THREE CHANNELS<small>C3.1.3 · nerves (wired) · hormones (radio) · blood (roadies)</small></div>
+    <div class="node">BRAIN = DJ BOOTH<small>C3.1.4 · integration · learning · memory</small></div>
+    <div class="node">SPINAL CORD<small>C3.1.5 · unconscious · reflexes</small></div>
+    <div class="node">SENSORY IN / MOTOR OUT<small>C3.1.6-7 · afferent · efferent</small></div>
+    <div class="node">NERVES = CABLE BUNDLES<small>C3.1.8 · sheath · myelinated vs not</small></div>
+    <div class="node">PAIN EXPRESS<small>C3.1.9 · 3-neuron reflex arc</small></div>
+    <div class="node">CEREBELLUM<small>C3.1.10 · coordination + balance</small></div>
+    <div class="node">CIRCADIAN RHYTHM<small>C3.1.11 · SCN · pineal · melatonin</small></div>
+    <div class="node">EPINEPHRINE<small>C3.1.12 · fight-or-flight broadcast</small></div>
+    <div class="node">HYPOTHALAMUS + PITUITARY<small>C3.1.13 · control room + tower</small></div>
+    <div class="node">AUTO-PILOTS<small>C3.1.14-16 · heart · ventilation · peristalsis</small></div>
+    <div class="node">GREEN ROOM (AHL)<small>C3.1.17-23 · tropisms · auxin · ethylene</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT SHEET ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">60-second recap</div>
+  <h2>THE CHEAT ⚡</h2>
+  <div class="marquee">
+    <div class="line">🎛️ Integration = <span>subsystems working together</span> for an overall function — hierarchy from organelles → cells → tissues → organs → systems → organism; one broken group of cells can kill the whole club.</div>
+    <div class="line">🎙️ Three channels: nerves = <span>wired mics</span> (fast, one target, milliseconds) · hormones = <span>radio signals</span> (slow, widespread, only receptor cells respond) · blood = <span>roadies</span> (transports materials, energy, CO₂).</div>
+    <div class="line">🧠 Brain = <span>central integration organ</span>: senses in → process → memory (cerebrum, needs learning) → instructions out to muscles and glands.</div>
+    <div class="line">🗄️ Spinal cord = <span>unconscious back office</span>: reflexes without the brain (fast!). Conscious = awake, voluntary, striated muscle, cerebral hemispheres · Unconscious = involuntary, glands + smooth muscle.</div>
+    <div class="line">🔌 Sensory neurons = <span>afferent (in)</span> from receptors · motor neurons = <span>efferent (out)</span> from the motor cortex to specific muscles; two-neuron relay via spinal grey matter.</div>
+    <div class="line">🧵 Nerves = bundles of fibres in a <span>protective sheath</span> · myelinated = dark ring, fast · unmyelinated = slow · most nerves mixed (optic = sensory only).</div>
+    <div class="line">⚡ Pain reflex arc = free nerve ending → sensory neuron → <span>one interneuron</span> (grey matter) → motor neuron → muscle lifts foot · brain hears about it later.</div>
+    <div class="line">🕺 Cerebellum = floor manager: <span>coordinates timing + balance</span>, never initiates · 🌙 Circadian: SCN (hypothalamus) → pineal → <span>melatonin</span> up at dusk, peak at night, cleared by dawn; reset by 460–480 nm blue light.</div>
+    <div class="line">🚀 Epinephrine from the adrenals = <span>fight-or-flight broadcast</span>: glycogen → glucose, airways dilate, heart speeds up, blood to muscle/liver, away from gut/kidneys/skin.</div>
+    <div class="line">🎚️ Hypothalamus senses + decides → <span>pituitary broadcasts</span>: anterior (HGH, TSH, LH, FSH, prolactin) · posterior (ADH, oxytocin) · examples: osmoregulation, puberty (GnRH → LH/FSH).</div>
+    <div class="line">🤖 Auto-pilots: heart = <span>SAN + medulla</span> (baroreceptors, chemoreceptors) · ventilation = brainstem + <span>blood pH chemoreceptors</span> (7.35–7.45) · peristalsis = <span>enteric nervous system</span>, no CNS needed.</div>
+    <div class="line">🌱 Green room (AHL): phototropism = <span>auxin on shaded side</span> elongates faster → bends to light · auxin moved by <span>efflux carriers</span>, elongates cells by acidifying walls · auxin+cytokinin synergistic in apices, antagonistic on lateral buds · <span>ethylene ripens fruit by positive feedback</span>.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Conductor check</div>
+  <h2>THE TEST ✍️</h2>
+  <p class="aim">10 questions. Pick an answer and you'll instantly see why.</p>
+
+  <div class="q" data-a="nervous">
+    <p>1. Which channel of integration is fastest and targets a single effector?</p>
+    <label><input type="radio" name="q1" value="nervous"> Nervous signalling — electrical impulses along neurons to one muscle or gland</label>
+    <label><input type="radio" name="q1" value="hormonal"> Hormonal signalling — chemical messengers broadcast through the blood</label>
+    <label><input type="radio" name="q1" value="blood"> Blood transport — roadies hauling glucose and oxygen</label>
+    <div class="fb correct">✅ Nerves are the wired mics: millisecond speed, one precise target (muscle or gland). Hormones are slower and reach everyone; blood is transport, not a signal channel per se.</div>
+    <div class="fb wrong">❌ Hormonal signalling is slower and widespread (only receptor cells respond). The fast, single-target channel is the nervous one.</div>
+  </div>
+
+  <div class="q" data-a="spinal">
+    <p>2. Why is a reflex faster than a conscious response?</p>
+    <label><input type="radio" name="q2" value="spinal"> The spinal cord coordinates it — the signal never travels up to the brain and back</label>
+    <label><input type="radio" name="q2" value="myelin"> Reflexes use only myelinated fibres, which are faster than any other pathway</label>
+    <label><input type="radio" name="q2" value="hormone"> Hormones act instantly at the synapse, beating any nerve impulse</label>
+    <div class="fb correct">✅ The reflex arc is a three-neuron loop in the spinal cord. A conscious response needs the extra trip to the brain and back — that detour is the delay.</div>
+    <div class="fb wrong">❌ The speed comes from bypassing the brain entirely, not from myelin or hormones. Myelination helps, but the route is what makes reflexes fast.</div>
+  </div>
+
+  <div class="q" data-a="efferent">
+    <p>3. Motor neurons are described as…</p>
+    <label><input type="radio" name="q3" value="afferent"> Afferent — carrying input from receptors into the CNS</label>
+    <label><input type="radio" name="q3" value="efferent"> Efferent — carrying output from the cerebral hemispheres to muscles</label>
+    <label><input type="radio" name="q3" value="relay"> Relay — connecting one sensory neuron directly to another</label>
+    <div class="fb correct">✅ Motor = efferent = exiting the CNS toward muscles (or glands). Sensory = afferent = arriving from receptors. "Efferent" and "exiting" both start with E.</div>
+    <div class="fb wrong">❌ That's the sensory neuron's job. Motor neurons carry output away from the CNS to effectors — efferent.</div>
+  </div>
+
+  <div class="q" data-a="melatonin">
+    <p>4. What does the pineal gland secrete, and when does its level peak?</p>
+    <label><input type="radio" name="q4" value="adh"> ADH, peaking at dawn to wake you up</label>
+    <label><input type="radio" name="q4" value="melatonin"> Melatonin, rising in the evening and peaking during the night</label>
+    <label><input type="radio" name="q4" value="epi"> Epinephrine, peaking when you're startled</label>
+    <div class="fb correct">✅ Melatonin from the pineal gland rises at dusk, peaks at night (deep sleep, cooler core temperature) and is rapidly cleared by the liver at dawn. High = drowsy; falling = waking.</div>
+    <div class="fb wrong">❌ ADH comes from the posterior pituitary (water balance), and epinephrine from the adrenal glands (fight or flight). The sleep hormone is melatonin, peaking at night.</div>
+  </div>
+
+  <div class="q" data-a="receptors">
+    <p>5. Why does epinephrine affect some cells but not others?</p>
+    <label><input type="radio" name="q5" value="all"> It reaches every cell, but only cells with adrenergic receptors respond</label>
+    <label><input type="radio" name="q5" value="nerves"> It is delivered only to muscles by specific motor neurons</label>
+    <label><input type="radio" name="q5" value="liver"> It only ever acts on the liver, which stores glycogen</label>
+    <div class="fb correct">✅ Epinephrine is a radio broadcast: it circulates everywhere in the blood, but only cells with matching adrenergic receptors are "tuned in". That's the difference between hormonal and nervous signalling.</div>
+    <div class="fb wrong">❌ Hormones travel in the blood to all cells. Selectivity comes from receptors on target cells, not from delivery routes.</div>
+  </div>
+
+  <div class="q" data-a="posterior">
+    <p>6. ADH is made in the hypothalamus but secreted by…</p>
+    <label><input type="radio" name="q6" value="anterior"> The anterior pituitary, along with HGH and TSH</label>
+    <label><input type="radio" name="q6" value="posterior"> The posterior pituitary, along with oxytocin</label>
+    <label><input type="radio" name="q6" value="pineal"> The pineal gland, along with melatonin</label>
+    <div class="fb correct">✅ The hypothalamus makes ADH, transports it down axons, and the posterior pituitary releases it into the blood. Anterior lobe handles HGH, TSH, LH, FSH, prolactin.</div>
+    <div class="fb wrong">❌ Anterior lobe hormones are HGH, TSH, LH, FSH and prolactin. ADH and oxytocin are made in the hypothalamus and released by the posterior pituitary.</div>
+  </div>
+
+  <div class="q" data-a="baroreceptors">
+    <p>7. Blood pressure drops. Which detectors tell the medulla to speed up the heart?</p>
+    <label><input type="radio" name="q7" value="stretch"> Stretch receptors in the lungs</label>
+    <label><input type="radio" name="q7" value="baroreceptors"> Baroreceptors in the aorta and carotid arteries</label>
+    <label><input type="radio" name="q7" value="thermo"> Thermoreceptors in the skin</label>
+    <div class="fb correct">✅ Baroreceptors monitor blood pressure in the aorta and carotid arteries → medulla → sympathetic nerve speeds up the SAN. Negative feedback restores pressure.</div>
+    <div class="fb wrong">❌ Lung stretch receptors stop over-inflation during breathing; skin thermoreceptors sense temperature. Pressure is the baroreceptors' job.</div>
+  </div>
+
+  <div class="q" data-a="ph">
+    <p>8. When blood CO₂ rises, ventilation increases because chemoreceptors detect…</p>
+    <label><input type="radio" name="q8" value="o2"> Falling oxygen levels in the alveoli</label>
+    <label><input type="radio" name="q8" value="ph"> Falling blood pH (rising acidity) in the aorta and carotid arteries</label>
+    <label><input type="radio" name="q8" value="temp"> Rising blood temperature during exercise</label>
+    <div class="fb correct">✅ CO₂ dissolves to form acid, so blood pH falls. Chemoreceptors in the aorta and carotids sense the pH drop via acid-sensing ion channels, and the respiratory centres shorten the gap between breaths until pH recovers (7.35–7.45).</div>
+    <div class="fb wrong">❌ The main signal is pH, not O₂. The pH sensors respond to CO₂-driven acidity; O₂ monitoring is the backup system (hypoxia).</div>
+  </div>
+
+  <div class="q" data-a="enteric">
+    <p>9. Peristalsis along most of the gut is controlled by…</p>
+    <label><input type="radio" name="q9" value="cerebrum"> The cerebral hemispheres, which direct every wave voluntarily</label>
+    <label><input type="radio" name="q9" value="enteric"> The enteric nervous system — the gut's own microcircuits, no CNS input needed</label>
+    <label><input type="radio" name="q9" value="spinal"> The spinal cord, exactly like the pain reflex arc</label>
+    <div class="fb correct">✅ The ENS runs peristalsis waves (outer longitudinal + inner circular smooth muscle) without CNS input. Swallowing starts voluntarily, then the ENS takes over. Only the anus sphincter gains voluntary control, learned in early childhood.</div>
+    <div class="fb wrong">❌ Peristalsis is unconscious and local — the gut's own nervous system. The CNS only gets involved at the start of swallowing and the end of defecation.</div>
+  </div>
+
+  <div class="q" data-a="shaded">
+    <p>10. A shoot bends toward light because…</p>
+    <label><input type="radio" name="q10" value="bright"> The bright side produces more auxin and elongates faster</label>
+    <label><input type="radio" name="q10" value="shaded"> Auxin accumulates on the shaded side, so those cells elongate faster and push the shoot over</label>
+    <label><input type="radio" name="q10" value="ethylene"> Ethylene gas shrinks the bright side, bending the shoot</label>
+    <div class="fb correct">✅ Light redistributes auxin toward the shaded side via efflux carriers; auxin acidifies cell walls there, elongating those cells faster — the shoot curves toward the light. It's positive phototropism.</div>
+    <div class="fb wrong">❌ The bright side doesn't grow faster — the shaded side does. And ethylene ripens fruit; it doesn't bend shoots.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 11 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">C3.1.1-2</span><span>System integration: component parts coordinated for an overall function (cheetah sprint = many systems at once; emergent properties). Hierarchy of subsystems: organelles → cells → tissues → organs → organ systems → organism; failure of one cell group can kill the organism.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">C3.1.3</span><span>Integration via nervous signalling (fast, focused, effectors = muscles + glands), hormonal signalling (slow, widespread, receptor-selective) and blood transport (materials, energy, CO₂, wastes). Production-line systems plug into the blood.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">C3.1.4</span><span>Brain = central information integration organ: input from sensory receptors (incl. internal, e.g. pressure receptors in vessel walls) → process → store memory (cerebrum; learning required for memory) → instructions to muscles/glands.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">C3.1.5</span><span>Spinal cord (CNS, 31 pairs of spinal nerves; white = myelinated axons, grey = motor neuron cell bodies + interneurons + synapses) coordinates unconscious processes incl. reflexes — faster than the brain. Conscious vs unconscious control: awake/voluntary/striated/cerebral hemispheres vs involuntary/glands + smooth muscle; swallowing = voluntary start → unconscious takeover.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">C3.1.6-7</span><span>Sensory neurons (afferent) carry impulses from receptors (skin nerve endings, rods/cones, stretch receptors, baroreceptors, chemoreceptors) to the CNS. Motor neurons (efferent) carry output from the primary motor cortex (cerebral hemispheres) via a two-neuron relay (synapse in spinal grey matter) to specific skeletal muscles — impulses cause contraction, or gland secretion.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">C3.1.8</span><span>Nerves = bundles of nerve fibres in a protective sheath. Sizes: sciatic ~20 mm, optic 0.77–1.7 M fibres, small nerves <100. Most nerves mixed sensory + motor (optic sensory-only, oculomotor motor-only). Transverse section: myelinated fibres (dark myelin ring, fast) vs unmyelinated (slow).</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">C3.1.9</span><span>Pain reflex arc: free sensory nerve ending in skin (no separate receptor cell) → sensory neuron → single interneuron in spinal grey matter → motor neuron → skeletal muscle effector contracts → foot lifts. Brain not involved → fast; pain felt after. Pupil constriction = counter-example (brain-coordinated reflex).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">C3.1.10-11</span><span>Cerebellum coordinates skeletal muscle contraction + balance; fine-tunes timing, never initiates. Circadian rhythms (~24 h, internal): SCN in hypothalamus → pineal gland → melatonin (rises dusk, peaks night, cleared by liver at dawn); reset by 460–480 nm light via retinal ganglion cells.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">C3.1.12-13</span><span>Epinephrine (adrenaline) from adrenal glands → adrenergic receptors: glycogen → glucose, airway dilation, faster SAN, blood rerouted to muscle/liver. Hypothalamus (sensors + inputs) → pituitary: anterior (HGH, TSH, LH, FSH, prolactin) + posterior (ADH, oxytocin); examples: osmoregulation, puberty (GnRH → LH/FSH).</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">C3.1.14-16</span><span>Heart rate: SAN pacemaker + medulla; sympathetic ↑ (3×), vagus ↓; baroreceptors (pressure) + chemoreceptors (O₂, pH) → negative feedback. Ventilation: brainstem centres; stretch receptors; pH chemoreceptors (7.35–7.45; <6.8 fatal). Peristalsis: two smooth-muscle layers + enteric nervous system microcircuits, no CNS input; swallowing voluntary start, ENS takeover.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">C3.1.17-23</span><span>AHL — Tropic responses: differential growth, positive/negative (roots +gravitropic; shoots +phototropic, −gravitropic); qualitative vs quantitative observation. Positive phototropism: shaded side grows faster. Phytohormones (auxin, gibberellins, cytokinins, ethylene, ABA…). Auxin efflux carriers (pump auxin⁻ out, directional flow); auxin promotes elongation via cell-wall acidification (proton pumps); auxin + cytokinin synergistic in apices, antagonistic on lateral roots/buds (apical dominance); ethylene ripens fruit via positive feedback (volatile gas synchronises ripening).</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) C3.1 chapter + IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='c31-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>

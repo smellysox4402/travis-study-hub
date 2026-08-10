@@ -16,6 +16,9 @@ PAGES = [
     "topics/bio/cell-division/index.html",
     "topics/bio/inheritance/index.html",
     "topics/bio/homeostasis/index.html",
+    "topics/bio/integration/index.html",
+    "topics/bio/transport/index.html",
+    "topics/bio/photosynthesis/index.html",
     "topics/chem/kinetics/index.html",
 ]
 

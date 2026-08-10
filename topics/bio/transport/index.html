@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>CLUB DELIVERY — B3.2 Transport · Bio HL</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · VIP CORRIDORS</a>
+  <a href="#act2">ACT 2 · CORRIDOR CODES</a>
+  <a href="#act3">ACT 3 · PRESSURE PIPE</a>
+  <a href="#act4">ACT 4 · BEAT COUNTER</a>
+  <a href="#act5">ACT 5 · ONE-WAY DOOR</a>
+  <a href="#act6">ACT 6 · BLOCKED BACKSTAGE</a>
+  <a href="#act7">ACT 7 · WATER PIPE NETWORK</a>
+  <a href="#act8">ACT 8 · PIPE FITTERS</a>
+  <a href="#act9">ACT 9 · FLOOR PLANS</a>
+  <a href="#act10">ACT 10 · TISSUE-FLUID TAP</a>
+  <a href="#act11">ACT 11 · THE DJ'S DECK</a>
+  <a href="#act12">ACT 12 · VIP ESCALATOR</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/10</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Biology HL · B3.2 Transport (SL + AHL)</div>
+  <h1>CLUB DELIVERY</h1>
+  <p class="sub">Your body is the best-run nightclub in biology: a pumping DJ (the heart) keeps the music (blood) flowing through VIP corridors (arteries, capillaries and veins) while the plants next door run the plumbing (xylem water pipes) and a VIP escalator (phloem) ferries the sugar upstairs. Every delivery system on this page exists for one job — get oxygen, water and fuel exactly where the dance floor needs them.</p>
+  <div class="badges">
+    <span class="badge">SL + AHL</span>
+    <span class="badge ahl">18 statements</span>
+    <span class="badge">Blood · Xylem · Phloem</span>
+    <span class="badge">Circulation · Transpiration</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · THE VIP CORRIDORS ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">B3.2.1</div>
+  <h2>THE VIP CORRIDORS</h2>
+  <p class="aim">Capillaries are the private corridors that actually serve the dance floor: ultra-narrow, ultra-branching, and built so thin that every single guest (cell) can trade with the bloodstream face to face.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🫁</div>
+    <div class="body">
+      <h3>Why narrow beats wide</h3>
+      <p class="aka">~10 µm · capillary network · endothelium · basement membrane · fenestrations</p>
+      <p><span class="accent">Capillaries</span> are the narrowest blood vessels — roughly <span class="cyan">10 µm across</span>, barely wide enough for red blood cells to squeeze through single file. What they lack in width they make up in numbers: they <span class="gold">branch and rejoin into dense networks</span>, and because each branch is narrow, the network has an enormous total <span class="gold">surface area</span> for exchange. A few wide tubes could never match the area that thousands of narrow ones deliver.</p>
+      <p>The wall is just <span class="accent">one layer of endothelium cells</span> sitting on a <span class="accent">basement membrane</span> — a gel of fibrous proteins that acts as a filter. Pores between the cells let plasma leak out into the tissue (that's how tissue fluid forms), while blood cells stay in. In places needing lightning-fast exchange, like the kidney's glomerulus or the small intestine, the endothelium has <span class="cyan">fenestrations</span> — very large pores — so bigger volumes can flood through. Almost every cell in the body sits close enough to a capillary to swap gases, nutrients and wastes with the blood.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="capillary network diagram: an arteriole branches into many narrow capillaries that weave through tissue and rejoin into a venule, with a zoomed circle showing a capillary wall one endothelium cell thick on a basement membrane, with a fenestration pore and red blood cells staying inside while plasma leaks out">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE VIP CORRIDORS — CAPILLARY NETWORK</text>
+      <!-- arteriole -->
+      <rect x="30" y="130" width="80" height="28" rx="14" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="70" y="148" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">ARTERIOLE</text>
+      <text x="70" y="120" fill="#b9a3d6" font-size="10" text-anchor="middle">high pressure</text>
+      <!-- venule -->
+      <rect x="550" y="130" width="80" height="28" rx="14" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="590" y="148" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">VENULE</text>
+      <text x="590" y="120" fill="#b9a3d6" font-size="10" text-anchor="middle">low pressure</text>
+      <!-- capillary strands -->
+      <path d="M 110 144 C 200 120 260 168 340 144 C 420 120 480 168 550 144" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+      <path d="M 110 144 C 180 96 260 90 350 108 C 430 122 490 120 550 144" fill="none" stroke="#22d3ee" stroke-width="2"/>
+      <path d="M 110 144 C 190 200 280 210 360 186 C 430 168 490 158 550 144" fill="none" stroke="#22d3ee" stroke-width="2"/>
+      <path d="M 110 144 C 220 168 300 150 380 176 C 450 196 500 170 550 144" fill="none" stroke="#22d3ee" stroke-width="1.8"/>
+      <text x="330" y="84" fill="#b9a3d6" font-size="10.5" text-anchor="middle">branch + rejoin → huge surface area</text>
+      <text x="330" y="234" fill="#b9a3d6" font-size="10.5" text-anchor="middle">~10 µm — red blood cells squeeze through single file</text>
+      <!-- zoom circle -->
+      <circle cx="330" cy="284" r="46" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2" stroke-dasharray="4 4"/>
+      <text x="330" y="252" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">ZOOM: WALL</text>
+      <!-- wall rings inside zoom -->
+      <circle cx="330" cy="288" r="26" fill="rgba(255,46,196,.06)" stroke="#ff2ec4" stroke-width="3"/>
+      <circle cx="330" cy="288" r="32" fill="none" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <!-- fenestration gap -->
+      <path d="M 330 256 A 32 32 0 0 1 360 264" fill="none" stroke="#4ade80" stroke-width="3"/>
+      <!-- rbc inside -->
+      <circle cx="324" cy="292" r="4" fill="#ff2ec4"/>
+      <circle cx="340" cy="296" r="4" fill="#ff2ec4"/>
+      <circle cx="333" cy="282" r="3.5" fill="#ff2ec4"/>
+      <!-- labels right of zoom -->
+      <line x1="376" y1="262" x2="452" y2="262" stroke="#ff2ec4" stroke-width="1.2"/>
+      <text x="458" y="260" fill="#f3e8ff" font-size="10" font-weight="700">endothelium — one cell thick</text>
+      <text x="458" y="278" fill="#b9a3d6" font-size="9.5">basement membrane = protein gel filter</text>
+      <line x1="360" y1="305" x2="452" y2="316" stroke="#4ade80" stroke-width="1.2"/>
+      <text x="458" y="314" fill="#4ade80" font-size="10" font-weight="700">fenestration: big pore</text>
+      <text x="458" y="332" fill="#b9a3d6" font-size="9.5">fast exchange (glomerulus, gut)</text>
+      <text x="330" y="336" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">RBCs stay in · plasma leaks out → tissue fluid</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — The VIP corridors: narrow (~10 µm), heavily branched capillaries maximise surface area; a one-cell-thick endothelium on a basement membrane filter allows plasma (not blood cells) to leak out, with fenestrations boosting exchange where speed matters. The lens and cornea of the eye have no capillaries at all — they must stay transparent.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Corridor logic":</b> many narrow corridors serve more guests than one wide boulevard. And remember: exchange happens ONLY in capillaries — arteries and veins are just the transport corridors between the heart and the dance floor.</div>
+</section>
+<!-- ══════════════════════ ACT 2 · THE CORRIDOR CODES ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">B3.2.2</div>
+  <h2>THE CORRIDOR CODES</h2>
+  <p class="aim">Spot the difference: arteries are the reinforced tunnels carrying pulses of high-pressure blood away from the heart; veins are the flexible return corridors bringing the low-pressure stream back. The micrograph tells you which is which.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🩸</div>
+    <div class="body">
+      <h3>Five structural differences that decide a micrograph</h3>
+      <p class="aka">wall thickness · lumen width · circular vs flattened · corrugated inner surface · visible fibres</p>
+      <p><span class="accent">Arteries</span> carry blood away from the heart under pulses of high pressure, so they need thick, muscular, elastic walls. <span class="accent">Veins</span> carry blood back to the heart as a low-pressure, steady stream, so their walls can be thin and flexible. In a microscope slide the rule is simple: <span class="gold">compare wall thickness to lumen width</span>.</p>
+      <p>The five code-breakers: <span class="cyan">(1)</span> arteries have a <b>much thicker wall</b>; <span class="cyan">(2)</span> arteries have a <b>narrower lumen</b> (the central hole) relative to the wall; <span class="cyan">(3)</span> arteries are <b>circular in section</b> while veins are circular <i>or flattened</i>; <span class="cyan">(4)</span> arteries show a <b>corrugated inner surface</b> (elastic tissue puckered after death); <span class="cyan">(5)</span> <b>fibres are clearly visible</b> in artery walls but barely visible in veins. Find one corrugated inner surface + thick wall = artery. Thin wall + wide, floppy lumen = vein.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="side by side cross sections of an artery and a vein: the artery has a thick wall with a narrow circular lumen and corrugated inner surface, the vein has a thin wall with a wide flattened lumen and smooth inner surface">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CORRIDOR CODES — ARTERY vs VEIN</text>
+      <!-- artery -->
+      <circle cx="165" cy="180" r="95" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="3"/>
+      <circle cx="165" cy="180" r="58" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="165" cy="180" r="26" fill="rgba(11,2,20,.9)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="165" y="176" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">LUMEN</text>
+      <text x="165" y="192" fill="#b9a3d6" font-size="9.5" text-anchor="middle">narrow</text>
+      <text x="165" y="66" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">ARTERY</text>
+      <text x="165" y="84" fill="#b9a3d6" font-size="10" text-anchor="middle">thick wall · circular</text>
+      <text x="165" y="292" fill="#b9a3d6" font-size="10" text-anchor="middle">corrugated inner surface</text>
+      <!-- vein -->
+      <ellipse cx="495" cy="180" rx="95" ry="80" fill="rgba(168,85,247,.05)" stroke="#a855f7" stroke-width="3"/>
+      <ellipse cx="495" cy="180" rx="72" ry="58" fill="rgba(168,85,247,.12)" stroke="#a855f7" stroke-width="2"/>
+      <ellipse cx="495" cy="180" rx="48" ry="34" fill="rgba(11,2,20,.9)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="495" y="176" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">LUMEN</text>
+      <text x="495" y="192" fill="#b9a3d6" font-size="9.5" text-anchor="middle">wide</text>
+      <text x="495" y="66" fill="#a855f7" font-size="13" font-weight="900" text-anchor="middle">VEIN</text>
+      <text x="495" y="84" fill="#b9a3d6" font-size="10" text-anchor="middle">thin wall · may flatten</text>
+      <text x="495" y="292" fill="#b9a3d6" font-size="10" text-anchor="middle">smooth inner surface</text>
+      <!-- bottom line -->
+      <text x="330" y="326" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">READ THE SLIDE: wall thickness ÷ lumen width — thick + corrugated = artery</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — The corridor codes: arteries show a thick wall, narrow circular lumen, corrugated inner surface and visible fibres; veins show a thin wall, wide (often flattened) lumen and a smooth inner surface. In exams the giveaway is wall thickness relative to the lumen.</div>
+  </div>
+
+  <div class="exam"><b>Micrograph skill:</b> when asked to distinguish artery from vein in a photomicrograph, state the <b>wall thickness relative to the lumen</b> first — that's the mark. Then add corrugation or fibres as supporting evidence. Never say "the artery has more blood" — you can't tell from a section.</div>
+</section>
+
+<!-- ══════════════════════ ACT 3 · THE PRESSURE PIPE ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">B3.2.3</div>
+  <h2>THE PRESSURE PIPE</h2>
+  <p class="aim">The heart slams blood into arteries at high pressure, every beat. The artery wall is engineered like a pressure pipe — three layers that stretch, recoil and hold so the pulse never bursts the system.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔧</div>
+    <div class="body">
+      <h3>Three layers, three jobs</h3>
+      <p class="aka">tunica externa · tunica media · tunica intima · elastic recoil · collagen</p>
+      <p>Artery walls have <span class="accent">three layers</span>. The <span class="cyan">tunica externa</span> (outermost) is made of <b>collagen fibres</b> — tough, inextensible material that stops the wall from bulging or bursting under high pressure. The <span class="cyan">tunica media</span> (middle) is the muscle layer: <b>smooth muscle</b> plus a huge amount of <b>elastic fibres</b> (up to ~50% of the wall's dry mass in the big arteries near the heart). The <span class="cyan">tunica intima</span> (innermost) is the smooth endothelium lining the lumen.</p>
+      <p>Why the elastic fibres? Each heartbeat inflates the artery (systole), then the elastic fibres <span class="gold">recoil during diastole</span>, squeezing blood onward even while the heart relaxes. That elastic recoil does three things: it <b>smooths the flow</b> into a steadier stream, it <b>maintains pressure between beats</b> so organs keep getting blood, and it <b>reduces the heart's workload</b> — the artery acts like a secondary pump. The narrow lumen helps too: a smaller bore keeps pressure and flow velocity high.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cross section of an artery wall showing three layers: outer tunica externa of collagen fibres, middle tunica media of smooth muscle and elastic fibres, inner tunica intima of endothelium, plus a diagram of elastic recoil where the artery stretches during systole and recoils during diastole to keep blood flowing">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE PRESSURE PIPE — ARTERY WALL LAYERS</text>
+      <!-- arrows -->
+      <defs>
+        <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#22d3ee"/>
+        </marker>
+      </defs>
+      <!-- wedge -->
+      <circle cx="150" cy="200" r="110" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <circle cx="150" cy="200" r="74" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <circle cx="150" cy="200" r="40" fill="rgba(11,2,20,.9)" stroke="#4ade80" stroke-width="2.5"/>
+      <path d="M 150 200 L 214 264" stroke="#ff2ec4" stroke-width="2"/>
+      <path d="M 150 200 L 86 264" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="150" y="196" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">LUMEN</text>
+      <!-- layer labels -->
+      <line x1="224" y1="150" x2="300" y2="118" stroke="#ff2ec4" stroke-width="1.2"/>
+      <text x="306" y="116" fill="#ff2ec4" font-size="11" font-weight="800">TUNICA EXTERNA</text>
+      <text x="306" y="134" fill="#b9a3d6" font-size="9.5">collagen fibres — stop bulging</text>
+      <text x="306" y="150" fill="#b9a3d6" font-size="9.5">and bursting (aneurysm)</text>
+      <line x1="200" y1="222" x2="300" y2="222" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="306" y="216" fill="#22d3ee" font-size="11" font-weight="800">TUNICA MEDIA</text>
+      <text x="306" y="234" fill="#b9a3d6" font-size="9.5">smooth muscle + elastic fibres</text>
+      <text x="306" y="250" fill="#b9a3d6" font-size="9.5">(up to ~50% dry mass near heart)</text>
+      <line x1="176" y1="290" x2="300" y2="296" stroke="#4ade80" stroke-width="1.2"/>
+      <text x="306" y="292" fill="#4ade80" font-size="11" font-weight="800">TUNICA INTIMA</text>
+      <text x="306" y="310" fill="#b9a3d6" font-size="9.5">endothelium — smooth lining</text>
+      <!-- elastic recoil panel -->
+      <rect x="420" y="80" width="210" height="52" rx="10" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="525" y="100" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">SYSTOLE — heart beats</text>
+      <text x="525" y="118" fill="#b9a3d6" font-size="9.5" text-anchor="middle">artery stretches, stores energy</text>
+      <rect x="420" y="150" width="210" height="52" rx="10" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="525" y="170" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">DIASTOLE — heart relaxes</text>
+      <text x="525" y="188" fill="#b9a3d6" font-size="9.5" text-anchor="middle">elastic recoil squeezes blood on</text>
+      <path d="M 525 132 L 525 146" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="525" y="222" fill="#b9a3d6" font-size="10" text-anchor="middle">flow stays smooth between beats</text>
+      <text x="525" y="240" fill="#b9a3d6" font-size="10" text-anchor="middle">→ less work for the heart</text>
+      <text x="525" y="262" fill="#b9a3d6" font-size="9.5" text-anchor="middle">narrow lumen keeps pressure high</text>
+      <text x="525" y="316" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">pulse wave = stretch + recoil</text>
+      <text x="525" y="334" fill="#b9a3d6" font-size="9.5" text-anchor="middle">travelling down the pipes</text>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — The pressure pipe: collagen (externa) prevents bursting, elastic fibres + smooth muscle (media) stretch at systole and recoil at diastole so blood keeps flowing between beats, and the endothelium (intima) keeps the surface slick. The narrow lumen maintains high pressure and velocity.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Ex-Media-Intima":</b> <b>Ex</b>ternal collagen (tough), <b>Med</b>ial muscle + elastic (the recoil), <b>Int</b>imal endothelium (slick). If an artery loses its elastic fibres it becomes rigid — blood pressure spikes and the heart works overtime.</div>
+</section>
+<!-- ══════════════════════ ACT 4 · THE BEAT COUNTER ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">B3.2.4</div>
+  <h2>THE BEAT COUNTER</h2>
+  <p class="aim">Every heartbeat sends a pulse — a wave of pressure along the arteries. Count the pulses and you've counted the beats. Find the right corridor, use the right fingers, and the club's tempo is yours.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎵</div>
+    <div class="body">
+      <h3>Where to feel the beat</h3>
+      <p class="aka">radial pulse · carotid pulse · 30 s × 2 · pulse oximeter</p>
+      <p>A pulse is the <span class="accent">pressure wave</span> that travels along arteries each time the left ventricle contracts. You can feel it anywhere an artery runs close to the surface over a bone. The classic spots: the <span class="cyan">radial pulse</span> on the wrist (on the <b>thumb side</b> — the side nearest your thumb) and the <span class="cyan">carotid pulse</span> in the neck (in the groove on either side of the windpipe).</p>
+      <p>Technique traps that cost marks: use <span class="gold">two or three fingertips, not your thumb</span> — the thumb has its own pulse and you'll count yours instead of the patient's. Press lightly (hard pressure squashes the artery and kills the pulse). Count for <span class="gold">30 seconds and multiply by 2</span> for beats per minute (or count a full minute for accuracy). Pulse rate at rest is roughly <span class="cyan">60–100 bpm</span>, and it rises with exercise, fever, fear or caffeine.</p>
+      <p>Modern clubs use a <span class="accent">digital pulse oximeter</span> clipped on a fingertip: it shines red and infrared light through the finger, and measures how light absorption changes as blood volume pulses with each beat — giving both pulse rate and blood oxygen saturation.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="pulse measurement diagram: a wrist showing the radial pulse on the thumb side, a neck showing the carotid pulse in the groove beside the windpipe, a pressure wave line showing one wave per heartbeat, and a fingertip pulse oximeter using red and infrared light">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE BEAT COUNTER — WHERE TO FEEL THE PULSE</text>
+      <!-- wrist -->
+      <rect x="60" y="110" width="150" height="70" rx="30" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="135" y="90" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">RADIAL PULSE</text>
+      <text x="135" y="106" fill="#b9a3d6" font-size="9.5" text-anchor="middle">wrist · thumb side</text>
+      <circle cx="130" cy="145" r="8" fill="#fbbf24" stroke="#fbbf24" stroke-width="2"/>
+      <text x="135" y="160" fill="#b9a3d6" font-size="9" text-anchor="middle">feel here</text>
+      <text x="135" y="204" fill="#b9a3d6" font-size="9.5" text-anchor="middle">artery runs over bone</text>
+      <text x="135" y="220" fill="#b9a3d6" font-size="9.5" text-anchor="middle">near the surface</text>
+      <!-- neck -->
+      <rect x="60" y="244" width="150" height="70" rx="30" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="135" y="234" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">CAROTID PULSE</text>
+      <text x="135" y="250" fill="#b9a3d6" font-size="9.5" text-anchor="middle">neck · beside windpipe</text>
+      <circle cx="130" cy="279" r="8" fill="#fbbf24" stroke="#fbbf24" stroke-width="2"/>
+      <text x="155" y="283" fill="#b9a3d6" font-size="9" text-anchor="middle">groove beside windpipe</text>
+      <!-- pressure wave -->
+      <path d="M 270 180 C 290 120 310 120 330 180 C 350 240 370 240 390 180 C 410 120 430 120 450 180 C 470 240 490 240 510 180" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <text x="390" y="96" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">1 pulse = 1 heartbeat</text>
+      <text x="390" y="112" fill="#b9a3d6" font-size="9.5" text-anchor="middle">pressure wave from left ventricle</text>
+      <text x="390" y="262" fill="#b9a3d6" font-size="10" text-anchor="middle">count 30 s × 2 = bpm</text>
+      <text x="390" y="280" fill="#b9a3d6" font-size="10" text-anchor="middle">rest ≈ 60–100 bpm</text>
+      <!-- oximeter -->
+      <rect x="540" y="150" width="90" height="80" rx="14" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="585" y="140" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">PULSE OXIMETER</text>
+      <rect x="560" y="176" width="50" height="28" rx="8" fill="rgba(255,46,196,.3)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="585" y="194" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">FINGER</text>
+      <text x="585" y="222" fill="#b9a3d6" font-size="9" text-anchor="middle">red + IR light</text>
+      <text x="585" y="238" fill="#b9a3d6" font-size="9" text-anchor="middle">absorption pulses</text>
+      <text x="585" y="254" fill="#b9a3d6" font-size="9" text-anchor="middle">→ bpm + SpO₂</text>
+      <text x="330" y="316" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">NEVER use your thumb — it has its own pulse and you'll count the wrong heart</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — The beat counter: radial pulse (wrist, thumb side) and carotid pulse (neck groove beside the windpipe) are the two classic sites. Two or three fingertips, light pressure, 30 s × 2. A pulse oximeter uses red + infrared light to read the pulse digitally.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Radial is Radical, Carotid is in the Collar":</b> wrist = radial (thumb side), neck = carotid (beside the windpipe). Never your thumb, never heavy pressure, always time it properly.</div>
+</section>
+
+<!-- ══════════════════════ ACT 5 · THE ONE-WAY DOOR ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">B3.2.5</div>
+  <h2>THE ONE-WAY DOOR</h2>
+  <p class="aim">Blood leaving the heart has the DJ's pressure behind it. Blood coming back has almost nothing — just thin walls, pocket valves and the squeeze of your own muscles. Welcome to the one-way door system.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚪</div>
+    <div class="body">
+      <h3>Three tricks that beat gravity</h3>
+      <p class="aka">pocket valves · skeletal muscle pump · thin flexible walls · ~80% of blood</p>
+      <p>Veins carry blood back to the heart under <span class="accent">low pressure</span> — and often against gravity (hello, legs). They solve this with three adaptations. First, <span class="cyan">pocket valves</span>: cup-shaped flaps of endothelium pointing toward the heart. Blood flowing the right way pushes them flat against the wall; blood trying to flow backwards fills the cups, making them <span class="gold">bulge and seal the lumen</span>. One-way doors, every few centimetres.</p>
+      <p>Second, the <span class="cyan">skeletal muscle pump</span>: vein walls are thin and flexible, so when surrounding muscles contract (walking, running, even fidgeting), they <span class="gold">squeeze the vein flat and push blood toward the heart</span> — the valves make sure it can't squirt backwards. Third, those same thin walls mean veins can hold a lot: at rest about <span class="cyan">80% of your blood volume</span> sits in the veins, ready to be mobilised (e.g. during exercise, when veins constrict to boost the return flow).</p>
+      <p>When pocket valves wear out — from age, pregnancy or standing jobs — blood pools in the veins of the legs and stretches them into <span class="accent">varicose veins</span>. The door stops closing; gravity wins.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="vein with pocket valves: one valve open with blood flowing toward the heart, one valve closed with cup-shaped flaps catching backflow, and a skeletal muscle squeezing the thin flexible vein wall to pump blood upward">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE ONE-WAY DOOR — VEIN VALVES + MUSCLE PUMP</text>
+      <!-- vein tube -->
+      <path d="M 120 60 L 120 300" stroke="#a855f7" stroke-width="10" fill="none"/>
+      <path d="M 200 60 L 200 300" stroke="#a855f7" stroke-width="10" fill="none"/>
+      <!-- flow arrows up -->
+      <path d="M 160 80 L 160 50" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 160 120 L 160 96" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="245" y="84" fill="#22d3ee" font-size="10" font-weight="800">TO THE HEART</text>
+      <!-- open valve -->
+      <path d="M 120 150 L 160 166 L 200 150" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="160" y="188" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">OPEN</text>
+      <text x="160" y="204" fill="#b9a3d6" font-size="9" text-anchor="middle">blood flows past,</text>
+      <text x="160" y="218" fill="#b9a3d6" font-size="9" text-anchor="middle">flaps pressed flat</text>
+      <!-- closed valve -->
+      <path d="M 120 262 C 145 236 175 236 200 262" fill="rgba(255,46,196,.2)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="160" y="250" fill="#ff2ec4" font-size="9.5" font-weight="700" text-anchor="middle">CLOSED</text>
+      <text x="160" y="292" fill="#ff2ec4" font-size="9" text-anchor="middle">backflow fills the cups</text>
+      <text x="160" y="308" fill="#b9a3d6" font-size="9" text-anchor="middle">→ seals the lumen</text>
+      <!-- muscle pump -->
+      <rect x="280" y="110" width="60" height="120" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="310" y="176" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle" transform="rotate(-90 310 176)">MUSCLE</text>
+      <line x1="340" y1="140" x2="380" y2="140" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <line x1="340" y1="200" x2="380" y2="200" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="430" y="110" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">MUSCLE PUMP</text>
+      <text x="430" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">muscle contraction squeezes</text>
+      <text x="430" y="144" fill="#b9a3d6" font-size="9.5" text-anchor="middle">the thin flexible wall</text>
+      <text x="430" y="162" fill="#b9a3d6" font-size="9.5" text-anchor="middle">→ blood pushed upward</text>
+      <text x="430" y="184" fill="#b9a3d6" font-size="9.5" text-anchor="middle">valves stop backflow</text>
+      <text x="430" y="226" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">thin walls = distensible</text>
+      <text x="430" y="244" fill="#b9a3d6" font-size="9.5" text-anchor="middle">~80% of blood at rest</text>
+      <text x="430" y="260" fill="#b9a3d6" font-size="9.5" text-anchor="middle">is in the veins</text>
+      <text x="430" y="288" fill="#ff2ec4" font-size="10" font-weight="700" text-anchor="middle">valves fail → varicose veins</text>
+      <text x="430" y="306" fill="#b9a3d6" font-size="9.5" text-anchor="middle">blood pools in the legs</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="10" text-anchor="middle">Valves every few centimetres — one-way doors all the way to the heart</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — The one-way door: pocket valves open for forward flow and cup shut against backflow; skeletal muscles squeeze the thin flexible walls, pushing blood toward the heart against gravity. ~80% of blood volume sits in veins at rest; valve failure → varicose veins.</div>
+  </div>
+
+  <div class="nos"><b>Nature of Science:</b> the muscle-pump story is a beautiful example of how physiology is tested by <b>measurement</b> — venous return rises when leg muscles contract, drops when they're still (long flights → swollen ankles). Quantitative evidence converted a hypothesis into a mechanism.</div>
+</section>
+
+<!-- ══════════════════════ ACT 6 · THE BLOCKED BACKSTAGE ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">B3.2.6</div>
+  <h2>THE BLOCKED BACKSTAGE</h2>
+  <p class="aim">The heart's own blood supply comes from the coronary arteries — the first branches off the aorta. When the corridors behind the DJ booth clog up, the music stops. And correlation is NOT the same as causation.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚑</div>
+    <div class="body">
+      <h3>When the DJ's power line kinks</h3>
+      <p class="aka">coronary arteries · atheroma · occlusion · thrombosis · myocardial infarction</p>
+      <p>The <span class="accent">coronary arteries</span> are the <b>first branches off the aorta</b> (right coronary + left coronary, which splits into two main branches — three main arteries in total). They wrap around the heart muscle, delivering oxygen and glucose to the hardest-working muscle in the body.</p>
+      <p>If <span class="accent">atheroma</span> forms — fatty deposits (lipids including cholesterol, later hardened with calcium salts) building up in the artery wall — the lumen narrows. A narrowed coronary causes <span class="cyan">angina</span> (chest pain on exertion) and shortness of breath; a fully blocked one causes <span class="cyan">myocardial infarction</span> (heart attack) — the muscle downstream dies from oxygen starvation. Complete blockage is usually a <span class="accent">thrombus</span> (blood clot) forming on the rough surface of an atheroma, and high blood pressure makes clots more likely by damaging the endothelium.</p>
+      <p>Risk factors: <span class="gold">hypertension, smoking, saturated fat, obesity, excess salt, alcohol, sedentary lifestyle, genetic predisposition, age</span>. Notice how many are lifestyle — that's why the exam loves asking which factors a patient could change.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="heart with coronary arteries branching off the aorta, one artery narrowed by an atheroma deposit and blocked by a thrombus, plus a scatter graph showing a strong positive correlation between saturated fat intake and coronary heart disease death rate with the warning that correlation does not prove causation">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE BLOCKED BACKSTAGE — CORONARY OCCLUSION</text>
+      <!-- aorta -->
+      <path d="M 150 50 C 150 20 210 20 210 50 L 210 90 L 150 90 Z" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="180" y="70" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">AORTA</text>
+      <!-- coronary branches -->
+      <path d="M 165 88 C 130 130 110 170 110 210" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <path d="M 195 88 C 220 130 240 170 250 200" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <path d="M 195 88 C 210 120 235 130 270 135" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <text x="96" y="238" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="end">coronary arteries</text>
+      <text x="96" y="254" fill="#b9a3d6" font-size="9" text-anchor="end">first branches of aorta</text>
+      <text x="96" y="270" fill="#b9a3d6" font-size="9" text-anchor="end">3 main arteries</text>
+      <!-- heart -->
+      <path d="M 110 230 C 90 270 130 320 180 320 C 220 320 240 300 250 280 C 260 300 280 320 320 320 C 370 320 410 270 390 230 C 380 210 360 200 340 205 C 330 195 310 190 300 195 C 290 190 270 195 260 205 C 240 200 220 200 210 205 C 190 195 170 195 160 205 C 140 200 120 210 110 230 Z" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="250" y="272" fill="#f3e8ff" font-size="10.5" font-weight="800" text-anchor="middle">HEART MUSCLE</text>
+      <text x="250" y="290" fill="#b9a3d6" font-size="9" text-anchor="middle">needs O₂ + glucose</text>
+      <text x="250" y="306" fill="#b9a3d6" font-size="9" text-anchor="middle">from coronary blood</text>
+      <!-- blocked artery zoom -->
+      <rect x="420" y="70" width="220" height="96" rx="10" fill="rgba(251,191,36,.06)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="530" y="90" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">ATHEROMA + THROMBUS</text>
+      <path d="M 440 120 L 620 120" stroke="#ff2ec4" stroke-width="14" fill="none"/>
+      <path d="M 490 112 L 540 128 L 500 132" fill="rgba(251,191,36,.5)" stroke="#fbbf24" stroke-width="1.5"/>
+      <path d="M 556 108 L 590 132 L 566 136" fill="rgba(255,46,196,.5)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="530" y="150" fill="#b9a3d6" font-size="9" text-anchor="middle">fatty deposit narrows lumen</text>
+      <text x="530" y="164" fill="#b9a3d6" font-size="9" text-anchor="middle">+ clot → total block (MI)</text>
+      <text x="530" y="188" fill="#ff2ec4" font-size="9.5" font-weight="700" text-anchor="middle">angina · shortness of breath</text>
+      <text x="530" y="204" fill="#b9a3d6" font-size="9" text-anchor="middle">on exertion → heart attack</text>
+      <!-- scatter graph -->
+      <line x1="420" y1="246" x2="420" y2="330" stroke="#b9a3d6" stroke-width="1.5"/>
+      <line x1="420" y1="330" x2="640" y2="330" stroke="#b9a3d6" stroke-width="1.5"/>
+      <circle cx="450" cy="312" r="4" fill="#4ade80"/>
+      <circle cx="490" cy="298" r="4" fill="#4ade80"/>
+      <circle cx="520" cy="288" r="4" fill="#4ade80"/>
+      <circle cx="560" cy="266" r="4" fill="#4ade80"/>
+      <circle cx="600" cy="252" r="4" fill="#4ade80"/>
+      <path d="M 440 316 L 610 248" stroke="#4ade80" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="530" y="236" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">SATURATED FAT vs CHD</text>
+      <text x="634" y="347" fill="#b9a3d6" font-size="9" text-anchor="end">fat intake →</text>
+      <text x="418" y="248" fill="#b9a3d6" font-size="9" text-anchor="start">CHD ↑</text>
+      <text x="530" y="318" fill="#fbbf24" font-size="9.5" font-weight="700" text-anchor="middle">STRONG correlation ≠ causation</text>
+      <text x="530" y="334" fill="#b9a3d6" font-size="9" text-anchor="middle">r ≈ +0.9 — but correlation is not proof</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — The blocked backstage: coronary arteries (first branches of the aorta) supply the heart; atheroma narrows them, thrombus blocks them, and the muscle starves. Data links saturated fat intake to CHD death rate with a strong positive correlation — but correlation is not causation.</div>
+  </div>
+
+  <div class="nos"><b>Nature of Science — correlation vs causation:</b> a correlation coefficient between −1 and +1 quantifies how closely two variables move together. Strong correlation (e.g. saturated fat ↔ CHD, r close to +1) shows association, <b>not</b> cause. To claim causation you need more: a plausible mechanism, controlled studies, and elimination of confounding variables (smoking, exercise, income). This exact distinction is a guaranteed exam favourite.</div>
+</section>
+<!-- ══════════════════════ ACT 7 · THE WATER PIPE NETWORK ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">B3.2.7 · B3.2.17</div>
+  <h2>THE WATER PIPE NETWORK</h2>
+  <p class="aim">How does water climb 100 m up a tree with no pump at the top? The leaf doesn't push — it pulls. Transpiration generates the tension, and a continuous rope of cohesive water molecules carries the pull all the way down to the roots.</p>
+
+  <div class="bouncer">
+    <div class="emoji">💧</div>
+    <div class="body">
+      <h3>Transpiration pull: the cohesion-tension mechanism</h3>
+      <p class="aka">evaporation · capillary action · tension · cohesion · adhesion · cavitation</p>
+      <p>Water evaporates from the <span class="accent">cell walls of the spongy mesophyll</span> in the leaf and diffuses out through the stomata. The cell walls are a mesh of cellulose fibres — water clings to them by <span class="cyan">adhesion</span> (hydrogen bonds), so as the outer water evaporates, <span class="cyan">capillary action</span> drags more water along the mesh, like a paper towel wicking up a spill. That pull is transmitted to the xylem sap, putting it under <span class="accent">tension</span> (negative pressure).</p>
+      <p>Here's the genius bit: water molecules stick to each other by <span class="cyan">cohesion</span> — hydrogen bonds make the whole xylem column behave like one long rope. When the top of the rope is pulled (tension from evaporation), the <span class="gold">entire column moves upward</span>, right down to the roots. Because the column is continuous, the pull isn't limited by atmospheric pressure (which alone can only lift water ~10.4 m). That's how 100 m trees work: cohesion, not suction. The process is <span class="gold">passive</span> — the energy comes from the sun (heat) driving evaporation, not from living cells pumping.</p>
+      <p>If the column breaks — a bubble forms (called <span class="accent">cavitation</span>) — that pipe is out of action until it refills. Plants pay for it by building redundancy: many vessels in parallel.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="transpiration pull diagram: water evaporates from spongy mesophyll cell walls in the leaf and diffuses out through stomata, capillary action draws water through cellulose walls, tension pulls the continuous cohesive water column up the xylem vessel from the roots, with adhesion to the vessel walls and cohesion between water molecules shown">
+      <rect width="660" height="400" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE WATER PIPE NETWORK — TRANSPIRATION PULL</text>
+      <!-- leaf -->
+      <path d="M 240 60 C 280 44 380 44 420 60 C 380 96 280 96 240 60 Z" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="330" y="76" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">LEAF</text>
+      <text x="330" y="120" fill="#b9a3d6" font-size="9.5" text-anchor="middle">spongy mesophyll cell walls</text>
+      <text x="330" y="136" fill="#b9a3d6" font-size="9.5" text-anchor="middle">evaporation → diffusion out</text>
+      <text x="330" y="152" fill="#b9a3d6" font-size="9.5" text-anchor="middle">through stomata</text>
+      <path d="M 300 102 C 290 116 295 128 302 136" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 360 102 C 370 116 365 128 358 136" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <!-- xylem vessel -->
+      <rect x="318" y="180" width="24" height="200" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="2"/>
+      <!-- water column inside -->
+      <rect x="322" y="184" width="16" height="192" fill="rgba(34,211,238,.25)"/>
+      <circle cx="330" cy="200" r="5" fill="#22d3ee"/>
+      <circle cx="330" cy="224" r="5" fill="#22d3ee"/>
+      <circle cx="330" cy="248" r="5" fill="#22d3ee"/>
+      <circle cx="330" cy="272" r="5" fill="#22d3ee"/>
+      <circle cx="330" cy="296" r="5" fill="#22d3ee"/>
+      <circle cx="330" cy="320" r="5" fill="#22d3ee"/>
+      <circle cx="330" cy="344" r="5" fill="#22d3ee"/>
+      <text x="330" y="178" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">XYLEM</text>
+      <!-- tension arrow up -->
+      <path d="M 358 300 C 400 280 400 240 366 200" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="5 4"/>
+      <text x="430" y="240" fill="#fbbf24" font-size="10" font-weight="800">TENSION = negative pressure</text>
+      <text x="430" y="258" fill="#b9a3d6" font-size="9.5">pulls the whole column up</text>
+      <!-- cohesion label -->
+      <path d="M 300 290 C 260 300 240 320 248 340" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+      <text x="120" y="330" fill="#a855f7" font-size="10" font-weight="800">COHESION</text>
+      <text x="120" y="348" fill="#b9a3d6" font-size="9.5">water molecules stick</text>
+      <text x="120" y="364" fill="#b9a3d6" font-size="9.5">→ column = one rope</text>
+      <text x="120" y="380" fill="#b9a3d6" font-size="9.5">beats the 10.4 m limit</text>
+      <!-- adhesion label -->
+      <path d="M 346 330 C 380 340 420 350 450 356" stroke="#4ade80" stroke-width="1.5" fill="none"/>
+      <text x="470" y="352" fill="#4ade80" font-size="10" font-weight="800">ADHESION</text>
+      <text x="470" y="370" fill="#b9a3d6" font-size="9.5">water clings to cellulose</text>
+      <text x="470" y="386" fill="#b9a3d6" font-size="9.5">walls (hydrogen bonds)</text>
+      <!-- root -->
+      <path d="M 300 380 C 310 392 320 392 330 384 C 340 392 350 392 360 380 L 360 396 L 300 396 Z" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="398" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">ROOT — water absorbed</text>
+      <text x="70" y="120" fill="#b9a3d6" font-size="10" text-anchor="middle">sun = the only energy:</text>
+      <text x="70" y="138" fill="#b9a3d6" font-size="10" text-anchor="middle">transpiration is PASSIVE</text>
+      <text x="70" y="162" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">cavitation:</text>
+      <text x="70" y="180" fill="#b9a3d6" font-size="10" text-anchor="middle">bubble breaks a pipe</text>
+    </svg>
+    <div class="cap"><b>FIG 7</b> — The water pipe network: evaporation from mesophyll cell walls → capillary action through cellulose → tension in the xylem → the cohesive water column is pulled up like a rope, with adhesion to the walls. Passive (sun-driven), beats the 10.4 m suction limit, and cavitation breaks pipes.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "TEAC":</b> <b>T</b>ranspiration (evaporation) → <b>E</b>nergy from sun → <b>A</b>dhesion to walls + capillary action → <b>C</b>ohesion pulls the column. Tension is just what the column feels when it's being pulled.</div>
+
+  <div class="panel">
+    <h3>B3.2.17 · The Spring Rise — root pressure</h3>
+    <p>Transpiration pull usually does the work — but sometimes it can't (at night, in high humidity, or in spring before leaves have opened). Then the roots take over with <span class="accent">root pressure</span>. Living root cells actively pump mineral ions into the xylem vessels, making the sap <span class="cyan">hypertonic</span>. Water then follows by <span class="cyan">osmosis</span>, building up <span class="gold">positive pressure</span> in the xylem that pushes sap upward — often enough to make cut stems "bleed" sap in spring. Root pressure works by pushing; transpiration pull works by pulling. Two mechanisms, same pipes, different seasons.</p>
+  </div>
+
+  <div class="exam"><b>Exam favourite:</b> "Suggest how water moves up a 100 m tree." Answer chain: evaporation at leaves → tension → cohesion keeps column continuous → pull transmitted down → water absorbed at roots. Mentioning the 10.4 m limit of suction is the mark-winner that shows you know WHY cohesion matters.</div>
+</section>
+
+<!-- ══════════════════════ ACT 8 · THE PIPE FITTERS ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">B3.2.8</div>
+  <h2>THE PIPE FITTERS</h2>
+  <p class="aim">Xylem is the water pipe network, and it's built by specialist pipe fitters: dead cells stripped of everything except a rigid, waterproof, ringed wall. Perfect for carrying tension without collapsing.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧱</div>
+    <div class="body">
+      <h3>Dead cells, perfect pipes</h3>
+      <p class="aka">xylem vessels · lignified walls · pits · end walls removed · rings and spirals</p>
+      <p>Xylem vessels are formed from columns of cells stacked end to end. As they mature, the cells <span class="accent">die</span>: their contents (cytoplasm, nucleus, membranes) break down, and their end walls are <span class="gold">largely removed</span> — leaving one long, hollow, continuous tube with minimal resistance to flow. Dead cells can't block the pipe with their own biology, and they can't be damaged by the negative pressure inside.</p>
+      <p>The walls are thickened with <span class="accent">lignin</span>, a tough waterproof polymer, in rings or spirals (in young, still-stretching vessels) or more extensively with <span class="cyan">pits</span> (in mature vessels). Lignified walls do two jobs: they <span class="gold">withstand tension</span> — the negative pressure of transpiration would crush a soft-walled tube — and they keep water in. The pits (unthickened gaps) are where water actually moves <span class="gold">in and out</span> of the vessel to the surrounding tissues.</p>
+      <p>Because the cells are dead, transport through xylem is <span class="cyan">passive</span> — no energy input, just tension, cohesion and the sun. The same columns also give mechanical support: that's why woody stems stand up.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="xylem vessel diagram: a column of dead cells with end walls removed forming one continuous tube, walls thickened with spiral and ring lignin deposits, pits where water enters and exits, flow arrows showing passive upward movement">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE PIPE FITTERS — XYLEM VESSEL</text>
+      <!-- vessel tube -->
+      <rect x="200" y="60" width="60" height="250" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2.5"/>
+      <!-- spiral thickenings -->
+      <path d="M 200 70 C 230 90 230 110 200 130 C 230 150 230 170 200 190 C 230 210 230 230 200 250" stroke="#4ade80" stroke-width="4" fill="none"/>
+      <!-- ring thickenings -->
+      <rect x="232" y="80" width="28" height="8" rx="4" fill="#4ade80"/>
+      <rect x="232" y="140" width="28" height="8" rx="4" fill="#4ade80"/>
+      <rect x="232" y="200" width="28" height="8" rx="4" fill="#4ade80"/>
+      <rect x="232" y="260" width="28" height="8" rx="4" fill="#4ade80"/>
+      <!-- pits -->
+      <circle cx="215" cy="240" r="5" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="215" cy="290" r="5" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <!-- flow arrows -->
+      <path d="M 230 296 L 230 80" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="6 4"/>
+      <text x="250" y="66" fill="#22d3ee" font-size="10" font-weight="800">water up (passive)</text>
+      <!-- cell boundaries (removed) -->
+      <line x1="200" y1="130" x2="260" y2="130" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <line x1="200" y1="200" x2="260" y2="200" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="130" y="88" fill="#b9a3d6" font-size="9.5" text-anchor="end">end walls removed →</text>
+      <text x="130" y="104" fill="#b9a3d6" font-size="9.5" text-anchor="end">one continuous tube</text>
+      <text x="130" y="152" fill="#ff2ec4" font-size="9.5" font-weight="700" text-anchor="end">cells are DEAD:</text>
+      <text x="130" y="168" fill="#b9a3d6" font-size="9.5" text-anchor="end">contents break down</text>
+      <text x="130" y="184" fill="#b9a3d6" font-size="9.5" text-anchor="end">→ hollow, unblocked</text>
+      <!-- labels right -->
+      <line x1="260" y1="100" x2="330" y2="100" stroke="#4ade80" stroke-width="1.2"/>
+      <text x="336" y="96" fill="#4ade80" font-size="10" font-weight="800">SPIRAL + RING LIGNIN</text>
+      <text x="336" y="112" fill="#b9a3d6" font-size="9.5">young vessels: stretch as</text>
+      <text x="336" y="126" fill="#b9a3d6" font-size="9.5">the plant grows</text>
+      <line x1="260" y1="170" x2="330" y2="170" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="336" y="166" fill="#22d3ee" font-size="10" font-weight="800">LIGNIFIED WALLS</text>
+      <text x="336" y="182" fill="#b9a3d6" font-size="9.5">withstand tension —</text>
+      <text x="336" y="196" fill="#b9a3d6" font-size="9.5">no collapse under pull</text>
+      <line x1="220" y1="242" x2="330" y2="242" stroke="#fbbf24" stroke-width="1.2"/>
+      <text x="336" y="238" fill="#fbbf24" font-size="10" font-weight="800">PITS</text>
+      <text x="336" y="254" fill="#b9a3d6" font-size="9.5">gaps in the wall where</text>
+      <text x="336" y="268" fill="#b9a3d6" font-size="9.5">water enters + exits</text>
+      <text x="330" y="322" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">Dead, hollow, lignified, pitted — the perfect tension-proof pipe</text>
+    </svg>
+    <div class="cap"><b>FIG 8</b> — The pipe fitters: xylem vessels are columns of dead cells with end walls removed (continuous tubes), ring/spiral lignin thickenings (tension-proof, stretchable in youth), and pits for water entry/exit. Flow is entirely passive.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Dead Hollow Lignified Pitted"</b> — four words that answer every xylem adaptation question. Compare with phloem (alive, nucleated companion cells) — the exam loves the contrast.</div>
+</section>
+
+<!-- ══════════════════════ ACT 9 · THE FLOOR PLANS ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">B3.2.9 · B3.2.10</div>
+  <h2>THE FLOOR PLANS</h2>
+  <p class="aim">Every club has a floor plan. Stems put the transport corridors in a ring near the edge; roots put them in the middle, xylem star-shaped. Learn the two plans and the microscope becomes predictable.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📐</div>
+    <div class="body">
+      <h3>Stem vs root: two layouts, one logic</h3>
+      <p class="aka">plan diagram · epidermis · cortex · vascular bundles · pith · star xylem</p>
+      <p><span class="accent">Stem (dicot) TS:</span> a ring of <span class="cyan">vascular bundles</span> sits just inside the <span class="cyan">epidermis</span>, surrounding a big central <span class="cyan">pith</span>, with <span class="cyan">cortex</span> between the bundles and the surface. In each bundle the <span class="gold">xylem faces the centre (inside)</span> and the <span class="gold">phloem faces the outside</span>, with cambium between them. Putting the bundles in a ring gives the stem strength against bending.</p>
+      <p><span class="accent">Root (dicot) TS:</span> the vascular tissue is <span class="cyan">central</span>, with a <span class="gold">star-shaped xylem core</span> and <span class="gold">phloem in the gaps between the star's points</span>. A ring of endodermis wraps the central cylinder, the <span class="cyan">cortex</span> (large thin-walled cells) bulks out the root, and the <span class="cyan">epidermis</span> bears <span class="cyan">root hairs</span> that absorb water and minerals.</p>
+      <p>A <span class="accent">plan diagram</span> is a low-power map: <span class="gold">single lines show tissue boundaries, no individual cells</span>. Epidermis (waterproofing), cortex (support/photosynthesis), vascular bundles, pith — that's the whole stem story; root swaps in star-xylem, endodermis and root hairs.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="plan diagrams side by side: dicot stem cross section with epidermis, cortex, a ring of vascular bundles each with xylem inner and phloem outer and pith in the centre; dicot root cross section with epidermis and root hairs, cortex, endodermis, and central star shaped xylem with phloem between the points">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE FLOOR PLANS — STEM vs ROOT (plan diagrams)</text>
+      <!-- stem -->
+      <circle cx="165" cy="200" r="110" fill="rgba(74,222,128,.06)" stroke="#4ade80" stroke-width="2.5"/>
+      <circle cx="165" cy="200" r="84" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="165" cy="200" r="40" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="2"/>
+      <!-- stem bundles -->
+      <g fill="rgba(255,46,196,.25)" stroke="#ff2ec4" stroke-width="1.5">
+        <circle cx="165" cy="112" r="12"/>
+        <circle cx="210" cy="128" r="12"/>
+        <circle cx="240" cy="165" r="12"/>
+        <circle cx="240" cy="235" r="12"/>
+        <circle cx="210" cy="272" r="12"/>
+        <circle cx="165" cy="288" r="12"/>
+        <circle cx="120" cy="272" r="12"/>
+        <circle cx="90" cy="235" r="12"/>
+        <circle cx="90" cy="165" r="12"/>
+        <circle cx="120" cy="128" r="12"/>
+      </g>
+      <text x="165" y="60" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">STEM</text>
+      <text x="165" y="78" fill="#b9a3d6" font-size="9.5" text-anchor="middle">bundles in a ring near edge</text>
+      <text x="165" y="200" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">PITH</text>
+      <line x1="240" y1="200" x2="330" y2="200" stroke="#ff2ec4" stroke-width="1.2"/>
+      <text x="336" y="196" fill="#ff2ec4" font-size="10" font-weight="800">VASCULAR BUNDLE</text>
+      <text x="336" y="212" fill="#b9a3d6" font-size="9.5">xylem INNER + phloem OUTER</text>
+      <text x="336" y="226" fill="#b9a3d6" font-size="9.5">cambium between them</text>
+      <line x1="120" y1="120" x2="60" y2="110" stroke="#4ade80" stroke-width="1.2"/>
+      <text x="54" y="106" fill="#4ade80" font-size="10" font-weight="800" text-anchor="end">EPIDERMIS</text>
+      <text x="54" y="122" fill="#b9a3d6" font-size="9.5" text-anchor="end">waterproofing</text>
+      <text x="54" y="150" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="end">CORTEX</text>
+      <text x="54" y="166" fill="#b9a3d6" font-size="9.5" text-anchor="end">support + photosynthesis</text>
+      <!-- root -->
+      <circle cx="495" cy="200" r="110" fill="rgba(74,222,128,.06)" stroke="#4ade80" stroke-width="2.5"/>
+      <circle cx="495" cy="200" r="84" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2"/>
+      <!-- star xylem -->
+      <g fill="rgba(255,46,196,.35)" stroke="#ff2ec4" stroke-width="2">
+        <polygon points="495,140 502,176 538,188 508,202 520,238 495,216 470,238 482,202 452,188 488,176"/>
+      </g>
+      <!-- phloem between points -->
+      <g fill="rgba(34,211,238,.4)">
+        <circle cx="538" cy="210" r="7"/>
+        <circle cx="510" cy="252" r="7"/>
+        <circle cx="470" cy="250" r="7"/>
+        <circle cx="452" cy="206" r="7"/>
+        <circle cx="482" cy="162" r="7"/>
+      </g>
+      <text x="495" y="60" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">ROOT</text>
+      <text x="495" y="78" fill="#b9a3d6" font-size="9.5" text-anchor="middle">vascular tissue CENTRAL</text>
+      <!-- root hairs -->
+      <path d="M 400 150 C 380 144 372 150 380 156" stroke="#4ade80" stroke-width="1.5" fill="none"/>
+      <path d="M 402 220 C 378 218 370 226 382 232" stroke="#4ade80" stroke-width="1.5" fill="none"/>
+      <text x="360" y="140" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="end">ROOT HAIRS</text>
+      <text x="360" y="156" fill="#b9a3d6" font-size="9" text-anchor="end">absorb water + ions</text>
+      <line x1="556" y1="240" x2="610" y2="260" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="616" y="256" fill="#22d3ee" font-size="10" font-weight="800">PHLOEM</text>
+      <text x="616" y="272" fill="#b9a3d6" font-size="9.5">between star points</text>
+      <text x="616" y="286" fill="#b9a3d6" font-size="9.5">of the xylem star</text>
+      <line x1="556" y1="180" x2="610" y2="180" stroke="#ff2ec4" stroke-width="1.2"/>
+      <text x="616" y="176" fill="#ff2ec4" font-size="10" font-weight="800">XYLEM STAR</text>
+      <text x="616" y="192" fill="#b9a3d6" font-size="9.5">thick-walled, central</text>
+      <text x="616" y="320" fill="#4ade80" font-size="9.5" text-anchor="start">endodermis wraps the centre</text>
+      <text x="330" y="332" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">PLAN DIAGRAM = single lines for tissue boundaries · no individual cells</text>
+    </svg>
+    <div class="cap"><b>FIG 9</b> — The floor plans: stem — epidermis, cortex, ring of vascular bundles (xylem inner, phloem outer, cambium between), pith centre. Root — epidermis with root hairs, cortex, endodermis, central star-shaped xylem with phloem between the points. Draw plan diagrams with single boundary lines only.</div>
+  </div>
+
+  <div class="exam"><b>Drawing skill:</b> plan diagrams are drawn from <b>low-power</b> views — one sharp line per tissue interface, no cell detail, faint shading for density (xylem = densest). Label xylem/phloem positions correctly: stem = xylem in, phloem out; root = star xylem centre, phloem between arms.</div>
+</section>
+<!-- ══════════════════════ ACT 10 · THE TISSUE-FLUID TAP ══════════════════════ -->
+<section class="act" id="act10">
+  <div class="acttag">AHL · B3.2.11 · B3.2.12 · B3.2.13</div>
+  <h2>THE TISSUE-FLUID TAP</h2>
+  <p class="aim">Every minute, the corridors leak. Plasma filters out of the arterial end of capillaries, bathes the cells, and mostly drains back in at the venous end — while the lymph system mops up the overflow. That's your tissue fluid tap.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚿</div>
+    <div class="body">
+      <h3>Pressure filtration at the tap</h3>
+      <p class="aka">tissue fluid · pressure filtration · plasma proteins · lymph · oedema</p>
+      <p><span class="accent">Tissue fluid</span> is the fluid that surrounds and bathes body cells — their internal environment. It forms by <span class="cyan">pressure filtration</span>: at the <b>arteriole end</b> of a capillary, blood pressure is high enough to force fluid (plasma minus its large proteins) out through the wall pores into the tissue. Along the bed, blood pressure falls, so at the <b>venule end</b> the lower pressure lets most fluid drain back in. The ~20 dm³ of tissue fluid produced per day: ~17 dm³ returns to capillaries, ~3 dm³ is mopped up by the lymph system.</p>
+      <p><span class="accent">Plasma vs tissue fluid:</span> tissue fluid is plasma that has been filtered — so it has <span class="gold">no large plasma proteins</span> (they're too big for the pores) and no blood cells. Everything else — glucose, amino acids, mineral ions, hormones, O₂, CO₂ — is present. Cells exchange with the tissue fluid: O₂ and glucose diffuse in; CO₂ and wastes diffuse out.</p>
+      <p><span class="accent">Lymph:</span> the excess tissue fluid drains into blind-ended <span class="cyan">lymph vessels</span> — thin-walled, highly permeable, with valves (one-way, like veins). It flows through lymph nodes (filtering) and eventually empties via lymph ducts into the subclavian veins, rejoining the blood. If drainage fails, fluid accumulates → <span class="accent">oedema</span> (swelling).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="capillary bed with tissue fluid exchange: high blood pressure at the arteriole end forces plasma out into the tissue, most fluid drains back at the venule end, and excess fluid is collected by a blind-ended lymph vessel with valves that returns it to the blood via lymph ducts">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE TISSUE-FLUID TAP — FILTRATION + LYMPH</text>
+      <!-- arteriole -->
+      <rect x="20" y="120" width="70" height="26" rx="13" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="55" y="112" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">ARTERIOLE</text>
+      <text x="55" y="160" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">HIGH BP</text>
+      <text x="55" y="176" fill="#b9a3d6" font-size="9" text-anchor="middle">forces fluid out</text>
+      <!-- capillary -->
+      <path d="M 90 133 C 200 120 280 140 400 133 C 460 130 520 133 570 133" fill="none" stroke="#22d3ee" stroke-width="5"/>
+      <!-- venule -->
+      <rect x="570" y="120" width="70" height="26" rx="13" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="605" y="112" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">VENULE</text>
+      <text x="605" y="160" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">LOW BP</text>
+      <text x="605" y="176" fill="#b9a3d6" font-size="9" text-anchor="middle">fluid drains back</text>
+      <!-- fluid out arrows -->
+      <path d="M 150 140 C 140 160 140 170 145 185" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 200 140 C 190 160 190 170 195 185" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 250 140 C 240 160 240 170 245 185" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <!-- fluid in arrows -->
+      <path d="M 420 185 C 425 170 425 160 415 140" stroke="#a855f7" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 470 185 C 475 170 475 160 465 140" stroke="#a855f7" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 520 185 C 525 170 525 160 515 140" stroke="#a855f7" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <!-- tissue fluid zone -->
+      <text x="330" y="210" fill="#b9a3d6" font-size="10" text-anchor="middle">tissue fluid bathes the cells</text>
+      <text x="330" y="226" fill="#b9a3d6" font-size="9.5" text-anchor="middle">= plasma minus large proteins</text>
+      <text x="120" y="210" fill="#b9a3d6" font-size="9" text-anchor="middle">O₂ + glucose</text>
+      <text x="120" y="224" fill="#b9a3d6" font-size="9" text-anchor="middle">diffuse into cells</text>
+      <text x="540" y="210" fill="#b9a3d6" font-size="9" text-anchor="middle">CO₂ + wastes out</text>
+      <!-- lymph vessel -->
+      <path d="M 300 250 L 300 320" stroke="#4ade80" stroke-width="8" fill="none"/>
+      <path d="M 340 250 L 340 320" stroke="#4ade80" stroke-width="8" fill="none"/>
+      <path d="M 300 270 L 340 270" fill="none" stroke="#150a26" stroke-width="3"/>
+      <path d="M 300 300 L 340 300" fill="none" stroke="#150a26" stroke-width="3"/>
+      <path d="M 300 268 C 315 262 325 262 340 268" fill="rgba(74,222,128,.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <path d="M 300 298 C 315 292 325 292 340 298" fill="rgba(74,222,128,.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="320" y="252" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">LYMPH</text>
+      <text x="320" y="334" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">VESSEL</text>
+      <path d="M 245 240 C 250 255 265 262 296 262" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 370 262 L 420 262 L 420 230" stroke="#4ade80" stroke-width="1.5" marker-end="url(#ah)" fill="none"/>
+      <text x="415" y="290" fill="#b9a3d6" font-size="9" text-anchor="middle">blind-ended, thin walls,</text>
+      <text x="415" y="304" fill="#b9a3d6" font-size="9" text-anchor="middle">valves → one-way flow</text>
+      <text x="415" y="326" fill="#4ade80" font-size="9.5" font-weight="700" text-anchor="middle">→ lymph ducts → subclavian</text>
+      <text x="415" y="340" fill="#4ade80" font-size="9.5" font-weight="700" text-anchor="middle">veins → back to blood</text>
+      <text x="330" y="356" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">~20 dm³ made · ~17 return · ~3 dm³ lymph · failure → oedema</text>
+    </svg>
+    <div class="cap"><b>FIG 10</b> — The tissue-fluid tap: high pressure at the arteriole end filters plasma out; lower pressure at the venule end recovers most of it; blind-ended lymph vessels with valves drain the excess back to the blood. Failure to drain = oedema.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "OUT at the start, IN at the end, LYMPH for the rest":</b> arteriole end pushes fluid out (high pressure), venule end lets it back in (low pressure), lymph vessels collect the ~3 dm³ surplus. Large plasma proteins never leave — they stay in the blood.</div>
+</section>
+
+<!-- ══════════════════════ ACT 11 · THE DJ'S DECK ══════════════════════ -->
+<section class="act" id="act11">
+  <div class="acttag">AHL · B3.2.14 · B3.2.15 · B3.2.16</div>
+  <h2>THE DJ'S DECK</h2>
+  <p class="aim">The heart is the DJ, and the beat sequence is the setlist: atria squeeze, ventricles slam, valves click shut — twice per second, every second. This is the club's unidirectional music system.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎧</div>
+    <div class="body">
+      <h3>One-way flow, built in</h3>
+      <p class="aka">cardiac muscle · pacemaker · atrioventricular valves · semilunar valves · septum</p>
+      <p><span class="accent">Cardiac muscle</span> is the DJ's special gear: cells are <span class="cyan">branched and connected</span>, so electrical signals spread rapidly and the whole heart contracts in a coordinated wave. It's <span class="cyan">myogenic</span> — the heartbeat starts in the heart itself, in the <span class="accent">sinoatrial (SA) node</span> (the pacemaker) in the right atrium wall, which fires rhythmically on its own.</p>
+      <p>In a <span class="accent">frontal plane</span> view you see the unidirectional plumbing: deoxygenated blood arrives via the <span class="cyan">vena cava</span> → <span class="cyan">right atrium</span> → through the <span class="cyan">right atrioventricular valve</span> → <span class="cyan">right ventricle</span> → <span class="cyan">pulmonary artery</span> (to the lungs). Oxygenated blood returns via <span class="cyan">pulmonary veins</span> → <span class="cyan">left atrium</span> → <span class="cyan">left atrioventricular valve</span> → <span class="cyan">left ventricle</span> → <span class="cyan">aorta</span> (to the body). The <span class="accent">septum</span> separates the two sides, so oxygenated and deoxygenated blood never mix.</p>
+      <p>Valves guarantee one-way flow: <span class="gold">atrioventricular valves</span> (right = tricuspid, left = bicuspid) stop blood squirting back into the atria when ventricles contract; <span class="gold">semilunar valves</span> at the artery exits stop it squirting back into the ventricles. Ventricles have <span class="cyan">thicker muscular walls than atria</span> — and the left ventricle is thickest of all, because it pumps blood around the entire body.</p>
+      <p><span class="accent">The cardiac cycle:</span> SA node fires → <span class="cyan">atrial systole</span> (atria contract, pushing blood into relaxed ventricles) → <span class="cyan">ventricular systole</span> (ventricles contract, AV valves shut, blood forced into arteries) → <span class="cyan">diastole</span> (whole heart relaxes, semilunar valves shut, blood refills from veins). At ~75 bpm one full cycle ≈ 0.8 s.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="frontal plane of the heart: vena cava into right atrium, through right atrioventricular valve into right ventricle and pulmonary artery; pulmonary veins into left atrium, through left atrioventricular valve into left ventricle and aorta; septum, SA node pacemaker, semilunar valves, and thicker left ventricle wall, plus a cardiac cycle strip showing atrial systole, ventricular systole and diastole">
+      <rect width="660" height="440" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE DJ'S DECK — HEART FRONTAL PLANE</text>
+      <!-- vena cava -->
+      <rect x="70" y="50" width="26" height="80" rx="8" fill="rgba(34,211,238,.2)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="83" y="42" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">VENA CAVA</text>
+      <!-- pulmonary artery -->
+      <path d="M 150 120 C 130 90 90 80 60 80 L 60 66 C 100 60 150 70 175 100 Z" fill="rgba(34,211,238,.25)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="72" y="100" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">PULMONARY</text>
+      <text x="72" y="112" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">ARTERY</text>
+      <!-- right atrium -->
+      <path d="M 80 140 C 80 110 150 110 170 140 C 185 165 175 200 150 210 L 100 210 C 80 200 80 160 80 140 Z" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="132" y="172" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">RIGHT</text>
+      <text x="132" y="186" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">ATRIUM</text>
+      <!-- SA node -->
+      <circle cx="118" cy="128" r="7" fill="rgba(251,191,36,.4)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="118" y="142" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">SA node</text>
+      <!-- right ventricle -->
+      <path d="M 95 225 C 90 260 110 300 150 300 C 190 300 210 270 215 240 C 200 225 160 220 130 222 Z" fill="rgba(34,211,238,.2)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="152" y="262" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">RIGHT</text>
+      <text x="152" y="276" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">VENTRICLE</text>
+      <!-- pulmonary veins -->
+      <rect x="560" y="130" width="26" height="60" rx="8" fill="rgba(255,46,196,.2)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="573" y="120" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">PULMONARY</text>
+      <text x="573" y="132" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">VEINS</text>
+      <!-- aorta -->
+      <path d="M 480 140 C 500 120 540 100 570 100 L 580 86 C 540 80 490 100 465 125 Z" fill="rgba(255,46,196,.25)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="545" y="100" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">AORTA</text>
+      <!-- left atrium -->
+      <path d="M 470 140 C 470 110 500 110 510 140 C 525 165 515 200 490 210 L 440 210 C 425 200 425 160 470 140 Z" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="468" y="172" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">LEFT</text>
+      <text x="468" y="186" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">ATRIUM</text>
+      <!-- left ventricle (thicker wall) -->
+      <path d="M 440 225 C 435 260 455 305 495 305 C 535 305 555 275 550 240 C 535 225 495 220 470 222 Z" fill="rgba(255,46,196,.2)" stroke="#ff2ec4" stroke-width="4"/>
+      <text x="495" y="262" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">LEFT</text>
+      <text x="495" y="276" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">VENTRICLE</text>
+      <text x="495" y="294" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">thickest wall</text>
+      <!-- septum -->
+      <line x1="310" y1="150" x2="310" y2="300" stroke="#b9a3d6" stroke-width="2.5" stroke-dasharray="6 4"/>
+      <text x="310" y="318" fill="#b9a3d6" font-size="9.5" font-weight="800" text-anchor="middle">SEPTUM</text>
+      <text x="310" y="332" fill="#b9a3d6" font-size="9" text-anchor="middle">no mixing of</text>
+      <text x="310" y="344" fill="#b9a3d6" font-size="9" text-anchor="middle">the two sides</text>
+      <!-- AV valves -->
+      <path d="M 105 210 L 150 225 L 130 235 Z" fill="rgba(251,191,36,.4)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="60" y="226" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="end">AV valves</text>
+      <text x="60" y="240" fill="#b9a3d6" font-size="9" text-anchor="end">tricuspid (R)</text>
+      <text x="60" y="254" fill="#b9a3d6" font-size="9" text-anchor="end">bicuspid (L)</text>
+      <path d="M 440 212 L 485 225 L 460 235 Z" fill="rgba(251,191,36,.4)" stroke="#fbbf24" stroke-width="1.5"/>
+      <!-- semilunar valves -->
+      <path d="M 150 120 L 162 130 L 148 136 Z" fill="rgba(74,222,128,.4)" stroke="#4ade80" stroke-width="1.5"/>
+      <path d="M 460 130 L 472 140 L 458 146 Z" fill="rgba(74,222,128,.4)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="192" y="110" fill="#4ade80" font-size="9" font-weight="800">SEMILUNAR VALVES</text>
+      <text x="192" y="124" fill="#b9a3d6" font-size="9">at artery exits</text>
+      <!-- flow arrows -->
+      <path d="M 83 140 L 110 165" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 140 190 L 140 218" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 120 225 C 100 200 90 150 85 125" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 505 160 L 480 180" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 470 200 L 470 218" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 480 228 C 500 200 520 160 540 130" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <!-- cardiac cycle strip -->
+      <line x1="30" y1="370" x2="630" y2="370" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="330" y="358" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">THE BEAT SEQUENCE (cardiac cycle, ~0.8 s at 75 bpm)</text>
+      <rect x="40" y="380" width="180" height="44" rx="10" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="130" y="398" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">ATRIAL SYSTOLE</text>
+      <text x="130" y="414" fill="#b9a3d6" font-size="9" text-anchor="middle">SA node fires · atria push</text>
+      <rect x="240" y="380" width="180" height="44" rx="10" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="398" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">VENTRICULAR SYSTOLE</text>
+      <text x="330" y="414" fill="#b9a3d6" font-size="9" text-anchor="middle">AV shut · blood into arteries</text>
+      <rect x="440" y="380" width="180" height="44" rx="10" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="530" y="398" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">DIASTOLE</text>
+      <text x="530" y="414" fill="#b9a3d6" font-size="9" text-anchor="middle">relax · semilunar shut · refill</text>
+      <path d="M 220 402 L 236 402" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 420 402 L 436 402" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="330" y="434" fill="#b9a3d6" font-size="9.5" text-anchor="middle">blood flows ONE way: vena cava → RA → RV → pulmonary artery → lungs → pulmonary veins → LA → LV → aorta</text>
+    </svg>
+    <div class="cap"><b>FIG 11</b> — The DJ's deck: a frontal-plane heart showing unidirectional flow, valves (AV + semilunar), the septum, SA node pacemaker, and the thicker left ventricle — plus the three-phase beat sequence (atrial systole → ventricular systole → diastole).</div>
+  </div>
+
+  <div class="panel">
+    <h3>B3.2.14 · Single vs double circulation: fish rave vs mammal club</h3>
+    <table>
+      <tr><th></th><th>Fish (single circulation)</th><th>Mammal (double circulation)</th></tr>
+      <tr><td>Blood passes through the heart</td><td>Once per circuit</td><td>Twice per circuit</td></tr>
+      <tr><td>Pathway</td><td>heart → gills → body → heart</td><td>heart → lungs → heart → body → heart</td></tr>
+      <tr><td>Pressure after gas exchange</td><td>Falls passing through gills, so body gets lower pressure</td><td>Re-pumped after lungs — body gets full pressure</td></tr>
+      <tr><td>Oxygenated / deoxygenated</td><td>Mixes in one circuit (heart pumps deoxygenated blood)</td><td>Separate sides — no mixing</td></tr>
+      <tr><td>Why it works</td><td>Water supports fish; gill capillaries are tough</td><td>High pressure needed for the body; delicate lung capillaries get low pressure</td></tr>
+    </table>
+    <p class="muted">Mammals evolved the double pump: the right heart pumps blood to the lungs at low pressure (delicate alveoli), and the left heart re-pumps it to the body at high pressure (needed for perfusion of organs like the kidneys). Fish make do with one pump and accept lower body pressure.</p>
+  </div>
+
+  <div class="exam"><b>Cardiac cycle timing:</b> at ~75 bpm the cycle lasts ~0.8 s. Atrial systole ~0.1 s, ventricular systole ~0.3 s, total relaxation (diastole) ~0.4 s. Question trap: the atria contract <b>before</b> the ventricles — the delay lets blood drain down into the ventricles before they slam shut.</div>
+</section>
+
+<!-- ══════════════════════ ACT 12 · THE VIP ESCALATOR ══════════════════════ -->
+<section class="act" id="act12">
+  <div class="acttag">AHL · B3.2.18</div>
+  <h2>THE VIP ESCALATOR</h2>
+  <p class="aim">While xylem pipes water up, the phloem escalator moves the real VIPs — sucrose and other carbon compounds — from the leaf kitchens (source) to wherever they're needed (sink). It's the only escalator in biology that runs both ways.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🛗</div>
+    <div class="body">
+      <h3>Sieve tubes + companion cells = the sugar lift</h3>
+      <p class="aka">translocation · sieve tubes · sieve plates · companion cells · plasmodesmata · source to sink</p>
+      <p><span class="accent">Translocation</span> is the transport of sucrose and other organic compounds in phloem from <span class="cyan">source</span> (where they're made or released — e.g. photosynthesis leaves, or stores being unloaded) to <span class="cyan">sink</span> (where they're used or stored — e.g. roots, fruits, growing buds). The escalator runs on pressure, not muscle.</p>
+      <p>The moving walkway is the <span class="accent">sieve tube</span>: a column of <span class="cyan">sieve tube elements</span> joined end to end. Their end walls are perforated into <span class="cyan">sieve plates</span>, letting sap flow through. Each element keeps a living plasma membrane but has <span class="gold">no nucleus and very little cytoplasm</span> — nearly everything is stripped out to leave a clear channel.</p>
+      <p>Because sieve tubes can barely run their own metabolism, each is paired with a <span class="accent">companion cell</span> packed with <span class="cyan">mitochondria</span>, connected to the sieve tube by <span class="cyan">plasmodesmata</span> (cytoplasmic channels). The companion cells do the heavy lifting: they load sucrose into the sieve tube by <span class="gold">active transport</span>. Water follows by osmosis, building up pressure at the source; at the sink, unloading lowers pressure — and the <span class="gold">pressure difference drives the flow</span> of sap from source to sink. That's the pressure-flow model.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="phloem translocation diagram: a sieve tube made of sieve tube elements with perforated sieve plates, paired with companion cells full of mitochondria connected by plasmodesmata, sucrose actively loaded at the source leaf creating high pressure and unloaded at the sink root creating low pressure, so sap flows from source to sink">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE VIP ESCALATOR — PHLOEM TRANSLOCATION</text>
+      <!-- sieve tube -->
+      <rect x="140" y="60" width="80" height="250" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2.5"/>
+      <!-- sieve plates -->
+      <line x1="140" y1="130" x2="220" y2="130" stroke="#4ade80" stroke-width="3"/>
+      <circle cx="160" cy="130" r="3" fill="#150a26"/>
+      <circle cx="180" cy="130" r="3" fill="#150a26"/>
+      <circle cx="200" cy="130" r="3" fill="#150a26"/>
+      <line x1="140" y1="220" x2="220" y2="220" stroke="#4ade80" stroke-width="3"/>
+      <circle cx="160" cy="220" r="3" fill="#150a26"/>
+      <circle cx="180" cy="220" r="3" fill="#150a26"/>
+      <circle cx="200" cy="220" r="3" fill="#150a26"/>
+      <text x="180" y="88" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">SIEVE</text>
+      <text x="180" y="102" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">TUBE</text>
+      <text x="180" y="172" fill="#b9a3d6" font-size="9" text-anchor="middle">no nucleus,</text>
+      <text x="180" y="186" fill="#b9a3d6" font-size="9" text-anchor="middle">little cytoplasm</text>
+      <text x="180" y="264" fill="#b9a3d6" font-size="9" text-anchor="middle">sieve plate:</text>
+      <text x="180" y="278" fill="#b9a3d6" font-size="9" text-anchor="middle">perforated end wall</text>
+      <!-- companion cells -->
+      <rect x="240" y="70" width="46" height="52" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="258" cy="88" r="5" fill="rgba(251,191,36,.5)"/>
+      <circle cx="272" cy="100" r="4" fill="rgba(251,191,36,.5)"/>
+      <rect x="240" y="160" width="46" height="52" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="258" cy="178" r="5" fill="rgba(251,191,36,.5)"/>
+      <circle cx="272" cy="190" r="4" fill="rgba(251,191,36,.5)"/>
+      <rect x="240" y="250" width="46" height="52" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="258" cy="268" r="5" fill="rgba(251,191,36,.5)"/>
+      <circle cx="272" cy="280" r="4" fill="rgba(251,191,36,.5)"/>
+      <text x="263" y="62" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">COMPANION</text>
+      <text x="263" y="74" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">CELLS</text>
+      <text x="263" y="140" fill="#b9a3d6" font-size="8.5" text-anchor="middle">many</text>
+      <text x="263" y="152" fill="#b9a3d6" font-size="8.5" text-anchor="middle">mitochondria</text>
+      <text x="263" y="236" fill="#b9a3d6" font-size="8.5" text-anchor="middle">ATP for</text>
+      <text x="263" y="248" fill="#b9a3d6" font-size="8.5" text-anchor="middle">loading</text>
+      <!-- plasmodesmata -->
+      <line x1="220" y1="96" x2="240" y2="96" stroke="#fbbf24" stroke-width="2"/>
+      <line x1="220" y1="186" x2="240" y2="186" stroke="#fbbf24" stroke-width="2"/>
+      <line x1="220" y1="276" x2="240" y2="276" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="96" fill="#fbbf24" font-size="9" font-weight="800">PLASMODESMATA</text>
+      <text x="330" y="110" fill="#b9a3d6" font-size="9">cytoplasmic bridges</text>
+      <text x="330" y="124" fill="#b9a3d6" font-size="9">sucrose + ATP pass</text>
+      <!-- source / sink -->
+      <rect x="420" y="70" width="200" height="66" rx="10" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="520" y="92" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">SOURCE — leaf</text>
+      <text x="520" y="110" fill="#b9a3d6" font-size="9.5" text-anchor="middle">sucrose actively loaded</text>
+      <text x="520" y="124" fill="#b9a3d6" font-size="9.5" text-anchor="middle">→ water in by osmosis</text>
+      <rect x="420" y="220" width="200" height="66" rx="10" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="520" y="242" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">SINK — root / fruit</text>
+      <text x="520" y="260" fill="#b9a3d6" font-size="9.5" text-anchor="middle">unloading → water out</text>
+      <text x="520" y="274" fill="#b9a3d6" font-size="9.5" text-anchor="middle">→ pressure falls</text>
+      <!-- pressure arrows -->
+      <path d="M 420 103 L 340 103" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 420 253 L 340 253" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="380" y="160" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">HIGH pressure at source</text>
+      <text x="380" y="176" fill="#b9a3d6" font-size="9" text-anchor="middle">↓</text>
+      <text x="380" y="190" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">LOW pressure at sink</text>
+      <text x="380" y="204" fill="#b9a3d6" font-size="9" text-anchor="middle">→ sap flows down the gradient</text>
+      <text x="330" y="316" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">Sucrose can go UP or DOWN — it flows source → sink, wherever the sugar is needed</text>
+    </svg>
+    <div class="cap"><b>FIG 12</b> — The VIP escalator: sieve tubes (no nucleus, perforated sieve plates) carry sap; companion cells (many mitochondria) load sucrose actively via plasmodesmata; water follows by osmosis creating high pressure at the source and low pressure at the sink — pressure flow drives translocation.</div>
+  </div>
+
+  <div class="tip"><b>Mnemonic — "Sieve strips, Companion carries":</b> sieve tubes are stripped-back channels (no nucleus, little cytoplasm); companion cells carry the metabolism (mitochondria → ATP → active loading). Water follows solute, pressure does the rest.</div>
+
+  <div class="nos"><b>Nature of Science:</b> the pressure-flow model is a hypothesis tested with evidence — aphid stylets (insects that tap phloem) let researchers collect actual phloem sap and measure its sucrose content and pressure; radioactive tracers showed sugars moving from source to sink. Models in biology are only as good as the measurements behind them.</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">The whole club in one map</div>
+  <h2>MIND MAP 🗺️</h2>
+  <p class="aim">One night at Club Delivery: everything that moves — blood, water and sugar — connects through the same corridors.</p>
+  <div class="mind">
+    <div class="node core">TRANSPORT<small>B3.2 · Club Delivery</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">VIP CORRIDORS<small>capillaries ~10 µm · thin walls · fenestrations</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">CORRIDOR CODES<small>artery: thick wall, narrow lumen · vein: thin, wide</small></div>
+    <div class="node">PRESSURE PIPE<small>externa collagen · media elastic recoil · intima</small></div>
+    <div class="node">BEAT COUNTER<small>radial + carotid pulse · 30 s × 2</small></div>
+    <div class="node">ONE-WAY DOOR<small>pocket valves · muscle pump · ~80% blood in veins</small></div>
+    <div class="node">BLOCKED BACKSTAGE<small>coronary atheroma → angina / MI · correlation ≠ causation</small></div>
+    <div class="node">TISSUE-FLUID TAP<small>pressure filtration · plasma minus proteins · lymph mop-up</small></div>
+    <div class="node">THE DJ'S DECK<small>SA node · valves · septum · single vs double circulation</small></div>
+    <div class="node">WATER PIPE NETWORK<small>transpiration pull · cohesion-tension · root pressure</small></div>
+    <div class="node">PIPE FITTERS<small>xylem: dead · hollow · lignified · pitted</small></div>
+    <div class="node">FLOOR PLANS<small>stem ring bundles · root star xylem · plan diagrams</small></div>
+    <div class="node">VIP ESCALATOR<small>phloem sieve tubes + companion cells · source → sink</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT SHEET ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">60-second recap</div>
+  <h2>THE CHEAT ⚡</h2>
+  <div class="marquee">
+    <div class="line">🪩 Capillaries = <span>VIP corridors</span>: ~10 µm, branched → huge surface area, one-cell endothelium + basement membrane filter, fenestrations for fast exchange (glomerulus, gut).</div>
+    <div class="line">🩸 Artery vs vein: artery = <span>thick wall, narrow lumen, circular, corrugated</span> · vein = <span>thin wall, wide lumen, may flatten</span> — read wall ÷ lumen.</div>
+    <div class="line">🔧 Artery wall: externa <span>collagen</span> (no bursting) · media <span>elastic + muscle</span> (recoil between beats) · intima <span>endothelium</span> · narrow lumen keeps pressure high.</div>
+    <div class="line">🎵 Pulse = one pressure wave per heartbeat · <span>radial (wrist, thumb side)</span> + <span>carotid (neck groove)</span> · never your thumb · count 30 s × 2.</div>
+    <div class="line">🚪 Veins: <span>pocket valves</span> (one-way cups) + <span>skeletal muscle pump</span> squashes thin flexible walls → blood returns against gravity · <span>~80% of blood at rest</span>.</div>
+    <div class="line">🚑 Coronary occlusion: atheroma (lipids + calcium) narrows → <span>angina</span> · clot → <span>heart attack</span> · risk: smoking, hypertension, saturated fat, salt, obesity · <span>correlation ≠ causation</span>.</div>
+    <div class="line">💧 Transpiration: evaporation from mesophyll walls → <span>capillary action + tension</span> → <span>cohesion</span> pulls the whole column up (beats 10.4 m) · passive, sun-driven · root pressure pushes in spring/night.</div>
+    <div class="line">🧱 Xylem = <span>dead, hollow, lignified, pitted</span> tubes · end walls removed → continuous pipes · withstand tension without collapse.</div>
+    <div class="line">📐 Floor plans: stem = <span>ring of bundles</span> (xylem in, phloem out, pith centre) · root = <span>central star xylem</span> + phloem between points · plan diagrams = single lines, no cells.</div>
+    <div class="line">🚿 Tissue fluid: <span>pressure filtration</span> — high BP at arteriole end pushes plasma out, low BP at venule end recovers it · <span>lymph</span> (blind-ended, valves) mops up ~3 dm³ · oedema if it fails.</div>
+    <div class="line">🎧 Heart: <span>SA node pacemaker</span> → atrial systole → ventricular systole → diastole · AV + semilunar valves = one-way · septum = no mixing · <span>fish single circuit, mammals double</span>.</div>
+    <div class="line">🛗 Phloem: <span>sieve tubes</span> (no nucleus, sieve plates) + <span>companion cells</span> (mitochondria, plasmodesmata) · active loading → pressure flow <span>source → sink</span>.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Bouncer check</div>
+  <h2>THE TEST ✍️</h2>
+  <p class="aim">10 questions. Pick an answer and you'll instantly see why.</p>
+
+  <div class="q" data-a="branch">
+    <p>1. Capillaries maximise exchange with tissues because…</p>
+    <label><input type="radio" name="q1" value="wide"> They are the widest vessels, carrying a huge volume of blood</label>
+    <label><input type="radio" name="q1" value="branch"> They are narrow (~10 µm) and branch into networks, giving a huge total surface area</label>
+    <label><input type="radio" name="q1" value="thick"> Their thick muscular walls pump blood into the tissue</label>
+    <div class="fb correct">✅ Narrow + branched = enormous surface area, and walls one endothelium cell thick let exchange happen fast. Wide or thick-walled vessels would be useless for exchange.</div>
+    <div class="fb wrong">❌ Capillaries are the NARROWEST vessels. Their superpower is branching into dense networks with thin one-cell walls — that's what delivers surface area and speed.</div>
+  </div>
+
+  <div class="q" data-a="wall">
+    <p>2. In a micrograph, the quickest way to tell an artery from a vein is…</p>
+    <label><input type="radio" name="q2" value="wall"> Compare wall thickness relative to the lumen — arteries have much thicker walls</label>
+    <label><input type="radio" name="q2" value="blood"> Check which one contains more red blood cells</label>
+    <label><input type="radio" name="q2" value="size"> Measure the overall diameter of the vessel</label>
+    <div class="fb correct">✅ Wall thickness vs lumen width is THE distinguishing feature. Corrugated inner surface and visible fibres back it up. Blood content tells you nothing from a section.</div>
+    <div class="fb wrong">❌ Blood content and overall size vary with location and preparation. The reliable feature is the wall-to-lumen ratio — thick + corrugated = artery.</div>
+  </div>
+
+  <div class="q" data-a="elastic">
+    <p>3. Elastic fibres in the tunica media help the circulation because…</p>
+    <label><input type="radio" name="q3" value="elastic"> They stretch during systole and recoil during diastole, smoothing flow and maintaining pressure between beats</label>
+    <label><input type="radio" name="q3" value="collagen"> They make the wall rigid so pressure never changes</label>
+    <label><input type="radio" name="q3" value="pump"> They contract like a second heart muscle</label>
+    <div class="fb correct">✅ Elastic recoil = the artery acts as a secondary pump between heartbeats: smoother flow, steady pressure, less work for the heart. Collagen (externa) prevents bursting.</div>
+    <div class="fb wrong">❌ Rigid walls would spike pressure and destroy the smoothing effect. Elastic fibres are passive — they store energy when stretched and release it on recoil.</div>
+  </div>
+
+  <div class="q" data-a="thumb">
+    <p>4. When taking a pulse you should NOT use your thumb because…</p>
+    <label><input type="radio" name="q4" value="thumb"> The thumb has its own pulse, so you'd count the wrong heartbeat</label>
+    <label><input type="radio" name="q4" value="weak"> The thumb is too weak to feel a pulse</label>
+    <label><input type="radio" name="q4" value="artery"> The thumb has no artery beneath it</label>
+    <div class="fb correct">✅ Your thumb has its own pulse — two fingers on the wrist (radial, thumb side) or neck (carotid) is the correct technique, with light pressure.</div>
+    <div class="fb wrong">❌ The thumb is perfectly strong — that's the problem. It carries its own pulse, so using it risks counting your own heartbeat.</div>
+  </div>
+
+  <div class="q" data-a="valves">
+    <p>5. Blood in veins flows one-way toward the heart mainly because of…</p>
+    <label><input type="radio" name="q5" value="pump"> The heart's suction pulling blood back</label>
+    <label><input type="radio" name="q5" value="valves"> Pocket valves that open forward but cup shut against backflow, plus muscle squeezing the thin walls</label>
+    <label><input type="radio" name="q5" value="gravity"> Gravity draining blood downward through the body</label>
+    <div class="fb correct">✅ Pocket valves + the skeletal muscle pump (squeezing thin flexible walls) push blood back against gravity. The heart pulls nothing — it only pushes.</div>
+    <div class="fb wrong">❌ Gravity is the enemy in the legs, not the helper. The heart pushes, it doesn't suck — venous return depends on valves and muscle pumps.</div>
+  </div>
+
+  <div class="q" data-a="correlation">
+    <p>6. A strong positive correlation between saturated fat intake and coronary heart disease shows…</p>
+    <label><input type="radio" name="q6" value="cause"> That saturated fat definitely causes heart disease</label>
+    <label><input type="radio" name="q6" value="correlation"> An association only — correlation does not prove causation</label>
+    <label><input type="radio" name="q6" value="random"> That the two variables are completely unrelated</label>
+    <div class="fb correct">✅ Correlation quantifies association, not cause. Claiming causation needs a mechanism and controlled studies. This is the classic NOS trap.</div>
+    <div class="fb wrong">❌ Strong correlation means the variables move together — nothing more. Confounding variables (smoking, exercise, income) could be behind it.</div>
+  </div>
+
+  <div class="q" data-a="cohesion">
+    <p>7. Water can reach the top of a 100 m tree because…</p>
+    <label><input type="radio" name="q7" value="pump"> Root pressure alone pushes water that high</label>
+    <label><input type="radio" name="q7" value="cohesion"> Evaporation creates tension, and cohesion keeps the continuous water column intact so the pull reaches the roots</label>
+    <label><input type="radio" name="q7" value="suction"> The leaves suck water up like a vacuum</label>
+    <div class="fb correct">✅ Transpiration pull + cohesion: the whole column behaves like one rope. Atmospheric pressure alone can only lift water ~10.4 m — cohesion beats the limit.</div>
+    <div class="fb wrong">❌ Root pressure is weak and only matters when transpiration stalls (spring, night). No vacuum exists — tension + cohesion is the mechanism.</div>
+  </div>
+
+  <div class="q" data-a="lignin">
+    <p>8. Xylem vessels are adapted to transport because they are…</p>
+    <label><input type="radio" name="q8" value="alive"> Alive cells actively pumping water upward</label>
+    <label><input type="radio" name="q8" value="lignin"> Dead, hollow tubes with lignified walls and pits — end walls removed for continuous flow</label>
+    <label><input type="radio" name="q8" value="thin"> Thin-walled cells that absorb water by osmosis</label>
+    <div class="fb correct">✅ Dead + hollow + lignified + pitted: continuous passive pipes that withstand tension without collapsing. Lignin is the tension-proofing.</div>
+    <div class="fb wrong">❌ Xylem transport is passive — the cells are dead. Lignified walls (not thin ones) stop the tubes collapsing under the pull of transpiration.</div>
+  </div>
+
+  <div class="q" data-a="filtration">
+    <p>9. Tissue fluid forms because…</p>
+    <label><input type="radio" name="q9" value="filtration"> High blood pressure at the arteriole end of capillaries forces plasma out through wall pores</label>
+    <label><input type="radio" name="q9" value="digest"> Cells actively secrete fluid into the spaces around them</label>
+    <label><input type="radio" name="q9" value="lymph"> Lymph vessels pump fluid into the tissues</label>
+    <div class="fb correct">✅ Pressure filtration: high pressure at the arterial end pushes fluid (plasma minus large proteins) out; low pressure at the venous end recovers most of it. Lymph drains the excess.</div>
+    <div class="fb wrong">❌ Cells don't secrete tissue fluid, and lymph drains tissue fluid OUT (back to the blood) — it doesn't pump it in.</div>
+  </div>
+
+  <div class="q" data-a="double">
+    <p>10. Mammals have double circulation, unlike fish, because…</p>
+    <label><input type="radio" name="q10" value="double"> Blood is re-pumped after the lungs, so the body gets high pressure while delicate lung capillaries get low pressure</label>
+    <label><input type="radio" name="q10" value="single"> Fish need more oxygen than mammals, so they pump harder</label>
+    <label><input type="radio" name="q10" value="mixing"> Mammals need to mix oxygenated and deoxygenated blood</label>
+    <div class="fb correct">✅ Double circulation = two pumps: right side sends blood to lungs at low pressure (delicate alveoli), left side re-pumps it to the body at high pressure. No mixing, thanks to the septum.</div>
+    <div class="fb wrong">❌ Mammals pump LESS to the lungs (they're delicate) and MORE to the body — that's exactly why the second pump exists. Fish manage with one circuit.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 10 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">B3.2.1</span><span>Capillaries exchange materials with tissues: ~10 µm narrow, branching networks → huge surface area, walls one endothelium cell thick on a basement membrane (protein gel filter), fenestrations where exchange is rapid (glomerulus, gut). Lens + cornea have none.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">B3.2.2-3</span><span>Arteries vs veins: thicker wall, narrower lumen, circular, corrugated inner surface, visible fibres vs thin wall, wide lumen, may flatten. Artery adaptations to high pressure: tunica externa (collagen — no bursting), tunica media (elastic + smooth muscle — recoil smooths flow), tunica intima (endothelium); narrow lumen keeps pressure high.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">B3.2.4-5</span><span>Pulse: one wave per heartbeat at radial (wrist, thumb side) and carotid (neck) pulses; 2–3 fingertips, light pressure, never the thumb, 30 s × 2; pulse oximeters (red + IR light). Veins: pocket valves (one-way cups), skeletal muscle pump squeezes thin flexible walls, ~80% of blood at rest in veins, valve failure → varicose veins.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">B3.2.6</span><span>Coronary occlusion: coronary arteries are first branches of the aorta; atheroma (lipids incl. cholesterol + calcium salts) narrows lumen → angina + shortness of breath; thrombus → myocardial infarction. Risk factors: hypertension, smoking, saturated fat, obesity, salt, alcohol, sedentary, genetics, age. NOS: correlation (−1 to +1) ≠ causation.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">B3.2.7</span><span>Transpiration + cohesion-tension: evaporation from spongy mesophyll cell walls → capillary action through cellulose → tension (negative pressure potential) in xylem → cohesion pulls the continuous column up from the roots; adhesion to walls; passive (sun-driven); cavitation breaks columns; beats the 10.4 m suction limit.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">B3.2.8</span><span>Xylem structure: columns of dead cells, contents + end walls removed → continuous tubes; lignified ring/spiral thickenings (young, stretchable) or extensive walls with pits (mature); withstand tension without collapse; pits for water entry/exit; passive flow.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">B3.2.9-10</span><span>Plan diagrams: stem TS — epidermis, cortex, ring of vascular bundles (xylem inner, phloem outer, cambium between), pith centre. Root TS — central star-shaped xylem, phloem between star points, endodermis, cortex, epidermis with root hairs. Single lines for tissue boundaries, no cell detail.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">B3.2.11-13</span><span>Tissue fluid formation by pressure filtration (high pressure at arteriole end pushes plasma out; low pressure at venule end recovers it; ~20 dm³/day, ~17 return). Plasma vs tissue fluid: tissue fluid lacks large plasma proteins + blood cells. Lymph: blind-ended vessels, thin walls with gaps, valves, lymph ducts → subclavian veins; prevents oedema.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">B3.2.14-16</span><span>Single (fish: heart → gills → body) vs double (mammal: lungs + body circuits, re-pumped) circulation. Heart frontal plane: vena cava → RA → RV → pulmonary artery; pulmonary veins → LA → LV → aorta; AV + semilunar valves = unidirectional flow; septum prevents mixing; left ventricle thickest; SA node pacemaker. Cardiac cycle: atrial systole → ventricular systole → diastole.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">B3.2.17-18</span><span>Root pressure: root cells actively pump mineral ions into xylem → hypertonic sap → osmosis → positive pressure pushes sap up (spring, night, high humidity, when transpiration is insufficient). Phloem translocation: sieve tubes (no nucleus, perforated sieve plates) + companion cells (many mitochondria, plasmodesmata); active loading at source → pressure flow to sink.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) B3.2 chapter + IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='b32-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>THE SOLAR KITCHEN — C1.3 Photosynthesis · Bio HL</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE SOLAR KITCHEN</a>
+  <a href="#act2">ACT 2 · THE OXYGEN VENT</a>
+  <a href="#act3">ACT 3 · THE SPICE RACK</a>
+  <a href="#act4">ACT 4 · THE COLOUR MENU</a>
+  <a href="#act5">ACT 5 · SPECTRA TWINS</a>
+  <a href="#act6">ACT 6 · THE BOTTLENECKS</a>
+  <a href="#act7">ACT 7 · THE CO2 BUBBLER</a>
+  <a href="#act8">ACT 8 · THE SOLAR PANELS</a>
+  <a href="#act9">ACT 9 · THE WATER SPLITTER</a>
+  <a href="#act10">ACT 10 · THE PROTON RIVER</a>
+  <a href="#act11">ACT 11 · THE THYLAKOID STATION</a>
+  <a href="#act12">ACT 12 · THE ASSEMBLY LINE</a>
+  <a href="#act13">ACT 13 · MENU &amp; POWER CUT</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/10</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Biochemistry · SL + AHL · C1.3.1 – C1.3.19</div>
+  <h1>THE SOLAR KITCHEN</h1>
+  <p class="sub">IB Biology HL · C1.3 Photosynthesis (SL + AHL). The chloroplast is a nightclub kitchen run on light energy: solar panels on the roof (photosystems), an assembly line in the back (the Calvin cycle), and the most abundant — and most stubborn — head chef in biology (Rubisco).</p>
+  <div class="badges">
+    <span class="badge">SL + AHL</span>
+    <span class="badge ahl">19 statements</span>
+    <span class="badge">Light energy → chemical energy</span>
+    <span class="badge">Calvin cycle · Rubisco</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · THE SOLAR KITCHEN ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">C1.3.1 – C1.3.2</div>
+  <h2>THE SOLAR KITCHEN</h2>
+  <p class="aim">Photosynthesis is an energy transformation: the chloroplast takes light energy and bakes it into chemical energy stored in carbon compounds — using hydrogen ripped out of water.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🍳</div>
+    <div class="body">
+      <h3>The nightclub kitchen that feeds the whole planet</h3>
+      <p class="aka">photosynthesis · energy transformation · carbon compounds · word equation · photolysis</p>
+      <p>Living organisms need complex carbon compounds to build cells and run life processes. Some organisms — plants, algae and cyanobacteria — make <b>all</b> of them from simple inorganic starting materials, using only light. That process is <span class="accent">photosynthesis</span>: light energy is converted into <span class="accent">chemical energy in carbon compounds</span> (carbohydrates, proteins, lipids, nucleic acids). This single transformation supplies <span class="gold">most of the chemical energy needed for life processes in ecosystems</span> — every calorie you've ever eaten was originally cooked in a solar kitchen.</p>
+      <p>The word equation hides a subtle trick: <span class="cyan">carbon dioxide + water → glucose + oxygen</span>. The carbon in glucose comes from CO₂, but the <b>hydrogen</b> needed to reduce CO₂ into a sugar comes from splitting water — <span class="accent">photolysis</span> ("photo" = light, "lysis" = loosen). Water splits into separated protons (H⁺) and electrons, and the oxygen left over is just the exhaust.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="overview of a chloroplast as a solar kitchen: sunlight hits solar-panel photosystems on the roof, carbon dioxide and water enter on the left, glucose leaves on the right and oxygen is a by-product that diffuses out">
+      <rect width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M 0 0 L 8 3 L 0 6 Z" fill="#22d3ee"/>
+        </marker>
+      </defs>
+      <text x="330" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE SOLAR KITCHEN — LIGHT IN, GLUCOSE OUT</text>
+      <!-- sun -->
+      <circle cx="88" cy="70" r="26" fill="rgba(251,191,36,.18)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="88" y="76" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">sun</text>
+      <!-- solar panels -->
+      <rect x="225" y="84" width="62" height="24" rx="4" fill="rgba(74,222,128,.25)" stroke="#4ade80" stroke-width="2"/>
+      <rect x="299" y="76" width="62" height="24" rx="4" fill="rgba(74,222,128,.25)" stroke="#4ade80" stroke-width="2"/>
+      <rect x="373" y="84" width="62" height="24" rx="4" fill="rgba(74,222,128,.25)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="66" fill="#b9a3d6" font-size="10" text-anchor="middle">solar panels = photosystems</text>
+      <!-- light arrow -->
+      <path d="M 116 66 C 160 60 190 66 221 78" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="150" y="54" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">light energy</text>
+      <!-- chloroplast -->
+      <rect x="210" y="128" width="280" height="132" rx="16" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="350" y="152" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">CHLOROPLAST = THE KITCHEN</text>
+      <text x="350" y="174" fill="#b9a3d6" font-size="10.5" text-anchor="middle">thylakoid membranes = solar-panel roof</text>
+      <text x="350" y="192" fill="#b9a3d6" font-size="10.5" text-anchor="middle">stroma = the assembly-line floor</text>
+      <text x="350" y="210" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">light energy → chemical energy</text>
+      <text x="350" y="228" fill="#b9a3d6" font-size="10.5" text-anchor="middle">(ATP + reduced NADP → glucose)</text>
+      <text x="350" y="246" fill="#b9a3d6" font-size="10" text-anchor="middle">carbon compounds: carbs · proteins · lipids · nucleic acids</text>
+      <!-- inputs -->
+      <rect x="40" y="150" width="112" height="46" rx="10" fill="rgba(255,46,196,.07)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="96" y="171" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">CO₂</text>
+      <text x="96" y="188" fill="#b9a3d6" font-size="9.5" text-anchor="middle">carbon dioxide in</text>
+      <rect x="40" y="212" width="112" height="46" rx="10" fill="rgba(34,211,238,.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="96" y="233" fill="#22d3ee" font-size="13" font-weight="900" text-anchor="middle">H₂O</text>
+      <text x="96" y="250" fill="#b9a3d6" font-size="9.5" text-anchor="middle">water in (the hydrogen source)</text>
+      <path d="M 152 173 L 206 173" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 152 235 L 206 235" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <!-- outputs -->
+      <rect x="508" y="150" width="112" height="46" rx="10" fill="rgba(251,191,36,.07)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="564" y="171" fill="#fbbf24" font-size="12" font-weight="900" text-anchor="middle">glucose</text>
+      <text x="564" y="188" fill="#b9a3d6" font-size="9.5" text-anchor="middle">C₆H₁₂O₆ out</text>
+      <rect x="508" y="212" width="112" height="46" rx="10" fill="rgba(74,222,128,.07)" stroke="#4ade80" stroke-width="2"/>
+      <text x="564" y="233" fill="#4ade80" font-size="13" font-weight="900" text-anchor="middle">O₂</text>
+      <text x="564" y="250" fill="#b9a3d6" font-size="9.5" text-anchor="middle">by-product (waste)</text>
+      <path d="M 494 173 L 504 173" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <path d="M 494 235 L 504 235" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <!-- oxygen diffusing out -->
+      <path d="M 560 212 C 556 170 540 130 530 92" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none" stroke-dasharray="4 3"/>
+      <text x="580" y="140" fill="#4ade80" font-size="10" font-weight="700" text-anchor="middle">O₂ diffuses out</text>
+      <text x="580" y="156" fill="#b9a3d6" font-size="9.5" text-anchor="middle">via stomata</text>
+      <text x="330" y="322" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Every carbon atom in every living thing was fixed in a kitchen like this one</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — The solar kitchen. Photosynthesis converts light energy into chemical energy in carbon compounds. Word equation: <b>carbon dioxide + water → glucose + oxygen</b>. The hydrogen that reduces CO₂ comes from <b>photolysis of water</b>; the oxygen is the waste product.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag gr">C1.3.1</div>
+      <h4>Energy transformation 🍳</h4>
+      <p>Light energy is converted into chemical energy stored in carbon compounds — carbohydrates, proteins, lipids, nucleic acids. This supplies most of the chemical energy for life processes in ecosystems.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">C1.3.2</div>
+      <h4>Where the hydrogen comes from 🧪</h4>
+      <p>Reducing CO₂ to glucose needs hydrogen. It comes from <b>photolysis of water</b>: 2H₂O → O₂ + 4H⁺ + 4e⁻. Photolysis only runs when light supplies the energy.</p>
+    </div>
+    <div class="card">
+      <div class="tag g">BIG PICTURE</div>
+      <h4>One hectare of redwoods 🌲</h4>
+      <p>A single hectare of Californian redwood forest can hold &gt;4,000 tonnes of biomass — nearly all of it carbon compounds baked by photosynthesis. You are looking at the planet's only kitchen.</p>
+    </div>
+  </div>
+
+  <div class="exam"><b>Exam gold — the full equation:</b> 6CO₂ + 12H₂O + light → C₆H₁₂O₆ + 6O₂ + 6H₂O. For each glucose molecule, <b>12 water molecules are split</b>, releasing 24 hydrogen ions. That's why the equation needs 12 waters, not 6 — the extra 6 are there to donate hydrogen, and 6 waters come out the other side.</div>
+</section>
+<section class="act" id="act2">
+  <div class="acttag">C1.3.3</div>
+  <h2>ACT 2 · THE OXYGEN VENT</h2>
+  <p class="aim">Where does the oxygen actually come from? Not from the carbon dioxide — it's a waste product of splitting water.</p>
+
+  <div class="bouncer">
+    <div class="emoji">💨</div>
+    <div class="body">
+    <h3>The vent that leaks the good stuff</h3>
+    <p>Every oxygen molecule in your next breath was made by <b>splitting water</b>, never by breaking down CO₂. The light-dependent reactions split water in a process called <b>photolysis</b> ("light-splitting"): the light energy is used to rip water apart into oxygen, hydrogen ions and electrons. The <b>oxygen is waste</b> — the plant vents it out through the stomata and gets on with making food.</p>
+    <p class="aka">AKA: the most generous exhaust pipe in biology — it's the source of nearly all the O₂ in Earth's atmosphere.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagram showing that oxygen released by photosynthesis comes from splitting water: a chloroplast splits H2O into O2, protons and electrons, and isotope-labelling experiments with 18O confirm water is the source, not carbon dioxide">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/></marker>
+        <marker id="arC" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE OXYGEN VENT — O₂ COMES FROM WATER, NOT FROM CO₂</text>
+
+      <!-- chloroplast -->
+      <rect x="30" y="56" width="260" height="210" rx="16" fill="rgba(34,211,238,0.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="160" y="78" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">CHLOROPLAST</text>
+      <text x="160" y="108" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="13" font-weight="800">2H₂O → O₂ + 4H⁺ + 4e⁻</text>
+      <text x="160" y="128" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">photolysis: water is split by light energy</text>
+      <text x="160" y="148" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">protons and electrons are kept and used</text>
+      <text x="160" y="168" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">oxygen = waste product</text>
+
+      <!-- O2 bubbles out -->
+      <circle cx="268" cy="82" r="9" fill="rgba(74,222,128,0.25)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="278" cy="104" r="6" fill="rgba(74,222,128,0.25)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="272" cy="128" r="4" fill="rgba(74,222,128,0.25)" stroke="#4ade80" stroke-width="1.5"/>
+      <path d="M 290 70 C 310 58 330 52 360 48" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#arG)"/>
+      <text x="366" y="52" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">O₂ out</text>
+
+      <!-- water in -->
+      <rect x="60" y="240" width="100" height="40" rx="8" fill="rgba(34,211,238,0.1)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="110" y="256" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">H₂O in</text>
+      <text x="110" y="274" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">water from the soil</text>
+      <path d="M 110 240 L 110 222" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#arC)"/>
+
+      <!-- isotope experiment -->
+      <rect x="330" y="56" width="90" height="150" rx="10" fill="rgba(255,46,196,0.05)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="375" y="80" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">EXPERIMENT 1</text>
+      <circle cx="360" cy="110" r="7" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="385" cy="126" r="5" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="368" cy="146" r="4" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="375" y="176" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">supply ¹⁸O-labelled</text>
+      <text x="375" y="192" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">WATER to the plant</text>
+
+      <rect x="440" y="56" width="90" height="150" rx="10" fill="rgba(251,191,36,0.05)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="485" y="80" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">EXPERIMENT 2</text>
+      <circle cx="470" cy="110" r="7" fill="rgba(255,46,196,0.15)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <circle cx="495" cy="126" r="5" fill="rgba(255,46,196,0.15)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="485" y="176" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">supply ¹⁸O-labelled</text>
+      <text x="485" y="192" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">CO₂ to the plant</text>
+
+      <rect x="550" y="56" width="86" height="150" rx="10" fill="rgba(168,85,247,0.06)" stroke="#a855f7" stroke-width="2"/>
+      <text x="593" y="80" text-anchor="middle" fill="#a855f7" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">RESULT</text>
+      <text x="593" y="112" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">¹⁸O₂ appears in</text>
+      <text x="593" y="128" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">the bubbles</text>
+      <text x="593" y="152" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">no labelled O₂</text>
+      <text x="593" y="168" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">is produced</text>
+
+      <text x="375" y="240" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">The O₂ must come from splitting water</text>
+      <text x="375" y="260" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">isotope ¹⁸O is a heavy tracer — it shows up wherever oxygen goes</text>
+
+      <text x="330" y="316" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">Prokaryotes did this first ~3.5 billion years ago — photolysis oxygen reshaped the whole planet</text>
+      <text x="330" y="334" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">O₂ diffuses: thylakoid space → stroma → cytoplasm → out through stomata</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — Photolysis of water supplies the oxygen. Isotope-labelling with ¹⁸O traces where the O₂ really comes from — the water, not the carbon dioxide.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>💧 Photolysis in one line</h4><p>Light energy splits <b>2H₂O → O₂ + 4H⁺ + 4e⁻</b> inside photosystem II. Electrons get used in the electron transport chain, protons help build the gradient, and O₂ is dumped.</p></div>
+    <div class="card"><h4>🔬 The isotope trick</h4><p>Feed a plant water labelled with heavy <b>¹⁸O</b>: the O₂ bubbles come out labelled. Feed it ¹⁸O-CO₂ instead: no labelled O₂. Case closed — the oxygen is water's contribution.</p></div>
+    <div class="card"><h4>🌍 Planetary fallout</h4><p>Billions of years ago cyanobacteria flooded the oceans with O₂. Iron rusted into <b>banded iron formations</b>, then the atmosphere went oxygen-rich — enabling aerobic respiration and, eventually, us.</p></div>
+  </div>
+
+  <div class="tip"><b>Why it matters for the exam:</b> the word equation "CO₂ + H₂O → glucose + O₂" hides the truth — <b>the carbon in glucose comes from CO₂, but the oxygen released comes from H₂O</b>. Get that the right way round and you've beaten the classic trap.</div>
+</section>
+
+<section class="act" id="act3">
+  <div class="acttag">C1.3.4</div>
+  <h2>ACT 3 · THE SPICE RACK</h2>
+  <p class="aim">Separation of photosynthetic pigments by chromatography — and the Rf values that identify them.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎨</div>
+    <div class="body">
+    <h3>Every kitchen needs its spice rack</h3>
+    <p>A leaf pigment extract is a mixture of several colours — chlorophyll a, chlorophyll b, carotenes, xanthophylls. To see them, you run <b>thin-layer chromatography (TLC)</b>: spot the extract near the bottom of a porous strip, stand it in solvent, and watch the pigments separate as the solvent climbs. Each pigment travels a different distance depending on how strongly it sticks to the strip versus how well it dissolves in the solvent. That travel distance, expressed as an <b>Rf value</b>, is a pigment's fingerprint.</p>
+    <p class="aka">AKA: the spice rack — each pigment is a different spice, and chromatography is the shelf that sorts them into labelled jars.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thin-layer chromatography of leaf pigments: a strip shows six separated bands with Rf values, carotene 0.98 travelling furthest, then phaeophytin 0.81, chlorophyll a 0.59, chlorophyll b 0.42, xanthophyll 1 0.28 and xanthophyll 2 0.15">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE SPICE RACK — CHROMATOGRAPHY SEPARATES THE PIGMENTS</text>
+
+      <!-- strip -->
+      <rect x="130" y="46" width="100" height="252" fill="rgba(185,163,214,0.06)" stroke="#b9a3d6" stroke-width="2"/>
+      <line x1="130" y1="66" x2="230" y2="66" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="130" y1="288" x2="230" y2="288" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="120" y="60" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">solvent front</text>
+      <text x="120" y="292" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">origin (spot)</text>
+
+      <!-- bands -->
+      <rect x="130" y="72" width="100" height="14" fill="#f97316"/>
+      <rect x="130" y="112" width="100" height="14" fill="#a3a635"/>
+      <rect x="130" y="152" width="100" height="14" fill="#22d3ee"/>
+      <rect x="130" y="192" width="100" height="14" fill="#84cc16"/>
+      <rect x="130" y="232" width="100" height="14" fill="#fbbf24"/>
+      <rect x="130" y="266" width="100" height="14" fill="#eab308"/>
+
+      <!-- labels -->
+      <text x="252" y="84" fill="#f97316" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">carotene · Rf 0.98</text>
+      <text x="252" y="124" fill="#a3a635" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">phaeophytin · Rf 0.81</text>
+      <text x="252" y="164" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">chlorophyll a · Rf 0.59</text>
+      <text x="252" y="204" fill="#84cc16" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">chlorophyll b · Rf 0.42</text>
+      <text x="252" y="244" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">xanthophyll 1 · Rf 0.28</text>
+      <text x="252" y="278" fill="#eab308" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">xanthophyll 2 · Rf 0.15</text>
+
+      <!-- Rf formula -->
+      <rect x="440" y="60" width="190" height="104" rx="10" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="535" y="84" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">Rf = distance moved by pigment</text>
+      <text x="535" y="104" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">÷ distance moved by solvent</text>
+      <text x="535" y="128" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">always between 0 and 1</text>
+      <text x="535" y="148" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">identify pigments by colour + Rf value</text>
+
+      <text x="440" y="196" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">Highest Rf = travelled furthest with the solvent</text>
+      <text x="440" y="216" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">carotene is least polar, most solvent-loving</text>
+      <text x="440" y="236" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">Rf is constant for a pigment in a fixed system</text>
+
+      <text x="330" y="306" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">TLC method: extract pigments in propanone → spot 10 mm from the strip's end → stand in solvent → let it climb</text>
+      <text x="330" y="326" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">use a pencil for lines, never pen (ink would run too) · the pigments travel at different speeds and separate</text>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — A chromatogram of leaf pigments. Rf = distance moved by pigment ÷ distance moved by solvent. Carotene (0.98) rides highest; xanthophyll 2 (0.15) barely leaves the origin.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🧪 How TLC works</h4><p>Pigments are extracted in <b>propanone</b>, spotted in a pencil line near the strip's base, and the strip stands in solvent. The solvent climbs by capillary action, dragging pigments at different rates — <b>more soluble pigments travel further</b>.</p></div>
+    <div class="card"><h4>📏 Reading Rf</h4><p>Measure from the origin (spot line) to the middle of each band, divide by the distance from origin to solvent front. Carotene 0.98 &gt; chlorophyll a 0.59 &gt; chlorophyll b 0.42 &gt; xanthophylls — a fixed fingerprint for each pigment.</p></div>
+    <div class="card"><h4>🍽️ Why so many spices?</h4><p>Chlorophyll a dominates, but accessory pigments — chlorophyll b, carotenes, xanthophylls — <b>absorb wavelengths chlorophyll a misses</b>, widening the kitchen's menu of usable light.</p></div>
+  </div>
+
+  <div class="tip"><b>Exam command words:</b> "distinguish" = give the Rf values with the colours; "outline" = describe the TLC steps in order. You won't be asked to memorise all six Rf values exactly, but knowing <b>carotene ≈ 1.0 &gt; chlorophyll a &gt; chlorophyll b &gt; xanthophylls</b> is a safe ranking.</div>
+</section>
+
+<section class="act" id="act4">
+  <div class="acttag">C1.3.5</div>
+  <h2>ACT 4 · THE COLOUR MENU</h2>
+  <p class="aim">Absorption spectra of chlorophyll a, chlorophyll b and carotenoids — why leaves look green.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌈</div>
+    <div class="body">
+    <h3>Reading the colour menu</h3>
+    <p>White light is a buffet of colours. A pigment only absorbs the wavelengths whose photons can excite its electrons to a higher energy level — the photon's energy must <b>match the energy gap between electron levels</b>. Chlorophyll a absorbs strongly in the <b>blue-violet (~430 nm)</b> and <b>red (~660–680 nm)</b>, and barely touches green. The green light is reflected and transmitted, which is exactly why leaves <b>look green</b>. An <b>absorption spectrum</b> is a graph of how much light a pigment absorbs at each wavelength — measured with a spectrophotometer.</p>
+    <p class="aka">AKA: the colour menu — chlorophyll orders blue and red; it sends the green back to the kitchen.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="absorption spectra of chlorophyll a, chlorophyll b and carotenoids: chlorophylls show two peaks in the blue-violet around 430 nanometres and red around 660 nanometres with a green trough, carotenoids absorb mainly in the blue region">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <linearGradient id="specbar" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#8b5cf6"/>
+          <stop offset="0.18" stop-color="#3b82f6"/>
+          <stop offset="0.36" stop-color="#22d3ee"/>
+          <stop offset="0.5" stop-color="#4ade80"/>
+          <stop offset="0.62" stop-color="#fbbf24"/>
+          <stop offset="0.8" stop-color="#f97316"/>
+          <stop offset="1" stop-color="#ef4444"/>
+        </linearGradient>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE COLOUR MENU — WHAT EACH PIGMENT ORDERS</text>
+
+      <!-- legend -->
+      <rect x="420" y="44" width="14" height="14" rx="3" fill="#ff2ec4"/>
+      <text x="440" y="56" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">chlorophyll a</text>
+      <rect x="420" y="66" width="14" height="14" rx="3" fill="#84cc16"/>
+      <text x="440" y="78" fill="#84cc16" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">chlorophyll b</text>
+      <rect x="420" y="88" width="14" height="14" rx="3" fill="#fbbf24"/>
+      <text x="440" y="100" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">carotenoids</text>
+
+      <!-- axes -->
+      <line x1="80" y1="52" x2="80" y2="280" stroke="#b9a3d6" stroke-width="2"/>
+      <line x1="80" y1="280" x2="620" y2="280" stroke="#b9a3d6" stroke-width="2"/>
+      <text x="70" y="110" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">absorption</text>
+      <text x="70" y="128" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">(%)</text>
+      <text x="160" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">400</text>
+      <text x="320" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">500</text>
+      <text x="470" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">600</text>
+      <text x="620" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">700</text>
+      <text x="350" y="326" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">wavelength / nm</text>
+      <rect x="80" y="284" width="540" height="12" rx="4" fill="url(#specbar)"/>
+
+      <!-- chlorophyll a curve -->
+      <polyline points="80,238 110,220 145,120 180,140 230,218 297,244 405,252 500,208 557,156 620,104" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <!-- chlorophyll b curve -->
+      <polyline points="80,242 120,224 155,152 240,232 320,250 420,244 513,196 570,150 620,140" fill="none" stroke="#84cc16" stroke-width="2.5"/>
+      <!-- carotenoids curve -->
+      <polyline points="80,252 110,236 145,176 188,148 250,196 340,252 405,258 620,260" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+
+      <text x="145" y="104" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">blue-violet peak ~430 nm</text>
+      <text x="612" y="88" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">red peak ~660 nm</text>
+      <text x="380" y="190" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">green trough — green light is reflected, so leaves look green</text>
+      <text x="330" y="264" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">carotenoids mop up blue-violet and hand the energy over to chlorophyll</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — Absorption spectra. Chlorophylls peak in blue-violet and red; the green trough is why leaves are green. Carotenoids (carotene + xanthophylls) absorb mainly blue light.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>⚡ Photon physics</h4><p>A photon is absorbed only if its energy matches the gap between electron energy levels in the pigment. <b>Blue photons are more energetic than red</b> (shorter wavelength = more energy), but both can excite chlorophyll's electrons.</p></div>
+    <div class="card"><h4>🍃 Chlorophyll a vs b</h4><p>Chlorophyll a — the primary pigment — peaks near <b>430 nm and 662 nm</b>. Chlorophyll b's peaks sit slightly differently (≈455 nm, ≈644 nm), so the pair together harvests a wider slice of the spectrum.</p></div>
+    <div class="card"><h4>🥕 Carotenoids</h4><p>Carotene and xanthophylls absorb <b>blue-violet light</b> that chlorophyll handles poorly, then pass the captured energy on. Bonus role: they protect the photosystems from excess light damage.</p></div>
+  </div>
+
+  <div class="nos"><b>Nature of science:</b> absorption spectra are quantitative data gathered with a spectrophotometer — <b>measurable, reproducible evidence</b> about which wavelengths a pigment can use, gained by varying the independent variable (wavelength) and recording the dependent variable (absorbance).</div>
+</section>
+<section class="act" id="act5">
+  <div class="acttag">C1.3.6</div>
+  <h2>ACT 5 · SPECTRA TWINS</h2>
+  <p class="aim">Absorption spectra vs action spectra — what a pigment absorbs versus what the plant actually uses.</p>
+
+  <div class="bouncer">
+    <div class="emoji">👯</div>
+    <div class="body">
+    <h3>Two graphs that look like twins</h3>
+    <p>An <b>absorption spectrum</b> tells you what a single pigment absorbs (measured with a spectrophotometer). An <b>action spectrum</b> tells you how fast photosynthesis actually runs at each wavelength — measured by <b>oxygen production or CO₂ consumption</b> by the whole plant. Because the two graphs match, with peaks in blue-violet and red and a dip in green, you can conclude the wavelengths a plant <b>absorbs</b> are the wavelengths it <b>uses</b> to drive photosynthesis. Green light is absorbed poorly, so it drives little photosynthesis.</p>
+    <p class="aka">AKA: the twins — one shows the shopping list (absorption), the other shows what got cooked (action).</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="overlay of an absorption spectrum and an action spectrum of photosynthesis: both have matching peaks in blue and red light and a trough in green, showing that the wavelengths absorbed are the wavelengths that drive photosynthesis">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">SPECTRA TWINS — ABSORPTION vs ACTION</text>
+
+      <rect x="150" y="44" width="14" height="14" rx="3" fill="#ff2ec4"/>
+      <text x="170" y="56" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">absorption spectrum (pigment, spectrophotometer)</text>
+      <rect x="150" y="66" width="14" height="14" rx="3" fill="#4ade80"/>
+      <text x="170" y="78" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">action spectrum (whole plant: O₂ produced / CO₂ used)</text>
+
+      <line x1="80" y1="52" x2="80" y2="280" stroke="#b9a3d6" stroke-width="2"/>
+      <line x1="80" y1="280" x2="620" y2="280" stroke="#b9a3d6" stroke-width="2"/>
+      <text x="70" y="108" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">absorption</text>
+      <text x="70" y="124" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">+ action rate</text>
+      <text x="160" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">400</text>
+      <text x="320" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">500</text>
+      <text x="470" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">600</text>
+      <text x="620" y="310" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="11">700</text>
+      <text x="350" y="326" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">wavelength / nm</text>
+      <rect x="80" y="284" width="540" height="12" rx="4" fill="url(#specbar)"/>
+
+      <polyline points="80,238 110,220 150,128 200,150 280,225 380,250 480,205 540,150 620,112" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <polyline points="80,244 115,228 158,138 205,162 285,232 385,252 470,215 545,160 620,128" fill="none" stroke="#4ade80" stroke-width="3" stroke-dasharray="7 5"/>
+
+      <text x="145" y="112" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">blue peak ~450 nm</text>
+      <text x="600" y="96" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="700">red peak ~670 nm</text>
+      <text x="430" y="170" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">green trough ~550 nm — least photosynthesis happens in green light</text>
+      <text x="330" y="270" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">same shape = the wavelengths absorbed are the wavelengths used</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — Absorption (solid) vs action (dashed) spectra. Matching peaks and troughs link light absorption to photosynthetic rate.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>📉 Absorption spectrum</h4><p>Measures <b>how much light a pigment absorbs</b> at each wavelength, using a spectrophotometer that shines one wavelength at a time through a pigment solution. A pigment property only.</p></div>
+    <div class="card"><h4>📈 Action spectrum</h4><p>Measures <b>photosynthetic rate</b> at each wavelength — the plant as a whole. Rate is tracked as <b>O₂ production</b> (bubble counts, oxygen electrode) or <b>CO₂ consumption</b> (pH change, IR gas analysis).</p></div>
+    <div class="card"><h4>🔗 The conclusion</h4><p>Overlaying the two shows the same double-peaked shape. Therefore the pigments' absorption pattern <b>determines which wavelengths power photosynthesis</b> — a classic correlation between two independently measured variables.</p></div>
+  </div>
+
+  <div class="tip"><b>Spot the difference for the exam:</b> absorption = what a pigment CAN absorb; action = what photosynthesis ACTUALLY does with each wavelength. Green light is absorbed little and drives little photosynthesis — yet most light that hits a leaf is green. That's why plants look green and why they're not more efficient.</div>
+</section>
+
+<section class="act" id="act6">
+  <div class="acttag">C1.3.7</div>
+  <h2>ACT 6 · THE BOTTLENECKS</h2>
+  <p class="aim">Limiting factors in photosynthesis — light, temperature and CO₂ — and the experiments that reveal them.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚦</div>
+    <div class="body">
+    <h3>Three taps, one sink</h3>
+    <p>Photosynthesis has three main inputs you can turn up or down: <b>light intensity, CO₂ concentration and temperature</b>. Raise any one while the others stay fixed and the rate rises — until it plateaus, because <b>something else has become the limiting factor</b>. That's the whole idea: the factor in shortest supply sets the rate, like the narrowest bottleneck on a production line. Experiments (pondweed bubble counting, floating leaf discs, fermenters of algae) change one independent variable at a time and measure the rate.</p>
+    <p class="aka">AKA: the bottlenecks — turn one tap and the kitchen speeds up, but only until the next tap runs dry.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three graphs of limiting factors: rate of photosynthesis against light intensity rises then plateaus, against carbon dioxide concentration rises then plateaus, and against temperature rises to an optimum then falls as enzymes denature">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE BOTTLENECKS — THREE LIMITING FACTORS</text>
+
+      <!-- graph A: light -->
+      <line x1="45" y1="200" x2="215" y2="200" stroke="#b9a3d6" stroke-width="1.5"/>
+      <line x1="45" y1="60" x2="45" y2="200" stroke="#b9a3d6" stroke-width="1.5"/>
+      <polyline points="45,190 75,165 105,130 145,92 170,80 200,80" fill="none" stroke="#ff2ec4" stroke-width="3"/>
+      <text x="130" y="218" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">LIGHT INTENSITY</text>
+      <text x="130" y="236" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">plateau = CO₂ or temperature now limiting</text>
+
+      <!-- graph B: CO2 -->
+      <line x1="255" y1="200" x2="425" y2="200" stroke="#b9a3d6" stroke-width="1.5"/>
+      <line x1="255" y1="60" x2="255" y2="200" stroke="#b9a3d6" stroke-width="1.5"/>
+      <polyline points="255,190 285,165 315,130 355,92 380,80 410,80" fill="none" stroke="#22d3ee" stroke-width="3"/>
+      <text x="340" y="218" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">CO₂ CONCENTRATION</text>
+      <text x="340" y="236" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">plateau = light or temperature now limiting</text>
+
+      <!-- graph C: temperature -->
+      <line x1="465" y1="200" x2="635" y2="200" stroke="#b9a3d6" stroke-width="1.5"/>
+      <line x1="465" y1="60" x2="465" y2="200" stroke="#b9a3d6" stroke-width="1.5"/>
+      <polyline points="465,190 495,140 525,100 555,72 585,92 615,140 635,165" fill="none" stroke="#fbbf24" stroke-width="3"/>
+      <text x="550" y="218" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">TEMPERATURE</text>
+      <text x="550" y="236" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">enzymes denature past the optimum</text>
+
+      <!-- method cards -->
+      <rect x="30" y="254" width="190" height="56" rx="8" fill="rgba(255,46,196,0.06)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="125" y="274" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">pondweed bubble count</text>
+      <text x="125" y="294" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">vary CO₂ with NaHCO₃ · count O₂ bubbles</text>
+
+      <rect x="235" y="254" width="190" height="56" rx="8" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="330" y="274" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">floating leaf discs</text>
+      <text x="330" y="294" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">vary light distance (1/d²) · discs float faster</text>
+
+      <rect x="440" y="254" width="190" height="56" rx="8" fill="rgba(251,191,36,0.06)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="535" y="274" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">fermenter + algae</text>
+      <text x="535" y="294" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">vary temperature · O₂ electrode or pH probe</text>
+
+      <text x="330" y="326" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">independent variable = what you change · dependent variable = what you measure · hypotheses need repeated testing (NOS)</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — Limiting factors. Each curve rises with its factor, then plateaus (or falls) as another factor — or enzyme damage — takes over as the bottleneck.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>💡 Light intensity</h4><p>More light → more photons hit the photosystems → faster light-dependent reactions. Plateau: the Calvin cycle can't keep up, or CO₂/temperature limit it. In experiments, light intensity follows <b>1/distance²</b>.</p></div>
+    <div class="card"><h4>🌫️ CO₂ concentration</h4><p>More CO₂ → faster carbon fixation by Rubisco. Plateau: light or temperature now limits. <b>Normal air is ~400 ppm CO₂</b> — plants can't use more than the air provides.</p></div>
+    <div class="card"><h4>🌡️ Temperature</h4><p>Photosynthesis is enzymatic — rate doubles-ish per 10 °C rise until the <b>optimum</b>, then enzymes (especially Rubisco's helpers) denature and the rate crashes. Night-time respiration also rises with temperature, cutting net gains.</p></div>
+  </div>
+
+  <div class="nos"><b>Nature of science:</b> the limiting-factor concept comes from <b>controlled experiments</b> — keep two factors constant, vary one, measure rate. Every conclusion is provisional and strengthened by repeating trials, replicating results and testing alternative explanations.</div>
+</section>
+
+<section class="act" id="act7">
+  <div class="acttag">C1.3.8</div>
+  <h2>ACT 7 · THE CO₂ BUBBLER</h2>
+  <p class="aim">CO₂ enrichment experiments — greenhouses and FACE — and what they show about carbon supply.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🏭</div>
+    <div class="body">
+    <h3>Pumping the kitchen full of CO₂</h3>
+    <p>If CO₂ is a limiting factor, then <b>raising CO₂ should raise yield</b> — and in greenhouses it does. Growers keep light and temperature near-optimal, then enrich the air with CO₂ (from combined heat-and-power boilers or compost) — often boosting tomato yields, especially on sunny days. <b>FACE (Free-Air CO₂ Enrichment)</b> takes the question outdoors: circles of towers release CO₂ over open plots of natural vegetation, holding ~550 ppm on the upwind side, while control plots get plain air. This tests how real ecosystems respond to the CO₂ levels predicted for coming decades — without walls or pots changing the result.</p>
+    <p class="aka">AKA: the CO₂ bubbler — the club's bouncer sprays extra carbon dioxide into the air and watches the kitchen cook faster.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="carbon dioxide enrichment: a greenhouse where CO2 from CHP boilers or compost is dosed to raise yields, and a FACE experiment where a ring of towers releases CO2 over open-air forest plots at 550 ppm with control plots receiving plain air">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff2ec4"/></marker>
+        <marker id="arC2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE CO₂ BUBBLER — GREENHOUSES AND FACE</text>
+
+      <!-- greenhouse -->
+      <path d="M 40 230 L 40 100 L 160 48 L 280 100 L 280 230 Z" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="2.5"/>
+      <rect x="70" y="170" width="14" height="60" fill="#22d3ee"/>
+      <rect x="110" y="150" width="14" height="80" fill="#22d3ee"/>
+      <rect x="150" y="120" width="14" height="110" fill="#22d3ee"/>
+      <rect x="190" y="160" width="14" height="70" fill="#22d3ee"/>
+      <text x="160" y="76" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">GREENHOUSE</text>
+      <text x="160" y="96" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">light + temperature held optimal</text>
+      <text x="160" y="112" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">only CO₂ is varied</text>
+      <text x="160" y="128" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">~400 ppm → 550+ ppm</text>
+      <path d="M 300 220 L 285 220" fill="none" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#arP)"/>
+      <text x="160" y="252" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">CO₂ dosed on sunny days → tomato yields up</text>
+      <text x="160" y="270" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">supply from CHP boilers or compost</text>
+
+      <!-- FACE -->
+      <circle cx="470" cy="140" r="72" fill="rgba(34,211,238,0.05)" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 5"/>
+      <rect x="462" y="62" width="16" height="10" fill="#a855f7"/>
+      <rect x="536" y="134" width="10" height="16" fill="#a855f7"/>
+      <rect x="462" y="208" width="16" height="10" fill="#a855f7"/>
+      <rect x="392" y="134" width="10" height="16" fill="#a855f7"/>
+      <path d="M 380 140 L 392 140" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#arC2)"/>
+      <path d="M 380 120 L 392 128" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arC2)"/>
+      <path d="M 380 160 L 392 152" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arC2)"/>
+      <text x="470" y="56" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">FACE (Free-Air CO₂ Enrichment)</text>
+      <text x="470" y="132" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">ring of towers in open air</text>
+      <text x="470" y="148" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">natural forest / grassland plot</text>
+      <text x="470" y="164" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">CO₂ released upwind → held at 550 ppm</text>
+      <text x="470" y="252" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">control plots: towers release plain air</text>
+      <text x="470" y="270" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">test: does extra CO₂ boost carbon storage?</text>
+
+      <text x="330" y="306" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">Questions FACE probes: carbon storage, nitrogen/phosphorus limits, biodiversity shifts at 550 ppm</text>
+      <text x="330" y="324" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">results from real ecosystems, no walls or pots — but answers are provisional (NOS)</text>
+    </svg>
+    <div class="cap"><b>FIG 7</b> — CO₂ enrichment. Greenhouses dose CO₂ to boost crop yields; FACE rings test the same question in the open air on natural ecosystems.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🏡 Greenhouse logic</h4><p>In a greenhouse, light and temperature are kept high, so CO₂ becomes the bottleneck. Enriching to <b>550+ ppm</b> removes it and yields climb — tomatoes respond most on bright days when the other factors can't hold the kitchen back.</p></div>
+    <div class="card"><h4>🌲 FACE design</h4><p>Circular arrays of towers emit CO₂ upwind of a plot, so wind carries a <b>~550 ppm</b> plume over the vegetation. Paired <b>control plots</b> get plain air. Everything else — soil, weather, neighbours — stays natural.</p></div>
+    <div class="card"><h4>🧠 What FACE found</h4><p>Early boost in growth often fades: extra carbon needs <b>nitrogen and phosphorus</b>, and other resources eventually limit. Long-running sites (forests in Australia, England) keep monitoring — the story is provisional and still being tested.</p></div>
+  </div>
+
+  <div class="tip"><b>Exam angle:</b> remember FACE is about <b>natural, open-air conditions</b> (no enclosure) with <b>control plots</b> — that's what separates it from greenhouse enrichment. And note the greenhouse result supports the limiting-factor model from Act 6: raise CO₂, and rate rises until the next bottleneck bites.</div>
+</section>
+<section class="act" id="act8">
+  <div class="acttag">AHL · C1.3.9 – C1.3.10</div>
+  <h2>ACT 8 · THE SOLAR PANELS</h2>
+  <p class="aim">Photosystems as antenna arrays — why a crowd of pigments beats a single chlorophyll molecule.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔆</div>
+    <div class="body">
+    <h3>One pigment is useless; an array is a power plant</h3>
+    <p>A single chlorophyll molecule intercepts only a few photons per second — far too few to run a reaction centre. So the thylakoid membrane packs <b>photosystems</b>: arrays of roughly <b>100 chlorophyll molecules plus ~30 accessory pigments</b> (carotenes, xanthophylls) that act as a light-harvesting <b>antenna</b>. When any antenna pigment absorbs a photon, the excitation energy hops from molecule to molecule in femtoseconds until it reaches the <b>reaction centre</b> — a special pair of chlorophyll molecules. There the energy ejects an electron, which the cell captures for chemistry. The reaction centre's identity gives the photosystem its name: <b>P680</b> in photosystem II (absorbs ~680 nm) and <b>P700</b> in photosystem I (~700 nm).</p>
+    <p class="aka">AKA: the solar panels on the kitchen roof — thousands of little collector tiles funneling light into one powerful socket.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="structure of a photosystem: an antenna array of about one hundred chlorophyll and accessory pigment molecules funnels excitation energy to a reaction centre with a special chlorophyll pair, P680 in photosystem II or P700 in photosystem I, which emits an excited electron">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arG2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/></marker>
+        <marker id="arY" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#fbbf24"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE SOLAR PANELS — ONE PHOTOSYSTEM</text>
+      <text x="330" y="46" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">antenna: ~100 chlorophyll + ~30 accessory pigments</text>
+
+      <!-- photosystem body -->
+      <rect x="170" y="76" width="320" height="140" rx="14" fill="rgba(34,211,238,0.05)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="330" y="96" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">PHOTOSYSTEM (in the thylakoid membrane)</text>
+
+      <!-- antenna pigment circles -->
+      <circle cx="205" cy="124" r="9" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="235" cy="114" r="9" fill="rgba(251,191,36,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <circle cx="265" cy="128" r="9" fill="rgba(255,46,196,0.3)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <circle cx="295" cy="114" r="9" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="325" cy="126" r="9" fill="rgba(251,191,36,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <circle cx="205" cy="164" r="9" fill="rgba(251,191,36,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <circle cx="235" cy="154" r="9" fill="rgba(255,46,196,0.3)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <circle cx="265" cy="168" r="9" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+      <circle cx="295" cy="156" r="9" fill="rgba(255,46,196,0.3)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <circle cx="325" cy="166" r="9" fill="rgba(74,222,128,0.3)" stroke="#4ade80" stroke-width="1.5"/>
+
+      <!-- energy funnel arrows -->
+      <path d="M 300 130 L 348 128" fill="none" stroke="#fbbf24" stroke-width="1.8" marker-end="url(#arY)"/>
+      <path d="M 296 160 L 348 148" fill="none" stroke="#fbbf24" stroke-width="1.8" marker-end="url(#arY)"/>
+      <path d="M 330 100 L 356 128" fill="none" stroke="#fbbf24" stroke-width="1.8" marker-end="url(#arY)"/>
+
+      <!-- reaction centre -->
+      <circle cx="372" cy="142" r="13" fill="rgba(255,46,196,0.25)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <circle cx="392" cy="142" r="13" fill="rgba(255,46,196,0.25)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="382" y="146" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="9" font-weight="800">RC</text>
+      <text x="430" y="132" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">reaction centre:</text>
+      <text x="430" y="150" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">special chlorophyll pair</text>
+
+      <!-- excited electron -->
+      <path d="M 382 128 C 400 100 420 80 460 64" fill="none" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arG2)"/>
+      <text x="465" y="58" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">excited electron emitted</text>
+      <text x="465" y="76" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">captured by the electron transport chain</text>
+
+      <!-- light in -->
+      <path d="M 110 120 L 195 124" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arY)"/>
+      <path d="M 110 148 L 195 148" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arY)"/>
+      <text x="105" y="108" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">light in</text>
+      <text x="105" y="176" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">photons strike any</text>
+      <text x="105" y="192" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">antenna pigment</text>
+
+      <text x="330" y="252" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">energy hops molecule to molecule in femtoseconds — funnelled to the centre, like a bucket chain</text>
+      <text x="330" y="272" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">the array catches ~100× more photons than a lone molecule · a single pigment is useless alone</text>
+      <text x="330" y="292" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">in low light, more than 99% of absorbed photons still produce excited electrons</text>
+      <text x="330" y="312" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">PSII's centre = P680 · PSI's centre = P700 (named for their absorption peaks)</text>
+      <text x="330" y="330" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">PSII sits mostly in the grana; PSI mostly in the stroma lamellae</text>
+    </svg>
+    <div class="cap"><b>FIG 8</b> — A photosystem: antenna pigments capture photons and funnel excitation energy to the P680 or P700 reaction centre, which releases an excited electron.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>📡 Antenna array</h4><p>~100 chlorophylls + ~30 accessory pigments catch photons across a <b>wider range of wavelengths</b> than any single molecule could. Excitation energy hops pigment-to-pigment in <b>femtoseconds</b> (10⁻¹⁵ s) — no chemical intermediates needed.</p></div>
+    <div class="card"><h4>🎯 Reaction centre</h4><p>A <b>special pair of chlorophylls</b> traps the energy and ejects an electron. The electron goes to the transport chain; the pigment grabs a replacement electron (from water in PSII, from the chain in PSI).</p></div>
+    <div class="card"><h4>🔢 P680 vs P700</h4><p>The numbers are the wavelengths (nm) where each centre absorbs best. <b>P680 (PSII)</b> is the electron donor to the chain; <b>P700 (PSI)</b> hands electrons to NADP reductase. Both are needed, working in series.</p></div>
+  </div>
+
+  <div class="tip"><b>Why arrays matter (exam favourite):</b> a single pigment molecule absorbs too few photons and too narrow a wavelength range to be useful. The array increases photon capture by about <b>two orders of magnitude</b> and lets accessory pigments feed energy in — so even dim light keeps the kitchen running.</div>
+</section>
+
+<section class="act" id="act9">
+  <div class="acttag">AHL · C1.3.11</div>
+  <h2>ACT 9 · THE WATER SPLITTER</h2>
+  <p class="aim">Photolysis — light-driven splitting of water in photosystem II, and the electrons, protons and oxygen it releases.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⚡</div>
+    <div class="body">
+    <h3>The most powerful oxidant in biology</h3>
+    <p>When P680 emits an electron, it becomes positively charged — and hungry. That electron-hungry P680⁺ is one of the strongest oxidising agents found in living things, powerful enough to <b>rip electrons off water</b>. This happens in the <b>oxygen-evolving complex (OEC)</b>, a cluster of manganese, calcium and oxygen atoms tucked against the thylakoid space. Two water molecules are split:</p>
+    <p class="aka">AKA: the water splitter — the kitchen's tap that doubles as a power supply, gushing oxygen as a side effect.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="photolysis in photosystem II: the oxygen-evolving complex splits two water molecules into oxygen gas, four protons released into the thylakoid space, and four electrons that replace the electrons P680 lost">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arG3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/></marker>
+        <marker id="arC3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker>
+        <marker id="arP3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff2ec4"/></marker>
+        <marker id="arY3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#fbbf24"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE WATER SPLITTER — PHOTOLYSIS IN PSII</text>
+
+      <!-- thylakoid cross-section -->
+      <rect x="60" y="46" width="540" height="58" rx="10" fill="rgba(34,211,238,0.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="595" y="80" text-anchor="end" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">thylakoid space (lumen)</text>
+      <rect x="60" y="104" width="540" height="30" fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="2"/>
+      <text x="600" y="124" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">membrane</text>
+      <rect x="60" y="134" width="540" height="180" rx="10" fill="rgba(74,222,128,0.04)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="600" y="154" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">stroma</text>
+
+      <!-- OEC -->
+      <circle cx="150" cy="119" r="19" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="150" y="124" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800">OEC</text>
+      <text x="150" y="84" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700">oxygen-evolving</text>
+      <text x="150" y="98" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700">complex</text>
+
+      <!-- water in -->
+      <rect x="60" y="286" width="110" height="38" rx="8" fill="rgba(34,211,238,0.1)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="115" y="300" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">2H₂O in</text>
+      <text x="115" y="316" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9">from the soil via xylem</text>
+      <path d="M 115 286 L 140 140" fill="none" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arC3)"/>
+
+      <!-- electrons to P680 -->
+      <path d="M 169 119 L 300 119" fill="none" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#arP3)"/>
+      <text x="300" y="96" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">4e⁻ replace P680's lost electrons</text>
+
+      <!-- protons to lumen -->
+      <path d="M 185 104 L 185 84" fill="none" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arC3)"/>
+      <text x="330" y="60" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">4H⁺ released into the thylakoid space — feeds the proton gradient</text>
+
+      <!-- O2 out -->
+      <path d="M 150 100 L 150 68" fill="none" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arG3)"/>
+      <text x="200" y="78" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">O₂ waste — diffuses out</text>
+
+      <text x="330" y="208" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="900">2H₂O → O₂ + 4H⁺ + 4e⁻</text>
+      <text x="330" y="228" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">only happens in the light — P680 must first be excited to pull the electrons</text>
+      <text x="330" y="252" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">Early cyanobacteria flooded the oceans with this O₂ → iron rusted into banded iron formations</text>
+      <text x="330" y="272" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">then the atmosphere went oxygen-rich → aerobic respiration → complex life</text>
+      <text x="330" y="300" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">every O₂ in your breath was split from water by a P680</text>
+    </svg>
+    <div class="cap"><b>FIG 9</b> — Photolysis: the oxygen-evolving complex splits water into O₂ (waste), H⁺ (into the thylakoid space) and e⁻ (back to P680).</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🥾 The electron relay</h4><p>Every photon-excited electron P680 emits must be replaced or the photosystem jams. <b>Water is the ultimate electron donor</b> — the only reason plants can keep losing electrons all day is that they have an infinite supply of water to cannibalise.</p></div>
+    <div class="card"><h4>🔋 Gradient fuel</h4><p>The 4H⁺ dumped into the thylakoid space per water pair are <b>free protons for the chemiosmotic gradient</b> — photolysis contributes to ATP production without costing the electron chain anything.</p></div>
+    <div class="card"><h4>🪨 Planetary scale</h4><p>Photolysis's waste O₂ rusted Earth's oceans (<b>banded iron formations</b>, ~2.5–2.8 billion years ago) before oxygen filled the air. Photosynthesis is why there's fire, rust and aerobic animals at all.</p></div>
+  </div>
+
+  <div class="nos"><b>Nature of science:</b> the OEC's manganese-calcium cluster was worked out partly by <b>comparing structures across species</b> and partly by spectroscopy — an example of how models of molecular machines are built from convergent evidence, then revised as techniques improve.</div>
+</section>
+
+<section class="act" id="act10">
+  <div class="acttag">AHL · C1.3.12 – C1.3.13</div>
+  <h2>ACT 10 · THE PROTON RIVER</h2>
+  <p class="aim">Chemiosmosis and ATP synthase — plus the reduction of NADP by photosystem I.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌊</div>
+    <div class="body">
+    <h3>Electrons fall, protons climb, ATP pours</h3>
+    <p>Electrons from PSII travel down the <b>electron transport chain</b> (plastoquinone → cytochrome b₆f → plastocyanin), losing energy at each step. That energy <b>pumps protons from the stroma into the thylakoid space</b>. Because the lumen is tiny, even a few dozen protons build a steep concentration gradient — the <b>proton motive force</b>. Protons can only flow back to the stroma through <b>ATP synthase</b>, and that flow spins the enzyme like a turbine, making ATP from ADP + Pi. This is <b>chemiosmosis</b>. Meanwhile PSI passes electrons down a short chain to <b>NADP reductase</b>, which reduces <b>NADP</b> to <b>reduced NADP</b> using 2 electrons + H⁺. In <b>cyclic photophosphorylation</b>, PSI's electrons loop back to the chain instead — producing ATP alone.</p>
+    <p class="aka">AKA: the proton river — a one-way current of H⁺ that turns the waterwheel of ATP synthase.</p>
+  </div></div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thylakoid cross-section showing chemiosmosis: photosystem II passes electrons along an electron transport chain that pumps protons into the thylakoid space, photosystem I reduces NADP to reduced NADP, and protons flowing back through ATP synthase drive ATP production">
+      <rect x="0" y="0" width="660" height="360" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arC4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker>
+        <marker id="arP4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff2ec4"/></marker>
+        <marker id="arG4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/></marker>
+        <marker id="arY4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#fbbf24"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE PROTON RIVER — CHEMIOSMOSIS AND NADP</text>
+
+      <!-- thylakoid -->
+      <rect x="60" y="48" width="540" height="66" rx="10" fill="rgba(34,211,238,0.07)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="600" y="70" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">thylakoid space</text>
+      <rect x="60" y="114" width="540" height="26" fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="60" y="140" width="540" height="196" rx="10" fill="rgba(74,222,128,0.04)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="600" y="250" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">stroma</text>
+
+      <!-- PSII -->
+      <rect x="90" y="96" width="76" height="62" rx="10" fill="rgba(255,46,196,0.12)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="128" y="118" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">PSII</text>
+      <text x="128" y="136" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10">P680</text>
+      <path d="M 110 48 L 110 92" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#arY4)"/>
+      <path d="M 146 48 L 146 92" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#arY4)"/>
+      <text x="128" y="40" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800">light</text>
+
+      <!-- ETC carriers -->
+      <circle cx="230" cy="127" r="10" fill="rgba(168,85,247,0.4)" stroke="#a855f7" stroke-width="2"/>
+      <circle cx="285" cy="127" r="10" fill="rgba(168,85,247,0.4)" stroke="#a855f7" stroke-width="2"/>
+      <circle cx="340" cy="127" r="10" fill="rgba(168,85,247,0.4)" stroke="#a855f7" stroke-width="2"/>
+      <path d="M 166 127 L 216 127" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arP4)"/>
+      <path d="M 240 127 L 271 127" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arP4)"/>
+      <path d="M 295 127 L 326 127" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arP4)"/>
+      <text x="240" y="116" fill="#a855f7" font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="700">e⁻</text>
+      <text x="285" y="104" text-anchor="middle" fill="#a855f7" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">electron transport chain</text>
+      <text x="285" y="88" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">plastoquinone → cytochrome b₆f → plastocyanin</text>
+
+      <!-- proton pumping -->
+      <path d="M 230 140 L 230 120" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#arC4)"/>
+      <path d="M 285 140 L 285 120" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#arC4)"/>
+      <path d="M 340 140 L 340 120" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#arC4)"/>
+      <text x="285" y="168" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">H⁺ pumped into the thylakoid space</text>
+
+      <!-- PSI -->
+      <rect x="400" y="96" width="76" height="62" rx="10" fill="rgba(255,46,196,0.12)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="438" y="118" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">PSI</text>
+      <text x="438" y="136" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10">P700</text>
+      <path d="M 350 127 L 396 127" fill="none" stroke="#a855f7" stroke-width="2" marker-end="url(#arP4)"/>
+
+      <!-- NADP reductase -->
+      <rect x="470" y="162" width="130" height="36" rx="8" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="2"/>
+      <text x="535" y="185" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">NADP reductase</text>
+      <path d="M 438 158 L 480 172" fill="none" stroke="#4ade80" stroke-width="2" marker-end="url(#arG4)"/>
+      <text x="450" y="172" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="700">2e⁻</text>
+      <text x="535" y="152" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">NADP + 2e⁻ + H⁺ → reduced NADP</text>
+
+      <!-- ATP synthase -->
+      <rect x="560" y="96" width="66" height="62" rx="10" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="593" y="120" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800">ATP</text>
+      <text x="593" y="136" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800">synthase</text>
+      <path d="M 593 114 L 593 140" fill="none" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arY4)"/>
+      <text x="593" y="108" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="700">H⁺ flow</text>
+      <text x="593" y="212" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">ADP + Pi → ATP</text>
+
+      <text x="330" y="248" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10.5">the proton gradient is the proton motive force — small lumen volume means few protons make a big gradient</text>
+      <text x="330" y="268" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">non-cyclic: PSII → chain → PSI → NADP (makes ATP + reduced NADP)</text>
+      <text x="330" y="288" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">cyclic: PSI's electrons loop back to the chain — ATP alone, no reduced NADP</text>
+      <text x="330" y="312" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">Jagendorf's acid-bath experiment: thylakoids soaked in acid, then shifted to ADP in the dark, made ATP — proof the gradient drives the enzyme</text>
+      <text x="330" y="334" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">reduced NADP is the other battery — it carries the hydrogen/electrons to the Calvin cycle</text>
+    </svg>
+    <div class="cap"><b>FIG 10</b> — Chemiosmosis in the thylakoid. Electrons fall down the chain, pumping H⁺ into the lumen; the H⁺ current spins ATP synthase; PSI reduces NADP.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🔄 Electron transport chain</h4><p>Carriers in the membrane pass electrons downhill, using the released energy to <b>pump protons into the thylakoid space</b>. P680's electrons enter; fresh ones arrive from photolysis; PSI's electrons finish at NADP reductase.</p></div>
+    <div class="card"><h4>🌀 ATP synthase</h4><p>A rotary enzyme: H⁺ flowing back to the stroma turns its rotor, and each turn drives <b>ADP + Pi → ATP</b>. This coupling of proton flow to ATP synthesis is <b>chemiosmosis</b> — the same trick mitochondria use.</p></div>
+    <div class="card"><h4>🔋 Two batteries</h4><p>Light-dependent reactions output <b>ATP</b> (energy) and <b>reduced NADP</b> (reducing power). NADP is NAD plus an extra phosphate — its reduced form carries H⁺ and electrons to power the Calvin cycle's GP → TP step.</p></div>
+  </div>
+
+  <div class="exam"><b>Exam gold — the Jagendorf evidence:</b> chloroplast thylakoids were incubated in an acid bath (pH ~4) in the dark, so H⁺ diffused in. Dropped into alkaline buffer with ADP + Pi, they produced a <b>burst of ATP with no light at all</b> — because the artificial gradient alone drove ATP synthase. That experiment nailed chemiosmosis.</div>
+</section>
+<section class="act" id="act11">
+  <div class="acttag">AHL · C1.3.14</div>
+  <h2>ACT 11 · THE THYLAKOID STATION</h2>
+  <p class="aim">The thylakoid as a functional system — one membrane doing photolysis, electron transport, proton pumping and NADP reduction, with the Calvin cycle waiting in the stroma.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🏗️</div>
+    <div class="body">
+      <h3>One membrane, four jobs, perfect zoning</h3>
+      <p class="aka">grana · stroma lamellae · lumen · stroma · zonation of the light-dependent reactions</p>
+      <p>Disc-shaped <span class="accent">thylakoids</span> are stacked into <span class="cyan">grana</span>, and unstacked <span class="cyan">stroma lamellae</span> connect the stacks. The membrane of every thylakoid hosts the <b>whole light-dependent factory</b>: photolysis, electron transport, proton pumping for chemiosmosis and NADP reduction all happen here. The tiny volume of the <span class="gold">thylakoid space (lumen)</span> is the secret weapon — a small lumen means even a modest number of protons creates a steep concentration gradient, so ATP synthesis needs only a few dozen H⁺.</p>
+      <p>There is real <b>zoning</b>: PSII arrays and the cytochrome b₆f complex concentrate in the <span class="cyan">grana</span>; PSI arrays and ATP synthases concentrate in the <span class="cyan">stroma lamellae</span>. The fluid <span class="green">stroma</span> outside holds the Calvin cycle enzymes — Rubisco and friends — and the products of the light-dependent reactions (ATP, reduced NADP) diffuse out to feed them.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="chloroplast cutaway showing the thylakoid system: grana are stacks of disc thylakoids, stroma lamellae connect the stacks, photosystem II and photolysis are found in the grana while photosystem I and ATP synthase sit in the stroma lamellae, and the Calvin cycle runs in the stroma fluid">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arA" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M 0 0 L 8 3 L 0 6 Z" fill="#22d3ee"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE THYLAKOID STATION — WHERE EACH REACTION LIVES</text>
+
+      <!-- chloroplast envelope -->
+      <rect x="40" y="44" width="580" height="256" rx="18" fill="rgba(255,46,196,0.04)" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="330" y="64" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800">CHLOROPLAST</text>
+      <rect x="56" y="80" width="548" height="200" rx="12" fill="none" stroke="rgba(185,163,214,0.4)" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+      <!-- granum 1 -->
+      <ellipse cx="140" cy="120" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="140" cy="146" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="140" cy="172" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="140" cy="198" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+
+      <!-- granum 2 -->
+      <ellipse cx="330" cy="120" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="330" cy="146" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="330" cy="172" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+      <ellipse cx="330" cy="198" rx="52" ry="13" fill="rgba(34,211,238,0.22)" stroke="#22d3ee" stroke-width="2"/>
+
+      <!-- stroma lamellae -->
+      <path d="M 192 120 L 278 120" stroke="#a855f7" stroke-width="4" fill="none"/>
+      <path d="M 192 172 L 278 172" stroke="#a855f7" stroke-width="4" fill="none"/>
+      <path d="M 382 146 L 468 146" stroke="#a855f7" stroke-width="4" fill="none"/>
+      <text x="235" y="106" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11" font-weight="800">grana — stacks of disc thylakoids</text>
+      <text x="235" y="232" text-anchor="middle" fill="#a855f7" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">stroma lamellae (unstacked) connect the stacks</text>
+
+      <!-- zoning labels with arrows -->
+      <path d="M 456 130 L 420 148" stroke="#22d3ee" stroke-width="2" marker-end="url(#arA)" fill="none"/>
+      <text x="468" y="112" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">PSII + photolysis</text>
+      <text x="468" y="128" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">concentrated in the grana</text>
+      <path d="M 468 176 L 452 168" stroke="#a855f7" stroke-width="2" marker-end="url(#arA)" fill="none"/>
+      <text x="480" y="166" fill="#a855f7" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">PSI + ATP synthase</text>
+      <text x="480" y="182" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">in the stroma lamellae</text>
+      <text x="480" y="210" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">Calvin cycle</text>
+      <text x="480" y="226" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">runs in the stroma fluid</text>
+      <text x="480" y="244" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">tiny lumen volume</text>
+      <text x="480" y="260" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">→ steep H⁺ gradient from few protons</text>
+
+      <text x="330" y="282" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">one membrane = the whole light-dependent factory: absorb light · split water · pump protons · make ATP + reduced NADP</text>
+      <text x="330" y="302" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">cyanobacteria: thylakoids attached to the plasma membrane · plants and algae: grana + stroma lamellae</text>
+      <text x="330" y="322" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">ATP + reduced NADP diffuse into the stroma; ADP + NADP diffuse back — the two halves trade constantly</text>
+    </svg>
+    <div class="cap"><b>FIG 11</b> — The thylakoid system. Grana do PSII work and photolysis; stroma lamellae carry PSI and ATP synthase; the stroma runs the Calvin cycle. The small lumen volume makes proton gradients cheap.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🟦 Grana</h4><p>Stacks of disc thylakoids packed with <b>PSII arrays and cytochrome b₆f</b>. Photolysis's protons are dumped into the tiny lumen here — the gradient starts building at the very first photosystem.</p></div>
+    <div class="card"><h4>🟪 Stroma lamellae</h4><p>Unstacked membrane extensions holding <b>PSI arrays and ATP synthases</b>. The proton river flows along the lumen from grana to lamellae, then spins the synthases.</p></div>
+    <div class="card"><h4>🟩 Stroma</h4><p>The fluid around the membranes: home of the <b>Calvin cycle</b>. It imports ATP + reduced NADP, exports triose phosphate, and recycles ADP + NADP back to the membrane.</p></div>
+  </div>
+
+  <div class="tip"><b>Think of it as zoning laws:</b> the kitchen keeps the hobs (PSII) in one wing and the dishwashers (ATP synthase) in another — but they're all plumbed to the same hot-water loop (the lumen). The exam wants you to say <b>where</b> each light-dependent reaction happens and <b>why the small lumen matters</b>.</div>
+</section>
+
+<section class="act" id="act12">
+  <div class="acttag">AHL · C1.3.15 – C1.3.17</div>
+  <h2>ACT 12 · THE ASSEMBLY LINE</h2>
+  <p class="aim">The Calvin cycle — Rubisco's carboxylation of RuBP, the reduction of GP to TP, and the regeneration of RuBP.</p>
+
+  <div class="bouncer">
+    <div class="emoji">👨‍🍳</div>
+    <div class="body">
+      <h3>Rubisco, the head chef, and his three-station line</h3>
+      <p class="aka">Rubisco (RuBP carboxylase) · RuBP · carboxylation · GP (glycerate 3-phosphate) · TP (triose phosphate) · regeneration</p>
+      <p>The <span class="accent">Calvin cycle</span> runs in the stroma and uses the ATP + reduced NADP from the light-dependent reactions. Its head chef is <span class="accent">Rubisco</span> (ribulose bisphosphate carboxylase) — the <b>most abundant enzyme on Earth</b>, yet a slow one: it fixes roughly <span class="gold">3 CO₂ per second</span>, so plants need enormous concentrations of it. Station one, <span class="cyan">carboxylation</span>: Rubisco joins CO₂ onto <span class="gold">ribulose bisphosphate (RuBP, 5C)</span>; the unstable 6-carbon intermediate instantly splits into <span class="cyan">two molecules of glycerate 3-phosphate (GP, 3C)</span>. Station two, <span class="pink">reduction</span>: GP is converted to <span class="green">triose phosphate (TP, 3C)</span> using ATP for energy and reduced NADP for hydrogen/electrons. Station three, <span class="gold">regeneration</span>: five of every six TP molecules are recycled into three RuBP molecules, using more ATP.</p>
+      <p>One turn fixes one CO₂ (3 ATP + 2 reduced NADP). Six turns bank one hexose — <b>18 ATP + 12 reduced NADP</b> per glucose. Melvin Calvin worked the cycle out with ¹⁴C-labelled CO₂ and won the Nobel Prize in 1961.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the Calvin cycle drawn as a three-station assembly line: Rubisco joins carbon dioxide to ribulose bisphosphate forming two molecules of glycerate 3-phosphate, which are reduced to triose phosphate using ATP and reduced NADP, then five of every six triose phosphate molecules regenerate ribulose bisphosphate using ATP, while one triose phosphate exits to make glucose and other products">
+      <rect x="0" y="0" width="660" height="372" rx="14" fill="#150a26"/>
+      <defs>
+        <marker id="arR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M 0 0 L 8 3 L 0 6 Z" fill="#ff2ec4"/></marker>
+        <marker id="arC5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M 0 0 L 8 3 L 0 6 Z" fill="#22d3ee"/></marker>
+        <marker id="arG5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M 0 0 L 8 3 L 0 6 Z" fill="#4ade80"/></marker>
+        <marker id="arY5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M 0 0 L 8 3 L 0 6 Z" fill="#fbbf24"/></marker>
+      </defs>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">THE ASSEMBLY LINE — CALVIN CYCLE (IN THE STROMA)</text>
+
+      <!-- CO2 in -->
+      <rect x="90" y="52" width="100" height="38" rx="8" fill="rgba(255,46,196,0.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="140" y="76" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="12" font-weight="900">CO₂ in</text>
+      <path d="M 190 71 L 246 71" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#arR)" fill="none"/>
+
+      <!-- Rubisco fact box -->
+      <rect x="450" y="40" width="190" height="92" rx="10" fill="rgba(74,222,128,0.07)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="545" y="60" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">RUBISCO — THE HEAD CHEF</text>
+      <text x="545" y="78" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">most abundant enzyme on Earth (~0.7 Gt)</text>
+      <text x="545" y="94" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">slow: ~3 CO₂ per second → needs bulk</text>
+      <text x="545" y="110" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">ineffective at low CO₂ (limits the cycle)</text>
+
+      <!-- RuBP -->
+      <rect x="60" y="120" width="180" height="54" rx="10" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="2.5"/>
+      <text x="150" y="142" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="13" font-weight="900">RuBP (5C)</text>
+      <text x="150" y="162" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">ribulose bisphosphate</text>
+
+      <!-- carboxylation arrow -->
+      <path d="M 240 147 L 330 147" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#arR)" fill="none"/>
+      <text x="285" y="136" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">Rubisco joins them</text>
+      <text x="285" y="176" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">unstable 6C → splits instantly</text>
+
+      <!-- GP -->
+      <rect x="340" y="122" width="230" height="54" rx="10" fill="rgba(34,211,238,0.1)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="455" y="142" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="900">2 × glycerate 3-phosphate (3C)</text>
+      <text x="455" y="162" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">GP — first stable product · carries the carboxyl group</text>
+
+      <!-- reduction arrow -->
+      <path d="M 455 176 L 390 240" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#arC5)" fill="none"/>
+      <text x="545" y="214" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">reduction: 2 ATP + 2 reduced NADP</text>
+      <text x="545" y="232" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">ATP = energy · reduced NADP = hydrogen/electrons</text>
+
+      <!-- TP -->
+      <rect x="200" y="252" width="260" height="54" rx="10" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="330" y="272" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="12.5" font-weight="900">2 × triose phosphate (3C)</text>
+      <text x="330" y="292" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">TP — the first carbohydrate · aldehyde group</text>
+
+      <!-- regeneration arrow -->
+      <path d="M 200 262 L 150 178" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#arY5)" fill="none"/>
+      <text x="120" y="224" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">5 of 6 TP → 3 RuBP</text>
+      <text x="120" y="242" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">regeneration · uses ATP</text>
+
+      <!-- exit -->
+      <path d="M 330 306 L 330 330" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arG5)" fill="none"/>
+      <text x="330" y="352" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">1 of 6 TP exits → hexose → starch · sucrose · fatty acids · amino acids</text>
+      <text x="330" y="368" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">per CO₂ fixed: 3 ATP + 2 reduced NADP · six turns → 1 glucose: 18 ATP + 12 reduced NADP</text>
+    </svg>
+    <div class="cap"><b>FIG 12</b> — The Calvin cycle assembly line. Carboxylation (Rubisco: RuBP + CO₂ → 2 GP) → reduction (2 ATP + 2 reduced NADP per CO₂: GP → TP) → regeneration (5 of 6 TP + ATP rebuild 3 RuBP). One TP exits per turn.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🥇 Station 1 · Carboxylation</h4><p>Rubisco fixes CO₂ onto RuBP (5C) forming an unstable 6C intermediate that splits into <b>2 GP (3C)</b>. This is literally how inorganic carbon enters the biosphere.</p></div>
+    <div class="card"><h4>🥈 Station 2 · Reduction</h4><p>GP is <b>reduced to TP</b>: ATP supplies energy, reduced NADP supplies hydrogen and electrons. The NADP oxidised here returns to the thylakoid to be re-reduced by PSI.</p></div>
+    <div class="card"><h4>🥉 Station 3 · Regeneration</h4><p><b>5 of every 6 TP</b> are converted back into 3 RuBP (5 × 3C = 3 × 5C), powered by ATP. Only the leftover 1 TP (one fixed carbon) leaves the line per turn.</p></div>
+  </div>
+
+  <div class="nos"><b>Nature of Science:</b> Calvin and Benson fed ¹⁴C-labelled CO₂ to algae, stopped the reaction at different times, and identified which labelled compounds appeared first — building the cycle from <b>order-of-appearance evidence</b>. Bassham later showed light-off makes GP rise and RuBP fall (and vice versa for CO₂-off), confirming which steps need the light-dependent products.</div>
+
+  <div class="exam"><b>Exam gold — the numbers:</b> per turn: 1 RuBP + 1 CO₂ → 2 GP → 2 TP (costs 2 ATP + 2 reduced NADP) → 5/6 TP regenerate RuBP (costs 1 more ATP per turn on average). Per glucose: <b>6 turns, 18 ATP, 12 reduced NADP</b>. And remember: the cycle doesn't make glucose directly — it makes TP, and 2 TP join to form hexose phosphate.</div>
+</section>
+
+<section class="act" id="act13">
+  <div class="acttag">AHL · C1.3.18 – C1.3.19</div>
+  <h2>ACT 13 · MENU &amp; POWER CUT</h2>
+  <p class="aim">What the kitchen actually serves — and why cutting light or CO₂ shuts the whole club down.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🍽️</div>
+    <div class="body">
+      <h3>From triose phosphate to the whole menu</h3>
+      <p class="aka">sucrose · starch · triglycerides · amino acids · nitrate · interdependence of the two reaction sets</p>
+      <p>All the carbon compounds a photosynthesizing organism contains are built from Calvin cycle intermediates. Triose phosphate feeds: <span class="cyan">glucose → sucrose</span> (the transport sugar shipped to the rest of the plant), <span class="cyan">starch</span> (stored in the chloroplast), and, via glycolysis-like steps, <span class="gold">fatty acids + glycerol → triglycerides</span> (seed oils, membrane lipids). Amino acids — all 20 of them — are made from GP/TP skeletons by adding <span class="accent">nitrogen from nitrate or ammonium</span>; phosphate and sulfate are needed for other compounds. So every carbon in the plant traces back to a Calvin cycle intermediate.</p>
+      <p>The two halves of photosynthesis are <b>interdependent</b>. The light-dependent reactions (thylakoid) make ATP + reduced NADP; the light-independent reactions (stroma) spend them. <span class="gold">Switch the light off</span> and the Calvin cycle grinds to a halt within seconds — ATP and reduced NADP are used up and not replaced. <span class="gold">Remove the CO₂</span> and the chain runs backwards into disaster: no GP forms, so reduced NADP can't be re-oxidised, NADP runs out, the electron chain backs up, and PSII can't unload its electrons — <b>photosystem II stops working</b>. Each half needs the other to recycle its products.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two panels: the menu of end products made from Calvin cycle triose phosphate, and the power cut showing how loss of light halts the Calvin cycle while loss of carbon dioxide stops photosystem II because reduced NADP accumulates and NADP runs out">
+      <rect x="0" y="0" width="660" height="340" rx="14" fill="#150a26"/>
+      <text x="330" y="26" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" letter-spacing="1">MENU &amp; POWER CUT</text>
+
+      <!-- menu panel -->
+      <rect x="30" y="44" width="290" height="232" rx="14" fill="rgba(74,222,128,0.05)" stroke="#4ade80" stroke-width="2"/>
+      <text x="175" y="66" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="12" font-weight="900">THE MENU — FROM TP TO EVERYTHING</text>
+      <text x="175" y="92" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">TP from the Calvin cycle →</text>
+      <text x="175" y="116" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">glucose → sucrose (transport sugar)</text>
+      <text x="175" y="136" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">glucose → starch (stored in chloroplast)</text>
+      <text x="175" y="156" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">TP → fatty acids + glycerol → triglycerides</text>
+      <text x="175" y="176" text-anchor="middle" fill="#4ade80" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">GP / TP → all 20 amino acids</text>
+      <text x="175" y="196" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">nitrogen from nitrate / ammonium · phosphate · sulfate</text>
+      <text x="175" y="222" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">every carbon atom traces back to</text>
+      <text x="175" y="240" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">a Calvin cycle intermediate</text>
+      <text x="175" y="262" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">that is how CO₂ becomes the entire plant</text>
+
+      <!-- power cut panel -->
+      <rect x="340" y="44" width="290" height="232" rx="14" fill="rgba(255,46,196,0.05)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="485" y="66" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="12" font-weight="900">THE POWER CUT — INTERDEPENDENCE</text>
+      <text x="485" y="90" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">LIGHT OFF →</text>
+      <text x="485" y="108" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">no new ATP / reduced NADP</text>
+      <text x="485" y="124" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">stocks used up → GP → TP stalls</text>
+      <text x="485" y="140" text-anchor="middle" fill="#ff2ec4" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">Calvin cycle stops in seconds</text>
+      <text x="485" y="168" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">NO CO₂ →</text>
+      <text x="485" y="186" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">no GP forms → reduced NADP piles up</text>
+      <text x="485" y="202" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="9.5">NADP runs out → electron chain backs up</text>
+      <text x="485" y="218" text-anchor="middle" fill="#22d3ee" font-family="Segoe UI, sans-serif" font-size="10.5" font-weight="800">photosystem II cannot function</text>
+      <text x="485" y="244" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800">the halves trade: ATP / reduced NADP → stroma</text>
+      <text x="485" y="260" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800">ADP / NADP → thylakoid · both directions</text>
+
+      <text x="330" y="300" text-anchor="middle" fill="#fbbf24" font-family="Segoe UI, sans-serif" font-size="11.5" font-weight="800">Two halves, one kitchen: the light-dependent reactions charge the batteries the Calvin cycle spends — cut either supply and the whole club goes dark</text>
+      <text x="330" y="322" text-anchor="middle" fill="#b9a3d6" font-family="Segoe UI, sans-serif" font-size="10">in high light, carbon fixation is rate-limiting · in no CO₂, even brilliant light cannot keep PSII running</text>
+    </svg>
+    <div class="cap"><b>FIG 13</b> — The menu of end products (left) and the power cut (right): light loss stalls the Calvin cycle in seconds; CO₂ loss stops PSII because NADP can't be recycled.</div>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h4>🥖 Sucrose &amp; starch</h4><p><b>Sucrose</b> is the plant's transport sugar — water-soluble, shipped via phloem to roots, fruits and growing tips. <b>Starch</b> is the storage polymer, packed into the chloroplast when photosynthesis outruns demand (and remobilised at night).</p></div>
+    <div class="card"><h4>🧈 Fats &amp; proteins</h4><p>TP feeds glycolysis-like pathways to <b>fatty acids</b>; glycerol also comes from TP — together they build triglycerides (seed oils, membranes). <b>Amino acids</b> get their skeletons from GP/TP and their nitrogen from nitrate or ammonium in the soil.</p></div>
+    <div class="card"><h4>🔌 The mutual hostage situation</h4><p>Light-dependent reactions need NADP back from the Calvin cycle; the Calvin cycle needs ATP + reduced NADP from the light. <b>No light → no batteries → assembly line stalls. No CO₂ → no GP → NADP not recycled → electron chain backs up → PSII stops.</b></p></div>
+  </div>
+
+  <div class="exam"><b>Exam gold — the causal chain (C1.3.19):</b> the examiner wants the mechanism, not just \"they need each other\". CO₂ removed → carboxylation stops → no GP to reduce → reduced NADP accumulates unused → free NADP runs out → PSI can't pass electrons on → the electron transport chain fills up → PSII can't donate its excited electrons → <b>PSII stops</b>. Light removed → ATP + reduced NADP are consumed by the still-running Calvin cycle and not replaced → reduction stops → cycle halts within seconds.</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">The whole kitchen in one map</div>
+  <h2>MIND MAP 🗺️</h2>
+  <p class="aim">One night at the Solar Kitchen: light in, glucose out, everything connected.</p>
+  <div class="mind">
+    <div class="node core">THE SOLAR KITCHEN<small>C1.3 · Photosynthesis · SL + AHL</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">LIGHT → CHEMICAL<small>C1.3.1 · energy in carbon compounds</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">WORD EQUATION<small>C1.3.2 · CO₂ + H₂O → glucose + O₂ · H from water</small></div>
+    <div class="node">OXYGEN VENT<small>C1.3.3 · from photolysis of water, not CO₂ · ¹⁸O evidence</small></div>
+    <div class="node">SPICE RACK<small>C1.3.4 · chromatography · Rf · carotene 0.98 → xanthophyll 0.15</small></div>
+    <div class="node">COLOUR MENU<small>C1.3.5 · absorption spectra · blue + red peaks · green reflected</small></div>
+    <div class="node">SPECTRA TWINS<small>C1.3.6 · absorption vs action · O₂ produced / CO₂ used</small></div>
+    <div class="node">BOTTLENECKS<small>C1.3.7 · light · CO₂ · temperature · pondweed / leaf discs</small></div>
+    <div class="node">CO₂ BUBBLER<small>C1.3.8 · greenhouses · FACE rings · control plots</small></div>
+    <div class="node">SOLAR PANELS<small>C1.3.9-10 · antenna arrays → P680 / P700 reaction centres</small></div>
+    <div class="node">WATER SPLITTER<small>C1.3.11 · photolysis · OEC · 2H₂O → O₂ + 4H⁺ + 4e⁻</small></div>
+    <div class="node">PROTON RIVER<small>C1.3.12-13 · ETC pumps H⁺ · ATP synthase · NADP reduction</small></div>
+    <div class="node">THYLAKOID STATION<small>C1.3.14 · grana + stroma lamellae · small lumen = steep gradient</small></div>
+    <div class="node">ASSEMBLY LINE<small>C1.3.15-17 · Rubisco · RuBP + CO₂ → 2 GP → 2 TP · 5/6 TP regenerate</small></div>
+    <div class="node">MENU &amp; POWER<small>C1.3.18-19 · sucrose · starch · fats · amino acids · interdependence</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT SHEET ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">60-second recap</div>
+  <h2>THE CHEAT ⚡</h2>
+  <div class="marquee">
+    <div class="line">🍳 Photosynthesis = <span>light energy → chemical energy</span> in carbon compounds (glucose etc.) — supplies most of the chemical energy for life in ecosystems.</div>
+    <div class="line">⚗️ Word equation: <span>carbon dioxide + water → glucose + oxygen</span> · the hydrogen comes from <span>splitting water</span> (photolysis), not from CO₂.</div>
+    <div class="line">💨 Oxygen is a <span>by-product of photolysis</span> — isotope experiments with ¹⁸O proved it comes from water, never from carbon dioxide.</div>
+    <div class="line">🎨 Pigments separated by <span>chromatography</span> · Rf = pigment distance ÷ solvent distance · carotene <span>0.98</span> &gt; chlorophyll a 0.59 &gt; chlorophyll b 0.42 &gt; xanthophylls.</div>
+    <div class="line">🟥🟦 Chlorophyll absorbs <span>red + blue</span>, reflects green → leaves look green · absorption spectrum = % absorbed per wavelength.</div>
+    <div class="line">📊 <span>Action spectrum</span> = rate of photosynthesis per wavelength (O₂ produced / CO₂ consumed) · matches absorption peaks at ~430 and ~660 nm.</div>
+    <div class="line">🚦 Limiting factors: <span>light, CO₂, temperature</span> · pondweed bubbles, leaf discs, fermenter · plateau = a different factor is now the bottleneck.</div>
+    <div class="line">🏭 CO₂ enrichment: <span>greenhouses</span> dose CO₂ (400 → 550+ ppm) to boost yields · <span>FACE</span> = tower rings in open air with control plots.</div>
+    <div class="line">🔌 Photosystems = solar panels: <span>antenna arrays funnel energy</span> to P680 (PSII) / P700 (PSI) · photolysis: <span>2H₂O → O₂ + 4H⁺ + 4e⁻</span>.</div>
+    <div class="line">⚡ Chemiosmosis: <span>ETC pumps H⁺ into the lumen</span> → gradient drives ATP synthase · PSI reduces <span>NADP + 2e⁻ + H⁺ → reduced NADP</span>.</div>
+    <div class="line">🏗️ Calvin cycle (stroma, <span>Rubisco the head chef</span>): 3 RuBP + 3 CO₂ → 6 GP → 6 TP · <span>5 of 6 TP regenerate RuBP</span> · 6 turns + 18 ATP + 12 reduced NADP = 1 glucose.</div>
+    <div class="line">🔌 Interdependence: no light → <span>Calvin stalls in seconds</span> · no CO₂ → no GP → NADP runs out → <span>PSII cannot function</span>.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Bouncer check</div>
+  <h2>THE TEST ✍️</h2>
+  <p class="aim">10 questions. Pick an answer and you'll instantly see why.</p>
+
+  <div class="q" data-a="chemical">
+    <p>1. Photosynthesis is fundamentally…</p>
+    <label><input type="radio" name="q1" value="chemical"> A conversion of light energy into chemical energy stored in carbon compounds</label>
+    <label><input type="radio" name="q1" value="heat"> A conversion of chemical energy into light energy for the plant's glow</label>
+    <label><input type="radio" name="q1" value="kinetic"> A conversion of kinetic energy of wind into stored sugars</label>
+    <div class="fb correct">✅ Light energy is transformed into chemical energy in carbon compounds — carbohydrates, proteins, lipids, nucleic acids. This supplies most of the chemical energy needed by life in ecosystems.</div>
+    <div class="fb wrong">❌ Photosynthesis runs the other way: light energy IN, chemical energy OUT (in carbon compounds). It's not about glowing or wind.</div>
+  </div>
+
+  <div class="q" data-a="equation">
+    <p>2. Which is the correct word equation for photosynthesis?</p>
+    <label><input type="radio" name="q2" value="equation"> Carbon dioxide + water → glucose + oxygen</label>
+    <label><input type="radio" name="q2" value="reverse"> Glucose + oxygen → carbon dioxide + water</label>
+    <label><input type="radio" name="q2" value="mixed"> Carbon dioxide + oxygen → glucose + water</label>
+    <div class="fb correct">✅ Carbon dioxide + water → glucose + oxygen. Glucose + oxygen → CO₂ + water is respiration (the reverse). The hydrogen in glucose comes from splitting water.</div>
+    <div class="fb wrong">❌ The glucose + oxygen version is aerobic respiration. Photosynthesis needs carbon dioxide AND water on the left, glucose AND oxygen on the right.</div>
+  </div>
+
+  <div class="q" data-a="water">
+    <p>3. The oxygen released by photosynthesis comes from…</p>
+    <label><input type="radio" name="q3" value="water"> The splitting of water (photolysis), not from carbon dioxide</label>
+    <label><input type="radio" name="q3" value="co2"> The carbon dioxide molecules, which lose their oxygen</label>
+    <label><input type="radio" name="q3" value="glucose"> The glucose molecules being broken down</label>
+    <div class="fb correct">✅ ¹⁸O isotope-labelling proved it: label the water and the O₂ bubbles come out labelled; label the CO₂ and they don't. Photolysis: 2H₂O → O₂ + 4H⁺ + 4e⁻.</div>
+    <div class="fb wrong">❌ It's a classic trap — oxygen comes from water. CO₂'s carbon ends up in glucose; CO₂'s oxygen ends up in water, not in the gas bubbles.</div>
+  </div>
+
+  <div class="q" data-a="carotene">
+    <p>4. In paper/thin-layer chromatography of leaf pigments, the pigment with the highest Rf value is…</p>
+    <label><input type="radio" name="q4" value="carotene"> Carotene (Rf ≈ 0.98)</label>
+    <label><input type="radio" name="q4" value="chlb"> Chlorophyll b (Rf ≈ 0.42)</label>
+    <label><input type="radio" name="q4" value="xanth"> Xanthophyll 2 (Rf ≈ 0.15)</label>
+    <div class="fb correct">✅ Rf = distance moved by pigment ÷ distance moved by solvent. Carotene travels furthest with the solvent (0.98), so it's the top band; xanthophylls lag behind.</div>
+    <div class="fb wrong">❌ Chlorophyll b (0.42) and xanthophyll 2 (0.15) travel less far. The highest Rf means the pigment rode closest to the solvent front.</div>
+  </div>
+
+  <div class="q" data-a="reflect">
+    <p>5. Leaves look green because…</p>
+    <label><input type="radio" name="q5" value="absorbgreen"> Chlorophyll absorbs green light best of all wavelengths</label>
+    <label><input type="radio" name="q5" value="reflect"> Chlorophyll absorbs red and blue strongly but reflects/transmits green</label>
+    <label><input type="radio" name="q5" value="carotene"> Carotenoids absorb green light and pass it to chlorophyll</label>
+    <div class="fb correct">✅ Chlorophyll's absorption spectrum peaks in blue-violet (~430 nm) and red (~660 nm) with a deep trough in the green — green photons aren't absorbed, so they bounce off or pass through.</div>
+    <div class="fb wrong">❌ Green is the trough — the wavelengths chlorophyll does NOT absorb. Carotenoids absorb blue-violet light, not green.</div>
+  </div>
+
+  <div class="q" data-a="rate">
+    <p>6. An action spectrum shows…</p>
+    <label><input type="radio" name="q6" value="absorb"> The percentage of light absorbed by a pigment at each wavelength</label>
+    <label><input type="radio" name="q6" value="rate"> The rate of photosynthesis at each wavelength of light</label>
+    <label><input type="radio" name="q6" value="emit"> The colours of light emitted by a plant after dark</label>
+    <div class="fb correct">✅ Action spectrum = photosynthetic rate per wavelength, measured via O₂ production or CO₂ consumption. It matches the absorption spectrum's peaks and troughs — what's absorbed is what's used.</div>
+    <div class="fb wrong">❌ That's an absorption spectrum. The action spectrum measures the plant's actual output per wavelength — the two are compared to prove absorbed light drives photosynthesis.</div>
+  </div>
+
+  <div class="q" data-a="co2">
+    <p>7. In the pondweed bubble-count experiment, if you vary CO₂ concentration (using sodium hydrogencarbonate), the independent variable is…</p>
+    <label><input type="radio" name="q7" value="bubbles"> The number of oxygen bubbles per minute</label>
+    <label><input type="radio" name="q7" value="co2"> The CO₂ concentration — the factor you deliberately change</label>
+    <label><input type="radio" name="q7" value="temp"> The temperature of the water bath</label>
+    <div class="fb correct">✅ Independent variable = what the experimenter changes (here, CO₂ concentration). Bubble count is the dependent variable you measure; temperature is a control that must be kept constant.</div>
+    <div class="fb wrong">❌ Bubble count is the dependent variable — the measurement. Temperature should be controlled (fixed), not varied. The thing you change is CO₂ concentration.</div>
+  </div>
+
+  <div class="q" data-a="face">
+    <p>8. FACE experiments are designed to…</p>
+    <label><input type="radio" name="q8" value="face"> Raise CO₂ around natural, open-air plots using rings of towers, with control plots, to test effects on real ecosystems</label>
+    <label><input type="radio" name="q8" value="greenhouse"> Dose CO₂ into sealed greenhouses to boost tomato yields</label>
+    <label><input type="radio" name="q8" value="scrub"> Remove CO₂ from the air around crops to find limiting effects</label>
+    <div class="fb correct">✅ FACE (Free-Air CO₂ Enrichment) releases CO₂ from tower rings on the upwind side to hold ~550 ppm over natural vegetation, while control plots get plain air — testing carbon storage, nutrient limits and biodiversity impacts.</div>
+    <div class="fb wrong">❌ That's greenhouse CO₂ enrichment (a different technique). FACE is specifically open-air — no chamber walls — so results reflect real ecosystems.</div>
+  </div>
+
+  <div class="q" data-a="gp">
+    <p>9. In the Calvin cycle, Rubisco catalyses…</p>
+    <label><input type="radio" name="q9" value="gp"> The carboxylation of RuBP with CO₂ to form two molecules of glycerate 3-phosphate (GP)</label>
+    <label><input type="radio" name="q9" value="glucose"> The direct assembly of glucose from six CO₂ molecules</label>
+    <label><input type="radio" name="q9" value="tp"> The reduction of GP to triose phosphate using ATP and reduced NADP</label>
+    <div class="fb correct">✅ Rubisco joins CO₂ onto RuBP (5C); the unstable 6C intermediate splits into 2 GP (3C). Glucose is never made directly — and the GP → TP reduction is a separate step using ATP + reduced NADP.</div>
+    <div class="fb wrong">❌ Glucose forms only after six turns and further joining of TP molecules. The GP → TP reduction needs ATP + reduced NADP but isn't Rubisco's job — Rubisco does carboxylation.</div>
+  </div>
+
+  <div class="q" data-a="backup">
+    <p>10. If CO₂ is suddenly removed from a brightly lit chloroplast, photosystem II stops working because…</p>
+    <label><input type="radio" name="q10" value="dark"> Without CO₂, the light can no longer excite chlorophyll</label>
+    <label><input type="radio" name="q10" value="backup"> No GP forms, so reduced NADP isn't re-oxidised — NADP runs out, the electron chain backs up and PSII can't emit electrons</label>
+    <label><input type="radio" name="q10" value="denature"> Rubisco denatures instantly in the absence of its substrate</label>
+    <div class="fb correct">✅ The causal chain: no CO₂ → no carboxylation → no GP → reduced NADP accumulates unused → free NADP is exhausted → PSI and the chain can't pass electrons on → PSII's excited electrons have nowhere to go → PSII stops.</div>
+    <div class="fb wrong">❌ Light absorption still works fine — the problem is downstream. The electron chain backs up because NADP can't be recycled, jamming PSII.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 10 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">C1.3.1-2</span><span>Light energy is transformed into chemical energy in carbon compounds (carbohydrates, proteins, lipids, nucleic acids), supplying most of the chemical energy for life in ecosystems. Word equation: carbon dioxide + water → glucose + oxygen; the hydrogen in glucose comes from splitting water.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">C1.3.3</span><span>Oxygen is a by-product of photosynthesis, produced by photolysis of water — NOT from carbon dioxide. Evidence: isotope labelling with ¹⁸O in water produces labelled O₂; ¹⁸O in CO₂ does not.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">C1.3.4</span><span>Photosynthetic pigments are separated by paper/thin-layer chromatography; Rf = distance moved by pigment ÷ distance moved by solvent. Order: carotene 0.98, phaeophytin 0.81, chlorophyll a 0.59, chlorophyll b 0.42, xanthophylls 0.28 / 0.15.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">C1.3.5</span><span>Absorption spectra of chlorophyll a, chlorophyll b and carotenoids: peaks in blue-violet and red, trough in green (reflected → leaves look green). A photon's energy must match the electron's energy gap for absorption to excite it.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">C1.3.6</span><span>Absorption spectrum (pigment, % absorbed) vs action spectrum (whole organism, rate of photosynthesis per wavelength via O₂ production or CO₂ consumption). Their matching peaks/troughs show absorbed wavelengths are the ones used.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">C1.3.7</span><span>Limiting factors: light intensity, CO₂ concentration, temperature. Techniques: pondweed bubble counting (CO₂ via sodium hydrogencarbonate), floating leaf discs (light via 1/distance²), fermenter with algae (temperature, O₂ electrode/pH probe). Independent vs dependent variables; hypotheses need repeated testing.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">C1.3.8</span><span>CO₂ enrichment: greenhouses dose CO₂ (from CHP boilers/compost) on sunny days to raise yields beyond ~400 ppm; FACE (Free-Air CO₂ Enrichment) uses tower rings releasing CO₂ to ~550 ppm over open-air plots with control plots releasing air — testing carbon storage, nutrient limits and biodiversity in natural ecosystems.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">C1.3.9-11</span><span>Photosystems are arrays: antenna complexes of ~100 chlorophyll + ~30 accessory pigments funnel excitation energy (femtoseconds) to a reaction centre of special chlorophylls — P680 in PSII, P700 in PSI (named for absorption peaks). A single pigment molecule is useless alone; >99% efficiency in low light. Photolysis: oxygen-evolving complex (Mn/Ca/O cluster) splits 2H₂O → O₂ + 4H⁺ + 4e⁻, replacing P680's electrons and feeding protons to the gradient; O₂ from early cyanobacteria formed banded iron formations.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">C1.3.12-14</span><span>Chemiosmosis: the electron transport chain pumps protons into the thylakoid space; the proton gradient (proton motive force) drives ATP synthase; NADP is reduced to reduced NADP by PSI via NADP reductase (NADP + 2e⁻ + H⁺). Cyclic photophosphorylation (PSI only) makes ATP alone. Thylakoid system: PSII + photolysis in grana, PSI + ATP synthase in stroma lamellae, Calvin cycle in the stroma; small lumen volume makes steep gradients cheap.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">C1.3.15-19</span><span>Calvin cycle (stroma): Rubisco carboxylates RuBP + CO₂ → unstable 6C → 2 GP; GP reduced to TP with ATP + reduced NADP; 5 of 6 TP regenerate 3 RuBP using ATP; 1 TP exits per turn (6 turns + 18 ATP + 12 reduced NADP → 1 glucose). End products: sucrose (transport), starch (storage), fatty acids/glycerol → triglycerides, all 20 amino acids (nitrate/ammonium nitrogen). Interdependence: no light → Calvin stalls in seconds; no CO₂ → no GP → NADP not recycled → chain backs up → PSII cannot function.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) C1.3 chapter + IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='c13-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
