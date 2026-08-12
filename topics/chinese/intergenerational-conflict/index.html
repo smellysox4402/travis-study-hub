@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>代际冲突 — Rebel · Reconcile · Release (Chinese B SL)</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .sub b{color:var(--pink);}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"B8"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .quote{background:linear-gradient(90deg,rgba(255,46,196,.10),rgba(168,85,247,.10)); border-left:4px solid var(--pink);
+         border-radius:0 14px 14px 0; padding:16px 20px; margin:16px 0;}
+  .quote .zh{font-size:16.5px; font-weight:700; line-height:1.8; color:#fff;}
+  .quote .src{font-size:12.5px; color:var(--dim); margin-top:8px;}
+  .quote .src b{color:var(--cyan);}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · 家 REBEL</a>
+  <a href="#act2">ACT 2 · 背影 RECONCILE</a>
+  <a href="#act3">ACT 3 · 目送 RELEASE</a>
+  <a href="#arc">🗺 THE ARC</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/6</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Chinese B SL · Literature · 代际冲突</div>
+  <h1>代际冲突 — REBEL · RECONCILE · RELEASE</h1>
+  <div class="sub">Three Chinese texts, one theme: the war between generations. <b>家</b> fights it and walks out. <b>背影</b> watches it dissolve into tears. <b>目送</b> accepts it and lets go. Learn the arc and this theme writes itself.</div>
+  <div class="badges">
+    <span class="badge hl">3 TEXTS · 1 THEME</span>
+    <span class="badge ahl">家 · 背影 · 目送</span>
+    <span class="badge">ESSAY-READY</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 · 反抗 — the rebellion</div>
+  <h2>《家》— 巴金 🏚️</h2>
+  <p class="aim">The young generation vs the feudal patriarch. Open war, and the only ending is leaving.</p>
+
+  <div class="panel">
+    <h3>THE SETUP — A CLAN THAT RUNS ON RULES</h3>
+    <p><span class="accent">《家》</span> (1931, first book of the 激流三部曲) is set in 成都 in the 五四 era, inside the 高家 — a big feudal clan run by <span class="accent">高老太爷</span>, the grandfather and absolute authority. The three brothers of the eldest branch are the engine of the conflict:</p>
+    <div class="grid3">
+      <div class="card"><div class="tag p">ELDEST · 妥协</div><h4>觉新</h4><p>The 长房长孙. Crushed between generations: forced to give up his love 梅表姐, married off by arrangement, wife 瑞珏 dies in childbirth because superstition bans her from the house. He obeys — and pays for it.</p></div>
+      <div class="card"><div class="tag g">MIDDLE · 温和</div><h4>觉民</h4><p>Between the two poles. Fights for the freedom to marry 琴, but through negotiation rather than detonation.</p></div>
+      <div class="card"><div class="tag v">YOUNGEST · 反抗</div><h4>觉慧</h4><p>The rebel. 五四-educated, joins the student movement, falls in love with the servant girl 鸣凤, and finally walks out of the house for good.</p></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>WHERE THE GENERATIONS CLASH</h3>
+    <ul class="clean">
+      <li><b>Grandfather vs grandson:</b> 高老太爷 has 觉慧 confined and lectured after the student movement — "胡闹" is the old man's verdict. To the elder, order; to the youth, justice.</li>
+      <li><b>The 鸣凤 tragedy:</b> the grandfather gives the servant girl 鸣凤 to the old 冯乐山 as a concubine. Rather than submit, she drowns herself. The young generation's love is collateral damage of the elders' authority.</li>
+      <li><b>觉新's crushed middle:</b> the eldest brother obeys every order and still loses everything — proof that compromise inside a rotten system is not a survival strategy.</li>
+    </ul>
+    <div class="quote">
+      <div class="zh">「我是青年，我不是畸人，我不是愚人，我要给自己把幸福争过来。」</div>
+      <div class="src">觉慧 · <b>《家》</b> — the rebel's manifesto: youth as a claim to happiness, not a debt to tradition.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>THE ENDING — REBELLION MEANS DEPARTURE</h3>
+    <p>觉慧 <span class="accent">离家出走</span> — he leaves the house, the city, the whole order. 高老太爷's deathbed softening (he finally allows 觉民's marriage) is the old order's last gasp, not its redemption. In 家, the generation gap is an <b>open wound</b>, and the only cure the young can find is walking out.</p>
+    <div class="exam"><b>ESSAY ANGLE:</b> 家 presents intergenerational conflict as <b>structural</b> — it is not a personality clash but the feudal system itself (礼教) using the elders as its enforcers. That is why 觉慧 cannot win by arguing; he can only leave.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">Act 2 · 和解 — the reconciliation</div>
+  <h2>《背影》— 朱自清 🍊</h2>
+  <p class="aim">The quiet war: a son who secretly mocks his father's fussing, and a father's back that ends the mocking forever.</p>
+
+  <div class="panel">
+    <h3>THE SCENE — ONE ORANGES, ONE BACK, TWO GENERATIONS</h3>
+    <p><span class="accent">《背影》</span> (1925, 回忆性散文) is a single memory: family fortunes collapsed (grandmother dead, father out of work — 差使交卸), the young 朱自清 heads north to university, and his father — heavy, old, diminished — sees him off at <span class="accent">浦口火车站</span>. Then the old man does something absurd and unforgettable: he crosses the railway tracks, climbs the far platform with enormous effort, and buys his grown son a handful of oranges.</p>
+    <div class="quote">
+      <div class="zh">「他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。」</div>
+      <div class="src"><b>《背影》</b> — the climb that becomes the symbol: effort, clumsiness, love with no elegance left in it.</div>
+    </div>
+    <p class="muted">The father's body is the message: an authority figure reduced to a struggling silhouette — and it is precisely his failure to look dignified that makes the son weep.</p>
+  </div>
+
+  <div class="panel">
+    <h3>THE QUIET CONFLICT — 「我心里暗笑他的迂」</h3>
+    <p>Before the tears, there is judgement. The young, educated son privately laughs at his father's fussing — <span class="accent">迂</span>, old-fashioned, unnecessary: <i>I am old enough to look after myself</i>. That casual, silent superiority is the intergenerational gap in its most everyday form — no patriarch, no rebellion, just a son who thinks he has outgrown his father.</p>
+    <ul class="clean">
+      <li><b>The conflict is internal, not shouted:</b> the father never argues; he just climbs and buys oranges.</li>
+      <li><b>The resolution is delayed:</b> understanding arrives only years later, when the son — a father himself — rereads the scene and the father's letter: 「大约大去之期不远矣」 (my end is probably not far off).</li>
+      <li><b>The symbol is the 背影:</b> a back turned away cannot perform authority. It can only be watched — and what the son finally sees is love that never needed to be understood to be real.</li>
+    </ul>
+    <div class="tip"><b>ESSAY ANGLE:</b> 背影 shows intergenerational conflict resolved not by confrontation but by <b>time and recognition</b>. The gap closes when the younger generation stops judging and starts seeing. The 泪光 (tears) at the end are the son's side of the reconciliation.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">Act 3 · 放手 — the release</div>
+  <h2>《目送》— 龙应台 👋</h2>
+  <p class="aim">The generation gap's final stage: not winning, not understanding — letting go.</p>
+
+  <div class="panel">
+    <h3>THE BOOK — SEVENTY-THREE ESSAYS ON LEAVING</h3>
+    <p><span class="accent">《目送》</span> (2008) is 龙应台's essay collection built around one act — 目送, watching someone go. Two threads run through it: <b>the son</b> (安德烈) growing up and walking away — first to school, then to a life of his own — and <b>the father</b>, whose visits end with his small truck driving off, and whose final departure is the coffin at his funeral. The parent moves from 孩子的陪伴者 (companion) to 旁观者 (bystander); the child's back becomes the permanent view.</p>
+    <div class="quote">
+      <div class="zh">「我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影渐行渐远。你站立在小路的这一端，看着他逐渐消失在小路转弯的地方，而且，他用背影默默告诉你：不必追。」</div>
+      <div class="src"><b>《目送》</b> — the theme in one paragraph: the bond between parent and child is a lifetime of watching each other's backs recede.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>WHERE THE CONFLICT GOES — 不必追</h3>
+    <ul class="clean">
+      <li><b>The gap is not fought, it is lived:</b> the teenage son who shrugs off his mother's hand is not rebelling against a system — he is simply becoming himself, and the leaving is the point.</li>
+      <li><b>The parent's work is acceptance:</b> the essay's hard-won wisdom is 放手 — the child's back does not say "goodbye", it says 「不必追」, and the parent must learn to stand still.</li>
+      <li><b>The circle closes:</b> the same woman who watches her son leave will watch her father's coffin — child and parent swap places across the generations.</li>
+    </ul>
+    <div class="exam"><b>ESSAY ANGLE:</b> 目送 completes the arc: where 家 explodes the gap and 背影 heals it, 目送 <b>accepts it as the natural shape of love</b>. The conflict is not resolved — it is outgrown. This is the mature, third answer to the same question.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ THE ARC ══════════════════════ -->
+<section class="act" id="arc">
+  <div class="acttag">One picture</div>
+  <h2>THE ARC 🗺 — ONE THEME, THREE ANSWERS</h2>
+  <p class="aim">Every 代际冲突 essay needs a spine. This is the spine: the same war, three generations of resolutions.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 300" role="img" aria-label="The arc of intergenerational conflict across three Chinese texts: 家 rebels, 背影 reconciles, 目送 releases">
+      <defs>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ff2ec4"/>
+          <stop offset="50%" stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#22d3ee"/>
+        </linearGradient>
+      </defs>
+      <path d="M 40 235 Q 320 45 600 235" fill="none" stroke="url(#arcGrad)" stroke-width="3" filter="url(#glow)"/>
+      <path d="M 40 235 Q 320 45 600 235" fill="none" stroke="url(#arcGrad)" stroke-width="1" stroke-dasharray="3 7" opacity="0.6"/>
+      <circle cx="75" cy="216" r="22" fill="#0b0214" stroke="#ff2ec4" stroke-width="3" filter="url(#glow)"/>
+      <text x="75" y="222" text-anchor="middle" fill="#ff2ec4" font-size="20" font-weight="900" font-family="Segoe UI, sans-serif">1</text>
+      <circle cx="320" cy="130" r="22" fill="#0b0214" stroke="#a855f7" stroke-width="3" filter="url(#glow)"/>
+      <text x="320" y="136" text-anchor="middle" fill="#a855f7" font-size="20" font-weight="900" font-family="Segoe UI, sans-serif">2</text>
+      <circle cx="565" cy="216" r="22" fill="#0b0214" stroke="#22d3ee" stroke-width="3" filter="url(#glow)"/>
+      <text x="565" y="222" text-anchor="middle" fill="#22d3ee" font-size="20" font-weight="900" font-family="Segoe UI, sans-serif">3</text>
+
+      <text x="75" y="262" text-anchor="middle" fill="#ff2ec4" font-size="15" font-weight="800" font-family="Segoe UI, sans-serif">《家》巴金</text>
+      <text x="75" y="282" text-anchor="middle" fill="#f3e8ff" font-size="12" font-family="Segoe UI, sans-serif">反抗 REBEL · 出走</text>
+
+      <text x="320" y="100" text-anchor="middle" fill="#a855f7" font-size="15" font-weight="800" font-family="Segoe UI, sans-serif">《背影》朱自清</text>
+      <text x="320" y="80" text-anchor="middle" fill="#f3e8ff" font-size="12" font-family="Segoe UI, sans-serif">和解 RECONCILE · 泪光</text>
+
+      <text x="565" y="262" text-anchor="middle" fill="#22d3ee" font-size="15" font-weight="800" font-family="Segoe UI, sans-serif">《目送》龙应台</text>
+      <text x="565" y="282" text-anchor="middle" fill="#f3e8ff" font-size="12" font-family="Segoe UI, sans-serif">放手 RELEASE · 不必追</text>
+
+      <text x="320" y="40" text-anchor="middle" fill="#f3e8ff" font-size="13" font-weight="700" font-family="Segoe UI, sans-serif" letter-spacing="2">代际冲突 · THE THREE-PART ARC</text>
+    </svg>
+    <div class="cap">Fight it (家) → heal it (背影) → let it go (目送). <b>One theme, three resolutions</b> — quote this arc in any comparison essay.</div>
+  </div>
+
+  <div class="panel">
+    <h3>THE COMPARISON TABLE — EXAM GOLD</h3>
+    <table>
+      <tr><th>Text</th><th>Conflict</th><th>Who clashes</th><th>Resolution</th><th>Key quote</th></tr>
+      <tr><td>《家》巴金</td><td>Feudal patriarchy vs 五四 youth — structural, public</td><td>觉慧 vs 高老太爷 (grandson vs grandfather)</td><td>Rebellion: 离家出走</td><td>「我要给自己把幸福争过来」</td></tr>
+      <tr><td>《背影》朱自清</td><td>Son's silent judgement vs father's silent love — private, unspoken</td><td>儿子 vs 父亲 (over time)</td><td>Reconciliation: recognition in 泪光</td><td>「他用两手攀着上面……显出努力的样子」</td></tr>
+      <tr><td>《目送》龙应台</td><td>Growing apart as children leave — natural, inevitable</td><td>母亲 vs 儿子 (and father)</td><td>Release: 放手, 不必追</td><td>「不断地在目送他的背影渐行渐远」</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
+  <div class="marquee">
+    <div class="line">家 (1931) · 巴金 · 激流三部曲第一部 <span>· 觉慧 vs 高老太爷 · 鸣凤投湖 · 觉新妥协 · 觉慧出走</span></div>
+    <div class="line">背影 (1925) · 朱自清 · 回忆性散文 <span>· 浦口火车站 · 买橘子 · 攀月台 · 暗笑其迂 · 泪光中的背影</span></div>
+    <div class="line">目送 (2008) · 龙应台 · 散文集 <span>· 安德烈长大 · 父亲的逝 · 目送 = 放手</span></div>
+    <div class="line">THE ARC: <span>家 = 反抗 (leave) → 背影 = 和解 (recognise) → 目送 = 放手 (release)</span></div>
+    <div class="line">家 quote: <span>「我是青年……我要给自己把幸福争过来」</span> — youth claims happiness</div>
+    <div class="line">背影 quote: <span>「他用两手攀着上面……显出努力的样子」</span> — love without dignity</div>
+    <div class="line">目送 quote: <span>「他用背影默默告诉你：不必追」</span> — the parent's lesson</div>
+    <div class="line">essay spine: <span>structural conflict → delayed recognition → natural acceptance</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">No peeking at the acts above. Pick an answer, get instant feedback.</p>
+
+  <div class="q" data-a="juehui">
+    <p>1. 在《家》中，直接与祖父高老太爷正面冲突、最后离家出走的是谁？</p>
+    <label><input type="radio" name="q1" value="juexin"> 觉新</label>
+    <label><input type="radio" name="q1" value="juehui"> 觉慧</label>
+    <label><input type="radio" name="q1" value="juemin"> 觉民</label>
+    <div class="fb correct">✅ 觉慧 — the 五四-educated youngest brother, the rebel who walks out at the end. 觉新 compromises, 觉民 negotiates.</div>
+    <div class="fb wrong">❌ 觉慧. 觉新 is the crushed compromiser, 觉民 the moderate middle. Only 觉慧 rebels openly and leaves.</div>
+  </div>
+
+  <div class="q" data-a="orange">
+    <p>2. 《背影》中，父亲在浦口火车站为"我"做了什么？</p>
+    <label><input type="radio" name="q2" value="orange"> 穿过铁道、爬上月台去买橘子</label>
+    <label><input type="radio" name="q2" value="wrong1"> 买了一张火车票</label>
+    <label><input type="radio" name="q2" value="wrong2"> 给"我"写了一封信</label>
+    <div class="fb correct">✅ The orange run — awkward, clumsy, and the emotional core of the essay. The letter comes at the end; the ticket is never the point.</div>
+    <div class="fb wrong">❌ 穿过铁道买橘子. That climb is the symbol: the father's effort, stripped of dignity, that finally breaks through the son's judgement.</div>
+  </div>
+
+  <div class="q" data-a="musong">
+    <p>3. 「他用背影默默告诉你：不必追」出自哪部作品？</p>
+    <label><input type="radio" name="q3" value="jiayuan"> 《家》</label>
+    <label><input type="radio" name="q3" value="musong"> 《目送》</label>
+    <label><input type="radio" name="q3" value="beijing"> 《背影》</label>
+    <div class="fb correct">✅ 《目送》. The parent must learn to stand still — the child's back says 不必追, don't chase.</div>
+    <div class="fb wrong">❌ 《目送》龙应台. 《家》 ends in rebellion, 《背影》 in tears — only 目送 turns the leaving itself into the lesson.</div>
+  </div>
+
+  <div class="q" data-a="order">
+    <p>4. 把三部作品按"反抗 → 和解 → 放手"的正确顺序排列。</p>
+    <label><input type="radio" name="q4" value="wrong1"> 背影 → 家 → 目送</label>
+    <label><input type="radio" name="q4" value="order"> 家 → 背影 → 目送</label>
+    <label><input type="radio" name="q4" value="wrong2"> 目送 → 背影 → 家</label>
+    <div class="fb correct">✅ 家 (rebel, leave) → 背影 (reconcile, recognise) → 目送 (release, let go). This arc is your essay spine.</div>
+    <div class="fb wrong">❌ 家 → 背影 → 目送. 家 explodes the gap, 背影 heals it in 泪光, 目送 accepts it as the natural shape of love.</div>
+  </div>
+
+  <div class="q" data-a="mingfeng">
+    <p>5. 《家》中，被高老太爷许给冯乐山做姨太太、最终投湖自尽的丫鬟是谁？</p>
+    <label><input type="radio" name="q5" value="wrong1"> 瑞珏</label>
+    <label><input type="radio" name="q5" value="mingfeng"> 鸣凤</label>
+    <label><input type="radio" name="q5" value="wrong2"> 琴</label>
+    <div class="fb correct">✅ 鸣凤 — 觉慧's love, destroyed by the elders' authority. 瑞珏 is 觉新's wife who dies in childbirth; 琴 is 觉民's love.</div>
+    <div class="fb wrong">❌ 鸣凤. She drowns rather than become a concubine — the human cost of the grandfather's authority. 瑞珏 (觉新's wife) and 琴 (觉民's love) are the decoys.</div>
+  </div>
+
+  <div class="q" data-a="recognition">
+    <p>6. 《背影》中，代际冲突最终靠什么化解？</p>
+    <label><input type="radio" name="q6" value="recognition"> 时间与重新看见 — 儿子多年后读懂父亲的背影</label>
+    <label><input type="radio" name="q6" value="wrong1"> 儿子当面与父亲争吵后和好</label>
+    <label><input type="radio" name="q6" value="wrong2"> 父亲主动道歉</label>
+    <div class="fb correct">✅ Time and recognition. The father never argues or apologises — the son's tears, years later, are the reconciliation.</div>
+    <div class="fb wrong">❌ 时间与重新看见. Nothing is shouted in 背影; the gap closes when the son stops judging (暗笑其迂) and starts seeing.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Essay-ready</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 6 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">TEXT 1</span><span>《家》巴金 (1931): 觉慧 vs 高老太爷, 鸣凤投湖, 觉新妥协, 结局 = 离家出走. 冲突是结构性的 — 礼教借长辈之手执行.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">TEXT 2</span><span>《背影》朱自清 (1925): 浦口火车站买橘子, 攀月台细节, 儿子「暗笑他的迂」, 结局 = 泪光中的和解. 冲突是安静的, 靠时间化解.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">TEXT 3</span><span>《目送》龙应台 (2008): 目送儿子长大、目送父亲离世, 「不必追」. 冲突被接受而非解决 — 放手是亲情的自然形态.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">QUOTES</span><span>能背诵三句核心名句并说出各自证明什么: 家 (争幸福) · 背影 (努力的样子) · 目送 (不必追).</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">THE ARC</span><span>能画出 反抗 → 和解 → 放手 的弧线, 并解释三部作品如何给出三种不同的答案.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">ESSAY</span><span>能写一段比较: 结构冲突 (家) → 延迟的认出 (背影) → 自然的接受 (目送), 每段带一句引文.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from the homework set: 文学作品中的代际冲突 — 《家》巴金 · 《背影》朱自清 · 《目送》龙应台 · Chinese B SL literature</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='intergen-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
