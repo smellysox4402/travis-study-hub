@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>C2.2 Neural Signalling - The Sound System</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"B8"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .credits{font-size:11.5px; opacity:.75; margin-top:4px;}
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">&#127968; HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 &#183; WIRING</a>
+  <a href="#act2">ACT 2 &#183; BATTERY</a>
+  <a href="#act3">ACT 3 &#183; THE DROP</a>
+  <a href="#act4">ACT 4 &#183; THE WAVE</a>
+  <a href="#act5">ACT 5 &#183; EXPRESS LANE</a>
+  <a href="#act6">ACT 6 &#183; HANDOFF</a>
+  <a href="#map">&#128506; MIND MAP</a>
+  <a href="#cheat">&#9889; CHEAT</a>
+  <a href="#test">&#9997; TEST</a>
+  <a href="#check">&#9989; CHECKLIST</a>
+  <span class="pill" id="progPill">0/9</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Biology &#183; Higher Level &#183; Theme C</div>
+  <h1>C2.2 NEURAL SIGNALLING</h1>
+  <div class="sub">C2.1 ran the guest list. C2.2 is the sound system: the wiring that stores charge, the drop that fires down the cable, and the handoff at the DJ booth where the record changes decks.</div>
+  <div class="badges">
+    <span class="badge hl">C2.2 &#183; AHL ONLY</span>
+    <span class="badge ahl">THE ELECTRICAL CHAPTER</span>
+    <span class="badge">9 SYLLABUS POINTS</span>
+  </div>
+</header>
+
+<!-- ============ ACT 1 ============ -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 &#183; C2.2.1</div>
+  <h2>THE WIRING &#128268;</h2>
+  <p class="aim">Two communication systems run the club: the slow mail (hormones) and the fast cable (neurons). This act is the cable.</p>
+
+  <div class="panel">
+    <h3>WHO IS ON THE WIRING</h3>
+    <p class="big">The nervous system runs on <span class="accent">neurons</span> &#8212; about <span class="cyan">85 billion</span> of them. Each neuron carries a <span class="accent">nerve impulse</span>, which is an <span class="cyan">electrical signal</span>.</p>
+    <ul class="clean">
+      <li><b>Cell body</b> &#8212; cytoplasm + nucleus. The DJ's mixer: it interprets incoming info and decides what to send.</li>
+      <li><b>Dendrites</b> &#8212; short, branched fibres. They collect signals, e.g. between neurons in the brain or spinal cord.</li>
+      <li><b>Axon</b> &#8212; one very elongated fibre. The speaker cable: e.g. from your toes or fingers all the way to the spinal cord.</li>
+    </ul>
+    <p class="muted">Impulse direction: dendrites &#8594; cell body &#8594; axon &#8594; next cell. One way, always.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4><span class="tag p">THE TWO SYSTEMS</span></h4>
+      <p><b>Endocrine</b> = glands &#8594; hormones &#8594; blood. Slow, lasts hours, wide broadcast.</p>
+      <p><b>Nervous</b> = neurons &#8594; impulses &#8594; dedicated cables. Fast (milliseconds), targeted, then it's over.</p>
+      <p class="muted">Exam loves: "the nervous system transmits electrical impulses along neurons; the endocrine system transmits chemical signals in the blood."</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag gr">ELECTRICAL, NOT ELECTRONS</span></h4>
+      <p>Impulses are electrical but <b>no electrons travel down the axon</b>. The signal is moving <b>ions</b> &#8212; charged particles &#8212; crossing the membrane.</p>
+      <p class="muted">Electricity = energy of any charged particle, not just electrons. Say this in the exam and you sound like you own the place.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACT 2 ============ -->
+<section class="act" id="act2">
+  <div class="acttag">Act 2 &#183; C2.2.2</div>
+  <h2>THE BATTERY &#128267;</h2>
+  <p class="aim">A resting neuron is a charged battery: &#8722;70 mV, inside negative. Nothing fires until this charge is built and held.</p>
+
+  <div class="panel">
+    <h3>THE STANDBY VOLTAGE</h3>
+    <p class="big">Stick microelectrodes inside and outside any living cell and you'll read a <span class="accent">membrane potential</span> of 10&#8211;100 mV. Cytoplasm is <span class="cyan">negative</span> compared to the fluid outside.</p>
+    <p>A neuron at rest sits at about <span class="accent">&#8722;70 mV</span> &#8212; the <span class="accent">resting potential</span>. (For scale: a liver cell sits at about &#8722;40 mV. Neurons are just more charged.)</p>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h4><span class="tag p">CHARGER 1 &#8212; THE PUMP</span></h4>
+      <p><b>Sodium&#8211;potassium pumps</b> actively pump <b>3 Na&#8314; out</b> and <b>2 K&#8314; in</b>, using ATP.</p>
+      <p>The unequal 3:2 ratio creates a <b>charge imbalance</b> (more + leaving than entering) <b>and</b> concentration gradients for both ions.</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag g">CHARGER 2 &#8212; THE LEAK</span></h4>
+      <p>Ions leak back by diffusion &#8212; slowly, but the membrane is <b>~50&#215; more permeable to K&#8314; than Na&#8314;</b>.</p>
+      <p>So K&#8314; leaks out faster than Na&#8314; gets in, widening the charge imbalance. The battery holds because the leak is slow.</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag gr">CHARGER 3 &#8212; THE ANIONS</span></h4>
+      <p>Inside the fibre sit <b>negatively charged proteins</b> (organic anions).</p>
+      <p>They can't cross the membrane, so they permanently tip the inside negative. Third reason, don't forget it.</p>
+    </div>
+  </div>
+
+  <div class="nos">
+    <b>Pump proof:</b> the textbook's data-based question uses <b>ouabain</b>, which inhibits the Na&#8314;/K&#8314; pump. Brain tissue treated with ouabain uses <b>less oxygen</b> &#8212; because the pump's active transport is a huge share of the brain's ATP (and oxygen) bill. Inhibit the pump, demand for ATP crashes.
+  </div>
+</section>
+
+<!-- ============ ACT 3 ============ -->
+<section class="act" id="act3">
+  <div class="acttag">Act 3 &#183; C2.2.3 + C2.2.8</div>
+  <h2>THE DROP &#9889;</h2>
+  <p class="aim">The action potential is all-or-nothing: below the threshold the floor stays quiet, at the threshold the whole system fires. No half-drops.</p>
+
+  <div class="panel">
+    <h3>ALL-OR-NOTHING</h3>
+    <p class="big">An <span class="accent">action potential</span> is a sudden spike in membrane potential with two main phases:</p>
+    <ul class="clean">
+      <li><b><span class="cyan">Depolarization</span></b> &#8212; potential flips from negative to positive (Na&#8314; floods in).</li>
+      <li><b><span class="pink">Repolarization</span></b> &#8212; potential flips back from positive to negative (K&#8314; floods out).</li>
+    </ul>
+    <p>Both phases are caused by <b>movement of positively charged ions</b> across the membrane &#8212; not by movement of electrons.</p>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="neon graph of an action potential: resting at -70 mV, threshold at -50 mV, peak at +30 mV, then repolarization and undershoot">
+      <defs>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect width="640" height="380" rx="14" fill="#150a26"/>
+      <!-- grid -->
+      <g stroke="rgba(168,85,247,.16)" stroke-width="1">
+        <line x1="70" y1="60" x2="600" y2="60"/><line x1="70" y1="140" x2="600" y2="140"/>
+        <line x1="70" y1="200" x2="600" y2="200"/><line x1="70" y1="270" x2="600" y2="270"/>
+        <line x1="70" y1="60" x2="70" y2="330"/><line x1="170" y1="60" x2="170" y2="330"/>
+        <line x1="270" y1="60" x2="270" y2="330"/><line x1="370" y1="60" x2="370" y2="330"/>
+        <line x1="470" y1="60" x2="470" y2="330"/><line x1="570" y1="60" x2="570" y2="330"/>
+      </g>
+      <!-- axis labels -->
+      <text x="30" y="64" fill="#b9a3d6" font-size="11" font-weight="700">+30</text>
+      <text x="36" y="144" fill="#b9a3d6" font-size="11" font-weight="700">0</text>
+      <text x="30" y="204" fill="#b9a3d6" font-size="11" font-weight="700">&#8722;50</text>
+      <text x="30" y="274" fill="#b9a3d6" font-size="11" font-weight="700">&#8722;70</text>
+      <text x="30" y="348" fill="#b9a3d6" font-size="11" font-weight="700">mV</text>
+      <text x="330" y="352" fill="#b9a3d6" font-size="10.5" font-weight="700">time / ms</text>
+      <!-- resting line -->
+      <line x1="70" y1="270" x2="600" y2="270" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="470" y="262" fill="#22d3ee" font-size="11" font-weight="800">resting potential</text>
+      <!-- threshold line -->
+      <line x1="70" y1="200" x2="600" y2="200" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3 5"/>
+      <text x="470" y="192" fill="#fbbf24" font-size="11" font-weight="800">threshold &#8722;50 mV</text>
+      <!-- stimulus arrow -->
+      <line x1="80" y1="300" x2="80" y2="215" stroke="#4ade80" stroke-width="2.5"/>
+      <polygon points="74,215 80,203 86,215" fill="#4ade80"/>
+      <text x="52" y="318" fill="#4ade80" font-size="10.5" font-weight="800">stimulus</text>
+      <!-- the trace -->
+      <polyline fill="none" stroke="#ff2ec4" stroke-width="3.5" filter="url(#glow)"
+        points="70,270 100,270 112,200 130,150 155,80 175,60 185,60 205,80 235,140 260,200 300,262 330,280 360,270 600,270"/>
+      <!-- peak + labels -->
+      <text x="190" y="44" fill="#ff2ec4" font-size="12" font-weight="900">peak &#8776; +30 mV</text>
+      <text x="130" y="120" fill="#4ade80" font-size="11" font-weight="800">DEPOLARIZATION</text>
+      <text x="130" y="134" fill="#4ade80" font-size="10" font-weight="700">Na&#8314; floods IN</text>
+      <text x="268" y="150" fill="#22d3ee" font-size="11" font-weight="800">REPOLARIZATION</text>
+      <text x="268" y="164" fill="#22d3ee" font-size="10" font-weight="700">K&#8314; floods OUT</text>
+      <text x="330" y="300" fill="#a855f7" font-size="10.5" font-weight="800">undershoot</text>
+      <text x="330" y="314" fill="#a855f7" font-size="10" font-weight="700">(pump recharges)</text>
+      <text x="398" y="52" fill="#b9a3d6" font-size="10.5" font-weight="700">one beat &#8776; 2&#8211;4 ms, then the floor can fire again</text>
+    </svg>
+    <div class="cap"><b>The drop:</b> stimulus pushes the membrane to threshold &#8594; Na&#8314; channels open &#8594; positive feedback &#8594; spike to +30 mV &#8594; K&#8314; channels open &#8594; back to &#8722;70, with a brief undershoot while the pump recharges.</div>
+  </div>
+
+  <div class="panel">
+    <h3>THE DOOR POLICY &#8212; VOLTAGE-GATING</h3>
+    <p>The Na&#8314; and K&#8314; channels are <span class="accent">voltage-gated</span>: they open and close in response to changes in membrane potential. That's the whole mechanism of the drop.</p>
+    <ol class="steps">
+      <li><b>Resting &#8722;70 mV:</b> Na&#8314; channels shut. The pump quietly holds the charge.</li>
+      <li><b>Stimulus pushes to &#8722;50 mV (the <span class="gold">threshold</span>):</b> some Na&#8314; channels open, Na&#8314; diffuses in (outside is ~10&#215; more concentrated).</li>
+      <li><b>Positive feedback:</b> Na&#8314; entering depolarizes further &#8594; opens <i>more</i> Na&#8314; channels &#8594; faster entry &#8594; the membrane rockets from &#8722;50 to about <span class="accent">+30 mV</span>.</li>
+      <li><b>Na&#8314; channels close</b> after only 1&#8211;2 ms &#8212; and stay shut (refractory).</li>
+      <li><b>K&#8314; channels open</b> (also for 1&#8211;2 ms): K&#8314; diffuses out down its gradient &#8594; <span class="cyan">repolarization</span> back toward &#8722;70 mV.</li>
+      <li><b>Ball-and-chain:</b> a protein "ball" swings into the K&#8314; channel and blocks it; the pump re-establishes the gradients over a few milliseconds.</li>
+    </ol>
+    <p class="muted">Below threshold? No drop. The pump simply re-establishes &#8722;70 mV. That's why the action potential is <b>all-or-nothing</b> &#8212; the threshold must be reached for the positive feedback to start.</p>
+  </div>
+
+  <div class="exam">
+    <b>Exam phrasing:</b> "Depolarization is caused by the inward diffusion of sodium ions through voltage-gated channels (positive feedback). Repolarization is caused by the outward diffusion of potassium ions." Name the ion, name the direction &#8212; that's 3 marks right there.
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4><span class="tag p">THE NUMBERS</span></h4>
+      <p>Resting: <b>&#8722;70 mV</b>. Threshold: <b>&#8722;50 mV</b>. Peak: <b>&#8776; +30 mV</b>.</p>
+      <p>Na&#8314; outside &#8776; <b>10&#215;</b> inside. Channels open <b>1&#8211;2 ms</b> each.</p>
+      <p class="muted">Positive feedback only during depolarization. Repolarization is just K&#8314; leaving &#8212; no feedback loop.</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag g">WHY ALL-OR-NOTHING</span></h4>
+      <p>Below &#8722;50 mV: nothing. At/above &#8722;50 mV: the full spike, every time.</p>
+      <p>The strength of a signal is coded in <b>frequency</b> (how many drops per second), not drop size.</p>
+      <p class="muted">A bigger stimulus doesn't make a bigger action potential &#8212; it makes more of them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACT 4 ============ -->
+<section class="act" id="act4">
+  <div class="acttag">Act 4 &#183; C2.2.9</div>
+  <h2>THE WAVE &#127911;</h2>
+  <p class="aim">The drop doesn't travel. Each patch of membrane does its own drop, triggered by the patch next to it. A relay, not a wire.</p>
+
+  <div class="panel">
+    <h3>LOCAL CURRENTS</h3>
+    <p class="big">When one patch depolarizes, its sodium concentrations change: <span class="accent">high Na&#8314; inside</span>, <span class="accent">low Na&#8314; outside</span>.</p>
+    <ul class="clean">
+      <li>Inside the axon, Na&#8314; <b>diffuses along</b> from the depolarized patch to the still-polarized neighbour.</li>
+      <li>Outside, the gradient runs the <b>opposite way</b> &#8212; Na&#8314; flows back toward the depolarized patch.</li>
+      <li>These ion movements are <b>local currents</b>. They raise the neighbour's membrane potential toward threshold.</li>
+      <li>Hit &#8722;50 mV &#8594; the neighbour's Na&#8314; channels open &#8594; <b>its own full action potential</b>. The wave steps forward.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>ONE-WAY STREET</h3>
+    <p>The impulse only travels <span class="accent">one direction</span> along a neuron &#8212; two reasons:</p>
+    <ul class="clean">
+      <li>The impulse can only be <b>initiated at one terminal</b> of the neuron and only <b>passed on at the other</b>.</li>
+      <li>After a drop, the patch is <span class="cyan">refractory</span> (Na&#8314; channels inactivated) &#8212; so the wave can't propagate <b>backwards</b> into the patch it just left.</li>
+    </ul>
+    <p class="muted">The refractory period is also why there's a ceiling on firing rate: no drop, no backflow.</p>
+  </div>
+</section>
+
+<!-- ============ ACT 5 ============ -->
+<section class="act" id="act5">
+  <div class="acttag">Act 5 &#183; C2.2.4</div>
+  <h2>THE EXPRESS LANE &#128640;</h2>
+  <p class="aim">Speed matters when the danger is real. Two upgrades exist: fatter cables and insulated cables.</p>
+
+  <div class="panel">
+    <h3>UPGRADE 1 &#8212; FATTER CABLE</h3>
+    <p>Wider fibres have <b>lower resistance</b>, so impulses travel faster.</p>
+    <ul class="clean">
+      <li>Human nerve fibre: ~<b>1 &#181;m</b> diameter &#8594; about <b>1 m/s</b>.</li>
+      <li>Squid giant axon: up to <b>500 &#181;m</b> &#8594; <b>25 m/s</b> &#8212; runs the jet-propulsion escape response.</li>
+      <li>Earthworms keep just <b>three</b> giant axons, used only for predator escape. Fat cables cost space and resources.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>UPGRADE 2 &#8212; MYELIN</h3>
+    <p><span class="accent">Myelin</span> is a coating of <b>Schwann cells</b> wrapped around the fibre, with bare gaps between them called <span class="cyan">nodes of Ranvier</span>.</p>
+    <p>The impulse <b>jumps from node to node</b> (saltatory conduction) instead of crawling through every patch &#8212; up to <span class="accent">100 m/s</span>. One hundred times faster than an unmyelinated human fibre.</p>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagram of a myelinated axon: Schwann cells with gaps (nodes of Ranvier), impulse jumping between nodes">
+      <rect width="640" height="240" rx="14" fill="#150a26"/>
+      <!-- axon -->
+      <rect x="40" y="90" width="560" height="60" rx="8" fill="rgba(168,85,247,.14)" stroke="#a855f7" stroke-width="2.5"/>
+      <text x="45" y="82" fill="#a855f7" font-size="11" font-weight="800">AXON</text>
+      <!-- schwann cells -->
+      <g fill="rgba(34,211,238,.16)" stroke="#22d3ee" stroke-width="2">
+        <rect x="60" y="70" width="90" height="100" rx="10"/>
+        <rect x="190" y="70" width="90" height="100" rx="10"/>
+        <rect x="320" y="70" width="90" height="100" rx="10"/>
+        <rect x="450" y="70" width="90" height="100" rx="10"/>
+      </g>
+      <text x="105" y="52" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">Schwann</text>
+      <text x="105" y="64" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">cell</text>
+      <!-- nodes of ranvier -->
+      <g stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="4 3">
+        <line x1="158" y1="92" x2="158" y2="148"/><line x1="288" y1="92" x2="288" y2="148"/><line x1="418" y1="92" x2="418" y2="148"/><line x1="548" y1="92" x2="548" y2="148"/>
+      </g>
+      <text x="158" y="182" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">node of</text>
+      <text x="158" y="194" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">Ranvier</text>
+      <!-- jump arrows -->
+      <g stroke="#ff2ec4" stroke-width="2.5" fill="none">
+        <path d="M 158 120 Q 220 30 288 120"/>
+        <path d="M 288 120 Q 350 30 418 120"/>
+      </g>
+      <polygon points="283,118 288,128 293,118" fill="#ff2ec4"/>
+      <polygon points="413,118 418,128 423,118" fill="#ff2ec4"/>
+      <text x="223" y="28" fill="#ff2ec4" font-size="11" font-weight="900">impulse jumps</text>
+      <text x="223" y="42" fill="#ff2ec4" font-size="10" font-weight="700">node &#8594; node</text>
+      <text x="420" y="215" fill="#b9a3d6" font-size="10.5" font-weight="700">saltatory conduction &#8212; up to 100 m/s</text>
+    </svg>
+    <div class="cap"><b>The express lane:</b> myelin insulates, so the signal only regenerates at the bare nodes of Ranvier &#8212; it leaps between them instead of crawling the whole axon.</div>
+  </div>
+
+  <div class="tip">
+    <b>Exam contrast:</b> diameter vs myelination are <b>two different</b> speed upgrades. Bigger diameter = less resistance (squid 25 m/s). Myelin = jumping between nodes (up to 100 m/s). Don't mix them up in a data question.
+  </div>
+</section>
+
+<!-- ============ ACT 6 ============ -->
+<section class="act" id="act6">
+  <div class="acttag">Act 6 &#183; C2.2.5 + C2.2.6 + C2.2.7</div>
+  <h2>THE HANDOFF &#127925;</h2>
+  <p class="aim">The axon is one DJ's cable. The synapse is the booth change: the record (neurotransmitter) is physically handed to the next deck.</p>
+
+  <div class="panel">
+    <h3>THE BOOTH</h3>
+    <p>A <span class="accent">synapse</span> is a junction between two cells. Three types exist:</p>
+    <ul class="clean">
+      <li><b>Sensory receptor cell &#8596; neuron</b> &#8212; in sense organs.</li>
+      <li><b>Neuron &#8596; neuron</b> &#8212; in the brain and spinal cord.</li>
+      <li><b>Neuron &#8596; effector</b> &#8212; muscle fibres or gland cells (effectors "effect" the response).</li>
+    </ul>
+    <p>Signals cross <b>one way only</b>. The <span class="cyan">presynaptic neuron</span> brings the impulse in; the <span class="cyan">postsynaptic neuron</span> carries it away. Between them: a fluid-filled gap only <span class="accent">~20 nm</span> wide.</p>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagram of a synapse: impulse arrives, calcium enters, vesicles fuse and release neurotransmitter across the cleft, receptors open channels">
+      <defs>
+        <filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect width="640" height="400" rx="14" fill="#150a26"/>
+      <!-- presynaptic knob -->
+      <path d="M 40 70 C 140 40 250 60 258 150 L 262 260 C 262 330 190 368 90 358 C 30 352 28 280 30 190 C 32 130 20 90 40 70 Z" fill="rgba(168,85,247,.13)" stroke="#a855f7" stroke-width="3"/>
+      <text x="55" y="52" fill="#a855f7" font-size="12" font-weight="800">PRESYNAPTIC</text>
+      <text x="55" y="66" fill="#a855f7" font-size="12" font-weight="800">NEURON</text>
+      <!-- impulse arrow -->
+      <line x1="150" y1="18" x2="150" y2="48" stroke="#22d3ee" stroke-width="2.5"/>
+      <polygon points="144,48 150,60 156,48" fill="#22d3ee"/>
+      <text x="150" y="12" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">nerve impulse</text>
+      <!-- Ca2+ entry -->
+      <line x1="205" y1="30" x2="205" y2="60" stroke="#4ade80" stroke-width="2"/>
+      <polygon points="200,60 205,70 210,60" fill="#4ade80"/>
+      <text x="205" y="86" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">Ca&#178;&#8314;</text>
+      <text x="232" y="86" fill="#4ade80" font-size="9.5" font-weight="800">Ca&#178;&#8314;</text>
+      <text x="180" y="104" fill="#4ade80" font-size="9.5" font-weight="700">Ca&#178;&#8314; in &#8594; fuse</text>
+      <!-- vesicles -->
+      <circle cx="120" cy="150" r="15" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2.5"/>
+      <circle cx="122" cy="152" r="4" fill="#fbbf24"/>
+      <circle cx="160" cy="215" r="15" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2.5"/>
+      <circle cx="162" cy="217" r="4" fill="#fbbf24"/>
+      <circle cx="110" cy="250" r="15" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2.5"/>
+      <circle cx="112" cy="252" r="4" fill="#fbbf24"/>
+      <text x="60" y="300" fill="#fbbf24" font-size="11" font-weight="800">vesicles =</text>
+      <text x="60" y="315" fill="#fbbf24" font-size="11" font-weight="800">ACh packets</text>
+      <!-- fusing vesicle -->
+      <circle cx="238" cy="180" r="13" fill="rgba(251,191,36,.22)" stroke="#fbbf24" stroke-width="2"/>
+      <circle cx="250" cy="178" r="3.5" fill="#fbbf24"/>
+      <!-- cleft -->
+      <rect x="268" y="140" width="70" height="190" rx="10" fill="rgba(34,211,238,.07)"/>
+      <text x="303" y="128" fill="#67e8f9" font-size="10" font-weight="800" text-anchor="middle">SYNAPTIC</text>
+      <text x="303" y="140" fill="#67e8f9" font-size="10" font-weight="800" text-anchor="middle">CLEFT ~20 nm</text>
+      <!-- NT dots crossing -->
+      <circle cx="278" cy="195" r="6" fill="#fbbf24"/>
+      <circle cx="298" cy="215" r="6" fill="#fbbf24"/>
+      <circle cx="284" cy="240" r="6" fill="#fbbf24"/>
+      <text x="298" y="265" fill="#fbbf24" font-size="11" font-weight="800">ACh</text>
+      <!-- postsynaptic membrane -->
+      <rect x="338" y="110" width="16" height="250" rx="6" fill="rgba(34,211,238,.2)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="352" y="96" fill="#22d3ee" font-size="12" font-weight="800">POSTSYNAPTIC CELL</text>
+      <!-- receptor-channel -->
+      <rect x="340" y="180" width="12" height="80" rx="4" fill="#ff2ec4"/>
+      <rect x="344" y="192" width="4" height="56" rx="2" fill="#150a26"/>
+      <text x="392" y="196" fill="#ff2ec4" font-size="11" font-weight="800">ACh receptor =</text>
+      <text x="392" y="212" fill="#ff2ec4" font-size="11" font-weight="800">Na&#8314; channel</text>
+      <text x="392" y="228" fill="#ff2ec4" font-size="11" font-weight="800">(opens on binding)</text>
+      <line x1="384" y1="215" x2="354" y2="218" stroke="#ff2ec4" stroke-width="1.5"/>
+      <!-- Na+ flood -->
+      <circle cx="420" cy="250" r="9" fill="#f87171"/><text x="415" y="254" fill="#fff" font-size="9" font-weight="800">Na&#8314;</text>
+      <circle cx="452" cy="268" r="9" fill="#f87171"/><text x="447" y="272" fill="#fff" font-size="9" font-weight="800">Na&#8314;</text>
+      <circle cx="484" cy="286" r="9" fill="#f87171"/><text x="479" y="290" fill="#fff" font-size="9" font-weight="800">Na&#8314;</text>
+      <text x="520" y="252" fill="#f87171" font-size="11" font-weight="800">Na&#8314; in &#8594;</text>
+      <text x="520" y="268" fill="#f87171" font-size="11" font-weight="800">EPSP &#8594; if it</text>
+      <text x="520" y="284" fill="#f87171" font-size="11" font-weight="800">hits threshold: AP</text>
+      <line x1="512" y1="268" x2="424" y2="262" stroke="#f87171" stroke-width="1.5"/>
+      <!-- AChE -->
+      <circle cx="300" cy="330" r="13" fill="#4ade80"/>
+      <path d="M 300 330 L 289 320 A 13 13 0 0 0 289 340 Z" fill="#150a26"/>
+      <text x="322" y="334" fill="#4ade80" font-size="11" font-weight="800">AChE breaks ACh</text>
+      <text x="322" y="350" fill="#4ade80" font-size="11" font-weight="800">&#8594; choline recycled</text>
+      <circle cx="283" cy="352" r="3.5" fill="#fbbf24"/>
+      <circle cx="295" cy="357" r="3" fill="#fbbf24"/>
+      <text x="60" y="350" fill="#b9a3d6" font-size="10.5" font-weight="700">one record, one drop, then the floor clears</text>
+    </svg>
+    <div class="cap"><b>The handoff:</b> impulse &#8594; Ca&#178;&#8314; in &#8594; vesicles fuse &#8594; ACh crosses the cleft &#8594; receptor-channel opens &#8594; Na&#8314; in &#8594; EPSP. Acetylcholinesterase clears the floor.</div>
+  </div>
+
+  <div class="panel">
+    <h3>THE RECORD DROP &#8212; STEP BY STEP</h3>
+    <ol class="steps">
+      <li>The impulse reaches the end of the presynaptic neuron &#8212; the <b>presynaptic membrane</b>.</li>
+      <li>Its depolarization opens <b>Ca&#178;&#8314; channels</b>; calcium diffuses <b>into</b> the knob.</li>
+      <li>Ca&#178;&#8314; makes <b>vesicles</b> (packets of neurotransmitter) move to the membrane and <b>fuse</b> with it.</li>
+      <li>Neurotransmitter is released into the gap by <b>exocytosis</b>.</li>
+      <li>ACh <b>diffuses across</b> the 20&#8211;40 nm gap (fast &#8212; it's only 2&#8211;4 membrane thicknesses) and binds <b>receptors</b> on the postsynaptic membrane.</li>
+      <li>Binding <b>opens ion channels</b> &#8212; either the receptor IS a channel, or it opens a separate one.</li>
+      <li><b>Na&#8314; diffuses in</b> &#8594; the membrane potential rises (less negative) &#8212; the <span class="accent">excitatory postsynaptic potential (EPSP)</span>.</li>
+      <li>If the EPSP is <b>strong enough</b> to reach threshold, a full action potential fires and propagates away from the synapse.</li>
+      <li>The neurotransmitter is <b>rapidly broken down and removed</b> &#8212; so one signal causes one response.</li>
+    </ol>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4><span class="tag g">ACETYLCHOLINE &#8212; THE RECORD</span></h4>
+      <p>Built in the presynaptic neuron from <b>choline</b> (from the diet) + an <b>acetyl group</b> (from aerobic respiration).</p>
+      <p>Used at <b>neuromuscular junctions</b> and many other synapses. When it binds its receptor, the channel opens and Na&#8314; enters &#8594; EPSP.</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag gr">THE CLEANUP CREW</span></h4>
+      <p><b>Acetylcholinesterase (AChE)</b> in the gap chops ACh into <b>choline + acetate</b> within a fraction of a second.</p>
+      <p>Choline is <b>reabsorbed</b> into the presynaptic neuron and rebuilt into fresh ACh. Fast cleanup = sharp, repeated signalling.</p>
+    </div>
+  </div>
+
+  <div class="exam">
+    <b>Exam sequence (memorize this order):</b> impulse &#8594; Ca&#178;&#8314; enters &#8594; vesicles fuse &#8594; exocytosis &#8594; diffusion across cleft &#8594; receptor binding &#8594; ion channels open &#8594; Na&#8314; in &#8594; EPSP &#8594; threshold &#8594; action potential &#8594; enzyme cleanup.
+  </div>
+</section>
+
+<!-- ============ MIND MAP ============ -->
+<section class="act" id="map">
+  <div class="acttag">Revision</div>
+  <h2>MIND MAP &#128506;</h2>
+  <p class="aim">One line per act. If you can redraw this from memory, you know the chapter.</p>
+  <div class="mind">
+    <span class="node core">C2.2 NEURAL SIGNALLING</span>
+    <span class="arrow">&#8594;</span>
+    <span class="node">WIRING<small>neurons: dendrites &#8594; cell body &#8594; axon</small></span>
+    <span class="arrow">&#8594;</span>
+    <span class="node">BATTERY<small>&#8722;70 mV: pump 3:2, K&#8314; leak, anions</small></span>
+    <span class="arrow">&#8594;</span>
+    <span class="node">THE DROP<small>threshold &#8722;50, Na&#8314; in &#8594; +30, K&#8314; out</small></span>
+    <span class="arrow">&#8594;</span>
+    <span class="node">THE WAVE<small>local currents, one-way, refractory</small></span>
+    <span class="arrow">&#8594;</span>
+    <span class="node">EXPRESS LANE<small>fat axon or myelin jumps</small></span>
+    <span class="arrow">&#8594;</span>
+    <span class="node">HANDOFF<small>Ca&#178;&#8314; &#8594; vesicles &#8594; ACh &#8594; EPSP</small></span>
+  </div>
+</section>
+
+<!-- ============ CHEAT ============ -->
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>CHEAT SHEET &#9889;</h2>
+  <p class="aim">The whole chapter on one marquee. Read it standing up, twice.</p>
+  <div class="marquee">
+    <div class="line">REST &#8722;70 mV: pump pushes <span>3 Na&#8314; out / 2 K&#8314; in</span> (ATP), K&#8314; leaks 50&#215; faster, anions hold the minus.</div>
+    <div class="line">THRESHOLD &#8722;50 mV: below it nothing fires; at it, <span>all-or-nothing</span> &#8212; positive feedback to +30 mV.</div>
+    <div class="line">DEPOLARIZE = <span>Na&#8314; in</span>. REPOLARIZE = <span>K&#8314; out</span>. Both are ion movements, not electrons.</div>
+    <div class="line">PROPAGATION = local currents: Na&#8314; inside the axon diffuses to the next patch and flips it.</div>
+    <div class="line">ONE WAY: the impulse starts at one terminal and the <span>refractory period blocks backflow</span>.</div>
+    <div class="line">FASTER: fatter axon (squid 25 m/s) or <span>myelin jumps between nodes of Ranvier</span> (100 m/s).</div>
+    <div class="line">SYNAPSE: <span>Ca&#178;&#8314; in &#8594; vesicles fuse &#8594; ACh out &#8594; receptor opens Na&#8314; channel &#8594; EPSP</span>.</div>
+    <div class="line">CLEANUP: <span>acetylcholinesterase</span> chops ACh &#8594; choline recycled. One record = one drop.</div>
+  </div>
+</section>
+
+<!-- ============ SELF-TEST ============ -->
+<section class="act" id="test">
+  <div class="acttag">Check yourself</div>
+  <h2>SELF-TEST &#9997;</h2>
+  <p class="aim">Click an answer. Instant feedback. No mercy.</p>
+
+  <div class="q" data-a="seventy">
+    <p>1. A neuron at rest sits at about &#8722;70 mV. Which is NOT a reason the inside stays negative?</p>
+    <label><input type="radio" name="q1" value="wrong1"> The Na&#8314;/K&#8314; pump moves 3 Na&#8314; out for every 2 K&#8314; in</label>
+    <label><input type="radio" name="q1" value="seventy"> Sodium ions are actively pumped into the cell</label>
+    <label><input type="radio" name="q1" value="wrong2"> The membrane leaks K&#8314; out about 50&#215; faster than Na&#8314; gets in</label>
+    <div class="fb correct">&#9989; Correct &#8212; the pump moves Na&#8314; OUT (3:2 ratio), plus K&#8314; leak and organic anions keep the inside negative.</div>
+    <div class="fb wrong">&#10060; Na&#8314; is pumped OUT, not in. Resting negative = pump (3 out / 2 in) + fast K&#8314; leak + organic anions.</div>
+  </div>
+
+  <div class="q" data-a="na">
+    <p>2. What exactly happens during depolarization?</p>
+    <label><input type="radio" name="q2" value="na"> Voltage-gated Na&#8314; channels open; Na&#8314; diffuses in; potential flips from negative to positive</label>
+    <label><input type="radio" name="q2" value="wrong1"> Voltage-gated K&#8314; channels open; K&#8314; diffuses out; potential drops</label>
+    <label><input type="radio" name="q2" value="wrong2"> Electrons travel down the axon and flip the charge</label>
+    <div class="fb correct">&#9989; Na&#8314; in &#8594; positive feedback &#8594; rapid climb from &#8722;50 to about +30 mV. No electrons involved.</div>
+    <div class="fb wrong">&#10060; Depolarization = Na&#8314; IN. K&#8314; out is repolarization. And impulses run on ions, never electrons.</div>
+  </div>
+
+  <div class="q" data-a="threshold">
+    <p>3. Why is the action potential described as all-or-nothing?</p>
+    <label><input type="radio" name="q3" value="wrong1"> Because the pump can only work at full power</label>
+    <label><input type="radio" name="q3" value="threshold"> If the threshold (&#8722;50 mV) isn't reached, no action potential fires; at or above it, the full spike always fires</label>
+    <label><input type="radio" name="q3" value="wrong2"> Because bigger stimuli make bigger action potentials</label>
+    <div class="fb correct">&#9989; Threshold gates everything. Signal strength is coded in frequency, not spike size.</div>
+    <div class="fb wrong">&#10060; All-or-nothing = threshold gate. Bigger stimulus = more spikes, never a bigger spike.</div>
+  </div>
+
+  <div class="q" data-a="positive">
+    <p>4. During depolarization, Na&#8314; entry opens more Na&#8314; channels, which lets in more Na&#8314;. This is:</p>
+    <label><input type="radio" name="q4" value="positive"> Positive feedback &#8212; the product amplifies its own cause</label>
+    <label><input type="radio" name="q4" value="wrong1"> Negative feedback &#8212; it returns the cell to rest</label>
+    <div class="fb correct">&#9989; Positive feedback, and it's the engine of the rapid spike. (Repolarization has no such loop.)</div>
+    <div class="fb wrong">&#10060; Positive feedback. Each bit of Na&#8314; entry recruits more Na&#8314; channels &#8212; a snowball, not a thermostat.</div>
+  </div>
+
+  <div class="q" data-a="refractory">
+    <p>5. Why can't an action potential travel backwards along an axon?</p>
+    <label><input type="radio" name="q5" value="wrong1"> The myelin sheath blocks reverse movement</label>
+    <label><input type="radio" name="q5" value="refractory"> The patch it just left is refractory &#8212; its Na&#8314; channels are inactivated, so local currents can't re-trigger it</label>
+    <label><input type="radio" name="q5" value="wrong2"> Calcium ions only flow forward</label>
+    <div class="fb correct">&#9989; The refractory period = one-way valve. Also why there's a max firing rate.</div>
+    <div class="fb wrong">&#10060; The refractory period. After a drop, Na&#8314; channels are inactivated, so the wave can only move into fresh membrane.</div>
+  </div>
+
+  <div class="q" data-a="squid">
+    <p>6. A squid giant axon (500 &#181;m) conducts at ~25 m/s while a human fibre (~1 &#181;m) does ~1 m/s. Why the difference?</p>
+    <label><input type="radio" name="q6" value="squid"> Bigger diameter &#8594; lower resistance &#8594; faster conduction</label>
+    <label><input type="radio" name="q6" value="wrong1"> Squids have more neurons per axon</label>
+    <label><input type="radio" name="q6" value="wrong2"> Squid axons are myelinated, human axons are not</label>
+    <div class="fb correct">&#9989; Diameter. And it's expensive &#8212; that's why earthworms keep only three giant axons, for escape.</div>
+    <div class="fb wrong">&#10060; Diameter = resistance. (Myelin is the OTHER speed upgrade, and human fibres have it too.)</div>
+  </div>
+
+  <div class="q" data-a="saltatory">
+    <p>7. In a myelinated fibre, where does the action potential actually regenerate?</p>
+    <label><input type="radio" name="q7" value="wrong1"> Continuously, all along the Schwann cells</label>
+    <label><input type="radio" name="q7" value="saltatory"> Only at the nodes of Ranvier &#8212; the bare gaps between Schwann cells</label>
+    <label><input type="radio" name="q7" value="wrong2"> At the cell body only</label>
+    <div class="fb correct">&#9989; Nodes only &#8212; that's what makes conduction saltatory (jumping), up to 100 m/s.</div>
+    <div class="fb wrong">&#10060; Nodes of Ranvier. The impulse jumps gap to gap instead of regenerating every patch.</div>
+  </div>
+
+  <div class="q" data-a="ca">
+    <p>8. What role does calcium play at the synapse?</p>
+    <label><input type="radio" name="q8" value="wrong1"> It carries the signal across the cleft itself</label>
+    <label><input type="radio" name="q8" value="ca"> The arriving impulse opens Ca&#178;&#8314; channels; Ca&#178;&#8314; enters and triggers vesicle fusion + exocytosis of neurotransmitter</label>
+    <label><input type="radio" name="q8" value="wrong2"> It repolarizes the presynaptic membrane</label>
+    <div class="fb correct">&#9989; Ca&#178;&#8314; is the trigger for release. The neurotransmitter (ACh) crosses the cleft, not calcium.</div>
+    <div class="fb wrong">&#10060; Ca&#178;&#8314; in &#8594; vesicle fusion &#8594; exocytosis. The neurotransmitter itself crosses the gap.</div>
+  </div>
+
+  <div class="q" data-a="ache">
+    <p>9. After ACh binds its receptor and the EPSP fires, how does the signal stop?</p>
+    <label><input type="radio" name="q9" value="ache"> Acetylcholinesterase breaks ACh into choline + acetate; choline is reabsorbed and rebuilt</label>
+    <label><input type="radio" name="q9" value="wrong1"> The receptor slowly degrades the ACh over hours</label>
+    <label><input type="radio" name="q9" value="wrong2"> ACh is pumped back across the cleft intact</label>
+    <div class="fb correct">&#9989; Enzymatic breakdown, then recycling. One record = one drop.</div>
+    <div class="fb wrong">&#10060; Acetylcholinesterase chops ACh into choline + acetate. Choline gets reabsorbed and rebuilt into new ACh.</div>
+  </div>
+
+  <div class="q" data-a="epsp">
+    <p>10. What makes an EPSP strong enough to trigger an action potential?</p>
+    <label><input type="radio" name="q10" value="wrong1"> It always triggers one, no matter the size</label>
+    <label><input type="radio" name="q10" value="epsp"> Enough Na&#8314; enters that the postsynaptic membrane potential reaches the threshold (&#8722;50 mV)</label>
+    <label><input type="radio" name="q10" value="wrong2"> The neurotransmitter stays bound permanently</label>
+    <div class="fb correct">&#9989; Threshold again. Sub-threshold EPSPs just fade; the pump restores the rest.</div>
+    <div class="fb wrong">&#10060; The EPSP must push the membrane to threshold. Below it, no action potential.</div>
+  </div>
+</section>
+
+<!-- ============ CHECKLIST ============ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST &#9989;</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 9 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">&#10003;</span><span class="code">C2.2.1</span><span>Neurons carry electrical impulses: dendrites collect, cell body interprets, axon transmits.</span></li>
+    <li data-i="1"><span class="box">&#10003;</span><span class="code">C2.2.2</span><span>Resting potential (&#8722;70 mV): Na&#8314;/K&#8314; pump (3 out, 2 in), K&#8314; leak, organic anions.</span></li>
+    <li data-i="2"><span class="box">&#10003;</span><span class="code">C2.2.3</span><span>Action potential: all-or-nothing; depolarization and repolarization by ion movement (not electrons).</span></li>
+    <li data-i="3"><span class="box">&#10003;</span><span class="code">C2.2.4</span><span>Speed varies with fibre diameter (squid giant axon) and myelination (nodes of Ranvier, saltatory).</span></li>
+    <li data-i="4"><span class="box">&#10003;</span><span class="code">C2.2.5</span><span>Synapses: junctions between receptor cells/neurons/effectors; signals pass one way across a ~20 nm gap.</span></li>
+    <li data-i="5"><span class="box">&#10003;</span><span class="code">C2.2.6</span><span>Release of neurotransmitter: Ca&#178;&#8314; influx &#8594; vesicle fusion &#8594; exocytosis.</span></li>
+    <li data-i="6"><span class="box">&#10003;</span><span class="code">C2.2.7</span><span>EPSP: ACh binds receptors &#8594; Na&#8314; in &#8594; potential rises &#8594; threshold &#8594; action potential.</span></li>
+    <li data-i="7"><span class="box">&#10003;</span><span class="code">C2.2.8</span><span>Voltage-gating: threshold &#8722;50 mV, positive feedback depolarization, 1&#8211;2 ms channel openings.</span></li>
+    <li data-i="8"><span class="box">&#10003;</span><span class="code">C2.2.9</span><span>Propagation by local currents; refractory period keeps it one-way.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) pp. 428&#8211;439 &#183; IB Biology guide (first exams 2025) &#183; AHL topic</p>
+  <p>&#128214; open &#8594; print to PDF for a poster &#183; part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">&#128247; Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  var KEY='c22-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
