@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>THE ENCORE — D3.1 Reproduction · Bio HL</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#act1">ACT 1 · LOOP VS REMIX</a>
+  <a href="#act2">ACT 2 · HALF-PRICE TICKETS</a>
+  <a href="#act3">ACT 3 · MALE BACKSTAGE</a>
+  <a href="#act4">ACT 4 · FEMALE BACKSTAGE</a>
+  <a href="#act5">ACT 5 · MONTHLY BOOKING</a>
+  <a href="#act6">ACT 6 · MEETING AT THE DOOR</a>
+  <a href="#act7">ACT 7 · LAB REMIX</a>
+  <a href="#act8">ACT 8 · OPEN-AIR VENUE</a>
+  <a href="#act9">ACT 9 · COURIER SERVICE</a>
+  <a href="#act10">ACT 10 · TOUR BUS</a>
+  <a href="#act11">ACT 11 · DEBUT NIGHT</a>
+  <a href="#act12">ACT 12 · FACTORY VS ONE-OFF</a>
+  <a href="#act13">ACT 13 · VELVET ROPE</a>
+  <a href="#act14">ACT 14 · MOVING IN</a>
+  <a href="#act15">ACT 15 · RENT CHECK</a>
+  <a href="#act16">ACT 16 · CATERING CORRIDOR</a>
+  <a href="#act17">ACT 17 · GRAND FINALE</a>
+  <a href="#act18">ACT 18 · REMASTER</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Continuity and change · SL + AHL · D3.1.1 – D3.1.20</div>
+  <h1>THE ENCORE</h1>
+  <p class="sub">IB Biology HL · D3.1 Reproduction (SL + AHL)</p>
+  <p class="sub">Reproduction is how the club keeps booking new acts — <b>sexual reproduction</b> is a remix that changes the track every generation, <b>asexual reproduction</b> is the same hit on loop. From half-price gamete tickets and the monthly booking calendar to pollen couriers and the grand-finale encore of childbirth, tonight's show never ends.</p>
+  <div class="badges">
+    <span class="badge">SL + AHL</span>
+    <span class="badge ahl">20 statements</span>
+    <span class="badge">Sexual + asexual</span>
+    <span class="badge">Fertilization · IVF · Flowers</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · THE LOOP VS THE REMIX ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">D3.1.1 – D3.1.2</div>
+  <h2>THE LOOP VS THE REMIX</h2>
+  <p class="aim">Asexual reproduction = the same track played on repeat (continuity, identical clones). Sexual reproduction = a fresh remix every generation (change, variation) that needs meiosis AND gamete fusion to keep the chromosome number stable.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔄</div>
+    <div class="body">
+      <h3>Same hit on loop, or a new mashup every night?</h3>
+      <p class="aka">asexual vs sexual reproduction · change vs continuity · meiosis + fusion cycle</p>
+      <p><span class="accent">Asexual reproduction</span> has a single parent: offspring form by <span class="cyan">mitosis</span> alone, so every offspring is <span class="cyan">genetically identical</span> to the parent (and to each other) — clones. No gametes fuse, no variation is generated, and the parent's exact genome is passed on. It works brilliantly in an <span class="cyan">unchanging environment</span>, where the winning formula doesn't need to change.</p>
+      <p><span class="accent">Sexual reproduction</span> needs two parents and involves <span class="cyan">meiosis</span> (halving the chromosome number when gametes form) followed by <span class="cyan">gamete fusion</span> (doubling it back at fertilization). Offspring are <span class="cyan">genetically different</span> from both parents and from each other — variation every generation. That variety is the club's insurance policy when the environment changes.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two DJ decks side by side: left LOOP deck playing the same record producing identical clones by mitosis, right REMIX deck producing genetically different offspring via meiosis and fusion, with a cycle diagram showing 2n halved by meiosis to n and doubled back to 2n by gamete fusion">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE LOOP VS THE REMIX — SEXUAL VS ASEXUAL</text>
+
+      <rect x="30" y="52" width="290" height="108" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="175" y="70" fill="#22d3ee" font-size="11.5" font-weight="800" text-anchor="middle">LOOP · ASEXUAL</text>
+      <text x="175" y="88" fill="#b9a3d6" font-size="9.5" text-anchor="middle">one parent · no gamete fusion</text>
+      <text x="175" y="102" fill="#b9a3d6" font-size="9.5" text-anchor="middle">mitosis throughout</text>
+      <text x="175" y="116" fill="#b9a3d6" font-size="9.5" text-anchor="middle">offspring identical clones</text>
+      <text x="175" y="130" fill="#b9a3d6" font-size="9.5" text-anchor="middle">no variation · continuity</text>
+      <text x="175" y="144" fill="#b9a3d6" font-size="9.5" text-anchor="middle">fits unchanging environments</text>
+
+      <rect x="340" y="52" width="290" height="108" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="485" y="70" fill="#a855f7" font-size="11.5" font-weight="800" text-anchor="middle">REMIX · SEXUAL</text>
+      <text x="485" y="88" fill="#b9a3d6" font-size="9.5" text-anchor="middle">two parents · gametes fuse</text>
+      <text x="485" y="102" fill="#b9a3d6" font-size="9.5" text-anchor="middle">meiosis once per generation</text>
+      <text x="485" y="116" fill="#b9a3d6" font-size="9.5" text-anchor="middle">offspring genetically different</text>
+      <text x="485" y="130" fill="#b9a3d6" font-size="9.5" text-anchor="middle">variation → new mashups</text>
+      <text x="485" y="144" fill="#b9a3d6" font-size="9.5" text-anchor="middle">fits changing environments</text>
+
+      <rect x="60" y="220" width="130" height="46" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="125" y="247" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">2n · body cells</text>
+      <path d="M 195 243 L 243 243" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="219" y="232" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">meiosis · halve</text>
+
+      <rect x="250" y="220" width="130" height="46" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="315" y="247" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">n · gametes</text>
+      <path d="M 385 243 L 433 243" stroke="#4ade80" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="409" y="232" fill="#4ade80" font-size="9.5" font-weight="700" text-anchor="middle">fusion · double</text>
+
+      <rect x="440" y="220" width="130" height="46" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="505" y="247" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">2n · zygote</text>
+
+      <text x="330" y="316" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Without meiosis the chromosome number would double every generation — halving + doubling keep it constant</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — Asexual = the LOOP deck: mitosis only, clones, no variation. Sexual = the REMIX deck: meiosis halves 2n → n gametes, fusion doubles n → 2n zygote, variation every generation.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "explain the role of meiosis in a sexual life cycle" questions want the <b>halving argument</b>: if gametes were formed by mitosis, each generation would double the chromosome number. Meiosis produces haploid gametes (n); fusion restores the diploid number (2n) in the zygote — the cycle keeps the number constant <b>and</b> shuffles alleles into new combinations.</div>
+</section>
+
+<!-- ══════════════════════ ACT 2 · THE HALF-PRICE TICKETS ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">D3.1.2 – D3.1.3</div>
+  <h2>THE HALF-PRICE TICKETS</h2>
+  <p class="aim">Gametes are the half-price tickets to the next generation: each carries one set of chromosomes (haploid, n). Male and female gametes are built completely differently — that difference is anisogamy.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎟️</div>
+    <div class="body">
+      <h3>Two ticket types, two jobs</h3>
+      <p class="aka">anisogamy · male vs female gametes · haploid vs diploid</p>
+      <p><span class="accent">Anisogamy</span> is the difference in size and behaviour between the two gamete types. The <span class="cyan">male gamete</span> is small and <span class="cyan">motile</span> — it travels to the female gamete. The <span class="cyan">female gamete</span> is large, <span class="cyan">sessile</span> (it stays put) and packed with <span class="cyan">food reserves</span> that nourish the early embryo. Because building a big food-stocked gamete is expensive, females produce far fewer gametes than males.</p>
+      <p>Gametes are <span class="cyan">haploid (n)</span> — half the chromosome number of the parent's body cells, which are <span class="cyan">diploid (2n)</span>. All plants and animals are anisogamous: two distinct gamete types is the rule across kingdoms.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ticket booth with two VIP ticket types: a slim fast male courier ticket that is small motile and mass-produced, versus a large cushioned female lounge ticket with food reserves for the embryo, both haploid n while body cells are diploid 2n">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE HALF-PRICE TICKETS — ANISOGAMY</text>
+
+      <rect x="40" y="56" width="270" height="160" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="175" y="76" fill="#22d3ee" font-size="11.5" font-weight="800" text-anchor="middle">♂ VIP COURIER — MALE GAMETE</text>
+      <text x="175" y="98" fill="#b9a3d6" font-size="9.5" text-anchor="middle">small · motile</text>
+      <text x="175" y="114" fill="#b9a3d6" font-size="9.5" text-anchor="middle">travels TO the female</text>
+      <text x="175" y="130" fill="#b9a3d6" font-size="9.5" text-anchor="middle">few food reserves</text>
+      <text x="175" y="146" fill="#b9a3d6" font-size="9.5" text-anchor="middle">produced in huge numbers</text>
+      <text x="175" y="170" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">n · haploid</text>
+
+      <rect x="350" y="56" width="270" height="160" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="485" y="76" fill="#ff2ec4" font-size="11.5" font-weight="800" text-anchor="middle">♀ VIP LOUNGE — FEMALE GAMETE</text>
+      <text x="485" y="98" fill="#b9a3d6" font-size="9.5" text-anchor="middle">large · sessile</text>
+      <text x="485" y="114" fill="#b9a3d6" font-size="9.5" text-anchor="middle">stays put</text>
+      <text x="485" y="130" fill="#b9a3d6" font-size="9.5" text-anchor="middle">big food reserves for embryo</text>
+      <text x="485" y="146" fill="#b9a3d6" font-size="9.5" text-anchor="middle">few in number — sometimes one</text>
+      <text x="485" y="170" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">n · haploid</text>
+
+      <text x="330" y="266" fill="#b9a3d6" font-size="10.5" text-anchor="middle">All plants and animals are anisogamous — two distinct gamete types</text>
+      <text x="330" y="320" fill="#4ade80" font-size="10.5" font-weight="700" text-anchor="middle">Gametes haploid (n) · body cells diploid (2n) — the half-price ticket carries half the set</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — Anisogamy: the male gamete is a cheap fast courier ticket (small, motile, mass-produced); the female gamete is a loaded lounge pass (large, sessile, stocked with food for the embryo). Both are haploid (n).</div>
+  </div>
+
+  <table>
+    <tr><th></th><th>♂ Male gamete</th><th>♀ Female gamete</th></tr>
+    <tr><td>Size</td><td>Small</td><td>Large (biggest human cell — the egg)</td></tr>
+    <tr><td>Movement</td><td>Motile — swims to the female</td><td>Sessile — stays in place</td></tr>
+    <tr><td>Food reserves</td><td>Few or none</td><td>Many — feed the embryo</td></tr>
+    <tr><td>Numbers</td><td>Huge (millions)</td><td>Few (one per cycle)</td></tr>
+    <tr><td>Ploidy</td><td>Haploid (n)</td><td>Haploid (n)</td></tr>
+  </table>
+
+  <div class="tip"><b>Remember:</b> anisogamy is <b>any</b> difference between gamete types — humans have it, mosses have it, even algae have it. The motile/sessile + reserves split explains everything else (numbers, size, who travels).</div>
+</section>
+
+<!-- ══════════════════════ ACT 3 · THE MALE BACKSTAGE ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">D3.1.4</div>
+  <h2>THE MALE BACKSTAGE</h2>
+  <p class="aim">The male reproductive system is a production line for sperm: made in the testis (kept cool in the scrotum), stored in the epididymis, mixed into semen by the accessory glands, and delivered through the urethra by the penis.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎧</div>
+    <div class="body">
+      <h3>Backstage tour: who makes, stores and delivers the tickets</h3>
+      <p class="aka">testis · scrotum · epididymis · sperm duct · seminal vesicle · prostate · urethra · penis</p>
+      <p>The <span class="cyan">testis</span> produces both sperm and the hormone <span class="cyan">testosterone</span>. It hangs in the <span class="cyan">scrotum</span>, which holds the testes below core body temperature — sperm need it cooler. <span class="cyan">Epididymis</span> stores sperm until ejaculation; the <span class="cyan">sperm duct</span> (vas deferens) transfers them during ejaculation.</p>
+      <p>The <span class="cyan">seminal vesicle and prostate gland</span> secrete an alkaline fluid with proteins and fructose — mixed with sperm this forms <span class="cyan">semen</span>. The <span class="cyan">urethra</span> carries semen during ejaculation (and urine at other times) through the <span class="cyan">penis</span>, which penetrates the vagina and ejaculates near the cervix to give sperm the shortest trip to the egg.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled schematic of the male reproductive system: testis makes sperm and testosterone, scrotum holds testes below core temperature, epididymis stores sperm, sperm duct transfers sperm, seminal vesicle and prostate secrete alkali proteins and fructose to make semen, urethra carries semen and urine, penis penetrates the vagina">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE MALE BACKSTAGE — MALE REPRODUCTIVE SYSTEM</text>
+
+      <rect x="40" y="52" width="190" height="40" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="135" y="76" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">TESTIS</text>
+      <rect x="40" y="104" width="190" height="40" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="135" y="128" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">SCROTUM</text>
+      <rect x="40" y="156" width="190" height="40" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="135" y="180" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">EPIDIDYMIS</text>
+      <rect x="40" y="208" width="190" height="40" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="135" y="232" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">SPERM DUCT</text>
+      <rect x="40" y="260" width="190" height="40" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="135" y="284" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">SEMINAL VESICLE</text>
+      <text x="135" y="298" fill="#b9a3d6" font-size="8.5" text-anchor="middle">+ prostate gland</text>
+      <rect x="40" y="312" width="190" height="40" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="135" y="336" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">URETHRA + PENIS</text>
+
+      <path d="M 235 72 L 278 72" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 124 L 278 124" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 176 L 278 176" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 228 L 278 228" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 280 L 278 280" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 332 L 278 332" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="285" y="52" width="335" height="40" rx="9" fill="rgba(255,46,196,.06)" stroke="rgba(255,46,196,.4)" stroke-width="1.5"/>
+      <text x="452" y="69" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">produces sperm + testosterone</text>
+      <text x="452" y="83" fill="#b9a3d6" font-size="9" text-anchor="middle">both made in the testis</text>
+      <rect x="285" y="104" width="335" height="40" rx="9" fill="rgba(251,191,36,.06)" stroke="rgba(251,191,36,.4)" stroke-width="1.5"/>
+      <text x="452" y="121" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">holds testes below core temperature</text>
+      <text x="452" y="135" fill="#b9a3d6" font-size="9" text-anchor="middle">cooler room for the VIPs</text>
+      <rect x="285" y="156" width="335" height="40" rx="9" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+      <text x="452" y="173" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">stores sperm</text>
+      <text x="452" y="187" fill="#b9a3d6" font-size="9" text-anchor="middle">until ejaculation</text>
+      <rect x="285" y="208" width="335" height="40" rx="9" fill="rgba(34,211,238,.06)" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+      <text x="452" y="225" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">transfers sperm</text>
+      <text x="452" y="239" fill="#b9a3d6" font-size="9" text-anchor="middle">during ejaculation</text>
+      <rect x="285" y="260" width="335" height="40" rx="9" fill="rgba(251,191,36,.06)" stroke="rgba(251,191,36,.4)" stroke-width="1.5"/>
+      <text x="452" y="277" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">secrete alkali + proteins + fructose</text>
+      <text x="452" y="291" fill="#b9a3d6" font-size="9" text-anchor="middle">→ semen</text>
+      <rect x="285" y="312" width="335" height="40" rx="9" fill="rgba(255,46,196,.06)" stroke="rgba(255,46,196,.4)" stroke-width="1.5"/>
+      <text x="452" y="329" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">semen at ejaculation + urine</text>
+      <text x="452" y="343" fill="#b9a3d6" font-size="9" text-anchor="middle">penis: penetrates vagina near cervix</text>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — Male backstage chain: testis (sperm + testosterone) → scrotum (cooler room) → epididymis (storage) → sperm duct (transfer) → seminal vesicle + prostate (alkali + proteins + fructose = semen) → urethra + penis (delivery near the cervix).</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> the <b>sperm duct</b> carries sperm only, the <b>urethra</b> carries semen <i>and</i> urine. And it's the <b>seminal vesicle + prostate</b> that add the fructose fuel and alkali — sperm alone are just swimmers without provisions.</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 · THE FEMALE BACKSTAGE ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">D3.1.4</div>
+  <h2>THE FEMALE BACKSTAGE</h2>
+  <p class="aim">The female reproductive system runs the whole venue: the ovary releases the egg, the oviduct hosts fertilization, the uterus hosts the pregnancy, and the cervix, vagina and vulva guard the entrances.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎤</div>
+    <div class="body">
+      <h3>The venue's rooms, from stage to front door</h3>
+      <p class="aka">ovary · oviduct · uterus · cervix · vagina · vulva</p>
+      <p>The <span class="cyan">ovary</span> produces eggs plus the hormones <span class="cyan">oestradiol and progesterone</span>. The <span class="cyan">oviduct</span> collects the egg at ovulation, is the <span class="cyan">site of fertilization</span>, and moves the early embryo to the uterus. The <span class="cyan">uterus</span> provides for the embryo and then the foetus during pregnancy.</p>
+      <p>The <span class="cyan">cervix</span> protects the developing foetus and dilates to form the birth canal. The <span class="cyan">vagina</span> stimulates the penis and ejaculation, and also serves as the birth canal. The <span class="cyan">vulva</span> protects the internal parts of the female reproductive system.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled schematic of the female reproductive system: ovary produces eggs oestradiol and progesterone, oviduct collects the egg and is the site of fertilization, uterus provides for embryo and foetus, cervix protects the foetus and dilates into the birth canal, vagina stimulates ejaculation and is a birth canal, vulva protects internal parts">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE FEMALE BACKSTAGE — FEMALE REPRODUCTIVE SYSTEM</text>
+
+      <rect x="40" y="52" width="190" height="40" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="135" y="76" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">OVARY</text>
+      <rect x="40" y="104" width="190" height="40" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="135" y="128" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">OVIDUCT</text>
+      <rect x="40" y="156" width="190" height="40" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="135" y="180" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">UTERUS</text>
+      <rect x="40" y="208" width="190" height="40" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="135" y="232" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">CERVIX</text>
+      <rect x="40" y="260" width="190" height="40" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="135" y="284" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">VAGINA</text>
+      <rect x="40" y="312" width="190" height="40" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="135" y="336" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">VULVA</text>
+
+      <path d="M 235 72 L 278 72" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 124 L 278 124" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 176 L 278 176" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 228 L 278 228" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 280 L 278 280" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 235 332 L 278 332" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="285" y="52" width="335" height="40" rx="9" fill="rgba(255,46,196,.06)" stroke="rgba(255,46,196,.4)" stroke-width="1.5"/>
+      <text x="452" y="69" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">produces eggs + oestradiol</text>
+      <text x="452" y="83" fill="#b9a3d6" font-size="9" text-anchor="middle">+ progesterone</text>
+      <rect x="285" y="104" width="335" height="40" rx="9" fill="rgba(34,211,238,.06)" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+      <text x="452" y="121" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">collects egg at ovulation</text>
+      <text x="452" y="135" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">fertilization happens HERE</text>
+      <rect x="285" y="156" width="335" height="40" rx="9" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.4)" stroke-width="1.5"/>
+      <text x="452" y="173" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">provides for embryo then foetus</text>
+      <text x="452" y="187" fill="#b9a3d6" font-size="9" text-anchor="middle">during pregnancy</text>
+      <rect x="285" y="208" width="335" height="40" rx="9" fill="rgba(251,191,36,.06)" stroke="rgba(251,191,36,.4)" stroke-width="1.5"/>
+      <text x="452" y="225" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">protects the foetus</text>
+      <text x="452" y="239" fill="#b9a3d6" font-size="9" text-anchor="middle">dilates → birth canal</text>
+      <rect x="285" y="260" width="335" height="40" rx="9" fill="rgba(255,46,196,.06)" stroke="rgba(255,46,196,.4)" stroke-width="1.5"/>
+      <text x="452" y="277" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">stimulates penis → ejaculation</text>
+      <text x="452" y="291" fill="#b9a3d6" font-size="9" text-anchor="middle">also serves as birth canal</text>
+      <rect x="285" y="312" width="335" height="40" rx="9" fill="rgba(34,211,238,.06)" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+      <text x="452" y="329" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">protects internal parts</text>
+      <text x="452" y="343" fill="#b9a3d6" font-size="9" text-anchor="middle">external entrance</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — Female backstage: ovary (eggs + oestradiol + progesterone) → oviduct (collects egg, fertilization HERE) → uterus (hosts embryo then foetus) → cervix (protects, dilates) → vagina (stimulates ejaculation, birth canal) → vulva (protects the entrance).</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> anatomy questions love "state the function of…" — memorise one crisp function per structure. The two most-tested: the <b>oviduct is the site of fertilization</b>, and the <b>uterus lining (endometrium)</b> is where the embryo implants (Act 14).</div>
+</section>
+
+<!-- ══════════════════════ ACT 5 · THE MONTHLY BOOKING ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">D3.1.5</div>
+  <h2>THE MONTHLY BOOKING</h2>
+  <p class="aim">The menstrual cycle is the venue's monthly calendar (~28 days): the ovarian cycle books a follicle and releases an egg at Day 14 (ovulation), while the uterine cycle rebuilds the endometrium and, if no embryo arrives, sheds it as menstruation.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📅</div>
+    <div class="body">
+      <h3>Two calendars, one booking system</h3>
+      <p class="aka">ovarian cycle · uterine cycle · FSH · LH · oestradiol · progesterone · ovulation Day 14</p>
+      <p>The <span class="cyan">ovarian cycle</span>: the <span class="cyan">follicular phase</span> develops follicles (one egg matures), then around <span class="cyan">Day 14</span> the follicle bursts and the egg is released — <span class="cyan">ovulation</span>. The follicle wall becomes the <span class="cyan">corpus luteum</span> (luteal phase), which breaks down if fertilization doesn't happen. The <span class="cyan">uterine cycle</span> runs in parallel: oestradiol repairs and thickens the <span class="cyan">endometrium</span>, progesterone maintains it for implantation; with no embryo it breaks down and is shed as <span class="cyan">menstruation</span> (Day 1).</p>
+      <p><span class="cyan">FSH</span> (pituitary) stimulates follicle development and oestradiol secretion. <span class="cyan">LH</span> (pituitary) has a sharp mid-cycle peak that completes meiosis in the oocyte, triggers ovulation and promotes the corpus luteum. <span class="cyan">Oestradiol</span> from the follicle wall thickens the endometrium, boosts FSH receptors (positive feedback) then, at high levels, inhibits FSH and stimulates LH. <span class="cyan">Progesterone</span> from the corpus luteum maintains the endometrium and inhibits FSH and LH.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="28 day menstrual cycle chart with stylised curves for FSH LH oestradiol and progesterone, ovulation marked at day 14, phases labelled follicular luteal and menstruation, with notes on the corpus luteum and feedback loops">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE MONTHLY BOOKING — THE MENSTRUAL CYCLE (~28 DAYS)</text>
+
+      <line x1="100" y1="250" x2="500" y2="250" stroke="#b9a3d6" stroke-width="1.5"/>
+      <line x1="295" y1="64" x2="295" y2="250" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="295" y="54" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">DAY 14 — OVULATION</text>
+
+      <path d="M 100 240 C 140 215 165 170 189 158 C 215 185 250 210 300 222 C 380 232 450 236 500 238" stroke="#22d3ee" stroke-width="3" fill="none"/>
+      <path d="M 100 242 C 200 240 260 238 285 232 C 290 160 292 130 295 108 C 298 130 300 170 305 232 C 350 238 420 240 500 242" stroke="#a855f7" stroke-width="3" fill="none"/>
+      <path d="M 100 240 C 180 220 240 130 280 105 C 310 110 340 190 400 205 C 440 210 480 220 500 225" stroke="#ff2ec4" stroke-width="3" fill="none"/>
+      <path d="M 100 246 C 250 245 280 244 300 242 C 340 200 370 170 400 162 C 440 165 480 200 500 220" stroke="#fbbf24" stroke-width="3" fill="none"/>
+
+      <line x1="528" y1="92" x2="540" y2="92" stroke="#22d3ee" stroke-width="3"/>
+      <text x="552" y="96" fill="#22d3ee" font-size="10" font-weight="800">FSH</text>
+      <line x1="528" y1="120" x2="540" y2="120" stroke="#a855f7" stroke-width="3"/>
+      <text x="552" y="124" fill="#a855f7" font-size="10" font-weight="800">LH</text>
+      <line x1="528" y1="148" x2="540" y2="148" stroke="#ff2ec4" stroke-width="3"/>
+      <text x="552" y="152" fill="#ff2ec4" font-size="10" font-weight="800">oestradiol</text>
+      <line x1="528" y1="176" x2="540" y2="176" stroke="#fbbf24" stroke-width="3"/>
+      <text x="552" y="180" fill="#fbbf24" font-size="10" font-weight="800">progesterone</text>
+
+      <text x="100" y="270" fill="#b9a3d6" font-size="9.5" text-anchor="middle">1</text>
+      <text x="189" y="270" fill="#b9a3d6" font-size="9.5" text-anchor="middle">7</text>
+      <text x="295" y="270" fill="#b9a3d6" font-size="9.5" text-anchor="middle">14</text>
+      <text x="396" y="270" fill="#b9a3d6" font-size="9.5" text-anchor="middle">21</text>
+      <text x="500" y="270" fill="#b9a3d6" font-size="9.5" text-anchor="middle">28</text>
+
+      <text x="110" y="292" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">menstruation</text>
+      <text x="230" y="292" fill="#b9a3d6" font-size="9.5" text-anchor="middle">follicular phase</text>
+      <text x="425" y="292" fill="#b9a3d6" font-size="9.5" text-anchor="middle">luteal phase</text>
+
+      <text x="330" y="314" fill="#b9a3d6" font-size="9.5" text-anchor="middle">corpus luteum secretes progesterone → endometrium maintained</text>
+      <text x="330" y="332" fill="#b9a3d6" font-size="9.5" text-anchor="middle">no embryo → corpus luteum breaks down → menstruation (Day 1)</text>
+      <text x="330" y="350" fill="#22d3ee" font-size="9.5" text-anchor="middle">oestradiol: boosts FSH receptors (positive feedback) then −FSH, +LH at high levels</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — The monthly booking: LH's sharp Day-14 spike fires ovulation; FSH grows the follicle; oestradiol thickens the endometrium (positive feedback first, then negative); progesterone from the corpus luteum holds the lining — until it breaks down and the show resets at Day 1.</div>
+  </div>
+
+  <table>
+    <tr><th>Hormone</th><th>Source</th><th>Key actions</th></tr>
+    <tr><td>FSH</td><td>Pituitary</td><td>Stimulates follicle development + oestradiol secretion from the follicle wall</td></tr>
+    <tr><td>LH</td><td>Pituitary</td><td>Sharp peak → completes meiosis in oocyte, triggers ovulation, promotes corpus luteum</td></tr>
+    <tr><td>Oestradiol</td><td>Follicle wall</td><td>Repairs + thickens endometrium; positive feedback on FSH receptors, then negative feedback (inhibits FSH, stimulates LH)</td></tr>
+    <tr><td>Progesterone</td><td>Corpus luteum</td><td>Maintains endometrium for implantation; inhibits FSH + LH</td></tr>
+  </table>
+
+  <div class="tip"><b>Remember:</b> "oestradiol runs the first half, progesterone runs the second half." Oestradiol peaks just before Day 14 (that rising level is what triggers the LH surge); progesterone only appears after ovulation, from the corpus luteum.</div>
+</section>
+
+<!-- ══════════════════════ ACT 6 · THE MEETING AT THE DOOR ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">D3.1.6</div>
+  <h2>THE MEETING AT THE DOOR</h2>
+  <p class="aim">Fertilization is a meeting at the door: sperm swim toward chemicals released by the egg, one sperm breaks through the zona pellucida, and the door slams shut behind it so the zygote stays diploid.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚪</div>
+    <div class="body">
+      <h3>One guest, one door, one fusion</h3>
+      <p class="aka">zona pellucida · glycoprotein layer · sperm receptors · diploid zygote</p>
+      <p>Sperm detect <span class="cyan">chemicals released by the egg</span> and swim toward it — <span class="cyan">directional swimming</span>. The egg is surrounded by <span class="cyan">follicle cells</span> and a <span class="cyan">glycoprotein layer, the zona pellucida</span>. Sperm digest through the glycoproteins and bind with <span class="cyan">plasma membrane proteins</span> of the egg.</p>
+      <p>The first sperm to penetrate the zona fuses with the egg membrane and its <span class="cyan">nucleus enters</span>. The zona pellucida <span class="cyan">hardens immediately</span>, blocking any more sperm — so the fertilized egg is a <span class="cyan">diploid zygote</span>. The sperm tail and most mitochondria stay outside or are destroyed: the offspring's mitochondria come from the mother.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="an egg at the club door surrounded by its zona pellucida and follicle cells, a cloud of sperm swimming toward egg chemicals, one sperm fusing first through the door, with a note that the zona hardens and blocks more sperm and the tail and mitochondria stay outside">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE MEETING AT THE DOOR — HUMAN FERTILIZATION</text>
+
+      <rect x="30" y="56" width="190" height="66" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="125" y="74" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">SPERM CLOUD</text>
+      <text x="125" y="90" fill="#b9a3d6" font-size="9" text-anchor="middle">detect egg chemicals</text>
+      <text x="125" y="104" fill="#b9a3d6" font-size="9" text-anchor="middle">directional swimming</text>
+
+      <circle cx="360" cy="200" r="78" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="5 4"/>
+      <circle cx="360" cy="200" r="58" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="360" y="196" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">EGG — haploid (n)</text>
+      <text x="360" y="210" fill="#b9a3d6" font-size="9" text-anchor="middle">23 chromosomes</text>
+      <text x="360" y="106" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">zona pellucida — glycoprotein coat</text>
+
+      <circle cx="272" cy="200" r="6" fill="#b9a3d6"/>
+      <circle cx="360" cy="112" r="6" fill="#b9a3d6"/>
+      <circle cx="448" cy="200" r="6" fill="#b9a3d6"/>
+      <circle cx="320" cy="125" r="6" fill="#b9a3d6"/>
+      <circle cx="402" cy="275" r="6" fill="#b9a3d6"/>
+      <text x="360" y="306" fill="#b9a3d6" font-size="9" text-anchor="middle">follicle cells</text>
+
+      <circle cx="150" cy="180" r="4" fill="#22d3ee"/><line x1="150" y1="180" x2="120" y2="172" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="170" cy="212" r="4" fill="#22d3ee"/><line x1="170" y1="212" x2="140" y2="205" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="160" cy="242" r="4" fill="#22d3ee"/><line x1="160" y1="242" x2="130" y2="235" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="205" cy="192" r="4" fill="#22d3ee"/><line x1="205" y1="192" x2="175" y2="185" stroke="#22d3ee" stroke-width="2"/>
+
+      <circle cx="420" cy="158" r="5" fill="#ff2ec4"/><line x1="420" y1="158" x2="452" y2="140" stroke="#ff2ec4" stroke-width="2"/>
+      <rect x="440" y="56" width="190" height="66" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="535" y="74" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">FIRST THROUGH THE DOOR</text>
+      <text x="535" y="90" fill="#b9a3d6" font-size="9" text-anchor="middle">membranes fuse</text>
+      <text x="535" y="104" fill="#b9a3d6" font-size="9" text-anchor="middle">sperm nucleus enters egg</text>
+      <path d="M 535 122 L 425 158" stroke="#b9a3d6" stroke-width="1.5" fill="none"/>
+
+      <text x="330" y="326" fill="#b9a3d6" font-size="9.5" text-anchor="middle">first sperm fuses → zona hardens → door slams shut — diploid zygote (2n)</text>
+      <text x="330" y="344" fill="#b9a3d6" font-size="9.5" text-anchor="middle">sperm tail + most mitochondria stay outside / are destroyed</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — Fertilization: sperm swim toward egg chemicals, digest through the zona pellucida, and the first to fuse wins — the zona hardens, the door slams, and the zygote stays diploid (2n).</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> fertilization happens in the <b>oviduct</b>, not the uterus. And the zona pellucida hardening you meet here is the same "cortical reaction" you'll meet in detail at AHL (Act 13) — the door-slam that blocks polyspermy.</div>
+</section>
+
+<!-- ══════════════════════ ACT 7 · THE LAB REMIX ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">D3.1.7</div>
+  <h2>THE LAB REMIX</h2>
+  <p class="aim">IVF is reproduction remixed in the lab: the natural cycle is muted, many follicles are forced to grow with FSH, hCG triggers final maturation, and fertilization happens in a dish before the embryo is placed in the uterus.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧪</div>
+    <div class="body">
+      <h3>The protocol, beat by beat</h3>
+      <p class="aka">down-regulation · FSH · hCG · egg collection · incubation · embryo transfer</p>
+      <p><span class="cyan">Down-regulation (~2 weeks)</span>: a drug stops the pituitary secreting FSH and LH, so oestradiol and progesterone fall and the woman's cycle is suspended — the doctors now control the timing. Then <span class="cyan">daily FSH injections for 7–12 days</span> make many follicles develop at once (8–15 is ideal, each around 18 mm).</p>
+      <p>When follicles reach ~18 mm, an <span class="cyan">hCG injection</span> (LH-like) triggers final maturation. Eggs are collected <span class="cyan">34–35 hours later</span> with a micropipette guided by ultrasound. Each egg is mixed with <span class="cyan">50,000–100,000 sperm</span> in a dish and incubated at <span class="cyan">37 °C</span>. Embryos about <span class="cyan">48 hours old</span> are placed in the uterus, and extra <span class="cyan">progesterone</span> (tablet in the vagina) maintains the lining.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IVF protocol as five steps: down-regulation mutes the cycle for two weeks, daily FSH injections grow 8 to 15 follicles to 18 mm, hCG triggers final maturation with egg collection 34 to 35 hours later, the dish mixes egg with 50000 to 100000 sperm at 37 degrees, embryo transfer at 48 hours with extra progesterone">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE LAB REMIX — IVF STEP BY STEP</text>
+
+      <rect x="205" y="52" width="250" height="42" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="70" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">1 · DOWN-REGULATION</text>
+      <text x="330" y="84" fill="#b9a3d6" font-size="9" text-anchor="middle">drug stops pituitary FSH + LH (~2 weeks) → cycle suspended</text>
+      <path d="M 330 94 L 330 102" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="205" y="106" width="250" height="42" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="124" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">2 · FSH INJECTIONS</text>
+      <text x="330" y="138" fill="#b9a3d6" font-size="9" text-anchor="middle">daily 7–12 days → 8–15 follicles (each ~18 mm)</text>
+      <path d="M 330 148 L 330 156" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="205" y="160" width="250" height="42" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="178" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">3 · hCG TRIGGER</text>
+      <text x="330" y="192" fill="#b9a3d6" font-size="9" text-anchor="middle">final maturation; eggs collected 34–35 h later</text>
+      <path d="M 330 202 L 330 210" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="205" y="214" width="250" height="42" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="232" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">4 · THE DISH</text>
+      <text x="330" y="246" fill="#b9a3d6" font-size="9" text-anchor="middle">egg + 50,000–100,000 sperm · 37 °C incubation</text>
+      <path d="M 330 256 L 330 264" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="205" y="268" width="250" height="42" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="286" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">5 · EMBRYO TRANSFER</text>
+      <text x="330" y="300" fill="#b9a3d6" font-size="9" text-anchor="middle">~48 h embryos into uterus · extra progesterone (tablet) holds the lining</text>
+
+      <text x="330" y="340" fill="#b9a3d6" font-size="9.5" text-anchor="middle">IVF = the lab remix: doctors control timing the natural cycle hides</text>
+    </svg>
+    <div class="cap"><b>FIG 7</b> — The IVF protocol: mute the cycle (down-regulation) → FSH for many follicles → hCG trigger → collect eggs 34–35 h later → mix with 50,000–100,000 sperm at 37 °C → transfer ~48 h embryos with progesterone support.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the "why down-regulation?" question — doctors <b>suspend the natural cycle so they control when follicles mature</b>. The "why hCG?" question — hCG mimics LH, giving the sharp LH-like surge that completes final maturation before collection.</div>
+</section>
+
+<!-- ══════════════════════ ACT 8 · THE OPEN-AIR VENUE ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">D3.1.8 – D3.1.9</div>
+  <h2>THE OPEN-AIR VENUE</h2>
+  <p class="aim">Flowers are open-air venues: the stamen (anther + filament) produces pollen, the carpel (stigma + style + ovary) catches it, and insect-pollinated flowers bribe couriers with deep nectar so they brush past the pollen machinery.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌸</div>
+    <div class="body">
+      <h3>Structure of the venue, and how insects work the room</h3>
+      <p class="aka">stamen · carpel · pollen · ovule · pollination · insect-pollinated features</p>
+      <p>The <span class="cyan">stamen</span> = <span class="cyan">anther</span> (produces pollen by meiosis) held up by the <span class="cyan">filament</span>. The <span class="cyan">carpel</span> = <span class="cyan">stigma</span> (catches pollen), <span class="cyan">style</span> (connects to ovary), and <span class="cyan">ovary</span> containing <span class="cyan">ovules</span>. The egg is one of <span class="cyan">8 haploid nuclei</span> produced by meiosis plus three mitotic divisions. A pollen grain carries <span class="cyan">3 haploid nuclei</span>, two of which are the male gametes. <span class="cyan">Pollination</span> is pollen transfer anther → stigma; the <span class="cyan">pollen tube</span> grows down the style to the ovule, fertilization follows, and the zygote becomes an embryo with root, shoot and cotyledons.</p>
+      <p>Insect-pollinated flowers advertise: <span class="cyan">large bright petals</span> (adverts + landing stage), scent from petals, <span class="cyan">large spiky pollen grains</span> that stick to insects (protein-rich food for them), a <span class="cyan">large sticky stigma</span>, and <span class="cyan">nectaries that secrete nectar deep inside</span> — insects must brush past anthers and stigma to reach it.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="half view of an insect-pollinated flower: large bright petals as landing stage, sepal at the base, anther on a filament making pollen, stigma and style leading to an ovary with ovules, nectary deep inside so visiting bees brush past anthers and stigma">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE OPEN-AIR VENUE — INSECT-POLLINATED FLOWER</text>
+
+      <ellipse cx="330" cy="80" rx="26" ry="13" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="84" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">STIGMA</text>
+      <rect x="326" y="93" width="8" height="70" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="350" y="122" fill="#22d3ee" font-size="9" font-weight="800">STYLE</text>
+
+      <rect x="200" y="70" width="76" height="18" rx="6" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="238" y="83" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">ANTHER</text>
+      <line x1="238" y1="88" x2="238" y2="160" stroke="#fbbf24" stroke-width="2"/>
+      <text x="200" y="120" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="end">FILAMENT</text>
+
+      <ellipse cx="165" cy="60" rx="13" ry="9" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="165" y="46" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">BEE — brushes past</text>
+
+      <circle cx="330" cy="202" r="32" fill="rgba(168,85,247,.12)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="196" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">OVARY</text>
+      <text x="330" y="212" fill="#b9a3d6" font-size="8.5" text-anchor="middle">ovules inside</text>
+      <line x1="330" y1="234" x2="330" y2="287" stroke="#4ade80" stroke-width="3"/>
+
+      <ellipse cx="150" cy="188" rx="64" ry="42" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="150" y="184" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">PETAL</text>
+      <text x="150" y="200" fill="#b9a3d6" font-size="8.5" text-anchor="middle">landing stage</text>
+      <ellipse cx="510" cy="188" rx="64" ry="42" fill="rgba(168,85,247,.12)" stroke="#a855f7" stroke-width="2"/>
+      <text x="510" y="184" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">PETAL</text>
+      <text x="510" y="200" fill="#b9a3d6" font-size="8.5" text-anchor="middle">bright + scented</text>
+
+      <circle cx="330" cy="252" r="11" fill="rgba(251,191,36,.25)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="355" y="248" fill="#fbbf24" font-size="9" font-weight="800">NECTARY</text>
+
+      <ellipse cx="330" cy="300" rx="44" ry="13" fill="rgba(74,222,128,.12)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="304" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">SEPAL</text>
+
+      <text x="330" y="342" fill="#b9a3d6" font-size="9.5" text-anchor="middle">nectar deep inside → insects must brush the anthers + stigma</text>
+    </svg>
+    <div class="cap"><b>FIG 8</b> — The open-air venue: stamen (anther + filament) makes pollen by meiosis; carpel (stigma + style + ovary) catches it. Big petals + scent advertise; deep nectaries force insects to brush past anthers and stigma on the way to the prize.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> pollen = <b>3 haploid nuclei</b>, two are the male gametes; the egg = <b>one of 8 haploid nuclei</b> (meiosis + 3 mitotic divisions). Pollination (anther → stigma) is just delivery — fertilization happens later, down in the ovule.</div>
+</section>
+
+<!-- ══════════════════════ ACT 9 · THE COURIER SERVICE ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">D3.1.10 – D3.1.11</div>
+  <h2>THE COURIER SERVICE</h2>
+  <p class="aim">Cross-pollination is the courier service between plants — it delivers variation and hybrid vigour. Self-pollination is extreme inbreeding, so plants evolved timing tricks and a genetic rejection system (self-incompatibility) to stop it.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚚</div>
+    <div class="body">
+      <h3>Deliveries between venues — and the rejected same-plant mail</h3>
+      <p class="aka">cross-pollination · hybrid vigour · inbreeding depression · protandry · protogyny · S-alleles</p>
+      <p><span class="cyan">Cross-pollination</span> (pollen from the anther of one plant to the stigma of another) <span class="cyan">promotes genetic variation</span> and produces offspring with <span class="cyan">hybrid vigour</span>. <span class="cyan">Self-pollination</span> is extreme inbreeding, which causes <span class="cyan">inbreeding depression</span>: premature death, failure to thrive and infertility, as rare recessive alleles meet up.</p>
+      <p>Mechanisms preventing self-pollination: <span class="cyan">separate male and female flowers on the same plant</span> (e.g. corn/maize); <span class="cyan">male and female flowers on different plants</span> (ginkgo, stinging nettle); <span class="cyan">anthers and stigmas maturing at different times</span> — protandry (anthers first, e.g. foxglove) or protogyny (stigma first, e.g. sacred lotus). <span class="cyan">Self-incompatibility</span> is genetic: if pollen carries the same S-alleles as the plant, the pollen fails to germinate or its tube stops growing — the converse of the immune system, which rejects non-self while self-incompatibility rejects self.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="courier dispatch board: pollen delivered between plant A and plant B is cross-pollination giving variation and hybrid vigour, same-plant pollen is rejected by self-incompatibility when S-alleles match, and three timing tricks protandry protogyny and dioecy separate the sexes">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE COURIER SERVICE — POLLEN DELIVERY</text>
+
+      <rect x="50" y="64" width="150" height="86" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="125" y="84" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">PLANT A</text>
+      <text x="125" y="100" fill="#b9a3d6" font-size="9" text-anchor="middle">anther → pollen</text>
+      <text x="125" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">its own S-alleles</text>
+
+      <rect x="50" y="160" width="150" height="86" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="125" y="180" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">PLANT B</text>
+      <text x="125" y="196" fill="#b9a3d6" font-size="9" text-anchor="middle">stigma catches pollen</text>
+      <text x="125" y="210" fill="#b9a3d6" font-size="9" text-anchor="middle">different S-alleles</text>
+
+      <path d="M 200 100 C 300 100 300 208 200 206" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="330" y="140" width="190" height="80" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="425" y="160" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">CROSS-POLLINATION</text>
+      <text x="425" y="176" fill="#b9a3d6" font-size="9" text-anchor="middle">anther → stigma of another</text>
+      <text x="425" y="190" fill="#b9a3d6" font-size="9" text-anchor="middle">plant: variation +</text>
+      <text x="425" y="204" fill="#b9a3d6" font-size="9" text-anchor="middle">hybrid vigour</text>
+
+      <rect x="440" y="64" width="180" height="100" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="530" y="84" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">REJECTED ✗</text>
+      <text x="530" y="100" fill="#b9a3d6" font-size="9" text-anchor="middle">same-plant pollen</text>
+      <text x="530" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">S-alleles match →</text>
+      <text x="530" y="128" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">SELF-INCOMPATIBILITY</text>
+      <text x="530" y="142" fill="#b9a3d6" font-size="9" text-anchor="middle">pollen tube stops growing</text>
+
+      <rect x="40" y="250" width="180" height="84" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="130" y="270" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">PROTANDRY</text>
+      <text x="130" y="286" fill="#b9a3d6" font-size="9" text-anchor="middle">anthers mature first</text>
+      <text x="130" y="300" fill="#b9a3d6" font-size="9" text-anchor="middle">e.g. foxglove</text>
+      <rect x="240" y="250" width="180" height="84" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="270" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">PROTOGYNY</text>
+      <text x="330" y="286" fill="#b9a3d6" font-size="9" text-anchor="middle">stigma matures first</text>
+      <text x="330" y="300" fill="#b9a3d6" font-size="9" text-anchor="middle">e.g. sacred lotus</text>
+      <rect x="440" y="250" width="180" height="84" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="530" y="270" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">DIOECY</text>
+      <text x="530" y="286" fill="#b9a3d6" font-size="9" text-anchor="middle">♂ and ♀ on separate</text>
+      <text x="530" y="300" fill="#b9a3d6" font-size="9" text-anchor="middle">plants · ginkgo · nettle</text>
+
+      <text x="330" y="350" fill="#b9a3d6" font-size="9.5" text-anchor="middle">self-pollination = extreme inbreeding → inbreeding depression (premature death, failure to thrive, infertility)</text>
+    </svg>
+    <div class="cap"><b>FIG 9</b> — Cross-pollination between plants = variation + hybrid vigour; same-plant pollen is rejected by self-incompatibility (matching S-alleles stop the tube). Protandry, protogyny and dioecy physically separate the sexes in time or space.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> self-incompatibility is the <b>converse of immunity</b> — the immune system attacks non-self and tolerates self; self-incompatibility accepts non-self pollen (other S-alleles) and rejects self (matching S-alleles).</div>
+</section>
+
+<!-- ══════════════════════ ACT 10 · THE TOUR BUS ══════════════════════ -->
+<section class="act" id="act10">
+  <div class="acttag">D3.1.12</div>
+  <h2>THE TOUR BUS</h2>
+  <p class="aim">Seeds take the tour bus out of town: dispersal moves seeds from the parent to a new germination site — reducing competition and spreading the species — via wind, animal coats, animal guts or explosive pods.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚌</div>
+    <div class="body">
+      <h3>Dispersal ≠ pollination — and here's why it matters</h3>
+      <p class="aka">seed dispersal · wind · animals · explosion · germination</p>
+      <p><span class="cyan">Pollination</span> moves pollen from anther to stigma; <span class="cyan">seed dispersal</span> moves seeds from the parent plant to where they will germinate. Two separate processes, two separate journeys. Dispersal <span class="cyan">reduces competition</span> between offspring and parent (and between siblings) and <span class="cyan">spreads the species</span> to new territory.</p>
+      <p>Fruit types match the transport: <span class="cyan">dry + explosive</span> pods (gorse, exploding cucumber, jewelweed); <span class="cyan">fleshy + attractive</span> fruits eaten by animals, seeds passing through the gut; <span class="cyan">feathery/winged</span> seeds for wind (maple samaras, dandelion); and <span class="cyan">hooks</span> that catch animal coats (burrs). Germination starts from the seed's embryo: <span class="cyan">embryo root, embryo shoot and cotyledons</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a tour bus of seeds leaving the club with four dispersal routes: wind carrying feathery and winged seeds like maple samaras and dandelion, animal coats catching hooked burrs, animal guts carrying fleshy fruit seeds through digestion, and explosive pods popping open like gorse and jewelweed">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE TOUR BUS — SEED DISPERSAL</text>
+
+      <rect x="40" y="56" width="200" height="66" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="140" y="76" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">WIND</text>
+      <text x="140" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">feathery / winged seeds</text>
+      <text x="140" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">maple samaras · dandelion</text>
+
+      <rect x="420" y="56" width="200" height="66" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="520" y="76" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">ANIMAL COAT</text>
+      <text x="520" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">hooks catch on fur</text>
+      <text x="520" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">burrs</text>
+
+      <rect x="250" y="180" width="160" height="62" rx="9" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="200" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">THE TOUR BUS</text>
+      <text x="330" y="216" fill="#b9a3d6" font-size="9" text-anchor="middle">seeds leave the club</text>
+      <text x="330" y="232" fill="#b9a3d6" font-size="9" text-anchor="middle">less competition · species spreads</text>
+      <circle cx="275" cy="242" r="7" fill="#b9a3d6"/>
+      <circle cx="385" cy="242" r="7" fill="#b9a3d6"/>
+
+      <rect x="420" y="236" width="200" height="66" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="520" y="256" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">ANIMAL GUT</text>
+      <text x="520" y="272" fill="#b9a3d6" font-size="9" text-anchor="middle">fleshy fruit eaten</text>
+      <text x="520" y="286" fill="#b9a3d6" font-size="9" text-anchor="middle">seeds pass through</text>
+
+      <rect x="40" y="236" width="200" height="66" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="140" y="256" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">EXPLOSION</text>
+      <text x="140" y="272" fill="#b9a3d6" font-size="9" text-anchor="middle">dry pods pop open</text>
+      <text x="140" y="286" fill="#b9a3d6" font-size="9" text-anchor="middle">gorse · jewelweed</text>
+
+      <path d="M 170 122 L 285 178" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 490 122 L 375 178" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 490 236 L 388 244" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 170 236 L 272 244" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <text x="330" y="336" fill="#b9a3d6" font-size="9.5" text-anchor="middle">dispersal ≠ pollination — pollen: anther → stigma · seeds: parent → new germination site</text>
+    </svg>
+    <div class="cap"><b>FIG 10</b> — The tour bus: wind (maple samaras, dandelion), animal coats (burrs), animal guts (fleshy fruits) and explosion (gorse, jewelweed) — each reducing competition and spreading the species. Dispersal is a separate journey from pollination.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "why do plants disperse seeds?" → <b>reduce competition</b> between offspring and parent, and <b>spread the species</b> to new habitats. "Why is dispersal separate from pollination?" → pollination is delivery of pollen; dispersal is the relocation of seeds — different structures, different agents, different outcomes.</div>
+</section>
+
+<!-- ══════════════════════ ACT 11 · THE DEBUT NIGHT (AHL) ══════════════════════ -->
+<section class="act" id="act11">
+  <div class="acttag">AHL · D3.1.13</div>
+  <h2>THE DEBUT NIGHT</h2>
+  <p class="aim">Puberty is the debut night: the hypothalamus starts the music with pulses of GnRH, the pituitary answers with FSH and LH, and the gonads' sex steroids remodel the body into its adult form.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🌙</div>
+    <div class="body">
+      <h3>The DJ booth, the tower, and the remix of the body</h3>
+      <p class="aka">GnRH · hypothalamus · FSH · LH · testosterone · oestradiol · secondary sexual characteristics</p>
+      <p><span class="cyan">GnRH</span> (gonadotropin-releasing hormone) is a <span class="cyan">10-amino-acid peptide</span> made by a few hundred hypothalamic neurons and sent down a blood vessel straight to the pituitary. It is secreted in <span class="cyan">pulses</span> (peaks at least hourly): <span class="cyan">lower-frequency pulses → FSH</span>, <span class="cyan">higher-frequency → LH</span>.</p>
+      <p>In males: <span class="cyan">FSH → testis growth</span>; <span class="cyan">LH → testosterone from Leydig cells</span>; testosterone drives penis growth, pubic hair and voice deepening (larynx growth). In females: <span class="cyan">FSH → follicle development</span>; the follicle wall makes <span class="cyan">oestradiol</span>; <span class="cyan">LH → corpus luteum after ovulation</span>, which makes oestradiol + progesterone; oestradiol drives uterus enlargement, breast development and pubic/underarm hair; progesterone develops the mammary glands for lactation. GnRH secretion starts ~10 weeks after fertilization, stops at 4–6 months old, and resumes at puberty.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="puberty control chain: hypothalamus DJ booth secretes GnRH pulses where lower frequency gives FSH and higher frequency gives LH, pituitary releases FSH and LH, gonads respond, sex steroids testosterone oestradiol and progesterone drive the secondary sexual characteristics">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE DEBUT NIGHT — PUBERTY CONTROL (AHL)</text>
+
+      <rect x="120" y="50" width="420" height="34" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="72" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">HYPOTHALAMUS — GnRH · 10-amino-acid peptide</text>
+      <path d="M 330 84 L 330 92" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="120" y="94" width="420" height="34" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="116" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">GnRH PULSES — lower frequency → FSH · higher frequency → LH</text>
+      <path d="M 330 128 L 330 136" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="120" y="138" width="420" height="34" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="160" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">PITUITARY — secretes FSH + LH</text>
+      <path d="M 330 172 L 330 180" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="120" y="182" width="420" height="34" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="204" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">GONADS — testes · ovaries</text>
+      <path d="M 330 216 L 330 224" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="120" y="226" width="420" height="34" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="248" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">SEX STEROIDS — testosterone · oestradiol · progesterone</text>
+      <path d="M 330 260 L 330 268" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="120" y="270" width="420" height="34" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="292" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">BODY CHANGES — ♂ penis · pubic hair · voice · ♀ uterus · breasts · hair</text>
+
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">GnRH starts ~10 weeks after fertilization · stops at 4–6 months · resumes at puberty</text>
+      <text x="330" y="348" fill="#b9a3d6" font-size="9.5" text-anchor="middle">FSH: testis growth / follicle development · LH: testosterone (Leydig cells) / corpus luteum</text>
+    </svg>
+    <div class="cap"><b>FIG 11</b> — Debut night chain: hypothalamus → GnRH pulses (slow = FSH, fast = LH) → pituitary → FSH/LH → gonads → sex steroids → secondary sexual characteristics. GnRH switches off between ~4–6 months and puberty.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the pulse-frequency detail is the AHL favourite: <b>same hormone (GnRH), two messages (frequency)</b> — slower pulses favour FSH, faster pulses favour LH. And "what restarts puberty?" is answered by the hypothalamus re-starting GnRH secretion.</div>
+</section>
+
+<!-- ══════════════════════ ACT 12 · THE FACTORY VS THE ONE-OFF (AHL) ══════════════════════ -->
+<section class="act" id="act12">
+  <div class="acttag">AHL · D3.1.14</div>
+  <h2>THE FACTORY VS THE ONE-OFF</h2>
+  <p class="aim">Spermatogenesis is a factory — endless mitosis, millions of sperm per day, 4 per meiosis. Oogenesis is a one-off — started before birth, one egg per month, 1 per meiosis, with all the cytoplasm going to the egg.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🏭</div>
+    <div class="body">
+      <h3>Two production lines, one per sex</h3>
+      <p class="aka">spermatogenesis · seminiferous tubules · Sertoli · Leydig · oogenesis · polar bodies</p>
+      <p><span class="accent">Spermatogenesis</span> (testes, seminiferous tubules): <span class="cyan">germinal epithelium</span> cells divide endlessly by mitosis, grow into <span class="cyan">primary spermatocytes (2n)</span>, then meiosis I → secondary spermatocytes (n), meiosis II → spermatids, which differentiate into sperm (tail, minimal cytoplasm) with <span class="cyan">Sertoli cell</span> support. <span class="cyan">Leydig cells</span> (interstitial) secrete testosterone. Output: <span class="cyan">millions per day</span>, from puberty onwards, ~75 days per batch, <span class="cyan">4 sperm per meiosis</span>.</p>
+      <p><span class="accent">Oogenesis</span> (ovaries): begins in the <span class="cyan">foetus</span> — about <span class="cyan">400,000 primary follicles at birth</span>, and no more are ever made. Each cycle a few follicles develop; usually one matures. The oocyte completes <span class="cyan">meiosis I at ovulation</span> and <span class="cyan">meiosis II after fertilization</span>. Result: <span class="cyan">1 egg per meiosis</span> (polar bodies are discarded), 1 per month from puberty to menopause, and the egg carries <span class="cyan">more cytoplasm than any other human cell</span> — the food reserves for the embryo.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two gamete production lines: left spermatogenesis factory in seminiferous tubules with endless mitosis, meiosis producing 4 sperm per meiosis, millions per day, Sertoli nurse cells and Leydig cells making testosterone; right oogenesis one-off with 400000 primary follicles at birth, one egg per month and per meiosis, polar bodies discarded">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE FACTORY VS THE ONE-OFF — GAMETOGENESIS (AHL)</text>
+
+      <rect x="30" y="56" width="290" height="252" rx="9" fill="rgba(255,46,196,.06)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="175" y="76" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">SPERMATOGENESIS — THE FACTORY</text>
+      <text x="175" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">seminiferous tubules · germinal epithelium</text>
+      <text x="175" y="112" fill="#b9a3d6" font-size="9.5" text-anchor="middle">mitosis endlessly → spermatocytes (2n)</text>
+      <text x="175" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">meiosis I + II → spermatids → sperm</text>
+      <text x="175" y="144" fill="#b9a3d6" font-size="9.5" text-anchor="middle">4 sperm per meiosis · millions per day</text>
+      <text x="175" y="160" fill="#b9a3d6" font-size="9.5" text-anchor="middle">~75 days per batch · from puberty</text>
+      <text x="175" y="176" fill="#b9a3d6" font-size="9.5" text-anchor="middle">Sertoli cells nurse · tail + minimal cytoplasm</text>
+      <text x="175" y="192" fill="#b9a3d6" font-size="9.5" text-anchor="middle">Leydig cells → testosterone</text>
+
+      <rect x="340" y="56" width="290" height="252" rx="9" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="485" y="76" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">OOGENESIS — THE ONE-OFF</text>
+      <text x="485" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">starts in the FOETUS — no more ever made</text>
+      <text x="485" y="112" fill="#b9a3d6" font-size="9.5" text-anchor="middle">~400,000 primary follicles at birth</text>
+      <text x="485" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">each cycle: a few develop → usually 1 matures</text>
+      <text x="485" y="144" fill="#b9a3d6" font-size="9.5" text-anchor="middle">meiosis I completed at ovulation</text>
+      <text x="485" y="160" fill="#b9a3d6" font-size="9.5" text-anchor="middle">meiosis II only after fertilization</text>
+      <text x="485" y="176" fill="#b9a3d6" font-size="9.5" text-anchor="middle">1 egg per meiosis — polar bodies discarded</text>
+      <text x="485" y="192" fill="#b9a3d6" font-size="9.5" text-anchor="middle">1 per month · Day 14 · puberty → menopause</text>
+      <text x="485" y="208" fill="#b9a3d6" font-size="9.5" text-anchor="middle">egg = most cytoplasm of any cell → food reserves</text>
+
+      <text x="330" y="336" fill="#b9a3d6" font-size="9.5" text-anchor="middle">same four stages — mitosis · growth · meiosis ×2 · differentiation — run very differently in each sex</text>
+    </svg>
+    <div class="cap"><b>FIG 12</b> — The factory (spermatogenesis: 4 sperm per meiosis, millions/day, Sertoli + Leydig support) vs the one-off (oogenesis: started before birth, 1 egg per meiosis, polar bodies discarded, the biggest cytoplasm in the body).</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> both gamete types come from the same four stages (mitosis → growth → meiosis ×2 → differentiation) — but the factory runs continuously from puberty, while the one-off started in the foetus and pays out one egg at a time.</div>
+</section>
+
+<!-- ══════════════════════ ACT 13 · THE VELVET ROPE (AHL) ══════════════════════ -->
+<section class="act" id="act13">
+  <div class="acttag">AHL · D3.1.15</div>
+  <h2>THE VELVET ROPE</h2>
+  <p class="aim">Polyspermy is the club's worst nightmare — two sperm in one egg makes a triploid zygote that dies. The acrosome reaction digs the first sperm in; the cortical reaction slams the door behind it.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔒</div>
+    <div class="body">
+      <h3>One guest per egg, enforced by two reactions</h3>
+      <p class="aka">acrosome reaction · cortical reaction · zona pellucida · polyspermy · triploid</p>
+      <p><span class="accent">Acrosome reaction</span>: the sperm binds <span class="cyan">specific glycoproteins in the zona pellucida</span>, and its <span class="cyan">acrosome</span> (an enzyme sac in the sperm head) releases enzymes that digest the glycoproteins. The sperm's tail force then pushes it through to the egg's plasma membrane.</p>
+      <p><span class="accent">Cortical reaction</span>: once the first sperm's nucleus enters, the egg activates and its <span class="cyan">cortical granules</span> (enzyme vesicles near the egg membrane) move to the membrane and undergo <span class="cyan">exocytosis</span>. The enzymes <span class="cyan">toughen the zona pellucida and change the glycoproteins</span> that sperm bind to — no more sperm can penetrate. Without it, a second sperm would fuse and create a <span class="cyan">triploid (3n) zygote, which is non-viable and dies</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="velvet rope at the egg's door: sperm one releases acrosome enzymes that digest the zona pellucida and push through, then the cortical reaction hardens the zona and changes binding glycoproteins, sperm two bounces off blocked, note that a triploid zygote from two sperm is non-viable">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE VELVET ROPE — PREVENTING POLYSPERMY (AHL)</text>
+
+      <rect x="30" y="56" width="210" height="92" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="135" y="76" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">1 · ACROSOME REACTION</text>
+      <text x="135" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">sperm binds zona glycoproteins</text>
+      <text x="135" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">enzymes digest → tail pushes</text>
+      <text x="135" y="120" fill="#b9a3d6" font-size="9" text-anchor="middle">through to egg membrane</text>
+
+      <circle cx="330" cy="210" r="74" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="5 4"/>
+      <circle cx="330" cy="210" r="52" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="118" fill="#22d3ee" font-size="9.5" font-weight="700" text-anchor="middle">zona pellucida</text>
+      <text x="330" y="214" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">EGG (n)</text>
+
+      <circle cx="200" cy="215" r="5" fill="#22d3ee"/><line x1="200" y1="215" x2="165" y2="208" stroke="#22d3ee" stroke-width="2"/>
+      <text x="150" y="235" fill="#22d3ee" font-size="8.5" text-anchor="middle">sperm 1</text>
+
+      <rect x="420" y="56" width="210" height="92" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="525" y="76" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">2 · CORTICAL REACTION</text>
+      <text x="525" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">granules exocytose → zona</text>
+      <text x="525" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">toughens + binding sites change</text>
+      <text x="525" y="120" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">door slams shut</text>
+
+      <circle cx="470" cy="255" r="5" fill="#ff2ec4"/><line x1="470" y1="255" x2="505" y2="248" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="470" y="275" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">sperm 2 ✗ blocked</text>
+
+      <text x="330" y="326" fill="#b9a3d6" font-size="9.5" text-anchor="middle">only ONE guest gets in — polyspermy → triploid zygote → non-viable, dies</text>
+      <text x="330" y="344" fill="#b9a3d6" font-size="9.5" text-anchor="middle">the egg activates once — the first nucleus triggers the lock-down</text>
+    </svg>
+    <div class="cap"><b>FIG 13</b> — The velvet rope: acrosome enzymes dig sperm 1 through the zona; the cortical reaction then hardens the zona and changes its binding glycoproteins — sperm 2 bounces off. Two sperm in = triploid zygote = death.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> the <b>acrosome reaction</b> is the sperm's own enzyme attack (digging in); the <b>cortical reaction</b> is the egg's response (locking down). First dig, then slam — the door only needs to slam once.</div>
+</section>
+
+<!-- ══════════════════════ ACT 14 · MOVING IN (AHL) ══════════════════════ -->
+<section class="act" id="act14">
+  <div class="acttag">AHL · D3.1.16</div>
+  <h2>MOVING IN</h2>
+  <p class="aim">The zygote becomes a blastocyst — a hollow ball of ~250 cells that rides down the oviduct, breaks out of the zona pellucida and implants in the endometrium to start the residency.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🏠</div>
+    <div class="body">
+      <h3>From single cell to hollow ball, then check-in</h3>
+      <p class="aka">cleavage · blastocyst · inner cell mass · trophoblast · blastocoele · implantation</p>
+      <p><span class="cyan">DNA replication</span> happens ~6 hours after fertilization and the <span class="cyan">first mitosis ~30 hours</span> later. Cleavage is rapid — cell cycles about every <span class="cyan">18 hours with no cell growth</span>, so cells get smaller. The solid ball becomes a <span class="cyan">hollow ball (blastocyst)</span> at ~6–7 days: <span class="cyan">~250 cells, ~200 μm</span>, with an <span class="cyan">inner cell mass</span> (→ embryo body), the <span class="cyan">trophoblast</span> outer layer (→ placenta) and a fluid-filled cavity, the <span class="cyan">blastocoele</span>.</p>
+      <p>The blastocyst is <span class="cyan">wafted down the oviduct by cilia</span>, the <span class="cyan">zona pellucida breaks down</span>, and it <span class="cyan">implants into the endometrium</span> — finger-like projections grow into the lining and exchange materials. By <span class="cyan">8 weeks</span> it's a foetus with bone tissue, recognizably human.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="blastocyst moving into the club: cleavage makes a hollow ball with inner cell mass forming the embryo body and trophoblast forming the placenta, cilia waft it down the oviduct, the zona pellucida breaks down and it implants into the endometrium, about 250 cells and 200 micrometres at day six to seven">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">MOVING IN — CLEAVAGE + IMPLANTATION (AHL)</text>
+
+      <rect x="140" y="52" width="380" height="54" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="70" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">CLEAVAGE — cell cycles ~every 18 h</text>
+      <text x="330" y="86" fill="#b9a3d6" font-size="9" text-anchor="middle">no cell growth → cells shrink · solid ball → blastocyst</text>
+
+      <path d="M 40 130 C 100 90 170 120 200 190" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah)" fill="none"/>
+      <text x="95" y="110" fill="#22d3ee" font-size="9" text-anchor="middle">cilia waft it along</text>
+
+      <circle cx="250" cy="235" r="72" fill="rgba(168,85,247,.12)" stroke="#a855f7" stroke-width="2"/>
+      <text x="250" y="147" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">TROPHOBLAST — → placenta</text>
+      <circle cx="235" cy="220" r="32" fill="rgba(255,46,196,.15)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="235" y="215" fill="#ff2ec4" font-size="8.5" font-weight="800" text-anchor="middle">INNER CELL</text>
+      <text x="235" y="228" fill="#ff2ec4" font-size="8.5" font-weight="800" text-anchor="middle">MASS → embryo</text>
+      <circle cx="280" cy="268" r="14" fill="rgba(34,211,238,.25)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="300" y="272" fill="#22d3ee" font-size="8.5" text-anchor="start">blastocoele (fluid)</text>
+      <text x="250" y="322" fill="#b9a3d6" font-size="8.5" text-anchor="middle">~250 cells · ~200 μm · days 6–7</text>
+
+      <rect x="470" y="130" width="150" height="190" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="545" y="152" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">ENDOMETRIUM</text>
+      <text x="545" y="168" fill="#b9a3d6" font-size="9" text-anchor="middle">uterus lining —</text>
+      <text x="545" y="182" fill="#b9a3d6" font-size="9" text-anchor="middle">implantation site</text>
+      <path d="M 325 235 L 464 235" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah)" fill="none"/>
+      <text x="398" y="225" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">IMPLANTED ✓</text>
+
+      <text x="330" y="348" fill="#b9a3d6" font-size="9.5" text-anchor="middle">zona pellucida breaks down · finger-like projections grow into the lining · 8 weeks → foetus (bone tissue)</text>
+    </svg>
+    <div class="cap"><b>FIG 14</b> — Moving in: cleavage (no growth, shrinking cells) → hollow blastocyst (inner cell mass → embryo, trophoblast → placenta, blastocoele) → cilia waft it down the oviduct → zona breaks down → implantation into the endometrium.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "describe the blastocyst" needs the <b>three parts and their fates</b>: inner cell mass → embryo body, trophoblast → placenta, blastocoele → fluid cavity. And the numbers (250 cells, 200 μm, 6–7 days) are the ones examiners reward.</div>
+</section>
+
+<!-- ══════════════════════ ACT 15 · THE RENT CHECK (AHL) ══════════════════════ -->
+<section class="act" id="act15">
+  <div class="acttag">AHL · D3.1.17</div>
+  <h2>THE RENT CHECK</h2>
+  <p class="aim">The trophoblast sends hCG — the tenant's "I'm alive, keep the room" signal — to the corpus luteum. hCG keeps progesterone flowing, and its presence in urine is what pregnancy tests detect with monoclonal antibodies.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧾</div>
+    <div class="body">
+      <h3>How the embryo pays the rent — and how the test reads it</h3>
+      <p class="aka">hCG · corpus luteum · progesterone · monoclonal antibodies · pregnancy test</p>
+      <p>From the blastocyst stage, the <span class="cyan">trophoblast secretes hCG</span> (human chorionic gonadotropin, a <span class="cyan">medium-sized protein</span>). hCG <span class="cyan">keeps the corpus luteum alive</span>, which keeps secreting <span class="cyan">progesterone</span>, which maintains the endometrium — <span class="cyan">preventing miscarriage</span>. At <span class="cyan">~8–12 weeks</span> the placenta takes over progesterone secretion and the corpus luteum degenerates.</p>
+      <p>hCG appears in urine, so <span class="cyan">pregnancy tests</span> use <span class="cyan">monoclonal antibodies</span>: one mobile antibody carries a blue dye and binds hCG; a second, <span class="cyan">immobilised antibody</span> traps the hCG-antibody complex, forming a <span class="cyan">blue band</span>. A control band shows the test worked.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="pregnancy test stick drawn as a rent check slip: urine flows from the tip past a mobile anti-hCG antibody with blue dye to an immobilised antibody test line and a control line, two blue bands means positive, with notes that hCG keeps the corpus luteum producing progesterone until the placenta takes over at 8 to 12 weeks">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE RENT CHECK — hCG PREGNANCY TESTING (AHL)</text>
+
+      <rect x="60" y="120" width="540" height="66" rx="9" fill="rgba(243,232,255,.06)" stroke="#b9a3d6" stroke-width="2"/>
+      <rect x="60" y="120" width="80" height="66" rx="9" fill="rgba(251,191,36,.15)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="100" y="150" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">urine sample</text>
+      <text x="100" y="166" fill="#b9a3d6" font-size="8" text-anchor="middle">hCG present?</text>
+      <rect x="180" y="120" width="110" height="66" rx="9" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="235" y="150" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">mobile anti-hCG</text>
+      <text x="235" y="166" fill="#b9a3d6" font-size="8" text-anchor="middle">antibody + blue dye</text>
+      <rect x="340" y="120" width="80" height="66" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="1.5"/>
+      <rect x="355" y="148" width="50" height="10" rx="4" fill="#60a5fa"/>
+      <rect x="460" y="120" width="80" height="66" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="1.5"/>
+      <rect x="475" y="148" width="50" height="10" rx="4" fill="#60a5fa"/>
+
+      <text x="235" y="110" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">mobile antibody + dye</text>
+      <text x="380" y="110" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">test line (C)</text>
+      <text x="500" y="110" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">control (D)</text>
+
+      <path d="M 145 153 L 173 153" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 295 153 L 333 153" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <path d="M 425 153 L 453 153" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="500" y="205" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">2 blue bands = POSITIVE ✓</text>
+
+      <rect x="60" y="220" width="260" height="78" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="190" y="240" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">hCG = the tenant's 'alive' signal</text>
+      <text x="190" y="256" fill="#b9a3d6" font-size="9" text-anchor="middle">trophoblast → hCG → corpus luteum</text>
+      <text x="190" y="270" fill="#b9a3d6" font-size="9" text-anchor="middle">→ progesterone → endometrium kept</text>
+      <text x="190" y="284" fill="#b9a3d6" font-size="8.5" text-anchor="middle">prevents miscarriage</text>
+
+      <rect x="340" y="220" width="260" height="78" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="470" y="240" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">~8–12 weeks: placenta takes over</text>
+      <text x="470" y="256" fill="#b9a3d6" font-size="9" text-anchor="middle">progesterone secretion</text>
+      <text x="470" y="270" fill="#b9a3d6" font-size="9" text-anchor="middle">corpus luteum degenerates</text>
+      <text x="470" y="284" fill="#b9a3d6" font-size="8.5" text-anchor="middle">hCG in urine = the clue</text>
+
+      <text x="330" y="336" fill="#b9a3d6" font-size="9.5" text-anchor="middle">2 blue bands = pregnant · control band proves the test worked — monoclonal antibodies do the detecting</text>
+    </svg>
+    <div class="cap"><b>FIG 15</b> — The rent check: hCG from the trophoblast keeps the corpus luteum alive → progesterone → endometrium maintained. The test stick uses a mobile antibody + dye and an immobilised antibody — two blue bands (test + control) = pregnant.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> hCG's job is to <b>rescue the corpus luteum</b> from its normal Day-28 breakdown. The placenta only starts making progesterone itself at ~8–12 weeks — until then, hCG is the bridge.</div>
+</section>
+
+<!-- ══════════════════════ ACT 16 · THE CATERING CORRIDOR (AHL) ══════════════════════ -->
+<section class="act" id="act16">
+  <div class="acttag">AHL · D3.1.18</div>
+  <h2>THE CATERING CORRIDOR</h2>
+  <p class="aim">The placenta is the catering corridor between two blood supplies: foetal villi bathe in maternal blood, separated by a ~5 μm selectively permeable barrier that feeds the foetus and hauls away its waste.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🍽️</div>
+    <div class="body">
+      <h3>Two kitchens, one 5-micrometre hatch</h3>
+      <p class="aka">placental villi · intervillous spaces · placental barrier · umbilical cord · exchange</p>
+      <p>The placenta is made of <span class="cyan">foetal tissues in intimate contact with maternal tissues</span>. Its functional unit is the <span class="cyan">placental villus</span> — finger-like foetal tissue bathed in <span class="cyan">maternal blood in the intervillous spaces</span>. Foetal blood runs through <span class="cyan">capillaries close to the villus surface</span>, and the <span class="cyan">placental barrier</span> (the cells separating the two bloods) is only about <span class="cyan">5 μm</span> thick and <span class="cyan">selectively permeable</span>.</p>
+      <p>Exchange: <span class="cyan">O₂, glucose, amino acids, water and antibodies</span> move to the foetus by <span class="cyan">diffusion, facilitated diffusion, osmosis and endocytosis</span>; <span class="cyan">CO₂ and urea</span> move to the mother. The <span class="cyan">umbilical cord</span> carries one vein + two arteries (the vein brings oxygenated blood in). The placenta lets the foetus stay in the uterus far longer than marsupials or monotremes can manage (surface-area-to-volume argument), and it takes over hormone secretion after the corpus luteum degenerates.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="placenta catering corridor cross section: umbilical cord with vein and artery at the top, foetal villi bathed in maternal blood in intervillous spaces, a five micrometre barrier, nutrients and oxygen and antibodies flowing to the foetus while carbon dioxide and urea flow out to the mother">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CATERING CORRIDOR — THE PLACENTA (AHL)</text>
+
+      <rect x="280" y="50" width="100" height="36" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="65" fill="#ff2ec4" font-size="8.5" font-weight="800" text-anchor="middle">UMBILICAL CORD</text>
+      <text x="330" y="79" fill="#b9a3d6" font-size="8" text-anchor="middle">vein + artery</text>
+
+      <text x="330" y="118" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">maternal blood — intervillous spaces</text>
+      <rect x="60" y="130" width="540" height="130" rx="9" fill="rgba(255,46,196,.05)" stroke="#ff2ec4" stroke-width="1.5"/>
+
+      <rect x="120" y="130" width="40" height="110" rx="8" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
+      <rect x="300" y="130" width="60" height="110" rx="8" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
+      <text x="330" y="158" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">VILLUS</text>
+      <text x="330" y="172" fill="#b9a3d6" font-size="8.5" text-anchor="middle">foetal tissue</text>
+      <text x="330" y="186" fill="#b9a3d6" font-size="8.5" text-anchor="middle">capillaries near surface</text>
+      <rect x="480" y="130" width="40" height="110" rx="8" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
+
+      <path d="M 520 172 L 572 172" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+      <text x="580" y="176" fill="#fbbf24" font-size="9" font-weight="800">5 μm barrier</text>
+
+      <text x="330" y="246" fill="#b9a3d6" font-size="9" text-anchor="middle">exchange: diffusion · facilitated diffusion · osmosis · endocytosis</text>
+
+      <rect x="60" y="300" width="250" height="44" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="185" y="318" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">→ TO FOETUS: O₂ · glucose · amino acids</text>
+      <text x="185" y="332" fill="#b9a3d6" font-size="9" text-anchor="middle">water · antibodies (endocytosis)</text>
+      <path d="M 185 296 L 185 264" stroke="#4ade80" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+
+      <rect x="350" y="300" width="250" height="44" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="475" y="318" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">FROM FOETUS →: CO₂ · urea</text>
+      <text x="475" y="332" fill="#b9a3d6" font-size="9" text-anchor="middle">diffusion out to mother</text>
+      <path d="M 475 296 L 475 264" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+    </svg>
+    <div class="cap"><b>FIG 16</b> — The catering corridor: villi (foetal) bathed in maternal blood; the ~5 μm barrier lets O₂, glucose, amino acids, water and antibodies in, and CO₂ + urea out. The cord carries the foetal vein + arteries.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the "why can placental mammals gestate so long?" question wants the <b>surface-area-to-volume argument</b>: the villus system gives a huge exchange surface for a small barrier thickness — so the foetus can keep growing inside the uterus far longer than marsupial or monotreme young, which are born tiny and feed externally.</div>
+</section>
+
+<!-- ══════════════════════ ACT 17 · THE GRAND FINALE (AHL) ══════════════════════ -->
+<section class="act" id="act17">
+  <div class="acttag">AHL · D3.1.19</div>
+  <h2>THE GRAND FINALE</h2>
+  <p class="aim">Childbirth is the crowd chanting for an encore: oxytocin drives contractions, stretch receptors demand more oxytocin, contractions get stronger — a rare positive feedback loop that ends the residency.</p>
+
+  <div class="bouncer">
+    <div class="emoji">👶</div>
+    <div class="body">
+      <h3>The positive-feedback encore</h3>
+      <p class="aka">oxytocin · myometrium · stretch receptors · positive feedback · progesterone</p>
+      <p>During pregnancy, <span class="cyan">progesterone inhibits oxytocin secretion and myometrium (uterine muscle) contractions</span>. At the end of pregnancy, <span class="cyan">foetal hormones signal the placenta to stop producing progesterone</span> — and oxytocin is secreted. <span class="cyan">Oxytocin stimulates myometrium contractions</span>; the contractions trigger <span class="cyan">stretch receptors</span> which stimulate <span class="cyan">more oxytocin secretion</span> → stronger, more frequent contractions. That's <span class="cyan">positive feedback</span> — rare in human physiology.</p>
+      <p>Its advantage: a <span class="cyan">gradual increase in contraction intensity</span> until the minimum intensity needed to birth the baby. The <span class="cyan">cervix relaxes and dilates</span>, the <span class="cyan">amniotic sac bursts</span>, contractions push the baby through cervix and vagina, the umbilical cord is broken, and the baby takes its first breath.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="positive feedback loop of childbirth: oxytocin stimulates myometrium contractions, stretch receptors detect them and trigger more oxytocin, stronger and more frequent contractions, with progesterone shown as the mute switch turned off at the end of pregnancy">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE GRAND FINALE — CHILDBIRTH (AHL)</text>
+
+      <rect x="400" y="56" width="200" height="60" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="500" y="74" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">OXYTOCIN</text>
+      <text x="500" y="90" fill="#b9a3d6" font-size="9" text-anchor="middle">pituitary secretes more</text>
+
+      <rect x="60" y="56" width="200" height="60" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="160" y="74" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">MYOMETRIUM</text>
+      <text x="160" y="90" fill="#b9a3d6" font-size="9" text-anchor="middle">uterus muscle contracts</text>
+
+      <rect x="60" y="224" width="200" height="60" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="160" y="242" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">STRETCH RECEPTORS</text>
+      <text x="160" y="258" fill="#b9a3d6" font-size="9" text-anchor="middle">detect the contraction</text>
+
+      <rect x="400" y="224" width="200" height="60" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="500" y="242" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">MORE OXYTOCIN</text>
+      <text x="500" y="258" fill="#b9a3d6" font-size="9" text-anchor="middle">stronger + more frequent</text>
+
+      <path d="M 400 86 L 266 86" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="333" y="78" fill="#b9a3d6" font-size="9" text-anchor="middle">stimulates</text>
+      <path d="M 160 116 L 160 220" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="150" y="168" fill="#b9a3d6" font-size="9" text-anchor="end">contraction</text>
+      <path d="M 266 254 L 400 254" stroke="#4ade80" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="333" y="246" fill="#b9a3d6" font-size="9" text-anchor="middle">more, stronger</text>
+      <path d="M 500 224 L 500 120" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah)" fill="none"/>
+      <text x="512" y="172" fill="#b9a3d6" font-size="9" text-anchor="start">more secretion</text>
+
+      <text x="330" y="160" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">POSITIVE FEEDBACK</text>
+      <text x="330" y="174" fill="#b9a3d6" font-size="9" text-anchor="middle">the encore chant —</text>
+      <text x="330" y="188" fill="#b9a3d6" font-size="9" text-anchor="middle">each round strengthens</text>
+
+      <text x="330" y="312" fill="#b9a3d6" font-size="9.5" text-anchor="middle">PROGESTERONE = the mute switch: inhibits oxytocin + contractions during pregnancy</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">foetal hormones → placenta stops progesterone → oxytocin · positive feedback is rare in physiology</text>
+      <text x="330" y="348" fill="#b9a3d6" font-size="9.5" text-anchor="middle">advantage: contractions build gradually — just enough force to birth the baby</text>
+    </svg>
+    <div class="cap"><b>FIG 17</b> — The grand finale loop: oxytocin → contraction → stretch receptors → more oxytocin → stronger contraction. Progesterone is the mute switch during pregnancy; foetal hormones turn it off so the encore can start.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> most body systems use <b>negative</b> feedback (bring the variable back to set point). Childbirth is the classic <b>positive</b> exception — the output amplifies itself until the job is done. Its rarity is exactly what makes it examinable.</div>
+</section>
+
+<!-- ══════════════════════ ACT 18 · THE REMASTER (AHL) ══════════════════════ -->
+<section class="act" id="act18">
+  <div class="acttag">AHL · D3.1.20</div>
+  <h2>THE REMASTER</h2>
+  <p class="aim">Hormone replacement therapy (HRT) is the remastered album: it relieves menopause symptoms and helps prevent osteoporosis — but early observational studies and later randomised trials told different stories about heart risk.</p>
+
+  <div class="bouncer">
+    <div class="emoji">💊</div>
+    <div class="body">
+      <h3>Two mixes, two verdicts, one lesson</h3>
+      <p class="aka">HRT · menopause · oestrogen + progesterone · observational vs RCT · correlation ≠ causation</p>
+      <p><span class="accent">HRT</span> supplements <span class="cyan">oestrogen and progesterone</span> after menopause, when the natural decrease causes <span class="cyan">hot flushes, night sweats, mood swings, vaginal dryness and reduced sex drive</span>. It also <span class="cyan">helps prevent osteoporosis</span>.</p>
+      <p>Early <span class="cyan">observational studies</span> suggested HRT lowered the risk of CHD (coronary heart disease). Later <span class="cyan">randomised controlled trials</span> showed a <span class="cyan">slightly elevated risk of CHD, breast cancer and stroke</span> — and HRT use declined from the early 2000s. Why the discrepancy? Observational studies are confounded: women who chose HRT were often <span class="cyan">affluent with better healthcare</span>, so their better health came from wealth, not the drugs — <span class="cyan">correlation ≠ causation</span>. Trials also compared women in early menopause with women years post-menopause.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two remastered album covers for HRT evidence: the observational mix suggested lower CHD risk but was confounded by affluent women with better healthcare, the RCT remix showed slightly elevated CHD breast cancer and stroke risk, with the lesson correlation is not causation">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE REMASTER — HRT: OBSERVATIONAL VS RCT (AHL)</text>
+
+      <rect x="50" y="60" width="270" height="180" rx="9" fill="rgba(255,46,196,.06)" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="80" cy="205" r="26" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <circle cx="80" cy="205" r="6" fill="#ff2ec4"/>
+      <text x="185" y="90" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">OBSERVATIONAL MIX</text>
+      <text x="185" y="118" fill="#b9a3d6" font-size="9.5" text-anchor="middle">early studies: HRT users</text>
+      <text x="185" y="134" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">→ lower CHD risk</text>
+      <text x="185" y="152" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">BUT confounders:</text>
+      <text x="185" y="168" fill="#b9a3d6" font-size="9.5" text-anchor="middle">affluent women with better</text>
+      <text x="185" y="184" fill="#b9a3d6" font-size="9.5" text-anchor="middle">healthcare took HRT</text>
+      <text x="185" y="202" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">correlation ≠ causation</text>
+
+      <rect x="340" y="60" width="270" height="180" rx="9" fill="rgba(34,211,238,.06)" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="580" cy="205" r="26" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <circle cx="580" cy="205" r="6" fill="#22d3ee"/>
+      <text x="475" y="90" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">RCT REMIX</text>
+      <text x="475" y="118" fill="#b9a3d6" font-size="9.5" text-anchor="middle">randomised controlled trials:</text>
+      <text x="475" y="134" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">slightly ELEVATED risk of</text>
+      <text x="475" y="150" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">CHD · breast cancer · stroke</text>
+      <text x="475" y="168" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">→ HRT use declined</text>
+      <text x="475" y="184" fill="#b9a3d6" font-size="9.5" text-anchor="middle">since the early 2000s</text>
+
+      <text x="330" y="272" fill="#b9a3d6" font-size="9.5" text-anchor="middle">HRT: supplements oestrogen + progesterone after menopause</text>
+      <text x="330" y="290" fill="#b9a3d6" font-size="9.5" text-anchor="middle">relieves hot flushes · night sweats · mood swings · vaginal dryness · low sex drive</text>
+      <text x="330" y="308" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">also helps prevent osteoporosis</text>
+      <text x="330" y="326" fill="#b9a3d6" font-size="9.5" text-anchor="middle">discrepancy: women in early menopause vs years post · observational vs RCT design</text>
+      <text x="330" y="344" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">affluent women confounded the early data — correlation ≠ causation</text>
+    </svg>
+    <div class="cap"><b>FIG 18</b> — The remaster: observational studies looked heart-safe but were confounded (affluent women, better healthcare); RCTs showed slightly elevated CHD, breast cancer and stroke risk. HRT still helps menopause symptoms and osteoporosis — but the evidence lesson is correlation ≠ causation.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the "why did observational studies mislead?" answer has three planks: <b>confounding</b> (affluent, health-conscious women self-selected HRT), <b>timing</b> (early vs late post-menopause), and <b>design</b> (observational correlation can't prove causation — only randomised trials can).</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">The whole club in one map</div>
+  <h2>MIND MAP 🗺️</h2>
+  <p class="aim">Every act of the show, connected: from the loop vs the remix at the door to the grand-finale encore and the remaster.</p>
+  <div class="mind">
+    <div class="node core">THE ENCORE<small>D3.1 · Reproduction (SL + AHL)</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">LOOP VS REMIX<small>D3.1.1-2 · asexual = continuity · sexual = change</small></div>
+    <div class="node">HALF-PRICE TICKETS<small>D3.1.2-3 · meiosis halves · fusion doubles · anisogamy</small></div>
+    <div class="node">BACKSTAGE TOURS<small>D3.1.4 · male + female anatomy · who does what</small></div>
+    <div class="node">MONTHLY BOOKING<small>D3.1.5 · FSH/LH/oestradiol/progesterone · ovulation Day 14</small></div>
+    <div class="node">MEETING AT THE DOOR<small>D3.1.6 · zona pellucida · first sperm wins</small></div>
+    <div class="node">LAB REMIX<small>D3.1.7 · down-regulation · FSH · hCG · IVF</small></div>
+    <div class="node">OPEN-AIR VENUE<small>D3.1.8-9 · stamen · carpel · pollen tube · nectaries</small></div>
+    <div class="node">COURIER SERVICE<small>D3.1.10-11 · cross vs self · S-alleles</small></div>
+    <div class="node">TOUR BUS<small>D3.1.12 · dispersal vs pollination · fruits</small></div>
+    <div class="node">DEBUT NIGHT<small>AHL 13 · GnRH pulses → FSH/LH → sex steroids</small></div>
+    <div class="node">FACTORY VS ONE-OFF<small>AHL 14 · 4 sperm vs 1 egg · Sertoli · polar bodies</small></div>
+    <div class="node">VELVET ROPE<small>AHL 15 · acrosome + cortical reactions</small></div>
+    <div class="node">MOVING IN<small>AHL 16 · blastocyst · implantation</small></div>
+    <div class="node">RENT CHECK<small>AHL 17 · hCG · monoclonal antibodies</small></div>
+    <div class="node">CATERING CORRIDOR<small>AHL 18 · villi · 5 μm barrier</small></div>
+    <div class="node">GRAND FINALE<small>AHL 19 · oxytocin positive feedback</small></div>
+    <div class="node">REMASTER<small>AHL 20 · HRT · observational vs RCT</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">60-second recap</div>
+  <h2>THE CHEAT ⚡</h2>
+  <p class="aim">Fifteen one-liners. If you can say them out loud, you know the show.</p>
+  <div class="marquee">
+    <div class="line">🎧 <span>Sexual = remix, asexual = loop</span> — meiosis halves, fusion doubles, every generation.</div>
+    <div class="line">🎫 <span>Gametes are half-price tickets</span> — male: small, motile, mass-produced · female: large, sessile, stocked.</div>
+    <div class="line">🗓 <span>Day 1 = period, Day 14 = ovulation</span> — FSH grows follicles, LH fires the egg, oestradiol + progesterone run the room.</div>
+    <div class="line">🚪 <span>First sperm through the door wins</span> — zona pellucida hardens behind it (cortical reaction).</div>
+    <div class="line">🧪 <span>IVF = lab remix</span> — mute the cycle, FSH for many follicles, hCG to mature, dish + 37°C, progesterone to hold.</div>
+    <div class="line">🌸 <span>Flower = open-air venue</span> — stamen makes pollen, carpel catches it, nectaries bribe the couriers.</div>
+    <div class="line">🐝 <span>Cross-pollination = variation + hybrid vigour</span> — self-incompatibility rejects same-S-allele pollen.</div>
+    <div class="line">🚌 <span>Seeds take the tour bus</span> — wind, animal coats, guts, or explosive pods; dispersal ≠ pollination.</div>
+    <div class="line">🌙 <span>Puberty = debut night</span> — GnRH pulses (slow = FSH, fast = LH) → sex steroids → the body changes.</div>
+    <div class="line">🏭 <span>Factory vs one-off</span> — spermatogenesis: millions/day, 4 per meiosis; oogenesis: 1/month, 1 per meiosis, started before birth.</div>
+    <div class="line">🔒 <span>One guest per egg</span> — acrosome reaction digs in, cortical reaction slams the door (triploids die).</div>
+    <div class="line">📦 <span>hCG = rent check</span> — trophoblast signal keeps the corpus luteum + progesterone up; 2 blue bands = pregnant.</div>
+    <div class="line">🍽 <span>Placenta = catering corridor</span> — 5 μm barrier, O₂ + glucose in, CO₂ + urea out.</div>
+    <div class="line">👶 <span>Childbirth = positive-feedback encore</span> — oxytocin → contraction → stretch → more oxytocin.</div>
+    <div class="line">💊 <span>HRT remaster</span> — observational said heart-safe, RCTs said slightly riskier; correlation ≠ causation.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Encore check</div>
+  <h2>THE TEST ✍️</h2>
+  <p class="aim">10 questions. Pick an answer and you'll instantly see why.</p>
+
+  <div class="q" data-a="variation">
+    <p>1. What is the key difference between sexual and asexual reproduction?</p>
+    <label><input type="radio" name="q1" value="variation"> Sexual offspring are genetically different — variation every generation; asexual offspring are identical clones</label>
+    <label><input type="radio" name="q1" value="speed"> Sexual reproduction is faster and produces more offspring per parent</label>
+    <label><input type="radio" name="q1" value="energy"> Asexual reproduction always needs two parents to share the work</label>
+    <div class="fb correct">✅ Sexual = remix (two parents, meiosis + fusion, genetically different offspring). Asexual = loop (one parent, mitosis only, identical clones). Variation vs continuity is the fundamental contrast.</div>
+    <div class="fb wrong">❌ Speed and numbers aren't the defining difference. The key contrast is genetic: sexual reproduction produces variation, asexual reproduction produces identical clones.</div>
+  </div>
+
+  <div class="q" data-a="double">
+    <p>2. What would happen if a sexual life cycle had NO meiosis?</p>
+    <label><input type="radio" name="q2" value="double"> The chromosome number would double every generation</label>
+    <label><input type="radio" name="q2" value="triple"> Gametes would stay haploid but offspring would be identical clones</label>
+    <label><input type="radio" name="q2" value="nothing"> Nothing — meiosis only affects gamete size, not chromosome number</label>
+    <div class="fb correct">✅ Meiosis halves 2n → n in gamete formation; fusion doubles n → 2n in the zygote. Without the halving, each generation would add a set of chromosomes — doubling forever.</div>
+    <div class="fb wrong">❌ Meiosis is the halving step of the cycle. Without it, fusion would double the chromosome number every generation — the halving + doubling pair keeps it constant.</div>
+  </div>
+
+  <div class="q" data-a="female">
+    <p>3. Which gamete carries the food reserves for the embryo?</p>
+    <label><input type="radio" name="q3" value="male"> The male gamete — its tail is packed with stored nutrients</label>
+    <label><input type="radio" name="q3" value="female"> The female gamete — large, sessile, with food reserves for the embryo</label>
+    <label><input type="radio" name="q3" value="both"> Both equally — every gamete carries the same reserves</label>
+    <div class="fb correct">✅ The female gamete is large and stocked with food reserves that nourish the early embryo — that's why so few are made. The male gamete is small, motile and mass-produced (anisogamy).</div>
+    <div class="fb wrong">❌ Anisogamy means the gametes differ: the female egg carries the food reserves. The male gamete is a minimal, motile courier with few or no reserves.</div>
+  </div>
+
+  <div class="q" data-a="lh">
+    <p>4. What triggers ovulation, and when does it happen?</p>
+    <label><input type="radio" name="q4" value="fsh"> Day 1 — the FSH surge at the start of menstruation</label>
+    <label><input type="radio" name="q4" value="lh"> Around Day 14 — a sharp LH peak completes meiosis and triggers ovulation</label>
+    <label><input type="radio" name="q4" value="prog"> Day 21 — the progesterone peak of the luteal phase</label>
+    <div class="fb correct">✅ LH has a sudden sharp peak near Day 14: it completes meiosis in the oocyte, digests the follicle wall and releases the egg (ovulation), then promotes the corpus luteum.</div>
+    <div class="fb wrong">❌ Ovulation is the Day-14 LH spike. FSH drives follicle development earlier, and progesterone is the luteal-phase hormone that comes after ovulation.</div>
+  </div>
+
+  <div class="q" data-a="cortical">
+    <p>5. What hardens the zona pellucida after the first sperm enters the egg?</p>
+    <label><input type="radio" name="q5" value="cortical"> The cortical reaction — egg granules exocytose, toughening the zona and changing its binding glycoproteins</label>
+    <label><input type="radio" name="q5" value="acrosome"> The acrosome reaction — the sperm's own enzymes harden the zona</label>
+    <label><input type="radio" name="q5" value="zona"> Nothing — the zona stays soft so backup sperm can also fuse</label>
+    <div class="fb correct">✅ The cortical reaction is the egg's lock-down: cortical granules exocytose enzymes that toughen the zona pellucida and change the glycoproteins sperm bind to — no more sperm get in.</div>
+    <div class="fb wrong">❌ The acrosome reaction is the sperm's digging-in (releasing enzymes to break through), not the hardening. The hardening is the egg's cortical reaction — and it must happen, or a triploid zygote forms and dies.</div>
+  </div>
+
+  <div class="q" data-a="down">
+    <p>6. What is the correct order of IVF steps?</p>
+    <label><input type="radio" name="q6" value="down"> Down-regulation → FSH injections → hCG trigger → egg collection → dish incubation → embryo transfer</label>
+    <label><input type="radio" name="q6" value="fshfirst"> FSH injections → down-regulation → hCG → dish → transfer</label>
+    <label><input type="radio" name="q6" value="hcglast"> Egg collection first, then down-regulation to stop further ovulation</label>
+    <div class="fb correct">✅ First mute the cycle (down-regulation, ~2 weeks), grow many follicles with FSH (7–12 days), trigger final maturation with hCG, collect eggs 34–35 h later, fertilize in the dish at 37 °C, then transfer ~48 h embryos with progesterone support.</div>
+    <div class="fb wrong">❌ Down-regulation must come FIRST — doctors suspend the natural cycle before stimulating follicles, so they control the timing. The order is: mute → FSH → hCG → collect → dish → transfer.</div>
+  </div>
+
+  <div class="q" data-a="stigma">
+    <p>7. Which is a feature of an insect-pollinated flower?</p>
+    <label><input type="radio" name="q7" value="wind"> Small dull petals, huge clouds of tiny pollen and a feathery exposed stigma</label>
+    <label><input type="radio" name="q7" value="stigma"> Large bright petals, scent, large sticky stigma and nectaries deep inside the flower</label>
+    <label><input type="radio" name="q7" value="anther"> No petals at all — the anthers dangle in the open air on long filaments</label>
+    <div class="fb correct">✅ Insect-pollinated flowers advertise: bright petals (landing stage), scent, large spiky pollen that sticks to insects, a large sticky stigma, and deep nectaries that force insects to brush past anthers and stigma.</div>
+    <div class="fb wrong">❌ That's the wind-pollinated design (small dull flowers, huge pollen output, feathery stigma). Insect-pollinated flowers invest in advertising: bright petals, scent, sticky surfaces and deep nectar.</div>
+  </div>
+
+  <div class="q" data-a="sallele">
+    <p>8. How does self-incompatibility reject self-pollen?</p>
+    <label><input type="radio" name="q8" value="sallele"> Pollen with the plant's own S-alleles fails to germinate, or its tube stops growing</label>
+    <label><input type="radio" name="q8" value="immune"> It rejects all pollen from the same species, exactly like an immune reaction</label>
+    <label><input type="radio" name="q8" value="time"> It only works if anthers and stigmas mature at different times</label>
+    <div class="fb correct">✅ Self-incompatibility is genetic (one or more genes, multiple S-alleles): matching S-alleles stop germination or the pollen tube. It's the converse of immunity — immunity rejects non-self, self-incompatibility rejects self.</div>
+    <div class="fb wrong">❌ It's selective, not blanket: pollen with DIFFERENT S-alleles is accepted. And it's a genetic recognition system, not the immune system — the immune system rejects non-self, this rejects self.</div>
+  </div>
+
+  <div class="q" data-a="four">
+    <p>9. How many gametes result from one meiosis in each sex?</p>
+    <label><input type="radio" name="q9" value="four"> 4 sperm in males vs 1 egg (plus polar bodies) in females</label>
+    <label><input type="radio" name="q9" value="one"> 1 sperm in males vs 4 eggs in females</label>
+    <label><input type="radio" name="q9" value="same"> 4 and 4 — both sexes produce four equal gametes per meiosis</label>
+    <div class="fb correct">✅ Spermatogenesis gives 4 sperm per meiosis (millions per day); oogenesis gives 1 egg per meiosis — the polar bodies are discarded, and all the cytoplasm goes to the egg.</div>
+    <div class="fb wrong">❌ The sexes differ: the factory produces 4 sperm per meiosis, the one-off produces a single egg — that's why the egg can be the biggest cell in the human body, stocked for the embryo.</div>
+  </div>
+
+  <div class="q" data-a="positive">
+    <p>10. Childbirth contractions are driven by…</p>
+    <label><input type="radio" name="q10" value="negative"> Negative feedback — contractions inhibit oxytocin to keep the uterus calm</label>
+    <label><input type="radio" name="q10" value="positive"> Positive feedback — oxytocin → contraction → stretch receptors → more oxytocin → stronger contractions</label>
+    <label><input type="radio" name="q10" value="voluntary"> Voluntary skeletal muscle — the mother pushes under conscious control</label>
+    <div class="fb correct">✅ Childbirth is the textbook positive-feedback loop: oxytocin contracts the myometrium, stretch receptors detect it and trigger more oxytocin, contractions get stronger and more frequent until the baby is born. Rare in human physiology — and that's why it's examinable.</div>
+    <div class="fb wrong">❌ It's positive feedback, not negative: the signal AMPLIFIES itself (oxytocin → contraction → stretch → more oxytocin). Negative feedback would dampen contractions, and the uterus is smooth muscle — not under voluntary control.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">D3.1.1-2</span><span>Sexual vs asexual reproduction: asexual = one parent, mitosis throughout, identical offspring, no variation, suited to unchanging environments; sexual = two parents, meiosis once per generation + gamete fusion, genetically different offspring, variation, suited to changing environments. Sexual life cycle needs BOTH meiosis (halving 2n → n) and fusion (doubling n → 2n) — without meiosis the chromosome number doubles every generation.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">D3.1.3</span><span>Anisogamy: male gametes small, motile, few/no food reserves, produced in huge numbers; female gametes large, sessile, food reserves for the embryo, few in number. Gametes haploid (n), body cells diploid (2n). All plants and animals are anisogamous.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">D3.1.4</span><span>Male reproductive system: testis (sperm + testosterone), scrotum (below core temp), epididymis (stores sperm until ejaculation), sperm duct (transfers sperm), seminal vesicle + prostate (alkali + proteins + fructose → semen), urethra (semen during ejaculation + urine), penis (penetrates vagina, ejaculates near cervix).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">D3.1.4</span><span>Female reproductive system: ovary (eggs + oestradiol + progesterone), oviduct (collects egg at ovulation, site of fertilization, moves embryo to uterus), uterus (provides for embryo then foetus), cervix (protects foetus, dilates → birth canal), vagina (stimulates penis/ejaculation + birth canal), vulva (protects internal parts).</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">D3.1.5</span><span>Menstrual cycle (~28 days): ovarian cycle (follicular phase → ovulation Day 14 → luteal phase, corpus luteum) + uterine cycle (endometrium thickens for implantation; without embryo, breaks down → menstruation Day 1). Hormones: FSH (follicles + oestradiol), LH (sharp peak → completes meiosis, ovulation, corpus luteum), oestradiol (thickens endometrium; positive feedback on FSH receptors, then negative feedback inhibits FSH + stimulates LH), progesterone (maintains endometrium; inhibits FSH/LH).</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">D3.1.6</span><span>Human fertilization: sperm swim directionally toward egg chemicals; egg has follicle cells + zona pellucida (glycoprotein layer); sperm digest through, bind plasma membrane proteins; first sperm to penetrate fuses, nucleus enters; zona pellucida hardens → blocks more sperm → diploid zygote; sperm tail + most mitochondria stay outside/destroyed.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">D3.1.7</span><span>IVF: down-regulation (~2 weeks, drug stops pituitary FSH/LH, cycle suspended); daily FSH injections 7–12 days → many follicles (8–15, ~18 mm); hCG injection at ~18 mm → final maturation; eggs collected 34–35 h later; each egg + 50,000–100,000 sperm in a dish at 37 °C; ~48 h embryos placed in uterus; extra progesterone (vaginal tablet) maintains the lining.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">D3.1.8-9</span><span>Flower structure: stamen (anther makes pollen by meiosis + filament), carpel (stigma, style, ovary with ovules); egg = one of 8 haploid nuclei (meiosis + 3 mitotic divisions); pollen grain = 3 haploid nuclei, 2 are male gametes; pollination = anther → stigma; pollen tube grows down style to ovule; zygote → embryo (root, shoot, cotyledons). Insect-pollinated: large bright petals (advertise + landing stage), scent, large spiky protein-rich pollen, large sticky stigma, nectaries deep inside so insects brush past anthers + stigma.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">D3.1.10-11</span><span>Cross-pollination (anther of one plant → stigma of another) promotes genetic variation + hybrid vigour; self-pollination = extreme inbreeding → inbreeding depression (premature death, failure to thrive, infertility; rare recessive alleles meet). Prevention: separate male/female flowers on same plant (corn), separate plants (ginkgo, nettle), protandry (anthers first, foxglove), protogyny (stigma first, sacred lotus). Self-incompatibility: same S-alleles → pollen fails to germinate / tube stops — converse of immune rejection.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">D3.1.12</span><span>Seed dispersal vs pollination (separate processes: pollen anther → stigma; seeds parent → germination site). Dispersal reduces competition, spreads the species. Fruit types: dry explosive (gorse, exploding cucumber, jewelweed), fleshy eaten by animals (seeds through gut), feathery/winged wind seeds (maple samaras, dandelion), hooked burrs on animal coats. Germination: embryo root, embryo shoot, cotyledons.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">D3.1.13</span><span>Puberty (AHL): GnRH (10-amino-acid peptide) from a few hundred hypothalamic neurons → pituitary via a blood vessel; secreted in pulses (peaks at least hourly) — lower frequency → FSH, higher frequency → LH. Males: FSH → testis growth, LH → testosterone (Leydig cells) → penis growth, pubic hair, voice (larynx). Females: FSH → follicles, follicle wall → oestradiol, LH → corpus luteum (oestradiol + progesterone); oestradiol → uterus, breasts, pubic/underarm hair; progesterone → mammary glands. GnRH starts ~10 weeks after fertilization, stops at 4–6 months, resumes at puberty.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">D3.1.14</span><span>Gametogenesis (AHL): spermatogenesis (seminiferous tubules) — germinal epithelium mitosis endlessly → primary spermatocytes (2n) → meiosis → spermatids → sperm; Sertoli cells support, Leydig cells make testosterone; millions/day, ~75 days per batch, 4 sperm per meiosis, from puberty. Oogenesis — starts in foetus (~400,000 primary follicles at birth, no more ever made); meiosis I completed at ovulation, meiosis II after fertilization; 1 egg per meiosis (polar bodies discarded), 1/month, Day 14, puberty → menopause; egg has more cytoplasm than any other human cell (food reserves).</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">D3.1.15</span><span>Polyspermy prevention (AHL): acrosome reaction — sperm binds specific zona pellucida glycoproteins, acrosome enzymes digest them, tail force pushes through to the egg membrane. Cortical reaction — first nucleus enters → egg activates → cortical granules exocytose → enzymes toughen zona + change sperm-binding glycoproteins → no more sperm penetrate. Without it: triploid (3n) zygote, non-viable, dies.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">D3.1.16</span><span>Blastocyst + implantation (AHL): DNA replication ~6 h after fertilization, first mitosis ~30 h; rapid cycles ~every 18 h with no cell growth (cells shrink) → solid ball → hollow blastocyst ~6–7 days (~250 cells, ~200 μm): inner cell mass → embryo body, trophoblast → placenta, blastocoele (fluid). Wafted down oviduct by cilia; zona pellucida breaks down; implants into endometrium (finger-like projections exchange materials); by 8 weeks → foetus (bone tissue, recognizably human).</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">D3.1.17</span><span>hCG + pregnancy testing (AHL): trophoblast secretes hCG (medium-sized protein) from blastocyst stage; hCG keeps corpus luteum alive → progesterone → endometrium maintained (prevents miscarriage); ~8–12 weeks placenta takes over progesterone, corpus luteum degenerates. Urine tests use monoclonal antibodies: mobile anti-hCG antibody + blue dye, then immobilised antibody traps the complex → blue band; control band proves the test worked.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">D3.1.18-20</span><span>Placenta (AHL): foetal villi bathed in maternal blood (intervillous spaces); barrier ~5 μm, selectively permeable; O₂, glucose, amino acids, water, antibodies → foetus (diffusion, facilitated diffusion, osmosis, endocytosis); CO₂, urea → mother; umbilical vein + artery; allows longer gestation than marsupials/monotremes (surface-area-to-volume); secretes hormones after corpus luteum degenerates. Childbirth: progesterone inhibits oxytocin + myometrium; foetal hormones → placenta stops progesterone → oxytocin → contractions → stretch receptors → more oxytocin (POSITIVE feedback, rare; gradual intensity). HRT: oestrogen + progesterone after menopause (relieves hot flushes, night sweats, mood swings, vaginal dryness, low sex drive; prevents osteoporosis); observational studies suggested lower CHD risk, RCTs showed slightly elevated CHD/breast cancer/stroke risk → use declined; discrepancy = confounding (affluent women, healthcare), early vs late menopause, correlation ≠ causation.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Biology: Course Companion 2nd ed.</b> (Allott &amp; Mindorff, Oxford 2023) D3.1 chapter + IB Biology guide (first exams 2025) · SL + AHL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<script>
+  // checklist with localStorage
+  var KEY='d31-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
