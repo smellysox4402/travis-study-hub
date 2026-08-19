@@ -20,6 +20,8 @@ PAGES = [
     "topics/bio/transport/index.html",
     "topics/bio/photosynthesis/index.html",
     "topics/bio/reproduction/index.html",
+    "topics/bio/enzymes/index.html",
+    "topics/bio/respiration/index.html",
     "topics/chem/kinetics/index.html",
 ]
 
