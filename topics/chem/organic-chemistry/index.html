@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>Organic Chemistry — The Organic Kitchen (S3.2 · R3.3 · R3.4)</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE INGREDIENT SHELF</a>
+  <a href="#act2">ACT 2 · SAME DISH, DIFFERENT PLATE</a>
+  <a href="#act3">ACT 3 · THE KITCHEN SCANNER</a>
+  <a href="#act4">ACT 4 · THE FREE-SPIRIT CHEFS</a>
+  <a href="#act5">ACT 5 · THE PARTNER EXCHANGE</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/18</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Chemistry · Higher Level · Structure 3.2 + Reactivity 3.3 + 3.4</div>
+  <h1>ORGANIC CHEMISTRY — THE ORGANIC KITCHEN</h1>
+  <div class="sub">Every organic molecule is a dish, and its functional group is the signature ingredient. This kitchen tour: how we <b>classify</b> the menu (S3.2), how isomers serve the same recipe on <b>different plates</b> (S3.2), how the <b>scanner</b> reads each dish (MS / IR / NMR, S3.2), how <b>free-spirit radicals</b> crash the pass (R3.3), and how <b>nucleophiles and electrophiles</b> exchange partners on the dance floor (R3.4).</div>
+  <div class="badges">
+    <span class="badge hl">STRUCTURE 3.2 · FUNCTIONAL GROUPS</span>
+    <span class="badge hl">REACTIVITY 3.3 · ELECTRON SHARING</span>
+    <span class="badge hl">REACTIVITY 3.4 · ELECTRON PAIR SHARING</span>
+    <span class="badge">28 SYLLABUS POINTS (14 SL · 14 AHL)</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 · S3.2.1 · S3.2.2 · S3.2.3</div>
+  <h2>THE INGREDIENT SHELF 🍽</h2>
+  <p class="lead">Every dish in the organic kitchen is built from carbon. The ingredient shelf is where we sort the ingredients: what a formula tells you, what a functional group is, and how families of compounds line up in homologous series.</p>
+
+  <h3>S3.2.1 — The recipe card: four ways to write a formula</h3>
+  <div class="cols">
+    <div class="card">
+      <h4>📄 EMPIRICAL</h4>
+      <p>Simplest whole-number ratio of atoms. Glucose C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> → CH<sub>2</sub>O. No structural info.</p>
+    </div>
+    <div class="card">
+      <h4>🔢 MOLECULAR</h4>
+      <p>Actual number of atoms: C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>. Still no structure.</p>
+    </div>
+    <div class="card">
+      <h4>🖼 STRUCTURAL</h4>
+      <p>Three flavours: full/displayed (all bonds), condensed (CH<sub>3</sub>CH<sub>2</sub>CH<sub>3</sub>), skeletal (vertices = carbons, H hidden, functional atoms shown).</p>
+    </div>
+  </div>
+  <p class="note">Carbon: 4 valence electrons → 4 bonds, and catenation (chains of identical atoms) → straight, branched or cyclic. That is why carbon chemistry is so vast.</p>
+
+  <h3>S3.2.2 — The ingredient shelf: functional groups</h3>
+  <p>A <strong>functional group</strong> is the atom or group of atoms that decides a compound's physical and chemical character. Same group → same class → similar reactions. R stands for any carbon-containing (alkyl) group.</p>
+  <div class="mini-table">
+    <div class="mtrow head"><span>GROUP</span><span>FORMULA</span><span>SUFFIX</span><span>CLASS</span><span>EXAMPLE</span></div>
+    <div class="mtrow"><span>halogeno</span><span>R–X</span><span>—</span><span>halogenoalkanes</span><span>chloromethane</span></div>
+    <div class="mtrow"><span>hydroxyl</span><span>R–OH</span><span>-ol</span><span>alcohols</span><span>ethanol</span></div>
+    <div class="mtrow"><span>carbonyl</span><span>R–CHO / R–CO–R'</span><span>-al / -one</span><span>aldehydes / ketones</span><span>ethanal / propanone</span></div>
+    <div class="mtrow"><span>carboxyl</span><span>R–COOH</span><span>-oic acid</span><span>carboxylic acids</span><span>ethanoic acid</span></div>
+    <div class="mtrow"><span>alkoxy</span><span>R–O–R'</span><span>—</span><span>ethers</span><span>methoxymethane</span></div>
+    <div class="mtrow"><span>amino</span><span>R–NH<sub>2</sub></span><span>-amine</span><span>amines</span><span>ethanamine</span></div>
+    <div class="mtrow"><span>amido</span><span>R–C(=O)NH<sub>2</sub></span><span>-amide</span><span>amides</span><span>ethanamide</span></div>
+    <div class="mtrow"><span>ester</span><span>R–COO–R'</span><span>-oate</span><span>esters</span><span>methyl ethanoate</span></div>
+    <div class="mtrow"><span>phenyl</span><span>aromatic ring</span><span>—</span><span>aromatics</span><span>methylbenzene</span></div>
+  </div>
+  <p class="note">Saturated = all C–C single bonds (alkanes). Unsaturated = at least one C=C or C≡C (alkenes, alkynes). Aliphatic = no aromatic ring.</p>
+
+  <h3>S3.2.3 — Recipe families: homologous series</h3>
+  <p>A <strong>homologous series</strong> is a family with the same functional group and a shared general formula; each member differs from the next by one CH<sub>2</sub>.</p>
+  <div class="mini-table">
+    <div class="mtrow head"><span>SERIES</span><span>GENERAL FORMULA</span><span>FIRST MEMBERS</span></div>
+    <div class="mtrow"><span>alkanes</span><span>C<sub>n</sub>H<sub>2n+2</sub></span><span>methane CH<sub>4</sub> … hexane C<sub>6</sub>H<sub>14</sub></span></div>
+    <div class="mtrow"><span>alkenes</span><span>C<sub>n</sub>H<sub>2n</sub></span><span>ethene, propene, but-2-ene</span></div>
+    <div class="mtrow"><span>alkynes</span><span>C<sub>n</sub>H<sub>2n−2</sub></span><span>ethyne, propyne, but-2-yne</span></div>
+    <div class="mtrow"><span>halogenoalkanes</span><span>C<sub>n</sub>H<sub>2n+1</sub>X</span><span>chloroethane, 1-chloropropane</span></div>
+    <div class="mtrow"><span>alcohols</span><span>C<sub>n</sub>H<sub>2n+1</sub>OH</span><span>ethanol, propan-1-ol, butan-1-ol</span></div>
+    <div class="mtrow"><span>aldehydes</span><span>C<sub>n</sub>H<sub>2n</sub>O</span><span>ethanal, propanal, butanal</span></div>
+    <div class="mtrow"><span>ketones</span><span>C<sub>n</sub>H<sub>2n</sub>O</span><span>propanone, butanone, pentan-3-one</span></div>
+    <div class="mtrow"><span>carboxylic acids</span><span>C<sub>n</sub>H<sub>2n</sub>O<sub>2</sub></span><span>methanoic acid (n = 1)…</span></div>
+    <div class="mtrow"><span>amines</span><span>C<sub>n</sub>H<sub>2n+3</sub>N</span><span>propanamine, dimethylamine, trimethylamine</span></div>
+  </div>
+  <p class="note">Ketones and aldehydes share C<sub>n</sub>H<sub>2n</sub>O — position of the C=O is the only difference.</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 300" role="img" aria-label="Functional group ingredient shelf: the carbon backbone with groups attached">
+      <rect x="20" y="20" width="600" height="260" rx="14" fill="#0e1420" stroke="#00e5ff" stroke-opacity="0.35"/>
+      <text x="40" y="55" fill="#7df9ff" font-size="17" font-weight="bold" font-family="Consolas,monospace">THE INGREDIENT SHELF</text>
+      <g font-family="Consolas,monospace" font-size="14">
+        <text x="40" y="95" fill="#e8f6ff">C</text>
+        <line x1="55" y1="92" x2="110" y2="92" stroke="#e8f6ff" stroke-width="3"/>
+        <text x="115" y="95" fill="#e8f6ff">C</text>
+        <line x1="130" y1="92" x2="185" y2="92" stroke="#e8f6ff" stroke-width="3"/>
+        <text x="190" y="95" fill="#e8f6ff">C</text>
+        <line x1="205" y1="92" x2="240" y2="92" stroke="#e8f6ff" stroke-width="3"/>
+        <text x="245" y="95" fill="#e8f6ff">… chain (catenation)</text>
+      </g>
+      <g font-family="Consolas,monospace" font-size="13">
+        <line x1="55" y1="88" x2="45" y2="70" stroke="#ffd166" stroke-width="3"/>
+        <text x="10" y="62" fill="#ffd166">-OH</text>
+        <text x="6" y="78" fill="#7d8ea0" font-size="11">alcohol</text>
+        <line x1="130" y1="88" x2="120" y2="70" stroke="#ff6b6b" stroke-width="3"/>
+        <text x="95" y="62" fill="#ff6b6b">-COOH</text>
+        <text x="103" y="78" fill="#7d8ea0" font-size="11">acid</text>
+        <line x1="205" y1="88" x2="195" y2="70" stroke="#4ecdc4" stroke-width="3"/>
+        <text x="180" y="62" fill="#4ecdc4">=O</text>
+        <text x="183" y="78" fill="#7d8ea0" font-size="11">ketone</text>
+        <line x1="250" y1="88" x2="245" y2="70" stroke="#c77dff" stroke-width="3"/>
+        <text x="240" y="62" fill="#c77dff">-NH₂</text>
+        <text x="236" y="78" fill="#7d8ea0" font-size="11">amine</text>
+      </g>
+      <line x1="40" y1="150" x2="600" y2="150" stroke="#2a3a52" stroke-width="2" stroke-dasharray="6 6"/>
+      <g font-family="Consolas,monospace" font-size="13">
+        <text x="40" y="180" fill="#e8f6ff">SAME GROUP → SAME CLASS → SAME REACTIONS</text>
+        <text x="40" y="210" fill="#7df9ff">R–OH</text>
+        <text x="110" y="210" fill="#7d8ea0">R'–OH</text>
+        <text x="190" y="210" fill="#7d8ea0">R''–OH</text>
+        <text x="270" y="210" fill="#7df9ff">all alcohols:</text>
+        <text x="380" y="210" fill="#e8f6ff">same chemical personality</text>
+        <text x="40" y="245" fill="#7d8ea0" font-size="12">homologous series: same general formula, +CH₂ per step</text>
+        <text x="40" y="270" fill="#7d8ea0" font-size="12">alkanes CₙH₂ₙ₊₂ · alkenes CₙH₂ₙ · alkynes CₙH₂ₙ₋₂</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="act" id="act2">
+  <div class="acttag">Act 2 · S3.2.4 · S3.2.5 · S3.2.6 · S3.2.7 (AHL)</div>
+  <h2>SAME DISH, DIFFERENT PLATE 🍳</h2>
+  <p class="lead">Bigger chains boil hotter, names follow strict rules, and the same ingredients can be arranged into completely different dishes: isomers.</p>
+
+  <h3>S3.2.4 — Bigger chain, hotter pot</h3>
+  <p>Boiling point climbs steadily along a homologous series: each added CH<sub>2</sub> strengthens London (dispersion) forces. Methane −161 °C → ethane −89 → propane −42 → butane −0.5 → pentane 36 → hexane 69 °C. Melting point is noisier — don't rely on it for prediction. Density and viscosity also rise with chain length.</p>
+
+  <h3>S3.2.5 — The naming rules (IUPAC)</h3>
+  <div class="cols">
+    <div class="card"><h4>🌱 ROOTS</h4><p>1 meth- · 2 eth- · 3 prop- · 4 but- · 5 pent- · 6 hex-</p></div>
+    <div class="card"><h4>🧱 STEPS</h4><p>Longest chain → root + -ane/-ene/-yne → number to give substituents lowest locants → prefixes in alphabetical order (3-ethyl-2-methylhexane) → multipliers for repeats (2,3-dimethylhexane).</p></div>
+    <div class="card"><h4>🎯 PRIORITY</h4><p>C=C gets lowest locant over substituents (4-methylhex-2-ene). –OH over C=C (propan-2-ol). Carbonyl lowest locant. –COOH always terminal, no locant.</p></div>
+  </div>
+  <p class="note">Alkenes: but-1-ene, 4,5-dimethylhex-2-ene. Halogenoalkanes: 2-chloro-1,1,1-trifluoroethane; C=C beats halogen (3-chlorobut-1-ene). Aldehydes: methanal, 4-methylpentanal, 3-fluorobutanal. Ketones: propanone, butanone, 4-methylpentan-2-one. Acids: 3-bromopropanoic acid, 4-methylpentanoic acid.</p>
+
+  <h3>S3.2.6 — Structural isomers: same formula, different skeleton</h3>
+  <div class="cols">
+    <div class="card"><h4>🔗 CHAIN</h4><p>Different carbon skeleton: butane vs methylpropane (both C<sub>4</sub>H<sub>10</sub>).</p></div>
+    <div class="card"><h4>📍 POSITIONAL</h4><p>Functional group moves: 1-, 2-, 3-bromopentane (C<sub>5</sub>H<sub>11</sub>Br).</p></div>
+    <div class="card"><h4>🍳 FUNCTIONAL GROUP</h4><p>Same atoms, new group: ethanol vs methoxymethane (C<sub>2</sub>H<sub>6</sub>O); propanal vs propanone (C<sub>3</sub>H<sub>6</sub>O); methyl methanoate vs ethanoic acid (C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>).</p></div>
+  </div>
+  <p class="note">1°, 2°, 3° = number of carbons bonded to the functional-group carbon. For amines count C bonded to N directly (N-methylpropan-1-amine). C<sub>4</sub>H<sub>9</sub>F has exactly 4 structural isomers: 1-fluoro-, 2-fluoro-, 1-fluoro-2-methylpropane, 2-fluoro-2-methylpropane.</p>
+
+  <h3>S3.2.7 (AHL) — Stereoisomers: same skeleton, different 3D pose</h3>
+  <div class="cols">
+    <div class="card"><h4>↔ CIS-TRANS</h4><p>C=C blocks rotation. cis = identical groups same side; trans = opposite sides. cis-/trans-but-2-ene. Propene: no (one C has two identical H). Cycloalkanes too: 1,2-dimethylcyclobutane.</p></div>
+    <div class="card"><h4>🪞 OPTICAL</h4><p>Chiral carbon = 4 different groups. Enantiomers = non-superimposable mirror images; rotate plane-polarised light +/− same angle. Racemic 50:50 mix: no rotation. Wedge = toward you, dash = away.</p></div>
+  </div>
+  <p class="note">Configurational isomers need bond-breaking to interconvert; conformational isomers (staggered vs eclipsed ethane) just rotate about single bonds — can't be separated.</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 320" role="img" aria-label="Isomer family tree: structural isomers (chain, positional, functional) vs stereoisomers (cis-trans, optical)">
+      <rect x="20" y="20" width="600" height="280" rx="14" fill="#0e1420" stroke="#ffd166" stroke-opacity="0.35"/>
+      <text x="40" y="55" fill="#ffd166" font-size="17" font-weight="bold" font-family="Consolas,monospace">SAME FORMULA, DIFFERENT DISH</text>
+      <text x="320" y="100" fill="#e8f6ff" font-size="15" text-anchor="middle" font-family="Consolas,monospace">ISOMERS</text>
+      <line x1="320" y1="110" x2="160" y2="150" stroke="#e8f6ff" stroke-width="2"/>
+      <line x1="320" y1="110" x2="480" y2="150" stroke="#e8f6ff" stroke-width="2"/>
+      <text x="160" y="175" fill="#7df9ff" font-size="15" text-anchor="middle" font-family="Consolas,monospace">STRUCTURAL</text>
+      <text x="480" y="175" fill="#ff6b6b" font-size="15" text-anchor="middle" font-family="Consolas,monospace">STEREO (AHL)</text>
+      <line x1="90" y1="185" x2="60" y2="215" stroke="#7df9ff" stroke-width="2"/>
+      <line x1="150" y1="185" x2="150" y2="215" stroke="#7df9ff" stroke-width="2"/>
+      <line x1="230" y1="185" x2="250" y2="215" stroke="#7df9ff" stroke-width="2"/>
+      <line x1="410" y1="185" x2="390" y2="215" stroke="#ff6b6b" stroke-width="2"/>
+      <line x1="480" y1="185" x2="480" y2="215" stroke="#ff6b6b" stroke-width="2"/>
+      <line x1="550" y1="185" x2="570" y2="215" stroke="#ff6b6b" stroke-width="2"/>
+      <g font-family="Consolas,monospace" font-size="13" text-anchor="middle">
+        <text x="60" y="238" fill="#7df9ff">chain</text>
+        <text x="150" y="238" fill="#7df9ff">positional</text>
+        <text x="250" y="238" fill="#7df9ff">functional</text>
+        <text x="390" y="238" fill="#ff6b6b">cis-trans</text>
+        <text x="480" y="238" fill="#ff6b6b">optical</text>
+        <text x="570" y="238" fill="#ff6b6b">conformer</text>
+        <text x="60" y="258" fill="#7d8ea0" font-size="11">butane vs</text>
+        <text x="60" y="273" fill="#7d8ea0" font-size="11">methylpropane</text>
+        <text x="150" y="258" fill="#7d8ea0" font-size="11">1-/2-/3-bromo-</text>
+        <text x="150" y="273" fill="#7d8ea0" font-size="11">pentane</text>
+        <text x="250" y="258" fill="#7d8ea0" font-size="11">ethanol vs</text>
+        <text x="250" y="273" fill="#7d8ea0" font-size="11">methoxymethane</text>
+        <text x="390" y="258" fill="#7d8ea0" font-size="11">cis-/trans-</text>
+        <text x="390" y="273" fill="#7d8ea0" font-size="11">but-2-ene</text>
+        <text x="480" y="258" fill="#7d8ea0" font-size="11">chiral C,</text>
+        <text x="480" y="273" fill="#7d8ea0" font-size="11">enantiomers</text>
+        <text x="570" y="258" fill="#7d8ea0" font-size="11">staggered/</text>
+        <text x="570" y="273" fill="#7d8ea0" font-size="11">eclipsed</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="act" id="act3">
+  <div class="acttag">Act 3 · S3.2.8 · S3.2.9 · S3.2.10 · S3.2.11 · S3.2.12 (AHL)</div>
+  <h2>THE KITCHEN SCANNER 🔬</h2>
+  <p class="lead">Can't see the molecule? Scan it. Mass spec weighs the pieces, IR feels the bonds, NMR counts the hydrogen neighbourhoods. Together they identify the dish.</p>
+
+  <h3>S3.2.8 — Mass spectrometry: weigh the fragments</h3>
+  <p>MS smashes the molecule into charged fragments. Highest m/z = the <strong>molecular ion M⁺</strong> = relative molecular mass. Fragment masses hint at pieces: 15 = CH<sub>3</sub>⁺, 17 = OH⁺, 29 = CHO⁺ or CH<sub>3</sub>CH<sub>2</sub>⁺, 31 = CH<sub>3</sub>O⁺ or CH<sub>2</sub>OH⁺, 45 = COOH⁺.</p>
+  <p class="note">Propan-1-ol (Mr 60): m/z 60 = M⁺, 31 = [CH<sub>2</sub>OH]⁺ (loss of ethyl), 29 = [CH<sub>3</sub>CH<sub>2</sub>]⁺.</p>
+
+  <h3>S3.2.9 — IR: feel the bonds</h3>
+  <p>Bonds vibrate; IR-active bonds (changing dipole) absorb at characteristic wavenumbers. <strong>C=O ~1700–1750 cm⁻¹</strong> (strong), <strong>carboxylic acid O–H ~2500–3000 cm⁻¹</strong> (very broad). Vibration frequency rises with bond enthalpy, falls with atomic mass (HCl 2886 > HBr 2559 > HI 2230 cm⁻¹). Homonuclear diatomics (H<sub>2</sub>, O<sub>2</sub>, Cl<sub>2</sub>): IR-inactive — no dipole change.</p>
+
+  <h3>S3.2.10 + 3.2.11 — ¹H NMR: count the hydrogen neighbourhoods</h3>
+  <div class="cols">
+    <div class="card"><h4>📊 SIGNALS</h4><p>One signal per distinct H environment. Integration (area) = relative H count. Propanone: 1 signal. Ethanoic acid: 2 (COOH ~9–13 ppm, CH<sub>3</sub> ~2 ppm, ratio 1:3). TMS = 0 ppm reference.</p></div>
+    <div class="card"><h4>🔀 SPLITTING (N+1)</h4><p>A proton with N neighbours splits into N+1 peaks: 0 → singlet, 1 → doublet, 2 → triplet (1:2:1), 3 → quartet (1:3:3:1). 1,1,2-trichloroethane: Ha doublet (2H), Hb triplet (1H).</p></div>
+  </div>
+  <p class="note">Butanone: A CH<sub>3</sub> next to C=O — singlet 2.1 ppm; B CH<sub>2</sub> — quartet 2.4; C terminal CH<sub>3</sub> — triplet 1.1. 1,1-dichloroethane: CH<sub>3</sub> doublet 2.0 + CH quartet 5.8, ratio 3:1.</p>
+
+  <h3>S3.2.12 — Combine everything: one unknown, one answer</h3>
+  <p>Worked example 11: chlorination of ethane gives X. Combustion: 24.27% C, 4.08% H, 71.65% Cl → mol ratio 2.021 : 4.04 : 2.021 → empirical C<sub>2</sub>H<sub>4</sub>Cl<sub>2</sub> (Mr 99). Isotope pattern (³⁵Cl/³⁷Cl) gives peaks 98, 100, 63, 65. ¹H NMR: 2 signals, 3:1, doublet at 2.0 + quartet at 5.8 → <strong>1,1-dichloroethane CH<sub>3</sub>CHCl<sub>2</sub></strong>.</p>
+  <p class="note">Worked example 8: 62.02% C, 10.43% H, 27.55% O → C<sub>3</sub>H<sub>6</sub>O (Mr 58); IR C=O at 1700–1750; M⁺ = 58; not terminal C=O → propanone.</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 340" role="img" aria-label="Three scanners on one molecule: MS peaks, IR absorption, NMR signals">
+      <rect x="20" y="20" width="600" height="300" rx="14" fill="#0e1420" stroke="#4ecdc4" stroke-opacity="0.35"/>
+      <text x="40" y="55" fill="#4ecdc4" font-size="17" font-weight="bold" font-family="Consolas,monospace">THREE SCANNERS, ONE DISH</text>
+      <text x="100" y="90" fill="#7df9ff" font-size="14" font-family="Consolas,monospace">MS: m/z</text>
+      <g font-family="Consolas,monospace" font-size="11">
+        <rect x="150" y="68" width="12" height="18" fill="#7df9ff"/><text x="148" y="100" fill="#7d8ea0" text-anchor="middle">15</text>
+        <rect x="190" y="48" width="12" height="38" fill="#7df9ff"/><text x="188" y="100" fill="#7d8ea0" text-anchor="middle">29</text>
+        <rect x="230" y="38" width="12" height="48" fill="#7df9ff"/><text x="228" y="100" fill="#7d8ea0" text-anchor="middle">31</text>
+        <rect x="290" y="15" width="12" height="71" fill="#ffd166"/><text x="288" y="100" fill="#ffd166" text-anchor="middle">60 M⁺</text>
+      </g>
+      <line x1="150" y1="106" x2="310" y2="106" stroke="#2a3a52" stroke-width="2"/>
+      <text x="100" y="140" fill="#ff6b6b" font-size="14" font-family="Consolas,monospace">IR: cm⁻¹</text>
+      <g font-family="Consolas,monospace" font-size="11">
+        <path d="M150 150 Q 180 60 210 148" stroke="#ff6b6b" stroke-width="3" fill="none"/>
+        <text x="150" y="165" fill="#ff6b6b">O–H 2500–3000</text>
+        <path d="M340 152 Q 370 100 400 150" stroke="#ff6b6b" stroke-width="3" fill="none"/>
+        <text x="340" y="165" fill="#ff6b6b">C=O 1700–1750</text>
+      </g>
+      <text x="100" y="210" fill="#c77dff" font-size="14" font-family="Consolas,monospace">¹H NMR: ppm</text>
+      <g font-family="Consolas,monospace" font-size="11">
+        <line x1="150" y1="245" x2="480" y2="245" stroke="#2a3a52" stroke-width="2"/>
+        <rect x="180" y="222" width="40" height="23" fill="#c77dff"/><text x="200" y="238" fill="#0e1420" text-anchor="middle">2.0 d</text>
+        <rect x="300" y="222" width="40" height="23" fill="#c77dff"/><text x="320" y="238" fill="#0e1420" text-anchor="middle">5.8 q</text>
+        <text x="180" y="270" fill="#7d8ea0">3H · doublet</text>
+        <text x="300" y="270" fill="#7d8ea0">1H · quartet</text>
+      </g>
+      <text x="40" y="305" fill="#e8f6ff" font-size="13" font-family="Consolas,monospace">= 1,1-dichloroethane CH₃CHCl₂</text>
+    </svg>
+  </div>
+</section>
+
+<section class="act" id="act4">
+  <div class="acttag">Act 4 · R3.3.1 · R3.3.2 · R3.3.3</div>
+  <h2>THE FREE-SPIRIT CHEFS 🔥</h2>
+  <p class="lead">Some chefs work alone with a single electron. Radicals are neutral species with one unpaired electron — formed by homolytic fission, they run the kitchen as a chain reaction.</p>
+
+  <h3>R3.3.1 — The radical: one unpaired electron</h3>
+  <p>A <strong>radical</strong> is a chemical entity with an unpaired electron, drawn with a dot: Cl•, •CH<sub>3</sub>, •OH. Unlike ions, radicals exist independently — no counter-ion needed. High reactivity means radicals are usually intermediates, not final products. Radicals are blamed in the free-radical theory of ageing (mitochondria, oxidative stress — still debated).</p>
+
+  <h3>R3.3.2 — Homolytic fission: splitting the pair</h3>
+  <p><strong>Homolytic fission</strong> = the two electrons of a covalent bond split evenly, one to each atom: Cl<sub>2</sub> → 2 Cl• (UV light or heat required). Drawn with <strong>single-barbed fish-hook arrows</strong> (one electron per arrow). This is the initiation step — the spark of the chain. Curly-arrow rules: start at the electrons' origin, end at their destination, rich → poor.</p>
+
+  <h3>R3.3.3 — Radical substitution: the three-stage chain</h3>
+  <p>Alkanes are inert (C–C 346, C–H 414 kJ mol⁻¹, non-polar). Chlorination in UV light fixes that:</p>
+  <div class="cols">
+    <div class="card"><h4>⚡ INITIATION</h4><p>Cl<sub>2</sub> → 2 Cl• (homolytic fission, UV/heat)</p></div>
+    <div class="card"><h4>🔁 PROPAGATION ×2</h4><p>Cl• + CH<sub>4</sub> → HCl + •CH<sub>3</sub>; then •CH<sub>3</sub> + Cl<sub>2</sub> → CH<sub>3</sub>Cl + Cl•. Cycle repeats: radical + molecule → molecule + new radical.</p></div>
+    <div class="card"><h4>🛑 TERMINATION</h4><p>Radical + radical → molecule: Cl•+Cl• → Cl<sub>2</sub>; •CH<sub>3</sub>+Cl• → CH<sub>3</sub>Cl; •CH<sub>3</sub>+•CH<sub>3</sub> → C<sub>2</sub>H<sub>6</sub> (by-product).</p></div>
+  </div>
+  <p class="note">F<sub>2</sub> too reactive (smashes C–C bonds), I<sub>2</sub> too sluggish — so radical halogenation works with Cl<sub>2</sub>/Br<sub>2</sub> only. Chloromethane's polar C–Cl bond makes it a useful stepping stone for further reactions.</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 320" role="img" aria-label="Radical substitution chain: initiation, two propagation steps cycling, termination">
+      <rect x="20" y="20" width="600" height="280" rx="14" fill="#0e1420" stroke="#ff6b6b" stroke-opacity="0.35"/>
+      <text x="40" y="55" fill="#ff6b6b" font-size="17" font-weight="bold" font-family="Consolas,monospace">THE CHAIN REACTION</text>
+      <g font-family="Consolas,monospace" font-size="13">
+        <text x="40" y="95" fill="#ffd166">INITIATION</text>
+        <text x="170" y="95" fill="#e8f6ff">Cl₂  →  2 Cl•</text>
+        <text x="320" y="95" fill="#7d8ea0" font-size="11">(UV or heat)</text>
+      </g>
+      <line x1="40" y1="108" x2="580" y2="108" stroke="#2a3a52" stroke-width="2"/>
+      <g font-family="Consolas,monospace" font-size="13">
+        <text x="40" y="140" fill="#7df9ff">PROPAGATION</text>
+        <text x="170" y="140" fill="#e8f6ff">Cl• + CH₄ → HCl + •CH₃</text>
+        <text x="170" y="165" fill="#e8f6ff">•CH₃ + Cl₂ → CH₃Cl + Cl•</text>
+        <text x="380" y="152" fill="#7df9ff" font-size="22">⟳</text>
+      </g>
+      <line x1="40" y1="180" x2="580" y2="180" stroke="#2a3a52" stroke-width="2"/>
+      <g font-family="Consolas,monospace" font-size="13">
+        <text x="40" y="212" fill="#4ecdc4">TERMINATION</text>
+        <text x="170" y="205" fill="#e8f6ff">Cl• + Cl• → Cl₂</text>
+        <text x="330" y="205" fill="#e8f6ff">•CH₃ + Cl• → CH₃Cl</text>
+        <text x="170" y="230" fill="#e8f6ff">•CH₃ + •CH₃ → C₂H₆ (by-product)</text>
+      </g>
+      <g font-family="Consolas,monospace" font-size="11" fill="#7d8ea0">
+        <text x="40" y="260">fish-hook arrows = ONE electron · double-barbed = electron PAIR</text>
+        <text x="40" y="280">chain runs until two radicals meet — that is the off switch</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="act" id="act5">
+  <div class="acttag">Act 5 · R3.4.1 · R3.4.2 · R3.4.3 · R3.4.4 · R3.4.5 · R3.4.6–3.4.13 (AHL)</div>
+  <h2>THE PARTNER EXCHANGE 🕺</h2>
+  <p class="lead">Nucleophiles (electron-rich, donate pairs) meet electrophiles (electron-hungry, accept pairs). The dance has names: SN1, SN2, electrophilic addition — and for AHL, Lewis theory and benzene.</p>
+
+  <h3>R3.4.1–3.4.4 — The dancers and the fission</h3>
+  <div class="cols">
+    <div class="card"><h4>🕺 NUCLEOPHILE</h4><p>Electron-rich, lone pair, donates a pair: OH⁻, CN⁻, Cl⁻, H<sub>2</sub>O, NH<sub>3</sub>. (CH<sub>3</sub>)<sub>4</sub>N⁺ can't — no lone pair.</p></div>
+    <div class="card"><h4>💃 ELECTROPHILE</h4><p>Electron-deficient, accepts a pair: cations (CH<sub>3</sub>⁺), δ+ atoms (BF<sub>3</sub>, carbonyl C).</p></div>
+    <div class="card"><h4>✂️ HETEROLYTIC FISSION</h4><p>Both electrons to one atom: CH<sub>3</sub>Br → CH<sub>3</sub>⁺ + Br⁻ (double-barbed arrow to Br). Makes carbocations.</p></div>
+  </div>
+  <p class="note">Nucleophilic substitution: Nu⁻ + R–X → R–Nu + X⁻. Chloroethane + OH⁻ → ethanol + Cl⁻. The leaving group takes the electron pair.</p>
+
+  <h3>R3.4.5 — Alkenes: electrophilic addition (SL)</h3>
+  <p>The C=C double bond is electron-rich → attacked by electrophiles. Halogens: ethene + Br<sub>2</sub> → 1,2-dibromoethane (bromine water decolourises = test for unsaturation). H–X: but-2-ene + HBr → 2-bromobutane. Water (acid-catalysed): hex-3-ene → hexan-3-ol (hydration; proton consumed then regenerated = catalyst).</p>
+
+  <h3>R3.4.6–3.4.8 (AHL) — Lewis theory: electron-pair economy</h3>
+  <p><strong>Lewis acid = electron-pair acceptor; Lewis base = electron-pair donor.</strong> Bigger than Brønsted–Lowry — covers reactions with no proton. BF<sub>3</sub> + NH<sub>3</sub> → F<sub>3</sub>B–NH<sub>3</sub>: NH<sub>3</sub> is Lewis base/nucleophile, BF<sub>3</sub> is Lewis acid/electrophile. AlCl<sub>3</sub> dimerises to Al<sub>2</sub>Cl<sub>6</sub> (both roles at once). All Lewis bases are nucleophiles, all Lewis acids are electrophiles — and vice versa. Transition metal cations = Lewis acids; ligands (H<sub>2</sub>O, NH<sub>3</sub>, CN⁻, Cl⁻, OH⁻) donate pairs → complex ions: [Co(H<sub>2</sub>O)<sub>6</sub>]²⁺ ⇌ [CoCl<sub>4</sub>]²⁻ (pink ⇌ blue). Charge math: overall = metal charge + Σ(ligand charge).</p>
+
+  <h3>R3.4.9–3.4.10 (AHL) — SN1 vs SN2: two dance styles</h3>
+  <div class="cols">
+    <div class="card"><h4>⚡ SN2 — ONE STEP</h4><p>Primary halogenoalkanes. Concerted backside attack (180° from leaving group, umbrella flip = inversion). No intermediate, just a transition state. rate = k[halogenoalkane][nucleophile] — second order. The "2" = two molecules in the slow step.</p></div>
+    <div class="card"><h4>🐢 SN1 — TWO STEPS</h4><p>Tertiary halogenoalkanes. Step 1: C–X breaks → carbocation (slow, rate-determining). Step 2: nucleophile attacks the cation. rate = k[halogenoalkane] — first order. Stable carbocations: 3° > 2° > 1° (alkyl groups donate electron density).</p></div>
+  </div>
+  <p class="note">Leaving group strength: C–I (228) < C–Br (285) < C–Cl (324) < C–F (492) kJ mol⁻¹ — weaker bond = faster fission = faster reaction. Iodides fastest, fluoroalkanes virtually inert. Rate: 2-iodopropane > 2-bromopropane > 2-chloropropane.</p>
+
+  <h3>R3.4.11–3.4.12 (AHL) — Addition mechanisms + Markovnikov</h3>
+  <p>Electrophilic addition: (1) electrophile attacks the π bond → carbocation, (2) anion/nucleophile attacks the cation. <strong>Markovnikov's rule:</strong> the electropositive part (H) bonds to the carbon with the fewest alkyl substituents, so the carbocation forms on the most substituted carbon. HBr + propene → 2-bromopropane (major, via 2° carbocation) vs 1-bromopropane (minor, via 1°).</p>
+
+  <h3>R3.4.13 (AHL) — Benzene: electrophilic substitution</h3>
+  <p>Benzene's aromatic ring is too stable for addition — it substitutes instead. Nitration: HNO<sub>3</sub> + H<sub>2</sub>SO<sub>4</sub> → NO<sub>2</sub>⁺ (nitronium ion) attacks the π ring → carbocation (aromaticity broken, rate-determining) → H⁺ leaves, aromaticity restored → nitrobenzene.</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 360" role="img" aria-label="SN1 vs SN2 comparison and electrophilic addition to alkene">
+      <rect x="20" y="20" width="600" height="320" rx="14" fill="#0e1420" stroke="#c77dff" stroke-opacity="0.35"/>
+      <text x="40" y="55" fill="#c77dff" font-size="17" font-weight="bold" font-family="Consolas,monospace">TWO DANCE STYLES</text>
+      <text x="100" y="90" fill="#7df9ff" font-size="14" font-family="Consolas,monospace" text-anchor="middle">SN2 · one step</text>
+      <text x="100" y="110" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">backside attack · umbrella flip</text>
+      <text x="100" y="130" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">rate = k[R–X][Nu⁻] · 2nd order</text>
+      <text x="100" y="150" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">primary · no intermediate</text>
+      <text x="400" y="90" fill="#ff6b6b" font-size="14" font-family="Consolas,monospace" text-anchor="middle">SN1 · two steps</text>
+      <text x="400" y="110" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">C–X breaks first → carbocation</text>
+      <text x="400" y="130" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">rate = k[R–X] · 1st order</text>
+      <text x="400" y="150" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">tertiary · 3° > 2° > 1° stable</text>
+      <line x1="40" y1="175" x2="600" y2="175" stroke="#2a3a52" stroke-width="2"/>
+      <text x="40" y="205" fill="#ffd166" font-size="14" font-family="Consolas,monospace">LEAVING GROUP SPEED</text>
+      <g font-family="Consolas,monospace" font-size="13">
+        <text x="40" y="235" fill="#e8f6ff">C–I 228</text>
+        <text x="140" y="235" fill="#7d8ea0">&gt;</text>
+        <text x="160" y="235" fill="#e8f6ff">C–Br 285</text>
+        <text x="270" y="235" fill="#7d8ea0">&gt;</text>
+        <text x="290" y="235" fill="#e8f6ff">C–Cl 324</text>
+        <text x="400" y="235" fill="#7d8ea0">&gt;</text>
+        <text x="420" y="235" fill="#e8f6ff">C–F 492</text>
+        <text x="530" y="235" fill="#7d8ea0" font-size="11">kJ mol⁻¹</text>
+        <text x="40" y="265" fill="#7df9ff">weakest bond → fastest reaction → iodides win</text>
+      </g>
+      <line x1="40" y1="285" x2="600" y2="285" stroke="#2a3a52" stroke-width="2"/>
+      <g font-family="Consolas,monospace" font-size="13">
+        <text x="40" y="312" fill="#ff6b6b">MARKOVNIKOV: H attaches to the C with FEWEST alkyl groups</text>
+        <text x="40" y="332" fill="#e8f6ff">HBr + propene → 2-bromopropane (major, 2° cation) + 1-bromopropane (minor, 1°)</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="act" id="map">
+  <div class="acttag">One picture</div>
+  <h2>MIND MAP 🗺</h2>
+  <div class="mindmap">
+    <div class="mm-root">ORGANIC KITCHEN</div>
+    <div class="mm-branch"><span class="mm-node">INGREDIENTS (S3.2)</span>
+      <div class="mm-leaf">formulas · functional groups · homologous series · IUPAC names · isomers (structural → stereo: cis-trans, optical)</div>
+    </div>
+    <div class="mm-branch"><span class="mm-node">SCANNERS (S3.2 AHL)</span>
+      <div class="mm-leaf">MS (M⁺, fragments) · IR (C=O 1700–1750, O–H 2500–3000) · ¹H NMR (environments, N+1 splitting) · combine all</div>
+    </div>
+    <div class="mm-branch"><span class="mm-node">RADICALS (R3.3)</span>
+      <div class="mm-leaf">unpaired electron · homolytic fission (fish-hook) · initiation → propagation ×2 → termination</div>
+    </div>
+    <div class="mm-branch"><span class="mm-node">PARTNERS (R3.4)</span>
+      <div class="mm-leaf">nucleophile donates pair · electrophile accepts · SN1 vs SN2 · electrophilic addition (Markovnikov) · Lewis acids/bases · complex ions · benzene nitration</div>
+    </div>
+  </div>
+</section>
+
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
+  <div class="marquee">
+    <span>alkanes CₙH₂ₙ₊₂ · alkenes CₙH₂ₙ · alkynes CₙH₂ₙ₋₂ · alcohols CₙH₂ₙ₊₁OH · acids CₙH₂ₙO₂</span>
+    <span>bp climbs with chain length (London forces) · mp is noisy</span>
+    <span>lowest locants rule · C=C beats halogen · –COOH never needs a locant</span>
+    <span>homolytic = fish-hook, one electron each · heterolytic = double-barb, pair to one atom</span>
+    <span>SN2: one step, backside, 2nd order · SN1: carbocation first, 1st order</span>
+    <span>I > Br > Cl leaving groups (bond enthalpy 228 < 285 < 324)</span>
+    <span>Markovnikov: H goes to the carbon with fewer alkyl groups</span>
+    <span>Lewis acid = pair acceptor · nucleophiles are Lewis bases, electrophiles are Lewis acids</span>
+    <span>IR: C=O 1700–1750 strong · acid O–H 2500–3000 broad · NMR: N+1 splitting, integration = H count</span>
+    <span>radical chain: Cl₂ → 2Cl• → •CH₃ → CH₃Cl + Cl• → repeat → terminate</span>
+  </div>
+</section>
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">14 questions. Pick an answer — you get instant feedback with the reasoning.</p>
+  <div class="q" data-a="ch3ch2ch3">
+    <p>1. Which is the condensed structural formula of propane?</p>
+    <label><input type="radio" name="q1" value="ch3ch2ch3"> CH₃CH₂CH₃</label>
+    <label><input type="radio" name="q1" value="wrong1"> C₃H₈</label>
+    <label><input type="radio" name="q1" value="wrong2"> CH₂CH₂CH₂</label>
+    <div class="fb correct">✅ Condensed structural formula shows atoms with bonds implied: CH₃CH₂CH₃. C₃H₈ is the molecular formula.</div>
+    <div class="fb wrong">❌ Condensed formula = atoms in order, bonds implied. CH₃CH₂CH₃.</div>
+  </div>
+
+  <div class="q" data-a="butanone">
+    <p>2. CH₃COCH₂CH₃ belongs to which class?</p>
+    <label><input type="radio" name="q2" value="wrong1"> Aldehyde</label>
+    <label><input type="radio" name="q2" value="butanone"> Ketone</label>
+    <label><input type="radio" name="q2" value="wrong2"> Ether</label>
+    <div class="fb correct">✅ C=O mid-chain = ketone: butanone. Aldehydes have terminal C=O (butanal = CH₃CH₂CH₂CHO).</div>
+    <div class="fb wrong">❌ Ketone — the carbonyl is mid-chain, not terminal.</div>
+  </div>
+
+  <div class="q" data-a="c4h10">
+    <p>3. Butane and methylpropane are an example of...</p>
+    <label><input type="radio" name="q3" value="wrong1"> Positional isomers</label>
+    <label><input type="radio" name="q3" value="c4h10"> Chain isomers</label>
+    <label><input type="radio" name="q3" value="wrong2"> Functional group isomers</label>
+    <div class="fb correct">✅ Same formula C₄H₁₀, different carbon skeleton: chain isomers. Positional = group moves (1-/2-bromobutane). Functional = different group (ethanol vs methoxymethane).</div>
+    <div class="fb wrong">❌ Chain isomers — the skeleton differs: straight butane vs branched methylpropane.</div>
+  </div>
+
+  <div class="q" data-a="nopropene">
+    <p>4. Which alkene shows cis-trans isomerism?</p>
+    <label><input type="radio" name="q4" value="wrong1"> Propene</label>
+    <label><input type="radio" name="q4" value="nopropene"> But-2-ene</label>
+    <label><input type="radio" name="q4" value="wrong2"> 2-methylpropene</label>
+    <div class="fb correct">✅ But-2-ene: each alkene carbon carries two different groups → cis and trans forms. Propene has CH₂ (two identical H) — no isomerism.</div>
+    <div class="fb wrong">❌ But-2-ene. cis-trans needs each C=C carbon to carry two DIFFERENT groups.</div>
+  </div>
+
+  <div class="q" data-a="chiral">
+    <p>5. (AHL) A chiral carbon is bonded to...</p>
+    <label><input type="radio" name="q5" value="wrong1"> Four hydrogen atoms</label>
+    <label><input type="radio" name="q5" value="chiral"> Four different atoms or groups</label>
+    <label><input type="radio" name="q5" value="wrong2"> A double bond</label>
+    <div class="fb correct">✅ Four different groups → non-superimposable mirror images (enantiomers) → rotates plane-polarised light. Example: 2-aminopropanoic acid (H, CH₃, NH₂, COOH).</div>
+    <div class="fb wrong">❌ Four DIFFERENT groups. Two identical groups = no chirality (e.g. C-3 of penicillamine).</div>
+  </div>
+
+  <div class="q" data-a="mz60">
+    <p>6. (AHL) The mass spectrum of propan-1-ol (Mr 60) shows M⁺ at m/z =</p>
+    <label><input type="radio" name="q6" value="mz60"> 60</label>
+    <label><input type="radio" name="q6" value="wrong1"> 31</label>
+    <label><input type="radio" name="q6" value="wrong2"> 29</label>
+    <div class="fb correct">✅ Molecular ion = the intact molecule = Mr = 60. m/z 31 = [CH₂OH]⁺ (lost ethyl); 29 = [CH₃CH₂]⁺.</div>
+    <div class="fb wrong">❌ M⁺ is the highest m/z — the parent molecule (60). Lower peaks are fragments.</div>
+  </div>
+
+  <div class="q" data-a="1700">
+    <p>7. (AHL) A strong absorption at 1700–1750 cm⁻¹ in IR shows...</p>
+    <label><input type="radio" name="q7" value="wrong1"> O–H (alcohol)</label>
+    <label><input type="radio" name="q7" value="1700"> C=O (carbonyl)</label>
+    <label><input type="radio" name="q7" value="wrong2"> C–H (alkane)</label>
+    <div class="fb correct">✅ C=O stretches at 1700–1750 cm⁻¹. Carboxylic acid O–H is the very broad 2500–3000 cm⁻¹ band.</div>
+    <div class="fb wrong">❌ C=O, 1700–1750 cm⁻¹. That single band nails the carbonyl.</div>
+  </div>
+
+  <div class="q" data-a="triplet">
+    <p>8. (AHL) A CH₃ group next to a CH₂ group (2 neighbours) gives a ¹H NMR signal split into a...</p>
+    <label><input type="radio" name="q8" value="wrong1"> Doublet</label>
+    <label><input type="radio" name="q8" value="triplet"> Triplet</label>
+    <label><input type="radio" name="q8" value="wrong2"> Quartet</label>
+    <div class="fb correct">✅ N + 1 rule: 2 neighbours → 3 peaks, ratio 1:2:1. (The CH₂ next to CH₃ shows a quartet — they split each other.)</div>
+    <div class="fb wrong">❌ Triplet (N + 1 = 3). Quartet would need 3 neighbouring protons.</div>
+  </div>
+
+  <div class="q" data-a="homolytic">
+    <p>9. Cl₂ → 2 Cl• under UV light is which step?</p>
+    <label><input type="radio" name="q9" value="wrong1"> Propagation</label>
+    <label><input type="radio" name="q9" value="homolytic"> Initiation</label>
+    <label><input type="radio" name="q9" value="wrong2"> Termination</label>
+    <div class="fb correct">✅ Initiation: homolytic fission makes the two radicals that start the chain. Termination joins two radicals into a molecule.</div>
+    <div class="fb wrong">❌ Initiation — this is where the chain sparks (homolytic fission, UV or heat).</div>
+  </div>
+
+  <div class="q" data-a="sn2">
+    <p>10. (AHL) The rate equation rate = k[halogenoalkane][nucleophile] describes...</p>
+    <label><input type="radio" name="q10" value="sn2"> SN2</label>
+    <label><input type="radio" name="q10" value="wrong1"> SN1</label>
+    <label><input type="radio" name="q10" value="wrong2"> Electrophilic addition</label>
+    <div class="fb correct">✅ The "2" in SN2 = two molecules in the rate-determining step → second order. SN1 is first order: rate = k[halogenoalkane].</div>
+    <div class="fb wrong">❌ SN2 — both reactants appear in the slow step. SN1's slow step is only the C–X bond breaking.</div>
+  </div>
+
+  <div class="q" data-a="iodo">
+    <p>11. (AHL) Fastest nucleophilic substitution with aqueous NaOH?</p>
+    <label><input type="radio" name="q11" value="wrong1"> 2-chloropropane</label>
+    <label><input type="radio" name="q11" value="wrong2"> 2-bromopropane</label>
+    <label><input type="radio" name="q11" value="iodo"> 2-iodopropane</label>
+    <div class="fb correct">✅ C–I bond is weakest (228 kJ mol⁻¹) → fastest heterolytic fission → fastest substitution. C–F (492) is virtually inert.</div>
+    <div class="fb wrong">❌ 2-iodopropane — weakest C–X bond = fastest leaving group departure.</div>
+  </div>
+
+  <div class="q" data-a="markovnikov">
+    <p>12. (AHL) HBr + propene gives a major product of...</p>
+    <label><input type="radio" name="q12" value="wrong1"> 1-bromopropane</label>
+    <label><input type="radio" name="q12" value="markovnikov"> 2-bromopropane</label>
+    <label><input type="radio" name="q12" value="wrong2"> 1,2-dibromopropane</label>
+    <div class="fb correct">✅ Markovnikov: H bonds to the less-substituted carbon → carbocation forms on the more-substituted carbon (2° > 1° stability) → Br lands on C2.</div>
+    <div class="fb wrong">❌ 2-bromopropane — via the more stable secondary carbocation.</div>
+  </div>
+
+  <div class="q" data-a="lewisbase">
+    <p>13. (AHL) In BF₃ + NH₃ → F₃B–NH₃, ammonia is a...</p>
+    <label><input type="radio" name="q13" value="wrong1"> Lewis acid</label>
+    <label><input type="radio" name="q13" value="lewisbase"> Lewis base</label>
+    <label><input type="radio" name="q13" value="wrong2"> Brønsted–Lowry acid</label>
+    <div class="fb correct">✅ NH₃ donates its lone pair to electron-deficient boron → Lewis base (also a nucleophile). BF₃ accepts the pair → Lewis acid. No proton involved, so B–L theory can't describe it.</div>
+    <div class="fb wrong">❌ Lewis base — it donates the electron pair. Lewis acid = acceptor (BF₃).</div>
+  </div>
+
+  <div class="q" data-a="no2plus">
+    <p>14. (AHL) The electrophile in benzene nitration is...</p>
+    <label><input type="radio" name="q14" value="wrong1"> H₂SO₄</label>
+    <label><input type="radio" name="q14" value="no2plus"> NO₂⁺</label>
+    <label><input type="radio" name="q14" value="wrong2"> HNO₃</label>
+    <div class="fb correct">✅ HNO₃ + H₂SO₄ generates the nitronium ion NO₂⁺, which attacks the aromatic ring. Rate-determining step = breaking aromaticity.</div>
+    <div class="fb wrong">❌ NO₂⁺ (nitronium ion), made in situ by the acid mixture.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 18 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">S3.2.1</span><span>Four formula types: empirical (simplest ratio), molecular (actual atoms), condensed (CH₃CH₂CH₃), skeletal (vertices = carbons); carbon makes 4 bonds and catenates into chains.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">S3.2.2</span><span>Functional group = the atom/group that sets a compound's character; classes: halogeno, hydroxyl (-ol), carbonyl (-al/-one), carboxyl (-oic acid), alkoxy (ether), amino (-amine), amido (-amide), ester (-oate), phenyl; saturated vs unsaturated.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">S3.2.3</span><span>Homologous series: same functional group + general formula, +CH₂ per member; alkanes CₙH₂ₙ₊₂, alkenes CₙH₂ₙ, alkynes CₙH₂ₙ₋₂, alcohols CₙH₂ₙ₊₁OH, acids CₙH₂ₙO₂, amines CₙH₂ₙ₊₃N; aldehydes and ketones share CₙH₂ₙO.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">S3.2.4</span><span>Boiling point rises steadily along a series (London forces, +CH₂ each step): methane −161 → hexane 69 °C; melting point is noisy; density and viscosity also rise with chain length.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">S3.2.5</span><span>IUPAC naming: longest chain → root (meth- to hex-) → suffix -ane/-ene/-yne → lowest locants → alphabetical prefixes (3-ethyl-2-methylhexane) → multipliers (2,3-dimethylhexane); priority: C=C over substituents, –OH over C=C, carbonyl lowest, –COOH terminal.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">S3.2.6</span><span>Structural isomers = same formula, different connectivity: chain (butane/methylpropane), positional (1-/2-bromopentane), functional group (ethanol vs methoxymethane); 1°/2°/3° classification; C₄H₉F has 4 isomers.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">S3.2.7</span><span>AHL: stereoisomers = same connectivity, different 3D arrangement; cis-trans (C=C blocks rotation; cis = same side, trans = opposite; propene none); optical: chiral C = 4 different groups, enantiomers rotate plane-polarised light ±, racemic mix = no rotation; wedge/dash drawing.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">S3.2.8</span><span>AHL: mass spectrometry fragments molecules; M⁺ peak = Mr; fragment m/z: 15 CH₃⁺, 17 OH⁺, 29 CHO⁺/C₂H₅⁺, 31 CH₃O⁺/CH₂OH⁺, 45 COOH⁺; propan-1-ol: 60 (M⁺), 31, 29.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">S3.2.9</span><span>AHL: IR identifies bonds by vibration; C=O strong 1700–1750 cm⁻¹, carboxylic acid O–H very broad 2500–3000 cm⁻¹; IR-active needs changing dipole (H₂, O₂, Cl₂ inactive); frequency ↑ with bond enthalpy, ↓ with mass (HCl 2886 > HBr 2559 > HI 2230).</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">S3.2.10</span><span>AHL: ¹H NMR — one signal per H environment; integration = relative H count; TMS = 0 ppm; propanone 1 signal; ethanoic acid 2 (COOH 9–13, CH₃ ~2, 1:3); butanone 3 signals (2.1 s, 2.4 q, 1.1 t).</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">S3.2.11</span><span>AHL: N + 1 splitting rule — 0 → singlet, 1 → doublet, 2 → triplet (1:2:1), 3 → quartet (1:3:3:1); 1,1,2-trichloroethane: Ha doublet, Hb triplet; 1,1-dichloroethane: CH₃ doublet 2.0 + CH quartet 5.8, 3:1.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">S3.2.12</span><span>AHL: combine combustion analysis + MS + IR + NMR + data booklet to identify unknowns; C₂H₄Cl₂ example (isotope peaks 98/100/63/65, NMR 2 signals 3:1) → 1,1-dichloroethane; C₃H₆O + C=O + Mr 58 → propanone.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">R3.3.1</span><span>Radical = species with an unpaired electron, drawn with a dot (Cl•, •CH₃, •OH); exists independently (no counter-ion); highly reactive → usually intermediates; free-radical theory of ageing.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">R3.3.2</span><span>Homolytic fission: bonding pair splits evenly, one electron per atom → two radicals; needs UV light or heat; drawn with single-barbed fish-hook arrows; initiation step of the chain.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">R3.3.3</span><span>Radical substitution in three stages: initiation (Cl₂ → 2Cl•), propagation ×2 (Cl• + CH₄ → HCl + •CH₃; •CH₃ + Cl₂ → CH₃Cl + Cl•), termination (radical + radical → molecule, incl. C₂H₆ by-product); only Cl₂/Br₂ work (F too violent, I too sluggish); curly-arrow rules.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">R3.4.1–3.4.4</span><span>Nucleophile = electron-rich, lone pair, donates a pair (OH⁻, CN⁻, H₂O, NH₃); electrophile = electron-deficient, accepts a pair (CH₃⁺, BF₃, carbonyl C); heterolytic fission = both electrons to one atom → carbocation + anion; Nu⁻ + R–X → R–Nu + X⁻ with leaving group.</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">R3.4.5</span><span>Alkenes undergo electrophilic addition (C=C is electron-rich): +Br₂ → 1,2-dibromoethane (bromine water decolourises = unsaturation test); +HBr → halogenoalkane; +H₂O (acid) → alcohol (hydration, proton = catalyst).</span></li>
+    <li data-i="17"><span class="box">✓</span><span class="code">R3.4.6–3.4.13</span><span>AHL: Lewis acid = electron-pair acceptor, Lewis base = donor (BF₃ + NH₃); nucleophiles = Lewis bases, electrophiles = Lewis acids; ligands donate pairs to transition-metal cations → complex ions ([Co(H₂O)₆]²⁺ ⇌ [CoCl₄]²⁻, pink ⇌ blue); SN2 (one step, backside, 2nd order) vs SN1 (carbocation first, 1st order); leaving groups I > Br > Cl > F; Markovnikov's rule (H to least-substituted carbon); benzene electrophilic substitution — nitration via NO₂⁺.</span></li>
+</ul>
+</section>
+
+<footer>
+  <p>Built from <b>Chemistry: Course Companion</b> (Bylikin, Horner, Grant &amp; Tarcy, Oxford 2023) — Reactivity 3.1 · IB Chemistry guide (first exams 2025) · HL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='organic-chemistry-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>

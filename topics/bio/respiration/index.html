@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>THE POWER PLANT — C1.2 Cell Respiration · Bio HL</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#act1">ACT 1 · ENERGY CURRENCY</a>
+  <a href="#act2">ACT 2 · TOKENS AT WORK</a>
+  <a href="#act3">ACT 3 · TOKEN TURNOVER</a>
+  <a href="#act4">ACT 4 · POWER SYSTEM</a>
+  <a href="#act5">ACT 5 · MAIN STAGE VS BACKUP</a>
+  <a href="#act6">ACT 6 · RATE METER</a>
+  <a href="#act7">ACT 7 · RESPIROMETER</a>
+  <a href="#act8">ACT 8 · HYDROGEN VALETS</a>
+  <a href="#act9">ACT 9 · STREET GENERATOR</a>
+  <a href="#act10">ACT 10 · GENERATOR FULL POWER</a>
+  <a href="#act11">ACT 11 · EMERGENCY BACKUP</a>
+  <a href="#act12">ACT 12 · BACKSTAGE BREWERY</a>
+  <a href="#act13">ACT 13 · DELIVERY DOCK</a>
+  <a href="#act14">ACT 14 · TURBINE LOOP</a>
+  <a href="#act15">ACT 15 · CONVEYOR BELT</a>
+  <a href="#act16">ACT 16 · WATER-WHEEL</a>
+  <a href="#act17">ACT 17 · FINAL CUSTOMER</a>
+  <a href="#act18">ACT 18 · FUEL MIX</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Molecules · Interaction and interdependence · SL + AHL · C1.2.1 – C1.2.17</div>
+  <h1>THE POWER PLANT — C1.2 Cell Respiration · Bio HL</h1>
+  <p class="sub">IB Biology HL · C1.2 Cell Respiration (SL + AHL)</p>
+  <p class="sub">Welcome to THE POWER PLANT — the hottest club in the cell, where every door runs on <b>ATP tokens</b>, the fuel of the night is <b>glucose</b>, and the mitochondria is the engine room that keeps the lights on. Tonight's lineup: the street-level generator (glycolysis), the round-the-clock turbine loop (Krebs cycle), the conveyor belt of electrons (ETC) and the proton waterfall that spins the water-wheel of chemiosmosis — with oxygen as the final customer at the door, and an emergency backup generator for when the main grid goes dark.</p>
+  <div class="badges">
+    <span class="badge">SL + AHL</span>
+    <span class="badge ahl">17 statements</span>
+    <span class="badge">Aerobic + anaerobic</span>
+    <span class="badge">ATP · Glycolysis · Krebs · Chemiosmosis</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 · THE ENERGY CURRENCY ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">C1.2.1 · SL</div>
+  <h2>THE ENERGY CURRENCY</h2>
+  <p class="aim">ATP is the club's currency — the token that distributes energy everywhere it's needed. It's a nucleotide with exactly the right properties to be the universal energy carrier.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🪙</div>
+    <div class="body">
+      <h3>One token fits every machine in the club</h3>
+      <p class="aka">ATP = adenosine triphosphate · nucleotide · energy currency</p>
+      <p><span class="accent">ATP (adenosine triphosphate)</span> is a <span class="cyan">nucleotide</span>: a nitrogen-containing base (<span class="cyan">adenine</span>), a five-carbon sugar (<span class="cyan">ribose</span>) and a chain of <span class="cyan">three phosphate groups</span>, each negatively charged. Like any currency, it's used for <span class="cyan">temporary storage</span> of energy and <span class="cyan">transfer</span> of energy between processes and between parts of the cell.</p>
+      <p>Four properties make it perfect for the job: it's <span class="cyan">soluble in water</span> (moves freely through the cytoplasm), <span class="cyan">stable at neutral pH</span> (like the cytoplasm), <span class="cyan">cannot pass through the phospholipid bilayer</span> (so it can't leak out of cells and its movement between organelles stays controlled), and its <span class="cyan">third phosphate can be easily removed and reattached</span> by hydrolysis and condensation.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="neon diagram of the ATP token: adenine base linked to ribose sugar linked to a chain of three phosphate groups, with the third phosphate marked as easily removed by hydrolysis, and a list of the four properties that make ATP the energy currency: soluble in water, stable at neutral pH, cannot pass the phospholipid bilayer, small energy release on hydrolysis">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE ENERGY CURRENCY — ATP (A NUCLEOTIDE)</text>
+
+      <rect x="40" y="56" width="150" height="54" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="115" y="80" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">ADENINE</text>
+      <text x="115" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">nitrogen base</text>
+
+      <rect x="210" y="56" width="140" height="54" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="280" y="80" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">RIBOSE</text>
+      <text x="280" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">5-carbon sugar</text>
+
+      <circle cx="420" cy="83" r="24" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="420" y="88" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">P</text>
+      <circle cx="478" cy="83" r="24" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="478" y="88" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">P</text>
+      <circle cx="536" cy="83" r="24" fill="rgba(74,222,128,.15)" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="536" y="88" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">P</text>
+      <text x="536" y="132" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">third phosphate</text>
+      <text x="536" y="144" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">pops off EASILY</text>
+      <path d="M 360 83 L 392 83" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah1)" fill="none"/>
+      <path d="M 448 83 L 452 83" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah1)" fill="none"/>
+      <path d="M 506 83 L 510 83" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah1)" fill="none"/>
+      <defs><marker id="ah1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b9a3d6"/></marker></defs>
+
+      <rect x="40" y="176" width="580" height="128" rx="9" fill="rgba(168,85,247,.07)" stroke="rgba(168,85,247,.45)" stroke-width="1.5"/>
+      <text x="330" y="198" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">WHY ATP IS THE PERFECT TOKEN</text>
+      <text x="330" y="222" fill="#b9a3d6" font-size="10" text-anchor="middle">✔ soluble in water → moves freely through cytoplasm</text>
+      <text x="330" y="242" fill="#b9a3d6" font-size="10" text-anchor="middle">✔ stable at neutral pH (cytoplasm conditions)</text>
+      <text x="330" y="262" fill="#b9a3d6" font-size="10" text-anchor="middle">✔ cannot pass phospholipid bilayer → can't leak out, movement controlled</text>
+      <text x="330" y="282" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">✔ third phosphate removed by hydrolysis → small, usable energy release</text>
+
+      <text x="330" y="336" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">ATP + H₂O → ADP + phosphate + energy  (hydrolysis)  ·  condensation rebuilds it</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — The ATP token: adenine + ribose + 3 phosphates = a nucleotide. Small energy release per hydrolysis means no wasteful excess — if each token dumped huge energy, most would be lost as heat.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the <b>four properties</b> question is a classic: soluble in water · stable at neutral pH · can't cross the phospholipid bilayer · third phosphate easily removed/reattached by hydrolysis/condensation. Say all four and link each to a consequence (moves freely · survives in cytoplasm · stays inside the cell · releases a small amount of energy on demand).</div>
+</section>
+
+<!-- ══════════════════════ ACT 2 · TOKENS AT WORK ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">C1.2.2 · SL</div>
+  <h2>TOKENS AT WORK</h2>
+  <p class="aim">The club only runs if the tokens get spent. ATP supplies energy to three main types of activity: building macromolecules, pumping against gradients, and movement.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🏗️</div>
+    <div class="body">
+      <h3>Three rooms where the currency gets cashed in</h3>
+      <p class="aka">anabolism · active transport · movement · ATP→ADP + Pi</p>
+      <p><span class="accent">1. Synthesizing macromolecules:</span> anabolic reactions that link monomers into polymers are endothermic — they only happen when coupled to ATP → ADP. Every time a monomer joins a growing polymer, one or more ATP molecules are spent: DNA during replication, RNA in transcription, proteins in translation.</p>
+      <p><span class="accent">2. Active transport:</span> pumping ions against their concentration gradient. ATP drives <span class="cyan">reversible changes in the conformation (shape) of the pump protein</span> — one shape lets the particle enter, the other lets it exit. ATP pays for the change from the stable to the less stable shape.</p>
+      <p><span class="accent">3. Movement:</span> chromosomes dragged to the poles during <span class="cyan">mitosis</span>, vesicles shuttling cargo, whole cells changing shape during <span class="cyan">cytokinesis</span>, <span class="cyan">phagocytes</span> crawling to infection sites, and muscle fibres contracting as <span class="cyan">actin and myosin filaments slide</span> across each other.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three rooms where ATP tokens are spent: the synthesis bar where monomers link into DNA RNA and protein using one or more ATP per link; the pump room where an ion pump protein changes conformation to push ions against the gradient; and the dance floor where chromosomes move in mitosis, cells pinch in cytokinesis, phagocytes crawl and muscle actin and myosin filaments slide">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">TOKENS AT WORK — THREE WAYS ATP GETS SPENT</text>
+
+      <rect x="30" y="52" width="192" height="180" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="126" y="72" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">1 · SYNTHESIS BAR</text>
+      <text x="126" y="94" fill="#b9a3d6" font-size="9" text-anchor="middle">monomers → polymers</text>
+      <text x="126" y="110" fill="#b9a3d6" font-size="9" text-anchor="middle">DNA replication</text>
+      <text x="126" y="126" fill="#b9a3d6" font-size="9" text-anchor="middle">RNA transcription</text>
+      <text x="126" y="142" fill="#b9a3d6" font-size="9" text-anchor="middle">protein translation</text>
+      <text x="126" y="166" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">≥1 ATP per monomer link</text>
+      <text x="126" y="200" fill="#b9a3d6" font-size="9" text-anchor="middle">anabolic · endothermic</text>
+      <text x="126" y="216" fill="#b9a3d6" font-size="9" text-anchor="middle">coupled to ATP → ADP</text>
+
+      <rect x="234" y="52" width="192" height="180" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="72" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">2 · PUMP ROOM</text>
+      <text x="330" y="94" fill="#b9a3d6" font-size="9" text-anchor="middle">ions against gradient</text>
+      <rect x="258" y="104" width="144" height="34" rx="7" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="330" y="125" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">PUMP PROTEIN</text>
+      <text x="330" y="154" fill="#b9a3d6" font-size="9" text-anchor="middle">ATP changes its SHAPE</text>
+      <text x="330" y="170" fill="#b9a3d6" font-size="9" text-anchor="middle">(conformational change)</text>
+      <text x="330" y="186" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">particle in one shape, out the other</text>
+      <text x="330" y="210" fill="#b9a3d6" font-size="9" text-anchor="middle">stable → less stable shape costs ATP</text>
+
+      <rect x="438" y="52" width="192" height="180" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2"/>
+      <text x="534" y="72" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">3 · DANCE FLOOR</text>
+      <text x="534" y="94" fill="#b9a3d6" font-size="9" text-anchor="middle">chromosomes → poles (mitosis)</text>
+      <text x="534" y="110" fill="#b9a3d6" font-size="9" text-anchor="middle">vesicles moved</text>
+      <text x="534" y="126" fill="#b9a3d6" font-size="9" text-anchor="middle">cytokinesis pinch</text>
+      <text x="534" y="142" fill="#b9a3d6" font-size="9" text-anchor="middle">phagocytes crawl</text>
+      <text x="534" y="158" fill="#b9a3d6" font-size="9" text-anchor="middle">muscle: actin + myosin slide</text>
+      <text x="534" y="186" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">big moves = many ATP</text>
+
+      <text x="330" y="272" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Every process spends the same token: ATP → ADP + phosphate (Pi) + energy</text>
+      <text x="330" y="310" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">muscle cramp? neurons silent? = the tokens ran out</text>
+      <text x="330" y="336" fill="#b9a3d6" font-size="9.5" text-anchor="middle">without ATP, cells start to degrade within minutes — damage soon irreparable</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — Three spending rooms: anabolism (DNA/RNA/protein, ATP per monomer), active transport (pump protein conformational change), movement (mitosis chromosomes, cytokinesis, phagocytes, actin-myosin sliding).</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> ATP does <b>not</b> store energy long-term — that's glycogen and starch. ATP is the <b>immediate</b> transfer token; storage molecules are the savings account, ATP is the cash in your pocket.</div>
+</section>
+
+<!-- ══════════════════════ ACT 3 · TOKEN TURNOVER ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">C1.2.3 · SL</div>
+  <h2>TOKEN TURNOVER</h2>
+  <p class="aim">ATP and ADP are constantly interconverted: hydrolysis of ATP releases energy, and rebuilding ATP from ADP + phosphate needs energy from somewhere. The turnover is relentless.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔄</div>
+    <div class="body">
+      <h3>The same token, spent and reminted hundreds of times a day</h3>
+      <p class="aka">ATP ⇌ ADP + Pi · hydrolysis vs condensation · ~120 mol/day</p>
+      <p><span class="accent">ATP → ADP + Pi</span> releases energy — ATP holds more chemical potential energy than ADP. The amount released is <span class="cyan">small but sufficient</span> for many cell processes. Sometimes the phosphate is first tacked onto another molecule (like a pump protein or a metabolic substrate); when it detaches, the energy is released and drives a change — a conformational change in a pump, or a chemical change of substrate into product.</p>
+      <p><span class="accent">ADP + Pi → ATP</span> needs energy, supplied by <span class="cyan">cell respiration</span> (oxidizing carbohydrates, fats or proteins), <span class="cyan">photosynthesis</span> (light → chemical energy) or <span class="cyan">chemosynthesis</span> (oxidizing inorganic substances such as sulfides). The whole cycle is <span class="cyan">not 100% efficient</span> — some energy escapes as heat.</p>
+      <p><span class="gold">The numbers are wild:</span> a human uses about <span class="cyan">120 moles of ATP per day</span>, but only about <span class="cyan">0.2 moles exist in the body at any moment</span> — so each ATP molecule is converted to ADP and back roughly <span class="cyan">600 times per day</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="token recycling loop: ATP is spent by active cell processes becoming ADP plus phosphate, and ATP is reminted from ADP plus phosphate using energy from cell respiration, photosynthesis or chemosynthesis, with a counter showing 120 moles used per day while only 0.2 moles are present so each token is recycled about 600 times a day">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">TOKEN TURNOVER — THE RECYCLING LOOP</text>
+
+      <rect x="200" y="52" width="260" height="56" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="74" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">ATP  (energy-rich token)</text>
+      <text x="330" y="94" fill="#b9a3d6" font-size="9" text-anchor="middle">more chemical potential energy than ADP</text>
+
+      <path d="M 330 108 L 330 138" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah3)" fill="none"/>
+      <defs><marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff2ec4"/></marker></defs>
+      <text x="352" y="126" fill="#ff2ec4" font-size="9.5" font-weight="800">HYDROLYSIS</text>
+      <text x="352" y="140" fill="#b9a3d6" font-size="8.5">energy released · small, sufficient</text>
+
+      <rect x="200" y="144" width="260" height="56" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="330" y="166" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">ADP + phosphate (Pi)</text>
+      <text x="330" y="186" fill="#b9a3d6" font-size="9" text-anchor="middle">active cell processes: synthesis · pumps · movement</text>
+
+      <path d="M 330 200 L 330 230" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah3b)" fill="none"/>
+      <defs><marker id="ah3b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <text x="352" y="220" fill="#22d3ee" font-size="9.5" font-weight="800">CONDENSATION</text>
+      <text x="352" y="234" fill="#b9a3d6" font-size="8.5">energy needed to rebuild ATP</text>
+
+      <rect x="150" y="236" width="360" height="52" rx="9" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.5)" stroke-width="1.5"/>
+      <text x="330" y="258" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">ENERGY SUPPLY: cell respiration · photosynthesis · chemosynthesis</text>
+      <text x="330" y="276" fill="#b9a3d6" font-size="9" text-anchor="middle">oxidising carbs/fats/proteins · light energy · oxidising inorganic substances (e.g. sulfides)</text>
+
+      <text x="330" y="316" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">~120 moles used per day · only ~0.2 moles present → each token recycled ~600×</text>
+      <text x="330" y="340" fill="#b9a3d6" font-size="9.5" text-anchor="middle">transfers are not 100% efficient — some energy is always lost as heat</text>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — The recycling loop: hydrolysis spends the token (small, sufficient energy), condensation remints it with energy from respiration, photosynthesis or chemosynthesis. 120 mol/day used vs 0.2 mol present = ~600 turnovers per molecule per day.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> ATP runs out fast if regeneration stops — neurons stop firing, muscle cells cramp, and cells start degrading within minutes. Continual regeneration of ATP from ADP + Pi is what keeps the party alive.</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 · THE POWER SYSTEM ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">C1.2.4 · SL</div>
+  <h2>THE POWER SYSTEM</h2>
+  <p class="aim">Cell respiration is the club's power grid: it oxidises carbon compounds and uses the released energy to produce ATP. It needs gas exchange to keep the air moving — the two are interdependent.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⚡</div>
+    <div class="body">
+      <h3>Every living cell runs its own generator</h3>
+      <p class="aka">oxidation of carbon compounds · glucose + fatty acids · gas exchange</p>
+      <p><span class="accent">Cell respiration</span> is performed by all living cells: <span class="cyan">carbon compounds are oxidised</span> to release energy, and that energy is used to produce ATP. A wide range of carbon compounds can serve as respiratory substrates, but <span class="cyan">glucose and fatty acids are the main ones</span> in most cells. Humans get their substrates from food; plants use carbohydrates or lipids made by photosynthesis.</p>
+      <p><span class="accent">Gas exchange ≠ respiration</span> — but they're <span class="cyan">interdependent</span>. O₂ diffuses into cells and CO₂ diffuses out, each across the plasma membrane independently (no one-for-one swap). Without gas exchange, respiration stops (oxygen runs low, CO₂ builds up); without respiration, gas exchange stops (the concentration gradients that drive diffusion vanish).</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the club power grid: fuel tank supplying glucose and fatty acids into the generator which oxidises carbon compounds to produce ATP tokens, with oxygen entering and carbon dioxide leaving by simple diffusion across the membrane, and a note that gas exchange and cell respiration are interdependent because respiration creates the concentration gradients that drive diffusion">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE POWER SYSTEM — RESPIRATION + GAS EXCHANGE</text>
+
+      <rect x="40" y="60" width="150" height="88" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="115" y="82" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">FUEL TANK</text>
+      <text x="115" y="104" fill="#b9a3d6" font-size="9" text-anchor="middle">glucose (main)</text>
+      <text x="115" y="120" fill="#b9a3d6" font-size="9" text-anchor="middle">fatty acids (main)</text>
+      <text x="115" y="136" fill="#b9a3d6" font-size="9" text-anchor="middle">+ wide range of C-compounds</text>
+
+      <path d="M 194 104 L 238 104" stroke="#fbbf24" stroke-width="2" marker-end="url(#ah4)" fill="none"/>
+      <defs><marker id="ah4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/></marker></defs>
+
+      <rect x="244" y="60" width="190" height="88" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="339" y="82" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">THE GENERATOR</text>
+      <text x="339" y="102" fill="#b9a3d6" font-size="9" text-anchor="middle">carbon compounds oxidised</text>
+      <text x="339" y="118" fill="#b9a3d6" font-size="9" text-anchor="middle">energy released → used to</text>
+      <text x="339" y="134" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">produce ATP</text>
+
+      <path d="M 438 104 L 482 104" stroke="#4ade80" stroke-width="2" marker-end="url(#ah4b)" fill="none"/>
+      <defs><marker id="ah4b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker></defs>
+
+      <rect x="488" y="60" width="132" height="88" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="554" y="82" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">ATP OUT</text>
+      <text x="554" y="104" fill="#b9a3d6" font-size="9" text-anchor="middle">energy currency</text>
+      <text x="554" y="120" fill="#b9a3d6" font-size="9" text-anchor="middle">powers the club</text>
+
+      <rect x="40" y="196" width="580" height="100" rx="9" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.5)" stroke-width="1.5"/>
+      <text x="330" y="218" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">GAS EXCHANGE — O₂ IN, CO₂ OUT (simple diffusion, independently)</text>
+      <text x="330" y="240" fill="#b9a3d6" font-size="9.5" text-anchor="middle">O₂ enters cells through the plasma membrane · CO₂ exits the same way</text>
+      <text x="330" y="258" fill="#b9a3d6" font-size="9.5" text-anchor="middle">not a one-for-one swap — both move by simple diffusion, driven by gradients</text>
+      <text x="330" y="280" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">respiration creates the O₂/CO₂ gradients · gradients drive gas exchange → interdependent</text>
+
+      <text x="330" y="330" fill="#b9a3d6" font-size="10" text-anchor="middle">without gas exchange respiration stops (no O₂, excess CO₂) · without respiration gas exchange stops (no gradients)</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — The power system: oxidise carbon compounds (glucose, fatty acids) → energy → ATP. Gas exchange and respiration are different processes but interdependent: respiration makes the gradients, the gradients drive diffusion.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "distinguish between cell respiration and gas exchange" — respiration = <b>chemical process</b> releasing energy from carbon compounds to make ATP (happens in every cell); gas exchange = <b>physical diffusion</b> of O₂ in and CO₂ out across the plasma membrane. Then add the interdependence sentence for full marks.</div>
+</section>
+
+<!-- ══════════════════════ ACT 5 · MAIN STAGE VS BACKUP ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">C1.2.5 · SL</div>
+  <h2>MAIN STAGE VS BACKUP</h2>
+  <p class="aim">Aerobic respiration is the main stage — huge yield, needs oxygen, uses mitochondria. Anaerobic respiration is the emergency backup generator — 2 ATP per glucose, cytoplasm only, no mitochondria required.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⚔️</div>
+    <div class="body">
+      <h3>Two sets of word equations, one club</h3>
+      <p class="aka">aerobic vs anaerobic · oxygen debt · lactate · sprint power</p>
+      <p><span class="accent">Aerobic (humans, most animals, plants):</span> glucose + oxygen → carbon dioxide + water, with a yield of <span class="cyan">more than 30 ATP per glucose</span>. Reactions start in the cytoplasm but continue in <span class="cyan">mitochondria</span>, where oxygen is used.</p>
+      <p><span class="accent">Anaerobic (humans, some bacteria):</span> glucose → lactate, only <span class="cyan">2 ATP per glucose</span>. Everything happens in the <span class="cyan">cytoplasm; mitochondria are not required</span>. Only carbohydrates can be used, and no water is produced.</p>
+      <p>Anaerobic respiration trades yield for <span class="cyan">speed</span> — it supplies ATP very rapidly for short bursts of maximal power: <span class="cyan">weightlifters during a lift, sprinters up to 400 m, sprint finishes</span>. Lactate tolerance limits how long this can last — that's why we can only sprint about 400 m. After vigorous contractions the lactate must be broken down, which <span class="cyan">needs oxygen</span> — the extra demand is the <span class="gold">oxygen debt</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two generators side by side: the main stage aerobic generator burns glucose plus oxygen to carbon dioxide plus water with over 30 ATP and uses mitochondria, while the emergency backup anaerobic generator converts glucose to lactate with only 2 ATP in the cytoplasm with no mitochondria needed, and a meter showing the oxygen debt bill after vigorous exercise">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">MAIN STAGE VS BACKUP — AEROBIC VS ANAEROBIC</text>
+
+      <rect x="30" y="52" width="290" height="150" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2"/>
+      <text x="175" y="72" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">MAIN STAGE · AEROBIC</text>
+      <text x="175" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">glucose + oxygen → CO₂ + water</text>
+      <text x="175" y="118" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">&gt;30 ATP per glucose</text>
+      <text x="175" y="140" fill="#b9a3d6" font-size="9.5" text-anchor="middle">oxygen = electron acceptor</text>
+      <text x="175" y="156" fill="#b9a3d6" font-size="9.5" text-anchor="middle">substrates: carbs + lipids + amino acids</text>
+      <text x="175" y="172" fill="#b9a3d6" font-size="9.5" text-anchor="middle">cytoplasm THEN mitochondria</text>
+      <text x="175" y="190" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">waste: CO₂ + water</text>
+
+      <rect x="340" y="52" width="290" height="150" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="485" y="72" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">BACKUP · ANAEROBIC (HUMANS)</text>
+      <text x="485" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">glucose → lactate</text>
+      <text x="485" y="118" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">only 2 ATP per glucose</text>
+      <text x="485" y="140" fill="#b9a3d6" font-size="9.5" text-anchor="middle">other substances act as acceptors</text>
+      <text x="485" y="156" fill="#b9a3d6" font-size="9.5" text-anchor="middle">only carbohydrates usable</text>
+      <text x="485" y="172" fill="#b9a3d6" font-size="9.5" text-anchor="middle">cytoplasm ONLY · no mitochondria</text>
+      <text x="485" y="190" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">waste: lactate (no water)</text>
+
+      <rect x="160" y="226" width="340" height="52" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="330" y="248" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">WHEN? max power bursts — weightlifters · sprinters ≤400 m · sprint finishes</text>
+      <text x="330" y="266" fill="#b9a3d6" font-size="9" text-anchor="middle">lactate tolerance limits duration → that's the ~400 m sprint limit</text>
+
+      <text x="330" y="310" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">OXYGEN DEBT = the bill after the party</text>
+      <text x="330" y="334" fill="#b9a3d6" font-size="9.5" text-anchor="middle">lactate breakdown needs O₂ — takes several minutes to clear → the demand that builds up is the oxygen debt</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — Aerobic: glucose + O₂ → CO₂ + H₂O, &gt;30 ATP, mitochondria. Anaerobic: glucose → lactate, 2 ATP, cytoplasm only. Backup wins on speed, loses on yield — and leaves an oxygen-debt bill.</div>
+  </div>
+
+  <table>
+    <tr><th></th><th>Aerobic</th><th>Anaerobic</th></tr>
+    <tr><td>Oxygen</td><td>Used as electron acceptor</td><td>Not used — other substances accept electrons</td></tr>
+    <tr><td>Substrates</td><td>Carbs, lipids, amino acids (after deamination)</td><td>Only carbohydrates</td></tr>
+    <tr><td>Waste products</td><td>CO₂ + water</td><td>CO₂ + lactate (humans) or ethanol; no water</td></tr>
+    <tr><td>ATP yield per glucose</td><td>&gt;30</td><td>2</td></tr>
+    <tr><td>Location</td><td>Cytoplasm, then mitochondria</td><td>Cytoplasm only — mitochondria not required</td></tr>
+  </table>
+
+  <div class="tip"><b>Remember:</b> anaerobic = <b>fast but broke</b> (2 ATP), aerobic = <b>slow but rich</b> (&gt;30 ATP). The oxygen debt is the O₂ needed afterwards to clear the lactate — not the lactate itself.</div>
+</section>
+
+<!-- ══════════════════════ ACT 6 · THE RATE METER ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">C1.2.6 · SL</div>
+  <h2>THE RATE METER</h2>
+  <p class="aim">How fast is the club burning fuel? The rate of cell respiration can be measured three ways — oxygen uptake, CO₂ production, or substrate consumption — and a heap of variables can change it.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📊</div>
+    <div class="body">
+      <h3>Ways to clock the burn rate</h3>
+      <p class="aka">oxygen uptake · CO₂ production · substrate use · rate = amount ÷ time</p>
+      <p><span class="accent">Three measurements</span> can give the rate of cell respiration: <span class="cyan">oxygen uptake</span>, <span class="cyan">carbon dioxide production</span>, or <span class="cyan">consumption of glucose</span> (or another respiratory substrate). Oxygen uptake is the usual choice for aerobic respiration — but you can't measure it from how much air is breathed in, because air contains other gases and only a small fraction of each breath is absorbed.</p>
+      <p>A <span class="accent">rate</span> is an amount per unit time: if 50 mm³ of oxygen is used in 10 minutes, the rate is <span class="cyan">5 mm³ of oxygen per minute</span>. The calculated rate is the <span class="cyan">dependent variable</span>; the variable you deliberately change (temperature, organism, activity level) is the <span class="cyan">independent variable</span>.</p>
+      <p><span class="accent">Variables that matter:</span> temperature, the type of organism, active vs inactive organisms — any experiment changes one variable while keeping all others constant. Temperature and pressure must be controlled because volume, pressure and temperature interact: a rise in temperature expands the air and skews the reading.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="rate meter dashboard: three dials for measuring the respiration rate — oxygen uptake, carbon dioxide production, and consumption of glucose or other respiratory substrates — with the formula rate equals amount divided by time using the example 50 cubic millimetres in 10 minutes equals 5 per minute, and a list of independent variables: temperature, type of organism, active versus inactive, while temperature and pressure must be controlled">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE RATE METER — MEASURING RESPIRATION RATE</text>
+
+      <rect x="30" y="52" width="192" height="96" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="126" y="74" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">DIAL 1 · O₂ UPTAKE</text>
+      <text x="126" y="98" fill="#b9a3d6" font-size="9" text-anchor="middle">usual measure of aerobic rate</text>
+      <text x="126" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">NOT from lung air (other gases)</text>
+      <text x="126" y="130" fill="#b9a3d6" font-size="9" text-anchor="middle">respirometer does this</text>
+
+      <rect x="234" y="52" width="192" height="96" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="74" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">DIAL 2 · CO₂ PRODUCTION</text>
+      <text x="330" y="98" fill="#b9a3d6" font-size="9" text-anchor="middle">amount of carbon dioxide made</text>
+      <text x="330" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">mass loss in yeast flasks</text>
+      <text x="330" y="130" fill="#b9a3d6" font-size="9" text-anchor="middle">(data-logged on a balance)</text>
+
+      <rect x="438" y="52" width="192" height="96" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="534" y="74" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">DIAL 3 · SUBSTRATE USE</text>
+      <text x="534" y="98" fill="#b9a3d6" font-size="9" text-anchor="middle">consumption of glucose or</text>
+      <text x="534" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">other respiratory substrates</text>
+
+      <rect x="30" y="170" width="600" height="58" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="192" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">RATE = AMOUNT ÷ TIME</text>
+      <text x="330" y="214" fill="#b9a3d6" font-size="9.5" text-anchor="middle">50 mm³ O₂ in 10 min → 5 mm³ O₂ per minute · calculated rate = dependent variable</text>
+
+      <text x="330" y="262" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">INDEPENDENT VARIABLES TO PLAY WITH</text>
+      <text x="330" y="284" fill="#b9a3d6" font-size="9.5" text-anchor="middle">temperature · type of organism · active vs inactive organisms · substrate available</text>
+      <text x="330" y="306" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">change ONE variable, keep all others constant</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">control temperature + pressure — volume, pressure and temperature interact</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — The rate meter: three dials (O₂ uptake, CO₂ production, substrate consumption), rate = amount ÷ time, and a controlled experiment: one independent variable changed, everything else constant.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> the <b>rate</b> (amount per unit time, the dependent variable) with the <b>variable you change</b> (the independent variable). Temperature and pressure are <b>controlled</b> variables — they must not drift, or the volume readings lie.</div>
+</section>
+
+<!-- ══════════════════════ ACT 7 · THE RESPIROMETER ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">C1.2.6 · SL</div>
+  <h2>THE RESPIROMETER</h2>
+  <p class="aim">The respirometer is the club's fuel gauge: a sealed chamber where CO₂ is absorbed by alkali, so any movement of fluid in the capillary tube is caused by oxygen uptake alone.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧪</div>
+    <div class="body">
+      <h3>How the fuel gauge works</h3>
+      <p class="aka">sealed container · potassium hydroxide · capillary fluid · water bath</p>
+      <p>A respirometer has three essential parts: a <span class="cyan">sealed glass or plastic container</span> holding the organism or tissue with enough air, a <span class="cyan">base (alkali) such as potassium hydroxide (KOH)</span> that absorbs the CO₂ produced, and a <span class="cyan">capillary tube containing fluid</span> connected to the container to measure volume changes.</p>
+      <p>Normally, CO₂ production adds volume while O₂ intake reduces it. With the CO₂ <span class="cyan">absorbed by the KOH</span>, any volume change must be due to oxygen intake alone — so <span class="cyan">fluid movement in the capillary = oxygen consumption</span>. Convert distance moved to volume if the tube's internal diameter is known.</p>
+      <p>Control the variables: keep temperature constant with a <span class="cyan">thermostatically controlled water bath</span>, and watch outside air pressure (it can move the fluid without any O₂ uptake). A second identical tube <span class="cyan">without respiring tissue</span> corrects for pressure and temperature changes.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="respirometer apparatus: a sealed flask holding a wire basket with living tissue and a filter-paper wick soaked in potassium hydroxide to absorb carbon dioxide, connected to a capillary tube containing a fluid drop that moves as oxygen is used up, the whole set-up inside a thermostatically controlled water bath, with an identical control flask without tissue on the left to correct for pressure and temperature changes">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE RESPIROMETER — MEASURING O₂ UPTAKE</text>
+
+      <rect x="60" y="52" width="200" height="120" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="160" y="74" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">CONTROL FLASK</text>
+      <text x="160" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">identical to test flask</text>
+      <text x="160" y="112" fill="#b9a3d6" font-size="9" text-anchor="middle">NO respiring tissue</text>
+      <text x="160" y="128" fill="#b9a3d6" font-size="9" text-anchor="middle">corrects for changes in</text>
+      <text x="160" y="144" fill="#b9a3d6" font-size="9" text-anchor="middle">pressure + temperature</text>
+
+      <rect x="400" y="52" width="200" height="120" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="500" y="74" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">TEST FLASK</text>
+      <text x="500" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">wire basket: living tissue</text>
+      <text x="500" y="112" fill="#b9a3d6" font-size="9" text-anchor="middle">filter-paper wick + KOH</text>
+      <text x="500" y="128" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">KOH absorbs ALL the CO₂</text>
+      <text x="500" y="144" fill="#b9a3d6" font-size="9" text-anchor="middle">→ volume change = O₂ only</text>
+
+      <rect x="275" y="82" width="110" height="20" rx="5" fill="rgba(74,222,128,.12)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="330" y="96" fill="#4ade80" font-size="8.5" font-weight="800" text-anchor="middle">CAPILLARY · FLUID</text>
+      <path d="M 260 92 L 271 92" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah7)" fill="none"/>
+      <defs><marker id="ah7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b9a3d6"/></marker></defs>
+      <path d="M 389 92 L 400 92" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah7b)" fill="none"/>
+      <defs><marker id="ah7b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b9a3d6"/></marker></defs>
+      <text x="330" y="70" fill="#b9a3d6" font-size="8.5" text-anchor="middle">fluid moves → O₂ consumed</text>
+
+      <rect x="40" y="200" width="580" height="72" rx="9" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.5)" stroke-width="1.5"/>
+      <text x="330" y="222" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">THERMOSTATICALLY CONTROLLED WATER BATH</text>
+      <text x="330" y="244" fill="#b9a3d6" font-size="9.5" text-anchor="middle">constant temperature → no thermal expansion of air to fake a reading</text>
+      <text x="330" y="262" fill="#b9a3d6" font-size="9.5" text-anchor="middle">heat from respiring organisms would otherwise expand the air and inflate the volume</text>
+
+      <text x="330" y="306" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">rate = volume of O₂ used ÷ time  (e.g. 50 mm³ in 10 min = 5 mm³ min⁻¹)</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">convert mm of fluid movement to volume using the internal diameter of the capillary</text>
+    </svg>
+    <div class="cap"><b>FIG 7</b> — Respirometer: KOH absorbs CO₂ → capillary fluid movement = O₂ uptake; thermostatic water bath controls temperature; identical flask without tissue corrects pressure/temperature drift.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> "why does the respirometer need KOH?" — without it, CO₂ production would add volume and mask the O₂ uptake. "Why a thermostatically controlled water bath?" — volume, pressure and temperature interact; constant temperature keeps readings honest. "Why a control tube?" — it corrects for changes in outside air pressure that would move the fluid regardless of respiration.</div>
+</section>
+
+<!-- ══════════════════════ ACT 8 · THE HYDROGEN VALETS ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">C1.2.7 · AHL</div>
+  <h2>THE HYDROGEN VALETS <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Oxidation and reduction always happen together — and in respiration, oxidation means removing hydrogen. NAD is the valet that carries the hydrogen (and its electrons) away.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🧤</div>
+    <div class="body">
+      <h3>Redox: one club loses electrons, another gains them</h3>
+      <p class="aka">oxidation = loss of electrons · reduction = gain · NAD = nicotinamide adenine dinucleotide</p>
+      <p><span class="accent">Oxidation</span> is the loss of electrons from a substance; <span class="accent">reduction</span> is the gain of electrons. They always occur together because electrons are transferred from one substance to another. The lab classic: in the <span class="cyan">Benedict's test</span>, blue <span class="cyan">Cu²⁺</span> ions gain electrons from sugar molecules and become insoluble <span class="cyan">copper atoms</span> — a red/orange precipitate. The sugar is oxidised (it lost electrons), the copper is reduced.</p>
+      <p><span class="accent">NAD (nicotinamide adenine dinucleotide)</span> is the main electron carrier in respiration — two nucleotides joined (one with a nicotinamide base, one with an adenine base). Substrates are oxidised by <span class="cyan">removal of two hydrogen atoms</span> (dehydrogenation); each hydrogen is an electron plus a proton. NAD⁺ accepts <span class="cyan">two electrons and one proton</span>, becoming <span class="cyan">NADH</span>, and the other proton (H⁺) is released.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the hydrogen valet service: a substrate is oxidised by removal of two hydrogen atoms, NAD plus accepts two electrons and one proton becoming reduced NAD or NADH with one proton released, and a Benedict's test panel showing blue Cu two plus ions gaining electrons to become red copper atoms while the sugar is oxidised">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE HYDROGEN VALETS — NAD + REDOX</text>
+
+      <rect x="30" y="52" width="190" height="110" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="125" y="74" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">SUBSTRATE</text>
+      <text x="125" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">removed: 2 H atoms</text>
+      <text x="125" y="112" fill="#b9a3d6" font-size="9" text-anchor="middle">(= 2 e⁻ + 2 H⁺)</text>
+      <text x="125" y="136" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">OXIDISED (lost electrons)</text>
+
+      <path d="M 224 108 L 258 108" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah8)" fill="none"/>
+      <defs><marker id="ah8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <text x="241" y="96" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">2H</text>
+
+      <rect x="264" y="52" width="180" height="110" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="354" y="74" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">NAD⁺ (oxidised)</text>
+      <text x="354" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">nicotinamide adenine</text>
+      <text x="354" y="112" fill="#b9a3d6" font-size="9" text-anchor="middle">dinucleotide · 2 nucleotides</text>
+      <text x="354" y="136" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">accepts 2 e⁻ + 1 H⁺ → NADH</text>
+      <text x="354" y="152" fill="#b9a3d6" font-size="9" text-anchor="middle">other H⁺ released</text>
+
+      <rect x="470" y="52" width="160" height="110" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2"/>
+      <text x="550" y="74" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">REDUCED NAD</text>
+      <text x="550" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">= NADH + H⁺</text>
+      <text x="550" y="112" fill="#b9a3d6" font-size="9" text-anchor="middle">carries 2 e⁻ + energy</text>
+      <text x="550" y="136" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">→ to the ETC (Act 15)</text>
+
+      <rect x="30" y="190" width="600" height="116" rx="9" fill="rgba(251,191,36,.07)" stroke="rgba(251,191,36,.5)" stroke-width="1.5"/>
+      <text x="330" y="212" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">BENEDICT'S TEST — THE LAB EXAMPLE OF REDOX</text>
+      <text x="330" y="234" fill="#b9a3d6" font-size="9.5" text-anchor="middle">Cu²⁺ (blue) + 2 e⁻ from sugar → Cu atoms (red/orange precipitate)</text>
+      <text x="330" y="254" fill="#b9a3d6" font-size="9.5" text-anchor="middle">copper ions are REDUCED (gain electrons) · the sugar is OXIDISED (lost electrons)</text>
+      <text x="330" y="280" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">oxidation + reduction always occur together — redox is electron transfer</text>
+
+      <text x="330" y="336" fill="#b9a3d6" font-size="9.5" text-anchor="middle">hydrogens are removed as atoms (e⁻ + H⁺), not as bare H⁺ — otherwise no electrons would be lost and nothing would be oxidised</text>
+    </svg>
+    <div class="cap"><b>FIG 8</b> — Oxidation by dehydrogenation: substrate loses 2 H (2 e⁻ + 2 H⁺), NAD⁺ takes 2 e⁻ + 1 H⁺ → NADH + H⁺. Benedict's test shows the same redox in a test tube: Cu²⁺ blue → Cu red.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> hydrogen atoms are removed, <b>not hydrogen ions</b>. Removing H⁺ alone would take no electrons, so the substrate wouldn't be oxidised. And NAD⁺ becomes <b>reduced</b> NAD by gaining electrons — reduced means electron-rich, not "smaller".</div>
+</section>
+
+<!-- ══════════════════════ ACT 9 · STREET-LEVEL GENERATOR ══════════════════════ -->
+<section class="act" id="act9">
+  <div class="acttag">C1.2.8 · AHL · stages 1–2</div>
+  <h2>STREET-LEVEL GENERATOR <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Glycolysis is the fast street-level generator: no oxygen needed, runs in the cytoplasm, and converts glucose into two pyruvates in four stages. First, the doors open: phosphorylation and lysis.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚪</div>
+    <div class="body">
+      <h3>Stage 1 · Phosphorylation — spend tokens to prime the fuel</h3>
+      <p class="aka">glycolysis · cytoplasm · 2 ATP in · fructose-1,6-bisphosphate</p>
+      <p><span class="accent">Stage 1 (phosphorylation):</span> two ATP molecules are invested to add phosphate groups to glucose — first to glucose-6-phosphate and fructose-6-phosphate, then a <span class="cyan">second phosphorylation</span> converts fructose-6-phosphate to <span class="cyan">fructose-1,6-bisphosphate</span>. The phosphorylated sugar is trapped inside the cell and primed for splitting.</p>
+      <p><span class="accent">Stage 2 (lysis):</span> fructose-1,6-bisphosphate is split into <span class="cyan">two molecules of triose phosphate</span> (3C each). Now the whole pathway deals with two identical three-carbon halves.</p>
+      <p>Every step is catalysed by a <span class="cyan">different enzyme</span> — a whole chain of bouncers, each with one specific door.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="street generator doors opening: glucose six-carbon enters, two ATP tokens are invested in stage one phosphorylation producing fructose-1,6-bisphosphate, then stage two lysis splits it into two triose phosphate molecules of three carbons each, all happening in the cytoplasm with each step catalysed by a different enzyme">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">STREET-LEVEL GENERATOR — GLYCOLYSIS STAGES 1–2</text>
+
+      <rect x="30" y="56" width="140" height="52" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="100" y="78" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">GLUCOSE</text>
+      <text x="100" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">6C · from the fuel tank</text>
+
+      <path d="M 174 82 L 216 82" stroke="#ff2ec4" stroke-width="2" marker-end="url(#ah9)" fill="none"/>
+      <defs><marker id="ah9" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff2ec4"/></marker></defs>
+
+      <rect x="222" y="52" width="200" height="60" rx="9" fill="rgba(255,46,196,.08)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="322" y="72" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">STAGE 1 · PHOSPHORYLATION</text>
+      <text x="322" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">2 ATP invested (2 phosphate groups)</text>
+      <text x="322" y="106" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">→ fructose-1,6-bisphosphate</text>
+
+      <path d="M 426 82 L 468 82" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah9b)" fill="none"/>
+      <defs><marker id="ah9b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+
+      <rect x="474" y="52" width="156" height="60" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="552" y="72" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">STAGE 2 · LYSIS</text>
+      <text x="552" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">fructose-1,6-bisphosphate</text>
+      <text x="552" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">splits in two</text>
+
+      <rect x="150" y="140" width="160" height="48" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="230" y="162" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">TRIOSE PHOSPHATE</text>
+      <text x="230" y="178" fill="#b9a3d6" font-size="9" text-anchor="middle">3C · × 2 molecules</text>
+      <rect x="350" y="140" width="160" height="48" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="430" y="162" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">TRIOSE PHOSPHATE</text>
+      <text x="430" y="178" fill="#b9a3d6" font-size="9" text-anchor="middle">3C · × 2 molecules</text>
+
+      <text x="330" y="236" fill="#b9a3d6" font-size="10" text-anchor="middle">from here on, every event happens TWICE (two halves)</text>
+      <text x="330" y="262" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">each step catalysed by a different enzyme</text>
+      <text x="330" y="292" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">LOCATION: CYTOPLASM — no oxygen needed, no mitochondria required</text>
+      <text x="330" y="322" fill="#b9a3d6" font-size="9.5" text-anchor="middle">the investment: 2 ATP per glucose · repaid with interest in stage 4 (Act 10)</text>
+    </svg>
+    <div class="cap"><b>FIG 9</b> — Doors open: phosphorylation spends 2 ATP to make fructose-1,6-bisphosphate; lysis splits it into 2 triose phosphates (3C). Cytoplasm, no O₂, different enzyme per step.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> the 2 ATP spent in stage 1 are an <b>investment</b> — they're repaid 4-fold in stage 4. Net yield = 4 − 2 = 2 ATP per glucose.</div>
+</section>
+
+<!-- ══════════════════════ ACT 10 · GENERATOR FULL POWER ══════════════════════ -->
+<section class="act" id="act10">
+  <div class="acttag">C1.2.8 · AHL · stages 3–4</div>
+  <h2>GENERATOR FULL POWER <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Now the generator pays out: oxidation hands hydrogen to NAD, and ATP formation banks four tokens per glucose. The net result of glycolysis: 2 pyruvate, 2 reduced NAD and a net 2 ATP.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔋</div>
+    <div class="body">
+      <h3>Stage 3 · Oxidation — hand the hydrogen to the valet</h3>
+      <p class="aka">oxidation · reduced NAD · bisphosphoglycerate · 4 ATP out</p>
+      <p><span class="accent">Stage 3 (oxidation):</span> each triose phosphate is oxidised by <span class="cyan">removal of hydrogen</span>, accepted by <span class="cyan">NAD → reduced NAD</span>. (Hydrogen atoms, not ions — removing H⁺ alone would lose no electrons.) Oxidising the sugar produces an organic acid; the energy released lets a second phosphate attach, giving <span class="cyan">bisphosphoglycerate</span>.</p>
+      <p><span class="accent">Stage 4 (ATP formation):</span> the two phosphates of bisphosphoglycerate are transferred to ADP — twice, because there are two bisphosphoglycerates per glucose. <span class="cyan">Four ATP are produced per glucose</span>, converting glycerate into <span class="cyan">pyruvate</span>, the end product.</p>
+      <p><span class="accent">Overall per glucose:</span> one 6C glucose → <span class="cyan">two 3C pyruvates</span>; 2 NAD → <span class="cyan">2 reduced NAD</span>; <span class="cyan">net 2 ATP</span> (2 used, 4 produced). Small yield — but it needs <span class="cyan">no oxygen</span>, so it's the lifeline when O₂ runs short.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="generator paying out: each triose phosphate is oxidised with hydrogen accepted by NAD to become reduced NAD producing bisphosphoglycerate, then ATP formation transfers phosphates to ADP producing 4 ATP, final outputs are 2 pyruvate three-carbon molecules, 2 reduced NAD and a net 2 ATP after repaying the 2 ATP invested">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">GENERATOR FULL POWER — GLYCOLYSIS STAGES 3–4</text>
+
+      <rect x="30" y="52" width="290" height="110" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="175" y="74" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">STAGE 3 · OXIDATION (×2 halves)</text>
+      <text x="175" y="98" fill="#b9a3d6" font-size="9" text-anchor="middle">hydrogen removed from triose phosphate</text>
+      <text x="175" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">accepted by NAD → reduced NAD</text>
+      <text x="175" y="130" fill="#b9a3d6" font-size="9" text-anchor="middle">oxidation of sugar → organic acid</text>
+      <text x="175" y="146" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">+ phosphate → bisphosphoglycerate</text>
+
+      <rect x="340" y="52" width="290" height="110" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="2"/>
+      <text x="485" y="74" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">STAGE 4 · ATP FORMATION (×2 halves)</text>
+      <text x="485" y="98" fill="#b9a3d6" font-size="9" text-anchor="middle">phosphate groups transferred to ADP</text>
+      <text x="485" y="114" fill="#b9a3d6" font-size="9" text-anchor="middle">2 phosphates × 2 molecules =</text>
+      <text x="485" y="134" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">4 ATP produced per glucose</text>
+      <text x="485" y="152" fill="#b9a3d6" font-size="9" text-anchor="middle">glycerate → pyruvate (end product)</text>
+
+      <rect x="60" y="196" width="160" height="56" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="140" y="218" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">2 PYRUVATE</text>
+      <text x="140" y="238" fill="#b9a3d6" font-size="9" text-anchor="middle">3C each · end product</text>
+
+      <rect x="250" y="196" width="160" height="56" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="330" y="218" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">2 REDUCED NAD</text>
+      <text x="330" y="238" fill="#b9a3d6" font-size="9" text-anchor="middle">2 NAD → 2 reduced NAD</text>
+
+      <rect x="440" y="196" width="160" height="56" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="520" y="218" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">NET 2 ATP</text>
+      <text x="520" y="238" fill="#b9a3d6" font-size="9" text-anchor="middle">4 made − 2 invested = 2</text>
+
+      <text x="330" y="290" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">net: glucose (6C) → 2 pyruvate (3C) + 2 reduced NAD + 2 ATP</text>
+      <text x="330" y="316" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">no oxygen required — small yield but always available</text>
+      <text x="330" y="340" fill="#b9a3d6" font-size="9.5" text-anchor="middle">a different enzyme catalyses each step of the pathway</text>
+    </svg>
+    <div class="cap"><b>FIG 10</b> — Full power: oxidation (hydrogen → NAD → reduced NAD, bisphosphoglycerate) then ATP formation (4 ATP out). Net per glucose: 2 pyruvate + 2 reduced NAD + 2 ATP, oxygen-free.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the four stages in order — <b>phosphorylation</b> (2 ATP in), <b>lysis</b> (splits to 2 triose phosphate), <b>oxidation</b> (hydrogen removed → reduced NAD), <b>ATP formation</b> (4 ATP out). Net yield 2 ATP + 2 reduced NAD; 2 pyruvate. You don't need intermediate names, but you do need the net numbers and that each step has its own enzyme.</div>
+</section>
+
+<!-- ══════════════════════ ACT 11 · EMERGENCY BACKUP ══════════════════════ -->
+<section class="act" id="act11">
+  <div class="acttag">C1.2.9 · AHL</div>
+  <h2>EMERGENCY BACKUP <span class="badge ahl">AHL</span></h2>
+  <p class="aim">When oxygen runs out, the generator can't dump its hydrogen anywhere — unless pyruvate steps in. Converting pyruvate to lactate regenerates NAD, and glycolysis keeps spinning.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚨</div>
+    <div class="body">
+      <h3>Pyruvate takes the hydrogen so the party can continue</h3>
+      <p class="aka">pyruvate → lactate · NAD regeneration · lactic fermentation · oxygen debt</p>
+      <p>Glycolysis needs a constant supply of glucose, ADP and <span class="cyan">NAD</span>. NAD runs out unless it's regenerated by oxidising reduced NAD — two hydrogen atoms (two protons and two electrons) must be transferred to another molecule.</p>
+      <p>In human (and some animal and bacterial) cells, hydrogen is transferred from <span class="cyan">reduced NAD to pyruvate</span>, converting pyruvate into <span class="cyan">lactate</span> — in the <span class="cyan">cytoplasm</span>. Two pyruvates are made per glucose, and each regenerates one NAD, so <span class="cyan">all the NAD used in glycolysis is recovered</span>. As long as glucose is available and lactate doesn't build up too high, anaerobic respiration can continue indefinitely.</p>
+      <p>This is <span class="cyan">lactic fermentation</span> — and it's a food-preservation trick: accumulating lactic acid lowers the pH and stops decomposition by bacteria and fungi. <span class="gold">Yoghurt, kimchi, sauerkraut and silage</span> are all made this way.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="emergency backup generator loop: pyruvate plus reduced NAD becomes lactate plus NAD in the cytoplasm, the regenerated NAD feeds back into glycolysis so it can keep producing 2 ATP per glucose, with a side panel listing foods made by lactic fermentation — yoghurt, kimchi, sauerkraut, silage — and the oxygen debt note that clearing lactate later needs oxygen">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE EMERGENCY BACKUP — PYRUVATE → LACTATE</text>
+
+      <rect x="40" y="52" width="200" height="62" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="140" y="76" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">PYRUVATE (3C)</text>
+      <text x="140" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">from glycolysis · 2 per glucose</text>
+
+      <rect x="420" y="52" width="200" height="62" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="520" y="76" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">LACTATE (3C)</text>
+      <text x="520" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">takes 2H from reduced NAD</text>
+
+      <path d="M 244 83 L 330 83" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah11)" fill="none"/>
+      <defs><marker id="ah11" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker></defs>
+      <path d="M 416 83 L 330 83" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah11b)" fill="none"/>
+      <defs><marker id="ah11b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker></defs>
+      <text x="330" y="70" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">reduced NAD → NAD</text>
+      <text x="330" y="102" fill="#b9a3d6" font-size="8.5" text-anchor="middle">2 H transferred · cytoplasm</text>
+
+      <rect x="40" y="150" width="580" height="50" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="330" y="172" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">NAD REGENERATED → GLYCOLYSIS KEEPS RUNNING → 2 ATP per glucose continues</text>
+      <text x="330" y="190" fill="#b9a3d6" font-size="9" text-anchor="middle">all NAD used in glycolysis is recovered · continues as long as glucose is available + lactate not too high</text>
+
+      <rect x="40" y="224" width="280" height="76" rx="9" fill="rgba(251,191,36,.07)" stroke="rgba(251,191,36,.5)" stroke-width="1.5"/>
+      <text x="180" y="246" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">LACTIC FERMENTATION FOODS</text>
+      <text x="180" y="268" fill="#b9a3d6" font-size="9.5" text-anchor="middle">yoghurt · kimchi · sauerkraut · silage</text>
+      <text x="180" y="288" fill="#b9a3d6" font-size="9" text-anchor="middle">low pH preserves — blocks decomposers</text>
+
+      <rect x="340" y="224" width="280" height="76" rx="9" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.5)" stroke-width="1.5"/>
+      <text x="480" y="246" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">OXYGEN DEBT — THE BILL</text>
+      <text x="480" y="268" fill="#b9a3d6" font-size="9.5" text-anchor="middle">lactate breakdown needs O₂</text>
+      <text x="480" y="288" fill="#b9a3d6" font-size="9.5" text-anchor="middle">several minutes to clear after hard exercise</text>
+
+      <text x="330" y="336" fill="#b9a3d6" font-size="9.5" text-anchor="middle">lactate limit ≈ the ~400 m sprint · weightlifters and sprinters live on the backup generator</text>
+    </svg>
+    <div class="cap"><b>FIG 11</b> — Emergency backup: pyruvate + reduced NAD → lactate + NAD (cytoplasm). NAD is regenerated, glycolysis continues at 2 ATP/glucose. Lactic fermentation = yoghurt, kimchi, sauerkraut, silage.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> the point of making lactate is <b>NOT to get rid of pyruvate</b> — it's to <b>regenerate NAD</b> so glycolysis can keep producing its 2 ATP. Lactate is a by-product of recycling, not a waste product with a job.</div>
+</section>
+
+<!-- ══════════════════════ ACT 12 · THE BACKSTAGE BREWERY ══════════════════════ -->
+<section class="act" id="act12">
+  <div class="acttag">C1.2.10 · AHL</div>
+  <h2>THE BACKSTAGE BREWERY <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Yeast runs the same backup generator differently: it turns pyruvate into ethanol and CO₂ in two stages. That CO₂ raises bread; that ethanol brews beer and wine.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🍞</div>
+    <div class="body">
+      <h3>Same glycolysis, different way to recycle NAD</h3>
+      <p class="aka">ethanol fermentation · ethanal · decarboxylation · facultative anaerobe</p>
+      <p>Yeast (a unicellular fungus, and a <span class="cyan">facultative anaerobe</span> — it can respire with or without oxygen) regenerates NAD by converting pyruvate to <span class="cyan">ethanol + CO₂</span>, in two stages. <span class="accent">Stage 1:</span> <span class="cyan">decarboxylation</span> — CO₂ is removed from pyruvate, leaving <span class="cyan">ethanal</span>. <span class="accent">Stage 2:</span> two hydrogens transfer from <span class="cyan">reduced NAD to ethanal</span>, making <span class="cyan">ethanol</span> and regenerating NAD. Same number of NADs regenerated per glucose as in human cells, so the 2-ATP-per-glucose party continues as long as glucose holds out and ethanol doesn't get too high.</p>
+      <p><span class="accent">Baking:</span> yeast in dough respires — aerobically at first, then anaerobically once the dough's oxygen is gone. The viscous dough traps the <span class="cyan">CO₂ bubbles</span>, making it swell and rise; the <span class="cyan">ethanol evaporates during baking</span>.</p>
+      <p><span class="accent">Brewing:</span> the goal is ethanol. Wine ferments grape juice; beer uses barley starch first converted to sugar by <span class="cyan">amylase</span> (yeast can't metabolise starch). In big tanks oxygen is limited, so yeast switches anaerobic; fermentation ends when the sugar runs out or the <span class="cyan">ethanol becomes toxic to the yeast — about 15% by volume</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="backstage brewery flow: pyruvate loses carbon dioxide in a decarboxylation stage one becoming ethanal, then reduced NAD transfers two hydrogens to ethanal in stage two making ethanol and regenerating NAD, with two side cards — baking where carbon dioxide bubbles get trapped in viscous dough making it rise while ethanol evaporates, and brewing where fermentation stops when sugar runs out or ethanol reaches about 15 percent by volume and becomes toxic to yeast">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE BACKSTAGE BREWERY — YEAST ETHANOL FERMENTATION</text>
+
+      <rect x="30" y="52" width="150" height="60" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="105" y="76" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">PYRUVATE (3C)</text>
+      <text x="105" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">from glycolysis</text>
+
+      <path d="M 184 82 L 246 82" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah12)" fill="none"/>
+      <defs><marker id="ah12" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/></marker></defs>
+      <text x="215" y="70" fill="#fbbf24" font-size="8.5" font-weight="800" text-anchor="middle">−CO₂</text>
+      <text x="215" y="104" fill="#b9a3d6" font-size="8.5" text-anchor="middle">stage 1 · decarboxylation</text>
+
+      <rect x="252" y="52" width="150" height="60" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="327" y="76" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">ETHANAL (2C)</text>
+      <text x="327" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">CO₂ removed from pyruvate</text>
+
+      <path d="M 406 82 L 468 82" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah12b)" fill="none"/>
+      <defs><marker id="ah12b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <text x="437" y="70" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">+2H</text>
+      <text x="437" y="104" fill="#b9a3d6" font-size="8.5" text-anchor="middle">stage 2 · reduced NAD</text>
+
+      <rect x="474" y="52" width="156" height="60" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="552" y="76" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">ETHANOL (2C)</text>
+      <text x="552" y="96" fill="#b9a3d6" font-size="9" text-anchor="middle">NAD regenerated</text>
+
+      <rect x="30" y="140" width="290" height="100" rx="9" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="175" y="162" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">🍞 BAKING — BREAD RISES</text>
+      <text x="175" y="184" fill="#b9a3d6" font-size="9" text-anchor="middle">CO₂ bubbles trapped in viscous dough</text>
+      <text x="175" y="202" fill="#b9a3d6" font-size="9" text-anchor="middle">→ dough swells and rises</text>
+      <text x="175" y="220" fill="#b9a3d6" font-size="9" text-anchor="middle">ethanol evaporates during baking</text>
+
+      <rect x="340" y="140" width="290" height="100" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="485" y="162" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">🍺 BREWING — ETHANOL IS THE POINT</text>
+      <text x="485" y="184" fill="#b9a3d6" font-size="9" text-anchor="middle">wine: grape juice · beer: barley starch</text>
+      <text x="485" y="202" fill="#b9a3d6" font-size="9" text-anchor="middle">+ amylase (yeast can't use starch)</text>
+      <text x="485" y="220" fill="#fbbf24" font-size="9" font-weight="800" text-anchor="middle">stops at ~15% ethanol — toxic to yeast</text>
+
+      <text x="330" y="280" fill="#b9a3d6" font-size="10" text-anchor="middle">yeast = facultative anaerobe · aerobic first, anaerobic once O₂ is used up</text>
+      <text x="330" y="306" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">glucose → ethanol + CO₂  (2 ATP per glucose, cytoplasm)</text>
+      <text x="330" y="332" fill="#b9a3d6" font-size="9.5" text-anchor="middle">bioethanol: sugar cane + corn fermented by yeast, purified by distillation — renewable fuel</text>
+    </svg>
+    <div class="cap"><b>FIG 12</b> — Backstage brewery: decarboxylation → ethanal (+CO₂), then reduced NAD → ethanol (+NAD). Bread: trapped CO₂ rises the dough, ethanol evaporates. Brewing: ethanol accumulates until ~15% by volume kills the yeast.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> humans regenerate NAD by making <b>lactate</b>; yeast regenerates NAD by making <b>ethanol + CO₂</b>. Both give 2 ATP per glucose, both run in the cytoplasm — only the final product differs.</div>
+</section>
+
+<!-- ══════════════════════ ACT 13 · THE DELIVERY DOCK ══════════════════════ -->
+<section class="act" id="act13">
+  <div class="acttag">C1.2.11 · AHL</div>
+  <h2>THE DELIVERY DOCK <span class="badge ahl">AHL</span></h2>
+  <p class="aim">If oxygen is available, pyruvate moves into the mitochondrial matrix and docks at the link reaction: a three-enzyme complex that strips CO₂, oxidises the remnant, and loads it onto coenzyme A.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📦</div>
+    <div class="body">
+      <h3>Pyruvate in, acetyl CoA out — the handoff to the turbine</h3>
+      <p class="aka">link reaction · matrix · 3-enzyme complex · acetyl coenzyme A</p>
+      <p>Glycolysis leaves pyruvate in the cytoplasm, but the link reaction and Krebs cycle happen in the <span class="cyan">matrix of the mitochondrion</span>. A <span class="cyan">transporter protein in the outer membrane</span> moves pyruvate across. This conversion links glycolysis to the Krebs cycle — hence the name.</p>
+      <p>A <span class="cyan">complex of three enzymes</span> carries out three processes: <span class="accent">1 · decarboxylation</span> — removal of CO₂ changes 3C pyruvate into a 2C molecule; <span class="accent">2 · oxidation</span> — two electrons are removed and accepted by <span class="cyan">NAD → reduced NAD</span>; <span class="accent">3 · binding</span> — the acetyl group attaches to <span class="cyan">coenzyme A</span>, forming <span class="cyan">acetyl coenzyme A (acetyl CoA)</span>.</p>
+      <p>Per glucose: two pyruvates → <span class="cyan">2 acetyl CoA + 2 CO₂ + 2 reduced NAD</span>. The acetyl group (2C) is now fuelled up for the turbine loop.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="delivery dock at the mitochondrion: pyruvate three-carbon arrives through a transporter in the outer membrane into the matrix, the three-enzyme complex removes carbon dioxide by decarboxylation, oxidises by removing two electrons accepted by NAD becoming reduced NAD, and binds the acetyl group to coenzyme A producing acetyl coenzyme A two-carbon, which then feeds the Krebs cycle">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE DELIVERY DOCK — THE LINK REACTION (MATRIX)</text>
+
+      <ellipse cx="330" cy="230" rx="300" ry="120" fill="rgba(34,211,238,.04)" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="330" y="196" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">MITOCHONDRIAL MATRIX</text>
+
+      <rect x="40" y="60" width="130" height="56" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="105" y="84" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">PYRUVATE</text>
+      <text x="105" y="102" fill="#b9a3d6" font-size="9" text-anchor="middle">3C · from cytoplasm</text>
+
+      <rect x="40" y="140" width="130" height="34" rx="7" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="105" y="162" fill="#fbbf24" font-size="8.5" font-weight="800" text-anchor="middle">transporter protein</text>
+      <text x="105" y="182" fill="#b9a3d6" font-size="8.5" text-anchor="middle">(outer membrane)</text>
+
+      <path d="M 174 88 L 236 88" stroke="#b9a3d6" stroke-width="2" marker-end="url(#ah13)" fill="none"/>
+      <defs><marker id="ah13" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b9a3d6"/></marker></defs>
+
+      <rect x="242" y="56" width="200" height="116" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="342" y="76" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">COMPLEX OF 3 ENZYMES</text>
+      <text x="342" y="98" fill="#b9a3d6" font-size="9" text-anchor="middle">1 · decarboxylation: −CO₂ (3C → 2C)</text>
+      <text x="342" y="116" fill="#b9a3d6" font-size="9" text-anchor="middle">2 · oxidation: −2 e⁻ → NAD → reduced NAD</text>
+      <text x="342" y="134" fill="#b9a3d6" font-size="9" text-anchor="middle">3 · binding: acetyl + coenzyme A</text>
+      <text x="342" y="158" fill="#4ade80" font-size="9" font-weight="800" text-anchor="middle">→ ACETYL COENZYME A (2C)</text>
+
+      <path d="M 446 88 L 508 88" stroke="#4ade80" stroke-width="2" marker-end="url(#ah13b)" fill="none"/>
+      <defs><marker id="ah13b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker></defs>
+
+      <rect x="514" y="60" width="116" height="56" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="572" y="84" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">ACETYL CoA</text>
+      <text x="572" y="102" fill="#b9a3d6" font-size="9" text-anchor="middle">2C → Krebs cycle</text>
+
+      <text x="330" y="252" fill="#b9a3d6" font-size="9.5" text-anchor="middle">CO₂ released (waste) · per glucose: 2 pyruvate → 2 acetyl CoA + 2 CO₂ + 2 reduced NAD</text>
+      <text x="330" y="276" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">all the carbon in sugars and fats is removed as CO₂ here or in the Krebs cycle</text>
+      <text x="330" y="300" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">only happens if oxygen is available — the aerobic road ahead</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">lipids and carbohydrates are both metabolised to 2C acetyl groups carried by coenzyme A</text>
+    </svg>
+    <div class="cap"><b>FIG 13</b> — Delivery dock: pyruvate (3C) in the matrix is decarboxylated (−CO₂), oxidised (→ reduced NAD) and bound to coenzyme A → acetyl CoA (2C). Three-enzyme complex, matrix, aerobic only.</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> the link reaction is where the <b>aerobic flag drops</b>. Without oxygen, pyruvate gets diverted to lactate or ethanol instead; with oxygen, it's loaded onto CoA and sent to the turbine.</div>
+</section>
+
+<!-- ══════════════════════ ACT 14 · THE ROUND-THE-CLOCK TURBINE ══════════════════════ -->
+<section class="act" id="act14">
+  <div class="acttag">C1.2.12 · AHL</div>
+  <h2>THE ROUND-THE-CLOCK TURBINE <span class="badge ahl">AHL</span></h2>
+  <p class="aim">The Krebs cycle is a turbine loop that never stops turning: acetyl groups are fed in, citrate (6C) forms, and two decarboxylations plus four oxidations spin it back to oxaloacetate (4C) — paying out reduced NAD, reduced FAD and ATP each turn.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔁</div>
+    <div class="body">
+      <h3>One acetyl group in, a stream of energy carriers out</h3>
+      <p class="aka">Krebs cycle · matrix · citrate 6C · oxaloacetate 4C</p>
+      <p>Acetyl groups from the link reaction are fed into the cycle by transfer from coenzyme A to <span class="cyan">oxaloacetate (4C)</span>, producing <span class="cyan">citrate (6C)</span> — named in honour of Hans Krebs, who won a Nobel Prize for discovering the cycle. Citrate is converted back to oxaloacetate by a series of enzyme-catalysed reactions: <span class="cyan">two decarboxylations</span> remove carbon as CO₂, and <span class="cyan">four oxidations</span> (dehydrogenations) release energy carried off by electron carriers.</p>
+      <p>The electrons removed in the oxidations are transferred to <span class="cyan">NAD or FAD</span> — both electron carriers, both hydrogen carriers. <span class="cyan">Reduced NAD and reduced FAD</span> carry the energy to the electron transport chain in the inner mitochondrial membrane.</p>
+      <p><span class="accent">Net per turn of the cycle:</span> one acetyl group consumed · <span class="cyan">3 reduced NAD + 1 reduced FAD + 1 ATP</span> produced · <span class="cyan">2 CO₂ released</span>. All the carbon in sugar or fat is removed by decarboxylation here or in the link reaction.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the round-the-clock turbine loop of the Krebs cycle: acetyl CoA two-carbon feeds in and combines with oxaloacetate four-carbon to make citrate six-carbon, the loop converts citrate back to oxaloacetate through two decarboxylations releasing two carbon dioxides and four oxidations, paying out three reduced NAD one reduced FAD and one ATP per turn, and the regenerated oxaloacetate keeps the loop spinning">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE TURBINE LOOP — KREBS CYCLE (MATRIX)</text>
+
+      <path d="M 330 92 A 110 110 0 1 1 329.9 92" stroke="#a855f7" stroke-width="0" fill="none"/>
+      <circle cx="330" cy="92" r="110" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="330" y="86" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">KREBS CYCLE</text>
+      <text x="330" y="100" fill="#b9a3d6" font-size="8.5" text-anchor="middle">spins forever</text>
+
+      <rect x="30" y="56" width="150" height="52" rx="9" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="105" y="76" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">ACETYL CoA</text>
+      <text x="105" y="94" fill="#b9a3d6" font-size="9" text-anchor="middle">2C · from link reaction</text>
+
+      <rect x="240" y="46" width="170" height="46" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="325" y="66" fill="#ff2ec4" font-size="10" font-weight="800" text-anchor="middle">OXALOACETATE (4C)</text>
+      <text x="325" y="84" fill="#b9a3d6" font-size="9" text-anchor="middle">+ acetyl → CITRATE (6C)</text>
+
+      <rect x="470" y="56" width="150" height="52" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="545" y="76" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">CITRATE (6C)</text>
+      <text x="545" y="94" fill="#b9a3d6" font-size="9" text-anchor="middle">first stop on the loop</text>
+
+      <rect x="40" y="196" width="280" height="104" rx="9" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.5)" stroke-width="1.5"/>
+      <text x="180" y="218" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">WHAT THE TURBINE PAYS OUT PER TURN</text>
+      <text x="180" y="242" fill="#b9a3d6" font-size="9.5" text-anchor="middle">2 decarboxylations → 2 CO₂ released</text>
+      <text x="180" y="262" fill="#b9a3d6" font-size="9.5" text-anchor="middle">4 oxidations (dehydrogenations)</text>
+      <text x="180" y="282" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">3 reduced NAD + 1 reduced FAD + 1 ATP</text>
+
+      <rect x="340" y="196" width="280" height="104" rx="9" fill="rgba(251,191,36,.07)" stroke="rgba(251,191,36,.5)" stroke-width="1.5"/>
+      <text x="480" y="218" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">CITRATE → BACK TO OXALOACETATE</text>
+      <text x="480" y="242" fill="#b9a3d6" font-size="9.5" text-anchor="middle">enzyme-catalysed series of reactions</text>
+      <text x="480" y="262" fill="#b9a3d6" font-size="9.5" text-anchor="middle">oxaloacetate (4C) is REGENERATED</text>
+      <text x="480" y="282" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">the loop never stops — hence "cycle"</text>
+
+      <text x="330" y="332" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reduced NAD + reduced FAD carry the energy to the ETC (Act 15) · CO₂ is the waste</text>
+    </svg>
+    <div class="cap"><b>FIG 14</b> — The turbine loop: acetyl (2C) + oxaloacetate (4C) → citrate (6C) → back to oxaloacetate via 2 decarboxylations + 4 oxidations. Per turn: 3 reduced NAD + 1 reduced FAD + 1 ATP + 2 CO₂.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> you only need to name <b>citrate (6C)</b> and <b>oxaloacetate (4C)</b> — and the per-turn yield (3 reduced NAD, 1 reduced FAD, 1 ATP, 2 CO₂). The four oxidations are dehydrogenations: hydrogen removed, electrons carried away by NAD or FAD.</div>
+</section>
+
+<!-- ══════════════════════ ACT 15 · THE CONVEYOR BELT ══════════════════════ -->
+<section class="act" id="act15">
+  <div class="acttag">C1.2.13 + C1.2.14 · AHL</div>
+  <h2>THE CONVEYOR BELT <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Reduced NAD and reduced FAD hand their electron pairs to the electron transport chain — a conveyor belt of carriers in the inner mitochondrial membrane. The energy of the electron flow pumps protons, building the gradient that powers everything next.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🎢</div>
+    <div class="body">
+      <h3>Electrons in, protons pumped — energy stored as a gradient</h3>
+      <p class="aka">ETC · cristae · proton pumps · 10 H⁺ vs 6 H⁺</p>
+      <p><span class="accent">C1.2.13 — handing over the energy:</span> groups of proteins in the <span class="cyan">inner mitochondrial membrane</span> act as electron carriers, each accepting and passing on pairs of electrons — the <span class="cyan">electron transport chain (ETC)</span>. The <span class="cyan">first carrier accepts a pair from reduced NAD</span>, converting it back to NAD and gaining chemical energy. Reduced NAD arrives from glycolysis (entering the mitochondrion), the link reaction and the Krebs cycle. <span class="cyan">Reduced FAD</span> also transfers a pair — but with less energy, so it enters <span class="cyan">part way along the chain</span>, at a carrier with higher electron affinity. Cristae (infoldings) maximise the membrane area and the number of ETCs.</p>
+      <p><span class="accent">C1.2.14 — building the proton gradient:</span> energy is released at every step as electrons pass from carrier to carrier. The <span class="cyan">three main carriers each act as a proton pump</span>: the first two pump <span class="cyan">4 protons each per pair of electrons</span>, the third pumps <span class="cyan">2</span> — a total of <span class="cyan">10 protons from reduced NAD</span>, but only <span class="cyan">6 from reduced FAD</span> (fed in after the first carrier).</p>
+      <p>Protons are pumped from the <span class="cyan">matrix to the intermembrane space</span> — against the concentration gradient, so it costs energy, which is stored as the gradient itself: <span class="cyan">high [H⁺] in the intermembrane space, low [H⁺] in the matrix</span>. That stored energy will make ATP in Act 16.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the conveyor belt of the electron transport chain in the inner mitochondrial membrane: reduced NAD delivers an electron pair to the first carrier and reduced FAD delivers its pair part way along, the three main carriers pump protons from the matrix into the intermembrane space, the first two pumping four protons each and the third pumping two for a total of ten protons per pair from reduced NAD and six from reduced FAD, creating a proton gradient with high proton concentration in the intermembrane space and low in the matrix">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CONVEYOR BELT — ETC + PROTON GRADIENT</text>
+
+      <rect x="30" y="52" width="600" height="44" rx="8" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="330" y="70" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">INTERMEMBRANE SPACE — HIGH [H⁺]</text>
+      <text x="330" y="88" fill="#b9a3d6" font-size="8.5" text-anchor="middle">protons pile up here · 10 from reduced NAD · 6 from reduced FAD</text>
+
+      <rect x="60" y="130" width="110" height="52" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="115" y="152" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">CARRIER 1</text>
+      <text x="115" y="170" fill="#b9a3d6" font-size="8.5" text-anchor="middle">+4 H⁺ pumped</text>
+      <rect x="230" y="130" width="110" height="52" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="285" y="152" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">CARRIER 2</text>
+      <text x="285" y="170" fill="#b9a3d6" font-size="8.5" text-anchor="middle">+4 H⁺ pumped</text>
+      <rect x="400" y="130" width="110" height="52" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="455" y="152" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">CARRIER 3</text>
+      <text x="455" y="170" fill="#b9a3d6" font-size="8.5" text-anchor="middle">+2 H⁺ pumped</text>
+
+      <path d="M 115 104 L 115 126" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah15)" fill="none"/>
+      <defs><marker id="ah15" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <path d="M 285 104 L 285 126" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah15b)" fill="none"/>
+      <defs><marker id="ah15b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <path d="M 455 104 L 455 126" stroke="#22d3ee" stroke-width="2" marker-end="url(#ah15c)" fill="none"/>
+      <defs><marker id="ah15c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <text x="100" y="120" fill="#22d3ee" font-size="8.5" font-weight="800">H⁺↑</text>
+      <text x="270" y="120" fill="#22d3ee" font-size="8.5" font-weight="800">H⁺↑</text>
+      <text x="440" y="120" fill="#22d3ee" font-size="8.5" font-weight="800">H⁺↑</text>
+
+      <path d="M 60 156 L 66 156" stroke="#4ade80" stroke-width="0" fill="none"/>
+      <rect x="30" y="208" width="600" height="88" rx="8" fill="rgba(255,46,196,.06)" stroke="rgba(255,46,196,.45)" stroke-width="1.5"/>
+      <text x="330" y="230" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">MATRIX — LOW [H⁺]</text>
+      <text x="330" y="252" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reduced NAD → first carrier (back to NAD, energy gained) · reduced FAD → part way (less energy)</text>
+      <text x="330" y="272" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">cristae = infoldings → more membrane → more ETCs</text>
+      <text x="330" y="290" fill="#b9a3d6" font-size="9" text-anchor="middle">pumping against the gradient stores energy as the proton gradient</text>
+
+      <text x="330" y="330" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">10 H⁺ per electron pair from reduced NAD · 6 H⁺ per pair from reduced FAD</text>
+      <text x="330" y="350" fill="#b9a3d6" font-size="9" text-anchor="middle">role of the ETC: generate and maintain the proton gradient across the inner membrane</text>
+    </svg>
+    <div class="cap"><b>FIG 15</b> — The conveyor belt: carriers accept electron pairs (reduced NAD at the start, reduced FAD partway), three main carriers pump 4+4+2 = 10 H⁺ (reduced NAD) or 6 H⁺ (reduced FAD) into the intermembrane space → high [H⁺] outside, low [H⁺] in the matrix.</div>
+  </div>
+
+  <div class="nos"><b>Don't mix up:</b> <b>reduced NAD delivers at the start</b> of the chain (10 H⁺ pumped), <b>reduced FAD enters partway</b> (6 H⁺) — because its electrons carry less energy. And the protons are pumped <b>from matrix to intermembrane space</b>, not the other way round.</div>
+</section>
+
+<!-- ══════════════════════ ACT 16 · THE WATER-WHEEL ══════════════════════ -->
+<section class="act" id="act16">
+  <div class="acttag">C1.2.15 · AHL</div>
+  <h2>THE WATER-WHEEL <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Chemiosmosis is the water-wheel: protons flow back down their gradient through ATP synthase, spinning a rotor that cranks ADP + phosphate into ATP.</p>
+
+  <div class="bouncer">
+    <div class="emoji">💧</div>
+    <div class="body">
+      <h3>The proton waterfall turns the ATP factory</h3>
+      <p class="aka">chemiosmosis · ATP synthase · rotor (10 c subunits) · 2.5 / 1.5 ATP</p>
+      <p><span class="accent">ATP synthase</span> is a large complex protein that phosphorylates ADP → ATP — an endergonic reaction, so it needs energy. In <span class="cyan">chemiosmosis</span>, protons move down their concentration gradient from the <span class="cyan">high concentration in the intermembrane space to the lower concentration in the matrix</span>, and the released energy links a phosphate to ADP. (In plain osmosis the energy of water moving down a gradient isn't harnessed; chemiosmosis is the version that captures it.)</p>
+      <p>The machine: a <span class="cyan">drum of 10 c subunits</span> in the membrane, each with a proton binding site; two misaligned half-channels (a) force the drum to rotate for protons to pass. The drum is tightly connected to a <span class="cyan">stalk (γ)</span> — together the <span class="cyan">rotor</span>. As the stalk spins inside a ring of <span class="cyan">α and β subunits</span> (3 β subunits, each with an active site), the conformational changes first bind ADP + phosphate, then link them into ATP, then release it. A rotor arm (b₂ + δ) stops the ring from spinning.</p>
+      <p><span class="accent">The maths:</span> one proton per c subunit → <span class="cyan">10 protons per full rotation</span>; 3 β subunits each make one ATP per turn → <span class="cyan">3 ATP per rotation</span>. Since reduced NAD drives 10 pumped protons and reduced FAD only 6: <span class="cyan">2.5 ATP per reduced NAD, 1.5 ATP per reduced FAD</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the water-wheel of chemiosmosis: protons cascade down from the intermembrane space through ATP synthase, ten protons pass through the rotor made of ten c subunits each carrying one proton, spinning the gamma stalk which sits inside a ring of three beta subunits each making one ATP per rotation, with the yield maths: 2.5 ATP per reduced NAD and 1.5 ATP per reduced FAD">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE WATER-WHEEL — CHEMIOSMOSIS + ATP SYNTHASE</text>
+
+      <rect x="30" y="52" width="600" height="40" rx="8" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="330" y="76" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">PROTON WATERFALL — HIGH [H⁺] intermembrane space → through ATP synthase → matrix</text>
+
+      <circle cx="330" cy="170" r="46" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="330" y="166" fill="#a855f7" font-size="9" font-weight="800" text-anchor="middle">ROTOR</text>
+      <text x="330" y="180" fill="#b9a3d6" font-size="8" text-anchor="middle">10 c subunits</text>
+      <text x="330" y="192" fill="#b9a3d6" font-size="8" text-anchor="middle">1 H⁺ each</text>
+      <circle cx="330" cy="170" r="12" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="330" y="174" fill="#fbbf24" font-size="7.5" font-weight="800" text-anchor="middle">γ</text>
+
+      <path d="M 330 96 L 330 120" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah16)" fill="none"/>
+      <defs><marker id="ah16" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/></marker></defs>
+      <text x="344" y="112" fill="#22d3ee" font-size="8.5" font-weight="800">10 H⁺</text>
+
+      <rect x="230" y="238" width="200" height="46" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="330" y="258" fill="#4ade80" font-size="10" font-weight="800" text-anchor="middle">3 β SUBUNITS</text>
+      <text x="330" y="274" fill="#b9a3d6" font-size="8.5" text-anchor="middle">1 ATP each per rotation</text>
+
+      <text x="330" y="318" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">10 protons per rotation → 3 ATP per rotation</text>
+      <text x="330" y="342" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">→ 2.5 ATP per reduced NAD · 1.5 ATP per reduced FAD</text>
+    </svg>
+    <div class="cap"><b>FIG 16</b> — Chemiosmosis: protons fall down their gradient through ATP synthase; the rotor (10 c subunits, 1 H⁺ each) spins the γ stalk, which turns the 3 β subunits — one ATP each per rotation. 10 H⁺ → 3 ATP → 2.5 per reduced NAD, 1.5 per reduced FAD.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the mechanism chain: proton gradient → protons through ATP synthase → rotor (10 c subunits) turns γ stalk → conformational changes in β subunits → ADP + Pi bind, link, ATP released. Numbers to quote: 2.5 ATP per reduced NAD, 1.5 per reduced FAD.</div>
+</section>
+
+<!-- ══════════════════════ ACT 17 · THE FINAL CUSTOMER ══════════════════════ -->
+<section class="act" id="act17">
+  <div class="acttag">C1.2.16 · AHL</div>
+  <h2>THE FINAL CUSTOMER <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Oxygen is the final customer at the end of the conveyor belt: it has the strongest affinity for electrons of anyone in the club, so it takes the spent electrons — plus protons from the matrix — and leaves water.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🅾️</div>
+    <div class="body">
+      <h3>Without the final customer, the whole belt jams</h3>
+      <p class="aka">terminal electron acceptor · metabolic water · electron backup</p>
+      <p>Each electron carrier in the ETC has a <span class="cyan">stronger affinity for electrons than the previous one</span> — so only a substance with a very strong affinity can remove electrons from the last carrier. Most organisms use <span class="cyan">molecular oxygen (O₂)</span>: the <span class="cyan">terminal electron acceptor</span>. O₂ accepts electrons from the final carrier and hydrogen ions from the matrix, producing <span class="cyan">water</span> — about <span class="cyan">half a litre per day</span> in humans. Making water also helps maintain the proton gradient.</p>
+      <p>Everything except glycolysis depends on oxygen. If O₂ runs out: electrons aren't removed from the end, <span class="cyan">all the carriers become reduced</span>, no electrons are accepted from reduced NAD at the start, and <span class="cyan">reduced NAD accumulates</span>. Once all the NAD is reduced, the oxidations of the <span class="cyan">link reaction and Krebs cycle can't happen — they stop</span>. Anaerobic respiration keeps glycolysis going in the cytoplasm, but the yield crashes from <span class="cyan">32 ATP to just 2 ATP per glucose</span>.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the final customer at the end of the conveyor belt: oxygen has the strongest electron affinity so it accepts the spent electrons from the last carrier plus protons from the matrix and produces water about half a litre per day in humans, with a warning panel showing that without oxygen the chain backs up, reduced NAD accumulates, the link reaction and Krebs cycle stop, and only glycolysis continues at 2 ATP versus 32 aerobic">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE FINAL CUSTOMER — OXYGEN, TERMINAL ELECTRON ACCEPTOR</text>
+
+      <rect x="30" y="52" width="340" height="52" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
+      <text x="200" y="72" fill="#a855f7" font-size="10" font-weight="800" text-anchor="middle">END OF THE CONVEYOR BELT</text>
+      <text x="200" y="92" fill="#b9a3d6" font-size="9" text-anchor="middle">last carrier has the strongest affinity so far…</text>
+
+      <path d="M 374 78 L 430 78" stroke="#4ade80" stroke-width="2.5" marker-end="url(#ah17)" fill="none"/>
+      <defs><marker id="ah17" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker></defs>
+      <text x="402" y="66" fill="#4ade80" font-size="8.5" font-weight="800">e⁻</text>
+
+      <circle cx="505" cy="78" r="40" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="505" y="74" fill="#22d3ee" font-size="13" font-weight="900" text-anchor="middle">O₂</text>
+      <text x="505" y="92" fill="#b9a3d6" font-size="8.5" text-anchor="middle">strongest affinity</text>
+      <text x="505" y="104" fill="#b9a3d6" font-size="8.5" text-anchor="middle">takes the spent e⁻</text>
+
+      <rect x="560" y="52" width="70" height="52" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
+      <text x="595" y="74" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">H₂O</text>
+      <text x="595" y="92" fill="#b9a3d6" font-size="8" text-anchor="middle">+ H⁺ from matrix</text>
+
+      <rect x="30" y="136" width="600" height="120" rx="9" fill="rgba(255,46,196,.06)" stroke="rgba(255,46,196,.5)" stroke-width="1.5"/>
+      <text x="330" y="158" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">⚠ BLACKOUT — IF OXYGEN RUNS OUT</text>
+      <text x="330" y="182" fill="#b9a3d6" font-size="9.5" text-anchor="middle">electrons not removed → all ETC carriers stay reduced → nothing accepted from reduced NAD</text>
+      <text x="330" y="202" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reduced NAD accumulates → all NAD reduced → link reaction + Krebs cycle STOP</text>
+      <text x="330" y="224" fill="#fbbf24" font-size="10" font-weight="800" text-anchor="middle">only glycolysis continues: 2 ATP per glucose vs 32 with aerobic respiration</text>
+      <text x="330" y="244" fill="#b9a3d6" font-size="9" text-anchor="middle">anaerobic NAD regeneration (lactate / ethanol) keeps the 2 ATP flowing</text>
+
+      <text x="330" y="292" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">water production: ~0.5 L per day in humans (metabolic water)</text>
+      <text x="330" y="316" fill="#b9a3d6" font-size="9.5" text-anchor="middle">O₂ + electrons from ETC + protons from matrix → water</text>
+      <text x="330" y="340" fill="#b9a3d6" font-size="9.5" text-anchor="middle">making water also helps maintain the proton gradient across the inner membrane</text>
+    </svg>
+    <div class="cap"><b>FIG 17</b> — Oxygen: terminal electron acceptor with the strongest affinity. It takes spent electrons + protons from the matrix → water (~0.5 L/day). No O₂ = chain backs up, link + Krebs stop, only glycolysis (2 ATP vs 32).</div>
+  </div>
+
+  <div class="tip"><b>Remember:</b> oxygen's job is to <b>keep the conveyor belt moving</b> — by taking electrons off the end, it lets carriers accept new ones from reduced NAD. No final customer, no flow, no ATP beyond glycolysis.</div>
+</section>
+
+<!-- ══════════════════════ ACT 18 · FUEL MIX ══════════════════════ -->
+<section class="act" id="act18">
+  <div class="acttag">C1.2.17 · AHL</div>
+  <h2>FUEL MIX <span class="badge ahl">AHL</span></h2>
+  <p class="aim">Lipids and carbohydrates are both respiratory substrates — but they burn differently. Lipids pack nearly twice the energy per gram, and only carbohydrates can power anaerobic respiration.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⛽</div>
+    <div class="body">
+      <h3>Two fuels, two energy densities, two metabolic paths</h3>
+      <p class="aka">17 kJ/g vs 37 kJ/g · glycolysis first vs fatty acids first</p>
+      <p><span class="accent">Carbohydrates (glucose, fructose):</span> the first stage is <span class="cyan">glycolysis</span>, which makes some ATP without oxygen — so <span class="cyan">anaerobic respiration is possible</span>. Pyruvate then converts to acetyl groups via the link reaction for the Krebs cycle (oxygen needed). Energy yield: <span class="cyan">17 kJ per gram</span> — more than 50% of the mass is oxygen, and oxygen doesn't yield energy when oxidised.</p>
+      <p><span class="accent">Lipids (fats, oils):</span> the first stage is <span class="cyan">breakdown of fatty acids to acetyl groups in the matrix of the mitochondrion</span>, which then feed the Krebs cycle — both stages need oxygen, so <span class="cyan">anaerobic respiration is impossible with lipids</span>. Energy yield: <span class="cyan">37 kJ per gram</span> — nearly twice the carbohydrates, because almost <span class="cyan">90% of lipid mass is carbon and hydrogen</span>, both of which yield energy when oxidised.</p>
+      <p>Both fuels are oxidised in respiration — which is why both work as energy-yielding foods and as energy stores. The energy yield per gram and the pathway taken are where they differ.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="fuel comparison at the club: carbohydrate tank shows glucose entering glycolysis first so anaerobic respiration is possible with 17 kilojoules per gram and more than fifty percent of its mass is oxygen, while the lipid tank shows fatty acids broken down to acetyl groups in the mitochondrial matrix feeding the Krebs cycle so anaerobic respiration is impossible, with 37 kilojoules per gram and nearly ninety percent of its mass being carbon and hydrogen">
+      <rect width="660" height="360" rx="14" fill="#150a26"/>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">FUEL MIX — LIPIDS VS CARBOHYDRATES</text>
+
+      <rect x="30" y="52" width="290" height="180" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="175" y="74" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">CARBOHYDRATES</text>
+      <text x="175" y="98" fill="#b9a3d6" font-size="9.5" text-anchor="middle">first stage = GLYCOLYSIS</text>
+      <text x="175" y="116" fill="#4ade80" font-size="9.5" font-weight="800" text-anchor="middle">anaerobic respiration POSSIBLE</text>
+      <text x="175" y="136" fill="#b9a3d6" font-size="9.5" text-anchor="middle">pyruvate → acetyl via link reaction</text>
+      <text x="175" y="154" fill="#b9a3d6" font-size="9.5" text-anchor="middle">(needs O₂ for the Krebs road)</text>
+      <text x="175" y="182" fill="#4ade80" font-size="13" font-weight="900" text-anchor="middle">17 kJ / gram</text>
+      <text x="175" y="204" fill="#b9a3d6" font-size="9" text-anchor="middle">&gt;50% of mass is oxygen</text>
+      <text x="175" y="220" fill="#b9a3d6" font-size="9" text-anchor="middle">oxygen yields no energy when oxidised</text>
+
+      <rect x="340" y="52" width="290" height="180" rx="9" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="485" y="74" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">LIPIDS (fats + oils)</text>
+      <text x="485" y="98" fill="#b9a3d6" font-size="9.5" text-anchor="middle">first stage = fatty acids → acetyl</text>
+      <text x="485" y="116" fill="#b9a3d6" font-size="9.5" text-anchor="middle">groups in the MATRIX</text>
+      <text x="485" y="134" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">anaerobic respiration IMPOSSIBLE</text>
+      <text x="485" y="152" fill="#b9a3d6" font-size="9.5" text-anchor="middle">both stages need oxygen</text>
+      <text x="485" y="182" fill="#4ade80" font-size="13" font-weight="900" text-anchor="middle">37 kJ / gram</text>
+      <text x="485" y="204" fill="#b9a3d6" font-size="9" text-anchor="middle">~90% of mass is carbon + hydrogen</text>
+      <text x="485" y="220" fill="#b9a3d6" font-size="9" text-anchor="middle">C and H both yield energy when oxidised</text>
+
+      <text x="330" y="272" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">LIPIDS ≈ 2× THE ENERGY PER GRAM</text>
+      <text x="330" y="296" fill="#b9a3d6" font-size="9.5" text-anchor="middle">why? nearly 90% of lipid mass is C + H · more than 50% of carbohydrate mass is O (no energy yield)</text>
+      <text x="330" y="320" fill="#b9a3d6" font-size="9.5" text-anchor="middle">both are oxidised in respiration → both work as energy-yielding foods and energy stores</text>
+      <text x="330" y="344" fill="#22d3ee" font-size="9.5" font-weight="800" text-anchor="middle">acetyl groups (2C) from both fuels enter the Krebs cycle via acetyl CoA</text>
+    </svg>
+    <div class="cap"><b>FIG 18</b> — Fuel mix: carbs 17 kJ/g, glycolysis first, anaerobic possible. Lipids 37 kJ/g (≈2×), fatty acids → acetyl groups in the matrix, aerobic only. Energy density comes from C + H content.</div>
+  </div>
+
+  <div class="exam"><b>Exam gold:</b> the "why do lipids give more energy per gram?" answer: lipids are nearly <b>90% carbon and hydrogen</b> (both yield energy on oxidation), while carbohydrates are <b>&gt;50% oxygen</b> by mass — and oxygen is already oxidised, so it yields no energy. And remember: <b>no glycolysis, no anaerobic respiration</b> — so lipids can't run the backup generator.</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act extra" id="map">
+  <div class="acttag">The whole club in one map</div>
+  <h2>MIND MAP 🗺️</h2>
+  <p class="aim">Every act of the show, connected: from the energy currency at the door to the fuel mix at the bar.</p>
+  <div class="mind">
+    <div class="node core">THE POWER PLANT<small>C1.2 · Cell Respiration (SL + AHL)</small></div>
+    <div class="arrow">▶</div>
+    <div class="node">ENERGY CURRENCY<small>C1.2.1 · ATP = nucleotide · 4 properties</small></div>
+    <div class="node">TOKENS AT WORK<small>C1.2.2 · synthesis · pumps · movement</small></div>
+    <div class="node">TOKEN TURNOVER<small>C1.2.3 · 120 mol/day · 0.2 mol present</small></div>
+    <div class="node">POWER SYSTEM<small>C1.2.4 · glucose + fatty acids · gas exchange</small></div>
+    <div class="node">MAIN STAGE VS BACKUP<small>C1.2.5 · &gt;30 vs 2 ATP · oxygen debt</small></div>
+    <div class="node">RATE METER + RESPIROMETER<small>C1.2.6 · KOH · capillary · water bath</small></div>
+    <div class="node">HYDROGEN VALETS<small>C1.2.7 · NAD⁺ + 2e⁻ + H⁺ → NADH</small></div>
+    <div class="node">STREET GENERATOR<small>C1.2.8 · 4 stages · net 2 ATP + 2 reduced NAD</small></div>
+    <div class="node">EMERGENCY BACKUP<small>C1.2.9 · pyruvate → lactate · yoghurt + kimchi</small></div>
+    <div class="node">BACKSTAGE BREWERY<small>C1.2.10 · ethanal → ethanol · bread + beer</small></div>
+    <div class="node">DELIVERY DOCK<small>C1.2.11 · 3-enzyme complex · acetyl CoA</small></div>
+    <div class="node">TURBINE LOOP<small>C1.2.12 · citrate 6C → oxaloacetate 4C</small></div>
+    <div class="node">CONVEYOR BELT<small>C1.2.13-14 · 10 H⁺ vs 6 H⁺ pumped</small></div>
+    <div class="node">WATER-WHEEL<small>C1.2.15 · rotor 10 c · 2.5 / 1.5 ATP</small></div>
+    <div class="node">FINAL CUSTOMER<small>C1.2.16 · O₂ + e⁻ + H⁺ → H₂O · ~0.5 L/day</small></div>
+    <div class="node">FUEL MIX<small>C1.2.17 · 17 vs 37 kJ/g · no anaerobic on lipids</small></div>
+<div class="node">BLACKOUT NIGHT<small>no O₂ · ETC backs up · glycolysis only 2 ATP vs 32</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act extra" id="cheat">
+  <div class="acttag">60-second recap</div>
+  <h2>THE CHEAT ⚡</h2>
+  <p class="aim">Fifteen one-liners. If you can say them out loud, you know the show.</p>
+  <div class="marquee">
+    <div class="line">🪙 <span>ATP = nucleotide</span> — adenine + ribose + 3 phosphates; soluble, stable at neutral pH, can't cross the bilayer, third phosphate pops off by hydrolysis.</div>
+    <div class="line">🏗️ <span>Tokens pay for three things</span> — macromolecule synthesis (DNA/RNA/protein), active transport (pump conformation), movement (chromosomes, cytokinesis, phagocytes, actin-myosin).</div>
+    <div class="line">🔄 <span>ATP → ADP + Pi releases energy</span> — rebuilt by respiration, photosynthesis or chemosynthesis; ~120 mol/day used, only ~0.2 mol present → ~600 turnovers each.</div>
+    <div class="line">⚙️ <span>Respiration oxidises carbon compounds</span> — glucose and fatty acids are the main substrates; gas exchange and respiration are interdependent (gradients ↔ diffusion).</div>
+    <div class="line">🎪 <span>Aerobic: glucose + O₂ → CO₂ + H₂O</span> — &gt;30 ATP, mitochondria required.</div>
+    <div class="line">🚨 <span>Anaerobic human: glucose → lactate</span> — 2 ATP, cytoplasm only, no mitochondria; lactate limit ≈ 400 m sprint.</div>
+    <div class="line">🧾 <span>Oxygen debt = the bill</span> — the O₂ needed afterwards to break down lactate from vigorous exercise.</div>
+    <div class="line">📊 <span>Respirometer: KOH absorbs CO₂</span> — capillary fluid movement = O₂ uptake; thermostatic water bath + control tube keep it honest.</div>
+    <div class="line">🧤 <span>NAD⁺ + 2e⁻ + 1H⁺ → NADH + H⁺</span> — oxidation = loss of electrons (Benedict's: Cu²⁺ blue → Cu red).</div>
+    <div class="line">🏭 <span>Glycolysis (cytoplasm): 2 ATP in, 4 out</span> — 2 reduced NAD, 2 pyruvate (3C); net 2 ATP, no O₂; each step its own enzyme.</div>
+    <div class="line">🍺 <span>Fermentation regenerates NAD</span> — pyruvate → lactate (humans: yoghurt, kimchi, sauerkraut, silage) or ethanal → ethanol + CO₂ (yeast: bread rises, brewing stops ~15%).</div>
+    <div class="line">📦 <span>Link reaction (matrix)</span> — pyruvate −CO₂, oxidised (−2e⁻ → reduced NAD), + CoA → acetyl CoA; 3-enzyme complex.</div>
+    <div class="line">🔁 <span>Krebs (matrix)</span> — acetyl (2C) + oxaloacetate (4C) → citrate (6C) → back via 2 decarboxylations + 4 oxidations: 3 reduced NAD + 1 reduced FAD + 1 ATP + 2 CO₂ per turn.</div>
+    <div class="line">🎢 <span>ETC + chemiosmosis</span> — 10 H⁺ pumped per reduced NAD (6 per reduced FAD); protons spin the ATP synthase rotor (10 c) → 2.5 ATP/reduced NAD, 1.5/reduced FAD.</div>
+    <div class="line">🅾️ <span>Oxygen = terminal electron acceptor</span> — takes e⁻ + H⁺ → water (~0.5 L/day); lipids 37 kJ/g vs carbs 17 kJ/g, and no anaerobic respiration on lipids.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ QUIZ ══════════════════════ -->
+<section class="act extra" id="test">
+  <div class="acttag">Encore check</div>
+  <h2>THE TEST ✍️</h2>
+  <p class="aim">10 questions. Pick an answer and you'll instantly see why.</p>
+
+  <div class="q" data-a="nucleotide">
+    <p>1. What exactly is ATP?</p>
+    <label><input type="radio" name="q1" value="nucleotide"> A nucleotide — adenine base + ribose sugar + three phosphate groups in a chain</label>
+    <label><input type="radio" name="q1" value="protein"> A protein enzyme that catalyses energy transfer reactions</label>
+    <label><input type="radio" name="q1" value="lipid"> A lipid molecule specialised for long-term energy storage</label>
+    <div class="fb correct">✅ ATP (adenosine triphosphate) is a nucleotide: adenine + ribose + three phosphates, each negatively charged. It's the energy currency, not a storage molecule and not an enzyme.</div>
+    <div class="fb wrong">❌ ATP is a nucleotide (base + 5-carbon sugar + phosphate chain). Long-term storage is glycogen/starch's job, and enzymes are proteins that catalyse — ATP is the energy token itself.</div>
+  </div>
+
+  <div class="q" data-a="bilayer">
+    <p>2. Which property makes ATP suitable as the energy currency?</p>
+    <label><input type="radio" name="q2" value="bilayer"> It cannot pass freely through the phospholipid bilayer, so it stays inside cells where its movement is controlled</label>
+    <label><input type="radio" name="q2" value="hydrolyse"> Hydrolysis of ATP releases a huge burst of energy, enough to power the whole cell at once</label>
+    <label><input type="radio" name="q2" value="acid"> It is most stable at very acidic pH, matching the conditions inside mitochondria</label>
+    <div class="fb correct">✅ All four properties matter: soluble in water, stable at neutral pH, can't cross the bilayer (controlled movement), and hydrolysis releases a small amount of energy — enough for processes, without wasteful excess lost as heat.</div>
+    <div class="fb wrong">❌ The release is deliberately SMALL (not huge) — excess energy would be wasted as heat. And ATP is stable at NEUTRAL pH, not acidic. It's the bilayer-blocking + controlled hydrolysis combo that makes it the ideal token.</div>
+  </div>
+
+  <div class="q" data-a="recycled">
+    <p>3. Humans use about 120 moles of ATP per day, yet only ~0.2 moles exist at any moment. What does that mean?</p>
+    <label><input type="radio" name="q3" value="recycled"> Each ATP molecule is converted to ADP and back roughly 600 times per day — constant recycling</label>
+    <label><input type="radio" name="q3" value="waste"> 120 moles are stored in muscles overnight and released slowly during the day</label>
+    <label><input type="radio" name="q3" value="freeze"> Cells must freeze all processes every few minutes while ATP is remade</label>
+    <div class="fb correct">✅ The pool is tiny (0.2 mol) but the turnover is enormous (~120 mol/day) — so each molecule is recycled ~600×/day. If regeneration stops, neurons fail and muscle cramps — cells degrade within minutes.</div>
+    <div class="fb wrong">❌ ATP is NOT stored in bulk — only ~0.2 moles exist at any time. The whole system runs on rapid, continuous recycling of the small pool: hydrolysis (spend) and condensation (remint) ~600 times per molecule per day.</div>
+  </div>
+
+  <div class="q" data-a="allthree">
+    <p>4. Energy to rebuild ATP from ADP + phosphate can come from…</p>
+    <label><input type="radio" name="q4" value="responly"> Cell respiration only — no other process can regenerate ATP</label>
+    <label><input type="radio" name="q4" value="photo"> Photosynthesis only, because only light energy is powerful enough</label>
+    <label><input type="radio" name="q4" value="allthree"> Cell respiration, photosynthesis AND chemosynthesis (oxidising inorganic substances like sulfides)</label>
+    <div class="fb correct">✅ Three energy sources rebuild ATP: cell respiration (oxidising carbs/fats/proteins), photosynthesis (light → chemical energy), and chemosynthesis (oxidising inorganic substances such as sulfides).</div>
+    <div class="fb wrong">❌ All three supply the energy: respiration, photosynthesis, and chemosynthesis. Photosynthesis isn't the only source, and respiration isn't the only source — the cell takes energy from whichever is available.</div>
+  </div>
+
+  <div class="q" data-a="cytoplasm">
+    <p>5. Where does anaerobic respiration in humans happen, and what does it produce?</p>
+    <label><input type="radio" name="q5" value="mito"> In the mitochondria, producing lactate and 30+ ATP per glucose</label>
+    <label><input type="radio" name="q5" value="cytoplasm"> Entirely in the cytoplasm — mitochondria are NOT required — producing lactate and only 2 ATP per glucose</label>
+    <label><input type="radio" name="q5" value="ethanol"> In the cytoplasm, producing ethanol and carbon dioxide, 2 ATP per glucose</label>
+    <div class="fb correct">✅ Anaerobic respiration in humans: glucose → lactate, 2 ATP per glucose, all in the cytoplasm; mitochondria are not required. Only carbohydrates can be used, and no water is produced.</div>
+    <div class="fb wrong">❌ The cytoplasm does the whole anaerobic job (no mitochondria needed). Ethanol + CO₂ is the YEAST version — humans make lactate. And the yield is 2 ATP, not 30+ (that's aerobic).</div>
+  </div>
+
+  <div class="q" data-a="koh">
+    <p>6. In a respirometer, why is potassium hydroxide (KOH) essential?</p>
+    <label><input type="radio" name="q6" value="koh"> It absorbs the CO₂ produced, so any volume change (fluid movement in the capillary) is due to oxygen uptake alone</label>
+    <label><input type="radio" name="q6" value="warm"> It warms the chamber so the organism respires faster and gives clearer readings</label>
+    <label><input type="radio" name="q6" value="seal"> It seals the container so no air can enter or leave during the experiment</label>
+    <div class="fb correct">✅ CO₂ production normally adds volume while O₂ uptake reduces it. KOH absorbs all the CO₂, so the movement of fluid in the capillary measures oxygen consumption alone. Temperature is controlled separately, with a thermostatic water bath.</div>
+    <div class="fb wrong">❌ KOH's job is chemical: absorb CO₂. The seal comes from the apparatus design, and temperature control comes from the thermostatically controlled water bath — both separate parts of the respirometer.</div>
+  </div>
+
+  <div class="q" data-a="twoone">
+    <p>7. When NAD⁺ is reduced to NADH during respiration, it accepts…</p>
+    <label><input type="radio" name="q7" value="twoone"> Two electrons and one proton — the other proton (H⁺) is released</label>
+    <label><input type="radio" name="q7" value="oneproton"> One electron and two protons, leaving the substrate with an extra electron</label>
+    <label><input type="radio" name="q7" value="twoH"> Two complete hydrogen atoms, so the substrate keeps all its electrons</label>
+    <div class="fb correct">✅ NAD⁺ accepts 2 electrons + 1 proton, becoming NADH; the second proton (H⁺) is released. Substrates are oxidised by removal of hydrogen atoms (each = electron + proton) — dehydrogenation.</div>
+    <div class="fb wrong">❌ NAD⁺ takes two electrons and one proton → NADH, with the other H⁺ released. If it took two whole hydrogen atoms, electrons wouldn't be transferred — and oxidation (electron loss) wouldn't happen.</div>
+  </div>
+
+  <div class="q" data-a="net2">
+    <p>8. What is the net yield of glycolysis per molecule of glucose?</p>
+    <label><input type="radio" name="q8" value="net2"> 2 ATP + 2 reduced NAD + 2 pyruvate (3C each) — 2 ATP used, 4 produced</label>
+    <label><input type="radio" name="q8" value="net4"> 4 ATP + 4 reduced NAD + 2 pyruvate — nothing is invested at the start</label>
+    <label><input type="radio" name="q8" value="net32"> 32 ATP + 6 CO₂ + 2 pyruvate, same as aerobic respiration</label>
+    <div class="fb correct">✅ Per glucose: 2 ATP invested in phosphorylation, 4 produced in ATP formation → net 2 ATP; plus 2 reduced NAD and 2 pyruvate (3C). No oxygen is needed — it's the street-level generator.</div>
+    <div class="fb wrong">❌ Watch the investment: 2 ATP are USED in stage 1, 4 are MADE in stage 4 → net 2 ATP, with 2 reduced NAD and 2 pyruvate. 32 ATP is the full aerobic total, not glycolysis.</div>
+  </div>
+
+  <div class="q" data-a="krebsyield">
+    <p>9. What is the yield of ONE turn of the Krebs cycle?</p>
+    <label><input type="radio" name="q9" value="krebsyield"> 3 reduced NAD + 1 reduced FAD + 1 ATP + 2 CO₂</label>
+    <label><input type="radio" name="q9" value="twoCO2"> 2 reduced NAD + 1 ATP + 4 CO₂ — the two decarboxylations dominate</label>
+    <label><input type="radio" name="q9" value="none"> No ATP at all — the cycle only produces CO₂, and all ATP comes from glycolysis</label>
+    <div class="fb correct">✅ Per turn: 3 reduced NAD, 1 reduced FAD, 1 ATP, 2 CO₂. Acetyl (2C) + oxaloacetate (4C) → citrate (6C) → back to oxaloacetate via 2 decarboxylations and 4 oxidations.</div>
+    <div class="fb wrong">❌ One turn gives 3 reduced NAD + 1 reduced FAD + 1 ATP + 2 CO₂. The 4 oxidations are what load up the electron carriers — the cycle is an energy-capture machine, not just a CO₂ factory.</div>
+  </div>
+
+  <div class="q" data-a="twofive">
+    <p>10. Chemiosmosis: how much ATP does one reduced NAD deliver, and why?</p>
+    <label><input type="radio" name="q10" value="twofive"> 2.5 ATP — its electron pair drives 10 pumped protons, and 10 protons = one rotor rotation = 3 ATP at the β subunits (per the textbook's accounting)</label>
+    <label><input type="radio" name="q10" value="onefive"> 1.5 ATP — reduced NAD enters the chain partway so fewer protons are pumped</label>
+    <label><input type="radio" name="q10" value="zero"> 0 ATP — reduced NAD is used up in the link reaction before it ever reaches the ETC</label>
+    <div class="fb correct">✅ Reduced NAD → 10 protons pumped → one full rotation of the ATP synthase rotor (10 c subunits) → 3 ATP made at the β subunits — quoted as 2.5 ATP per reduced NAD. Reduced FAD (6 protons) gives 1.5.</div>
+    <div class="fb wrong">❌ It's reduced FAD that enters partway (6 protons → 1.5 ATP). Reduced NAD starts at the first carrier, drives 10 protons, and yields 2.5 ATP — and reduced NAD definitely reaches the ETC; it's the chain's main fuel.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act extra" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">C1.2.1</span><span>ATP = nucleotide (adenine + ribose + 3 phosphates in a chain, each negatively charged). Energy currency properties: soluble in water (moves freely in cytoplasm), stable at neutral pH, cannot pass through the phospholipid bilayer (can't diffuse out; movement between organelles controlled), third phosphate easily removed/reattached by hydrolysis/condensation. ATP + H₂O → ADP + phosphate + energy; the small energy release avoids wasteful excess lost as heat.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">C1.2.2</span><span>ATP supplies energy to: (1) synthesis of macromolecules — anabolism, ATP per monomer linked: DNA replication, RNA transcription, protein translation; (2) active transport — reversible conformational changes of pump proteins (stable → less stable shape costs ATP), particle enters in one shape, exits in the other; (3) movement — chromosomes to poles in mitosis, vesicle transport, cytokinesis shape change, phagocyte locomotion, muscle actin-myosin filament sliding.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">C1.2.3</span><span>ATP → ADP + Pi releases a small but sufficient amount of energy (phosphate may be transferred to another molecule first; energy released when it detaches). Regeneration of ATP needs energy from cell respiration (oxidising carbs/fats/proteins), photosynthesis, or chemosynthesis (oxidising inorganic substances such as sulfides). Human body uses ~120 moles ATP/day but only ~0.2 moles exist at any time → each molecule recycled ~600×/day; without ATP neurons fail, muscle cramps, cells degrade within minutes. Interconversions are not 100% efficient — some energy becomes heat.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">C1.2.4</span><span>Cell respiration: all living cells oxidise carbon compounds to release energy used to produce ATP. Glucose and fatty acids are the main respiratory substrates; a wide range of carbon compounds can be used. Gas exchange ≠ respiration but interdependent: O₂ in and CO₂ out by simple diffusion across the plasma membrane (independently, not one-for-one); respiration creates the gradients that drive diffusion, gas exchange supplies O₂ and removes CO₂.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">C1.2.5</span><span>Aerobic vs anaerobic in humans. Aerobic: glucose + oxygen → CO₂ + water; &gt;30 ATP per glucose; oxygen used as electron acceptor; carbs, lipids, amino acids (after deamination) usable; reactions start in cytoplasm, continue in mitochondria. Anaerobic: glucose → lactate; 2 ATP per glucose; cytoplasm only, mitochondria NOT required; only carbohydrates usable; no water produced. Yeast anaerobic: glucose → ethanol + CO₂. Used for maximal power: weightlifters, sprinters to 400 m, sprint finishes; lactate tolerance limits duration.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">C1.2.5</span><span>Oxygen debt: after vigorous muscle contractions, lactate must be broken down, which requires oxygen — the demand that builds up during anaerobic respiration is the oxygen debt; clearing it can take several minutes. Lactate concentration limit ≈ the reason we can only sprint ~400 m.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">C1.2.6</span><span>Rate of cell respiration from: oxygen uptake, CO₂ production, or consumption of glucose/substrate. Rate = amount ÷ time (e.g. 50 mm³ O₂ in 10 min = 5 mm³ min⁻¹); calculated rate = dependent variable. Independent variables: temperature, type of organism, active vs inactive. Respirometer: sealed container + KOH (absorbs CO₂) + capillary tube with fluid (volume change = O₂ uptake); convert mm to volume using tube diameter; control temperature (thermostatic water bath) and pressure (identical control tube without tissue).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">C1.2.7</span><span>Oxidation = loss of electrons, reduction = gain; always occur together (redox, electron transfer). Benedict's test: Cu²⁺ (blue) + electrons from sugar → Cu atoms (red/orange precipitate); sugar oxidised. NAD (nicotinamide adenine dinucleotide) = main electron carrier; substrates oxidised by removal of two hydrogen atoms (dehydrogenation); NAD⁺ accepts 2 electrons + 1 proton → NADH; other proton (H⁺) released.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">C1.2.8</span><span>Glycolysis (cytoplasm, no O₂, different enzyme per step): Stage 1 phosphorylation — 2 ATP invested, glucose → fructose-1,6-bisphosphate; Stage 2 lysis — splits to 2 triose phosphate (3C); Stage 3 oxidation — hydrogen removed, accepted by NAD → reduced NAD, bisphosphoglycerate forms; Stage 4 ATP formation — 4 ATP produced. Net per glucose: 2 pyruvate (3C) + 2 reduced NAD + net 2 ATP (4 − 2).</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">C1.2.9</span><span>Pyruvate → lactate regenerates NAD in anaerobic respiration: reduced NAD transfers 2 H to pyruvate (cytoplasm); 2 pyruvates per glucose regenerate all NAD used in glycolysis → glycolysis continues indefinitely (2 ATP/glucose) as long as glucose available and lactate not too high. Lactic fermentation: yoghurt, kimchi, sauerkraut, silage (lactic acid lowers pH, prevents decomposition).</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">C1.2.10</span><span>Yeast (facultative anaerobe) ethanol fermentation, 2 stages: (1) decarboxylation — pyruvate −CO₂ → ethanal; (2) reduced NAD → ethanal + 2H → ethanol (+ NAD regenerated). Baking: CO₂ bubbles trapped in viscous dough make it rise; ethanol evaporates during baking. Brewing: wine (grape juice), beer (barley starch + amylase — yeast can't use starch); fermentation ends when sugar runs out or ethanol becomes toxic (~15% by volume). Also bioethanol fuel.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">C1.2.11</span><span>Link reaction (mitochondrial matrix; pyruvate moved in by a transporter protein in the outer membrane; aerobic only): complex of 3 enzymes does (1) decarboxylation — pyruvate (3C) −CO₂ → 2C molecule; (2) oxidation — 2 electrons removed, accepted by NAD → reduced NAD; (3) binding to coenzyme A → acetyl coenzyme A (2C). Per glucose: 2 acetyl CoA + 2 CO₂ + 2 reduced NAD.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">C1.2.12</span><span>Krebs cycle (matrix): acetyl group transferred from CoA to oxaloacetate (4C) → citrate (6C); citrate converted back to oxaloacetate via 2 decarboxylations (2 CO₂) + 4 oxidations (dehydrogenations), electrons to NAD or FAD. Per turn: 3 reduced NAD + 1 reduced FAD + 1 ATP + 2 CO₂; one acetyl consumed. All carbon of sugar/fat removed as CO₂ here or in the link reaction. Oxaloacetate regenerated — the cycle turns.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">C1.2.13-14</span><span>ETC (inner mitochondrial membrane; cristae increase area): first carrier accepts electron pair from reduced NAD (→ NAD, carrier gains energy); reduced NAD from glycolysis, link reaction and Krebs cycle; reduced FAD enters partway (less energy). Three main carriers act as proton pumps: first two pump 4 H⁺ each per pair, third pumps 2 → 10 H⁺ per pair from reduced NAD, 6 from reduced FAD. Protons pumped from matrix → intermembrane space against the gradient; energy stored as the proton gradient (high [H⁺] intermembrane space, low [H⁺] matrix). Role of ETC: generate and maintain the proton gradient.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">C1.2.15</span><span>Chemiosmosis: protons flow down their gradient (intermembrane space → matrix) through ATP synthase; energy used to phosphorylate ADP → ATP (endergonic). ATP synthase: transmembrane region (proton channel) + globular region (active sites in matrix). Rotor = drum of 10 c subunits (1 proton each) + stalk γ; two misaligned half-channels (a) force rotation; stalk spins inside ring of α/β subunits (3 β, one ATP each per rotation); rotor arm (b₂ + δ) holds the ring. Yield: 10 protons per rotation → 2.5 ATP per reduced NAD, 1.5 per reduced FAD.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">C1.2.16-17</span><span>Oxygen = terminal electron acceptor (strongest affinity for electrons): accepts electrons from the final carrier + protons from the matrix → water (~half litre/day in humans). Without O₂: ETC carriers stay reduced, reduced NAD accumulates, link reaction + Krebs stop; only glycolysis continues (2 ATP vs 32 aerobic). Lipids vs carbohydrates: carbs 17 kJ/g (glycolysis first → anaerobic possible; &gt;50% of mass is oxygen); lipids 37 kJ/g ≈ 2× (fatty acids → acetyl groups in matrix → Krebs; aerobic only; ~90% of mass is C + H). Both oxidised; both energy-yielding foods and stores.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>⚡ Built with Hermes Agent — self-contained study page with neon SVG diagrams drawn for this page.</p>
+  <p>Source: <b>Oxford IB Diploma Programme: Biology Course Companion, HL, 2nd ed.</b> (Allott &amp; Mindorff, Oxford University Press, 2023) — C1.2 Cell Respiration, pp. 361–382 · cross-checked against IB Biology guide (first exams 2025) statement list C1.2.1–C1.2.17</p>
+  <p>📖 part of <a href="../../../index.html">Travis's Study Hub</a> · open → print to PDF for a poster</p>
+</footer>
+
+</div>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<script>
+  // checklist with localStorage
+  var KEY='c12-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script></body></html>
