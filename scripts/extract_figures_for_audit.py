@@ -23,6 +23,7 @@ PAGES = [
     "topics/bio/enzymes/index.html",
     "topics/bio/respiration/index.html",
     "topics/chem/kinetics/index.html",
+    "topics/chem/atomic-structure-periodicity/index.html",
 ]
 
 def slugify(s):

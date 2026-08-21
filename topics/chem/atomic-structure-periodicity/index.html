@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>Atomic Structure &amp; Periodicity — The Nuclear Vault (Structure 1.2 · 1.3 · 3.1)</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  /* HERO */
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+
+  /* ACTS */
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  /* figure / image blocks */
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  /* Bouncer rows */
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:14.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
+     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
+  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
+  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+
+  /* callout boxes */
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+
+  /* marquee / cheat */
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  /* mind map */
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+
+  /* quiz */
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  /* checklist */
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  /* home button — always find your way back */
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  /* footer */
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE NUCLEAR VAULT</a>
+  <a href="#act2">ACT 2 · THE ISOTOPE MIX</a>
+  <a href="#act3">ACT 3 · THE LIGHT SHOW</a>
+  <a href="#act4">ACT 4 · THE ENERGY TOWER</a>
+  <a href="#act5">ACT 5 · THE SLEDGEHAMMER</a>
+  <a href="#act6">ACT 6 · THE NEIGHBOURHOOD MAP</a>
+  <a href="#act7">ACT 7 · THE REACTIVITY ARC</a>
+  <a href="#act8">ACT 8 · THE TRANSITION LOUNGE</a>
+  <a href="#mind">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/25</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Chemistry · Higher Level · Structure 1.2 + 1.3 + 3.1</div>
+  <h1>THE NUCLEAR VAULT &amp; THE NEIGHBOURHOOD MAP</h1>
+  <div class="sub">Think of every atom as a <b>vault</b> (the nucleus — 99.9% of the mass, 1/100,000th of the size) inside a <b>tower</b> (energy levels where electrons live). The periodic table is the <b>neighbourhood map</b> of all 118 towers. This topic = what's in the vault, how the tower is built, and why the map predicts the neighbours' behaviour.</div>
+  <div class="badges">
+    <span class="badge hl">STRUCTURE 1.2 · 1.3 · 3.1 — ATOMS &amp; THE TABLE</span>
+    <span class="badge ahl">S3.1.5–S3.1.10 ARE AHL (S1.2 + S1.3 + S3.1.1–3.1.4 IS SL)</span>
+    <span class="badge">20 SYLLABUS POINTS</span>
+  </div>
+</header>
+
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 · S1.2.1</div>
+  <h2>THE NUCLEAR VAULT 🔐</h2>
+  <p class="aim">An atom is mostly nothing. All the mass sits in a tiny positively charged vault; the electrons live in the vast empty space around it. Rutherford found the vault by shooting bullets at gold foil.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔐</div>
+    <div class="body">
+      <h3>THE VAULT &amp; ITS GUESTS (S1.2.1)</h3>
+      <p class="aka">nucleons = protons + neutrons · electrons live outside the vault</p>
+      <ul class="clean">
+        <li>Nucleus = <span class="accent">protons (+1)</span> + <span class="accent">neutrons (0)</span> — together called <b>nucleons</b>. Electrons (<span class="accent">−1</span>) occupy the vast region outside.</li>
+        <li>Vault rules: <b>(1)</b> tiny compared to the atom (atom diameter ≈ 100 000 × nucleus diameter), <b>(2)</b> contains virtually ALL the mass, <b>(3)</b> positively charged.</li>
+        <li>Subatomic particles: proton (relative mass <b>1</b>, charge <b>+1</b>, nucleus) · neutron (mass <b>1</b>, charge <b>0</b>, nucleus) · electron (mass <b>negligible</b>, charge <b>−1</b>, outside nucleus).</li>
+        <li>Atom diameter: 1 × 10⁻¹⁰ to 5 × 10⁻¹⁰ m. Units: <b>1 pm = 10⁻¹² m</b> · <b>1 Å (angstrom) = 10⁻¹⁰ m</b>. Fluorine atomic radius = 60 pm = 0.60 Å.</li>
+        <li>Elementary charge e ≈ 1.602 × 10⁻¹⁹ C — protons +1e, electrons −1e.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 370" role="img" aria-label="Rutherford gold foil experiment: alpha particles fired at a gold foil, most pass straight through, some deflect, a few bounce back from the nucleus">
+      <rect x="0" y="0" width="640" height="370" rx="18" fill="#1d0f33"/>
+      <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">RUTHERFORD 1911 — SHOOTING BULLETS AT GOLD FOIL</text>
+      <!-- alpha source -->
+      <rect x="18" y="150" width="66" height="46" rx="8" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/>
+      <text x="51" y="171" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">α SOURCE</text>
+      <text x="51" y="186" text-anchor="middle" font-size="9" fill="#b9a3d6" font-family="Segoe UI">alpha particles</text>
+      <!-- gold foil -->
+      <line x1="250" y1="70" x2="250" y2="330" stroke="#fbbf24" stroke-width="3"/>
+      <text x="250" y="342" text-anchor="middle" font-size="11" fill="#fbbf24" font-family="Segoe UI" font-weight="700">gold foil</text>
+      <!-- nucleus -->
+      <circle cx="250" cy="210" r="10" fill="#ff2ec4"/>
+      <text x="250" y="214" text-anchor="middle" font-size="11" font-weight="900" fill="#0b0214" font-family="Segoe UI">+</text>
+      <!-- undeflected rays -->
+      <line x1="86" y1="158" x2="240" y2="178" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="86" y1="175" x2="240" y2="200" stroke="#22d3ee" stroke-width="2.5"/>
+      <line x1="86" y1="192" x2="240" y2="240" stroke="#22d3ee" stroke-width="2.5"/>
+      <!-- deflected ray -->
+      <path d="M86,205 L240,235 L330,270" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+      <path d="M86,170 L240,186 L330,160" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+      <!-- bouncing ray -->
+      <path d="M86,188 L240,214 L120,260" fill="none" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="118" y="282" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">BOUNCES BACK!</text>
+      <!-- detector -->
+      <path d="M330,110 A160,150 0 0 1 560,270" fill="none" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="560" y="252" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">movable detector</text>
+      <!-- observations -->
+      <text x="430" y="110" text-anchor="middle" font-size="12" fill="#22d3ee" font-family="Segoe UI" font-weight="700">MOST: straight through</text>
+      <text x="430" y="128" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">→ atom is mostly empty space</text>
+      <text x="390" y="160" text-anchor="middle" font-size="12" fill="#a855f7" font-family="Segoe UI" font-weight="700">SOME: deflect slightly</text>
+      <text x="390" y="178" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">→ pass near a positive nucleus</text>
+      <text x="452" y="322" text-anchor="middle" font-size="12" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">A FEW: bounce straight back</text>
+      <text x="452" y="340" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">→ tiny, dense, positive nucleus</text>
+      <text x="320" y="362" text-anchor="middle" font-size="12" fill="#22d3ee" font-family="Segoe UI" font-weight="700">conclusion: the plum-pudding model is dead — long live the nuclear atom</text>
+    </svg>
+    <div class="cap"><b>Figure 1</b> — Rutherford's gold foil experiment. The alpha particles are ⁴₂He nuclei fired at the foil. Nearly all pass through; ~1 in 8000 bounces back. That falsified the plum-pudding model (amorphous positive blob) and proved the <b>nucleus</b> exists.</div>
+  </div>
+
+  <div class="nos"><b>EXAM TRAP:</b> "Most alpha particles bounced back" is WRONG — most passed straight through. Only a FEW bounced back, and THAT is the evidence for the small dense positive nucleus. Match each observation to the property it proves (nucleus small / dense / positive).</div>
+
+  <div class="panel">
+    <h3>NUCLEAR SYMBOLS — THE ID CARD 🪪</h3>
+    <p class="big"><b>ᴬ_Z X</b> — A = mass number (protons + neutrons) · Z = atomic number (protons) · X = element symbol</p>
+    <p>A = Z + N (N = neutrons). Neutral atom: electrons = protons. <b>Z</b> is also the position on the periodic table — gold, atomic number 79, has 79 protons; ¹⁹⁷₇₉Au has 197 − 79 = <b>118 neutrons</b>.</p>
+    <p>Ions change the electron count, not the vault: magnesium loses 2 electrons → <b>²⁴₁₂Mg²⁺</b> (12 p⁺, 12 n, 10 e⁻). Oxygen gains 2 → <b>¹⁶₈O²⁻</b> (8 p⁺, 8 n, 10 e⁻). Charge = protons − electrons.</p>
+    <p class="muted">Activity: an ion with 24 protons, 21 electrons, 28 neutrons → Z = 24 (Cr), A = 24 + 28 = 52, charge = 24 − 21 = +3 → <b>⁵²₂₄Cr³⁺</b>.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">Act 2 · S1.2.2 · S1.2.3</div>
+  <h2>THE ISOTOPE MIX ⚖️</h2>
+  <p class="aim">Same element, different neutron counts. The periodic table mass is a weighted average of the whole mix — and the mass spectrometer is the machine that counts the mix.</p>
+
+  <div class="bouncer">
+    <div class="emoji">⚖️</div>
+    <div class="body">
+      <h3>ISOTOPES — SAME DNA, DIFFERENT BODY WEIGHT (S1.2.2)</h3>
+      <p class="aka">same Z, different N → different mass number A</p>
+      <ul class="clean">
+        <li><b>Isotopes</b> = atoms of the same element with different numbers of <b>neutrons</b>. Same protons, same electrons → <b>same chemical properties</b>. Different mass → <b>different physical properties</b> (density, mp, bp).</li>
+        <li>Chlorine: ³⁵₁₇Cl and ³⁷₁₇Cl. Shorthand: chlorine-37 or Cl-37 (Z is obvious from the symbol).</li>
+        <li>Hydrogen's trio: <b>protium</b> ¹H, <b>deuterium</b> ²H (stable), <b>tritium</b> ³H (radioactive — used in glowing exit signs!).</li>
+        <li>Heavy water: ²H₂O density 1.106 vs ¹H₂O 1.000 g cm⁻³, bp 101.4 vs 100.0 °C — physical differences you can measure.</li>
+        <li>Real uses: uranium enrichment (raise ²³⁵U from 0.72% to ≥3% for reactors), <b>isotope labelling</b> to track reaction mechanisms.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🔬</div>
+    <div class="body">
+      <h3>RELATIVE ATOMIC MASS — THE WEIGHTED AVERAGE</h3>
+      <p class="aka">A_r = Σ (isotope mass × natural abundance) ÷ 100</p>
+      <ul class="clean">
+        <li><b>A_r</b> = weighted average of all isotopes' masses using their <b>natural abundance</b> (NA, the % of that isotope on Earth).</li>
+        <li>Not a whole number precisely because it's an average over the isotope mix.</li>
+        <li>Reverse problem (find the abundance split) works ONLY for two-isotope elements: let x = NA of isotope 1, then NA of isotope 2 = 100 − x.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exam"><b>WORKED EXAMPLE 1 (book p.27):</b> A_r for iron from the table — ⁵⁴Fe 5.845%, ⁵⁶Fe 91.754%, ⁵⁷Fe 2.119%, ⁵⁸Fe 0.282%<br>
+  A_r = (54 × 5.845 + 56 × 91.754 + 57 × 2.119 + 58 × 0.282) ÷ 100 = <b>55.91</b>.<br>
+  <b>WORKED EXAMPLE 2:</b> Chlorine (A_r = 35.45) from ³⁵Cl and ³⁷Cl. Let x = NA(³⁵Cl): (35x + 37(100 − x))/100 = 35.45 → 3700 − 2x = 3545 → <b>x = 77.5%, so ³⁷Cl = 22.5%</b>. (Actual: 75.8/24.2 — the small difference is because mass numbers are rounded versions of true isotopic masses.)</div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 330" role="img" aria-label="Mass spectrum of boron: two peaks at m/z 10 and 11 with relative abundances 19.9 and 80.1 percent">
+      <rect x="0" y="0" width="640" height="330" rx="18" fill="#1d0f33"/>
+      <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">MASS SPECTRUM OF BORON — READ IT, DON'T LOOK AT IT</text>
+      <!-- axes -->
+      <line x1="80" y1="60" x2="80" y2="250" stroke="#b9a3d6" stroke-width="2"/>
+      <line x1="80" y1="250" x2="580" y2="250" stroke="#b9a3d6" stroke-width="2"/>
+      <text x="40" y="70" font-size="11" fill="#b9a3d6" font-family="Segoe UI">100</text>
+      <text x="40" y="200" font-size="11" fill="#b9a3d6" font-family="Segoe UI">20</text>
+      <text x="40" y="265" font-size="11" fill="#b9a3d6" font-family="Segoe UI">0</text>
+      <text x="40" y="240" font-size="10" fill="#b9a3d6" font-family="Segoe UI" transform="rotate(-90 40,240)">rel. abundance / %</text>
+      <text x="320" y="285" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">m/z</text>
+      <!-- peaks -->
+      <line x1="240" y1="250" x2="240" y2="200" stroke="#22d3ee" stroke-width="14"/>
+      <text x="240" y="190" text-anchor="middle" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">¹⁰B</text>
+      <text x="240" y="174" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">19.9%</text>
+      <line x1="420" y1="250" x2="420" y2="60" stroke="#22d3ee" stroke-width="14"/>
+      <text x="420" y="48" text-anchor="middle" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">¹¹B</text>
+      <text x="420" y="68" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">80.1%</text>
+      <text x="240" y="270" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">10</text>
+      <text x="420" y="270" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">11</text>
+      <!-- equation -->
+      <rect x="120" y="290" width="400" height="30" rx="8" fill="#150a26" stroke="#ff2ec4" stroke-width="1.2"/>
+      <text x="320" y="310" text-anchor="middle" font-size="13" fill="#f3e8ff" font-family="Segoe UI">A_r = (11 × 80.1 + 10 × 19.9) / 100 = <tspan font-weight="900" fill="#ff2ec4">10.8</tspan></text>
+    </svg>
+    <div class="cap"><b>Figure 2</b> — A mass spectrum plots relative abundance against m/z. The tallest peak = most abundant isotope. A_r is the weighted average you compute from the peaks — here it comes out 10.8.</div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">⚙️</div>
+    <div class="body">
+      <h3>THE MASS SPECTROMETER — 5-STAGE CONVEYOR BELT (S1.2.3)</h3>
+      <p class="aka">operational details are NOT assessed — but the story is</p>
+      <ol class="steps">
+        <li><b>Vaporize</b> — heating filament turns the sample into gas.</li>
+        <li><b>Ionize</b> — high-energy electron beam knocks electrons off atoms → cations (M → M⁺ + 2e⁻).</li>
+        <li><b>Accelerate</b> — electric field speeds the ions up.</li>
+        <li><b>Deflect</b> — magnetic field bends the path. Deflection depends on <b>m/z</b>: lowest mass, highest charge = deflected MOST. Neutral particles aren't affected at all → never reach the detector.</li>
+        <li><b>Detect</b> — ions hit the detector; a computer plots the mass spectrum.</li>
+      </ol>
+      <p class="muted">Real application: cobalt vs nickel in iron meteorites look chemically identical, but their isotope fingerprints are totally different — mass spec tells them apart instantly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">Act 3 · S1.3.1 · S1.3.2 · S1.3.6</div>
+  <h2>THE LIGHT SHOW 🌈</h2>
+  <p class="aim">Electrons hate being stuck at one energy. Give them a photon and they jump up; when they fall back down they scream — in colour. The hydrogen rainbow is the evidence that energy comes in fixed steps, not a smooth ramp.</p>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag p">S1.3.1 · SL</div>
+      <h4>THREE SPECTRA, ONE STORY</h4>
+      <p><b>Continuous:</b> all wavelengths, colours merge — a rainbow, 400–700 nm.</p>
+      <p><b>Emission:</b> hot gas glows → bright lines on dark. Each element has its own line "barcode".</p>
+      <p><b>Absorption:</b> cold gas in front of a white source → dark lines on the rainbow.</p>
+      <p class="muted">Sodium streetlight: 589.0 + 589.6 nm yellow-orange — same glow as the flame test.</p>
+    </div>
+    <div class="card">
+      <div class="tag">S1.3.2 · SL</div>
+      <h4>THE HYDROGEN RAINBOW</h4>
+      <p>Four visible lines: <b>656 nm red</b> (3→2) · <b>486 nm cyan</b> (4→2) · <b>434 nm blue</b> (5→2) · <b>410 nm violet</b> (6→2).</p>
+      <p>Lines <b>converge</b> at higher energy — they bunch up like stairs to a ceiling.</p>
+      <p>Only discrete colours → electrons exist in <b>discrete energy levels</b>, not a continuum.</p>
+      <p class="muted">Transitions to n = 1 → UV · to n = 2 → visible · to n = 3 → IR.</p>
+    </div>
+    <div class="card">
+      <div class="tag v">S1.3.6 · SL</div>
+      <h4>THE CEILING = IONIZATION</h4>
+      <p>The limit of convergence = the energy to <b>fully remove the electron</b>.</p>
+      <p>Hydrogen: convergence at 9.12 × 10⁻⁸ m → E = hc/λ → <b>2.18 × 10⁻¹⁸ J</b> per atom = <b>1.31 × 10³ kJ mol⁻¹</b> — matches the data booklet.</p>
+      <p class="muted">Same ceiling the Bohr model predicts: E₁ = −2.18 × 10⁻¹⁸ J.</p>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🎚</div>
+    <div class="body">
+      <h3>THE PHOTON TRADING FLOOR</h3>
+      <p class="aka">c = f × λ · E = h × f · h = 6.63 × 10⁻³⁴ J s · c = 3.00 × 10⁸ m s⁻¹</p>
+      <ul class="clean">
+        <li>Light is <b>electromagnetic radiation</b>: gamma → X-ray → UV → visible → IR → microwave → radio.</li>
+        <li>Energy ∝ 1/λ: <b>short wavelength = high frequency = high energy</b>. Gamma is the bouncer; radio is the couch potato.</li>
+        <li>Bohr 1913: electrons orbit in <b>fixed allowed orbits</b>. Absorb a photon with exactly ΔE → jump to an excited state. Fall back → emit a photon of exactly that ΔE. No in-between: <b>quantized</b>.</li>
+        <li>The Bohr model only works cleanly for hydrogen — one electron. The quantum mechanical model (Schrödinger, 1926) replaces orbits with <b>probability clouds</b>.</li>
+        <li>Flame tests are the same physics: heat bumps electrons up, they fall back and emit visible photons. Li = red, Na = yellow-orange, K = lilac, Ca = brick-red, Cu = blue-green, Sr = crimson.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 400" role="img" aria-label="Energy level diagram of hydrogen: electrons falling from higher levels to n=2 emit red, cyan, blue and violet light; convergence limit at the top corresponds to ionization">
+      <rect x="0" y="0" width="640" height="400" rx="18" fill="#1d0f33"/>
+      <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">THE ENERGY TOWER OF HYDROGEN — FIXED FLOORS, FIXED COLOURS</text>
+      <!-- energy levels -->
+      <line x1="60" y1="60" x2="300" y2="60" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="340" y="64" font-size="11" fill="#b9a3d6" font-family="Segoe UI">n = ∞ (ionization)</text>
+      <line x1="60" y1="95" x2="300" y2="95" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="340" y="99" font-size="11" fill="#b9a3d6" font-family="Segoe UI">n = 6</text>
+      <line x1="60" y1="120" x2="300" y2="120" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="340" y="124" font-size="11" fill="#b9a3d6" font-family="Segoe UI">n = 5</text>
+      <line x1="60" y1="150" x2="300" y2="150" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="340" y="154" font-size="11" fill="#b9a3d6" font-family="Segoe UI">n = 4</text>
+      <line x1="60" y1="185" x2="300" y2="185" stroke="#b9a3d6" stroke-width="1.5"/>
+      <text x="340" y="189" font-size="11" fill="#b9a3d6" font-family="Segoe UI">n = 3</text>
+      <line x1="60" y1="240" x2="300" y2="240" stroke="#22d3ee" stroke-width="3"/>
+      <text x="340" y="244" font-size="11" font-weight="800" fill="#22d3ee" font-family="Segoe UI">n = 2 — landing pad</text>
+      <line x1="60" y1="330" x2="300" y2="330" stroke="#ff2ec4" stroke-width="3"/>
+      <text x="340" y="334" font-size="11" font-weight="800" fill="#ff2ec4" font-family="Segoe UI">n = 1 — ground state</text>
+      <!-- transitions -->
+      <line x1="150" y1="185" x2="150" y2="240" stroke="#ff2ec4" stroke-width="3" marker-end="url(#arrL)"/>
+      <text x="150" y="205" text-anchor="middle" font-size="11" fill="#ff2ec4" font-family="Segoe UI">656 nm · red</text>
+      <line x1="210" y1="150" x2="210" y2="240" stroke="#22d3ee" stroke-width="3"/>
+      <text x="212" y="185" font-size="11" fill="#22d3ee" font-family="Segoe UI">486 nm · cyan</text>
+      <line x1="260" y1="120" x2="260" y2="240" stroke="#a855f7" stroke-width="3"/>
+      <text x="262" y="165" font-size="11" fill="#a855f7" font-family="Segoe UI">434 nm · blue</text>
+      <line x1="60" y1="95" x2="60" y2="240" stroke="#fbbf24" stroke-width="3"/>
+      <text x="46" y="170" font-size="11" fill="#fbbf24" font-family="Segoe UI">410 nm</text>
+      <text x="46" y="184" font-size="11" fill="#fbbf24" font-family="Segoe UI">violet</text>
+      <!-- ionization arrow -->
+      <line x1="230" y1="330" x2="230" y2="62" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="238" y="200" font-size="11" fill="#4ade80" font-family="Segoe UI">absorb energy →</text>
+      <text x="238" y="214" font-size="11" fill="#4ade80" font-family="Segoe UI">electron escapes</text>
+      <!-- series zones -->
+      <rect x="470" y="70" width="150" height="255" rx="10" fill="#150a26" stroke="#4ade80" stroke-width="1.2"/>
+      <text x="545" y="96" text-anchor="middle" font-size="12" font-weight="800" fill="#4ade80" font-family="Segoe UI">THE SERIES</text>
+      <text x="545" y="130" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">to n = 1 → UV</text>
+      <text x="545" y="150" text-anchor="middle" font-size="11" fill="#22d3ee" font-family="Segoe UI">to n = 2 → visible</text>
+      <text x="545" y="170" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">to n = 3 → IR</text>
+      <text x="545" y="205" text-anchor="middle" font-size="11" fill="#4ade80" font-family="Segoe UI">lines converge</text>
+      <text x="545" y="220" text-anchor="middle" font-size="11" fill="#4ade80" font-family="Segoe UI">at the ceiling =</text>
+      <text x="545" y="235" text-anchor="middle" font-size="11" font-weight="800" fill="#4ade80" font-family="Segoe UI">ionization energy</text>
+      <text x="545" y="310" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">H: 2.18 × 10⁻¹⁸ J per atom</text>
+      <text x="545" y="324" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">= 1312 kJ mol⁻¹</text>
+      <text x="320" y="392" text-anchor="middle" font-size="12" fill="#22d3ee" font-family="Segoe UI" font-weight="700">each arrow = one exact photon energy → evidence that electron energy is QUANTIZED</text>
+    </svg>
+    <div class="cap"><b>Figure 3</b> — Hydrogen's energy levels. Falling to n = 2 gives the four visible Balmer lines; the convergence limit at the top is the ionization energy (S1.3.6).</div>
+  </div>
+
+  <div class="tip"><b>MEMORY HOOK:</b> "656 red, 486 cyan, 434 blue, 410 violet" — the gaps shrink as n grows, so the lines crowd together. The crowd's end is the ionization ceiling. Also: 1/n² spacing — each floor sits closer to the ceiling than the last.</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">Act 4 · S1.3.3 · S1.3.4 · S1.3.5</div>
+  <h2>THE ENERGY TOWER 🏢</h2>
+  <p class="aim">The tower has floors (n), each floor has rooms (sublevels s, p, d, f), and each room has beds (orbitals) that hold exactly two electrons — with opposite spins. Filling order is the rulebook.</p>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag p">S1.3.3 · SL</div>
+      <h4>THE 2n² RULE</h4>
+      <p>Floor n holds at most <b>2n²</b> electrons.</p>
+      <p>n = 1 → <b>2</b> · n = 2 → <b>8</b> · n = 3 → <b>18</b> · n = 4 → <b>32</b></p>
+      <p class="muted">That's the fire-code capacity of each floor.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">S1.3.4 · SL</div>
+      <h4>ROOMS: s, p, d, f</h4>
+      <p>Each floor splits into <b>sublevels</b> of rising energy: <b>s &lt; p &lt; d &lt; f</b>.</p>
+      <p>Orbitals per sublevel: <b>s = 1, p = 3, d = 5, f = 7</b>.</p>
+      <p>Shapes: s = <b>sphere</b> · p = <b>dumbbell</b> (px, py, pz at right angles) · d = cloverleaf (5) · f = complex (7).</p>
+      <p class="muted">Floor 3: 3s (2 e⁻) + 3p (6 e⁻) + 3d (10 e⁻) = 18 ✓.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">S1.3.5 · SL</div>
+      <h4>BEDS: ORBITALS</h4>
+      <p><b>Orbital</b> = region of space with a high probability (~99%) of finding the electron.</p>
+      <p><b>Pauli:</b> max <b>2 electrons per orbital</b>, opposite spins.</p>
+      <p><b>Degenerate:</b> same-energy orbitals — the three 2p orbitals are equal.</p>
+      <p><b>Hund:</b> fill degenerate orbitals <b>singly first</b>, same spin, before pairing.</p>
+      <p class="muted">Degenerate = "equal energy". Spreading out first minimises repulsion.</p>
+    </div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 480 340" role="img" aria-label="Aufbau filling order: 1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 4f 5d 6p">
+      <rect x="0" y="0" width="480" height="340" rx="18" fill="#1d0f33"/>
+      <text x="240" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">THE AUFBAU LADDER — FILL LOWEST FIRST</text>
+      <!-- sublevel boxes -->
+      <rect x="30" y="60" width="70" height="26" rx="6" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="65" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#ff2ec4" font-family="Segoe UI">1s²</text>
+      <rect x="110" y="60" width="70" height="26" rx="6" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="145" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#ff2ec4" font-family="Segoe UI">2s²</text>
+      <rect x="190" y="60" width="70" height="26" rx="6" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="225" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#22d3ee" font-family="Segoe UI">2p⁶</text>
+      <rect x="30" y="100" width="70" height="26" rx="6" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="65" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#ff2ec4" font-family="Segoe UI">3s²</text>
+      <rect x="110" y="100" width="70" height="26" rx="6" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="145" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#22d3ee" font-family="Segoe UI">3p⁶</text>
+      <rect x="30" y="140" width="70" height="26" rx="6" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="65" y="158" text-anchor="middle" font-size="12" font-weight="700" fill="#ff2ec4" font-family="Segoe UI">4s²</text>
+      <rect x="110" y="140" width="70" height="26" rx="6" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="145" y="158" text-anchor="middle" font-size="12" font-weight="700" fill="#a855f7" font-family="Segoe UI">3d¹⁰</text>
+      <rect x="190" y="140" width="70" height="26" rx="6" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="225" y="158" text-anchor="middle" font-size="12" font-weight="700" fill="#22d3ee" font-family="Segoe UI">4p⁶</text>
+      <rect x="30" y="180" width="70" height="26" rx="6" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="65" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="#ff2ec4" font-family="Segoe UI">5s²</text>
+      <rect x="110" y="180" width="70" height="26" rx="6" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="145" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="#a855f7" font-family="Segoe UI">4d¹⁰</text>
+      <rect x="190" y="180" width="70" height="26" rx="6" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="225" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="#22d3ee" font-family="Segoe UI">5p⁶</text>
+      <rect x="30" y="220" width="70" height="26" rx="6" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="65" y="238" text-anchor="middle" font-size="12" font-weight="700" fill="#ff2ec4" font-family="Segoe UI">6s²</text>
+      <rect x="110" y="220" width="70" height="26" rx="6" fill="#150a26" stroke="#fbbf24" stroke-width="1.5"/><text x="145" y="238" text-anchor="middle" font-size="12" font-weight="700" fill="#fbbf24" font-family="Segoe UI">4f¹⁴</text>
+      <rect x="190" y="220" width="70" height="26" rx="6" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="225" y="238" text-anchor="middle" font-size="12" font-weight="700" fill="#a855f7" font-family="Segoe UI">5d¹⁰</text>
+      <rect x="270" y="220" width="70" height="26" rx="6" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="305" y="238" text-anchor="middle" font-size="12" font-weight="700" fill="#22d3ee" font-family="Segoe UI">6p⁶</text>
+      <!-- diagonal arrows -->
+      <line x1="95" y1="86" x2="75" y2="96" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="175" y1="86" x2="105" y2="96" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="95" y1="126" x2="75" y2="136" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="175" y1="126" x2="105" y2="136" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="95" y1="166" x2="75" y2="176" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="175" y1="166" x2="105" y2="176" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="95" y1="206" x2="75" y2="216" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <line x1="175" y1="206" x2="105" y2="216" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrS)"/>
+      <text x="320" y="80" font-size="10" fill="#b9a3d6" font-family="Segoe UI">read diagonals:</text>
+      <text x="320" y="96" font-size="10" fill="#b9a3d6" font-family="Segoe UI">4s fills BEFORE 3d!</text>
+      <text x="320" y="112" font-size="10" fill="#b9a3d6" font-family="Segoe UI">6s before 4f before 5d</text>
+      <text x="240" y="272" text-anchor="middle" font-size="11" fill="#4ade80" font-family="Segoe UI" font-weight="700">exam ceiling: IB only tests up to Z = 36 (krypton)</text>
+      <text x="240" y="292" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">Kr = 1s²2s²2p⁶3s²3p⁶4s²3d¹⁰4p⁶ · Ca = [Ar]4s²</text>
+      <text x="240" y="314" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">the 4s/3d swap is the classic "trap" — 4s fills first,</text>
+      <text x="240" y="332" text-anchor="middle" font-size="11" fill="#b9a3d6" font-family="Segoe UI">but 3d is LOWER in energy once both are occupied</text>
+    </svg>
+    <div class="cap"><b>Figure 4a</b> — Aufbau filling order. Read the ladder diagonally: 4s is filled before 3d, 6s before 4f.</div>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 480 300" role="img" aria-label="Orbital box diagrams for nitrogen and manganese showing Pauli exclusion and Hund's rule">
+      <rect x="0" y="0" width="480" height="300" rx="18" fill="#1d0f33"/>
+      <text x="240" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">ORBITAL BOX DIAGRAMS — PAULI + HUND IN ACTION</text>
+      <!-- nitrogen -->
+      <text x="40" y="70" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">NITROGEN · 1s² 2s² 2p³</text>
+      <rect x="40" y="85" width="26" height="26" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="53" y="103" text-anchor="middle" font-size="13" fill="#ff2ec4" font-family="Segoe UI">↑</text><text x="53" y="118" text-anchor="middle" font-size="9" fill="#b9a3d6" font-family="Segoe UI">↓</text>
+      <rect x="74" y="85" width="26" height="26" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="87" y="103" text-anchor="middle" font-size="13" fill="#ff2ec4" font-family="Segoe UI">↑</text><text x="87" y="118" text-anchor="middle" font-size="9" fill="#b9a3d6" font-family="Segoe UI">↓</text>
+      <rect x="130" y="85" width="26" height="26" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="143" y="103" text-anchor="middle" font-size="13" fill="#22d3ee" font-family="Segoe UI">↑</text>
+      <rect x="164" y="85" width="26" height="26" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="177" y="103" text-anchor="middle" font-size="13" fill="#22d3ee" font-family="Segoe UI">↑</text>
+      <rect x="198" y="85" width="26" height="26" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><text x="211" y="103" text-anchor="middle" font-size="13" fill="#22d3ee" font-family="Segoe UI">↑</text>
+      <text x="40" y="135" font-size="10" fill="#b9a3d6" font-family="Segoe UI">3 p electrons SINGLY occupied, same spin — Hund's rule</text>
+      <text x="40" y="150" font-size="10" fill="#b9a3d6" font-family="Segoe UI">(pairing costs repulsion energy — spread out first)</text>
+      <!-- manganese -->
+      <text x="40" y="185" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">MANGANESE · [Ar] 4s² 3d⁵</text>
+      <rect x="40" y="200" width="26" height="26" fill="#150a26" stroke="#ff2ec4" stroke-width="1.5"/><text x="53" y="218" text-anchor="middle" font-size="13" fill="#ff2ec4" font-family="Segoe UI">↑</text><text x="53" y="233" text-anchor="middle" font-size="9" fill="#b9a3d6" font-family="Segoe UI">↓</text>
+      <text x="74" y="218" font-size="10" fill="#b9a3d6" font-family="Segoe UI">4s</text>
+      <rect x="130" y="200" width="26" height="26" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="143" y="218" text-anchor="middle" font-size="13" fill="#a855f7" font-family="Segoe UI">↑</text>
+      <rect x="164" y="200" width="26" height="26" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="177" y="218" text-anchor="middle" font-size="13" fill="#a855f7" font-family="Segoe UI">↑</text>
+      <rect x="198" y="200" width="26" height="26" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="211" y="218" text-anchor="middle" font-size="13" fill="#a855f7" font-family="Segoe UI">↑</text>
+      <rect x="232" y="200" width="26" height="26" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="245" y="218" text-anchor="middle" font-size="13" fill="#a855f7" font-family="Segoe UI">↑</text>
+      <rect x="266" y="200" width="26" height="26" fill="#150a26" stroke="#a855f7" stroke-width="1.5"/><text x="279" y="218" text-anchor="middle" font-size="13" fill="#a855f7" font-family="Segoe UI">↑</text>
+      <text x="300" y="218" font-size="10" fill="#b9a3d6" font-family="Segoe UI">3d — 5 singly = half-filled</text>
+      <text x="40" y="250" font-size="10" fill="#b9a3d6" font-family="Segoe UI">Mn²⁺ loses 4s electrons FIRST → [Ar]3d⁵ (half-filled = extra stable)</text>
+      <text x="240" y="286" text-anchor="middle" font-size="11" fill="#4ade80" font-family="Segoe UI" font-weight="700">half-filled (d⁵, p³) and full (d¹⁰, p⁶) sublevels are extra stable</text>
+    </svg>
+    <div class="cap"><b>Figure 4b</b> — Pauli: two electrons per orbital, opposite spins. Hund: fill before pairing. Half-filled sublevels = stability bonus (that's Cr and Cu's excuse).</div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">📋</div>
+    <div class="body">
+      <h3>WRITING CONFIGURATIONS — THE SHORTCUTS (S1.3.5)</h3>
+      <p class="aka">full vs condensed · ions · the two exceptions you must know</p>
+      <ul class="clean">
+        <li><b>Full:</b> Ca = 1s² 2s² 2p⁶ 3s² 3p⁶ 4s². <b>Condensed:</b> [Ar] 4s². Noble-gas core + valence.</li>
+        <li><b>Ions:</b> electrons come OUT of the highest n first (not the last-filled!): Mn²⁺ = [Ar] <b>3d⁵</b> (4s emptied), Fe²⁺ = [Ar]3d⁶, Fe³⁺ = [Ar]3d⁵.</li>
+        <li><b>The two exceptions (memorize):</b> Cr = [Ar]4s¹3d⁵ (not 4s²3d⁴) and Cu = [Ar]4s¹3d¹⁰ (not 4s²3d⁹) — half-filled/full d wins.</li>
+        <li>IB only tests writing configurations up to <b>Z = 36</b> (krypton).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="nos"><b>EXAM TRAP:</b> "4s fills first" AND "4s empties first" are BOTH true — but for different reasons. Filling: 4s is lower energy when empty. Removing: the ion's energy is minimised by stripping the outermost shell (highest n) first. So Fe → Fe²⁺ loses 4s², giving [Ar]3d⁶.</div>
+</section>
+
+<!-- ══════════════════════ ACT 5 ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">Act 5 · S1.3.7</div>
+  <h2>THE IONIZATION SLEDGEHAMMER 🔨</h2>
+  <p class="aim">Hit an atom once, you remove the easiest electron. Keep hitting — each next electron costs more, and the price spike tells you exactly which shell you've cracked open.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🔨</div>
+    <div class="body">
+      <h3>IE DEFINITIONS &amp; THE BIG-JUMP TRICK (S1.3.7)</h3>
+      <p class="aka">X(g) → X⁺(g) + e⁻ · always gaseous, always minimum energy</p>
+      <ul class="clean">
+        <li><b>First ionization energy</b> = minimum energy to remove one electron from one mole of gaseous atoms: X(g) → X⁺(g) + e⁻.</li>
+        <li><b>Successive IEs always increase</b> — the ion gets more positively charged, so each remaining electron feels more pull.</li>
+        <li>The <b>big jump</b> happens when you break through to an inner (core) shell: after the valence electrons are gone, the next electron comes from a much lower, much more tightly held level.</li>
+        <li><b>Group = number of electrons before the big jump.</b> Na: jump after IE₁ → group 1. Mg: jump after IE₂ → group 2. Al: jump after IE₃ → group 13.</li>
+        <li>IE data also confirms shell structure (S1.3.3): the jump size tells you how many electrons were in the outer level — evidence for 2n² and the whole tower model.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 360" role="img" aria-label="Successive ionization energies of sodium, magnesium and aluminium showing the big jump after the valence electrons are removed">
+      <rect x="0" y="0" width="640" height="360" rx="18" fill="#1d0f33"/>
+      <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">SUCCESSIVE IE — FIND THE BIG JUMP, NAME THE GROUP</text>
+      <!-- sodium -->
+      <text x="100" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">SODIUM (Na)</text>
+      <rect x="55" y="70" width="30" height="120" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="55" y="150" width="30" height="40" fill="#22d3ee"/>
+      <rect x="92" y="70" width="30" height="230" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="92" y="130" width="30" height="170" fill="#ff2ec4"/>
+      <rect x="129" y="70" width="30" height="245" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="129" y="105" width="30" height="210" fill="#ff2ec4"/>
+      <text x="70" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE1</text>
+      <text x="107" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE2</text>
+      <text x="144" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE3</text>
+      <text x="107" y="315" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">jump after 1st → group 1</text>
+      <!-- magnesium -->
+      <text x="295" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">MAGNESIUM (Mg)</text>
+      <rect x="250" y="70" width="30" height="120" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="250" y="150" width="30" height="40" fill="#22d3ee"/>
+      <rect x="287" y="70" width="30" height="150" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="287" y="130" width="30" height="90" fill="#22d3ee"/>
+      <rect x="324" y="70" width="30" height="245" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="324" y="105" width="30" height="210" fill="#ff2ec4"/>
+      <text x="265" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE1</text>
+      <text x="302" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE2</text>
+      <text x="339" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE3</text>
+      <text x="302" y="315" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">jump after 2nd → group 2</text>
+      <!-- aluminium -->
+      <text x="500" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#22d3ee" font-family="Segoe UI">ALUMINIUM (Al)</text>
+      <rect x="455" y="70" width="30" height="120" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="455" y="150" width="30" height="40" fill="#22d3ee"/>
+      <rect x="492" y="70" width="30" height="150" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="492" y="130" width="30" height="90" fill="#22d3ee"/>
+      <rect x="529" y="70" width="30" height="170" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="529" y="115" width="30" height="125" fill="#22d3ee"/>
+      <rect x="566" y="70" width="30" height="245" fill="#150a26" stroke="#22d3ee" stroke-width="1.5"/><rect x="566" y="105" width="30" height="210" fill="#ff2ec4"/>
+      <text x="470" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE1</text>
+      <text x="507" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE2</text>
+      <text x="544" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE3</text>
+      <text x="581" y="290" text-anchor="middle" font-size="10" fill="#b9a3d6" font-family="Segoe UI">IE4</text>
+      <text x="528" y="315" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">jump after 3rd → group 13</text>
+      <text x="320" y="348" text-anchor="middle" font-size="12" fill="#22d3ee" font-family="Segoe UI" font-weight="700">bar height = IE value (not to scale) · count the short bars before the wall = valence electrons</text>
+    </svg>
+    <div class="cap"><b>Figure 5</b> — Successive ionization energies. The wall after IE₁ (Na), IE₂ (Mg) or IE₃ (Al) marks the edge of the core shell — that count identifies the group.</div>
+  </div>
+
+  <div class="exam"><b>WORKED EXAMPLE (book p.53–54):</b> An element's successive IE values (kJ mol⁻¹) are 578, 1817, 2745, 11577... → IE₁–IE₃ are low and similar; IE₄ is ~4× bigger → 3 valence electrons → <b>group 13</b> (aluminium-like). If asked to sketch from data: the big jump's position = group number, always.</div>
+
+  <div class="tip"><b>MEMORY HOOK:</b> IE is like pulling out nails from a board. The first nail comes out easy; each next one is welded tighter; and the moment you hit the board's core (core electrons), you need a completely different tool — the sledgehammer of IE.</div>
+</section>
+
+<!-- ══════════════════════ ACT 6 ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">Act 6 · S3.1.1 · S3.1.2 · S3.1.3 · S3.1.4</div>
+  <h2>THE NEIGHBOURHOOD MAP 🗺</h2>
+  <p class="aim">Mendeleev drew the map by hand in 1869 — ordered by atomic mass, with bold predictions. Modern version: ordered by atomic number (protons), and the position alone predicts radius, ionization energy, electronegativity and reactivity.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag p">S3.1.1 · SL</div>
+      <h4>THE MAP'S COORDINATES</h4>
+      <p><b>Period</b> = row (1–7) · <b>Group</b> = column (1–18) · <b>Block</b> = which sublevel the outer electrons live in (s, p, d, f).</p>
+      <p>Mendeleev: ordered by <b>atomic mass</b>, left gaps, predicted <b>gallium</b> (eka-aluminium) before it was found. Modern table: ordered by <b>atomic number</b> (Moseley).</p>
+      <p class="muted">The gaps were the point — the map predicted undiscovered elements. That's a map worth framing.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">S3.1.2 · SL</div>
+      <h4>READING POSITION = READING CONFIG</h4>
+      <p><b>Group number = valence electrons</b>: groups 1–2 → the group number itself (group 2 = 2 valence e⁻); groups 13–18 → the last digit (group 17 = 7 valence e⁻).</p>
+      <p><b>Period number = principal quantum number n</b> of the outer shell. Sodium is in period 3 → outer electrons in n = 3.</p>
+      <p class="muted">Position IS the electron configuration, in map form.</p>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🧭</div>
+    <div class="body">
+      <h3>THE NEIGHBOURHOODS (S3.1.3)</h3>
+      <p class="aka">group 1 alkali metals · group 17 halogens · group 18 noble gases · groups 3–11 transition elements</p>
+      <ul class="clean">
+        <li><b>Metals</b> (left + middle): lose electrons, form cations, conduct — about 80% of all elements.</li>
+        <li><b>Non-metals</b> (top right): gain/share electrons, form anions and covalent compounds.</li>
+        <li><b>Metalloids</b> straddle the zig-zag line (B, Si, Ge, As, Sb, Te): semiconductor behaviour — the "in-betweeners".</li>
+        <li>Group names to drop in essays: <b>alkali metals</b> (1), <b>alkaline earth metals</b> (2), <b>halogens</b> (17), <b>noble gases</b> (18), <b>transition elements</b> (3–11).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 400" role="img" aria-label="Schematic periodic table showing periods, groups, blocks, group names and the trend arrows for atomic radius, ionization energy and electronegativity">
+      <rect x="0" y="0" width="640" height="400" rx="18" fill="#1d0f33"/>
+      <text x="320" y="28" text-anchor="middle" font-size="16" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">THE NEIGHBOURHOOD MAP — ONE LOOK, ALL THE TRENDS</text>
+      <!-- grid -->
+      <g stroke="#a855f7" stroke-width="1">
+        <rect x="40" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="104" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="136" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="168" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="200" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="232" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="264" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="296" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="328" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="360" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="392" y="50" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="424" y="50" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="50" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="50" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="50" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="50" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="50" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <!-- period 2 -->
+        <rect x="40" y="76" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="584" y="76" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <!-- periods 3-7: s and p columns -->
+        <rect x="40" y="102" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="102" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="392" y="102" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="424" y="102" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="102" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="102" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="102" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="102" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="102" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <rect x="40" y="128" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="128" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="392" y="128" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="424" y="128" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="128" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="128" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="128" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="128" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="128" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <!-- d block period 4 -->
+        <rect x="104" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="136" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="168" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="200" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="232" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="264" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="296" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="328" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="360" y="128" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <!-- periods 5-7 -->
+        <rect x="40" y="154" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="154" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="104" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="136" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="168" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="200" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="232" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="264" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="296" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="328" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="360" y="154" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="392" y="154" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="424" y="154" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="154" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="154" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="154" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="154" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="154" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <rect x="40" y="180" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="180" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="104" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="136" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="168" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="200" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="232" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="264" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="296" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="328" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="360" y="180" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="392" y="180" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="424" y="180" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="180" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="180" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="180" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="180" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="180" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <rect x="40" y="206" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="206" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="104" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="136" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="168" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="200" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="232" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="264" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="296" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="328" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="360" y="206" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="392" y="206" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="424" y="206" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="206" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="206" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="206" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="206" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="206" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+        <rect x="40" y="232" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="72" y="232" width="30" height="24" fill="#ff2ec4" opacity=".55"/>
+        <rect x="104" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="136" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="168" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="200" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="232" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="264" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="296" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="328" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="360" y="232" width="30" height="24" fill="#a855f7" opacity=".5"/>
+        <rect x="392" y="232" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="424" y="232" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="456" y="232" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="488" y="232" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="520" y="232" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="552" y="232" width="30" height="24" fill="#4ade80" opacity=".45"/>
+        <rect x="584" y="232" width="30" height="24" fill="#22d3ee" opacity=".4"/>
+      </g>
+      <!-- labels -->
+      <text x="55" y="45" text-anchor="middle" font-size="9" fill="#ff2ec4" font-family="Segoe UI">1</text>
+      <text x="87" y="45" text-anchor="middle" font-size="9" fill="#ff2ec4" font-family="Segoe UI">2</text>
+      <text x="247" y="45" text-anchor="middle" font-size="9" fill="#a855f7" font-family="Segoe UI">d-block</text>
+      <text x="445" y="45" text-anchor="middle" font-size="9" fill="#4ade80" font-family="Segoe UI">13</text>
+      <text x="555" y="45" text-anchor="middle" font-size="9" fill="#22d3ee" font-family="Segoe UI">17</text>
+      <text x="599" y="45" text-anchor="middle" font-size="9" fill="#22d3ee" font-family="Segoe UI">18</text>
+      <text x="55" y="280" text-anchor="middle" font-size="9" fill="#fbbf24" font-family="Segoe UI">s-block</text>
+      <text x="140" y="280" text-anchor="middle" font-size="9" fill="#a855f7" font-family="Segoe UI">d-block (3–12)</text>
+      <text x="440" y="280" text-anchor="middle" font-size="9" fill="#4ade80" font-family="Segoe UI">p-block (13–18)</text>
+      <text x="55" y="294" text-anchor="middle" font-size="9" fill="#ff2ec4" font-family="Segoe UI">group 1: alkali metals</text>
+      <text x="555" y="294" text-anchor="middle" font-size="9" fill="#22d3ee" font-family="Segoe UI">halogens</text>
+      <text x="599" y="294" text-anchor="middle" font-size="9" fill="#22d3ee" font-family="Segoe UI">noble gases</text>
+      <!-- trend arrows -->
+      <rect x="392" y="300" width="228" height="80" rx="10" fill="#150a26" stroke="#22d3ee" stroke-width="1.2"/>
+      <text x="506" y="318" text-anchor="middle" font-size="12" font-weight="800" fill="#22d3ee" font-family="Segoe UI">TREND ARROWS</text>
+      <text x="420" y="340" font-size="11" fill="#f3e8ff" font-family="Segoe UI">atomic radius</text>
+      <text x="555" y="340" font-size="11" fill="#f3e8ff" font-family="Segoe UI">IE · EN · EA</text>
+      <line x1="430" y1="348" x2="520" y2="348" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#arrT)"/>
+      <text x="475" y="356" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI">ACROSS →</text>
+      <line x1="435" y1="364" x2="435" y2="372" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrT)"/>
+      <text x="415" y="374" font-size="10" fill="#4ade80" font-family="Segoe UI">DOWN ↓ (radius grows)</text>
+      <line x1="555" y1="364" x2="555" y2="372" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#arrT)"/>
+      <text x="535" y="374" font-size="10" fill="#ff2ec4" font-family="Segoe UI">DOWN ↓ (IE/EN fall)</text>
+      <text x="320" y="394" text-anchor="middle" font-size="12" fill="#22d3ee" font-family="Segoe UI" font-weight="700">position predicts EVERYTHING: radius, IE, electronegativity, reactivity</text>
+    </svg>
+    <div class="cap"><b>Figure 6</b> — Schematic map (not to scale): period = row (n), group = column (valence e⁻), block = outer sublevel. Trend arrows: radius shrinks across, grows down; IE/EN/EA grow across, fall down.</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="tag p">S3.1.4 · SL</div>
+      <h4>ATOMIC RADIUS</h4>
+      <p><b>Across a period → decreases.</b> More protons pull the same shell tighter (nuclear charge ↑, no new shielding).</p>
+      <p><b>Down a group → increases.</b> New shells = bigger tower; more shielding from inner electrons.</p>
+      <p class="muted">Effective nuclear charge Z_eff is the real driver: what the outer electrons actually feel.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">S3.1.4 · SL</div>
+      <h4>IONIC RADIUS</h4>
+      <p><b>Cations &lt; parent atom</b> (fewer electrons, same protons → squeeze). <b>Anions &gt; parent atom</b> (extra electrons → balloon).</p>
+      <p><b>Isoelectronic series</b> (same configuration): size set by proton count — O²⁻ &gt; F⁻ &gt; Ne &gt; Na⁺ &gt; Mg²⁺.</p>
+      <p class="muted">Same number of electrons, more protons = smaller. That's the whole series.</p>
+    </div>
+    <div class="card">
+      <div class="tag p">S3.1.4 · SL</div>
+      <h4>IE · EA · ELECTRONEGATIVITY</h4>
+      <p><b>IE</b>: increases across (tighter grip), decreases down (more shielding).</p>
+      <p><b>Electron affinity</b>: energy released on X(g) + e⁻ → X⁻(g). More negative across, less negative down.</p>
+      <p><b>Electronegativity</b>: power to attract bonding electrons. Across ↑, down ↓. <b>F = 4.0, the maximum.</b></p>
+      <p class="muted">Metallic character follows IE: alkali metals get MORE reactive down the group (Cs explodes), halogens LESS reactive down the group (F₂ is the beast).</p>
+    </div>
+  </div>
+
+  <div class="nos"><b>EXAM TRAP:</b> Two different reasons, two different directions. "Across = higher Z, same shell, no new shielding → smaller radius, higher IE/EN." "Down = new shell + more shielding → bigger radius, lower IE/EN." Never mix the justifications.</div>
+</section>
+
+<!-- ══════════════════════ ACT 7 ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">Act 7 · S3.1.5 · S3.1.6 · S3.1.7 · S3.1.8 · AHL</div>
+  <h2>THE REACTIVITY ARC ⚔️</h2>
+  <p class="aim">AHL territory: the tiny wobbles in the IE graph, the oxidation-state bookkeeping, and the grand arc from basic metal oxides to acidic non-metal oxides. Plus: why sodium explodes on water and fluorine steals everything.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📉</div>
+    <div class="body">
+      <h3>THE TWO WOBBLES IN THE IE GRAPH (S3.1.5)</h3>
+      <p class="aka">Be → B and N → O: the exceptions that PROVE the sublevel model</p>
+      <ul class="clean">
+        <li><b>Be → B:</b> IE₁(B) &lt; IE₁(Be). The new 2p electron sits in a <b>higher-energy, shielded sublevel</b> — the 2s² pair blocks some nuclear charge. s-sublevel electrons penetrate more than p.</li>
+        <li><b>N → O:</b> IE₁(O) &lt; IE₁(N). Nitrogen's 2p³ is <b>half-filled and stable</b>; oxygen's extra electron is forced to <b>pair up</b> in an already-occupied orbital → pairing repulsion makes it easier to remove.</li>
+        <li>Same pattern later: Mg → Al (3s² vs 3p¹) and P → S (3p³ vs 3p⁴).</li>
+        <li>The takeaway: <b>half-filled (p³, d⁵) and filled (p⁶, d¹⁰) sublevels are extra stable</b> — this explains Cr, Cu, and the common ions of transition metals.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🧮</div>
+    <div class="body">
+      <h3>OXIDATION STATES — THE BOOKKEEPING (S3.1.6)</h3>
+      <p class="aka">oxidation state = the charge an atom WOULD have if all bonds were ionic</p>
+      <ul class="clean">
+        <li>Rules: element alone = 0 · monatomic ion = its charge · group 1 = +1, group 2 = +2 · <b>F always −1</b> · H = +1 (except metal hydrides −1) · O = −2 (except peroxides −1, OF₂ +2) · sum = 0 in a neutral compound, = ion charge in a polyatomic ion.</li>
+        <li>Naming oxyanions with the state: <b>manganate(VII)</b> = MnO₄⁻ (Mn +7), sulfate(VI) = SO₄²⁻, nitrate(V) = NO₃⁻, dichromate(VI) = Cr₂O₇²⁻.</li>
+        <li>Transition metals rock <b>variable states</b> because their successive IEs are close: Fe +2/+3, Cu +1/+2, Mn +2/+4/+7 (manganese(II) oxide, manganese(IV) oxide, manganese(VII) oxide).</li>
+        <li>Why so many states? The 4s and 3d electrons sit at similar energies — the tower's top floors are all the same height (Act 8 digs in).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🌋</div>
+    <div class="body">
+      <h3>THE OXIDE ARC — BASIC → AMPHOTERIC → ACIDIC (S3.1.7)</h3>
+      <p class="aka">metal oxides = Lewis bases · non-metal oxides = Lewis acids</p>
+      <ul class="clean">
+        <li>Period 3 sweep: <b>Na₂O, MgO basic → Al₂O₃ amphoteric → SiO₂, P₄O₁₀, SO₂, SO₃, Cl₂O₇ acidic.</b> One row, full arc.</li>
+        <li>Basic oxides + water → hydroxides: Na₂O + H₂O → <b>2NaOH</b> (strong base); MgO + H₂O → Mg(OH)₂ (weak).</li>
+        <li>Acidic oxides + water → acids: SO₂ + H₂O → H₂SO₃; SO₃ + H₂O → <b>H₂SO₄</b>; P₄O₁₀ + 6H₂O → 4H₃PO₄; CO₂ + H₂O → H₂CO₃.</li>
+        <li><b>Al₂O₃ amphoteric</b> — eats both: with acid Al₂O₃ + 6HCl → 2AlCl₃ + 3H₂O; with base Al₂O₃ + 2NaOH + 3H₂O → <b>2Na[Al(OH)₄]</b>.</li>
+        <li>Acid rain: SO₂ + NOₓ from burning fossil fuels → pH below ~5.6 → eats limestone buildings, kills lakes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">💥</div>
+    <div class="body">
+      <h3>ALKALI METALS vs HALOGENS (S3.1.8)</h3>
+      <p class="aka">the most reactive metal family vs the most reactive non-metal family</p>
+      <ul class="clean">
+        <li>Alkali + water: <b>2M + 2H₂O → 2MOH + H₂</b>. Na fizzes into a darting molten ball; Cs detonates. Reactivity <b>increases down</b> (IE falls). Phenolphthalein → pink (OH⁻ made).</li>
+        <li>Halogens steal electrons: <b>X₂ + 2X'⁻ → 2X⁻ + X'₂</b>. Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂ (orange-brown bromine appears). The stronger (higher) halogen oxidises the weaker one's ions.</li>
+        <li>Halogen reactivity <b>decreases down</b> (electronegativity falls): F₂ &gt; Cl₂ &gt; Br₂ &gt; I₂. F₂ is the neighbourhood bully — it even steals from oxygen in OF₂.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exam"><b>WORKED EXAMPLE (S3.1.6):</b> Oxidation state of N in sodium nitrate NaNO₃ → Na +1, O₃ = 3 × (−2) = −6 → 1 + N + (−6) = 0 → <b>N = +5</b>, so it's <b>sodium nitrate(V)</b>. For Co in [CoCl₄]²⁻: 4 × (−1) = −4, overall −2 → <b>Co = +2</b>.</div>
+</section>
+
+<!-- ══════════════════════ ACT 8 ══════════════════════ -->
+<section class="act" id="act8">
+  <div class="acttag">Act 8 · S3.1.9 · S3.1.10 · AHL</div>
+  <h2>THE TRANSITION LOUNGE 💎</h2>
+  <p class="aim">The d-block's VIP area: variable oxidation states, magnetic personalities, catalytic bouncers, and the only colours in the whole table that come from d-electron gymnastics.</p>
+
+  <div class="bouncer">
+    <div class="emoji">🚪</div>
+    <div class="body">
+      <h3>WHO GETS IN? THE DEFINITION (S3.1.9)</h3>
+      <p class="aka">partially filled d sublevel in the atom OR in any common stable ion</p>
+      <ul class="clean">
+        <li><b>Transition element</b> = element with a partially filled d sublevel in its atom or in any of its common stable ions (groups 3–11 of the d-block).</li>
+        <li><b>Zinc is NOT one:</b> Zn²⁺ = [Ar]3d¹⁰ — full d, and its compounds are colourless. <b>Scandium barely is:</b> Sc³⁺ = [Ar] — empty d. (Book's verdict: Sc not considered a transition element — it had only +3 for decades.)</li>
+        <li>Signature properties: <b>variable oxidation states</b>, <b>coloured complexes</b>, <b>paramagnetism</b> (unpaired d electrons → attracted to a magnetic field), <b>catalytic behaviour</b>, high mp/density.</li>
+        <li>Catalyst spotlight: catalytic converters (Pt/Pd/Rh) — <b>2CO + O₂ → 2CO₂</b> and NOₓ → N₂ + O₂ in your exhaust.</li>
+        <li>Variable states explained by <b>successive IEs that stay close</b>: the 4s and 3d electrons all cost similar energy to remove. Compare: Cr shows +1 to +6; copper's bigger gaps mean fewer stable states (+1, +2).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🎨</div>
+    <div class="body">
+      <h3>WHY ARE THEY COLOURED? THE d-DAYLIGHT ROBBERY (S3.1.10)</h3>
+      <p class="aka">ligands split the d orbitals → visible light gets absorbed → you see the complement</p>
+      <ul class="clean">
+        <li>A <b>complex</b> = central transition-metal cation + <b>ligands</b> (molecules/ions with lone pairs, e.g. H₂O, Cl⁻, NH₃) joined by coordinate bonds. [Cr(H₂O)₆]³⁺ is violet.</li>
+        <li>Ligands <b>split the five d orbitals into two energy sets</b> (they're degenerate in a free ion — all equal). The gap lands in the visible range.</li>
+        <li>Electrons jump the gap by <b>absorbing that exact wavelength</b>. You see the <b>complementary colour</b> — opposites on the colour wheel (in the data booklet).</li>
+        <li>[Cr(H₂O)₆]³⁺ absorbs yellow (~585 nm) → looks <b>violet</b>. [CuCl₄]²⁻ looks orange-red → it absorbed blue-green (~491 nm).</li>
+        <li>Three factors set the gap: <b>ligand strength</b> (stronger ligand → bigger split → higher-energy light absorbed), <b>identity of the central ion</b>, and <b>its oxidation state</b> (Cr³⁺ vs Cr²⁺ complexes differ).</li>
+        <li>Zinc's [Ar]3d¹⁰ has nowhere to jump → <b>colourless</b>. The classic contrast: Cu²⁺ blue vs Zn²⁺ clear.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 350" role="img" aria-label="Colour wheel showing complementary colours and d-orbital splitting in a complex ion">
+      <defs>
+        <marker id="arrCW" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker>
+      </defs>
+      <rect x="0" y="0" width="640" height="350" rx="18" fill="#1d0f33"/>
+      <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">THE COLOUR WHEEL — ABSORB ONE, SEE ITS OPPOSITE</text>
+      <!-- colour wheel -->
+      <circle cx="200" cy="180" r="90" fill="none" stroke="#b9a3d6" stroke-width="1.5"/>
+      <path d="M200,90 A90,90 0 0 1 278,128 L242,155 A45,45 0 0 0 200,135 Z" fill="#ff2ec4"/>
+      <path d="M278,128 A90,90 0 0 1 290,180 L245,180 A45,45 0 0 0 242,155 Z" fill="#ff7a45"/>
+      <path d="M290,180 A90,90 0 0 1 278,232 L242,205 A45,45 0 0 0 245,180 Z" fill="#fbbf24"/>
+      <path d="M278,232 A90,90 0 0 1 200,270 L200,225 A45,45 0 0 0 242,205 Z" fill="#4ade80"/>
+      <path d="M200,270 A90,90 0 0 1 122,232 L158,205 A45,45 0 0 0 200,225 Z" fill="#22d3ee"/>
+      <path d="M122,232 A90,90 0 0 1 110,180 L155,180 A45,45 0 0 0 158,205 Z" fill="#a855f7"/>
+      <path d="M110,180 A90,90 0 0 1 122,128 L158,155 A45,45 0 0 0 155,180 Z" fill="#4ade80" opacity=".7"/>
+      <path d="M122,128 A90,90 0 0 1 200,90 L200,135 A45,45 0 0 0 158,155 Z" fill="#fbbf24" opacity=".7"/>
+      <!-- labels -->
+      <text x="200" y="72" text-anchor="middle" font-size="10" fill="#ff2ec4" font-family="Segoe UI">red 700</text>
+      <text x="300" y="110" text-anchor="middle" font-size="10" fill="#ff7a45" font-family="Segoe UI">orange 647</text>
+      <text x="312" y="178" text-anchor="middle" font-size="10" fill="#fbbf24" font-family="Segoe UI">yellow 585</text>
+      <text x="298" y="248" text-anchor="middle" font-size="10" fill="#4ade80" font-family="Segoe UI">green 491</text>
+      <text x="196" y="292" text-anchor="middle" font-size="10" fill="#22d3ee" font-family="Segoe UI">blue 424</text>
+      <text x="92" y="248" text-anchor="middle" font-size="10" fill="#a855f7" font-family="Segoe UI">violet 400</text>
+      <!-- complementary pair arrows -->
+      <line x1="200" y1="135" x2="200" y2="225" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrCW)"/>
+      <text x="172" y="190" font-size="9" fill="#22d3ee" font-family="Segoe UI">complements</text>
+      <!-- d splitting -->
+      <rect x="360" y="70" width="240" height="250" rx="12" fill="#150a26" stroke="#a855f7" stroke-width="1.2"/>
+      <text x="480" y="94" text-anchor="middle" font-size="13" font-weight="800" fill="#f3e8ff" font-family="Segoe UI">d-ORBITAL SPLITTING</text>
+      <line x1="400" y1="110" x2="560" y2="110" stroke="#22d3ee" stroke-width="2.5"/>
+      <text x="575" y="114" font-size="10" fill="#22d3ee" font-family="Segoe UI">upper set</text>
+      <line x1="400" y1="200" x2="560" y2="200" stroke="#ff2ec4" stroke-width="2.5"/>
+      <text x="575" y="204" font-size="10" fill="#ff2ec4" font-family="Segoe UI">lower set</text>
+      <line x1="480" y1="110" x2="480" y2="200" stroke="#4ade80" stroke-width="2" marker-end="url(#arrCW)"/>
+      <text x="470" y="162" font-size="9" fill="#4ade80" font-family="Segoe UI">ΔE</text>
+      <text x="440" y="226" font-size="10" fill="#b9a3d6" font-family="Segoe UI">free ion: 5 degenerate d orbitals</text>
+      <text x="440" y="242" font-size="10" fill="#b9a3d6" font-family="Segoe UI">complex: split by ligands</text>
+      <text x="440" y="268" font-size="10" fill="#4ade80" font-family="Segoe UI">ΔE matches visible λ absorbed</text>
+      <text x="440" y="284" font-size="10" fill="#f3e8ff" font-family="Segoe UI">[CuCl₄]²⁻ absorbs 491 nm →</text>
+      <text x="440" y="298" font-size="10" fill="#ff2ec4" font-family="Segoe UI" font-weight="700">appears orange-red (647 nm)</text>
+      <text x="320" y="336" text-anchor="middle" font-size="12" fill="#22d3ee" font-family="Segoe UI" font-weight="700">stronger ligand → bigger split → higher-energy (shorter λ) light absorbed</text>
+    </svg>
+    <div class="cap"><b>Figure 7</b> — Absorbed colour vs observed colour are wheel-opposites. The d-splitting gap ΔE decides which wavelength gets eaten.</div>
+  </div>
+
+  <div class="exam"><b>WORKED EXAMPLE (book p.252):</b> [CuCl₄]²⁻ appears the colour of 647 nm light. The wavelength ABSORBED is the complement: <b>491 nm</b>. f = c/λ = 3.00 × 10⁸ / (491 × 10⁻⁹) = 6.11 × 10¹⁴ s⁻¹. E = h × f = 6.63 × 10⁻³⁴ × 6.11 × 10¹⁴ = <b>4.05 × 10⁻¹⁹ J</b> — that's the d-orbital gap.<br>
+  <b>EXAM-STYLE (book p.255):</b> [Co(H₂O)₆]²⁺ pink absorbs ~540 nm; add excess Cl⁻ → [CoCl₄]²⁻ blue. Cl⁻ is a <b>weaker ligand</b> → smaller split → lower energy (longer wavelength) absorbed → different colour. Pink 540 nm absorbed = green eaten → pink seen; blue means yellow-orange eaten.</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="mind">
+  <div class="acttag">One picture</div>
+  <h2>MIND MAP 🗺</h2>
+  <div class="mind">
+    <div class="node core">THE ATOM<br><small>vault + tower + neighbourhood map</small></div>
+    <div class="arrow">→</div>
+    <div class="node">VAULT<br><small>S1.2: protons+neutrons, Rutherford, isotopes, Ar, mass spec</small></div>
+    <div class="arrow">→</div>
+    <div class="node">TOWER<br><small>S1.3: energy levels 2n², s/p/d/f, orbitals, aufbau, IE</small></div>
+    <div class="arrow">→</div>
+    <div class="node">MAP<br><small>S3.1: periods/groups/blocks, trends in radius/IE/EN</small></div>
+    <div class="arrow">→</div>
+    <div class="node">ARC (AHL)<br><small>IE wobbles, oxidation states, basic→acidic oxides</small></div>
+    <div class="arrow">→</div>
+    <div class="node">LOUNGE (AHL)<br><small>transition elements, d-splitting, colour wheel, catalysts</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
+  <div class="marquee">
+    <div class="line">nucleus = protons + neutrons <span>· atom diameter ≈ 100 000 × nucleus · electron mass ≈ negligible</span></div>
+    <div class="line">Rutherford: MOST alpha straight through <span>· FEW bounce back → tiny dense positive nucleus · plum pudding dead</span></div>
+    <div class="line">ᴬ_Z X · A = Z + N <span>· neutral atom e⁻ = p⁺ · isotope = same Z, different N · 1 pm = 10⁻¹² m · 1 Å = 10⁻¹⁰ m</span></div>
+    <div class="line">A_r = Σ(mass × abundance) ÷ 100 <span>· mass spec: vaporize → ionize → accelerate → deflect (m/z) → detect</span></div>
+    <div class="line">emission = bright lines <span>· absorption = dark lines · continuous = rainbow · each element = its own barcode</span></div>
+    <div class="line">c = f × λ · E = h × f <span>· h = 6.63 × 10⁻³⁴ J s · short λ = high energy (gamma beats radio)</span></div>
+    <div class="line">hydrogen visible lines: <span>656 red · 486 cyan · 434 blue · 410 violet (falling to n = 2)</span></div>
+    <div class="line">convergence limit = ionization <span>· H: 2.18 × 10⁻¹⁸ J atom⁻¹ = 1312 kJ mol⁻¹</span></div>
+    <div class="line">max electrons = 2n² <span>· n=1:2 · n=2:8 · n=3:18 · n=4:32 · orbitals: s1 p3 d5 f7 · 2 e⁻ per orbital</span></div>
+    <div class="line">aufbau: 1s 2s 2p 3s 3p 4s 3d 4p <span>· Pauli: opposite spins · Hund: singly first · IB tests up to Z = 36</span></div>
+    <div class="line">exceptions: Cr = [Ar]4s¹3d⁵ <span>· Cu = [Ar]4s¹3d¹⁰ · ions lose highest n first: Mn²⁺ = [Ar]3d⁵</span></div>
+    <div class="line">IE: X(g) → X⁺(g) + e⁻ <span>· increases across, decreases down · successive IE: big jump after valence shell → group</span></div>
+    <div class="line">IE wobbles (AHL): Be→B <span>(2p shielded) · N→O (pairing repulsion) · half-filled/full = stable</span></div>
+    <div class="line">trends: radius ↓ across ↑ down <span>· IE/EN/EA ↑ across ↓ down · F = max electronegativity (4.0)</span></div>
+    <div class="line">ionic radius: cation &lt; atom &lt; anion <span>· isoelectronic: O²⁻ &gt; F⁻ &gt; Ne &gt; Na⁺ &gt; Mg²⁺ (protons decide)</span></div>
+    <div class="line">oxides (AHL): Na₂O/MgO basic <span>· Al₂O₃ amphoteric · SiO₂/P₄O₁₀/SO₂/SO₃ acidic · SO₂ + H₂O → H₂SO₃ · SO₃ + H₂O → H₂SO₄</span></div>
+    <div class="line">oxidation states (AHL): F always −1 · O −2 · H +1 <span>· manganate(VII) = MnO₄⁻ · alkali + water → MOH + H₂ · X₂ + 2X'⁻ → 2X⁻ + X'₂</span></div>
+    <div class="line">transition element (AHL): <span>partially filled d in atom or common ion · Zn (3d¹⁰) and Sc (3d⁰ ion) NOT in the club</span></div>
+    <div class="line">colour (AHL): ligands split d orbitals <span>· absorb one wavelength, see its complement · stronger ligand = bigger split</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">No peeking at the acts above. Pick an answer, get instant feedback.</p>
+
+  <div class="q" data-a="straight">
+    <p>1. In Rutherford's gold foil experiment, MOST alpha particles...</p>
+    <label><input type="radio" name="q1" value="straight"> Went straight through the foil</label>
+    <label><input type="radio" name="q1" value="wrong1"> Bounced straight back</label>
+    <label><input type="radio" name="q1" value="wrong2"> Were deflected at large angles</label>
+    <div class="fb correct">✅ Most passed straight through — the atom is mostly empty space. The FEW that bounced back proved the tiny dense positive nucleus.</div>
+    <div class="fb wrong">❌ Most went straight through. Only about 1 in 8000 bounced back — that's the nucleus evidence.</div>
+  </div>
+
+  <div class="q" data-a="negligible">
+    <p>2. Which subatomic particle has negligible relative mass?</p>
+    <label><input type="radio" name="q2" value="wrong1"> Proton</label>
+    <label><input type="radio" name="q2" value="negligible"> Electron</label>
+    <label><input type="radio" name="q2" value="wrong2"> Neutron</label>
+    <div class="fb correct">✅ Electron: relative mass negligible, charge −1, outside the nucleus. Proton and neutron both have relative mass 1.</div>
+    <div class="fb wrong">❌ The electron. Protons (1, +1) and neutrons (1, 0) carry the mass in the nucleus.</div>
+  </div>
+
+  <div class="q" data-a="27">
+    <p>3. How many electrons are in ⁶³₂₉Cu²⁺?</p>
+    <label><input type="radio" name="q3" value="27"> 27</label>
+    <label><input type="radio" name="q3" value="wrong1"> 29</label>
+    <label><input type="radio" name="q3" value="wrong2"> 31</label>
+    <div class="fb correct">✅ Z = 29 protons; neutral Cu has 29 e⁻; the 2+ charge means 2 lost → 29 − 2 = 27.</div>
+    <div class="fb wrong">❌ 29 − 2 = 27. Cations have FEWER electrons than protons.</div>
+  </div>
+
+  <div class="q" data-a="neutrons">
+    <p>4. Isotopes of the same element differ in their number of...</p>
+    <label><input type="radio" name="q4" value="wrong1"> Protons</label>
+    <label><input type="radio" name="q4" value="neutrons"> Neutrons</label>
+    <label><input type="radio" name="q4" value="wrong2"> Electrons</label>
+    <div class="fb correct">✅ Same protons (same element!), different neutrons → different mass number. Same chemical properties, different physical ones.</div>
+    <div class="fb wrong">❌ Neutrons. Same Z, different N — that's the whole definition.</div>
+  </div>
+
+  <div class="q" data-a="10_8">
+    <p>5. Boron: ¹¹B 80.1%, ¹⁰B 19.9%. Its A_r is...</p>
+    <label><input type="radio" name="q5" value="wrong1"> 10.5</label>
+    <label><input type="radio" name="q5" value="10_8"> 10.8</label>
+    <label><input type="radio" name="q5" value="wrong2"> 11.0</label>
+    <div class="fb correct">✅ (11 × 80.1 + 10 × 19.9) ÷ 100 = (881.1 + 199) ÷ 100 = 10.8.</div>
+    <div class="fb wrong">❌ (11 × 80.1 + 10 × 19.9) ÷ 100 = 10.8. Weighted average, not a plain average.</div>
+  </div>
+
+  <div class="q" data-a="lightest">
+    <p>6. In a mass spectrometer, the ion deflected MOST by the magnetic field has...</p>
+    <label><input type="radio" name="q6" value="wrong1"> The highest mass-to-charge ratio</label>
+    <label><input type="radio" name="q6" value="lightest"> The lowest mass-to-charge ratio</label>
+    <label><input type="radio" name="q6" value="wrong2"> Zero charge</label>
+    <div class="fb correct">✅ Lowest m/z = lightest (or most charged) = deflected most. Uncharged particles aren't deflected at all.</div>
+    <div class="fb wrong">❌ Lowest m/z. The lightest ions bend the most in the magnetic field.</div>
+  </div>
+
+  <div class="q" data-a="emission">
+    <p>7. A hot gas viewed through a prism gives a...</p>
+    <label><input type="radio" name="q7" value="wrong1"> Continuous rainbow</label>
+    <label><input type="radio" name="q7" value="emission"> Line emission spectrum (bright lines on dark)</label>
+    <label><input type="radio" name="q7" value="wrong2"> Dark lines on a rainbow</label>
+    <div class="fb correct">✅ Emission spectrum — the element's bright-line barcode. Dark lines = absorption (cold gas in front of a source).</div>
+    <div class="fb wrong">❌ Emission — bright lines on dark. The dark-line version is an absorption spectrum.</div>
+  </div>
+
+  <div class="q" data-a="18">
+    <p>8. The maximum number of electrons in the n = 3 energy level is...</p>
+    <label><input type="radio" name="q8" value="18"> 18</label>
+    <label><input type="radio" name="q8" value="wrong1"> 8</label>
+    <label><input type="radio" name="q8" value="wrong2"> 32</label>
+    <div class="fb correct">✅ 2n² = 2 × 3² = 18 (3s + 3p + 3d).</div>
+    <div class="fb wrong">❌ 2n² = 18. (8 is n = 2; 32 is n = 4.)</div>
+  </div>
+
+  <div class="q" data-a="3">
+    <p>9. How many orbitals are in a p sublevel?</p>
+    <label><input type="radio" name="q9" value="wrong1"> 1</label>
+    <label><input type="radio" name="q9" value="3"> 3</label>
+    <label><input type="radio" name="q9" value="wrong2"> 5</label>
+    <div class="fb correct">✅ Three (px, py, pz) → 6 electrons max. s = 1 orbital, p = 3, d = 5, f = 7.</div>
+    <div class="fb wrong">❌ 3 orbitals (px, py, pz). 1 = s, 5 = d.</div>
+  </div>
+
+  <div class="q" data-a="cr">
+    <p>10. The electron configuration of chromium is...</p>
+    <label><input type="radio" name="q10" value="wrong1"> [Ar]4s²3d⁴</label>
+    <label><input type="radio" name="q10" value="cr"> [Ar]4s¹3d⁵</label>
+    <label><input type="radio" name="q10" value="wrong2"> [Ar]4s²3d⁵</label>
+    <div class="fb correct">✅ [Ar]4s¹3d⁵ — the half-filled d wins. Same logic: Cu = [Ar]4s¹3d¹⁰.</div>
+    <div class="fb wrong">❌ [Ar]4s¹3d⁵. Half-filled d⁵ is extra stable, so one 4s electron drops down.</div>
+  </div>
+
+  <div class="q" data-a="increases">
+    <p>11. Across a period (left to right), first ionization energy...</p>
+    <label><input type="radio" name="q11" value="wrong1"> Decreases</label>
+    <label><input type="radio" name="q11" value="increases"> Increases</label>
+    <label><input type="radio" name="q11" value="wrong2"> Stays constant</label>
+    <div class="fb correct">✅ Increases: higher nuclear charge, same shell, no new shielding → tighter grip. (Small wobbles at Be→B and N→O, AHL.)</div>
+    <div class="fb wrong">❌ Increases across the period — the atoms shrink and the nucleus pulls harder.</div>
+  </div>
+
+  <div class="q" data-a="group2">
+    <p>12. An element's successive IEs (kJ mol⁻¹): 738, 1450, 7733, 10540... It belongs to group...</p>
+    <label><input type="radio" name="q12" value="wrong1"> 1</label>
+    <label><input type="radio" name="q12" value="group2"> 2</label>
+    <label><input type="radio" name="q12" value="wrong2"> 13</label>
+    <div class="fb correct">✅ Big jump after IE₂ → 2 valence electrons → group 2 (magnesium-like). Count the low bars before the wall.</div>
+    <div class="fb wrong">❌ Group 2 — the huge jump comes after removing the SECOND electron.</div>
+  </div>
+
+  <div class="q" data-a="decreases">
+    <p>13. Atomic radius across a period...</p>
+    <label><input type="radio" name="q13" value="wrong1"> Increases</label>
+    <label><input type="radio" name="q13" value="decreases"> Decreases</label>
+    <label><input type="radio" name="q13" value="wrong2"> Stays constant</label>
+    <div class="fb correct">✅ Decreases — more protons pull the same shell tighter (no extra shielding). Down a group it grows (new shells).</div>
+    <div class="fb wrong">❌ Decreases. Same shell, bigger Z, no new shielding → atoms shrink.</div>
+  </div>
+
+  <div class="q" data-a="zn">
+    <p>14. (AHL) Which is NOT a transition element?</p>
+    <label><input type="radio" name="q14" value="wrong1"> Fe</label>
+    <label><input type="radio" name="q14" value="zn"> Zn</label>
+    <label><input type="radio" name="q14" value="wrong2"> Cu</label>
+    <div class="fb correct">✅ Zn²⁺ = [Ar]3d¹⁰ — full d sublevel, colourless compounds. Transition elements need a partially filled d in atom or common ion.</div>
+    <div class="fb wrong">❌ Zinc. Fe and Cu both form ions with partially filled d. Zn²⁺ is 3d¹⁰.</div>
+  </div>
+
+  <div class="q" data-a="yellow">
+    <p>15. (AHL) [Cr(H₂O)₆]³⁺ looks violet. What wavelength does it ABSORB?</p>
+    <label><input type="radio" name="q15" value="yellow"> Yellow (~585 nm)</label>
+    <label><input type="radio" name="q15" value="wrong1"> Violet (~400 nm)</label>
+    <label><input type="radio" name="q15" value="wrong2"> Red (~700 nm)</label>
+    <div class="fb correct">✅ It absorbs its complement on the colour wheel — yellow — and what's left over looks violet. You never see the absorbed colour.</div>
+    <div class="fb wrong">❌ Yellow. Observed colour = complement of absorbed colour (opposites on the wheel).</div>
+  </div>
+
+  <div class="q" data-a="al">
+    <p>16. (AHL) Why is IE₁ of aluminium LOWER than IE₁ of magnesium?</p>
+    <label><input type="radio" name="q16" value="wrong1"> Al is bigger than Mg</label>
+    <label><input type="radio" name="q16" value="al"> The new 3p electron is in a higher-energy, shielded sublevel</label>
+    <label><input type="radio" name="q16" value="wrong2"> Mg has a half-filled 3p</label>
+    <div class="fb correct">✅ Same story as Be→B: the 3p electron sits above the 3s² pair, which shields it. The s sublevel penetrates more than p.</div>
+    <div class="fb wrong">❌ The 3p electron is shielded by the 3s² pair → easier to remove. (Mg→Al mirrors Be→B; P→S mirrors N→O.)</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 25 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">S1.2.1</span><span>Atoms = dense positive nucleus (protons + neutrons = nucleons) + electrons outside; relative masses/charges of p⁺, n, e⁻; atom ≈ 100 000 × nucleus diameter; 1 pm = 10⁻¹² m, 1 Å = 10⁻¹⁰ m.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">S1.2.1</span><span>Rutherford gold foil: most α straight through, some deflect, few bounce back → nucleus tiny, dense, positive; plum-pudding falsified; nuclear symbol ᴬ_Z X, A = Z + N, neutral e⁻ = p⁺; ions (²⁴₁₂Mg²⁺, ¹⁶₈O²⁻, ⁵²₂₄Cr³⁺).</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">S1.2.2</span><span>Isotopes = same Z, different N; same chemical, different physical properties; protium/deuterium/tritium; A_r = Σ(mass × NA)/100; two-isotope abundance problems (Cl: 77.5/22.5).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">S1.2.3</span><span>Mass spectrometer: vaporize → ionize → accelerate → deflect (m/z, lightest deflected most) → detect; reading a mass spectrum → A_r (boron 10.8); uranium enrichment + isotope labelling as applications.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">S1.3.1</span><span>Continuous vs emission vs absorption spectra; line spectra = element barcodes; flame tests (Li red, Na yellow-orange, K lilac, Ca brick-red, Cu blue-green, Sr crimson); EM spectrum order + E ∝ 1/λ.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">S1.3.2</span><span>Hydrogen line spectrum = evidence for discrete energy levels; c = f × λ (c = 3.00 × 10⁸ m s⁻¹), E = h × f (h = 6.63 × 10⁻³⁴ J s); Bohr: absorb/emit exact ΔE photons; visible lines 656/486/434/410 nm to n = 2; UV to n = 1, IR to n = 3.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">S1.3.3</span><span>Main energy level n holds max 2n² electrons: n = 1 → 2, n = 2 → 8, n = 3 → 18, n = 4 → 32.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">S1.3.4</span><span>Sublevels s, p, d, f of successively higher energy; orbitals per sublevel s 1, p 3, d 5, f 7; orbital shapes (s sphere, p dumbbell); floor capacities from orbital counts.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">S1.3.5</span><span>Orbital = high-probability region (~99%); Pauli (2 e⁻/orbital, opposite spins); degenerate orbitals; Hund (fill singly, same spin, before pairing); aufbau order incl. 4s before 3d; configs up to Z = 36; Cr [Ar]4s¹3d⁵, Cu [Ar]4s¹3d¹⁰; ions lose highest n first (Mn²⁺ [Ar]3d⁵).</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">S1.3.6</span><span>Convergence limit of emission spectrum = ionization energy; hydrogen 2.18 × 10⁻¹⁸ J atom⁻¹ = 1312 kJ mol⁻¹; E = hc/λ conversion with N_A.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">S1.3.7</span><span>IE₁ = X(g) → X⁺(g) + e⁻; successive IEs increase; big jump after valence shell removed → deduce group (Na after 1st, Mg after 2nd, Al after 3rd); sketch IE graphs from data.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">S3.1.1</span><span>Periodic table arranged by atomic number (Mendeleev: atomic mass + predicted gallium); periods = rows, groups = columns, blocks = outer sublevel; transition elements groups 3–11.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">S3.1.2</span><span>Group number = valence electrons (groups 1–2: the number; 13–18: last digit); period number = principal quantum number n of outer shell; metals / metalloids (zig-zag) / non-metals; group names: alkali metals, halogens, noble gases.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">S3.1.4</span><span>Atomic radius: decreases across (↑Z, same shell, no new shielding), increases down (new shells + shielding); effective nuclear charge story.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">S3.1.4</span><span>Ionic radius: cation &lt; atom &lt; anion; isoelectronic series sized by protons (O²⁻ &gt; F⁻ &gt; Ne &gt; Na⁺ &gt; Mg²⁺); IE across ↑ / down ↓; electron affinity more negative across; electronegativity across ↑ / down ↓ (F 4.0); metallic character follows IE.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">S3.1.5</span><span>AHL: IE₁ discontinuities Be→B (2p shielded by 2s²) and N→O (pairing repulsion in 2p⁴); Mg→Al and P→S mirror them; half-filled (p³, d⁵) and full (p⁶, d¹⁰) sublevels are stable.</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">S3.1.6</span><span>AHL: oxidation state rules (F −1, O −2, H +1, group 1 +1, group 2 +2, sum = 0 / ion charge); naming with Roman numerals: manganate(VII) MnO₄⁻, sulfate(VI), nitrate(V); transition metals have variable states (Mn +2/+4/+7).</span></li>
+    <li data-i="17"><span class="box">✓</span><span class="code">S3.1.7</span><span>AHL: period 3 oxide arc Na₂O/MgO basic → Al₂O₃ amphoteric → SiO₂/P₄O₁₀/SO₂/SO₃ acidic; equations (Na₂O + H₂O → 2NaOH; SO₃ + H₂O → H₂SO₄; Al₂O₃ + 2NaOH + 3H₂O → 2Na[Al(OH)₄]); acid rain from SO₂/NOₓ.</span></li>
+    <li data-i="18"><span class="box">✓</span><span class="code">S3.1.8</span><span>AHL: alkali metals + water → MOH + H₂, reactivity increases down (IE ↓); halogens displace halide ions (Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂), reactivity decreases down (EN ↓); oxidation of halides by more electronegative halogen.</span></li>
+    <li data-i="19"><span class="box">✓</span><span class="code">S3.1.9</span><span>AHL: transition element = partially filled d in atom or common stable ion; Zn²⁺ (3d¹⁰) and Sc³⁺ (3d⁰) not in the club; variable oxidation states from close successive IEs; paramagnetism; catalytic converters 2CO + O₂ → 2CO₂; high mp/density.</span></li>
+    <li data-i="20"><span class="box">✓</span><span class="code">S3.1.10</span><span>AHL: complex = cation + ligands (lone-pair donors) via coordinate bonds; ligands split degenerate d orbitals; gap matches a visible wavelength; absorbed colour vs observed (complementary, colour wheel); [Cr(H₂O)₆]³⁺ violet absorbs yellow; factors: ligand strength, central ion, oxidation state.</span></li>
+    <li data-i="21"><span class="box">✓</span><span class="code">S3.1.10</span><span>AHL: worked calc — [CuCl₄]²⁻ appears 647 nm → absorbs 491 nm → f = 6.11 × 10¹⁴ s⁻¹ → E = 4.05 × 10⁻¹⁹ J; weaker ligand (Cl⁻) = smaller split = lower-energy light absorbed (pink [Co(H₂O)₆]²⁺ → blue [CoCl₄]²⁻).</span></li>
+    <li data-i="22"><span class="box">✓</span><span class="code">FIGURES</span><span>Know the numbers cold: 2n² capacities · 656/486/434/410 nm · 10.8 (B), 55.91 (Fe), 77.5/22.5 (Cl) · c = 3.00 × 10⁸ · h = 6.63 × 10⁻³⁴ · 1312 kJ mol⁻¹ · 1 pm/1 Å conversions · F radius 60 pm = 0.60 Å.</span></li>
+    <li data-i="23"><span class="box">✓</span><span class="code">LINKS</span><span>Connect the map to the tower: position → config (group = valence e⁻, period = n) → trends → reactivity (S3.1) · IE jumps confirm shell structure (S1.3.7 ↔ S1.3.3) · transition colour links to the light show of Act 3 (same E = hf physics).</span></li>
+    <li data-i="24"><span class="box">✓</span><span class="code">EXTRA</span><span>Concepts I must own out loud: why the mass number isn't the atomic mass · why A_r isn't whole · why 4s fills before 3d but empties first · why half-filled d is stable · why Zn is colourless · why the convergence limit IS the ionization energy.</span></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Built from <b>Chemistry: Course Companion</b> (Bylikin, Horner, Grant &amp; Tarcy, Oxford 2023) — Structure 1.2 + 1.3 + 3.1 · IB Chemistry guide (first exams 2025) · HL topic</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p class="credits">📷 Diagrams drawn for this page (neon originals).</p>
+</footer>
+
+</div>
+
+<script>
+  // checklist with localStorage
+  var KEY='atomic-structure-periodicity-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+
+  // quiz
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
+</script>
+</body>
+</html>
