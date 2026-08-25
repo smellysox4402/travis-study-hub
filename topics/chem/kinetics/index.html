@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Kinetics — The Bouncer's Door (Reactivity 2.2)</title>
+<title>Kinetics (Reactivity 2.2)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,14 +16,14 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
 
   /* NAV */
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
@@ -32,11 +32,8 @@
   /* HERO */
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
@@ -45,25 +42,22 @@
   /* ACTS */
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -71,14 +65,14 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
 
   /* figure / image blocks */
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
@@ -87,22 +81,23 @@
   .fig.narrow svg{max-width:480px;}
 
   /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
-           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
   .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
   .bouncer .body{flex:1;}
   .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
   .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:14.5px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
   @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
 
   /* tables */
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
 
   /* callout boxes */
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -120,7 +115,7 @@
 
   /* mind map */
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
@@ -128,7 +123,7 @@
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -141,7 +136,7 @@
   /* checklist */
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -180,11 +175,11 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · THE DOOR</a>
-  <a href="#act2">ACT 2 · THE QUEUE</a>
-  <a href="#act3">ACT 3 · THE ENERGY CURVE</a>
-  <a href="#act4">ACT 4 · THE VIP LIST</a>
-  <a href="#act5">ACT 5 · THE ARRHENIUS DOOR</a>
+  <a href="#act1">Rate of reaction</a>
+  <a href="#act2">Factors & catalysts</a>
+  <a href="#act3">Energy distribution</a>
+  <a href="#act4">Rate equation</a>
+  <a href="#act5">Arrhenius</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -197,8 +192,8 @@
 
 <header class="hero">
   <div class="kicker">IB Chemistry · Higher Level · Reactivity 2.2</div>
-  <h1>KINETICS — THE BOUNCER'S DOOR</h1>
-  <div class="sub">Every reaction is a nightclub. Particles queue up to get in — but the bouncer only lets in the ones that collide <b>at the right angle</b> with <b>enough energy</b>. Kinetics is the study of who gets past the door, and how fast.</div>
+  <h1>Kinetics</h1>
+  <div class="sub">The rate of chemical change — how fast reactions go, why temperature matters more than concentration, and how to put numbers on both.</div>
   <div class="badges">
     <span class="badge hl">REACTIVITY 2.2 · UNIT 5</span>
     <span class="badge ahl">R2.2.9–R2.2.13 ARE AHL (R2.2.8 IS SL)</span>
@@ -208,9 +203,9 @@
 
 <!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · R2.2.1 · R2.2.2 · R2.2.4</div>
-  <h2>THE DOOR 🚪</h2>
-  <p class="aim">Rate is just "how many guests get in per second". And getting in is harder than it looks.</p>
+  <div class="acttag">R2.2.1 · R2.2.2 · R2.2.4</div>
+  <h2>Rate of reaction</h2>
+  <p class="aim">Rate is the change in concentration of a reactant or product per unit time.</p>
 
   <div class="panel">
     <h3>RATE OF REACTION = CHANGE IN CONCENTRATION PER UNIT TIME</h3>
@@ -235,7 +230,7 @@
   </div>
 
   <div class="panel">
-    <h3>COLLISION THEORY — THE BOUNCER'S THREE RULES (R2.2.2)</h3>
+    <h3>Collision theory (R2.2.2)</h3>
     <p>For a reaction to happen, particles must:</p>
     <ol class="steps">
       <li><b>Collide</b> — no contact, no reaction. Ever.</li>
@@ -246,7 +241,7 @@
   </div>
 
   <div class="panel">
-    <h3>ACTIVATION ENERGY — THE BOUNCER'S STRENGTH CHECK (R2.2.4)</h3>
+    <h3>Activation energy (R2.2.4)</h3>
     <p class="big"><span class="accent">Eₐ = the minimum energy colliding particles need</span> for a reaction to occur.</p>
     <ul class="clean">
       <li>Old bonds must <b>break or weaken</b> before new bonds fully form — that costs energy.</li>
@@ -259,9 +254,9 @@
 
 <!-- ══════════════════════ ACT 2 ══════════════════════ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · R2.2.3 · R2.2.5</div>
-  <h2>THE QUEUE 🎫</h2>
-  <p class="aim">Four ways to get more guests past the door per second — and one very special VIP pass.</p>
+  <div class="acttag">R2.2.3 · R2.2.5</div>
+  <h2>Factors affecting rate</h2>
+  <p class="aim">What changes the rate, and how a catalyst takes an alternative path.</p>
 
   <table>
     <tr><th>Knob you turn</th><th>What happens to rate</th><th>Why (collision theory)</th></tr>
@@ -277,7 +272,7 @@
   <div class="bouncer">
     <div class="emoji">🪪</div>
     <div class="body">
-      <h3>CATALYSTS — THE VIP PASS (R2.2.5)</h3>
+      <h3>Catalysts (R2.2.5)</h3>
       <p class="aka">a substance that increases rate but is NOT consumed</p>
       <ul class="clean">
         <li>Provides an <span class="cyan">alternative pathway</span> with a <b>lower activation energy</b> (Eₐ′ &lt; Eₐ).</li>
@@ -292,9 +287,9 @@
 
 <!-- ══════════════════════ ACT 3 ══════════════════════ -->
 <section class="act" id="act3">
-  <div class="acttag">Act 3 · R2.2.4 · R2.2.5</div>
-  <h2>THE ENERGY CURVE 📈</h2>
-  <p class="aim">Why does temperature matter so much more than concentration? Because of who's in the crowd — and the Maxwell–Boltzmann curve is the crowd photo.</p>
+  <div class="acttag">R2.2.4 · R2.2.5</div>
+  <h2>The energy distribution</h2>
+  <p class="aim">Why temperature matters so much — it moves the whole Maxwell–Boltzmann distribution.</p>
 
   <div class="fig">
     <svg viewBox="0 0 640 400" role="img" aria-label="Maxwell-Boltzmann energy distribution curves at two temperatures">
@@ -320,12 +315,12 @@
   </div>
 
   <div class="panel">
-    <h3>READING THE CROWD PHOTO 📸</h3>
+    <h3>Reading the Maxwell–Boltzmann curve</h3>
     <ul class="clean">
       <li><b>Peak of the curve</b> = kinetic energy of the largest share of particles (the most common speed).</li>
       <li><b>Average kinetic energy (Ēₖ)</b> sits slightly to the right of the peak.</li>
       <li><b>Area under the curve</b> = total number of particles — <b>unchanged by temperature</b>.</li>
-      <li><b>Eₐ is fixed</b> — temperature moves the crowd, not the bouncer's threshold.</li>
+      <li><b>Eₐ is fixed</b> — temperature shifts the distribution, not the threshold.</li>
     </ul>
     <div class="tip"><b>EXAM TRAP:</b> at higher T the peak is <i>LOWER</i> and further right — students often draw it taller. It's a redistribution: the same number of particles spread thinner, with a fatter high-energy tail.</div>
   </div>
@@ -336,7 +331,7 @@
       <tr><th></th><th>Temperature ↑</th><th>Catalyst</th></tr>
       <tr><td>Eₐ</td><td>UNCHANGED</td><td>lowered (Eₐ′)</td></tr>
       <tr><td>Ēₖ (average energy)</td><td>increased</td><td>UNCHANGED</td></tr>
-      <tr><td>Curve shape</td><td>flatter, broader, peak right</td><td>same curve — but the bouncer's line moves LEFT</td></tr>
+      <tr><td>Curve shape</td><td>flatter, broader, peak right</td><td>same curve — but the Eₐ line moves LEFT</td></tr>
       <tr><td>Result</td><td colspan="2">both: more particles with E ≥ Eₐ → more successful collisions</td></tr>
     </table>
     <div class="exam"><b>MARK-GRABBER:</b> "a rise in temperature does not affect Eₐ but increases the average kinetic energy; a catalyst does not affect the average kinetic energy but reduces Eₐ." Write that sentence and you've basically banked the marks.</div>
@@ -345,15 +340,15 @@
 
 <!-- ══════════════════════ ACT 4 ══════════════════════ -->
 <section class="act" id="act4">
-  <div class="acttag">Act 4 · R2.2.8 (SL) · R2.2.9 · R2.2.10 (AHL)</div>
-  <h2>THE VIP LIST 📋</h2>
-  <p class="aim">The bouncer's rulebook: who actually controls the queue, and how much power does each guest have?</p>
+  <div class="acttag">R2.2.8 (SL) · R2.2.9 · R2.2.10 (AHL)</div>
+  <h2>The rate equation</h2>
+  <p class="aim">How the rate depends on concentration, and why orders come from experiment, never the equation.</p>
 
   <div class="panel">
     <h3>THE RATE EQUATION (R2.2.9 · AHL)</h3>
     <p class="big">rate = <span class="accent">k [A]ⁿ [B]ᵐ</span></p>
     <ul class="clean">
-      <li><b>k = rate constant</b> — the bouncer's mood. Independent of concentration, but <span class="gold">changes with temperature and catalyst</span>.</li>
+      <li><b>k = rate constant</b> . Independent of concentration, but <span class="gold">changes with temperature and catalyst</span>.</li>
       <li><b>n, m = orders of reaction</b> — the "power" each reactant has over the rate.</li>
       <li><b>Overall order = n + m</b>.</li>
     </ul>
@@ -361,7 +356,7 @@
   </div>
 
   <div class="panel">
-    <h3>MOLECULARITY — COUNTING THE DANCERS (R2.2.8 · SL)</h3>
+    <h3>Molecularity (R2.2.8 · SL)</h3>
     <p>Molecularity = the <span class="accent">number of reacting particles</span> taking part in a single <b>elementary step</b>. It's about ONE step of the mechanism, not the whole reaction.</p>
     <table>
       <tr><th>Name</th><th>Particles in the step</th><th>Example step</th></tr>
@@ -407,7 +402,7 @@
   </div>
 
   <div class="panel">
-    <h3>k UNITS — THE BOUNCER'S PAY GRADE (R2.2.11 · AHL)</h3>
+    <h3>Units of k (R2.2.11 · AHL)</h3>
     <p>k's units come from the <b>overall order</b> — you need rate (mol dm⁻³ s⁻¹) divided by the concentration terms, then tidy up:</p>
     <table>
       <tr><th>Overall order</th><th>Rate equation</th><th>Units of k</th></tr>
@@ -421,7 +416,7 @@
   </div>
 
   <div class="panel">
-    <h3>CONCENTRATION–TIME CURVES — THE CCTV FOOTAGE (R2.2.10 · AHL)</h3>
+    <h3>Concentration–time curves (R2.2.10 · AHL)</h3>
     <p>A single experiment gives you [A] vs time. The <b>shape</b> of that curve hides the order — but 1st and 2nd order curves look almost identical. That's why you <b>linearise</b> them:</p>
     <table>
       <tr><th>Order</th><th>[A] vs t curve</th><th>Plot that gives a straight line</th><th>Slope</th></tr>
@@ -434,8 +429,8 @@
   </div>
 
   <div class="panel">
-    <h3>RATE-DETERMINING STEP — THE ONLY DOOR THAT MATTERS (R2.2.6 · R2.2.10)</h3>
-    <p>Multi-step reactions are a chain of queues. The <span class="accent">rate-determining step (RDS)</span> is the <b>slowest step</b> — it controls the whole rate, exactly like the single slowest bouncer controls the whole club's throughput.</p>
+    <h3>Rate-determining step (R2.2.6 · R2.2.10)</h3>
+    <p>Multi-step reactions are a chain of queues. The <span class="accent">rate-determining step (RDS)</span> is the <b>slowest step</b> — it controls the whole rate, exactly like the single slowest step controls the whole reaction's rate.</p>
     <ul class="clean">
       <li>The rate equation reflects the reactants in the <b>slow step</b> (and any fast step that feeds them) — <b>not</b> the overall equation.</li>
       <li>Example: 2NO₂ + F₂ → 2NO₂F has a slow step NO₂ + F₂ → NO₂F + F, so rate = k[NO₂][F₂] — first order in each, overall 2nd. The second NO₂ enters AFTER the slow step and never touches the rate.</li>
@@ -445,7 +440,7 @@
   </div>
 
   <div class="panel">
-    <h3>MECHANISM → RATE EQUATION — THE BOOK'S WORKED EXAMPLE (R2.2.9 · AHL)</h3>
+    <h3>Mechanism → rate equation — worked example (R2.2.9 · AHL)</h3>
     <p>Course Companion worked example 5–6 (pp. 497–501): NO₂(g) + CO(g) → NO(g) + CO₂(g). At <b>low temperature</b> the reaction runs in two steps:</p>
     <ul class="clean">
       <li><b>step 1 (SLOW, RDS):</b> NO₂ + NO₂ → NO₃ + NO</li>
@@ -459,9 +454,9 @@
 
 <!-- ══════════════════════ ACT 5 ══════════════════════ -->
 <section class="act" id="act5">
-  <div class="acttag">Act 5 · R2.2.7 (SL) · R2.2.12 · R2.2.13 (AHL)</div>
-  <h2>THE ARRHENIUS DOOR 🔐</h2>
-  <p class="aim">The bouncer's bouncer: the equation that puts a number on temperature, energy and rate.</p>
+  <div class="acttag">R2.2.7 (SL) · R2.2.12 · R2.2.13 (AHL)</div>
+  <h2>Arrhenius</h2>
+  <p class="aim">The equation that links the rate constant to temperature and activation energy.</p>
 
   <div class="panel">
     <h3>THE ARRHENIUS EQUATION (R2.2.12 · AHL)</h3>
@@ -527,7 +522,7 @@
   </div>
 
   <div class="panel">
-    <h3>ENERGY PROFILE — THE HILL PICTURE (R2.2.7 · SL)</h3>
+    <h3>Energy profiles (R2.2.7 · SL)</h3>
     <ul class="clean">
       <li>Catalyst path = <b>two small hills</b> (two transition states) with a valley (intermediate) between them.</li>
       <li>Uncatalysed path = <b>one big hill</b>.</li>
@@ -549,7 +544,7 @@
     <div class="arrow">→</div>
     <div class="node">FACTORS<br><small>conc · pressure · surface area · T · catalyst</small></div>
     <div class="arrow">→</div>
-    <div class="node">M–B CURVE<br><small>T moves crowd · catalyst moves Eₐ line</small></div>
+    <div class="node">M–B CURVE<br><small>T shifts the curve · catalyst moves Eₐ line</small></div>
     <div class="arrow">→</div>
     <div class="node">RATE = k[A]ⁿ[B]ᵐ<br><small>orders from experiments only</small></div>
     <div class="arrow">→</div>
@@ -654,7 +649,7 @@
     <label><input type="radio" name="q8" value="slow"> The slowest step (rate-determining step)</label>
     <label><input type="radio" name="q8" value="wrong1"> The overall balanced equation</label>
     <label><input type="radio" name="q8" value="wrong2"> The fastest step</label>
-    <div class="fb correct">✅ The RDS controls the rate — the club moves as fast as its slowest bouncer.</div>
+    <div class="fb correct">✅ The RDS controls the rate — the reaction goes as fast as its slowest step.</div>
     <div class="fb wrong">❌ The rate-determining step. The overall equation says nothing about the rate; the fastest step is the opposite of the bottleneck.</div>
   </div>
 
@@ -717,7 +712,7 @@
 <section class="act" id="vault">
   <div class="acttag">Read this before the exam</div>
   <h2>THE REVISION VAULT 🗄️</h2>
-  <p class="aim">The bouncer's complete rulebook in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
+  <p class="aim">Everything in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
 
   <div class="panel">
     <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>

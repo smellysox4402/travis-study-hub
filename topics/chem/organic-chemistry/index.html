@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Organic Chemistry — The Organic Kitchen (S3.2 · R3.3 · R3.4)</title>
+<title>Organic Chemistry (S3.2 · R3.3 · R3.4)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,14 +16,14 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
 
   /* NAV */
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
@@ -32,11 +32,8 @@
   /* HERO */
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
@@ -45,25 +42,22 @@
   /* ACTS */
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -71,14 +65,14 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
 
   /* figure / image blocks */
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
@@ -87,22 +81,23 @@
   .fig.narrow svg{max-width:480px;}
 
   /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
-           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
   .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
   .bouncer .body{flex:1;}
   .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
   .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:14.5px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
   @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
 
   /* tables */
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
 
   /* callout boxes */
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -120,7 +115,7 @@
 
   /* mind map */
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
@@ -128,7 +123,7 @@
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -141,7 +136,7 @@
   /* checklist */
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -180,11 +175,11 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · THE INGREDIENT SHELF</a>
-  <a href="#act2">ACT 2 · SAME DISH, DIFFERENT PLATE</a>
-  <a href="#act3">ACT 3 · THE KITCHEN SCANNER</a>
-  <a href="#act4">ACT 4 · THE FREE-SPIRIT CHEFS</a>
-  <a href="#act5">ACT 5 · THE PARTNER EXCHANGE</a>
+  <a href="#act1">Formulas & functional groups</a>
+  <a href="#act2">Isomerism</a>
+  <a href="#act3">Spectroscopy</a>
+  <a href="#act4">Free radicals</a>
+  <a href="#act5">Reaction mechanisms</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -197,8 +192,8 @@
 
 <header class="hero">
   <div class="kicker">IB Chemistry · Higher Level · Structure 3.2 + Reactivity 3.3 + 3.4</div>
-  <h1>ORGANIC CHEMISTRY — THE ORGANIC KITCHEN</h1>
-  <div class="sub">Every organic molecule is a dish, and its functional group is the signature ingredient. This kitchen tour: how we <b>classify</b> the menu (S3.2), how isomers serve the same recipe on <b>different plates</b> (S3.2), how the <b>scanner</b> reads each dish (MS / IR / NMR, S3.2), how <b>free-spirit radicals</b> crash the pass (R3.3), and how <b>nucleophiles and electrophiles</b> exchange partners on the dance floor (R3.4).</div>
+  <h1>Organic Chemistry</h1>
+  <div class="sub">The chemistry of carbon — functional groups, isomerism, spectroscopy, and the main reaction mechanisms.</div>
   <div class="badges">
     <span class="badge hl">STRUCTURE 3.2 · FUNCTIONAL GROUPS</span>
     <span class="badge hl">REACTIVITY 3.3 · ELECTRON SHARING</span>
@@ -209,11 +204,11 @@
 
 <!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · S3.2.1 · S3.2.2 · S3.2.3</div>
-  <h2>THE INGREDIENT SHELF 🍽</h2>
+  <div class="acttag">S3.2.1 · S3.2.2 · S3.2.3</div>
+  <h2>Formulas & functional groups</h2>
   <p class="lead">Every dish in the organic kitchen is built from carbon. The ingredient shelf is where we sort the ingredients: what a formula tells you, what a functional group is, and how families of compounds line up in homologous series.</p>
 
-  <h3>S3.2.1 — The recipe card: four ways to write a formula</h3>
+  <h3>S3.2.1 — Four ways to write a formula</h3>
   <div class="cols">
     <div class="card">
       <h4>📄 EMPIRICAL</h4>
@@ -230,7 +225,7 @@
   </div>
   <p class="note">Carbon: 4 valence electrons → 4 bonds, and catenation (chains of identical atoms) → straight, branched or cyclic. That is why carbon chemistry is so vast.</p>
 
-  <h3>S3.2.2 — The ingredient shelf: functional groups</h3>
+  <h3>S3.2.2 — Functional groups</h3>
   <p>A <strong>functional group</strong> is the atom or group of atoms that decides a compound's physical and chemical character. Same group → same class → similar reactions. R stands for any carbon-containing (alkyl) group.</p>
   <div class="mini-table">
     <div class="mtrow head"><span>GROUP</span><span>FORMULA</span><span>SUFFIX</span><span>CLASS</span><span>EXAMPLE</span></div>
@@ -246,7 +241,7 @@
   </div>
   <p class="note">Saturated = all C–C single bonds (alkanes). Unsaturated = at least one C=C or C≡C (alkenes, alkynes). Aliphatic = no aromatic ring.</p>
 
-  <h3>S3.2.3 — Recipe families: homologous series</h3>
+  <h3>S3.2.3 — Homologous series</h3>
   <p>A <strong>homologous series</strong> is a family with the same functional group and a shared general formula; each member differs from the next by one CH<sub>2</sub>.</p>
   <div class="mini-table">
     <div class="mtrow head"><span>SERIES</span><span>GENERAL FORMULA</span><span>FIRST MEMBERS</span></div>
@@ -305,11 +300,11 @@
 </section>
 
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · S3.2.4 · S3.2.5 · S3.2.6 · S3.2.7 (AHL)</div>
-  <h2>SAME DISH, DIFFERENT PLATE 🍳</h2>
+  <div class="acttag">S3.2.4 · S3.2.5 · S3.2.6 · S3.2.7 (AHL)</div>
+  <h2>Isomerism</h2>
   <p class="lead">Bigger chains boil hotter, names follow strict rules, and the same ingredients can be arranged into completely different dishes: isomers.</p>
 
-  <h3>S3.2.4 — Bigger chain, hotter pot</h3>
+  <h3>S3.2.4 — Boiling point trends</h3>
   <p>Boiling point climbs steadily along a homologous series: each added CH<sub>2</sub> strengthens London (dispersion) forces. Methane −161 °C → ethane −89 → propane −42 → butane −0.5 → pentane 36 → hexane 69 °C. Melting point is noisier — don't rely on it for prediction. Density and viscosity also rise with chain length.</p>
 
   <h3>S3.2.5 — The naming rules (IUPAC)</h3>
@@ -375,8 +370,8 @@
 </section>
 
 <section class="act" id="act3">
-  <div class="acttag">Act 3 · S3.2.8 · S3.2.9 · S3.2.10 · S3.2.11 · S3.2.12 (AHL)</div>
-  <h2>THE KITCHEN SCANNER 🔬</h2>
+  <div class="acttag">S3.2.8 · S3.2.9 · S3.2.10 · S3.2.11 · S3.2.12 (AHL)</div>
+  <h2>Spectroscopy</h2>
   <p class="lead">Can't see the molecule? Scan it. Mass spec weighs the pieces, IR feels the bonds, NMR counts the hydrogen neighbourhoods. Together they identify the dish.</p>
 
   <h3>S3.2.8 — Mass spectrometry: weigh the fragments</h3>
@@ -430,8 +425,8 @@
 </section>
 
 <section class="act" id="act4">
-  <div class="acttag">Act 4 · R3.3.1 · R3.3.2 · R3.3.3</div>
-  <h2>THE FREE-SPIRIT CHEFS 🔥</h2>
+  <div class="acttag">R3.3.1 · R3.3.2 · R3.3.3</div>
+  <h2>Free radicals</h2>
   <p class="lead">Some chefs work alone with a single electron. Radicals are neutral species with one unpaired electron — formed by homolytic fission, they run the kitchen as a chain reaction.</p>
 
   <h3>R3.3.1 — The radical: one unpaired electron</h3>
@@ -481,11 +476,11 @@
 </section>
 
 <section class="act" id="act5">
-  <div class="acttag">Act 5 · R3.4.1 · R3.4.2 · R3.4.3 · R3.4.4 · R3.4.5 · R3.4.6–3.4.13 (AHL)</div>
-  <h2>THE PARTNER EXCHANGE 🕺</h2>
-  <p class="lead">Nucleophiles (electron-rich, donate pairs) meet electrophiles (electron-hungry, accept pairs). The dance has names: SN1, SN2, electrophilic addition — and for AHL, Lewis theory and benzene.</p>
+  <div class="acttag">R3.4.1 · R3.4.2 · R3.4.3 · R3.4.4 · R3.4.5 · R3.4.6–3.4.13 (AHL)</div>
+  <h2>Reaction mechanisms</h2>
+  <p class="lead">Nucleophiles (electron-rich, donate pairs) meet electrophiles (electron-hungry, accept pairs). The mechanisms have names: SN1, SN2, electrophilic addition — and for AHL, Lewis theory and benzene.</p>
 
-  <h3>R3.4.1–3.4.4 — The dancers and the fission</h3>
+  <h3>R3.4.1–3.4.4 — Nucleophiles, electrophiles and fission</h3>
   <div class="cols">
     <div class="card"><h4>🕺 NUCLEOPHILE</h4><p>Electron-rich, lone pair, donates a pair: OH⁻, CN⁻, Cl⁻, H<sub>2</sub>O, NH<sub>3</sub>. (CH<sub>3</sub>)<sub>4</sub>N⁺ can't — no lone pair.</p></div>
     <div class="card"><h4>💃 ELECTROPHILE</h4><p>Electron-deficient, accepts a pair: cations (CH<sub>3</sub>⁺), δ+ atoms (BF<sub>3</sub>, carbonyl C).</p></div>
@@ -499,7 +494,7 @@
   <h3>R3.4.6–3.4.8 (AHL) — Lewis theory: electron-pair economy</h3>
   <p><strong>Lewis acid = electron-pair acceptor; Lewis base = electron-pair donor.</strong> Bigger than Brønsted–Lowry — covers reactions with no proton. BF<sub>3</sub> + NH<sub>3</sub> → F<sub>3</sub>B–NH<sub>3</sub>: NH<sub>3</sub> is Lewis base/nucleophile, BF<sub>3</sub> is Lewis acid/electrophile. AlCl<sub>3</sub> dimerises to Al<sub>2</sub>Cl<sub>6</sub> (both roles at once). All Lewis bases are nucleophiles, all Lewis acids are electrophiles — and vice versa. Transition metal cations = Lewis acids; ligands (H<sub>2</sub>O, NH<sub>3</sub>, CN⁻, Cl⁻, OH⁻) donate pairs → complex ions: [Co(H<sub>2</sub>O)<sub>6</sub>]²⁺ ⇌ [CoCl<sub>4</sub>]²⁻ (pink ⇌ blue). Charge math: overall = metal charge + Σ(ligand charge).</p>
 
-  <h3>R3.4.9–3.4.10 (AHL) — SN1 vs SN2: two dance styles</h3>
+  <h3>R3.4.9–3.4.10 (AHL) — SN1 vs SN2</h3>
   <div class="cols">
     <div class="card"><h4>⚡ SN2 — ONE STEP</h4><p>Primary halogenoalkanes. Concerted backside attack (180° from leaving group, umbrella flip = inversion). No intermediate, just a transition state. rate = k[halogenoalkane][nucleophile] — second order. The "2" = two molecules in the slow step.</p></div>
     <div class="card"><h4>🐢 SN1 — TWO STEPS</h4><p>Tertiary halogenoalkanes. Step 1: C–X breaks → carbocation (slow, rate-determining). Step 2: nucleophile attacks the cation. rate = k[halogenoalkane] — first order. Stable carbocations: 3° > 2° > 1° (alkyl groups donate electron density).</p></div>
@@ -515,7 +510,7 @@
   <div class="svg-wrap">
     <svg viewBox="0 0 640 360" role="img" aria-label="SN1 vs SN2 comparison and electrophilic addition to alkene">
       <rect x="20" y="20" width="600" height="320" rx="14" fill="#0e1420" stroke="#c77dff" stroke-opacity="0.35"/>
-      <text x="40" y="55" fill="#c77dff" font-size="17" font-weight="bold" font-family="Consolas,monospace">TWO DANCE STYLES</text>
+      <text x="40" y="55" fill="#c77dff" font-size="17" font-weight="bold" font-family="Consolas,monospace">TWO MECHANISMS</text>
       <text x="100" y="90" fill="#7df9ff" font-size="14" font-family="Consolas,monospace" text-anchor="middle">SN2 · one step</text>
       <text x="100" y="110" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">backside attack · umbrella flip</text>
       <text x="100" y="130" fill="#7d8ea0" font-size="12" font-family="Consolas,monospace" text-anchor="middle">rate = k[R–X][Nu⁻] · 2nd order</text>
@@ -717,7 +712,7 @@
 <section class="act" id="vault">
   <div class="acttag">Read this before the exam</div>
   <h2>THE REVISION VAULT 🗄️</h2>
-  <p class="aim">The kitchen's complete rulebook in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
+  <p class="aim">Everything in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
 
   <div class="panel">
     <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>

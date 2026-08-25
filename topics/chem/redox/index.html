@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Redox — The Electron Grid (Reactivity 3.2)</title>
+<title>Redox (Reactivity 3.2)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,14 +16,14 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
 
   /* NAV */
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
@@ -32,11 +32,8 @@
   /* HERO */
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
@@ -45,25 +42,22 @@
   /* ACTS */
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -71,14 +65,14 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
 
   /* figure / image blocks */
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
@@ -87,22 +81,23 @@
   .fig.narrow svg{max-width:480px;}
 
   /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
-           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
   .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
   .bouncer .body{flex:1;}
   .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
   .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:14.5px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
   @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
 
   /* tables */
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
 
   /* callout boxes */
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -120,7 +115,7 @@
 
   /* mind map */
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
@@ -128,7 +123,7 @@
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -141,7 +136,7 @@
   /* checklist */
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -180,11 +175,11 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · THE HANDOVER</a>
-  <a href="#act2">ACT 2 · THE PECKING ORDER</a>
-  <a href="#act3">ACT 3 · THE GRID</a>
-  <a href="#act4">ACT 4 · ORGANIC REDOX</a>
-  <a href="#act5">ACT 5 · THE VOLTAGE METER</a>
+  <a href="#act1">Oxidation & reduction</a>
+  <a href="#act2">Activity series</a>
+  <a href="#act3">Electrochemical cells</a>
+  <a href="#act4">Organic redox</a>
+  <a href="#act5">Electrode potentials</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -197,8 +192,8 @@
 
 <header class="hero">
   <div class="kicker">IB Chemistry · Higher Level · Reactivity 3.2</div>
-  <h1>REDOX — THE ELECTRON GRID</h1>
-  <div class="sub">Every reaction is a power exchange: one species <b>loses electrons</b> (oxidized), another <b>gains them</b> (reduced) — never one without the other. R3.2 is the study of that exchange: who's willing to give, who's greedy to take, and how to wire the whole thing into a battery.</div>
+  <h1>Redox</h1>
+  <div class="sub">Electron transfer — oxidation and reduction always happen together, and their flow can be wired into a cell.</div>
   <div class="badges">
     <span class="badge hl">REACTIVITY 3.2 · ELECTRON TRANSFER</span>
     <span class="badge ahl">R3.2.12–R3.2.16 ARE AHL (R3.2.1–R3.2.11 IS SL)</span>
@@ -208,9 +203,9 @@
 
 <!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · R3.2.1 · R3.2.2</div>
-  <h2>THE HANDOVER ⚡</h2>
-  <p class="aim">Oxidation and reduction — four definitions, one idea. Learn OIL RIG, then master the half-equation bookkeeping.</p>
+  <div class="acttag">R3.2.1 · R3.2.2</div>
+  <h2>Oxidation & reduction</h2>
+  <p class="aim">Oxidation and reduction: four definitions, one idea — then master half-equation bookkeeping.</p>
 
   <div class="bouncer">
     <div class="emoji">🔄</div>
@@ -289,9 +284,9 @@
 
 <!-- ══════════════════════ ACT 2 ══════════════════════ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · R3.2.3 · R3.2.4</div>
-  <h2>THE PECKING ORDER 🥊</h2>
-  <p class="aim">Who can steal from whom? The activity series + halogen order = the ranking of electron greed.</p>
+  <div class="acttag">R3.2.3 · R3.2.4</div>
+  <h2>The activity series</h2>
+  <p class="aim">Who can oxidise whom — the activity series and halogen order.</p>
 
   <div class="grid2">
     <div class="card">
@@ -358,9 +353,9 @@
 
 <!-- ══════════════════════ ACT 3 ══════════════════════ -->
 <section class="act" id="act3">
-  <div class="acttag">Act 3 · R3.2.5 · R3.2.6 · R3.2.7 · R3.2.8</div>
-  <h2>THE GRID 🔋</h2>
-  <p class="aim">Wire the electron flow through an external circuit and you've built a battery. Push energy in backwards and you get electrolysis. Same chemistry, two directions.</p>
+  <div class="acttag">R3.2.5 · R3.2.6 · R3.2.7 · R3.2.8</div>
+  <h2>Electrochemical cells</h2>
+  <p class="aim">Voltaic and electrolytic cells: the same chemistry in two directions.</p>
 
   <div class="bouncer">
     <div class="emoji">🔌</div>
@@ -455,9 +450,9 @@
 
 <!-- ══════════════════════ ACT 4 ══════════════════════ -->
 <section class="act" id="act4">
-  <div class="acttag">Act 4 · R3.2.9 · R3.2.10 · R3.2.11</div>
-  <h2>ORGANIC REDOX 🧪</h2>
-  <p class="aim">Carbon plays the same game: oxidation = gains oxygen / loses hydrogen (oxidation state of C increases). Alcohols, aldehydes, ketones, acids — a redox ladder.</p>
+  <div class="acttag">R3.2.9 · R3.2.10 · R3.2.11</div>
+  <h2>Organic redox</h2>
+  <p class="aim">Organic redox: oxidation states on carbon, from alcohols to acids.</p>
 
   <div class="grid3">
     <div class="card">
@@ -493,9 +488,9 @@
 
 <!-- ══════════════════════ ACT 5 ══════════════════════ -->
 <section class="act" id="act5">
-  <div class="acttag">Act 5 · R3.2.12 · R3.2.13 · R3.2.14 · R3.2.15 · R3.2.16 (ALL AHL)</div>
-  <h2>THE VOLTAGE METER 📟</h2>
-  <p class="aim">AHL: quantify electron greed. E° ranks every half-reaction on one number line. E°cell tells you which way is spontaneous, and ΔG° = −nFE°cell converts volts into energy.</p>
+  <div class="acttag">R3.2.12 · R3.2.13 · R3.2.14 · R3.2.15 · R3.2.16 (ALL AHL)</div>
+  <h2>Electrode potentials</h2>
+  <p class="aim">E° ranks every half-reaction, E°cell predicts spontaneity, and ΔG° = −nFE°cell converts volts to energy.</p>
 
   <div class="bouncer">
     <div class="emoji">⚖️</div>
@@ -779,7 +774,7 @@
 <section class="act" id="vault">
   <div class="acttag">Read this before the exam</div>
   <h2>THE REVISION VAULT 🗄️</h2>
-  <p class="aim">The electron grid's complete rulebook in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
+  <p class="aim">Everything in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
 
   <div class="panel">
     <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>

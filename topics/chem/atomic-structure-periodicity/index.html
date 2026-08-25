@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Atomic Structure &amp; Periodicity — The Nuclear Vault (Structure 1.2 · 1.3 · 3.1)</title>
+<title>Atomic Structure &amp; Periodicity (Structure 1.2 · 1.3 · 3.1)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,14 +16,14 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
 
   /* NAV */
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
@@ -32,11 +32,8 @@
   /* HERO */
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
@@ -45,25 +42,22 @@
   /* ACTS */
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -71,14 +65,14 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
 
   /* figure / image blocks */
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
@@ -87,22 +81,23 @@
   .fig.narrow svg{max-width:480px;}
 
   /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
-           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
   .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
   .bouncer .body{flex:1;}
   .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
   .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:14.5px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
   @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
 
   /* tables */
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
 
   /* callout boxes */
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -120,7 +115,7 @@
 
   /* mind map */
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
@@ -128,7 +123,7 @@
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -141,7 +136,7 @@
   /* checklist */
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -180,15 +175,15 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · THE NUCLEAR VAULT</a>
-  <a href="#act2">ACT 2 · THE ISOTOPE MIX</a>
-  <a href="#act3">ACT 3 · THE LIGHT SHOW</a>
-  <a href="#act4">ACT 4 · THE ENERGY TOWER</a>
-  <a href="#act4b">ACT 4b · THE ADDRESS BOOK</a>
-  <a href="#act5">ACT 5 · THE SLEDGEHAMMER</a>
-  <a href="#act6">ACT 6 · THE NEIGHBOURHOOD MAP</a>
-  <a href="#act7">ACT 7 · THE REACTIVITY ARC</a>
-  <a href="#act8">ACT 8 · THE TRANSITION LOUNGE</a>
+  <a href="#act1">The nuclear atom</a>
+  <a href="#act2">Isotopes & mass spec</a>
+  <a href="#act3">Atomic spectra</a>
+  <a href="#act4">Electron arrangement</a>
+  <a href="#act4b">Quantum numbers</a>
+  <a href="#act5">Ionization energy</a>
+  <a href="#act6">The periodic table</a>
+  <a href="#act7">Trends (AHL)</a>
+  <a href="#act8">Transition elements</a>
   <a href="#mind">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -201,8 +196,8 @@
 
 <header class="hero">
   <div class="kicker">IB Chemistry · Higher Level · Structure 1.2 + 1.3 + 3.1</div>
-  <h1>THE NUCLEAR VAULT &amp; THE NEIGHBOURHOOD MAP</h1>
-  <div class="sub">Think of every atom as a <b>vault</b> (the nucleus — 99.9% of the mass, 1/100,000th of the size) inside a <b>tower</b> (energy levels where electrons live). The periodic table is the <b>neighbourhood map</b> of all 118 towers. This topic = what's in the vault, how the tower is built, and why the map predicts the neighbours' behaviour.</div>
+  <h1>Atomic Structure &amp; Periodicity</h1>
+  <div class="sub">The atom, the electron and the periodic table — what is in the nucleus, how electrons are arranged, and how position predicts behaviour.</div>
   <div class="badges">
     <span class="badge hl">STRUCTURE 1.2 · 1.3 · 3.1 — ATOMS &amp; THE TABLE</span>
     <span class="badge ahl">S3.1.5–S3.1.10 ARE AHL (S1.2 + S1.3 + S3.1.1–3.1.4 IS SL)</span>
@@ -212,14 +207,14 @@
 
 <!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · S1.2.1</div>
-  <h2>THE NUCLEAR VAULT 🔐</h2>
-  <p class="aim">An atom is mostly nothing. All the mass sits in a tiny positively charged vault; the electrons live in the vast empty space around it. Rutherford found the vault by shooting bullets at gold foil.</p>
+  <div class="acttag">S1.2.1</div>
+  <h2>The nuclear atom</h2>
+  <p class="aim">The atom is mostly empty: a dense positive nucleus with electrons around it. Rutherford found it with gold foil.</p>
 
   <div class="bouncer">
     <div class="emoji">🔐</div>
     <div class="body">
-      <h3>THE VAULT &amp; ITS GUESTS (S1.2.1)</h3>
+      <h3>The atom: nucleus and electrons (S1.2.1)</h3>
       <p class="aka">nucleons = protons + neutrons · electrons live outside the vault</p>
       <ul class="clean">
         <li>Nucleus = <span class="accent">protons (+1)</span> + <span class="accent">neutrons (0)</span> — together called <b>nucleons</b>. Electrons (<span class="accent">−1</span>) occupy the vast region outside.</li>
@@ -273,7 +268,7 @@
   <div class="nos"><b>EXAM TRAP:</b> "Most alpha particles bounced back" is WRONG — most passed straight through. Only a FEW bounced back, and THAT is the evidence for the small dense positive nucleus. Match each observation to the property it proves (nucleus small / dense / positive).</div>
 
   <div class="panel">
-    <h3>NUCLEAR SYMBOLS — THE ID CARD 🪪</h3>
+    <h3>Nuclear symbols</h3>
     <p class="big"><b>ᴬ_Z X</b> — A = mass number (protons + neutrons) · Z = atomic number (protons) · X = element symbol</p>
     <p>A = Z + N (N = neutrons). Neutral atom: electrons = protons. <b>Z</b> is also the position on the periodic table — gold, atomic number 79, has 79 protons; ¹⁹⁷₇₉Au has 197 − 79 = <b>118 neutrons</b>.</p>
     <p>Ions change the electron count, not the vault: magnesium loses 2 electrons → <b>²⁴₁₂Mg²⁺</b> (12 p⁺, 12 n, 10 e⁻). Oxygen gains 2 → <b>¹⁶₈O²⁻</b> (8 p⁺, 8 n, 10 e⁻). Charge = protons − electrons.</p>
@@ -283,14 +278,14 @@
 
 <!-- ══════════════════════ ACT 2 ══════════════════════ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · S1.2.2 · S1.2.3</div>
-  <h2>THE ISOTOPE MIX ⚖️</h2>
-  <p class="aim">Same element, different neutron counts. The periodic table mass is a weighted average of the whole mix — and the mass spectrometer is the machine that counts the mix.</p>
+  <div class="acttag">S1.2.2 · S1.2.3</div>
+  <h2>Isotopes & mass spectrometry</h2>
+  <p class="aim">Isotopes differ only in neutrons; the periodic table mass is a weighted average.</p>
 
   <div class="bouncer">
     <div class="emoji">⚖️</div>
     <div class="body">
-      <h3>ISOTOPES — SAME DNA, DIFFERENT BODY WEIGHT (S1.2.2)</h3>
+      <h3>Isotopes (S1.2.2)</h3>
       <p class="aka">same Z, different N → different mass number A</p>
       <ul class="clean">
         <li><b>Isotopes</b> = atoms of the same element with different numbers of <b>neutrons</b>. Same protons, same electrons → <b>same chemical properties</b>. Different mass → <b>different physical properties</b> (density, mp, bp).</li>
@@ -350,7 +345,7 @@
   <div class="bouncer">
     <div class="emoji">⚙️</div>
     <div class="body">
-      <h3>THE MASS SPECTROMETER — 5-STAGE CONVEYOR BELT (S1.2.3)</h3>
+      <h3>The mass spectrometer (S1.2.3)</h3>
       <p class="aka">operational details are NOT assessed — but the story is</p>
       <ol class="steps">
         <li><b>Vaporize</b> — heating filament turns the sample into gas.</li>
@@ -366,9 +361,9 @@
 
 <!-- ══════════════════════ ACT 3 ══════════════════════ -->
 <section class="act" id="act3">
-  <div class="acttag">Act 3 · S1.3.1 · S1.3.2 · S1.3.6</div>
-  <h2>THE LIGHT SHOW 🌈</h2>
-  <p class="aim">Electrons hate being stuck at one energy. Give them a photon and they jump up; when they fall back down they scream — in colour. The hydrogen rainbow is the evidence that energy comes in fixed steps, not a smooth ramp.</p>
+  <div class="acttag">S1.3.1 · S1.3.2 · S1.3.6</div>
+  <h2>Atomic spectra</h2>
+  <p class="aim">Line spectra are the evidence that electron energies are quantised.</p>
 
   <div class="grid3">
     <div class="card">
@@ -399,11 +394,11 @@
   <div class="bouncer">
     <div class="emoji">🎚</div>
     <div class="body">
-      <h3>THE PHOTON TRADING FLOOR</h3>
+      <h3>Photon absorption and emission</h3>
       <p class="aka">c = f × λ · E = h × f · h = 6.63 × 10⁻³⁴ J s · c = 3.00 × 10⁸ m s⁻¹</p>
       <ul class="clean">
         <li>Light is <b>electromagnetic radiation</b>: gamma → X-ray → UV → visible → IR → microwave → radio.</li>
-        <li>Energy ∝ 1/λ: <b>short wavelength = high frequency = high energy</b>. Gamma is the bouncer; radio is the couch potato.</li>
+        <li>Energy ∝ 1/λ: <b>short wavelength = high frequency = high energy</b>. Gamma has the highest energy; radio the lowest.</li>
         <li>Bohr 1913: electrons orbit in <b>fixed allowed orbits</b>. Absorb a photon with exactly ΔE → jump to an excited state. Fall back → emit a photon of exactly that ΔE. No in-between: <b>quantized</b>.</li>
         <li>The Bohr model only works cleanly for hydrogen — one electron. The quantum mechanical model (Schrödinger, 1926) replaces orbits with <b>probability clouds</b>.</li>
         <li>Flame tests are the same physics: heat bumps electrons up, they fall back and emit visible photons. Li = red, Na = yellow-orange, K = lilac, Ca = brick-red, Cu = blue-green, Sr = crimson.</li>
@@ -460,14 +455,14 @@
     <div class="cap"><b>Figure 3</b> — Hydrogen's energy levels. Falling to n = 2 gives the four visible Balmer lines; the convergence limit at the top is the ionization energy (S1.3.6).</div>
   </div>
 
-  <div class="tip"><b>MEMORY HOOK:</b> "656 red, 486 cyan, 434 blue, 410 violet" — the gaps shrink as n grows, so the lines crowd together. The crowd's end is the ionization ceiling. Also: 1/n² spacing — each floor sits closer to the ceiling than the last.</div>
+  <div class="tip"><b>MEMORY HOOK:</b> "656 red, 486 cyan, 434 blue, 410 violet" — the gaps shrink as n grows, so the lines bunch together. Their limit is the ionization energy. Also: 1/n² spacing — each floor sits closer to the ceiling than the last.</div>
 </section>
 
 <!-- ══════════════════════ ACT 4 ══════════════════════ -->
 <section class="act" id="act4">
-  <div class="acttag">Act 4 · S1.3.3 · S1.3.4 · S1.3.5</div>
-  <h2>THE ENERGY TOWER 🏢</h2>
-  <p class="aim">The tower has floors (n), each floor has rooms (sublevels s, p, d, f), and each room has beds (orbitals) that hold exactly two electrons — with opposite spins. Filling order is the rulebook.</p>
+  <div class="acttag">S1.3.3 · S1.3.4 · S1.3.5</div>
+  <h2>Electron arrangement</h2>
+  <p class="aim">Shells, sublevels and orbitals — the arrangement of electrons.</p>
 
   <div class="grid3">
     <div class="card">
@@ -584,9 +579,9 @@
 
 <!-- ══════════════════════ ACT 4b ══════════════════════ -->
 <section class="act" id="act4b">
-  <div class="acttag">Act 4b · S1.3.3–S1.3.4 · SL</div>
-  <h2>THE ADDRESS BOOK 📇</h2>
-  <p class="aim">Four quantum numbers = a unique postcode for every electron in the atom. n names the shell, l the shape, mₗ the orbital's orientation, mₛ the spin. No two electrons at the party share an address.</p>
+  <div class="acttag">S1.3.3–S1.3.4 · SL</div>
+  <h2>Quantum numbers</h2>
+  <p class="aim">The four quantum numbers give every electron a unique address.</p>
 
   <div class="bouncer">
     <div class="emoji">📇</div>
@@ -642,9 +637,9 @@
 
 <!-- ══════════════════════ ACT 5 ══════════════════════ -->
 <section class="act" id="act5">
-  <div class="acttag">Act 5 · S1.3.7</div>
-  <h2>THE IONIZATION SLEDGEHAMMER 🔨</h2>
-  <p class="aim">Hit an atom once, you remove the easiest electron. Keep hitting — each next electron costs more, and the price spike tells you exactly which shell you've cracked open.</p>
+  <div class="acttag">S1.3.7</div>
+  <h2>Ionization energy</h2>
+  <p class="aim">Ionization energy, and the big jump that reveals the shell structure.</p>
 
   <div class="bouncer">
     <div class="emoji">🔨</div>
@@ -706,9 +701,9 @@
 
 <!-- ══════════════════════ ACT 6 ══════════════════════ -->
 <section class="act" id="act6">
-  <div class="acttag">Act 6 · S3.1.1 · S3.1.2 · S3.1.3 · S3.1.4</div>
-  <h2>THE NEIGHBOURHOOD MAP 🗺</h2>
-  <p class="aim">Mendeleev drew the map by hand in 1869 — ordered by atomic mass, with bold predictions. Modern version: ordered by atomic number (protons), and the position alone predicts radius, ionization energy, electronegativity and reactivity.</p>
+  <div class="acttag">S3.1.1 · S3.1.2 · S3.1.3 · S3.1.4</div>
+  <h2>The periodic table</h2>
+  <p class="aim">The periodic table: position predicts radius, ionization energy, electronegativity and reactivity.</p>
 
   <div class="grid2">
     <div class="card">
@@ -930,9 +925,9 @@
 
 <!-- ══════════════════════ ACT 7 ══════════════════════ -->
 <section class="act" id="act7">
-  <div class="acttag">Act 7 · S3.1.5 · S3.1.6 · S3.1.7 · S3.1.8 · AHL</div>
-  <h2>THE REACTIVITY ARC ⚔️</h2>
-  <p class="aim">AHL territory: the tiny wobbles in the IE graph, the oxidation-state bookkeeping, and the grand arc from basic metal oxides to acidic non-metal oxides. Plus: why sodium explodes on water and fluorine steals everything.</p>
+  <div class="acttag">S3.1.5 · S3.1.6 · S3.1.7 · S3.1.8 · AHL</div>
+  <h2>Periodic trends (AHL)</h2>
+  <p class="aim">AHL: the IE wobbles, oxidation states, and the basic-to-acidic oxide arc.</p>
 
   <div class="bouncer">
     <div class="emoji">📉</div>
@@ -995,14 +990,14 @@
 
 <!-- ══════════════════════ ACT 8 ══════════════════════ -->
 <section class="act" id="act8">
-  <div class="acttag">Act 8 · S3.1.9 · S3.1.10 · AHL</div>
-  <h2>THE TRANSITION LOUNGE 💎</h2>
-  <p class="aim">The d-block's VIP area: variable oxidation states, magnetic personalities, catalytic bouncers, and the only colours in the whole table that come from d-electron gymnastics.</p>
+  <div class="acttag">S3.1.9 · S3.1.10 · AHL</div>
+  <h2>Transition elements (AHL)</h2>
+  <p class="aim">AHL: transition elements — variable oxidation states and d-orbital colour.</p>
 
   <div class="bouncer">
     <div class="emoji">🚪</div>
     <div class="body">
-      <h3>WHO GETS IN? THE DEFINITION (S3.1.9)</h3>
+      <h3>Transition elements: the definition (S3.1.9)</h3>
       <p class="aka">partially filled d sublevel in the atom OR in any common stable ion</p>
       <ul class="clean">
         <li><b>Transition element</b> = element with a partially filled d sublevel in its atom or in any of its common stable ions (groups 3–11 of the d-block).</li>
@@ -1017,7 +1012,7 @@
   <div class="bouncer">
     <div class="emoji">🎨</div>
     <div class="body">
-      <h3>WHY ARE THEY COLOURED? THE d-DAYLIGHT ROBBERY (S3.1.10)</h3>
+      <h3>Why transition metal complexes are coloured (S3.1.10)</h3>
       <p class="aka">ligands split the d orbitals → visible light gets absorbed → you see the complement</p>
       <ul class="clean">
         <li>A <b>complex</b> = central transition-metal cation + <b>ligands</b> (molecules/ions with lone pairs, e.g. H₂O, Cl⁻, NH₃) joined by coordinate bonds. [Cr(H₂O)₆]³⁺ is violet.</li>
@@ -1121,7 +1116,7 @@
     <div class="line">ionic radius: cation &lt; atom &lt; anion <span>· isoelectronic: O²⁻ &gt; F⁻ &gt; Ne &gt; Na⁺ &gt; Mg²⁺ (protons decide)</span></div>
     <div class="line">oxides (AHL): Na₂O/MgO basic <span>· Al₂O₃ amphoteric · SiO₂/P₄O₁₀/SO₂/SO₃ acidic · SO₂ + H₂O → H₂SO₃ · SO₃ + H₂O → H₂SO₄</span></div>
     <div class="line">oxidation states (AHL): F always −1 · O −2 · H +1 <span>· manganate(VII) = MnO₄⁻ · alkali + water → MOH + H₂ · X₂ + 2X'⁻ → 2X⁻ + X'₂</span></div>
-    <div class="line">transition element (AHL): <span>partially filled d in atom or common ion · Zn (3d¹⁰) and Sc (3d⁰ ion) NOT in the club</span></div>
+    <div class="line">transition element (AHL): <span>partially filled d in atom or common ion · Zn (3d¹⁰) and Sc (3d⁰ ion) are NOT transition elements</span></div>
     <div class="line">colour (AHL): ligands split d orbitals <span>· absorb one wavelength, see its complement · stronger ligand = bigger split</span></div>
   </div>
 </section>
@@ -1290,7 +1285,7 @@
 <section class="act" id="vault">
   <div class="acttag">Read this before the exam</div>
   <h2>THE REVISION VAULT 🗄️</h2>
-  <p class="aim">The nuclear vault's complete rulebook in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
+  <p class="aim">Everything in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
 
   <div class="panel">
     <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>
@@ -1397,7 +1392,7 @@
     <li data-i="16"><span class="box">✓</span><span class="code">S3.1.6</span><span>AHL: oxidation state rules (F −1, O −2, H +1, group 1 +1, group 2 +2, sum = 0 / ion charge); naming with Roman numerals: manganate(VII) MnO₄⁻, sulfate(VI), nitrate(V); transition metals have variable states (Mn +2/+4/+7).</span></li>
     <li data-i="17"><span class="box">✓</span><span class="code">S3.1.7</span><span>AHL: period 3 oxide arc Na₂O/MgO basic → Al₂O₃ amphoteric → SiO₂/P₄O₁₀/SO₂/SO₃ acidic; equations (Na₂O + H₂O → 2NaOH; SO₃ + H₂O → H₂SO₄; Al₂O₃ + 2NaOH + 3H₂O → 2Na[Al(OH)₄]); acid rain from SO₂/NOₓ.</span></li>
     <li data-i="18"><span class="box">✓</span><span class="code">S3.1.8</span><span>AHL: alkali metals + water → MOH + H₂, reactivity increases down (IE ↓); halogens displace halide ions (Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂), reactivity decreases down (EN ↓); oxidation of halides by more electronegative halogen.</span></li>
-    <li data-i="19"><span class="box">✓</span><span class="code">S3.1.9</span><span>AHL: transition element = partially filled d in atom or common stable ion; Zn²⁺ (3d¹⁰) and Sc³⁺ (3d⁰) not in the club; variable oxidation states from close successive IEs; paramagnetism; catalytic converters 2CO + O₂ → 2CO₂; high mp/density.</span></li>
+    <li data-i="19"><span class="box">✓</span><span class="code">S3.1.9</span><span>AHL: transition element = partially filled d in atom or common stable ion; Zn²⁺ (3d¹⁰) and Sc³⁺ (3d⁰) are not transition elements; variable oxidation states from close successive IEs; paramagnetism; catalytic converters 2CO + O₂ → 2CO₂; high mp/density.</span></li>
     <li data-i="20"><span class="box">✓</span><span class="code">S3.1.10</span><span>AHL: complex = cation + ligands (lone-pair donors) via coordinate bonds; ligands split degenerate d orbitals; gap matches a visible wavelength; absorbed colour vs observed (complementary, colour wheel); [Cr(H₂O)₆]³⁺ violet absorbs yellow; factors: ligand strength, central ion, oxidation state.</span></li>
     <li data-i="21"><span class="box">✓</span><span class="code">S3.1.10</span><span>AHL: worked calc — [CuCl₄]²⁻ appears 647 nm → absorbs 491 nm → f = 6.11 × 10¹⁴ s⁻¹ → E = 4.05 × 10⁻¹⁹ J; weaker ligand (Cl⁻) = smaller split = lower-energy light absorbed (pink [Co(H₂O)₆]²⁺ → blue [CoCl₄]²⁻).</span></li>
     <li data-i="22"><span class="box">✓</span><span class="code">FIGURES</span><span>Know the numbers cold: 2n² capacities · 656/486/434/410 nm · 10.8 (B), 55.91 (Fe), 77.5/22.5 (Cl) · c = 3.00 × 10⁸ · h = 6.63 × 10⁻³⁴ · 1312 kJ mol⁻¹ · 1 pm/1 Å conversions · F radius 60 pm = 0.60 Å.</span></li>

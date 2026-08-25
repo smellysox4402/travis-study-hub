@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Equilibrium — The Crowd Balancer (Reactivity 2.3)</title>
+<title>Equilibrium (Reactivity 2.3)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,14 +16,14 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
 
   /* NAV */
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
@@ -32,11 +32,8 @@
   /* HERO */
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
@@ -45,25 +42,22 @@
   /* ACTS */
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -71,14 +65,14 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
 
   /* figure / image blocks */
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
@@ -87,22 +81,23 @@
   .fig.narrow svg{max-width:480px;}
 
   /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
-           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
   .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
   .bouncer .body{flex:1;}
   .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
   .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:14.5px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
   @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
 
   /* tables */
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
 
   /* callout boxes */
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -120,7 +115,7 @@
 
   /* mind map */
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
@@ -128,7 +123,7 @@
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -141,7 +136,7 @@
   /* checklist */
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -180,11 +175,11 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · THE TURNSTILE</a>
-  <a href="#act2">ACT 2 · THE SCOREBOARD</a>
-  <a href="#act3">ACT 3 · THE BOUNCER</a>
-  <a href="#act4">ACT 4 · THE COMPASS</a>
-  <a href="#act5">ACT 5 · THE LEDGER</a>
+  <a href="#act1">Dynamic equilibrium</a>
+  <a href="#act2">The equilibrium constant</a>
+  <a href="#act3">Le Chatelier</a>
+  <a href="#act4">Reaction quotient</a>
+  <a href="#act5">ICE tables & Gibbs</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -197,8 +192,8 @@
 
 <header class="hero">
   <div class="kicker">IB Chemistry · Higher Level · Reactivity 2.3</div>
-  <h1>EQUILIBRIUM — THE CROWD BALANCER 🎚️</h1>
-  <div class="sub">A reaction is a nightclub with a capacity limit. People flow from the bar (reactants) to the dance floor (products) and back — and at <b>equilibrium</b>, the same number walk each way every second. The club still looks identical, but the turnover never stops. This page is the bouncer's handbook: how the flow balances, what the scoreboard (K) tells you, how to predict every crowd shift, and how to count heads with an ICE table.</div>
+  <h1>Equilibrium</h1>
+  <div class="sub">The extent of chemical change — how far reactions go, what the equilibrium constant K tells you, and how to predict every shift.</div>
   <div class="badges">
     <span class="badge hl">REACTIVITY 2.3 · HOW FAR? THE EXTENT OF CHEMICAL CHANGE</span>
     <span class="badge ahl">R2.3.5–R2.3.7 ARE AHL</span>
@@ -208,9 +203,9 @@
 
 <!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · R2.3.1</div>
-  <h2>THE TURNSTILE 🚪</h2>
-  <p class="aim">What equilibrium actually IS: a crowd that never changes in size but never stops moving.</p>
+  <div class="acttag">R2.3.1</div>
+  <h2>Dynamic equilibrium</h2>
+  <p class="aim">What equilibrium is: forward and reverse rates equal, in a closed system.</p>
 
   <div class="panel">
     <h3>DYNAMIC EQUILIBRIUM (R2.3.1)</h3>
@@ -220,7 +215,7 @@
       <li>"Closed system" matters — if gas escapes, the reverse reaction can't keep up, so no equilibrium.</li>
       <li>Equal <b>rates</b>, NOT equal <b>amounts</b>. The mixture can be 90% products and still be at equilibrium.</li>
     </ul>
-    <div class="tip"><b>MEMORY HOOK:</b> equilibrium is a <b>turnstile</b> — the same number of people push through each side per second. The crowd looks frozen; the individual people are not.</div>
+    <div class="tip"><b>MEMORY HOOK:</b> equilibrium is a two-way flow — the same number of molecules convert each way per second. The mixture looks frozen; the individual molecules are not.</div>
   </div>
 
   <div class="fig">
@@ -273,9 +268,9 @@
 
 <!-- ══════════════════════ ACT 2 ══════════════════════ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · R2.3.2 · R2.3.3</div>
-  <h2>THE SCOREBOARD 📊</h2>
-  <p class="aim">The equilibrium law: one number, K, that captures the whole crowd ratio — and what its size tells you.</p>
+  <div class="acttag">R2.3.2 · R2.3.3</div>
+  <h2>The equilibrium constant</h2>
+  <p class="aim">One number, K, captures the equilibrium ratio — and its size tells you which side wins.</p>
 
   <div class="panel">
     <h3>THE EQUILIBRIUM LAW (R2.3.2)</h3>
@@ -308,7 +303,7 @@
       <tr><td>K &lt; 1</td><td>reactants favoured</td><td>reverse reaction spontaneous</td></tr>
       <tr><td>K &lt;&lt; 1</td><td>reactants strongly favoured — reaction barely happens</td><td>reverse reaction spontaneous</td></tr>
     </table>
-    <div class="tip"><b>MEMORY HOOK:</b> big K → big products. The scoreboard never lies — if K is 10⁵, the home team (products) won.</div>
+    <div class="tip"><b>MEMORY HOOK:</b> big K → big products. K never lies — if K is 10⁵, the products side won.</div>
   </div>
 
   <div class="fig">
@@ -338,7 +333,7 @@
       <text x="320" y="205" fill="#ff2ec4" font-size="12">← reverse favoured</text>
       <text x="330" y="205" fill="#22d3ee" font-size="12">forward favoured →</text>
     </svg>
-    <div class="cap"><b>Figure 2 — K magnitude = the scoreboard.</b> Left of centre: reactants dominate. Right: products dominate. K itself never changes with concentration or pressure — only with temperature.</div>
+    <div class="cap"><b>Figure 2 — K magnitude: where the balance lies.</b> Left of centre: reactants dominate. Right: products dominate. K itself never changes with concentration or pressure — only with temperature.</div>
   </div>
 
   <div class="panel">
@@ -361,9 +356,9 @@
 
 <!-- ══════════════════════ ACT 3 ══════════════════════ -->
 <section class="act" id="act3">
-  <div class="acttag">Act 3 · R2.3.4</div>
-  <h2>THE BOUNCER 🥋</h2>
-  <p class="aim">Le Chatelier's principle: when the club is disturbed, the bouncer adjusts the flow to counteract the disturbance.</p>
+  <div class="acttag">R2.3.4</div>
+  <h2>Le Chatelier's principle</h2>
+  <p class="aim">How a disturbed equilibrium shifts to counteract the change.</p>
 
   <div class="panel">
     <h3>LE CHATELIER'S PRINCIPLE (R2.3.4)</h3>
@@ -372,7 +367,7 @@
       <li>Shift <b>to the right</b> → forward reaction favoured → more products.</li>
       <li>Shift <b>to the left</b> → reverse reaction favoured → more reactants.</li>
     </ul>
-    <div class="tip"><b>MEMORY HOOK:</b> the bouncer restores order. Squeeze the club (add pressure) and he lets the crowd shrink (fewer gas molecules). Heat it up and he burns off the excess heat. Whatever you add, he pushes the reaction away from it.</div>
+    <div class="tip"><b>MEMORY HOOK:</b> the equilibrium shifts to oppose the change. Squeeze the system (add pressure) → it shifts to fewer gas molecules. Heat it → it absorbs the excess heat. Whatever you add, the equilibrium moves away from it.</div>
   </div>
 
   <div class="bouncer">
@@ -467,9 +462,9 @@
 
 <!-- ══════════════════════ ACT 4 ══════════════════════ -->
 <section class="act" id="act4">
-  <div class="acttag">Act 4 · R2.3.5 · AHL</div>
-  <h2>THE COMPASS 🧭</h2>
-  <p class="aim">Q — the same formula as K, but with the crowd RIGHT NOW instead of at equilibrium. It tells you which way the reaction is heading.</p>
+  <div class="acttag">R2.3.5 · AHL</div>
+  <h2>The reaction quotient</h2>
+  <p class="aim">Q — the same expression as K, but with current concentrations; it tells you the direction.</p>
 
   <div class="panel">
     <h3>THE REACTION QUOTIENT, Q (R2.3.5 AHL)</h3>
@@ -510,7 +505,7 @@
       <text x="405" y="235" fill="#ff2ec4" font-size="12" font-weight="700">Q = 4 (too many products) → run reverse</text>
       <text x="320" y="265" fill="#b9a3d6" font-size="12" text-anchor="middle">whichever direction brings Q back to K is the spontaneous direction</text>
     </svg>
-    <div class="cap"><b>Figure 4 — The Q vs K compass.</b> K is the fixed target (constant at constant T); Q slides around it as the reaction proceeds, always heading back toward K.</div>
+    <div class="cap"><b>Figure 4 — The Q vs K comparison.</b> K is the fixed target (constant at constant T); Q slides around it as the reaction proceeds, always heading back toward K.</div>
   </div>
 
   <div class="exam">
@@ -528,9 +523,9 @@
 
 <!-- ══════════════════════ ACT 5 ══════════════════════ -->
 <section class="act" id="act5">
-  <div class="acttag">Act 5 · R2.3.6 · R2.3.7 · AHL</div>
-  <h2>THE LEDGER 🧮</h2>
-  <p class="aim">Counting heads: ICE tables for equilibrium composition, and the bridge between K and Gibbs energy.</p>
+  <div class="acttag">R2.3.6 · R2.3.7 · AHL</div>
+  <h2>ICE tables & Gibbs energy</h2>
+  <p class="aim">ICE tables for equilibrium composition, and the link between K and Gibbs energy.</p>
 
   <div class="panel">
     <h3>QUANTIFYING COMPOSITION WITH K (R2.3.6 AHL)</h3>
@@ -547,7 +542,7 @@
       <tr><td>change</td><td>−0.18</td><td>−0.09</td><td>+0.18</td></tr>
       <tr><td>equilibrium</td><td>0.12</td><td>0.75</td><td>0.18</td></tr>
     </table>
-    <span class="muted">Check: 0.18²/(0.75 × 0.12²) = 3.0 ✓ — the ledger balances.</span>
+    <span class="muted">Check: 0.18²/(0.75 × 0.12²) = 3.0 ✓ — the calculation checks out.</span>
   </div>
 
   <div class="panel">
@@ -608,17 +603,17 @@
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
 <section class="act" id="map">
   <div class="acttag">Overview</div>
-  <h2>🗺 THE CROWD MAP</h2>
+  <h2>🗺 MIND MAP</h2>
   <div class="mind">
     <div class="node core">EQUILIBRIUM 🎚️<small>R2.3 — how far does a reaction go?</small></div>
     <div class="arrow">→</div>
     <div class="node">DYNAMIC 🚪<small>R2.3.1 · equal rates, closed system</small></div>
     <div class="arrow">→</div>
-    <div class="node">K = SCOREBOARD 📊<small>R2.3.2–3 · products/reactants, T-only</small></div>
+    <div class="node">K = EQUILIBRIUM CONSTANT 📊<small>R2.3.2–3 · products/reactants, T-only</small></div>
     <div class="arrow">→</div>
     <div class="node">LE CHATELIER 🥋<small>R2.3.4 · conc, pressure, temp</small></div>
     <div class="arrow">→</div>
-    <div class="node">Q COMPASS 🧭<small>R2.3.5 AHL · which way now?</small></div>
+    <div class="node">Q = REACTION QUOTIENT 🧭<small>R2.3.5 AHL · which way now?</small></div>
     <div class="arrow">→</div>
     <div class="node">ICE + ΔG° 🧮<small>R2.3.6–7 AHL · count heads, link to Gibbs</small></div>
   </div>
@@ -641,7 +636,7 @@
 <!-- ══════════════════════ TEST ══════════════════════ -->
 <section class="act" id="test">
   <div class="acttag">Self-test</div>
-  <h2>✍ THE CROWD QUIZ</h2>
+  <h2>✍ SELF-TEST</h2>
   <p class="aim">14 questions. Click an answer — instant feedback, no wrong-track penalties.</p>
 
   <div class="q" data-a="c">
@@ -650,7 +645,7 @@
     <label><input type="radio" name="q1" value="b"> Reactants and products are present in equal amounts.</label>
     <label><input type="radio" name="q1" value="c"> The rates of the forward and reverse reactions are equal.</label>
     <label><input type="radio" name="q1" value="d"> The concentrations of reactants and products are equal.</label>
-    <div class="fb correct">✅ Equal RATES, not equal amounts. The turnstile spins both ways at the same speed.</div>
+    <div class="fb correct">✅ Equal RATES, not equal amounts. The reaction runs both ways at the same rate.</div>
     <div class="fb wrong">❌ Remember: equal forward and reverse RATES — concentrations are constant but rarely equal.</div>
   </div>
 
@@ -690,7 +685,7 @@
     <label><input type="radio" name="q5" value="b"> always less than K.</label>
     <label><input type="radio" name="q5" value="c"> always greater than K.</label>
     <label><input type="radio" name="q5" value="d"> equal to 1.</label>
-    <div class="fb correct">✅ Equilibrium is defined by Q = K. That's the whole compass.</div>
+    <div class="fb correct">✅ Equilibrium is defined by Q = K. That's the whole idea.</div>
     <div class="fb wrong">❌ At equilibrium Q = K exactly — that's what "at equilibrium" means.</div>
   </div>
 
@@ -789,7 +784,7 @@
 <section class="act" id="vault">
   <div class="acttag">Read this before the exam</div>
   <h2>THE REVISION VAULT 🗄️</h2>
-  <p class="aim">The crowd's complete rulebook in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
+  <p class="aim">Everything in one place — every term, every formula, every number, and exactly how the examiner wants them worded.</p>
 
   <div class="panel">
     <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>
@@ -859,7 +854,7 @@
 <!-- ══════════════════════ CHECKLIST ══════════════════════ -->
 <section class="act" id="check">
   <div class="acttag">Exam readiness</div>
-  <h2>✅ THE BOUNCER'S CHECKLIST</h2>
+  <h2>✅ EXAM-READY CHECKLIST</h2>
   <p class="aim">18 items. Tick what you own — progress saves to this device.</p>
   <div class="progress"><div class="fill" id="fill"></div></div>
   <div class="progtext" id="progText">0 / 18 mastered</div>
