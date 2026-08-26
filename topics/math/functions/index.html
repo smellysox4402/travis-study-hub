@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Functions — AI SL Topic 2</title>
+<title>Functions (Topic 2)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,108 +16,126 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; font-size:16px; line-height:1.7;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
-  .wrap{max-width:960px; margin:0 auto; padding:0 18px 90px;}
-
-  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.94); backdrop-filter:blur(8px);
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:.03em;
-        padding:6px 11px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
         font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
-
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
   .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
-  .badge.gold{border-color:var(--gold); color:var(--gold);}
-
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:15px; margin-bottom:18px; max-width:760px;}
-
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:9px 0; color:var(--ink); font-size:16px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
   .muted{color:var(--dim); font-size:14px;}
-
-  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; line-height:1.6;}
-  th{background:var(--panel2); color:var(--cyan); font-weight:800; text-align:left; padding:12px 16px;
-     border-bottom:1px solid var(--line2); letter-spacing:.04em; font-size:13px; text-transform:uppercase;}
-  td{padding:14px 16px; border-bottom:1px solid rgba(168,85,247,.15); vertical-align:top;}
-  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
-  td .f{color:#fff; font-weight:700;}
-
   ul.clean{list-style:none;}
-  ul.clean li{padding:8px 0 8px 26px; position:relative; font-size:15.5px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
-
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .tip b{color:var(--gold);}
   .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .nos b{color:var(--cyan);}
-  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:16px 18px; margin:16px 0;}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .exam b{color:var(--green);}
-  .exam .qa{font-weight:700; color:#fff; font-size:15.5px; margin-bottom:6px;}
-  .exam .ans{color:var(--ink);}
-  .exam .trap{color:var(--dim); font-size:14px; margin-top:8px;}
-
-  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:14px 0;}
-  .q p{font-weight:700; font-size:15.5px; margin-bottom:12px;}
-  .q label{display:block; padding:8px 14px; margin:5px 0; border-radius:10px; cursor:pointer; font-size:15px;
+  kbd{display:inline-block; background:#1d0f33; border:1px solid var(--line2); border-bottom:2px solid var(--line2);
+      border-radius:6px; padding:1px 7px; font-family:'Segoe UI',system-ui,sans-serif; font-size:12.5px; font-weight:700;
+      color:var(--cyan); margin:0 2px; box-shadow:0 1px 0 rgba(168,85,247,.3);}
+  .gdc{border:1px solid rgba(34,211,238,.35); background:rgba(34,211,238,.06); border-radius:16px; padding:18px 20px; margin:16px 0;}
+  .gdc h4{color:var(--cyan); font-size:15px; font-weight:800; margin-bottom:10px;}
+  .gdc ol{margin:4px 0 4px 22px;}
+  .gdc li{margin:7px 0; font-size:15px; line-height:1.7;}
+  .gdc .note{color:var(--dim); font-size:13.5px; margin-top:8px;}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
-  .q input{accent-color:var(--pink); margin-right:9px;}
-  .q .fb{display:none; margin-top:12px; font-size:14.5px; padding:11px 14px; border-radius:10px; line-height:1.55;}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
   .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
   .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
   .q.correct .fb.correct{display:block;}
   .q.wrong .fb.wrong{display:block;}
-
   .cl{list-style:none;}
-  .cl li{display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px; line-height:1.55;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
-  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:2px;
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
            display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
   .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
-  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 58px; font-size:13px; padding-top:2px;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
   .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
   .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
   .progtext{font-size:13px; color:var(--dim); text-align:right;}
-
   .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
     padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
     color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
     box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
     backdrop-filter:blur(4px); transition:all .2s;}
   .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
-
-  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:13px; text-align:center; line-height:1.8;}
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
   footer a{color:var(--cyan); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
-
   @media print{
     nav{display:none;}
     body{background:#fff; color:#111;}
-    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
     h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
     .act h2{-webkit-text-fill-color:#111;}
     .q .fb{display:block;}
@@ -129,11 +147,15 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#defs">📖 DEFINITIONS</a>
-  <a href="#formulas">🧮 FORMULAS</a>
-  <a href="#facts">🔢 KEY FACTS</a>
-  <a href="#worked">🎯 WORKED</a>
-  <a href="#quiz">✏️ QUIZ</a>
+  <a href="#act1">Straight lines</a>
+  <a href="#act2">Functions &amp; inverses</a>
+  <a href="#act3">Graphs &amp; key features</a>
+  <a href="#act4">Models &amp; modelling</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#gdc">📟 GDC GUIDE</a>
+  <a href="#vault">🗄 VAULT</a>
   <a href="#check">✅ CHECKLIST</a>
   <span class="pill" id="progPill">0/6</span>
 </nav>
@@ -141,232 +163,406 @@
 <div class="wrap">
 
 <header class="hero">
-  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL</div>
-  <h1>FUNCTIONS</h1>
-  <div class="sub">Straight lines, quadratics, exponentials, sinusoids and their inverses — how to read a graph, write its equation, and fit a model to real data.</div>
+  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL · Topic 2</div>
+  <h1>Functions</h1>
+  <div class="sub">Straight lines, quadratics, exponentials, sinusoids and their inverses — how to read a graph, write its equation, and fit a model to real data, with the GDC shortcuts for each.</div>
   <div class="badges">
     <span class="badge hl">TOPIC 2 · 2.1 – 2.6</span>
     <span class="badge ahl">GDC HEAVY · AI SL</span>
-    <span class="badge gold">ASSESSMENT · THU 27 AUG</span>
+    <span class="badge">6 SYLLABUS POINTS</span>
   </div>
 </header>
 
-<!-- ══════════════ DEFINITIONS ══════════════ -->
-<section class="act" id="defs">
-  <div class="acttag">📖 Definitions bank</div>
-  <h2>THE WORDS THAT SCORE</h2>
-  <p class="aim">Exact definitions, one line each.</p>
-  <table>
-    <tr><th>Term</th><th>Definition</th></tr>
-    <tr><td><span class="f">Function</span></td><td>A rule that maps every input x to <span class="cyan">exactly one</span> output y. f(x), v(t), C(n) are all functions.</td></tr>
-    <tr><td><span class="f">Domain</span></td><td>The set of all possible <span class="accent">input</span> (x) values a function accepts.</td></tr>
-    <tr><td><span class="f">Range</span></td><td>The set of all possible <span class="accent">output</span> (y) values the function produces.</td></tr>
-    <tr><td><span class="f">Inverse function f⁻¹</span></td><td>Reverses a function: if f takes x → y, then f⁻¹ takes y back to x. Its graph is a <span class="cyan">reflection in the line y = x</span>.</td></tr>
-    <tr><td><span class="f">Gradient (slope)</span></td><td>Rate of change of y with respect to x — how steep a line is. m in y = mx + c.</td></tr>
-    <tr><td><span class="f">Intercept</span></td><td>Where a graph crosses an axis. x-intercept = where y = 0; y-intercept = where x = 0.</td></tr>
-    <tr><td><span class="f">Asymptote</span></td><td>A line the curve approaches but <span class="gold">never reaches</span>. Exponential curves have a horizontal one; inverse-variation curves have a vertical one.</td></tr>
-    <tr><td><span class="f">Vertex</span></td><td>The turning point of a parabola — its maximum or minimum.</td></tr>
-    <tr><td><span class="f">Axis of symmetry</span></td><td>The vertical line through a parabola's vertex that splits it into two mirror-image halves.</td></tr>
-    <tr><td><span class="f">Root / zero</span></td><td>An x-value where f(x) = 0 — where the graph cuts the x-axis.</td></tr>
-    <tr><td><span class="f">Periodic function</span></td><td>Repeats the same shape at regular intervals — sine and cosine repeat every period.</td></tr>
-  </table>
-</section>
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">2.1</div>
+  <h2>Straight lines</h2>
+  <p class="aim">The gradient-intercept form and the two line relationships that show up every year.</p>
 
-<!-- ══════════════ FORMULAS ══════════════ -->
-<section class="act" id="formulas">
-  <div class="acttag">🧮 Formula sheet</div>
-  <h2>THE FORMULAS YOU MUST KNOW</h2>
-  <p class="aim">The equation of every model you'll be asked to fit, and its key feature.</p>
-  <table>
-    <tr><th>Model / formula</th><th>What it does</th><th>Key feature</th></tr>
-    <tr><td><span class="f">y = mx + c</span></td><td>Straight line</td><td>m = gradient, c = y-intercept</td></tr>
-    <tr><td><span class="f">m = (y₂ − y₁)/(x₂ − x₁)</span></td><td>Gradient through two points</td><td>rise over run</td></tr>
-    <tr><td><span class="f">m₁ = m₂</span> · <span class="f">m₁m₂ = −1</span></td><td>Parallel / perpendicular lines</td><td>perp gradient = negative reciprocal</td></tr>
-    <tr><td><span class="f">f(x) = ax² + bx + c</span></td><td>Quadratic (parabola)</td><td>axis of symmetry x = −b/(2a)</td></tr>
-    <tr><td><span class="f">x = (−b ± √(b² − 4ac))/2a</span></td><td>Quadratic roots</td><td>b² − 4ac &gt; 0 → two roots; = 0 → one; &lt; 0 → none</td></tr>
-    <tr><td><span class="f">f(x) = kaˣ + c</span></td><td>Exponential growth/decay</td><td>horizontal asymptote y = c</td></tr>
-    <tr><td><span class="f">f(x) = ke<sup>rx</sup> + c</span></td><td>Continuous growth/decay</td><td>r &gt; 0 grows, r &lt; 0 decays</td></tr>
-    <tr><td><span class="f">f(x) = axⁿ</span></td><td>Direct / inverse variation</td><td>n &lt; 0 → vertical asymptote at x = 0</td></tr>
-    <tr><td><span class="f">f(x) = ax³ + bx² + cx + d</span></td><td>Cubic</td><td>up to 3 roots, 2 turning points</td></tr>
-    <tr><td><span class="f">f(x) = a sin(bx) + d</span></td><td>Sinusoidal</td><td>amplitude |a|, period 2π/b, midline y = d</td></tr>
-  </table>
-
-  <div class="tip"><b>EXAM TRAP</b> — "Axis of symmetry" and "vertex": the axis is the line x = −b/(2a). The vertex is the <em>point</em> (−b/2a, f(−b/2a)). State both coordinates for the vertex — that's where the mark is.</div>
-</section>
-
-<!-- ══════════════ KEY FACTS ══════════════ -->
-<section class="act" id="facts">
-  <div class="acttag">🔢 Key facts</div>
-  <h2>NUMBERS TO HAVE LOADED</h2>
   <div class="panel">
+    <h3>y = mx + c</h3>
+    <p class="big">m = gradient (slope), c = y-intercept. Gradient through two points: <span class="accent">m = (y₂ − y₁)/(x₂ − x₁)</span>.</p>
     <ul class="clean">
-      <li><span class="accent">Quadratic discriminant</span> b² − 4ac: positive = two x-intercepts, zero = one (touches), negative = none (never crosses).</li>
-      <li><span class="cyan">a &gt; 0</span> → parabola opens up (minimum vertex); <span class="cyan">a &lt; 0</span> → opens down (maximum).</li>
-      <li><span class="gold">Exponential asymptote</span>: for kaˣ + c the curve levels off at y = c (as x → −∞ when a &gt; 1). Write "y = c", not just "c".</li>
-      <li><span class="accent">Sinusoid</span> a sin(bx) + d: amplitude = |a|, period = 2π/b (radians) or 360°/b (degrees), midline y = d, so range is [d − |a|, d + |a|].</li>
-      <li><span class="cyan">Direct variation</span> f(x) = axⁿ with n &gt; 0 passes through the origin; <span class="gold">inverse variation</span> (n &lt; 0) shoots up next to the y-axis.</li>
-      <li>GDC graphs sums/differences of functions and finds <span class="green">intersections</span> of two curves (2.4) — always sketch what's on screen before you transfer it to paper.</li>
+      <li><b>Parallel lines:</b> m₁ = m₂ (same gradient, different intercept).</li>
+      <li><b>Perpendicular lines:</b> m₁ × m₂ = −1, so the perpendicular gradient is <span class="accent">−1/m</span> (flip and change the sign).</li>
+      <li>Equation through a point: y − y₁ = m(x − x₁).</li>
     </ul>
   </div>
-</section>
 
-<!-- ══════════════ WORKED EXAMPLES ══════════════ -->
-<section class="act" id="worked">
-  <div class="acttag">🎯 Worked examples</div>
-  <h2>SIX QUESTIONS, STEP BY STEP</h2>
-  <p class="aim">Model answers with the trap that catches people on each one.</p>
-
-  <div class="exam">
-    <div class="qa">1. Find the equation of the line through (1, 2) and (3, 8).</div>
-    <div class="ans">m = (8 − 2)/(3 − 1) = 3. Using y − y₁ = m(x − x₁): <span class="green">y − 2 = 3(x − 1) → y = 3x − 1.</span></div>
-    <div class="trap">Trap: "rise over run" is (y₂ − y₁)/(x₂ − x₁). Swapping the pairs gives the right number here, but not when signs differ — always second point minus first, consistently.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">2. A line has gradient 3. Find the gradient of a line perpendicular to it.</div>
-    <div class="ans">Perpendicular gradient is the negative reciprocal: <span class="green">m = −1/3.</span></div>
-    <div class="trap">Trap: m₁m₂ = −1, so the perpendicular gradient is −1/m. Don't just flip the sign — flip the fraction too.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">3. For f(x) = x² − 4x + 5, find the axis of symmetry and the vertex.</div>
-    <div class="ans">Axis: x = −b/(2a) = 4/2 = 2. Vertex y = f(2) = 4 − 8 + 5 = 1. <span class="green">Axis x = 2, vertex (2, 1)</span> — a minimum since a &gt; 0.</div>
-    <div class="trap">Trap: the axis is x = 2 (a line), the vertex is (2, 1) (a point). Missing the y-coordinate of the vertex loses the mark.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">4. State the horizontal asymptote of f(x) = 3(2ˣ) + 1.</div>
-    <div class="ans">As x → −∞, 2ˣ → 0, so f(x) → 1. <span class="green">Horizontal asymptote: y = 1.</span></div>
-    <div class="trap">Trap: it's the "+ c" that sets the asymptote. The 3 only stretches the curve, it never moves the asymptote off y = 1.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">5. Find the inverse of f(x) = 2x + 3.</div>
-    <div class="ans">Swap x and y: x = 2y + 3 → 2y = x − 3 → <span class="green">f⁻¹(x) = (x − 3)/2.</span></div>
-    <div class="trap">Trap: check with f(2) = 7, then f⁻¹(7) = 2. If the inverse doesn't undo the original, you've made an algebra slip.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">6. For f(x) = 5 sin(2x) + 3, state the amplitude, period and midline.</div>
-    <div class="ans"><span class="green">Amplitude = 5, period = 2π/2 = π, midline y = 3</span> (so the range is −2 to 8).</div>
-    <div class="trap">Trap: the "+ d" shifts the whole curve but does not change the amplitude. Amplitude is |a| = 5, not 8.</div>
+  <div class="panel">
+    <h3>WORKED</h3>
+    <p>Find the equation of the line through (1, 2) and (3, 8).</p>
+    <p>m = (8 − 2)/(3 − 1) = 3. Then y − 2 = 3(x − 1) → <b>y = 3x − 1</b>.</p>
+    <p class="muted">A line with gradient 3 is perpendicular to one with gradient −1/3.</p>
   </div>
 </section>
 
-<!-- ══════════════ QUIZ ══════════════ -->
-<section class="act" id="quiz">
-  <div class="acttag">✏️ Self-test</div>
-  <h2>QUICK QUIZ — 6 QUESTIONS</h2>
-  <p class="aim">No notes. Pick an answer and get told right away.</p>
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">2.2</div>
+  <h2>Functions &amp; inverses</h2>
+  <p class="aim">Domain, range, and the inverse as a reflection in y = x.</p>
 
-  <div class="q" data-a="1">
-    <p>Q1. The gradient of the line through (2, 3) and (6, 11) is:</p>
-    <label><input type="radio" name="q1" value="1"> 2</label>
-    <label><input type="radio" name="q1" value="2"> 4</label>
-    <label><input type="radio" name="q1" value="3"> 8</label>
+  <div class="panel">
+    <h3>FUNCTION, DOMAIN, RANGE</h3>
+    <p>A function maps every input x to <span class="cyan">exactly one</span> output y.</p>
+    <ul class="clean">
+      <li><b>Domain</b> = all possible x (input) values.</li>
+      <li><b>Range</b> = all possible y (output) values.</li>
+      <li>Notation: f(x), v(t), C(n) — the letter just names the function.</li>
+    </ul>
+  </div>
+
+  <div class="bouncer">
+    <div class="emoji">🔁</div>
+    <div class="body">
+      <h3>The inverse function f⁻¹</h3>
+      <p class="aka">reverses what f does — its graph is a reflection in y = x</p>
+      <ol class="steps">
+        <li>Write the function as y = …</li>
+        <li>Swap x and y.</li>
+        <li>Solve for y — that's f⁻¹(x).</li>
+      </ol>
+      <p class="muted">Check: f(2) = 7 for f(x) = 2x + 3, so f⁻¹(7) must equal 2. If it doesn't, you slipped.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED — inverse</h3>
+    <p>Find f⁻¹(x) for f(x) = 2x + 3.</p>
+    <p>x = 2y + 3 → 2y = x − 3 → <b>f⁻¹(x) = (x − 3)/2</b>.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">2.3 · 2.4</div>
+  <h2>Graphs &amp; key features</h2>
+  <p class="aim">The features an examiner asks for, and the G-Solve keys that find them for you.</p>
+
+  <div class="panel">
+    <h3>KEY FEATURES OF A GRAPH</h3>
+    <ul class="clean">
+      <li><b>x-intercept</b> = where y = 0 (the roots / zeros).</li>
+      <li><b>y-intercept</b> = where x = 0.</li>
+      <li><b>Maximum / minimum</b> (vertex of a parabola) = the turning point.</li>
+      <li><b>Asymptotes</b> = lines the curve approaches but never reaches.</li>
+      <li><b>Point of intersection</b> of two curves = where f(x) = g(x).</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED — intersection of two curves</h3>
+    <p>Find where y = x² − 4x + 5 meets y = 2x − 3.</p>
+    <div class="gdc">
+      <h4>📟 GDC — fx-CG50 (G-Solve)</h4>
+      <ol>
+        <li><kbd>MENU</kbd> → <kbd>5</kbd> (GRAPH)</li>
+        <li>Type Y1 = x² − 4x + 5, Y2 = 2x − 3 → <kbd>F6</kbd> (DRAW)</li>
+        <li><kbd>F5</kbd> (G-SOLVE) → <kbd>F5</kbd> (ISCT) → reads off the intersection point(s)</li>
+      </ol>
+      <p class="note">G-Solve is your whole toolbox for "key features": <kbd>F1</kbd> ROOT (x-intercepts), <kbd>F2</kbd> MAX, <kbd>F3</kbd> MIN, <kbd>F5</kbd> ISCT (intersection).</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED — vertex of a parabola</h3>
+    <p>Find the vertex of f(x) = x² − 4x + 5.</p>
+    <p>By hand: axis x = −b/2a = 2, vertex (2, 1). On the GDC: graph it → <kbd>F5</kbd> G-SOLVE → <kbd>F3</kbd> (MIN) → (2, 1).</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 4 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">2.5 · 2.6</div>
+  <h2>Models &amp; modelling</h2>
+  <p class="aim">The six model shapes you fit to data, and how the GDC does the fitting.</p>
+
+  <div class="grid3">
+    <div class="card"><div class="tag p">LINEAR</div><h4>f(x) = mx + c</h4><p>Straight line, constant rate of change.</p></div>
+    <div class="card"><div class="tag v">QUADRATIC</div><h4>f(x) = ax² + bx + c</h4><p>Parabola. Axis of symmetry x = −b/2a, vertex, roots via the quadratic formula.</p></div>
+    <div class="card"><div class="tag g">EXPONENTIAL</div><h4>f(x) = kaˣ + c</h4><p>Growth/decay. Horizontal asymptote y = c.</p></div>
+    <div class="card"><div class="tag gr">CUBIC</div><h4>f(x) = ax³ + bx² + cx + d</h4><p>Up to 3 roots, 2 turning points.</p></div>
+    <div class="card"><div class="tag p">POWER</div><h4>f(x) = axⁿ</h4><p>Direct (n &gt; 0) / inverse (n &lt; 0 → vertical asymptote at x = 0).</p></div>
+    <div class="card"><div class="tag g">SINUSOIDAL</div><h4>f(x) = a sin(bx) + d</h4><p>Amplitude |a|, period 2π/b, midline y = d.</p></div>
+  </div>
+
+  <div class="panel">
+    <h3>FITTING A MODEL TO DATA (2.6)</h3>
+    <p>The modelling loop: <span class="cyan">choose a model</span> (from the shape of the data) → <span class="cyan">fit the parameters</span> (GDC regression) → <span class="cyan">test it</span> (does it make sense?) → <span class="cyan">use it</span> (predict).</p>
+    <div class="gdc">
+      <h4>📟 GDC — fit a regression line (linear model)</h4>
+      <ol>
+        <li><kbd>MENU</kbd> → <kbd>2</kbd> (STAT)</li>
+        <li>Enter x-values in <b>List 1</b>, y-values in <b>List 2</b></li>
+        <li><kbd>F2</kbd> (CALC) → <kbd>F3</kbd> (REG) → <kbd>F1</kbd> (X, linear)</li>
+        <li>Reads off <b>a</b>, <b>b</b> and the correlation <b>r</b></li>
+      </ol>
+      <p class="note">⚠️ Casio writes the line as y = a + bx (a = intercept, b = gradient). If the question uses y = ax + b, the letters swap — read the <em>numbers</em>, not the letters.</p>
+    </div>
+    <div class="gdc">
+      <h4>📟 GDC — other models</h4>
+      <ol>
+        <li>Quadratic: STAT → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F3</kbd> (X²)</li>
+        <li>Exponential: <kbd>F3</kbd> REG → <kbd>F6</kbd> (▸) → <kbd>F2</kbd> (Exp)</li>
+        <li>Sinusoidal: <kbd>F3</kbd> REG → <kbd>F6</kbd> (▸) → <kbd>F4</kbd> (Sin)</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">One picture</div>
+  <h2>MIND MAP 🗺</h2>
+  <div class="mind">
+    <div class="node core">FUNCTIONS<br><small>Topic 2</small></div>
+    <div class="arrow">→</div>
+    <div class="node">LINES<br><small>y = mx + c · parallel / perp</small></div>
+    <div class="arrow">→</div>
+    <div class="node">DOMAIN &amp; RANGE<br><small>inputs · outputs</small></div>
+    <div class="arrow">→</div>
+    <div class="node">INVERSE<br><small>reflect in y = x</small></div>
+    <div class="arrow">→</div>
+    <div class="node">KEY FEATURES<br><small>intercepts · max/min · asymptotes</small></div>
+    <div class="arrow">→</div>
+    <div class="node">MODELS<br><small>linear · quadratic · exp · cubic · sin</small></div>
+    <div class="arrow">→</div>
+    <div class="node">GDC<br><small>G-Solve · regression</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
+  <div class="marquee">
+    <div class="line">gradient m = (y₂ − y₁)/(x₂ − x₁) · line: <span>y = mx + c</span></div>
+    <div class="line">parallel: m₁ = m₂ · perpendicular: <span>m₁m₂ = −1 → gradient −1/m</span></div>
+    <div class="line">inverse: swap x and y, solve · <span>reflection in y = x</span></div>
+    <div class="line">quadratic: axis x = −b/2a · roots x = (−b ± √(b²−4ac))/2a · <span>discriminant &gt; 0 = two roots</span></div>
+    <div class="line">exponential kaˣ + c: <span>horizontal asymptote y = c</span></div>
+    <div class="line">power axⁿ: <span>n &lt; 0 → vertical asymptote at x = 0</span></div>
+    <div class="line">sinusoid a sin(bx) + d: <span>amplitude |a| · period 2π/b · midline y = d</span></div>
+    <div class="line">G-Solve: <span>F1 ROOT · F2 MAX · F3 MIN · F5 ISCT</span></div>
+    <div class="line">regression: Casio gives y = a + bx <span>(a = intercept, b = gradient — mind the swap)</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">No notes. Pick an answer, get instant feedback.</p>
+
+  <div class="q" data-a="2">
+    <p>1. The gradient of the line through (2, 3) and (6, 11) is:</p>
+    <label><input type="radio" name="q1" value="2"> 2</label>
+    <label><input type="radio" name="q1" value="4"> 4</label>
+    <label><input type="radio" name="q1" value="8"> 8</label>
     <div class="fb correct">✅ 2. (11 − 3)/(6 − 2) = 8/4 = 2.</div>
     <div class="fb wrong">❌ m = (11 − 3)/(6 − 2) = 8/4 = 2.</div>
   </div>
 
-  <div class="q" data-a="3">
-    <p>Q2. A line has gradient 4. A perpendicular line has gradient:</p>
-    <label><input type="radio" name="q2" value="1"> 4</label>
-    <label><input type="radio" name="q2" value="2"> 1/4</label>
-    <label><input type="radio" name="q2" value="3"> −1/4</label>
-    <div class="fb correct">✅ −1/4. Perpendicular gradient = negative reciprocal.</div>
+  <div class="q" data-a="neg1/4">
+    <p>2. A line has gradient 4. A perpendicular line has gradient:</p>
+    <label><input type="radio" name="q2" value="4"> 4</label>
+    <label><input type="radio" name="q2" value="1/4"> 1/4</label>
+    <label><input type="radio" name="q2" value="neg1/4"> −1/4</label>
+    <div class="fb correct">✅ −1/4. Perpendicular = negative reciprocal.</div>
     <div class="fb wrong">❌ m₁m₂ = −1, so m₂ = −1/4.</div>
   </div>
 
-  <div class="q" data-a="1">
-    <p>Q3. The axis of symmetry of y = x² − 6x + 8 is:</p>
-    <label><input type="radio" name="q3" value="1"> x = 3</label>
-    <label><input type="radio" name="q3" value="2"> x = −3</label>
-    <label><input type="radio" name="q3" value="3"> x = 6</label>
+  <div class="q" data-a="x=3">
+    <p>3. The axis of symmetry of y = x² − 6x + 8 is:</p>
+    <label><input type="radio" name="q3" value="x=3"> x = 3</label>
+    <label><input type="radio" name="q3" value="x=-3"> x = −3</label>
+    <label><input type="radio" name="q3" value="x=6"> x = 6</label>
     <div class="fb correct">✅ x = 3. x = −b/(2a) = 6/2 = 3.</div>
     <div class="fb wrong">❌ x = −b/(2a) = −(−6)/(2×1) = 3.</div>
   </div>
 
-  <div class="q" data-a="2">
-    <p>Q4. The horizontal asymptote of f(x) = 2(3ˣ) + 5 is:</p>
-    <label><input type="radio" name="q4" value="1"> y = 2</label>
-    <label><input type="radio" name="q4" value="2"> y = 5</label>
-    <label><input type="radio" name="q4" value="3"> y = 0</label>
+  <div class="q" data-a="y=5">
+    <p>4. The horizontal asymptote of f(x) = 2(3ˣ) + 5 is:</p>
+    <label><input type="radio" name="q4" value="y=2"> y = 2</label>
+    <label><input type="radio" name="q4" value="y=5"> y = 5</label>
+    <label><input type="radio" name="q4" value="y=0"> y = 0</label>
     <div class="fb correct">✅ y = 5. As x → −∞, 3ˣ → 0, so f(x) → 5.</div>
     <div class="fb wrong">❌ The "+ 5" sets the asymptote at y = 5.</div>
   </div>
 
-  <div class="q" data-a="2">
-    <p>Q5. The inverse of f(x) = 4x − 7 is:</p>
-    <label><input type="radio" name="q5" value="1"> (x − 7)/4</label>
-    <label><input type="radio" name="q5" value="2"> (x + 7)/4</label>
-    <label><input type="radio" name="q5" value="3"> 4x + 7</label>
-    <div class="fb correct">✅ (x + 7)/4. Swap x and y: x = 4y − 7 → y = (x + 7)/4.</div>
-    <div class="fb wrong">❌ x = 4y − 7, so 4y = x + 7, giving f⁻¹(x) = (x + 7)/4.</div>
+  <div class="q" data-a="(x+7)/4">
+    <p>5. The inverse of f(x) = 4x − 7 is:</p>
+    <label><input type="radio" name="q5" value="(x-7)/4"> (x − 7)/4</label>
+    <label><input type="radio" name="q5" value="(x+7)/4"> (x + 7)/4</label>
+    <label><input type="radio" name="q5" value="4x+7"> 4x + 7</label>
+    <div class="fb correct">✅ (x + 7)/4. Swap: x = 4y − 7 → y = (x + 7)/4.</div>
+    <div class="fb wrong">❌ x = 4y − 7, so 4y = x + 7 → f⁻¹(x) = (x + 7)/4.</div>
   </div>
 
   <div class="q" data-a="3">
-    <p>Q6. The amplitude of f(x) = 3 cos(2x) + 1 is:</p>
+    <p>6. The amplitude of f(x) = 3 cos(2x) + 1 is:</p>
     <label><input type="radio" name="q6" value="1"> 1</label>
     <label><input type="radio" name="q6" value="2"> 2</label>
     <label><input type="radio" name="q6" value="3"> 3</label>
-    <div class="fb correct">✅ 3. Amplitude = |a| = 3. The +1 only shifts the midline.</div>
-    <div class="fb wrong">❌ Amplitude is the multiplier |a| = 3, not the vertical shift.</div>
+    <div class="fb correct">✅ 3. Amplitude = |a| = 3; the +1 only shifts the midline.</div>
+    <div class="fb wrong">❌ Amplitude is |a| = 3, not the vertical shift.</div>
   </div>
 </section>
 
-<!-- ══════════════ CHECKLIST ══════════════ -->
+<!-- ══════════════════════ GDC GUIDE ══════════════════════ -->
+<section class="act" id="gdc">
+  <div class="acttag">Casio fx-CG50</div>
+  <h2>BUTTON GUIDE 📟</h2>
+  <p class="aim">The exact key presses for every calculator question in Topic 2.</p>
+  <table>
+    <tr><th>What you want</th><th>Buttons to press (fx-CG50)</th></tr>
+    <tr><td>Graph a function</td><td><kbd>MENU</kbd> <kbd>5</kbd> (GRAPH) → type Y1 = … → <kbd>F6</kbd> (DRAW)</td></tr>
+    <tr><td>Find x-intercepts (roots)</td><td>GRAPH → <kbd>F5</kbd> (G-SOLVE) → <kbd>F1</kbd> (ROOT)</td></tr>
+    <tr><td>Find maximum</td><td>GRAPH → <kbd>F5</kbd> (G-SOLVE) → <kbd>F2</kbd> (MAX)</td></tr>
+    <tr><td>Find minimum (vertex)</td><td>GRAPH → <kbd>F5</kbd> (G-SOLVE) → <kbd>F3</kbd> (MIN)</td></tr>
+    <tr><td>Intersection of two curves</td><td>GRAPH (both Y1, Y2) → <kbd>F5</kbd> (G-SOLVE) → <kbd>F5</kbd> (ISCT)</td></tr>
+    <tr><td>Evaluate f(x) at a point</td><td>GRAPH → <kbd>TRACE</kbd> → type x → <kbd>EXE</kbd> (or use TABLE mode)</td></tr>
+    <tr><td>Linear regression (fit a line)</td><td><kbd>MENU</kbd> <kbd>2</kbd> (STAT) → List 1 = x, List 2 = y → <kbd>F2</kbd> (CALC) → <kbd>F3</kbd> (REG) → <kbd>F1</kbd> (X) → a, b, r</td></tr>
+    <tr><td>Quadratic regression</td><td>STAT → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F3</kbd> (X²)</td></tr>
+    <tr><td>Exponential regression</td><td>STAT → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F6</kbd> (▸) → <kbd>F2</kbd> (Exp)</td></tr>
+    <tr><td>Sinusoidal regression</td><td>STAT → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F6</kbd> (▸) → <kbd>F4</kbd> (Sin)</td></tr>
+  </table>
+  <div class="tip"><b>REGRESSION LETTER SWAP:</b> Casio prints y = a + bx (a = intercept, b = gradient). The IB formula sheet says y = ax + b (a = gradient, b = intercept). Match by the <em>numbers</em> — the gradient is the one multiplying x — never copy letters blindly.</div>
+</section>
+
+<!-- ══════════════════════ REVISION VAULT ══════════════════════ -->
+<section class="act" id="vault">
+  <div class="acttag">Read this before the exam</div>
+  <h2>THE REVISION VAULT 🗄️</h2>
+  <p class="aim">Every term, formula, number, and exactly how the examiner wants them worded.</p>
+
+  <div class="panel">
+    <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>
+    <table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td>Function</td><td>A rule mapping every input x to exactly one output y.</td></tr>
+      <tr><td>Domain</td><td>The set of all possible input (x) values.</td></tr>
+      <tr><td>Range</td><td>The set of all possible output (y) values.</td></tr>
+      <tr><td>Inverse function f⁻¹</td><td>Reverses f; its graph is a reflection in the line y = x.</td></tr>
+      <tr><td>Gradient</td><td>Rate of change of y with respect to x — the slope m.</td></tr>
+      <tr><td>Intercept</td><td>Where the graph crosses an axis (x-intercept: y = 0; y-intercept: x = 0).</td></tr>
+      <tr><td>Asymptote</td><td>A line the curve approaches but never reaches.</td></tr>
+      <tr><td>Vertex</td><td>The turning point of a parabola (its max or min).</td></tr>
+      <tr><td>Root / zero</td><td>An x-value where f(x) = 0.</td></tr>
+      <tr><td>Periodic function</td><td>Repeats the same shape at regular intervals (sine, cosine).</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🧮 FORMULA SHEET</h3>
+    <table>
+      <tr><th>Formula</th><th>What it does</th><th>Key feature</th></tr>
+      <tr><td>y = mx + c</td><td>straight line</td><td>m = gradient, c = y-intercept</td></tr>
+      <tr><td>m = (y₂ − y₁)/(x₂ − x₁)</td><td>gradient through two points</td><td>rise over run</td></tr>
+      <tr><td>m₁m₂ = −1</td><td>perpendicular lines</td><td>perp gradient = −1/m</td></tr>
+      <tr><td>x = −b/(2a)</td><td>axis of symmetry</td><td>vertex at (−b/2a, f(−b/2a))</td></tr>
+      <tr><td>x = (−b ± √(b² − 4ac))/2a</td><td>quadratic roots</td><td>discriminant: 2 roots / 1 / 0</td></tr>
+      <tr><td>f(x) = kaˣ + c</td><td>exponential model</td><td>horizontal asymptote y = c</td></tr>
+      <tr><td>f(x) = axⁿ</td><td>power model</td><td>n &lt; 0 → vertical asymptote x = 0</td></tr>
+      <tr><td>f(x) = a sin(bx) + d</td><td>sinusoidal model</td><td>amplitude |a|, period 2π/b, midline d</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🔢 DATA BANK — NUMBERS TO OWN</h3>
+    <ul class="clean">
+      <li>Quadratic discriminant b² − 4ac: <b>&gt; 0</b> two x-intercepts, <b>= 0</b> one (touches), <b>&lt; 0</b> none.</li>
+      <li><b>a &gt; 0</b> parabola opens up (min); <b>a &lt; 0</b> opens down (max).</li>
+      <li>Exponential kaˣ + c levels off at <b>y = c</b> (as x → −∞ when a &gt; 1).</li>
+      <li>Sinusoid a sin(bx) + d: range is <b>[d − |a|, d + |a|]</b>.</li>
+      <li>Direct variation (n &gt; 0) passes through the origin; inverse (n &lt; 0) shoots up by the y-axis.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>🎯 EXAM WALKTHROUGHS</h3>
+    <div class="exam">
+      <b>Q1 — CALCULATE [2 marks]</b> "Find the equation of the line through (1, 2) and (3, 8)."
+      <p><b>Model answer:</b> m = (8 − 2)/(3 − 1) = 3 (1) · y − 2 = 3(x − 1) → y = 3x − 1 (1).</p>
+    </div>
+    <div class="exam">
+      <b>Q2 — CALCULATE [2 marks]</b> "Find the vertex of f(x) = x² − 4x + 5."
+      <p><b>Model answer:</b> axis x = −b/2a = 2 (1) · vertex = (2, 1), a minimum since a &gt; 0 (1).</p>
+      <p class="muted">Trap: the axis is the line x = 2; the vertex is the point (2, 1). Missing the y-coordinate loses the mark.</p>
+    </div>
+    <div class="exam">
+      <b>Q3 — CALCULATE [2 marks]</b> "State the horizontal asymptote of f(x) = 3(2ˣ) + 1."
+      <p><b>Model answer:</b> as x → −∞, 2ˣ → 0 so f(x) → 1, giving <b>y = 1</b> (write "y = 1", not just "1").</p>
+    </div>
+    <div class="exam">
+      <b>Q4 — CALCULATE [2 marks]</b> "For f(x) = 5 sin(2x) + 3, state the amplitude and period."
+      <p><b>Model answer:</b> amplitude = 5 (1) · period = 2π/2 = π (1).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
 <section class="act" id="check">
-  <div class="acttag">✅ Syllabus checklist</div>
-  <h2>TICK IT OFF</h2>
-  <p class="aim">Every 2.x statement. Click to mark done — progress saves automatically.</p>
-  <div class="progress"><div class="fill" id="progFill"></div></div>
-  <div class="progtext" id="progText">0 of 6 done</div>
-  <ol class="cl" id="cl">
-    <li><span class="box">✓</span><span class="code">2.1</span> Straight-line equation forms, gradient, intercepts; parallel (m₁ = m₂) and perpendicular (m₁m₂ = −1).</li>
-    <li><span class="box">✓</span><span class="code">2.2</span> Function concept, domain, range, graph, notation f(x); inverse function as reflection in y = x.</li>
-    <li><span class="box">✓</span><span class="code">2.3</span> Graph of y = f(x): sketch from info/context, screen-to-paper transfer, GDC graphs (incl. sums &amp; differences).</li>
-    <li><span class="box">✓</span><span class="code">2.4</span> Key features of graphs; point of intersection of two curves using technology.</li>
-    <li><span class="box">✓</span><span class="code">2.5</span> Models: linear, quadratic (axis, vertex, roots, intercepts), exponential (asymptote), direct/inverse variation, cubic, sinusoidal.</li>
-    <li><span class="box">✓</span><span class="code">2.6</span> Modelling skills: choose &amp; justify a model, fit parameters, set domain, test, and use it for predictions.</li>
-  </ol>
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 6 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">2.1</span><span>Straight-line forms, gradient, intercepts; parallel (m₁ = m₂) and perpendicular (m₁m₂ = −1).</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">2.2</span><span>Function concept, domain, range, graph, notation f(x); inverse function as reflection in y = x.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">2.3</span><span>Graph of y = f(x): sketch from info/context, screen-to-paper, GDC graphs (incl. sums &amp; differences).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">2.4</span><span>Key features of graphs; point of intersection of two curves using technology.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">2.5</span><span>Models: linear, quadratic (axis, vertex, roots, intercepts), exponential (asymptote), direct/inverse variation, cubic, sinusoidal.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">2.6</span><span>Modelling skills: choose &amp; justify a model, fit parameters, set domain, test, and use for predictions.</span></li>
+  </ul>
 </section>
 
 <footer>
-  <p>built for the Thu 2026-08-27 Math AI SL assessment — Functions</p>
-  <p>sources: Y12 AI SL topics sheet (Aug 2026) · IB data booklet · GDC: TI-Nspire CX / fx-CG50</p>
-  <p>part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p>Built from the Y12 AI SL topics sheet (Aug 2026) · IB data booklet · Casio fx-CG50</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
 </footer>
+
 </div>
 
 <script>
-var KEY='math-fn-checklist-v1';
-var items=document.querySelectorAll('#cl li');
-var pill=document.getElementById('progPill');
-var fill=document.getElementById('progFill');
-var ptext=document.getElementById('progText');
-var saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
-function upd(){
-  var d=0; items.forEach(function(li){if(li.classList.contains('done'))d++;});
-  pill.textContent=d+'/'+items.length;
-  fill.style.width=(d/items.length*100)+'%';
-  ptext.textContent=d+' of '+items.length+' done';
-  var s={}; items.forEach(function(li,i){s[i]=li.classList.contains('done');});
-  try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
-}
-items.forEach(function(li,i){
-  if(saved[i])li.classList.add('done');
-  li.addEventListener('click',function(){li.classList.toggle('done');upd();});
-});
-upd();
-
-document.querySelectorAll('.q').forEach(function(q){
-  q.querySelectorAll('input[type=radio]').forEach(function(r){
-    r.addEventListener('change',function(){
-      q.classList.remove('correct','wrong');
-      if(r.value===q.getAttribute('data-a'))q.classList.add('correct'); else q.classList.add('wrong');
+  var KEY='math-fn-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
     });
   });
-});
+  update();
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
 </script>
 </body>
 </html>

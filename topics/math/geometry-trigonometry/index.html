@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Geometry &amp; Trigonometry — AI SL Topic 3</title>
+<title>Geometry &amp; Trigonometry (Topic 3)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,108 +16,126 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; font-size:16px; line-height:1.7;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
-  .wrap{max-width:960px; margin:0 auto; padding:0 18px 90px;}
-
-  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.94); backdrop-filter:blur(8px);
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:.03em;
-        padding:6px 11px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
         font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
-
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
   .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
-  .badge.gold{border-color:var(--gold); color:var(--gold);}
-
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:15px; margin-bottom:18px; max-width:760px;}
-
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:9px 0; color:var(--ink); font-size:16px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
   .muted{color:var(--dim); font-size:14px;}
-
-  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; line-height:1.6;}
-  th{background:var(--panel2); color:var(--cyan); font-weight:800; text-align:left; padding:12px 16px;
-     border-bottom:1px solid var(--line2); letter-spacing:.04em; font-size:13px; text-transform:uppercase;}
-  td{padding:14px 16px; border-bottom:1px solid rgba(168,85,247,.15); vertical-align:top;}
-  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
-  td .f{color:#fff; font-weight:700;}
-
   ul.clean{list-style:none;}
-  ul.clean li{padding:8px 0 8px 26px; position:relative; font-size:15.5px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
-
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .tip b{color:var(--gold);}
   .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .nos b{color:var(--cyan);}
-  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:16px 18px; margin:16px 0;}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .exam b{color:var(--green);}
-  .exam .qa{font-weight:700; color:#fff; font-size:15.5px; margin-bottom:6px;}
-  .exam .ans{color:var(--ink);}
-  .exam .trap{color:var(--dim); font-size:14px; margin-top:8px;}
-
-  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:14px 0;}
-  .q p{font-weight:700; font-size:15.5px; margin-bottom:12px;}
-  .q label{display:block; padding:8px 14px; margin:5px 0; border-radius:10px; cursor:pointer; font-size:15px;
+  kbd{display:inline-block; background:#1d0f33; border:1px solid var(--line2); border-bottom:2px solid var(--line2);
+      border-radius:6px; padding:1px 7px; font-family:'Segoe UI',system-ui,sans-serif; font-size:12.5px; font-weight:700;
+      color:var(--cyan); margin:0 2px; box-shadow:0 1px 0 rgba(168,85,247,.3);}
+  .gdc{border:1px solid rgba(34,211,238,.35); background:rgba(34,211,238,.06); border-radius:16px; padding:18px 20px; margin:16px 0;}
+  .gdc h4{color:var(--cyan); font-size:15px; font-weight:800; margin-bottom:10px;}
+  .gdc ol{margin:4px 0 4px 22px;}
+  .gdc li{margin:7px 0; font-size:15px; line-height:1.7;}
+  .gdc .note{color:var(--dim); font-size:13.5px; margin-top:8px;}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
-  .q input{accent-color:var(--pink); margin-right:9px;}
-  .q .fb{display:none; margin-top:12px; font-size:14.5px; padding:11px 14px; border-radius:10px; line-height:1.55;}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
   .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
   .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
   .q.correct .fb.correct{display:block;}
   .q.wrong .fb.wrong{display:block;}
-
   .cl{list-style:none;}
-  .cl li{display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px; line-height:1.55;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
-  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:2px;
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
            display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
   .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
-  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 58px; font-size:13px; padding-top:2px;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
   .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
   .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
   .progtext{font-size:13px; color:var(--dim); text-align:right;}
-
   .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
     padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
     color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
     box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
     backdrop-filter:blur(4px); transition:all .2s;}
   .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
-
-  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:13px; text-align:center; line-height:1.8;}
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
   footer a{color:var(--cyan); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
-
   @media print{
     nav{display:none;}
     body{background:#fff; color:#111;}
-    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
     h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
     .act h2{-webkit-text-fill-color:#111;}
     .q .fb{display:block;}
@@ -129,11 +147,15 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#defs">📖 DEFINITIONS</a>
-  <a href="#formulas">🧮 FORMULAS</a>
-  <a href="#facts">🔢 KEY FACTS</a>
-  <a href="#worked">🎯 WORKED</a>
-  <a href="#quiz">✏️ QUIZ</a>
+  <a href="#act1">3D geometry</a>
+  <a href="#act2">Right-angle trig</a>
+  <a href="#act3">Sine &amp; cosine rule</a>
+  <a href="#act4">Circles &amp; Voronoi</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#gdc">📟 GDC GUIDE</a>
+  <a href="#vault">🗄 VAULT</a>
   <a href="#check">✅ CHECKLIST</a>
   <span class="pill" id="progPill">0/6</span>
 </nav>
@@ -141,230 +163,397 @@
 <div class="wrap">
 
 <header class="hero">
-  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL</div>
-  <h1>GEOMETRY &amp; TRIGONOMETRY</h1>
-  <div class="sub">3D distances, volumes, the sine and cosine rules, circles and Voronoi diagrams — the shape stuff, with every formula you'll reach for.</div>
+  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL · Topic 3</div>
+  <h1>Geometry &amp; Trigonometry</h1>
+  <div class="sub">3D distances, volumes, the sine and cosine rules, circles and Voronoi diagrams — the shape stuff, with every formula and the angle-mode trap that wrecks the circle questions.</div>
   <div class="badges">
     <span class="badge hl">TOPIC 3 · 3.1 – 3.6</span>
-    <span class="badge ahl">AI SL · DIAGRAM-FRIENDLY</span>
-    <span class="badge gold">ASSESSMENT · THU 27 AUG</span>
+    <span class="badge ahl">DIAGRAM-FRIENDLY · AI SL</span>
+    <span class="badge">6 SYLLABUS POINTS</span>
   </div>
 </header>
 
-<!-- ══════════════ DEFINITIONS ══════════════ -->
-<section class="act" id="defs">
-  <div class="acttag">📖 Definitions bank</div>
-  <h2>THE WORDS THAT SCORE</h2>
-  <p class="aim">Exact definitions, one line each.</p>
-  <table>
-    <tr><th>Term</th><th>Definition</th></tr>
-    <tr><td><span class="f">Sine / cosine / tangent</span></td><td>Ratios in a right-angled triangle: <span class="cyan">sin = O/H, cos = A/H, tan = O/A</span> (SOH CAH TOA).</td></tr>
-    <tr><td><span class="f">Sine rule</span></td><td>Relates sides to the sines of opposite angles: a/sin A = b/sin B = c/sin C. Use for non-right triangles when you have a side-opposite-angle pair.</td></tr>
-    <tr><td><span class="f">Cosine rule</span></td><td>a² = b² + c² − 2bc cos A. Use for non-right triangles with two sides and the included angle, or all three sides.</td></tr>
-    <tr><td><span class="f">Angle of elevation</span></td><td>The angle measured <span class="gold">up</span> from the horizontal to a point above.</td></tr>
-    <tr><td><span class="f">Angle of depression</span></td><td>The angle measured <span class="gold">down</span> from the horizontal to a point below.</td></tr>
-    <tr><td><span class="f">Arc</span></td><td>A section of the circumference of a circle, cut off by a central angle θ.</td></tr>
-    <tr><td><span class="f">Sector</span></td><td>The "pizza slice" of a circle bounded by two radii and an arc.</td></tr>
-    <tr><td><span class="f">Perpendicular bisector</span></td><td>A line that cuts a segment into two equal parts at a right angle. Every point on it is <span class="accent">equidistant from both endpoints</span>.</td></tr>
-    <tr><td><span class="f">Voronoi diagram</span></td><td>Splits a plane into cells so each point belongs to the <span class="cyan">nearest site</span>. Edges are perpendicular bisectors between sites.</td></tr>
-    <tr><td><span class="f">Nearest neighbour interpolation</span></td><td>Estimating an unknown value at a point by taking the value of the nearest known site (its Voronoi cell).</td></tr>
-  </table>
-</section>
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
+<section class="act" id="act1">
+  <div class="acttag">3.1</div>
+  <h2>3D geometry</h2>
+  <p class="aim">Distance and midpoint in 3D, and the volume / surface area of the solids that keep reappearing.</p>
 
-<!-- ══════════════ FORMULAS ══════════════ -->
-<section class="act" id="formulas">
-  <div class="acttag">🧮 Formula sheet</div>
-  <h2>THE FORMULAS YOU MUST KNOW</h2>
-  <p class="aim">θ is in radians for arc length and sector area — convert degrees with × π/180.</p>
-  <table>
-    <tr><th>Formula</th><th>What it does</th><th>Notes</th></tr>
-    <tr><td><span class="f">d = √((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²)</span></td><td>Distance between two points in 3D</td><td>midpoint = ((x₁+x₂)/2, (y₁+y₂)/2, (z₁+z₂)/2)</td></tr>
-    <tr><td><span class="f">V = (1/3)Ah</span></td><td>Volume of a pyramid / cone</td><td>cone: A = πr², so V = (1/3)πr²h</td></tr>
-    <tr><td><span class="f">V = (4/3)πr³</span></td><td>Volume of a sphere</td><td>hemisphere = (2/3)πr³</td></tr>
-    <tr><td><span class="f">SA = 4πr²</span></td><td>Surface area of a sphere</td><td>hemisphere = 2πr² (curved) + πr² (flat) = 3πr²</td></tr>
-    <tr><td><span class="f">SA = πr² + πrl</span></td><td>Cone surface area</td><td>l = slant height = √(r² + h²)</td></tr>
-    <tr><td><span class="f">a² = b² + c² − 2bc cos A</span></td><td>Cosine rule</td><td>rearranged: cos A = (b² + c² − a²)/(2bc)</td></tr>
-    <tr><td><span class="f">a/sin A = b/sin B = c/sin C</span></td><td>Sine rule</td><td>SSA can give two answers (ambiguous case)</td></tr>
-    <tr><td><span class="f">Area = (1/2)ab sin C</span></td><td>Area of a triangle</td><td>two sides × sine of the included angle</td></tr>
-    <tr><td><span class="f">l = rθ</span> · <span class="f">A = (1/2)r²θ</span></td><td>Arc length · sector area</td><td>θ in radians only</td></tr>
-  </table>
-
-  <div class="tip"><b>EXAM TRAP</b> — Radians vs degrees: your GDC must be in the right mode. If a question says θ = 45° and you plug "45" into the radian arc-length formula, you're wrong by a factor of 57. Convert: 45° = π/4 radians.</div>
-</section>
-
-<!-- ══════════════ KEY FACTS ══════════════ -->
-<section class="act" id="facts">
-  <div class="acttag">🔢 Key facts</div>
-  <h2>NUMBERS TO HAVE LOADED</h2>
   <div class="panel">
+    <h3>DISTANCE &amp; MIDPOINT IN 3D</h3>
+    <p class="big">d = √((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²)</p>
+    <p>Midpoint = ((x₁+x₂)/2, (y₁+y₂)/2, (z₁+z₂)/2) — just the average of each coordinate.</p>
+    <p class="muted">Trap: it's <b>three</b> differences. 3-4-12 → √(9+16+144) = 13 is a favourite.</p>
+  </div>
+
+  <div class="panel">
+    <h3>VOLUME &amp; SURFACE AREA</h3>
+    <table>
+      <tr><th>Solid</th><th>Volume</th><th>Surface area</th></tr>
+      <tr><td>Pyramid / cone</td><td>V = (1/3)Ah (cone: ⅓πr²h)</td><td>cone: πr² + πrl (l = slant height)</td></tr>
+      <tr><td>Sphere</td><td>V = (4/3)πr³</td><td>4πr²</td></tr>
+      <tr><td>Hemisphere</td><td>V = (2/3)πr³</td><td>2πr² (curved) + πr² (flat) = 3πr²</td></tr>
+    </table>
+    <p class="muted">"Combinations of solids" = add or subtract two of the above (a cone on top of a hemisphere, a cylinder with a hemisphere cap, …).</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
+<section class="act" id="act2">
+  <div class="acttag">3.2 · 3.3</div>
+  <h2>Right-angle trigonometry</h2>
+  <p class="aim">SOH CAH TOA and Pythagoras — the foundation everything else sits on.</p>
+
+  <div class="bouncer">
+    <div class="emoji">📐</div>
+    <div class="body">
+      <h3>SOH CAH TOA</h3>
+      <p class="aka">sin = opposite/hypotenuse · cos = adjacent/hypotenuse · tan = opposite/adjacent</p>
+      <ul class="clean">
+        <li><b>Pythagoras:</b> a² + b² = c² (c = hypotenuse, opposite the right angle).</li>
+        <li><b>Angle of elevation</b> = up from the horizontal; <b>depression</b> = down from the horizontal.</li>
+        <li><b>To find an angle</b> from a ratio, use the inverse: θ = sin⁻¹(O/H), etc.</li>
+      </ul>
+      <p class="muted">Exact values worth knowing: sin 30° = ½, cos 60° = ½, tan 45° = 1, sin 90° = 1.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED — elevation</h3>
+    <p>A ladder 5 m long leans against a wall, its foot 3 m from the wall. Find the angle the ladder makes with the ground.</p>
+    <p>cos θ = adjacent/hypotenuse = 3/5, so θ = cos⁻¹(0.6) = <b>53.1°</b>.</p>
+    <div class="gdc">
+      <h4>📟 GDC — fx-CG50 (inverse trig)</h4>
+      <ol>
+        <li>Make sure you're in degrees: <kbd>SHIFT</kbd> → <kbd>MENU</kbd> (SET UP) → Angle → <kbd>F1</kbd> (Deg)</li>
+        <li><kbd>SHIFT</kbd> → <kbd>cos</kbd> (gives cos⁻¹) → type 0.6 → <kbd>EXE</kbd> → <b>53.13°</b></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">3.2 · 3.3</div>
+  <h2>Sine &amp; cosine rule</h2>
+  <p class="aim">For triangles that aren't right-angled — which rule to reach for, and why.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="tag p">SINE RULE</div>
+      <h4>a/sin A = b/sin B = c/sin C</h4>
+      <p>Use when you have a <b>side and its opposite angle</b> (plus one other side or angle).</p>
+      <p class="muted">⚠️ SSA can give two answers — the ambiguous case.</p>
+    </div>
+    <div class="card">
+      <div class="tag v">COSINE RULE</div>
+      <h4>a² = b² + c² − 2bc cos A</h4>
+      <p>Use for <b>two sides + the included angle</b>, or all three sides.</p>
+      <p class="muted">Rearrange for an angle: cos A = (b² + c² − a²)/(2bc).</p>
+    </div>
+    <div class="card">
+      <div class="tag g">AREA</div>
+      <h4>Area = ½ ab sin C</h4>
+      <p>Two sides × the sine of the included angle.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED — sine rule</h3>
+    <p>In a triangle, A = 30°, a = 10, B = 45°. Find b.</p>
+    <p>b = a · sin B / sin A = 10 × sin 45° / sin 30° = 10 × 0.7071 / 0.5 = <b>14.14</b>.</p>
+  </div>
+
+  <div class="panel">
+    <h3>WORKED — cosine rule</h3>
+    <p>Two sides are 5 and 7, with included angle 60°. Find the third side.</p>
+    <p>a² = 5² + 7² − 2(5)(7) cos 60° = 25 + 49 − 35 = 39, so a = <b>√39 ≈ 6.24</b>.</p>
+  </div>
+
+  <div class="tip"><b>WHICH RULE?</b> Two sides + included angle, or three sides → <b>cosine</b>. A side and its opposite angle → <b>sine</b>. The included-angle question is the one most often misread as sine rule.</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">3.4 · 3.5 · 3.6</div>
+  <h2>Circles &amp; Voronoi diagrams</h2>
+  <p class="aim">Arcs and sectors (radians!), perpendicular bisectors, and the Voronoi diagram.</p>
+
+  <div class="panel">
+    <h3>ARC LENGTH &amp; SECTOR AREA</h3>
+    <p class="big">Arc length l = rθ · Sector area A = ½r²θ &nbsp;<span class="accent">(θ in radians)</span></p>
     <ul class="clean">
-      <li><span class="accent">360° = 2π radians</span>, so 180° = π, 90° = π/2, 60° = π/3, 45° = π/4, 30° = π/6.</li>
-      <li><span class="cyan">SOH CAH TOA</span>: sin 30° = 0.5, cos 60° = 0.5, tan 45° = 1, sin 90° = 1.</li>
-      <li><span class="gold">Sine rule ambiguous case</span>: given two sides and a non-included angle (SSA), the angle can be A or 180° − A. Two triangles are possible — state both.</li>
-      <li><span class="accent">Area of a triangle</span> (1/2)ab sin C is also just (1/2) × base × height — but use the sin C form when you don't know the height.</li>
-      <li><span class="cyan">Voronoi edge</span> = perpendicular bisector between two sites. A new site only redraws the cells around its immediate neighbours.</li>
-      <li><span class="gold">Toxic-waste dump problem</span>: find the point (or site) that minimises the distance to the nearest site — the intersection of Voronoi edges, or the site with the smallest max-distance.</li>
+      <li>Convert degrees → radians: multiply by π/180 (45° = π/4).</li>
+      <li>360° = 2π, 180° = π, 90° = π/2.</li>
+    </ul>
+    <div class="gdc">
+      <h4>📟 GDC — angle mode (THE circle trap)</h4>
+      <ol>
+        <li><kbd>SHIFT</kbd> → <kbd>MENU</kbd> (SET UP) → Angle</li>
+        <li><kbd>F1</kbd> = Degrees · <kbd>F2</kbd> = Radians</li>
+      </ol>
+      <p class="note">Arc/sector formulas need <b>radians</b>. If the GDC is in degrees, l = rθ with θ = 45 gives nonsense. Set radians for circles, degrees for triangles.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>PERPENDICULAR BISECTORS (3.5)</h3>
+    <p>A line that cuts a segment in half at a right angle. Every point on it is <span class="cyan">equidistant from the two endpoints</span> — that's the property that builds Voronoi diagrams.</p>
+  </div>
+
+  <div class="panel">
+    <h3>VORONOI DIAGRAMS (3.6)</h3>
+    <p>Splits a plane into <span class="accent">cells</span> so every point belongs to the nearest <b>site</b>. The <b>edges</b> are perpendicular bisectors between neighbouring sites; where edges meet are <b>vertices</b>.</p>
+    <ul class="clean">
+      <li><b>Nearest-neighbour interpolation:</b> estimate an unknown value by taking the value of the site whose cell the point sits in.</li>
+      <li><b>Adding a site</b> only redraws the cells around its immediate neighbours.</li>
+      <li><b>Toxic-waste dump problem:</b> place the dump to maximise its distance from every site — the point furthest from all sites (a vertex of the diagram).</li>
     </ul>
   </div>
 </section>
 
-<!-- ══════════════ WORKED EXAMPLES ══════════════ -->
-<section class="act" id="worked">
-  <div class="acttag">🎯 Worked examples</div>
-  <h2>SIX QUESTIONS, STEP BY STEP</h2>
-  <p class="aim">Model answers with the trap that catches people on each one.</p>
-
-  <div class="exam">
-    <div class="qa">1. Find the distance between (1, 2, 3) and (4, 6, 15).</div>
-    <div class="ans">d = √((4−1)² + (6−2)² + (15−3)²) = √(9 + 16 + 144) = √169 = <span class="green">13</span>.</div>
-    <div class="trap">Trap: it's three differences, not two. The 9−16−144 = 169 = 13² is a classic 3-4-12-13 set they reuse on purpose.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">2. Find the volume of a sphere of radius 6 cm.</div>
-    <div class="ans">V = (4/3)π(6³) = (4/3)π(216) = <span class="green">288π cm³</span>.</div>
-    <div class="trap">Trap: radius is cubed, not squared. Volume answers are cubic units — a squared answer is an instant red flag.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">3. In a triangle, A = 30°, a = 10 and B = 45°. Find b.</div>
-    <div class="ans">Sine rule: b = a·sin B / sin A = 10·sin 45° / sin 30° = 10(0.7071)/0.5 = <span class="green">14.14</span>.</div>
-    <div class="trap">Trap: each side pairs with the sine of its <em>opposite</em> angle. Side a is opposite angle A, b opposite B — don't cross them.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">4. Two sides are 5 and 7, with included angle 60°. Find the third side.</div>
-    <div class="ans">Cosine rule: a² = 5² + 7² − 2(5)(7)cos 60° = 25 + 49 − 70(0.5) = 74 − 35 = 39, so <span class="green">a = √39 ≈ 6.24</span>.</div>
-    <div class="trap">Trap: cosine rule needs the <em>included</em> angle (between the two known sides). If the angle isn't between them, it's sine rule (and possibly ambiguous).</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">5. A circle has radius 8 cm. Find the arc length for a central angle of 45°.</div>
-    <div class="ans">θ = 45° = π/4 rad. <span class="green">l = rθ = 8(π/4) = 2π ≈ 6.28 cm.</span></div>
-    <div class="trap">Trap: using θ = 45 directly gives l = 360 cm — absurd for a radius-8 circle. Convert to radians first.</div>
-  </div>
-
-  <div class="exam">
-    <div class="qa">6. For the same circle, find the area of the 45° sector.</div>
-    <div class="ans"><span class="green">A = (1/2)r²θ = (1/2)(64)(π/4) = 8π ≈ 25.13 cm².</span></div>
-    <div class="trap">Trap: sector area is (1/2)r²θ, not r²θ — that missing half is the single most common slip on this topic.</div>
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">One picture</div>
+  <h2>MIND MAP 🗺</h2>
+  <div class="mind">
+    <div class="node core">GEOMETRY &amp; TRIG<br><small>Topic 3</small></div>
+    <div class="arrow">→</div>
+    <div class="node">3D<br><small>distance · midpoint · V/SA</small></div>
+    <div class="arrow">→</div>
+    <div class="node">RIGHT TRIANGLES<br><small>SOH CAH TOA · Pythagoras</small></div>
+    <div class="arrow">→</div>
+    <div class="node">NON-RIGHT<br><small>sine rule · cosine rule · ½ab sin C</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CIRCLES<br><small>arc rθ · sector ½r²θ</small></div>
+    <div class="arrow">→</div>
+    <div class="node">VORONOI<br><small>sites · cells · bisectors</small></div>
   </div>
 </section>
 
-<!-- ══════════════ QUIZ ══════════════ -->
-<section class="act" id="quiz">
-  <div class="acttag">✏️ Self-test</div>
-  <h2>QUICK QUIZ — 6 QUESTIONS</h2>
-  <p class="aim">No notes. Pick an answer and get told right away.</p>
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
+<section class="act" id="cheat">
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
+  <div class="marquee">
+    <div class="line">3D distance: <span>√((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²)</span> · midpoint = averages</div>
+    <div class="line">pyramid/cone: V = ⅓Ah · sphere: <span>V = 4/3 πr³ · SA = 4πr²</span></div>
+    <div class="line">SOH CAH TOA: <span>sin = O/H · cos = A/H · tan = O/A</span></div>
+    <div class="line">sine rule: a/sin A = b/sin B · <span>SSA → ambiguous case (two angles)</span></div>
+    <div class="line">cosine rule: a² = b² + c² − 2bc cos A · <span>two sides + included angle</span></div>
+    <div class="line">area: ½ab sin C · <span>arc l = rθ · sector A = ½r²θ (radians!)</span></div>
+    <div class="line">Voronoi edge = perpendicular bisector · <span>cell = nearest site</span></div>
+  </div>
+</section>
 
-  <div class="q" data-a="1">
-    <p>Q1. The distance from the origin to (3, 4, 12) is:</p>
-    <label><input type="radio" name="q1" value="1"> 13</label>
-    <label><input type="radio" name="q1" value="2"> 19</label>
-    <label><input type="radio" name="q1" value="3"> 25</label>
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">No notes. Pick an answer, get instant feedback.</p>
+
+  <div class="q" data-a="13">
+    <p>1. The distance from the origin to (3, 4, 12) is:</p>
+    <label><input type="radio" name="q1" value="13"> 13</label>
+    <label><input type="radio" name="q1" value="19"> 19</label>
+    <label><input type="radio" name="q1" value="25"> 25</label>
     <div class="fb correct">✅ 13. √(9 + 16 + 144) = √169 = 13.</div>
     <div class="fb wrong">❌ √(3² + 4² + 12²) = √169 = 13.</div>
   </div>
 
-  <div class="q" data-a="2">
-    <p>Q2. sin 30° = ?</p>
+  <div class="q" data-a="0.5">
+    <p>2. sin 30° = ?</p>
     <label><input type="radio" name="q2" value="1"> 1</label>
-    <label><input type="radio" name="q2" value="2"> 0.5</label>
-    <label><input type="radio" name="q2" value="3"> √3/2</label>
+    <label><input type="radio" name="q2" value="0.5"> 0.5</label>
+    <label><input type="radio" name="q2" value="0.866"> √3/2</label>
     <div class="fb correct">✅ 0.5. sin 30° = ½.</div>
-    <div class="fb wrong">❌ sin 30° = ½ (a 30-60-90 triangle's short side is half the hypotenuse).</div>
+    <div class="fb wrong">❌ sin 30° = ½ (30-60-90 triangle).</div>
   </div>
 
-  <div class="q" data-a="2">
-    <p>Q3. The area of a triangle with sides 6 and 8 and included angle 30° is:</p>
-    <label><input type="radio" name="q3" value="1"> 24</label>
-    <label><input type="radio" name="q3" value="2"> 12</label>
-    <label><input type="radio" name="q3" value="3"> 48</label>
-    <div class="fb correct">✅ 12. (1/2)(6)(8)sin 30° = 24 × 0.5 = 12.</div>
-    <div class="fb wrong">❌ Area = (1/2)ab sin C = (1/2)(6)(8)(0.5) = 12.</div>
+  <div class="q" data-a="12">
+    <p>3. The area of a triangle with sides 6 and 8 and included angle 30° is:</p>
+    <label><input type="radio" name="q3" value="24"> 24</label>
+    <label><input type="radio" name="q3" value="12"> 12</label>
+    <label><input type="radio" name="q3" value="48"> 48</label>
+    <div class="fb correct">✅ 12. (1/2)(6)(8) sin 30° = 24 × 0.5 = 12.</div>
+    <div class="fb wrong">❌ Area = ½ab sin C = ½(6)(8)(0.5) = 12.</div>
   </div>
 
-  <div class="q" data-a="1">
-    <p>Q4. The arc length of a radius-10 circle for a 90° angle is:</p>
-    <label><input type="radio" name="q4" value="1"> 5π</label>
-    <label><input type="radio" name="q4" value="2"> 10π</label>
-    <label><input type="radio" name="q4" value="3"> 900</label>
+  <div class="q" data-a="5π">
+    <p>4. The arc length of a radius-10 circle for a 90° angle is:</p>
+    <label><input type="radio" name="q4" value="5π"> 5π</label>
+    <label><input type="radio" name="q4" value="10π"> 10π</label>
+    <label><input type="radio" name="q4" value="900"> 900</label>
     <div class="fb correct">✅ 5π. 90° = π/2, so l = 10(π/2) = 5π.</div>
     <div class="fb wrong">❌ Convert first: 90° = π/2, then l = rθ = 10(π/2) = 5π.</div>
   </div>
 
-  <div class="q" data-a="3">
-    <p>Q5. The volume of a cone with radius 3 and height 4 is:</p>
-    <label><input type="radio" name="q5" value="1"> 36π</label>
-    <label><input type="radio" name="q5" value="2"> 9π</label>
-    <label><input type="radio" name="q5" value="3"> 12π</label>
-    <div class="fb correct">✅ 12π. V = (1/3)πr²h = (1/3)π(9)(4) = 12π.</div>
-    <div class="fb wrong">❌ V = (1/3)πr²h = (1/3)π(3²)(4) = 12π.</div>
+  <div class="q" data-a="12π">
+    <p>5. The volume of a cone with radius 3 and height 4 is:</p>
+    <label><input type="radio" name="q5" value="36π"> 36π</label>
+    <label><input type="radio" name="q5" value="9π"> 9π</label>
+    <label><input type="radio" name="q5" value="12π"> 12π</label>
+    <div class="fb correct">✅ 12π. V = ⅓πr²h = ⅓π(9)(4) = 12π.</div>
+    <div class="fb wrong">❌ V = ⅓πr²h = ⅓π(3²)(4) = 12π.</div>
   </div>
 
-  <div class="q" data-a="2">
-    <p>Q6. The surface area of a sphere of radius 5 is:</p>
-    <label><input type="radio" name="q6" value="1"> 25π</label>
-    <label><input type="radio" name="q6" value="2"> 100π</label>
-    <label><input type="radio" name="q6" value="3"> (500/3)π</label>
+  <div class="q" data-a="100π">
+    <p>6. The surface area of a sphere of radius 5 is:</p>
+    <label><input type="radio" name="q6" value="25π"> 25π</label>
+    <label><input type="radio" name="q6" value="100π"> 100π</label>
+    <label><input type="radio" name="q6" value="500π/3"> (500/3)π</label>
     <div class="fb correct">✅ 100π. SA = 4πr² = 4π(25) = 100π.</div>
-    <div class="fb wrong">❌ Surface area is 4πr² (that's 100π); (500/3)π would be the volume.</div>
+    <div class="fb wrong">❌ Surface area is 4πr² = 100π; (500/3)π is the volume.</div>
   </div>
 </section>
 
-<!-- ══════════════ CHECKLIST ══════════════ -->
+<!-- ══════════════════════ GDC GUIDE ══════════════════════ -->
+<section class="act" id="gdc">
+  <div class="acttag">Casio fx-CG50</div>
+  <h2>BUTTON GUIDE 📟</h2>
+  <p class="aim">Topic 3 is mostly by-hand, but the GDC handles angle mode, inverse trig and solving for angles.</p>
+  <table>
+    <tr><th>What you want</th><th>Buttons to press (fx-CG50)</th></tr>
+    <tr><td>Set degrees (triangles)</td><td><kbd>SHIFT</kbd> → <kbd>MENU</kbd> (SET UP) → Angle → <kbd>F1</kbd> (Deg)</td></tr>
+    <tr><td>Set radians (circles)</td><td><kbd>SHIFT</kbd> → <kbd>MENU</kbd> (SET UP) → Angle → <kbd>F2</kbd> (Rad)</td></tr>
+    <tr><td>Find an angle (inverse trig)</td><td><kbd>SHIFT</kbd> → <kbd>sin</kbd>/<kbd>cos</kbd>/<kbd>tan</kbd> → type ratio → <kbd>EXE</kbd></td></tr>
+    <tr><td>Evaluate sin / cos / tan</td><td><kbd>sin</kbd>/<kbd>cos</kbd>/<kbd>tan</kbd> → type angle → <kbd>EXE</kbd></td></tr>
+    <tr><td>Solve sin x = 0.5 (ambiguous case)</td><td><kbd>MENU</kbd> <kbd>1</kbd> → <kbd>OPTN</kbd> <kbd>F4</kbd> → <kbd>F1</kbd> (SolveN) → SolveN(sin x = 0.5, x) → <kbd>EXE</kbd></td></tr>
+    <tr><td>Convert an angle deg → rad</td><td>type the degrees → <kbd>OPTN</kbd> <kbd>F6</kbd> (▸) → <kbd>F5</kbd> (ANGL) → <kbd>F2</kbd> (r) → <kbd>EXE</kbd></td></tr>
+  </table>
+  <div class="tip"><b>THE CIRCLE TRAP:</b> arc l = rθ and sector A = ½r²θ need <b>radians</b>. If you leave the GDC in degrees (from a triangle question) and plug θ = 45 into l = rθ, you're wrong by a factor of ~57. Set radians for circles, degrees for triangles.</div>
+</section>
+
+<!-- ══════════════════════ REVISION VAULT ══════════════════════ -->
+<section class="act" id="vault">
+  <div class="acttag">Read this before the exam</div>
+  <h2>THE REVISION VAULT 🗄️</h2>
+  <p class="aim">Every term, formula, number, and exactly how the examiner wants them worded.</p>
+
+  <div class="panel">
+    <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>
+    <table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td>Sine / cosine / tangent</td><td>Ratios in a right-angled triangle: sin = O/H, cos = A/H, tan = O/A.</td></tr>
+      <tr><td>Sine rule</td><td>a/sin A = b/sin B = c/sin C — for non-right triangles with a side-opposite-angle pair.</td></tr>
+      <tr><td>Cosine rule</td><td>a² = b² + c² − 2bc cos A — two sides and the included angle, or three sides.</td></tr>
+      <tr><td>Angle of elevation / depression</td><td>The angle measured up / down from the horizontal.</td></tr>
+      <tr><td>Arc</td><td>A section of a circle's circumference cut off by a central angle.</td></tr>
+      <tr><td>Sector</td><td>The "pizza slice" bounded by two radii and an arc.</td></tr>
+      <tr><td>Perpendicular bisector</td><td>A line cutting a segment into two equal halves at a right angle; every point is equidistant from the endpoints.</td></tr>
+      <tr><td>Voronoi diagram</td><td>Splits a plane into cells so each point belongs to the nearest site; edges are perpendicular bisectors.</td></tr>
+      <tr><td>Nearest-neighbour interpolation</td><td>Estimating a value by taking the value of the nearest known site (its cell).</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🧮 FORMULA SHEET</h3>
+    <table>
+      <tr><th>Formula</th><th>What it does</th><th>Notes</th></tr>
+      <tr><td>d = √((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²)</td><td>3D distance</td><td>midpoint = coordinate averages</td></tr>
+      <tr><td>V = ⅓Ah</td><td>pyramid / cone volume</td><td>cone: ⅓πr²h</td></tr>
+      <tr><td>V = 4/3 πr³ · SA = 4πr²</td><td>sphere</td><td>hemisphere: ⅔πr³ and 3πr²</td></tr>
+      <tr><td>a² = b² + c² − 2bc cos A</td><td>cosine rule</td><td>cos A = (b²+c²−a²)/2bc</td></tr>
+      <tr><td>a/sin A = b/sin B = c/sin C</td><td>sine rule</td><td>SSA → ambiguous case</td></tr>
+      <tr><td>Area = ½ab sin C</td><td>triangle area</td><td>two sides × sine of included angle</td></tr>
+      <tr><td>l = rθ · A = ½r²θ</td><td>arc · sector</td><td>θ in radians only</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🔢 DATA BANK — NUMBERS TO OWN</h3>
+    <ul class="clean">
+      <li><b>360° = 2π</b> · 180° = π · 90° = π/2 · 60° = π/3 · 45° = π/4 · 30° = π/6</li>
+      <li>sin 30° = ½ · cos 60° = ½ · tan 45° = 1 · sin 90° = 1</li>
+      <li>3-4-12-13 and 3-4-5 are the favourite right-triangle / 3D distance sets</li>
+      <li>Sphere: V = 4/3 πr³ (cube the radius!) · SA = 4πr² (square it)</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>🎯 EXAM WALKTHROUGHS</h3>
+    <div class="exam">
+      <b>Q1 — CALCULATE [2 marks]</b> "Find the distance between (1, 2, 3) and (4, 6, 15)."
+      <p><b>Model answer:</b> √(3² + 4² + 12²) = √169 = <b>13</b> (2 marks).</p>
+    </div>
+    <div class="exam">
+      <b>Q2 — CALCULATE [2 marks]</b> "Two sides are 5 and 7 with included angle 60°. Find the third side."
+      <p><b>Model answer:</b> a² = 25 + 49 − 70 cos 60° = 39 → <b>a = 6.24</b> (method 1, answer 1).</p>
+      <p class="muted">Trap: cosine rule needs the <em>included</em> angle. Not included → sine rule (and check for the ambiguous case).</p>
+    </div>
+    <div class="exam">
+      <b>Q3 — CALCULATE [2 marks]</b> "A circle of radius 8 cm has a 45° sector. Find its area."
+      <p><b>Model answer:</b> θ = π/4 (1) · A = ½(8)²(π/4) = 8π ≈ 25.1 cm² (1).</p>
+      <p class="muted">Trap: sector area is ½r²θ, not r²θ — the missing ½ is the single most common slip.</p>
+    </div>
+    <div class="exam">
+      <b>Q4 — EXPLAIN [2 marks]</b> "Why does the sine rule sometimes give two possible angles?"
+      <p><b>Model answer:</b> sin θ = sin(180° − θ) (1), so a given sine value corresponds to two possible angles, and the SSA arrangement can fit two different triangles (1).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
 <section class="act" id="check">
-  <div class="acttag">✅ Syllabus checklist</div>
-  <h2>TICK IT OFF</h2>
-  <p class="aim">Every 3.x statement. Click to mark done — progress saves automatically.</p>
-  <div class="progress"><div class="fill" id="progFill"></div></div>
-  <div class="progtext" id="progText">0 of 6 done</div>
-  <ol class="cl" id="cl">
-    <li><span class="box">✓</span><span class="code">3.1</span> 3D distance &amp; midpoint; volume &amp; surface area of solids (pyramid, cone, sphere, hemisphere, combinations); angle between lines / line &amp; plane.</li>
-    <li><span class="box">✓</span><span class="code">3.2</span> Sine, cosine, tangent ratios (right triangles); sine rule, cosine rule, area of a triangle.</li>
-    <li><span class="box">✓</span><span class="code">3.3</span> Applications of right &amp; non-right trig, Pythagoras; angles of elevation/depression; constructing labelled diagrams.</li>
-    <li><span class="box">✓</span><span class="code">3.4</span> The circle: arc length and area of a sector.</li>
-    <li><span class="box">✓</span><span class="code">3.5</span> Equations of perpendicular bisectors.</li>
-    <li><span class="box">✓</span><span class="code">3.6</span> Voronoi diagrams (sites, vertices, edges, cells); adding a site; nearest-neighbour interpolation; the toxic-waste-dump problem.</li>
-  </ol>
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 6 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">3.1</span><span>3D distance &amp; midpoint; volume &amp; surface area of solids (pyramid, cone, sphere, hemisphere, combinations); angle between lines / line &amp; plane.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">3.2</span><span>Sine, cosine, tangent ratios (right triangles); sine rule, cosine rule, area of a triangle.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">3.3</span><span>Applications of right &amp; non-right trig, Pythagoras; angles of elevation/depression; constructing labelled diagrams.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">3.4</span><span>The circle: arc length and area of a sector.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">3.5</span><span>Equations of perpendicular bisectors.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">3.6</span><span>Voronoi diagrams (sites, vertices, edges, cells); adding a site; nearest-neighbour interpolation; the toxic-waste-dump problem.</span></li>
+  </ul>
 </section>
 
 <footer>
-  <p>built for the Thu 2026-08-27 Math AI SL assessment — Geometry &amp; Trigonometry</p>
-  <p>sources: Y12 AI SL topics sheet (Aug 2026) · IB data booklet · GDC: TI-Nspire CX / fx-CG50</p>
-  <p>part of <a href="../../../index.html">Travis's Study Hub</a></p>
+  <p>Built from the Y12 AI SL topics sheet (Aug 2026) · IB data booklet · Casio fx-CG50</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
 </footer>
+
 </div>
 
 <script>
-var KEY='math-gt-checklist-v1';
-var items=document.querySelectorAll('#cl li');
-var pill=document.getElementById('progPill');
-var fill=document.getElementById('progFill');
-var ptext=document.getElementById('progText');
-var saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
-function upd(){
-  var d=0; items.forEach(function(li){if(li.classList.contains('done'))d++;});
-  pill.textContent=d+'/'+items.length;
-  fill.style.width=(d/items.length*100)+'%';
-  ptext.textContent=d+' of '+items.length+' done';
-  var s={}; items.forEach(function(li,i){s[i]=li.classList.contains('done');});
-  try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
-}
-items.forEach(function(li,i){
-  if(saved[i])li.classList.add('done');
-  li.addEventListener('click',function(){li.classList.toggle('done');upd();});
-});
-upd();
-
-document.querySelectorAll('.q').forEach(function(q){
-  q.querySelectorAll('input[type=radio]').forEach(function(r){
-    r.addEventListener('change',function(){
-      q.classList.remove('correct','wrong');
-      if(r.value===q.getAttribute('data-a'))q.classList.add('correct'); else q.classList.add('wrong');
+  var KEY='math-gt-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
     });
   });
-});
+  update();
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
 </script>
 </body>
 </html>
