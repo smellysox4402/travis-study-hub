@@ -16,48 +16,42 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
         font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
   .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"B8"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -65,24 +59,25 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
   .fig svg{max-width:660px; width:100%; height:auto;}
   .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
   .fig.narrow svg{max-width:480px;}
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .tip b{color:var(--gold);}
   .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -94,13 +89,13 @@
   .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
   .marquee .line span{color:var(--pink);}
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -111,7 +106,7 @@
   .q.wrong .fb.wrong{display:block;}
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -146,12 +141,12 @@
 <a class="home-btn" href="../../../index.html">&#127968; HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 &#183; WIRING</a>
-  <a href="#act2">ACT 2 &#183; BATTERY</a>
-  <a href="#act3">ACT 3 &#183; THE DROP</a>
-  <a href="#act4">ACT 4 &#183; THE WAVE</a>
-  <a href="#act5">ACT 5 &#183; EXPRESS LANE</a>
-  <a href="#act6">ACT 6 &#183; HANDOFF</a>
+  <a href="#act1">Neurons</a>
+  <a href="#act2">Resting potential</a>
+  <a href="#act3">Action potential</a>
+  <a href="#act4">Propagation</a>
+  <a href="#act5">Speed of conduction</a>
+  <a href="#act6">Synapses</a>
   <a href="#map">&#128506; MIND MAP</a>
   <a href="#cheat">&#9889; CHEAT</a>
   <a href="#test">&#9997; TEST</a>
@@ -163,8 +158,8 @@
 
 <header class="hero">
   <div class="kicker">IB Biology &#183; Higher Level &#183; Theme C</div>
-  <h1>C2.2 NEURAL SIGNALLING</h1>
-  <div class="sub">C2.1 ran the guest list. C2.2 is the sound system: the wiring that stores charge, the drop that fires down the cable, and the handoff at the DJ booth where the record changes decks.</div>
+  <h1>Neural Signalling</h1>
+  <div class="sub">Neurons carry electrical signals: a resting potential stores charge, an action potential fires along the axon, and a synapse hands the signal to the next cell.</div>
   <div class="badges">
     <span class="badge hl">C2.2 &#183; AHL ONLY</span>
     <span class="badge ahl">THE ELECTRICAL CHAPTER</span>
@@ -174,17 +169,17 @@
 
 <!-- ============ ACT 1 ============ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 &#183; C2.2.1</div>
-  <h2>THE WIRING &#128268;</h2>
-  <p class="aim">Two communication systems run the club: the slow mail (hormones) and the fast cable (neurons). This act is the cable.</p>
+  <div class="acttag">C2.2.1</div>
+  <h2>Neurons and nerves</h2>
+  <p class="aim">Two communication systems: the slow hormonal system and the fast nervous system. This topic is the nervous system.</p>
 
   <div class="panel">
-    <h3>WHO IS ON THE WIRING</h3>
+    <h3>Structure of a neuron</h3>
     <p class="big">The nervous system runs on <span class="accent">neurons</span> &#8212; about <span class="cyan">85 billion</span> of them. Each neuron carries a <span class="accent">nerve impulse</span>, which is an <span class="cyan">electrical signal</span>.</p>
     <ul class="clean">
-      <li><b>Cell body</b> &#8212; cytoplasm + nucleus. The DJ's mixer: it interprets incoming info and decides what to send.</li>
+      <li><b>Cell body</b> &#8212; cytoplasm + nucleus. The cell body (soma): it interprets incoming info and decides what to send.</li>
       <li><b>Dendrites</b> &#8212; short, branched fibres. They collect signals, e.g. between neurons in the brain or spinal cord.</li>
-      <li><b>Axon</b> &#8212; one very elongated fibre. The speaker cable: e.g. from your toes or fingers all the way to the spinal cord.</li>
+      <li><b>Axon</b> &#8212; one very elongated fibre. The axon: e.g. from your toes or fingers all the way to the spinal cord.</li>
     </ul>
     <p class="muted">Impulse direction: dendrites &#8594; cell body &#8594; axon &#8594; next cell. One way, always.</p>
   </div>
@@ -193,7 +188,7 @@
     <div class="card">
       <h4><span class="tag p">THE TWO SYSTEMS</span></h4>
       <p><b>Endocrine</b> = glands &#8594; hormones &#8594; blood. Slow, lasts hours, wide broadcast.</p>
-      <p><b>Nervous</b> = neurons &#8594; impulses &#8594; dedicated cables. Fast (milliseconds), targeted, then it's over.</p>
+      <p><b>Nervous</b> = neurons &#8594; impulses &#8594; dedicated nerve fibres. Fast (milliseconds), targeted, then it's over.</p>
       <p class="muted">Exam loves: "the nervous system transmits electrical impulses along neurons; the endocrine system transmits chemical signals in the blood."</p>
     </div>
     <div class="card">
@@ -206,12 +201,12 @@
 
 <!-- ============ ACT 2 ============ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 &#183; C2.2.2</div>
-  <h2>THE BATTERY &#128267;</h2>
-  <p class="aim">A resting neuron is a charged battery: &#8722;70 mV, inside negative. Nothing fires until this charge is built and held.</p>
+  <div class="acttag">C2.2.2</div>
+  <h2>Resting potential</h2>
+  <p class="aim">A resting neuron is charged: about &#8722;70 mV, inside negative. Nothing fires until this charge is established.</p>
 
   <div class="panel">
-    <h3>THE STANDBY VOLTAGE</h3>
+    <h3>The resting membrane potential</h3>
     <p class="big">Stick microelectrodes inside and outside any living cell and you'll read a <span class="accent">membrane potential</span> of 10&#8211;100 mV. Cytoplasm is <span class="cyan">negative</span> compared to the fluid outside.</p>
     <p>A neuron at rest sits at about <span class="accent">&#8722;70 mV</span> &#8212; the <span class="accent">resting potential</span>. (For scale: a liver cell sits at about &#8722;40 mV. Neurons are just more charged.)</p>
   </div>
@@ -225,7 +220,7 @@
     <div class="card">
       <h4><span class="tag g">CHARGER 2 &#8212; THE LEAK</span></h4>
       <p>Ions leak back by diffusion &#8212; slowly, but the membrane is <b>~50&#215; more permeable to K&#8314; than Na&#8314;</b>.</p>
-      <p>So K&#8314; leaks out faster than Na&#8314; gets in, widening the charge imbalance. The battery holds because the leak is slow.</p>
+      <p>So K&#8314; leaks out faster than Na&#8314; gets in, widening the charge imbalance. the charge holds because the leak is slow.</p>
     </div>
     <div class="card">
       <h4><span class="tag gr">CHARGER 3 &#8212; THE ANIONS</span></h4>
@@ -241,9 +236,9 @@
 
 <!-- ============ ACT 3 ============ -->
 <section class="act" id="act3">
-  <div class="acttag">Act 3 &#183; C2.2.3 + C2.2.8</div>
-  <h2>THE DROP &#9889;</h2>
-  <p class="aim">The action potential is all-or-nothing: below the threshold the floor stays quiet, at the threshold the whole system fires. No half-drops.</p>
+  <div class="acttag">C2.2.3 + C2.2.8</div>
+  <h2>The action potential</h2>
+  <p class="aim">The action potential is all-or-nothing: below threshold nothing happens, at threshold it fires fully.</p>
 
   <div class="panel">
     <h3>ALL-OR-NOTHING</h3>
@@ -300,14 +295,14 @@
       <text x="268" y="164" fill="#22d3ee" font-size="10" font-weight="700">K&#8314; floods OUT</text>
       <text x="330" y="300" fill="#a855f7" font-size="10.5" font-weight="800">undershoot</text>
       <text x="330" y="314" fill="#a855f7" font-size="10" font-weight="700">(pump recharges)</text>
-      <text x="398" y="52" fill="#b9a3d6" font-size="10.5" font-weight="700">one beat &#8776; 2&#8211;4 ms, then the floor can fire again</text>
+      <text x="398" y="52" fill="#b9a3d6" font-size="10.5" font-weight="700">one beat &#8776; 2&#8211;4 ms, then the membrane can fire again</text>
     </svg>
-    <div class="cap"><b>The drop:</b> stimulus pushes the membrane to threshold &#8594; Na&#8314; channels open &#8594; positive feedback &#8594; spike to +30 mV &#8594; K&#8314; channels open &#8594; back to &#8722;70, with a brief undershoot while the pump recharges.</div>
+    <div class="cap"><b>The action potential:</b> stimulus pushes the membrane to threshold &#8594; Na&#8314; channels open &#8594; positive feedback &#8594; spike to +30 mV &#8594; K&#8314; channels open &#8594; back to &#8722;70, with a brief undershoot while the pump recharges.</div>
   </div>
 
   <div class="panel">
-    <h3>THE DOOR POLICY &#8212; VOLTAGE-GATING</h3>
-    <p>The Na&#8314; and K&#8314; channels are <span class="accent">voltage-gated</span>: they open and close in response to changes in membrane potential. That's the whole mechanism of the drop.</p>
+    <h3>Voltage-gated ion channels</h3>
+    <p>The Na&#8314; and K&#8314; channels are <span class="accent">voltage-gated</span>: they open and close in response to changes in membrane potential. That's the whole mechanism of the action potential.</p>
     <ol class="steps">
       <li><b>Resting &#8722;70 mV:</b> Na&#8314; channels shut. The pump quietly holds the charge.</li>
       <li><b>Stimulus pushes to &#8722;50 mV (the <span class="gold">threshold</span>):</b> some Na&#8314; channels open, Na&#8314; diffuses in (outside is ~10&#215; more concentrated).</li>
@@ -316,7 +311,7 @@
       <li><b>K&#8314; channels open</b> (also for 1&#8211;2 ms): K&#8314; diffuses out down its gradient &#8594; <span class="cyan">repolarization</span> back toward &#8722;70 mV.</li>
       <li><b>Ball-and-chain:</b> a protein "ball" swings into the K&#8314; channel and blocks it; the pump re-establishes the gradients over a few milliseconds.</li>
     </ol>
-    <p class="muted">Below threshold? No drop. The pump simply re-establishes &#8722;70 mV. That's why the action potential is <b>all-or-nothing</b> &#8212; the threshold must be reached for the positive feedback to start.</p>
+    <p class="muted">Below threshold? No action potential. The pump simply re-establishes &#8722;70 mV. That's why the action potential is <b>all-or-nothing</b> &#8212; the threshold must be reached for the positive feedback to start.</p>
   </div>
 
   <div class="exam">
@@ -333,7 +328,7 @@
     <div class="card">
       <h4><span class="tag g">WHY ALL-OR-NOTHING</span></h4>
       <p>Below &#8722;50 mV: nothing. At/above &#8722;50 mV: the full spike, every time.</p>
-      <p>The strength of a signal is coded in <b>frequency</b> (how many drops per second), not drop size.</p>
+      <p>The strength of a signal is coded in <b>frequency</b> (how many action potentials per second), not action potential size.</p>
       <p class="muted">A bigger stimulus doesn't make a bigger action potential &#8212; it makes more of them.</p>
     </div>
   </div>
@@ -341,9 +336,9 @@
 
 <!-- ============ ACT 4 ============ -->
 <section class="act" id="act4">
-  <div class="acttag">Act 4 &#183; C2.2.9</div>
-  <h2>THE WAVE &#127911;</h2>
-  <p class="aim">The drop doesn't travel. Each patch of membrane does its own drop, triggered by the patch next to it. A relay, not a wire.</p>
+  <div class="acttag">C2.2.9</div>
+  <h2>Propagation</h2>
+  <p class="aim">The action potential does not travel: each patch of membrane fires its own, triggered by the patch next to it — a relay, not a wire.</p>
 
   <div class="panel">
     <h3>LOCAL CURRENTS</h3>
@@ -357,34 +352,34 @@
   </div>
 
   <div class="panel">
-    <h3>ONE-WAY STREET</h3>
+    <h3>The refractory period</h3>
     <p>The impulse only travels <span class="accent">one direction</span> along a neuron &#8212; two reasons:</p>
     <ul class="clean">
       <li>The impulse can only be <b>initiated at one terminal</b> of the neuron and only <b>passed on at the other</b>.</li>
-      <li>After a drop, the patch is <span class="cyan">refractory</span> (Na&#8314; channels inactivated) &#8212; so the wave can't propagate <b>backwards</b> into the patch it just left.</li>
+      <li>After an action potential, the patch is <span class="cyan">refractory</span> (Na&#8314; channels inactivated) &#8212; so the wave can't propagate <b>backwards</b> into the patch it just left.</li>
     </ul>
-    <p class="muted">The refractory period is also why there's a ceiling on firing rate: no drop, no backflow.</p>
+    <p class="muted">The refractory period is also why there's a ceiling on firing rate: no action potential, no backflow.</p>
   </div>
 </section>
 
 <!-- ============ ACT 5 ============ -->
 <section class="act" id="act5">
-  <div class="acttag">Act 5 &#183; C2.2.4</div>
-  <h2>THE EXPRESS LANE &#128640;</h2>
-  <p class="aim">Speed matters when the danger is real. Two upgrades exist: fatter cables and insulated cables.</p>
+  <div class="acttag">C2.2.4</div>
+  <h2>Speed of conduction</h2>
+  <p class="aim">Two factors increase conduction speed: a wider axon and myelination.</p>
 
   <div class="panel">
-    <h3>UPGRADE 1 &#8212; FATTER CABLE</h3>
+    <h3>Wider axon</h3>
     <p>Wider fibres have <b>lower resistance</b>, so impulses travel faster.</p>
     <ul class="clean">
       <li>Human nerve fibre: ~<b>1 &#181;m</b> diameter &#8594; about <b>1 m/s</b>.</li>
       <li>Squid giant axon: up to <b>500 &#181;m</b> &#8594; <b>25 m/s</b> &#8212; runs the jet-propulsion escape response.</li>
-      <li>Earthworms keep just <b>three</b> giant axons, used only for predator escape. Fat cables cost space and resources.</li>
+      <li>Earthworms keep just <b>three</b> giant axons, used only for predator escape. Fat axons cost space and resources.</li>
     </ul>
   </div>
 
   <div class="panel">
-    <h3>UPGRADE 2 &#8212; MYELIN</h3>
+    <h3>Myelination (saltatory conduction)</h3>
     <p><span class="accent">Myelin</span> is a coating of <b>Schwann cells</b> wrapped around the fibre, with bare gaps between them called <span class="cyan">nodes of Ranvier</span>.</p>
     <p>The impulse <b>jumps from node to node</b> (saltatory conduction) instead of crawling through every patch &#8212; up to <span class="accent">100 m/s</span>. One hundred times faster than an unmyelinated human fibre.</p>
   </div>
@@ -421,7 +416,7 @@
       <text x="223" y="42" fill="#ff2ec4" font-size="10" font-weight="700">node &#8594; node</text>
       <text x="420" y="215" fill="#b9a3d6" font-size="10.5" font-weight="700">saltatory conduction &#8212; up to 100 m/s</text>
     </svg>
-    <div class="cap"><b>The express lane:</b> myelin insulates, so the signal only regenerates at the bare nodes of Ranvier &#8212; it leaps between them instead of crawling the whole axon.</div>
+    <div class="cap"><b>myelination:</b> myelin insulates, so the signal only regenerates at the bare nodes of Ranvier &#8212; it leaps between them instead of crawling the whole axon.</div>
   </div>
 
   <div class="tip">
@@ -431,12 +426,12 @@
 
 <!-- ============ ACT 6 ============ -->
 <section class="act" id="act6">
-  <div class="acttag">Act 6 &#183; C2.2.5 + C2.2.6 + C2.2.7</div>
-  <h2>THE HANDOFF &#127925;</h2>
-  <p class="aim">The axon is one DJ's cable. The synapse is the booth change: the record (neurotransmitter) is physically handed to the next deck.</p>
+  <div class="acttag">C2.2.5 + C2.2.6 + C2.2.7</div>
+  <h2>Synapses</h2>
+  <p class="aim">The synapse is where the signal passes from one neuron to the next, via a neurotransmitter.</p>
 
   <div class="panel">
-    <h3>THE BOOTH</h3>
+    <h3>The synapse</h3>
     <p>A <span class="accent">synapse</span> is a junction between two cells. Three types exist:</p>
     <ul class="clean">
       <li><b>Sensory receptor cell &#8596; neuron</b> &#8212; in sense organs.</li>
@@ -515,13 +510,13 @@
       <text x="322" y="350" fill="#4ade80" font-size="11" font-weight="800">&#8594; choline recycled</text>
       <circle cx="283" cy="352" r="3.5" fill="#fbbf24"/>
       <circle cx="295" cy="357" r="3" fill="#fbbf24"/>
-      <text x="60" y="350" fill="#b9a3d6" font-size="10.5" font-weight="700">one record, one drop, then the floor clears</text>
+      <text x="60" y="350" fill="#b9a3d6" font-size="10.5" font-weight="700">one neurotransmitter, one action potential, then the synapse clears</text>
     </svg>
-    <div class="cap"><b>The handoff:</b> impulse &#8594; Ca&#178;&#8314; in &#8594; vesicles fuse &#8594; ACh crosses the cleft &#8594; receptor-channel opens &#8594; Na&#8314; in &#8594; EPSP. Acetylcholinesterase clears the floor.</div>
+    <div class="cap"><b>The handoff:</b> impulse &#8594; Ca&#178;&#8314; in &#8594; vesicles fuse &#8594; ACh crosses the cleft &#8594; receptor-channel opens &#8594; Na&#8314; in &#8594; EPSP. Acetylcholinesterase clears the synapse.</div>
   </div>
 
   <div class="panel">
-    <h3>THE RECORD DROP &#8212; STEP BY STEP</h3>
+    <h3>Synaptic transmission, step by step</h3>
     <ol class="steps">
       <li>The impulse reaches the end of the presynaptic neuron &#8212; the <b>presynaptic membrane</b>.</li>
       <li>Its depolarization opens <b>Ca&#178;&#8314; channels</b>; calcium diffuses <b>into</b> the knob.</li>
@@ -537,7 +532,7 @@
 
   <div class="grid2">
     <div class="card">
-      <h4><span class="tag g">ACETYLCHOLINE &#8212; THE RECORD</span></h4>
+      <h4><span class="tag g">ACETYLCHOLINE &#8212; THE NEUROTRANSMITTER</span></h4>
       <p>Built in the presynaptic neuron from <b>choline</b> (from the diet) + an <b>acetyl group</b> (from aerobic respiration).</p>
       <p>Used at <b>neuromuscular junctions</b> and many other synapses. When it binds its receptor, the channel opens and Na&#8314; enters &#8594; EPSP.</p>
     </div>
@@ -563,13 +558,13 @@
     <span class="arrow">&#8594;</span>
     <span class="node">WIRING<small>neurons: dendrites &#8594; cell body &#8594; axon</small></span>
     <span class="arrow">&#8594;</span>
-    <span class="node">BATTERY<small>&#8722;70 mV: pump 3:2, K&#8314; leak, anions</small></span>
+    <span class="node">RESTING POTENTIAL<small>&#8722;70 mV: pump 3:2, K&#8314; leak, anions</small></span>
     <span class="arrow">&#8594;</span>
-    <span class="node">THE DROP<small>threshold &#8722;50, Na&#8314; in &#8594; +30, K&#8314; out</small></span>
+    <span class="node">ACTION POTENTIAL<small>threshold &#8722;50, Na&#8314; in &#8594; +30, K&#8314; out</small></span>
     <span class="arrow">&#8594;</span>
     <span class="node">THE WAVE<small>local currents, one-way, refractory</small></span>
     <span class="arrow">&#8594;</span>
-    <span class="node">EXPRESS LANE<small>fat axon or myelin jumps</small></span>
+    <span class="node">SPEED<small>fat axon or myelin jumps</small></span>
     <span class="arrow">&#8594;</span>
     <span class="node">HANDOFF<small>Ca&#178;&#8314; &#8594; vesicles &#8594; ACh &#8594; EPSP</small></span>
   </div>
@@ -588,7 +583,7 @@
     <div class="line">ONE WAY: the impulse starts at one terminal and the <span>refractory period blocks backflow</span>.</div>
     <div class="line">FASTER: fatter axon (squid 25 m/s) or <span>myelin jumps between nodes of Ranvier</span> (100 m/s).</div>
     <div class="line">SYNAPSE: <span>Ca&#178;&#8314; in &#8594; vesicles fuse &#8594; ACh out &#8594; receptor opens Na&#8314; channel &#8594; EPSP</span>.</div>
-    <div class="line">CLEANUP: <span>acetylcholinesterase</span> chops ACh &#8594; choline recycled. One record = one drop.</div>
+    <div class="line">CLEANUP: <span>acetylcholinesterase</span> chops ACh &#8594; choline recycled. one neurotransmitter = one action potential.</div>
   </div>
 </section>
 
@@ -639,7 +634,7 @@
     <label><input type="radio" name="q5" value="refractory"> The patch it just left is refractory &#8212; its Na&#8314; channels are inactivated, so local currents can't re-trigger it</label>
     <label><input type="radio" name="q5" value="wrong2"> Calcium ions only flow forward</label>
     <div class="fb correct">&#9989; The refractory period = one-way valve. Also why there's a max firing rate.</div>
-    <div class="fb wrong">&#10060; The refractory period. After a drop, Na&#8314; channels are inactivated, so the wave can only move into fresh membrane.</div>
+    <div class="fb wrong">&#10060; The refractory period. After an action potential, Na&#8314; channels are inactivated, so the wave can only move into fresh membrane.</div>
   </div>
 
   <div class="q" data-a="squid">
@@ -674,7 +669,7 @@
     <label><input type="radio" name="q9" value="ache"> Acetylcholinesterase breaks ACh into choline + acetate; choline is reabsorbed and rebuilt</label>
     <label><input type="radio" name="q9" value="wrong1"> The receptor slowly degrades the ACh over hours</label>
     <label><input type="radio" name="q9" value="wrong2"> ACh is pumped back across the cleft intact</label>
-    <div class="fb correct">&#9989; Enzymatic breakdown, then recycling. One record = one drop.</div>
+    <div class="fb correct">&#9989; Enzymatic breakdown, then recycling. one neurotransmitter = one action potential.</div>
     <div class="fb wrong">&#10060; Acetylcholinesterase chops ACh into choline + acetate. Choline gets reabsorbed and rebuilt into new ACh.</div>
   </div>
 

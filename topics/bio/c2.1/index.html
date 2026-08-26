@@ -16,14 +16,14 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
 
   /* NAV */
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
@@ -32,10 +32,7 @@
   /* HERO */
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
   .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
@@ -45,25 +42,22 @@
   /* ACTS */
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
   ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
-  ol.steps li{counter-increment:s; padding:7px 0 7px 40px; position:relative; font-size:15px;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
   ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
         border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
@@ -71,14 +65,14 @@
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
   .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
 
   /* figure / image blocks */
   .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
   .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
   .fig .cap b{color:var(--cyan);}
   .fig .cap a{color:var(--cyan); text-decoration:none;}
   .fig .cap a:hover{text-decoration:underline;}
@@ -87,22 +81,23 @@
   .fig.narrow svg{max-width:480px;}
 
   /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
-           padding:20px; margin:16px 0; box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
   .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
   .bouncer .body{flex:1;}
   .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
   .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:14.5px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
   @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
 
   /* tables */
-  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
-  th{background:linear-gradient(90deg,rgba(255,46,196,.18),rgba(168,85,247,.18)); color:#fff; text-align:left;
-     padding:10px 12px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;}
-  td{padding:10px 12px; border-top:1px solid rgba(168,85,247,.2); vertical-align:top;}
-  td:first-child{font-weight:700; color:var(--pink); white-space:nowrap;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
   tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
 
   /* callout boxes */
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
@@ -120,7 +115,7 @@
 
   /* mind map */
   .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
-  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:13.5px; font-weight:600;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
   .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
   .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
   .arrow{color:var(--pink); font-weight:900; align-self:center;}
@@ -128,7 +123,7 @@
   /* quiz */
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -141,7 +136,7 @@
   /* checklist */
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -180,11 +175,11 @@
 <a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · GUEST LIST</a>
-  <a href="#act2">ACT 2 · DELIVERY</a>
-  <a href="#act3">ACT 3 · DOOR POLICY</a>
-  <a href="#act4">ACT 4 · THE PARTY</a>
-  <a href="#act5">ACT 5 · VOLUME</a>
+  <a href="#act1">Cell signalling</a>
+  <a href="#act2">Signalling methods</a>
+  <a href="#act3">Receptors & pathways</a>
+  <a href="#act4">Quorum sensing</a>
+  <a href="#act5">Hormones & feedback</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -196,8 +191,8 @@
 
 <header class="hero">
   <div class="kicker">IB Biology · Higher Level · Theme C</div>
-  <h1>C2.1 CHEMICAL SIGNALLING</h1>
-  <div class="sub">Your body is a nightclub. Every door has a bouncer, every bouncer only lets in one kind of guest — and the music only starts when enough people show up.</div>
+  <h1>Chemical Signalling</h1>
+  <div class="sub">Cells communicate through chemical signals: a ligand binds a specific receptor, triggering a response. Signals travel in different ways, and hormones use feedback to regulate the body.</div>
   <div class="badges">
     <span class="badge hl">C2.1 · AHL ONLY</span>
     <span class="badge ahl">SEPARATES THE HL KIDS FROM THE SL KIDS</span>
@@ -207,30 +202,30 @@
 
 <!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · C2.1.1</div>
-  <h2>THE GUEST LIST 🎟</h2>
-  <p class="aim">Only the right key opens the right door. That's the whole of cell signalling in one sentence.</p>
+  <div class="acttag">C2.1.1</div>
+  <h2>How cells communicate</h2>
+  <p class="aim">A specific ligand binds a specific receptor — that is cell signalling in one sentence.</p>
 
   <div class="panel">
     <h3>HOW CELLS TALK</h3>
     <p class="big">Cell signalling = the transmission of <span class="accent">chemical signals</span> between interacting cells. Your trillions of cells use it to coordinate — to hold <span class="cyan">homeostasis</span> together, to grow, to fight, to think.</p>
     <p>It also happens between <span class="cyan">unicellular organisms</span> (bacteria gossip too — see Act 4).</p>
     <ul class="clean">
-      <li><b>The guest = the <span class="accent">LIGAND</span></b> — the signalling chemical, released by the communicating cell. (Syllabus word: always say <b>ligand</b>, not just "chemical".)</li>
-      <li><b>The door = the <span class="accent">RECEPTOR</span></b> — a <b>protein</b> with a <b>specific binding site</b>, on or inside the target cell.</li>
+      <li><b>The signal = the <span class="accent">LIGAND</span></b> — the signalling chemical, released by the communicating cell. (Syllabus word: always say <b>ligand</b>, not just "chemical".)</li>
+      <li><b>The target = the <span class="accent">RECEPTOR</span></b> — a <b>protein</b> with a <b>specific binding site</b>, on or inside the target cell.</li>
       <li>Ligand binds → the receptor changes shape (<span class="accent">conformational change</span>) → triggers a cellular response.</li>
       <li>Turning a chemical signal into a cellular response = <span class="cyan">signal transduction</span>.</li>
     </ul>
   </div>
 
   <div class="panel">
-    <h3>ONLY THE RIGHT KEY GETS IN 🥒</h3>
+    <h3>Specificity of ligand–receptor binding</h3>
     <p>A hormone travels through your bloodstream and passes <b>every single cell</b> in your body. But only the cells with the <b>matching receptor</b> react. A cucumber key 🥒 does not open the front door — no matter how hard it tries.</p>
-    <p class="muted">That's why one chemical can do completely different jobs: the message is the same, the doors it fits are different.</p>
+    <p class="muted">That's why one chemical can do completely different jobs: the message is the same, the receptors it fits are different.</p>
   </div>
 
   <div class="panel">
-    <h3>LIGAND-BINDING SITE = THE KEYHOLE 🔑</h3>
+    <h3>The ligand-binding site</h3>
     <p>Receptor–ligand binding is like enzyme–substrate specificity — with ONE crucial difference:</p>
     <ul class="clean">
       <li><b>Same:</b> binding happens at a <b>specific site</b>; the <b>shape and chemical properties</b> of the site match the ligand (rejecting everything else); neither enzyme nor receptor is changed by binding (induced fit is temporary).</li>
@@ -260,9 +255,9 @@
 
 <!-- ══════════════════════ ACT 2 ══════════════════════ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · C2.1.3 · C2.1.4 · C2.1.5</div>
-  <h2>DELIVERY METHODS 📦</h2>
-  <p class="aim">Same club, four ways to send the invite — from whispering to a neighbour to mailing across the country.</p>
+  <div class="acttag">C2.1.3 · C2.1.4 · C2.1.5</div>
+  <h2>How signals are delivered</h2>
+  <p class="aim">Four delivery methods, from acting on a neighbouring cell to travelling the bloodstream.</p>
 
   <div class="panel">
     <h3>HOW FAR DOES THE MESSAGE TRAVEL?</h3>
@@ -290,7 +285,7 @@
   </div>
 
   <div class="panel">
-    <h3>THE FOUR DELIVERY TYPES 🎁</h3>
+    <h3>The four signalling types</h3>
     <table>
       <tr><th>Delivery</th><th>How it works</th><th>Key facts</th></tr>
       <tr><td>💌 HORMONES</td>
@@ -309,7 +304,7 @@
   </div>
 
   <div class="panel">
-    <h3>THE MENU: CHEMICAL DIVERSITY 🧪</h3>
+    <h3>The diversity of signalling molecules</h3>
     <p class="big">Why so many different chemicals? A signalling chemical must have a <span class="accent">distinctive shape and chemical properties</span> (so the receptor can tell it apart from everything else) and be <span class="cyan">small and soluble enough</span> to be transported. Evolution just repurposed whatever molecules already existed.</p>
     <div class="grid2">
       <div class="card">
@@ -335,25 +330,25 @@
     <div class="tip"><b>EXAM TRAP:</b> peptide (&lt;50 aa) vs protein (≥50 aa) hormone — examiners love the 50-amino-acid cutoff. And <b>adrenaline is BOTH a hormone and a neurotransmitter</b> — a classic "state the difference" answer.</div>
     <div class="tip"><b>NITRIC vs NITROUS:</b> the official guide says <b>nitric oxide</b> (NO) is the gas neurotransmitter. Some sites say "nitrous oxide" — that's laughing gas (N₂O), a different molecule. In the exam, write <b>nitric oxide</b>.</div>
     <p class="muted" style="margin-top:12px">🧪 Textbook grouping (Oxford 2023): hormones = <b>amines · peptides · steroids</b> (insulin sits under peptides there); neurotransmitters = <b>amines · gases · amino acids · esters</b>. The sharper exam answer keeps peptide (&lt;50 aa) vs protein (≥50 aa) separate.</p>
-    <p class="muted">🐟 Fun fact from the textbook's own data question: <b>nitric oxide even runs newt courtship</b> — nitric oxide synthase activity in male newt brains spikes through each stage of the mating dance. NO: signalling gas, dating coach.</p>
+    <p class="muted">🐟 Fun fact from the textbook's own data question: <b>nitric oxide even runs newt courtship</b> — nitric oxide synthase activity in male newt brains spikes through each stage of the mating behaviour. NO: signalling gas, dating coach.</p>
   </div>
 </section>
 
 <!-- ══════════════════════ ACT 3 ══════════════════════ -->
 <section class="act" id="act3">
-  <div class="acttag">Act 3 · C2.1.6 – C2.1.12</div>
-  <h2>THE DOOR POLICY 🚪</h2>
-  <p class="aim">Hydrophilic guests ring the doorbell. Hydrophobic VIPs walk straight through the wall. Meet the four bouncers.</p>
+  <div class="acttag">C2.1.6 – C2.1.12</div>
+  <h2>Receptors and signal transduction</h2>
+  <p class="aim">Hydrophilic signals bind cell-surface receptors; hydrophobic signals cross the membrane to intracellular receptors. There are four main receptor types.</p>
 
   <div class="marquee">
-    <div class="line">THE QUEUE: <span>RECEPTION → TRANSDUCTION → RESPONSE</span></div>
+    <div class="line"><span>RECEPTION → TRANSDUCTION → RESPONSE</span></div>
     <div class="line">HYDROPHILIC RINGS THE BELL · <span>HYDROPHOBIC WALKS IN</span></div>
     <div class="line">NO KEY, NO ENTRY · ONE "FIRE!" EMPTIES THE STADIUM</div>
-    <div class="line">VIPs GO STRAIGHT TO THE BOSS · <span>NEGATIVE = THERMOSTAT, POSITIVE = SNOWBALL</span></div>
+    <div class="line">Steroids go straight to the nucleus · <span>NEGATIVE = THERMOSTAT, POSITIVE = SNOWBALL</span></div>
   </div>
 
   <div class="panel">
-    <h3>THE 3-STAGE QUEUE 🎬</h3>
+    <h3>The three stages of signal transduction</h3>
     <ol class="steps">
       <li><b>RECEPTION</b> — a ligand binds to a receptor, inside the cell or on the membrane.</li>
       <li><b>TRANSDUCTION</b> — the receptor converts the chemical signal into a cellular signal (often a sequential cascade of reactions).</li>
@@ -378,13 +373,13 @@
     </div>
   </div>
 
-  <!-- Bouncer 1 -->
+  <!-- Receptor 1 -->
   <div class="bouncer">
     <div class="emoji">🚪</div>
     <div class="body">
-      <h3>BOUNCER 1 — THE DOOR</h3>
+      <h3>Receptor 1 — ion-channel receptors</h3>
       <div class="aka">LIGAND-GATED ION CHANNEL · neurotransmitter receptor · example: ACETYLCHOLINE (ACh) · C2.1.8</div>
-      <p>The bouncer <b>is</b> the door. ACh is released by the pre-synaptic neuron into the synaptic cleft and binds to a <b>cholinergic receptor</b> on the post-synaptic cell.</p>
+      <p>The receptor <b>is</b> the ion channel. ACh is released by the pre-synaptic neuron into the synaptic cleft and binds to a <b>cholinergic receptor</b> on the post-synaptic cell.</p>
       <ol class="steps">
         <li>ACh binds → <b>conformational change</b> in the channel protein.</li>
         <li>The channel <b>opens</b> → <b>Na⁺ floods in by facilitated diffusion</b> (down its gradient, through the open pore).</li>
@@ -458,13 +453,13 @@
     </div>
   </div>
 
-  <!-- Bouncer 2 -->
+  <!-- Receptor 2 -->
   <div class="bouncer">
     <div class="emoji">📻</div>
     <div class="body">
-      <h3>BOUNCER 2 — THE WALKIE-TALKIE</h3>
+      <h3>Receptor 2 — G protein-coupled receptors</h3>
       <div class="aka">G PROTEIN-COUPLED RECEPTOR (GPCR) · example: EPINEPHRINE (ADRENALINE) · C2.1.9 + C2.1.10</div>
-      <p>The bouncer doesn't open anything himself — he calls dispatch on the radio, and dispatch mobilises the whole club.</p>
+      <p>The receptor doesn't open anything itself — it activates a G protein, which mobilises the whole cell.</p>
       <p><b>Structure:</b> a GPCR is a single polypeptide that snakes through the membrane. The extracellular part forms the <b>binding site</b>; the intracellular part docks onto a <b>G protein</b>. Humans have <b>hundreds of different GPCRs</b> — one of the biggest receptor families we've got.</p>
       <p><b>The G protein</b> = three subunits: an <b>α subunit bound to GDP</b> + a <b>βγ dimer</b>. When resting, the α, β and γ subunits sit <b>assembled on the receptor</b>.</p>
       <p><b>GPCRs are everywhere:</b> their ligands include <b>light-sensitive compounds, odours, pheromones, hormones and neurotransmitters</b> — your <b>eyes (rhodopsin) and nose (olfactory receptors) run on GPCRs</b>. One of the biggest receptor families humans have.</p>
@@ -539,20 +534,20 @@
           <text x="392" y="408" fill="#4ade80" font-size="11" font-weight="800">glycogen→glucose · heart ↑</text>
           <!-- amplification banner -->
           <rect x="40" y="438" width="560" height="26" rx="8" fill="rgba(251,191,36,.09)" stroke="#fbbf24" stroke-width="1.5"/>
-          <text x="320" y="455" fill="#fbbf24" font-size="12" font-weight="800" text-anchor="middle">⚡ AMPLIFICATION: one adrenaline → many cAMP → whole club mobilised</text>
+          <text x="320" y="455" fill="#fbbf24" font-size="12" font-weight="800" text-anchor="middle">⚡ AMPLIFICATION: one adrenaline → many cAMP → whole cell mobilised</text>
         </svg>
         <div class="cap"><b>TRACE IT:</b> adrenaline docks → GDP→GTP on the α subunit → the G protein splits, α-GTP docks adenylyl cyclase → ATP → cAMP (the second messenger) → kinase cascade. Each step makes more messengers — that's amplification.</div>
       </div>
     </div>
   </div>
 
-  <!-- Bouncer 3 -->
+  <!-- Receptor 3 -->
   <div class="bouncer">
     <div class="emoji">🖨</div>
     <div class="body">
-      <h3>BOUNCER 3 — THE PHOTOCOPIER</h3>
+      <h3>Receptor 3 — receptor tyrosine kinases</h3>
       <div class="aka">RECEPTOR TYROSINE KINASE (RTK) · example: INSULIN · C2.1.11</div>
-      <p>The bouncer who photocopies the message and hands copies to everyone in the club.</p>
+      <p>The receptor that amplifies the signal by phosphorylating many targets.</p>
       <p><b>What an RTK is:</b> a transmembrane <b>kinase</b> — an enzyme that adds a phosphate group from <b>ATP</b> to a molecule (that's <b>phosphorylation</b>). This one phosphorylates the <b>amino acid tyrosine</b> in proteins. Adding phosphate changes a protein's shape and activity.</p>
       <ol class="steps">
         <li>Insulin binds its receptor on the plasma membrane.</li>
@@ -621,18 +616,18 @@
           <text x="562" y="140" fill="#f87171" font-size="10" font-weight="800">(facilitated</text>
           <text x="562" y="158" fill="#f87171" font-size="10" font-weight="800">diffusion)</text>
         </svg>
-        <div class="cap"><b>THE PHOTOCOPIER, ALL FOUR STEPS:</b> insulin docks → two tails dimerize → cross-phosphorylate (ATP→P on tyrosines) → relay proteins dock → GLUT4 vesicles fuse → glucose in. The vesicle fusion IS the endpoint — stop there in the exam.</div>
+        <div class="cap"><b>THE RTK, ALL FOUR STEPS:</b> insulin docks → two tails dimerize → cross-phosphorylate (ATP→P on tyrosines) → relay proteins dock → GLUT4 vesicles fuse → glucose in. The vesicle fusion IS the endpoint — stop there in the exam.</div>
       </div>
     </div>
   </div>
 
-  <!-- Bouncer 4 -->
+  <!-- Receptor 4 -->
   <div class="bouncer">
     <div class="emoji">💎</div>
     <div class="body">
-      <h3>BOUNCER 4 — THE VIP LOUNGE</h3>
+      <h3>Receptor 4 — intracellular receptors</h3>
       <div class="aka">INTRACELLULAR RECEPTOR · example: STEROIDS (oestradiol, progesterone, testosterone) · C2.1.12</div>
-      <p>Steroids don't queue. They're fat-soluble, so they <b>diffuse straight through the plasma membrane</b> (in the blood they ride bound to <b>transport proteins</b>).</p>
+      <p>Steroids don't need a membrane receptor. They're fat-soluble, so they <b>diffuse straight through the plasma membrane</b> (in the blood they ride bound to <b>transport proteins</b>).</p>
       <ol class="steps">
         <li>Steroid diffuses into the cell → binds its receptor in the <b>cytoplasm or nucleus</b>.</li>
         <li>The activated <b>hormone–receptor complex = a TRANSCRIPTION FACTOR</b>.</li>
@@ -640,7 +635,7 @@
         <li>Gene transcription switches on → new proteins → cellular change.</li>
       </ol>
       <p class="muted">Speed: slow (minutes to hours) but the effect <b>lasts</b>. Testosterone → male sex characteristics + <b>muscle growth</b> (textbook example: the androgen–receptor complex boosts the <b>FADS1</b> gene → more fats in prostate cells); oestradiol → female characteristics + <b>menstrual cycle</b>; progesterone → pregnancy (implantation, milk production).</p>
-      <p class="gold">💎 VIPs GO STRAIGHT TO THE BOSS — no bouncers, no second messengers, no cascade. Direct line to the DNA.</p>
+      <p class="gold">💎 Steroids go straight to the nucleus — no membrane receptor, no second messengers, no cascade. Direct line to the DNA.</p>
       <div class="fig narrow">
         <svg viewBox="0 0 640 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="labelled diagram of a steroid hormone passing through the membrane and acting on DNA via an intracellular receptor">
           <rect width="640" height="450" rx="14" fill="#150a26"/>
@@ -691,13 +686,13 @@
           <!-- timing -->
           <text x="320" y="430" fill="#b9a3d6" font-size="11" font-weight="700" text-anchor="middle">slow (minutes–hours) but it lasts — direct line to DNA, no cascade</text>
         </svg>
-        <div class="cap"><b>NO BOUNCER REQUIRED:</b> steroid slips through the membrane → binds the intracellular receptor → complex = transcription factor → binds DNA, RNA polymerase attaches at the promoter → new protein. Slow, but the effect lasts.</div>
+        <div class="cap"><b>No membrane receptor required:</b> steroid slips through the membrane → binds the intracellular receptor → complex = transcription factor → binds DNA, RNA polymerase attaches at the promoter → new protein. Slow, but the effect lasts.</div>
       </div>
     </div>
   </div>
 
   <div class="panel">
-    <h3>SECOND MESSENGERS GALLERY 📨</h3>
+    <h3>Second messengers</h3>
     <p>When the first messenger (the ligand) can't get inside, the receptor sends <b>second messengers</b> in instead:</p>
     <div class="grid3">
       <div class="card"><h4>cAMP</h4><p>Made from ATP by adenylyl cyclase. Adrenaline's messenger.</p></div>
@@ -711,9 +706,9 @@
 
 <!-- ══════════════════════ ACT 4 ══════════════════════ -->
 <section class="act" id="act4">
-  <div class="acttag">Act 4 · C2.1.2</div>
-  <h2>THE PARTY 🦑</h2>
-  <p class="aim">Bacteria don't have a club — so they build one. When the room gets full enough, the lights come on.</p>
+  <div class="acttag">C2.1.2</div>
+  <h2>Quorum sensing</h2>
+  <p class="aim">Bacteria coordinate behaviour by detecting their own population density — quorum sensing.</p>
 
   <div class="panel">
     <h3>QUORUM SENSING</h3>
@@ -751,9 +746,9 @@
 
 <!-- ══════════════════════ ACT 5 ══════════════════════ -->
 <section class="act" id="act5">
-  <div class="acttag">Act 5 · C2.1.13 · C2.1.14</div>
-  <h2>VOLUME CONTROL 🎚</h2>
-  <p class="aim">Two hormones with very specific jobs, and the DJ's two volume knobs: thermostat (calm it down) and snowball (amp it up).</p>
+  <div class="acttag">C2.1.13 · C2.1.14</div>
+  <h2>Hormones and feedback</h2>
+  <p class="aim">Two hormones with specific jobs, and two feedback patterns: negative feedback (a thermostat) and positive feedback (amplifying).</p>
 
   <div class="grid2">
     <div class="card">
@@ -817,20 +812,20 @@
     <div class="arrow">→</div>
     <div class="node">🎁 DELIVERY<br><small>hormone · NT · cytokine · Ca²⁺ · C2.1.3</small></div>
     <div class="arrow">→</div>
-    <div class="node">🚪 4 BOUNCERS<br><small>channel · GPCR · RTK · VIP · C2.1.8–12</small></div>
+    <div class="node">🚪 4 RECEPTORS<br><small>ion channel · GPCR · RTK · intracellular · C2.1.8–12</small></div>
     <div class="arrow">→</div>
     <div class="node">🦑 QUORUM<br><small>lights on when full · C2.1.2</small></div>
     <div class="arrow">→</div>
     <div class="node">🎚 FEEDBACK<br><small>thermostat vs snowball · C2.1.14</small></div>
   </div>
   <div class="panel">
-    <h3>THE FOUR BOUNCERS, ONE LINE EACH</h3>
+    <h3>THE FOUR RECEPTOR TYPES, ONE LINE EACH</h3>
     <table>
-      <tr><th>Bouncer</th><th>Receptor</th><th>Guest</th><th>One-liner</th></tr>
-      <tr><td>🚪 THE DOOR</td><td>Ligand-gated ion channel</td><td>ACh</td><td>Bouncer IS the door: Na⁺ floods in → depolarisation.</td></tr>
-      <tr><td>📻 WALKIE-TALKIE</td><td>GPCR</td><td>Adrenaline</td><td>Calls dispatch: G protein → adenylyl cyclase → cAMP → cascade.</td></tr>
-      <tr><td>🖨 PHOTOCOPIER</td><td>RTK</td><td>Insulin</td><td>Phosphorylates tyrosines → GLUT4 vesicles → glucose in.</td></tr>
-      <tr><td>💎 VIP</td><td>Intracellular</td><td>Steroids</td><td>Walks straight in → transcription factor → genes on.</td></tr>
+      <tr><th>Receptor type</th><th>Class</th><th>Signal</th><th>How it works</th></tr>
+      <tr><td>🚪 Ion channel</td><td>Ligand-gated ion channel</td><td>ACh</td><td>Receptor IS the channel: Na⁺ floods in → depolarisation.</td></tr>
+      <tr><td>📻 GPCR</td><td>GPCR</td><td>Adrenaline</td><td>Activates G protein → adenylyl cyclase → cAMP → cascade.</td></tr>
+      <tr><td>🖨 RTK</td><td>RTK</td><td>Insulin</td><td>Phosphorylates tyrosines → GLUT4 vesicles → glucose in.</td></tr>
+      <tr><td>💎 Intracellular</td><td>Intracellular</td><td>Steroids</td><td>Diffuses straight in → transcription factor → genes on.</td></tr>
     </table>
   </div>
 </section>
@@ -844,7 +839,7 @@
     <div class="line">1 · LIGAND = signalling chemical · RECEPTOR = protein with specific binding site</div>
     <div class="line">2 · RECEPTION → TRANSDUCTION → RESPONSE</div>
     <div class="line">3 · HYDROPHILIC = transmembrane receptor (rings the bell) · HYDROPHOBIC = intracellular (walks in)</div>
-    <div class="line">4 · FOUR BOUNCERS: <span>door · walkie-talkie · photocopier · VIP</span></div>
+    <div class="line">4 · FOUR RECEPTORS: <span>ion channel · GPCR · RTK · intracellular</span></div>
     <div class="line">5 · G PROTEIN CYCLE: <span>GDP OUT → GTP IN → SPLIT → DELIVER</span></div>
     <div class="line">6 · SECOND MESSENGERS: <span>cAMP · Ca²⁺ · NO · protein kinases</span> = amplification</div>
     <div class="line">7 · ADRENALINE: <span>amine · adrenal gland · GPCR · ATP→cAMP · fight or flight</span></div>
@@ -865,12 +860,12 @@
   <p class="aim">Click an answer. Instant feedback. No mercy.</p>
 
   <div class="q" data-a="door">
-    <p>1. Name the four bouncers in order of speed, fastest first.</p>
-    <label><input type="radio" name="q1" value="door"> 🚪 door (channel) · 📻 walkie-talkie (GPCR) · 🖨 photocopier (RTK) · 💎 VIP (intracellular)</label>
-    <label><input type="radio" name="q1" value="wrong1"> 💎 VIP · 📻 walkie-talkie · 🚪 door · 🖨 photocopier</label>
-    <label><input type="radio" name="q1" value="wrong2"> 📻 walkie-talkie · 🚪 door · 💎 VIP · 🖨 photocopier</label>
-    <div class="fb correct">✅ Correct — millisecond channel, then the cascades, then the slow-but-lasting VIPs.</div>
-    <div class="fb wrong">❌ The door (ion channel) is millisecond-fast; VIP steroids are the slow ones (minutes–hours).</div>
+    <p>1. Name the four receptor types in order of speed, fastest first.</p>
+    <label><input type="radio" name="q1" value="door"> 🚪 ion channel · 📻 GPCR · 🖨 RTK · 💎 intracellular</label>
+    <label><input type="radio" name="q1" value="wrong1"> 💎 intracellular · 📻 GPCR · 🚪 door · 🖨 RTK</label>
+    <label><input type="radio" name="q1" value="wrong2"> 📻 GPCR · 🚪 ion channel · 💎 intracellular · 🖨 RTK</label>
+    <div class="fb correct">✅ Correct — millisecond channel, then the cascades, then the slow-but-lasting intracellular receptors.</div>
+    <div class="fb wrong">❌ The ion channel is millisecond-fast; intracellular steroids are the slow ones (minutes–hours).</div>
   </div>
 
   <div class="q" data-a="gtp">
@@ -915,7 +910,7 @@
     <label><input type="radio" name="q6" value="luc"> Luciferase</label>
     <label><input type="radio" name="q6" value="wrong2"> Adenylyl cyclase</label>
     <div class="fb correct">✅ Luciferase — switched on when quorum is reached.</div>
-    <div class="fb wrong">❌ It's <b>luciferase</b>. (Adenylyl cyclase makes cAMP in the adrenaline pathway — different party.)</div>
+    <div class="fb wrong">❌ It's <b>luciferase</b>. (Adenylyl cyclase makes cAMP in the adrenaline pathway — different pathway.)</div>
   </div>
 
   <div class="q" data-a="adh">
