@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>Number &amp; Algebra — AI SL Topic 1</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; font-size:16px; line-height:1.7;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 90px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.94); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:.03em;
+        padding:6px 11px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+  .badge.gold{border-color:var(--gold); color:var(--gold);}
+
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:15px; margin-bottom:18px; max-width:760px;}
+
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:9px 0; color:var(--ink); font-size:16px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:14px;}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; line-height:1.6;}
+  th{background:var(--panel2); color:var(--cyan); font-weight:800; text-align:left; padding:12px 16px;
+     border-bottom:1px solid var(--line2); letter-spacing:.04em; font-size:13px; text-transform:uppercase;}
+  td{padding:14px 16px; border-bottom:1px solid rgba(168,85,247,.15); vertical-align:top;}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+  td .f{color:#fff; font-weight:700;}
+  td .u{color:var(--dim); font-size:13.5px; display:block; margin-top:3px;}
+
+  ul.clean{list-style:none;}
+  ul.clean li{padding:8px 0 8px 26px; position:relative; font-size:15.5px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:16px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+  .exam .qa{font-weight:700; color:#fff; font-size:15.5px; margin-bottom:6px;}
+  .exam .ans{color:var(--ink);}
+  .exam .trap{color:var(--dim); font-size:14px; margin-top:8px;}
+
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:14px 0;}
+  .q p{font-weight:700; font-size:15.5px; margin-bottom:12px;}
+  .q label{display:block; padding:8px 14px; margin:5px 0; border-radius:10px; cursor:pointer; font-size:15px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:9px;}
+  .q .fb{display:none; margin-top:12px; font-size:14.5px; padding:11px 14px; border-radius:10px; line-height:1.55;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px; line-height:1.55;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:2px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 58px; font-size:13px; padding-top:2px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:13px; text-align:center; line-height:1.8;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+
+<nav>
+  <a href="#defs">📖 DEFINITIONS</a>
+  <a href="#formulas">🧮 FORMULAS</a>
+  <a href="#facts">🔢 KEY FACTS</a>
+  <a href="#worked">🎯 WORKED</a>
+  <a href="#quiz">✏️ QUIZ</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/8</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL</div>
+  <h1>NUMBER &amp; ALGEBRA</h1>
+  <div class="sub">Scientific notation, sequences and series, compound interest, logarithms, bounds and GDC solving — every rule in Topic 1, with the formulas and worked answers you'll actually be asked for.</div>
+  <div class="badges">
+    <span class="badge hl">TOPIC 1 · 1.1 – 1.8</span>
+    <span class="badge ahl">GDC + BY HAND</span>
+    <span class="badge gold">ASSESSMENT · THU 27 AUG</span>
+  </div>
+</header>
+
+<!-- ══════════════ DEFINITIONS ══════════════ -->
+<section class="act" id="defs">
+  <div class="acttag">📖 Definitions bank</div>
+  <h2>THE WORDS THAT SCORE</h2>
+  <p class="aim">Exact definitions, one line each. If you can say these, you can start any "state" or "explain" question.</p>
+  <table>
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td><span class="f">Scientific notation</span></td><td>Writing a number as <span class="f">a × 10<sup>k</sup></span> where 1 ≤ a &lt; 10 and k is an integer. 4 300 000 = 4.3 × 10<sup>6</sup>.</td></tr>
+    <tr><td><span class="f">Arithmetic sequence</span></td><td>A list where each term differs from the next by a <span class="cyan">common difference d</span>. 5, 8, 11, 14… (d = 3).</td></tr>
+    <tr><td><span class="f">Geometric sequence</span></td><td>A list where each term is multiplied by a <span class="cyan">common ratio r</span> to get the next. 8, 4, 2, 1… (r = ½).</td></tr>
+    <tr><td><span class="f">Series</span></td><td>The <span class="accent">sum</span> of the terms of a sequence. "Sequence" = list, "series" = added together.</td></tr>
+    <tr><td><span class="f">Compound interest</span></td><td>Interest paid on the original amount <em>and</em> on interest already earned — money grows geometrically.</td></tr>
+    <tr><td><span class="f">Depreciation</span></td><td>Value decreasing by a <span class="cyan">fixed percentage each year</span> — a geometric sequence with r &lt; 1.</td></tr>
+    <tr><td><span class="f">Annuity</span></td><td>A series of <span class="accent">equal regular payments</span> into or out of an account (saving up, or a pension).</td></tr>
+    <tr><td><span class="f">Amortization</span></td><td>Paying off a loan with regular equal payments; each payment covers interest <em>plus</em> some principal.</td></tr>
+    <tr><td><span class="f">Logarithm</span></td><td>The inverse of a power. log<sub>10</sub> x = "the power you raise 10 to, to get x". log<sub>10</sub> 1000 = 3 because 10³ = 1000.</td></tr>
+    <tr><td><span class="f">Upper / lower bound</span></td><td>The interval a rounded value must actually sit in. 6.7 (1 dp) lies in 6.65 ≤ x &lt; 6.75.</td></tr>
+    <tr><td><span class="f">Percentage error</span></td><td>|measured − exact| ÷ exact × 100%. How far a measurement is off, as a % of the true value.</td></tr>
+  </table>
+</section>
+
+<!-- ══════════════ FORMULAS ══════════════ -->
+<section class="act" id="formulas">
+  <div class="acttag">🧮 Formula sheet</div>
+  <h2>THE FORMULAS YOU MUST KNOW</h2>
+  <p class="aim">These are in your data booklet — but you need them in your head fast enough to spot which one a question wants.</p>
+  <table>
+    <tr><th>Formula</th><th>What it does</th><th>When to use</th></tr>
+    <tr><td><span class="f">u<sub>n</sub> = u<sub>1</sub> + (n − 1)d</span></td><td>n-th term of an arithmetic sequence</td><td>"Find the 20th term"</td></tr>
+    <tr><td><span class="f">S<sub>n</sub> = n/2 [2u<sub>1</sub> + (n − 1)d]</span><br><span class="f">= n/2 (u<sub>1</sub> + u<sub>n</sub>)</span></td><td>Sum of the first n terms (arithmetic)</td><td>"Find the sum of the first 30 terms"</td></tr>
+    <tr><td><span class="f">u<sub>n</sub> = u<sub>1</sub> r<sup>n−1</sup></span></td><td>n-th term of a geometric sequence</td><td>"Find the 8th term"</td></tr>
+    <tr><td><span class="f">S<sub>n</sub> = u<sub>1</sub>(1 − r<sup>n</sup>)/(1 − r)</span></td><td>Sum of the first n terms (geometric)</td><td>r ≠ 1; "sum the first n terms"</td></tr>
+    <tr><td><span class="f">S<sub>∞</sub> = u<sub>1</sub>/(1 − r)</span></td><td>Sum to infinity (geometric)</td><td>Only when |r| &lt; 1</td></tr>
+    <tr><td><span class="f">FV = PV (1 + i)<sup>n</sup></span></td><td>Compound interest</td><td>i = rate per period, n = number of periods</td></tr>
+    <tr><td><span class="f">FV = PV (1 − r)<sup>n</sup></span></td><td>Annual depreciation</td><td>r = depreciation rate as a decimal</td></tr>
+    <tr><td><span class="f">a<sup>m</sup> a<sup>n</sup> = a<sup>m+n</sup></span> &nbsp;·&nbsp; <span class="f">a<sup>m</sup>/a<sup>n</sup> = a<sup>m−n</sup></span><br><span class="f">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span> &nbsp;·&nbsp; <span class="f">a<sup>0</sup> = 1</span> &nbsp;·&nbsp; <span class="f">a<sup>−n</sup> = 1/a<sup>n</sup></span></td><td>Laws of exponents</td><td>Simplifying powers</td></tr>
+    <tr><td><span class="f">log<sub>a</sub>(xy) = log<sub>a</sub>x + log<sub>a</sub>y</span><br><span class="f">log<sub>a</sub>(x/y) = log<sub>a</sub>x − log<sub>a</sub>y</span><br><span class="f">log<sub>a</sub>x<sup>m</sup> = m log<sub>a</sub>x</span></td><td>Laws of logarithms</td><td>log<sub>a</sub>a = 1, log<sub>a</sub>1 = 0</td></tr>
+    <tr><td><span class="f">% error = |approx − exact| / exact × 100%</span></td><td>Percentage error</td><td>Bounds / measurement questions</td></tr>
+  </table>
+
+  <div class="tip"><b>EXAM TRAP</b> — Arithmetic vs geometric: if terms go up/down by a <em>constant amount</em>, it's arithmetic (use d). If they're multiplied by a <em>constant factor</em>, it's geometric (use r). The words "doubles", "halves", "5% each year" all scream geometric.</div>
+</section>
+
+<!-- ══════════════ KEY FACTS ══════════════ -->
+<section class="act" id="facts">
+  <div class="acttag">🔢 Key facts</div>
+  <h2>NUMBERS TO HAVE LOADED</h2>
+  <p class="aim">The small constants that save you a GDC trip in the exam.</p>
+  <div class="panel">
+    <ul class="clean">
+      <li><span class="accent">e ≈ 2.71828</span> — the base of the natural log, ln. ln e = 1, ln 1 = 0.</li>
+      <li><span class="cyan">log<sub>10</sub> 1 = 0</span> · log<sub>10</sub> 10 = 1 · log<sub>10</sub> 100 = 2 · log<sub>10</sub> 1000 = 3 · log<sub>10</sub> 10 000 = 4.</li>
+      <li><span class="gold">10<sup>0</sup> = 1</span>, and 10<sup>−k</sup> = 1/10<sup>k</sup> (10<sup>−3</sup> = 0.001).</li>
+      <li>Scientific notation keeps <span class="accent">1 ≤ a &lt; 10</span>: 0.0045 = 4.5 × 10<sup>−3</sup>, not 45 × 10<sup>−4</sup>.</li>
+      <li>A number rounded to <span class="cyan">d decimal places</span> is off by at most <span class="accent">half a unit in the last place</span>: 6.7 (1 dp) → bounds 6.65 and 6.75.</li>
+      <li>Annuity / amortization: use the GDC <span class="gold">TVM solver</span> — N, I%, PV, PMT, FV, P/Y, C/Y. PV is positive money in, PMT/FV signed by direction.</li>
+      <li>GDC solves <span class="cyan">systems of up to 3 linear equations</span> (linSolve / rref) and polynomial equations (polyRoots / nSolve) — 1.8 is pure technology marks.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════ WORKED EXAMPLES ══════════════ -->
+<section class="act" id="worked">
+  <div class="acttag">🎯 Worked examples</div>
+  <h2>FIVE QUESTIONS, STEP BY STEP</h2>
+  <p class="aim">Model answers with the marks in mind — and the trap that catches people out on each one.</p>
+
+  <div class="exam">
+    <div class="qa">1. Find the 10th term and the sum of the first 10 terms of the arithmetic sequence 5, 8, 11, …</div>
+    <div class="ans">d = 3. <span class="green">u<sub>10</sub> = 5 + (10 − 1)(3) = 5 + 27 = 32.</span> Then <span class="green">S<sub>10</sub> = 10/2 (5 + 32) = 5 × 37 = 185.</span></div>
+    <div class="trap">Trap: "10th term" needs (n − 1) = 9 in the formula, not 10. Writing u<sub>10</sub> = 5 + 10×3 is the classic −1 slip.</div>
+  </div>
+
+  <div class="exam">
+    <div class="qa">2. Evaluate the sum to infinity of 8 + 4 + 2 + 1 + …</div>
+    <div class="ans">Geometric, r = 4/8 = 0.5, and |r| &lt; 1 so a sum to infinity exists. <span class="green">S<sub>∞</sub> = 8/(1 − 0.5) = 8/0.5 = 16.</span></div>
+    <div class="trap">Trap: S<sub>∞</sub> only exists when |r| &lt; 1. If r ≥ 1 the series keeps growing and "sum to infinity" has no answer.</div>
+  </div>
+
+  <div class="exam">
+    <div class="qa">3. $2500 is invested at 3.5% per year, compounded annually. Find its value after 6 years.</div>
+    <div class="ans"><span class="green">FV = 2500(1.035)<sup>6</sup> = $3073.14</span> (to the nearest cent).</div>
+    <div class="trap">Trap: i is the decimal rate 0.035, and n is the <em>number of periods</em>. Compounded monthly for 6 years would be i = 0.035/12 and n = 72.</div>
+  </div>
+
+  <div class="exam">
+    <div class="qa">4. A laptop bought for $1200 depreciates 15% per year. Find its value after 4 years.</div>
+    <div class="ans"><span class="green">FV = 1200(1 − 0.15)<sup>4</sup> = 1200(0.85)<sup>4</sup> = $626.41</span>.</div>
+    <div class="trap">Trap: depreciation multiplies by (1 − r), not (1 + r). Using 1.15 gives a laptop that <em>gains</em> value.</div>
+  </div>
+
+  <div class="exam">
+    <div class="qa">5. A length is measured as 6.7 m correct to 1 decimal place. State the lower and upper bounds, and the maximum percentage error.</div>
+    <div class="ans">Bounds: <span class="green">6.65 m ≤ L &lt; 6.75 m.</span> Max error = 0.05 m. <span class="green">% error = 0.05/6.7 × 100 ≈ 0.75%</span>.</div>
+    <div class="trap">Trap: the upper bound is 6.75 with a strict "less than" (a value of exactly 6.75 would round to 6.8). Lower bound 6.65 is inclusive.</div>
+  </div>
+
+  <div class="exam">
+    <div class="qa">6. Solve 10<sup>x</sup> = 500.</div>
+    <div class="ans"><span class="green">x = log<sub>10</sub> 500 ≈ 2.699</span> (using the GDC log key).</div>
+    <div class="trap">Trap: log<sub>10</sub> 500 is <em>not</em> 50. It's the power, so it sits between 2 (=100) and 3 (=1000).</div>
+  </div>
+</section>
+
+<!-- ══════════════ QUIZ ══════════════ -->
+<section class="act" id="quiz">
+  <div class="acttag">✏️ Self-test</div>
+  <h2>QUICK QUIZ — 6 QUESTIONS</h2>
+  <p class="aim">No notes, no GDC where it says so. Pick an answer and it tells you right away.</p>
+
+  <div class="q" data-a="1">
+    <p>Q1. Find the 10th term of the arithmetic sequence 3, 7, 11, …</p>
+    <label><input type="radio" name="q1" value="1"> 39</label>
+    <label><input type="radio" name="q1" value="2"> 43</label>
+    <label><input type="radio" name="q1" value="3"> 35</label>
+    <div class="fb correct">✅ 39. u<sub>10</sub> = 3 + 9×4 = 39.</div>
+    <div class="fb wrong">❌ Not quite. d = 4, so u<sub>10</sub> = 3 + (10−1)×4 = 3 + 36 = 39.</div>
+  </div>
+
+  <div class="q" data-a="2">
+    <p>Q2. The sum to infinity of 12 + 6 + 3 + … is:</p>
+    <label><input type="radio" name="q2" value="1"> 12</label>
+    <label><input type="radio" name="q2" value="2"> 24</label>
+    <label><input type="radio" name="q2" value="3"> 36</label>
+    <div class="fb correct">✅ 24. r = ½, so S<sub>∞</sub> = 12/(1 − ½) = 24.</div>
+    <div class="fb wrong">❌ S<sub>∞</sub> = u<sub>1</sub>/(1 − r) = 12/(1 − 0.5) = 24.</div>
+  </div>
+
+  <div class="q" data-a="2">
+    <p>Q3. $2000 at 4% p.a. compounded annually for 5 years is worth:</p>
+    <label><input type="radio" name="q3" value="1"> $2400.00</label>
+    <label><input type="radio" name="q3" value="2"> $2433.31</label>
+    <label><input type="radio" name="q3" value="3"> $2500.00</label>
+    <div class="fb correct">✅ $2433.31. 2000(1.04)⁵ = 2433.31.</div>
+    <div class="fb wrong">❌ 2000 × 1.04⁵ = 2000 × 1.21665 = $2433.31.</div>
+  </div>
+
+  <div class="q" data-a="3">
+    <p>Q4. log<sub>10</sub> 10 000 = ?</p>
+    <label><input type="radio" name="q4" value="1"> 10</label>
+    <label><input type="radio" name="q4" value="2"> 1000</label>
+    <label><input type="radio" name="q4" value="3"> 4</label>
+    <div class="fb correct">✅ 4. 10⁴ = 10 000, so log<sub>10</sub> 10 000 = 4.</div>
+    <div class="fb wrong">❌ The log is the power: 10 000 = 10⁴, so the answer is 4.</div>
+  </div>
+
+  <div class="q" data-a="2">
+    <p>Q5. A value is given as 8.3 (correct to 1 dp). The lower bound is:</p>
+    <label><input type="radio" name="q5" value="1"> 8.35</label>
+    <label><input type="radio" name="q5" value="2"> 8.25</label>
+    <label><input type="radio" name="q5" value="3"> 8.30</label>
+    <div class="fb correct">✅ 8.25. Rounding to 1 dp is off by at most 0.05.</div>
+    <div class="fb wrong">❌ 1 dp → half of 0.1 is 0.05, so 8.3 − 0.05 = 8.25.</div>
+  </div>
+
+  <div class="q" data-a="1">
+    <p>Q6. The sum of the first 8 terms of 2, 5, 8, … is:</p>
+    <label><input type="radio" name="q6" value="1"> 100</label>
+    <label><input type="radio" name="q6" value="2"> 116</label>
+    <label><input type="radio" name="q6" value="3"> 88</label>
+    <div class="fb correct">✅ 100. S₈ = 8/2(2×2 + 7×3) = 4 × 25 = 100.</div>
+    <div class="fb wrong">❌ d = 3, u₁ = 2: S₈ = 4(4 + 21) = 100.</div>
+  </div>
+</section>
+
+<!-- ══════════════ CHECKLIST ══════════════ -->
+<section class="act" id="check">
+  <div class="acttag">✅ Syllabus checklist</div>
+  <h2>TICK IT OFF</h2>
+  <p class="aim">Every 1.x statement. Click to mark it done — your progress saves automatically.</p>
+  <div class="progress"><div class="fill" id="progFill"></div></div>
+  <div class="progtext" id="progText">0 of 8 done</div>
+  <ol class="cl" id="cl">
+    <li><span class="box">✓</span><span class="code">1.1</span> Scientific notation: a × 10<sup>k</sup> with 1 ≤ a &lt; 10, k an integer.</li>
+    <li><span class="box">✓</span><span class="code">1.2</span> Arithmetic sequences &amp; series — n-th term, sum formula, sigma notation, and real-life (imperfect) models.</li>
+    <li><span class="box">✓</span><span class="code">1.3</span> Geometric sequences &amp; series — n-th term, sum formula, sigma notation, sum to infinity.</li>
+    <li><span class="box">✓</span><span class="code">1.4</span> Financial applications: compound interest and annual depreciation.</li>
+    <li><span class="box">✓</span><span class="code">1.5</span> Laws of exponents (integer), logarithms base 10 and e, GDC log evaluation.</li>
+    <li><span class="box">✓</span><span class="code">1.6</span> Approximation: decimal places, sig figs, upper/lower bounds, percentage error, estimation.</li>
+    <li><span class="box">✓</span><span class="code">1.7</span> Amortization and annuities using technology.</li>
+    <li><span class="box">✓</span><span class="code">1.8</span> GDC: systems of linear equations (up to 3 variables) and polynomial equations.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>built for the Thu 2026-08-27 Math AI SL assessment — Number &amp; Algebra</p>
+  <p>sources: Y12 AI SL topics sheet (Aug 2026) · IB data booklet · GDC: TI-Nspire CX / fx-CG50</p>
+  <p>part of <a href="../../../index.html">Travis's Study Hub</a></p>
+</footer>
+</div>
+
+<script>
+var KEY='math-na-checklist-v1';
+var items=document.querySelectorAll('#cl li');
+var pill=document.getElementById('progPill');
+var fill=document.getElementById('progFill');
+var ptext=document.getElementById('progText');
+var saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+function upd(){
+  var d=0; items.forEach(function(li){if(li.classList.contains('done'))d++;});
+  pill.textContent=d+'/'+items.length;
+  fill.style.width=(d/items.length*100)+'%';
+  ptext.textContent=d+' of '+items.length+' done';
+  var s={}; items.forEach(function(li,i){s[i]=li.classList.contains('done');});
+  try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
+}
+items.forEach(function(li,i){
+  if(saved[i])li.classList.add('done');
+  li.addEventListener('click',function(){li.classList.toggle('done');upd();});
+});
+upd();
+
+document.querySelectorAll('.q').forEach(function(q){
+  q.querySelectorAll('input[type=radio]').forEach(function(r){
+    r.addEventListener('change',function(){
+      q.classList.remove('correct','wrong');
+      if(r.value===q.getAttribute('data-a'))q.classList.add('correct'); else q.classList.add('wrong');
+    });
+  });
+});
+</script>
+</body>
+</html>

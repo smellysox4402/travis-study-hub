@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>Stats &amp; Probability — The DJ Booth</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
+     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
+     -webkit-background-clip:text; background-clip:text; color:transparent;
+     text-shadow:0 0 42px rgba(255,46,196,.35);}
+  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+  .badge.gold{border-color:var(--gold); color:var(--gold);}
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
+          background:linear-gradient(90deg,var(--pink),var(--violet));
+          -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
+         box-shadow:0 0 30px rgba(168,85,247,.08);}
+  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
+  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
+  .panel .big{font-size:16.5px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:13.5px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
+  .fig .cap b{color:var(--cyan);}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+
+  footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
+  footer a{color:var(--cyan); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media print{
+    nav{display:none;}
+    body{background:#fff; color:#111;}
+    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
+    .act h2{-webkit-text-fill-color:#111;}
+    .q .fb{display:block;}
+  }
+</style>
+</head><body>
+
+<a class="home-btn" href="../../../index.html">HOME</a>
+
+<nav>
+  <a href="#act1">ACT 1 · THE DJ BOOTH</a>
+  <a href="#act2">ACT 2 · THE DANCE FLOOR</a>
+  <a href="#act3">ACT 3 · GUEST LIST ODDS</a>
+  <a href="#act4">ACT 4 · THE LINE OUTSIDE</a>
+  <a href="#cheat">CHEAT</a>
+  <a href="#selftest">SELF-TEST</a>
+  <span class="pill" id="progPill">0/11</span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL</div>
+  <h1>STATS &amp; PROBABILITY</h1>
+  <div class="sub">Every dataset is a nightclub. The mean is the DJ's average taste, the box plot is the queue at the door, and probability is the bouncer's odds on who gets in. Read the room and the numbers stop lying to you.</div>
+  <div class="badges">
+    <span class="badge hl">TOPIC 4 · SL + HL CORE</span>
+    <span class="badge ahl">GDC HEAVY · AI SL</span>
+    <span class="badge gold">ASSESSMENT · THU 27 AUG</span>
+  </div>
+</header>
+<!-- ACT 1 -->
+<section class="act" id="act1">
+  <div class="acttag">Act 1 · 4.1 – 4.5 · descriptive statistics</div>
+  <h2>THE DJ BOOTH</h2>
+  <p class="aim">First rule of the club: one rowdy guest can wreck the whole vibe. The mean feels everything; the median doesn't care.</p>
+
+  <div class="panel">
+    <h3>THREE WAYS TO DESCRIBE THE CROWD</h3>
+    <p class="big">The <span class="accent">mean</span> is the DJ's average taste — add every value, divide by how many. The <span class="cyan">median</span> is the middle of the queue — sort everyone, take the centre. The <span class="gold">mode</span> is the most common value — the vibe everyone keeps showing up in.</p>
+    <p>One extreme guest (an <b>outlier</b>) drags the mean with him. The median doesn't even notice. That's why house prices are quoted as medians and exam grade boundaries use means.</p>
+  </div>
+
+  <div class="panel">
+    <h3>THE BOUNCE HOUSE: QUARTILES</h3>
+    <p>Split the sorted queue into four equal groups. <b>Q1</b> = 25% in, <b>Q2</b> = the median (50%), <b>Q3</b> = 75%. The middle 50% of guests live between Q1 and Q3 — that stretch is the <span class="accent">IQR</span> = Q3 − Q1.</p>
+    <p class="big">Outlier door policy: anyone below <span class="accent">Q1 − 1.5 × IQR</span> or above <span class="accent">Q3 + 1.5 × IQR</span> doesn't get in — they're drawn as lonely dots beyond the whiskers.</p>
+  </div>
+  <div class="fig">
+    <svg viewBox="0 0 660 230" role="img" aria-label="box and whisker plot">
+      <defs>
+        <linearGradient id="boxg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#ff2ec4"/><stop offset="1" stop-color="#a855f7"/>
+        </linearGradient>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <line x1="60" y1="180" x2="620" y2="180" stroke="#22d3ee" stroke-width="2" opacity=".5"/>
+      <line x1="60" y1="175" x2="60" y2="185" stroke="#22d3ee" stroke-width="2"/>
+      <line x1="620" y1="175" x2="620" y2="185" stroke="#22d3ee" stroke-width="2"/>
+      <line x1="90" y1="130" x2="150" y2="130" stroke="#f3e8ff" stroke-width="3"/>
+      <rect x="150" y="100" width="300" height="60" rx="6" fill="none" stroke="url(#boxg)" stroke-width="3" filter="url(#glow)"/>
+      <line x1="290" y1="100" x2="290" y2="160" stroke="#fbbf24" stroke-width="3" filter="url(#glow)"/>
+      <line x1="450" y1="130" x2="560" y2="130" stroke="#f3e8ff" stroke-width="3"/>
+      <circle cx="590" cy="130" r="6" fill="#ff2ec4" filter="url(#glow)"/>
+      <text x="70" y="205" fill="#22d3ee" font-size="12" font-weight="700">min</text>
+      <text x="135" y="120" fill="#f3e8ff" font-size="11" font-weight="700">Q1</text>
+      <text x="270" y="90" fill="#fbbf24" font-size="12" font-weight="800">median (Q2)</text>
+      <text x="455" y="120" fill="#f3e8ff" font-size="11" font-weight="700">Q3</text>
+      <text x="548" y="205" fill="#22d3ee" font-size="12" font-weight="700">max</text>
+      <text x="525" y="115" fill="#ff2ec4" font-size="11" font-weight="800">outlier</text>
+      <text x="250" y="228" fill="#b9a3d6" font-size="12">IQR = Q3 − Q1 = the middle 50% of guests</text>
+    </svg>
+    <div class="cap"><b>THE BOUNCE HOUSE</b> · whiskers reach the last in-bounds guest, outliers float alone. Draw this from a 5-number summary in under 20 seconds.</div>
+  </div>
+
+  <div class="panel">
+    <h3>THE SPREAD: VARIANCE &amp; STANDARD DEVIATION</h3>
+    <p>How far does the crowd scatter from the DJ booth? <b>Variance</b> = the mean of the squared distances from the mean. <b>Standard deviation</b> = the square root of that — and it's in the <i>same units as the data</i>, which is why it wins.</p>
+    <p class="big">Population: σ² = Σ(x − x̄)² / n. Sample: s² = Σ(x − x̄)² / (n − 1). <span class="cyan">You will not compute these by hand in the exam — that's what the GDC is for.</span> You WILL be asked which dataset is more consistent (smaller σ).</p>
+  </div>
+
+  <div class="tip"><b>EXAM NOTE</b> — "State the standard deviation" ≠ "state the variance". Give the number in the data's units and say which group is more <i>consistent</i>, not just "smaller".</div>
+</section>
+<!-- ACT 2 -->
+<section class="act" id="act2">
+  <div class="acttag">Act 2 · 4.6 – 4.7 · bivariate statistics</div>
+  <h2>THE DANCE FLOOR MAP</h2>
+  <p class="aim">Two variables, one point per guest. The pattern on the floor is correlation — and correlation is NOT the bouncer's crush.</p>
+
+  <div class="panel">
+    <h3>READING THE FLOOR</h3>
+    <p>Plot each guest as a point: one variable on each axis. Points marching up-right = <span class="accent">positive correlation</span>; down-right = <span class="cyan">negative</span>; a cloud with no direction = <span class="gold">no linear correlation</span>.</p>
+    <p class="big"><span class="accent">Pearson's r</span> scores it from −1 to +1. Sign = direction. Size = strength. r = −0.9 is a tighter relationship than r = +0.4 — the minus is just the slope.</p>
+    <p><b>Spearman's rank ρ</b> (AI SL special): rank both lists first, then run Pearson on the ranks. Use it when the relationship is curved rather than straight, or when your data is ordinal (1st, 2nd, 3rd...).</p>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 230" role="img" aria-label="three scatter plots showing correlation strength">
+      <defs>
+        <filter id="glow2" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g transform="translate(20,15)">
+        <rect x="0" y="0" width="190" height="170" rx="10" fill="#150a26" stroke="rgba(168,85,247,.35)"/>
+        <text x="95" y="24" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="800">r ≈ +0.9</text>
+        <line x1="25" y1="150" x2="165" y2="30" stroke="#ff2ec4" stroke-width="2.5" opacity=".8" filter="url(#glow2)"/>
+        <g fill="#f3e8ff">
+          <circle cx="30" cy="148" r="4"/><circle cx="48" cy="138" r="4"/><circle cx="66" cy="126" r="4"/>
+          <circle cx="84" cy="112" r="4"/><circle cx="100" cy="102" r="4"/><circle cx="118" cy="88" r="4"/>
+          <circle cx="134" cy="74" r="4"/><circle cx="152" cy="56" r="4"/><circle cx="160" cy="40" r="4"/>
+        </g>
+      </g>
+      <g transform="translate(235,15)">
+        <rect x="0" y="0" width="190" height="170" rx="10" fill="#150a26" stroke="rgba(168,85,247,.35)"/>
+        <text x="95" y="24" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="800">r ≈ −0.85</text>
+        <line x1="25" y1="30" x2="165" y2="150" stroke="#22d3ee" stroke-width="2.5" opacity=".8" filter="url(#glow2)"/>
+        <g fill="#f3e8ff">
+          <circle cx="30" cy="34" r="4"/><circle cx="48" cy="48" r="4"/><circle cx="66" cy="62" r="4"/>
+          <circle cx="84" cy="78" r="4"/><circle cx="100" cy="92" r="4"/><circle cx="118" cy="106" r="4"/>
+          <circle cx="134" cy="120" r="4"/><circle cx="152" cy="136" r="4"/><circle cx="160" cy="150" r="4"/>
+        </g>
+      </g>
+      <g transform="translate(450,15)">
+        <rect x="0" y="0" width="190" height="170" rx="10" fill="#150a26" stroke="rgba(168,85,247,.35)"/>
+        <text x="95" y="24" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="800">r ≈ 0</text>
+        <g fill="#f3e8ff">
+          <circle cx="30" cy="120" r="4"/><circle cx="48" cy="40" r="4"/><circle cx="66" cy="95" r="4"/>
+          <circle cx="84" cy="140" r="4"/><circle cx="100" cy="60" r="4"/><circle cx="118" cy="110" r="4"/>
+          <circle cx="134" cy="50" r="4"/><circle cx="152" cy="130" r="4"/><circle cx="160" cy="85" r="4"/>
+        </g>
+      </g>
+      <text x="330" y="225" text-anchor="middle" fill="#b9a3d6" font-size="12">sign = direction · |r| = strength · cloud = no linear link</text>
+    </svg>
+    <div class="cap"><b>READ THE FLOOR</b> · correlation describes the pattern. It says nothing about who causes who.</div>
+  </div>
+
+  <div class="nos"><b>THE CLASSIC TRAP</b> — ice cream sales and drowning deaths both rise in summer. r is huge. Is ice cream drowning people? No. A third variable (hot weather) drives both. Exam line: <i>"correlation does not imply causation — a confounding variable may explain the link."</i></div>
+
+  <div class="panel">
+    <h3>THE REGRESSION LINE: y ON x</h3>
+    <p>Fit the best straight line through the cloud — <span class="accent">least squares</span>, written y = a + bx. Its one job: <b>predict y from a new x</b>. The GDC hands you a and b in one command.</p>
+    <p class="big">The line is only valid <span class="cyan">inside the range of your data</span>. Predict for an x beyond the data and you're guessing — that's extrapolation, and the examiner docks you for it.</p>
+  </div>
+
+  <div class="exam"><b>EXAM NOTE</b> — "Use the regression line to estimate y when x = 8" with data spanning x = 2 to x = 6? The answer starts with "this is extrapolation, so the estimate is unreliable". Say the magic words, then give the number.</div>
+</section>
+<!-- ACT 3 -->
+<section class="act" id="act3">
+  <div class="acttag">Act 3 · 4.9 · probability</div>
+  <h2>GUEST LIST ODDS</h2>
+  <p class="aim">The bouncer works in probabilities: P(gets in) = the guest's name on the list divided by everyone at the door.</p>
+
+  <div class="panel">
+    <h3>THE THREE LAWS OF THE DOOR</h3>
+    <p class="big"><span class="accent">Mutually exclusive</span> — two guests can't both get in (a card can't be a heart AND a spade). P(A or B) = P(A) + P(B).</p>
+    <p class="big"><span class="cyan">Independent</span> — one guest's entry doesn't change the other's odds. P(A and B) = P(A) × P(B).</p>
+    <p class="big"><span class="gold">Conditional</span> — "given that" changes everything. P(A | B) = P(A and B) / P(B). Read it as: of the guests who got in (B), what fraction were also A?</p>
+    <p>Trigger words: <b>"given that"</b> = conditional. <b>"and"</b> = multiply (if independent). <b>"or"</b> = add (if mutually exclusive). The examiner hides these in plain sight.</p>
+  </div>
+
+  <div class="fig narrow">
+    <svg viewBox="0 0 480 250" role="img" aria-label="venn diagram with intersection shaded">
+      <defs>
+        <filter id="glow3" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <circle cx="180" cy="125" r="80" fill="none" stroke="#ff2ec4" stroke-width="3" filter="url(#glow3)"/>
+      <circle cx="300" cy="125" r="80" fill="none" stroke="#22d3ee" stroke-width="3" filter="url(#glow3)"/>
+      <path d="M180 45 a80 80 0 0 0 0 160 a80 80 0 0 0 0 -160 M300 45 a80 80 0 0 1 0 160 a80 80 0 0 1 0 -160" fill="rgba(168,85,247,.35)" stroke="none"/>
+      <text x="135" y="120" fill="#ff2ec4" font-size="22" font-weight="900">A</text>
+      <text x="335" y="120" fill="#22d3ee" font-size="22" font-weight="900">B</text>
+      <text x="240" y="120" fill="#fff" font-size="14" font-weight="800">A ∩ B</text>
+      <text x="240" y="235" text-anchor="middle" fill="#b9a3d6" font-size="12">the overlap = P(A and B) — the guests on both lists</text>
+    </svg>
+    <div class="cap"><b>THE GUEST LIST</b> · Venn diagrams and tree diagrams are just the same three laws drawn twice. Tree = order matters, Venn = groups overlap.</div>
+  </div>
+
+  <div class="tip"><b>EXAM NOTE</b> — P(A | B) is NOT the same as P(B | A). "Probability it's raining given the ground is wet" ≠ "probability the ground is wet given it's raining". Don't swap them.</div>
+</section>
+<!-- ACT 4 -->
+<section class="act" id="act4">
+  <div class="acttag">Act 4 · 4.10 – 4.11 · distributions</div>
+  <h2>THE LINE OUTSIDE</h2>
+  <p class="aim">Two bouncers run this club: Binomial for the VIP list (counts of successes), Normal for the crowd (a smooth bell of everyone).</p>
+
+  <div class="grid3">
+    <div class="card">
+      <h4><span class="tag gr">BINOMIAL · B(n, p)</span></h4>
+      <p>Counts <b>successes</b> in n fixed trials, each with the same probability p, independent, two outcomes only.</p>
+      <p>P(X = x) = <b>C(n, x) pˣ (1 − p)ⁿ⁻ˣ</b></p>
+      <p>Mean = np · Variance = np(1 − p)</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag v">NORMAL · N(μ, σ²)</span></h4>
+      <p>Continuous, symmetric bell around the mean μ with spread σ. Heights, test scores, measurement errors.</p>
+      <p>z = (x − μ) / σ</p>
+      <p>P(X &gt; x) = 1 − P(X &lt; x)</p>
+    </div>
+    <div class="card">
+      <h4><span class="tag g">GDC MOVES</span></h4>
+      <p>BinomPDF / BinomCDF for exact and cumulative binomial.</p>
+      <p>NormalCDF for areas, <b>InvNorm</b> to go backwards: probability → x.</p>
+    </div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" role="img" aria-label="normal distribution curve with 95 percent shaded">
+      <defs>
+        <filter id="glow4" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <line x1="40" y1="220" x2="640" y2="220" stroke="#22d3ee" stroke-width="2" opacity=".5"/>
+      <path d="M330 220 C 240 220 220 80 330 80 C 440 80 420 220 330 220 Z" fill="none"/>
+      <path d="M330 220 C 240 220 220 80 330 80 C 440 80 420 220 330 220 Z" fill="rgba(168,85,247,.30)" stroke="none"/>
+      <path d="M220 220 C 190 220 185 140 220 140 C 255 140 250 220 220 220 Z" fill="rgba(255,46,196,.18)" stroke="none"/>
+      <path d="M440 220 C 410 220 405 140 440 140 C 475 140 470 220 440 220 Z" fill="rgba(255,46,196,.18)" stroke="none"/>
+      <path d="M330 220 C 240 220 220 80 330 80 C 440 80 420 220 330 220 Z" fill="none" stroke="url(#boxg)" stroke-width="3" filter="url(#glow)"/>
+      <line x1="330" y1="80" x2="330" y2="220" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 4" opacity=".8"/>
+      <line x1="220" y1="140" x2="220" y2="220" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/>
+      <line x1="440" y1="140" x2="440" y2="220" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/>
+      <text x="330" y="240" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="800">μ</text>
+      <text x="220" y="238" text-anchor="middle" fill="#22d3ee" font-size="12">μ − 2σ</text>
+      <text x="440" y="238" text-anchor="middle" fill="#22d3ee" font-size="12">μ + 2σ</text>
+      <text x="330" y="60" text-anchor="middle" fill="#f3e8ff" font-size="13" font-weight="800">95% of guests between μ ± 2σ</text>
+      <text x="330" y="205" text-anchor="middle" fill="#b9a3d6" font-size="11">68% within 1σ · 95% within 2σ · 99.7% within 3σ</text>
+    </svg>
+    <div class="cap"><b>THE BELL CURVE</b> · memorise the 68-95-99.7 rule — it answers half the normal questions without any GDC work.</div>
+  </div>
+
+  <div class="nos"><b>BINOMIAL CONDITIONS CHECK</b> — fixed n · independent trials · two outcomes (success/fail) · same p every trial. Miss one and it's not binomial; the examiner loves a scenario where the "success" probability changes mid-question.</div>
+
+  <div class="exam"><b>EXAM NOTE</b> — "Find P(X &gt; 12)" on a normal curve? Compute P(X &lt; 12) with your GDC and subtract from 1. Inverse normal (InvNorm) is the same curve walked backwards: area → x.</div>
+</section>
+<!-- CHEAT -->
+<section class="act" id="cheat">
+  <div class="acttag">Revision</div>
+  <h2>CHEAT SHEET</h2>
+  <p class="aim">Everything the examiner wants, compressed into 14 lines.</p>
+  <div class="marquee">
+    <div class="line">1 · MEAN = Σx/n · <span>outlier-sensitive</span> · MEDIAN = middle of sorted data · <span>robust</span> · MODE = most common</div>
+    <div class="line">2 · QUARTILES: Q1 = 25% · Q2 = median · Q3 = 75% · <span>IQR = Q3 − Q1</span></div>
+    <div class="line">3 · OUTLIER: below <span>Q1 − 1.5 × IQR</span> or above <span>Q3 + 1.5 × IQR</span></div>
+    <div class="line">4 · VARIANCE = mean of squared deviations · <span>σ² = Σ(x − x̄)²/n (pop)</span> · s² = .../(n − 1) (sample)</div>
+    <div class="line">5 · STANDARD DEVIATION = √variance · <span>same units as the data</span> · smaller σ = more consistent</div>
+    <div class="line">6 · PEARSON r: <span>−1 ≤ r ≤ +1</span> · sign = direction · |r| = strength · r ≈ 0 = no linear link</div>
+    <div class="line">7 · SPEARMAN ρ = 1 − 6Σd²/(n(n² − 1)) · <span>rank data first</span> · use when not linear or ordinal</div>
+    <div class="line">8 · REGRESSION y on x: y = a + bx · <span>predict y from x · NO extrapolation</span></div>
+    <div class="line">9 · CORRELATION ≠ CAUSATION · <span>third variable alert</span></div>
+    <div class="line">10 · MUTUALLY EXCLUSIVE: P(A ∪ B) = P(A) + P(B) · <span>INDEPENDENT: P(A ∩ B) = P(A)P(B)</span></div>
+    <div class="line">11 · CONDITIONAL: P(A|B) = P(A ∩ B)/P(B) · <span>"given that" = trigger word</span></div>
+    <div class="line">12 · BINOMIAL X ~ B(n, p): P(X=x) = C(n,x)pˣ(1−p)ⁿ⁻ˣ · <span>mean np · var np(1 − p)</span></div>
+    <div class="line">13 · NORMAL: <span>68% within μ ± σ · 95% within μ ± 2σ · 99.7% within μ ± 3σ</span> · z = (x − μ)/σ</div>
+    <div class="line">14 · INVERSE NORMAL: probability → x (InvNorm) · <span>P(X &gt; x) = 1 − P(X &lt; x)</span></div>
+  </div>
+</section>
+<!-- SELFTEST -->
+<section class="act" id="selftest">
+  <div class="acttag">Self-test · answers in the data file</div>
+  <h2>DOOR CHECK — 6 QUICK ONES</h2>
+  <p class="aim">Six questions, ten minutes, no notes. The answers and full worked solutions are in <code>IB_Study/data/stats_prob_selftest.md</code>.</p>
+  <ol class="checklist">
+    <li class="done">Q1. 15 songs, 8 of them by your favourite artist. Probability the first two played are both by them?</li>
+    <li class="done">Q2. Heights are N(170, 36). What range holds the middle 68%?</li>
+    <li class="done">Q3. r = 0.9 for hours studied vs score. What does it NOT tell you?</li>
+  </ol>
+  <ol class="checklist" start="4">
+    <li class="done">Q4. Given P(A)=0.6, P(B)=0.5, P(A∩B)=0.3 — are A and B independent? Show it.</li>
+    <li class="done">Q5. X~B(10, 0.3). Find P(X=3).</li>
+    <li class="done">Q6. X~N(100, 15²). Find P(X &lt; 85) with your GDC.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>built for the Thu 2026-08-27 Math AI SL assessment — stats &amp; probability paper prep</p>
+  <p>sources: Oxford Math AI SL (2023) ch.4 · your IB_Study schedule · GDC: TI-Nspire CX / fx-CG50</p>
+</footer>
+</div>
+<script>
+var items=document.querySelectorAll('ol.checklist li');
+var pill=document.getElementById('progPill');
+function upd(){var d=0;items.forEach(function(li){if(li.classList.contains('done'))d++;});pill.textContent=d+'/'+items.length;}
+items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');upd();});});
+upd();
+</script>
+</body>
+</html>
