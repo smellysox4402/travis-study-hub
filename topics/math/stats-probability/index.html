@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
-<title>Stats &amp; Probability — The DJ Booth</title>
+<title>Stats &amp; Probability (Topic 4)</title>
 <style>
   :root{
     --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
@@ -16,77 +16,93 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.55;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
   ::selection{background:var(--pink); color:#0b0214;}
   .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
-
   nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
-  nav a{color:var(--dim); text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.04em;
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
         padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
   nav a:hover{color:var(--pink); border-color:var(--line);}
   .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
         font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
-
   header.hero{text-align:center; padding:64px 18px 34px;}
   .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
-  h1{font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05; margin:14px 0 6px;
-     background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));
-     -webkit-background-clip:text; background-clip:text; color:transparent;
-     text-shadow:0 0 42px rgba(255,46,196,.35);}
-  .sub{color:var(--dim); font-size:16px; max-width:640px; margin:10px auto 0;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
   .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
   .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
   .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
   .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
-  .badge.gold{border-color:var(--gold); color:var(--gold);}
   .act{margin-top:56px;}
   .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
-  .act h2{font-size:clamp(24px,4vw,34px); font-weight:900; margin:6px 0 4px;
-          background:linear-gradient(90deg,var(--pink),var(--violet));
-          -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .act .aim{color:var(--dim); font-size:14px; margin-bottom:18px; max-width:720px;}
-  .panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px 22px; margin:16px 0;
-         box-shadow:0 0 30px rgba(168,85,247,.08);}
-  .panel h3{font-size:17px; font-weight:800; margin-bottom:10px; color:#fff;}
-  .panel p{margin:8px 0; color:var(--ink); font-size:15px;}
-  .panel .big{font-size:16.5px;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .panel .big{font-size:17.5px;}
   .accent{color:var(--pink); font-weight:700;}
   .cyan{color:var(--cyan); font-weight:700;}
   .gold{color:var(--gold); font-weight:700;}
   .green{color:var(--green); font-weight:700;}
-  .muted{color:var(--dim); font-size:13.5px;}
+  .muted{color:var(--dim); font-size:14px;}
   ul.clean{list-style:none;}
-  ul.clean li{padding:7px 0 7px 26px; position:relative; font-size:15px;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
   ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
   .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
   .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
   .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
-  .card p{font-size:14px; color:var(--ink); margin:5px 0;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
   .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
-  .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
-
-  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
-  .fig .cap{font-size:12px; color:var(--dim); margin-top:10px; line-height:1.5;}
-  .fig .cap b{color:var(--cyan);}
-  .fig svg{max-width:660px; width:100%; height:auto;}
-  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
-  .fig.narrow svg{max-width:480px;}
-
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+           padding:20px; margin:16px 0;}
+  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .bouncer .body{flex:1;}
+  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .bouncer p, .bouncer li{font-size:15.5px;}
+  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
   .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .tip b{color:var(--gold);}
   .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .nos b{color:var(--cyan);}
   .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
   .exam b{color:var(--green);}
+  kbd{display:inline-block; background:#1d0f33; border:1px solid var(--line2); border-bottom:2px solid var(--line2);
+      border-radius:6px; padding:1px 7px; font-family:'Segoe UI',system-ui,sans-serif; font-size:12.5px; font-weight:700;
+      color:var(--cyan); margin:0 2px; box-shadow:0 1px 0 rgba(168,85,247,.3);}
+  .gdc{border:1px solid rgba(34,211,238,.35); background:rgba(34,211,238,.06); border-radius:16px; padding:18px 20px; margin:16px 0;}
+  .gdc h4{color:var(--cyan); font-size:15px; font-weight:800; margin-bottom:10px;}
+  .gdc ol{margin:4px 0 4px 22px;}
+  .gdc li{margin:7px 0; font-size:15px; line-height:1.7;}
+  .gdc .note{color:var(--dim); font-size:13.5px; margin-top:8px;}
   .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
            border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
   .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
   .marquee .line span{color:var(--pink);}
-
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
   .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
   .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
-  .q label{display:block; padding:7px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:14px;
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
            border:1px solid rgba(168,85,247,.25); transition:.15s;}
   .q label:hover{background:rgba(168,85,247,.1);}
   .q input{accent-color:var(--pink); margin-right:8px;}
@@ -95,10 +111,9 @@
   .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
   .q.correct .fb.correct{display:block;}
   .q.wrong .fb.wrong{display:block;}
-
   .cl{list-style:none;}
   .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
-         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:14px;}
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
   .cl li:hover{background:rgba(168,85,247,.08);}
   .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
   .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
@@ -108,310 +123,585 @@
   .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
   .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
   .progtext{font-size:13px; color:var(--dim); text-align:right;}
-
   .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
     padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
     color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
     box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
     backdrop-filter:blur(4px); transition:all .2s;}
   .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
-
   footer{margin-top:70px; padding-top:20px; border-top:1px solid var(--line); color:var(--dim); font-size:12.5px; text-align:center;}
   footer a{color:var(--cyan); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
-
   @media print{
     nav{display:none;}
     body{background:#fff; color:#111;}
-    .panel,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
     h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
     .act h2{-webkit-text-fill-color:#111;}
     .q .fb{display:block;}
   }
 </style>
-</head><body>
+</head>
+<body>
 
-<a class="home-btn" href="../../../index.html">HOME</a>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
 
 <nav>
-  <a href="#act1">ACT 1 · THE DJ BOOTH</a>
-  <a href="#act2">ACT 2 · THE DANCE FLOOR</a>
-  <a href="#act3">ACT 3 · GUEST LIST ODDS</a>
-  <a href="#act4">ACT 4 · THE LINE OUTSIDE</a>
-  <a href="#cheat">CHEAT</a>
-  <a href="#selftest">SELF-TEST</a>
+  <a href="#act1">Data &amp; sampling</a>
+  <a href="#act2">Summarising data</a>
+  <a href="#act3">Correlation &amp; regression</a>
+  <a href="#act4">Probability</a>
+  <a href="#act5">Discrete RVs &amp; binomial</a>
+  <a href="#act6">Normal distribution</a>
+  <a href="#act7">Hypothesis testing</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ TEST</a>
+  <a href="#gdc">📟 GDC GUIDE</a>
+  <a href="#vault">🗄 VAULT</a>
+  <a href="#check">✅ CHECKLIST</a>
   <span class="pill" id="progPill">0/11</span>
 </nav>
 
 <div class="wrap">
 
 <header class="hero">
-  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL</div>
-  <h1>STATS &amp; PROBABILITY</h1>
-  <div class="sub">Every dataset is a nightclub. The mean is the DJ's average taste, the box plot is the queue at the door, and probability is the bouncer's odds on who gets in. Read the room and the numbers stop lying to you.</div>
+  <div class="kicker">IB Mathematics · Applications &amp; Interpretation · SL · Topic 4</div>
+  <h1>Stats &amp; Probability</h1>
+  <div class="sub">From sampling to hypothesis tests — the full Topic 4 with every formula, the exact GDC keys for the distributions, and the mark-scheme wording the examiner wants.</div>
   <div class="badges">
-    <span class="badge hl">TOPIC 4 · SL + HL CORE</span>
+    <span class="badge hl">TOPIC 4 · 4.1 – 4.11</span>
     <span class="badge ahl">GDC HEAVY · AI SL</span>
-    <span class="badge gold">ASSESSMENT · THU 27 AUG</span>
+    <span class="badge">11 SYLLABUS POINTS</span>
   </div>
 </header>
-<!-- ACT 1 -->
+
+<!-- ══════════════════════ ACT 1 ══════════════════════ -->
 <section class="act" id="act1">
-  <div class="acttag">Act 1 · 4.1 – 4.5 · descriptive statistics</div>
-  <h2>THE DJ BOOTH</h2>
-  <p class="aim">First rule of the club: one rowdy guest can wreck the whole vibe. The mean feels everything; the median doesn't care.</p>
+  <div class="acttag">4.1</div>
+  <h2>Data &amp; sampling</h2>
+  <p class="aim">Where data comes from, whether it's trustworthy, and the words for what can go wrong.</p>
 
   <div class="panel">
-    <h3>THREE WAYS TO DESCRIBE THE CROWD</h3>
-    <p class="big">The <span class="accent">mean</span> is the DJ's average taste — add every value, divide by how many. The <span class="cyan">median</span> is the middle of the queue — sort everyone, take the centre. The <span class="gold">mode</span> is the most common value — the vibe everyone keeps showing up in.</p>
-    <p>One extreme guest (an <b>outlier</b>) drags the mean with him. The median doesn't even notice. That's why house prices are quoted as medians and exam grade boundaries use means.</p>
-  </div>
-
-  <div class="panel">
-    <h3>THE BOUNCE HOUSE: QUARTILES</h3>
-    <p>Split the sorted queue into four equal groups. <b>Q1</b> = 25% in, <b>Q2</b> = the median (50%), <b>Q3</b> = 75%. The middle 50% of guests live between Q1 and Q3 — that stretch is the <span class="accent">IQR</span> = Q3 − Q1.</p>
-    <p class="big">Outlier door policy: anyone below <span class="accent">Q1 − 1.5 × IQR</span> or above <span class="accent">Q3 + 1.5 × IQR</span> doesn't get in — they're drawn as lonely dots beyond the whiskers.</p>
-  </div>
-  <div class="fig">
-    <svg viewBox="0 0 660 230" role="img" aria-label="box and whisker plot">
-      <defs>
-        <linearGradient id="boxg" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#ff2ec4"/><stop offset="1" stop-color="#a855f7"/>
-        </linearGradient>
-        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <line x1="60" y1="180" x2="620" y2="180" stroke="#22d3ee" stroke-width="2" opacity=".5"/>
-      <line x1="60" y1="175" x2="60" y2="185" stroke="#22d3ee" stroke-width="2"/>
-      <line x1="620" y1="175" x2="620" y2="185" stroke="#22d3ee" stroke-width="2"/>
-      <line x1="90" y1="130" x2="150" y2="130" stroke="#f3e8ff" stroke-width="3"/>
-      <rect x="150" y="100" width="300" height="60" rx="6" fill="none" stroke="url(#boxg)" stroke-width="3" filter="url(#glow)"/>
-      <line x1="290" y1="100" x2="290" y2="160" stroke="#fbbf24" stroke-width="3" filter="url(#glow)"/>
-      <line x1="450" y1="130" x2="560" y2="130" stroke="#f3e8ff" stroke-width="3"/>
-      <circle cx="590" cy="130" r="6" fill="#ff2ec4" filter="url(#glow)"/>
-      <text x="70" y="205" fill="#22d3ee" font-size="12" font-weight="700">min</text>
-      <text x="135" y="120" fill="#f3e8ff" font-size="11" font-weight="700">Q1</text>
-      <text x="270" y="90" fill="#fbbf24" font-size="12" font-weight="800">median (Q2)</text>
-      <text x="455" y="120" fill="#f3e8ff" font-size="11" font-weight="700">Q3</text>
-      <text x="548" y="205" fill="#22d3ee" font-size="12" font-weight="700">max</text>
-      <text x="525" y="115" fill="#ff2ec4" font-size="11" font-weight="800">outlier</text>
-      <text x="250" y="228" fill="#b9a3d6" font-size="12">IQR = Q3 − Q1 = the middle 50% of guests</text>
-    </svg>
-    <div class="cap"><b>THE BOUNCE HOUSE</b> · whiskers reach the last in-bounds guest, outliers float alone. Draw this from a 5-number summary in under 20 seconds.</div>
+    <h3>POPULATION, SAMPLE, TYPES OF DATA</h3>
+    <table>
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td>Population</td><td>The whole group you're interested in (all students in HK).</td></tr>
+      <tr><td>Sample</td><td>A subset of the population you actually measure.</td></tr>
+      <tr><td>Random sample</td><td>Every member equally likely to be chosen — the gold standard.</td></tr>
+      <tr><td>Discrete data</td><td>Countable, separate values (number of siblings: 0, 1, 2…).</td></tr>
+      <tr><td>Continuous data</td><td>Any value on a scale (height, time, mass).</td></tr>
+    </table>
   </div>
 
   <div class="panel">
-    <h3>THE SPREAD: VARIANCE &amp; STANDARD DEVIATION</h3>
-    <p>How far does the crowd scatter from the DJ booth? <b>Variance</b> = the mean of the squared distances from the mean. <b>Standard deviation</b> = the square root of that — and it's in the <i>same units as the data</i>, which is why it wins.</p>
-    <p class="big">Population: σ² = Σ(x − x̄)² / n. Sample: s² = Σ(x − x̄)² / (n − 1). <span class="cyan">You will not compute these by hand in the exam — that's what the GDC is for.</span> You WILL be asked which dataset is more consistent (smaller σ).</p>
+    <h3>RELIABILITY &amp; BIAS (4.1)</h3>
+    <ul class="clean">
+      <li><b>Bias</b> = a sampling method that systematically over/under-represents a group.</li>
+      <li><b>Outlier</b> = a value far from the rest — investigate before you trust the mean.</li>
+      <li><b>Sampling techniques:</b> simple random, stratified (by group), systematic (every k-th), convenience (easy but biased), quota, self-selected (voluntary → biased).</li>
+    </ul>
+    <p class="muted">Exam line: "the sample is not representative because …", "selection bias / under-coverage / self-selection".</p>
   </div>
-
-  <div class="tip"><b>EXAM NOTE</b> — "State the standard deviation" ≠ "state the variance". Give the number in the data's units and say which group is more <i>consistent</i>, not just "smaller".</div>
 </section>
-<!-- ACT 2 -->
+
+<!-- ══════════════════════ ACT 2 ══════════════════════ -->
 <section class="act" id="act2">
-  <div class="acttag">Act 2 · 4.6 – 4.7 · bivariate statistics</div>
-  <h2>THE DANCE FLOOR MAP</h2>
-  <p class="aim">Two variables, one point per guest. The pattern on the floor is correlation — and correlation is NOT the bouncer's crush.</p>
-
-  <div class="panel">
-    <h3>READING THE FLOOR</h3>
-    <p>Plot each guest as a point: one variable on each axis. Points marching up-right = <span class="accent">positive correlation</span>; down-right = <span class="cyan">negative</span>; a cloud with no direction = <span class="gold">no linear correlation</span>.</p>
-    <p class="big"><span class="accent">Pearson's r</span> scores it from −1 to +1. Sign = direction. Size = strength. r = −0.9 is a tighter relationship than r = +0.4 — the minus is just the slope.</p>
-    <p><b>Spearman's rank ρ</b> (AI SL special): rank both lists first, then run Pearson on the ranks. Use it when the relationship is curved rather than straight, or when your data is ordinal (1st, 2nd, 3rd...).</p>
-  </div>
-
-  <div class="fig">
-    <svg viewBox="0 0 660 230" role="img" aria-label="three scatter plots showing correlation strength">
-      <defs>
-        <filter id="glow2" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <g transform="translate(20,15)">
-        <rect x="0" y="0" width="190" height="170" rx="10" fill="#150a26" stroke="rgba(168,85,247,.35)"/>
-        <text x="95" y="24" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="800">r ≈ +0.9</text>
-        <line x1="25" y1="150" x2="165" y2="30" stroke="#ff2ec4" stroke-width="2.5" opacity=".8" filter="url(#glow2)"/>
-        <g fill="#f3e8ff">
-          <circle cx="30" cy="148" r="4"/><circle cx="48" cy="138" r="4"/><circle cx="66" cy="126" r="4"/>
-          <circle cx="84" cy="112" r="4"/><circle cx="100" cy="102" r="4"/><circle cx="118" cy="88" r="4"/>
-          <circle cx="134" cy="74" r="4"/><circle cx="152" cy="56" r="4"/><circle cx="160" cy="40" r="4"/>
-        </g>
-      </g>
-      <g transform="translate(235,15)">
-        <rect x="0" y="0" width="190" height="170" rx="10" fill="#150a26" stroke="rgba(168,85,247,.35)"/>
-        <text x="95" y="24" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="800">r ≈ −0.85</text>
-        <line x1="25" y1="30" x2="165" y2="150" stroke="#22d3ee" stroke-width="2.5" opacity=".8" filter="url(#glow2)"/>
-        <g fill="#f3e8ff">
-          <circle cx="30" cy="34" r="4"/><circle cx="48" cy="48" r="4"/><circle cx="66" cy="62" r="4"/>
-          <circle cx="84" cy="78" r="4"/><circle cx="100" cy="92" r="4"/><circle cx="118" cy="106" r="4"/>
-          <circle cx="134" cy="120" r="4"/><circle cx="152" cy="136" r="4"/><circle cx="160" cy="150" r="4"/>
-        </g>
-      </g>
-      <g transform="translate(450,15)">
-        <rect x="0" y="0" width="190" height="170" rx="10" fill="#150a26" stroke="rgba(168,85,247,.35)"/>
-        <text x="95" y="24" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="800">r ≈ 0</text>
-        <g fill="#f3e8ff">
-          <circle cx="30" cy="120" r="4"/><circle cx="48" cy="40" r="4"/><circle cx="66" cy="95" r="4"/>
-          <circle cx="84" cy="140" r="4"/><circle cx="100" cy="60" r="4"/><circle cx="118" cy="110" r="4"/>
-          <circle cx="134" cy="50" r="4"/><circle cx="152" cy="130" r="4"/><circle cx="160" cy="85" r="4"/>
-        </g>
-      </g>
-      <text x="330" y="225" text-anchor="middle" fill="#b9a3d6" font-size="12">sign = direction · |r| = strength · cloud = no linear link</text>
-    </svg>
-    <div class="cap"><b>READ THE FLOOR</b> · correlation describes the pattern. It says nothing about who causes who.</div>
-  </div>
-
-  <div class="nos"><b>THE CLASSIC TRAP</b> — ice cream sales and drowning deaths both rise in summer. r is huge. Is ice cream drowning people? No. A third variable (hot weather) drives both. Exam line: <i>"correlation does not imply causation — a confounding variable may explain the link."</i></div>
-
-  <div class="panel">
-    <h3>THE REGRESSION LINE: y ON x</h3>
-    <p>Fit the best straight line through the cloud — <span class="accent">least squares</span>, written y = a + bx. Its one job: <b>predict y from a new x</b>. The GDC hands you a and b in one command.</p>
-    <p class="big">The line is only valid <span class="cyan">inside the range of your data</span>. Predict for an x beyond the data and you're guessing — that's extrapolation, and the examiner docks you for it.</p>
-  </div>
-
-  <div class="exam"><b>EXAM NOTE</b> — "Use the regression line to estimate y when x = 8" with data spanning x = 2 to x = 6? The answer starts with "this is extrapolation, so the estimate is unreliable". Say the magic words, then give the number.</div>
-</section>
-<!-- ACT 3 -->
-<section class="act" id="act3">
-  <div class="acttag">Act 3 · 4.9 · probability</div>
-  <h2>GUEST LIST ODDS</h2>
-  <p class="aim">The bouncer works in probabilities: P(gets in) = the guest's name on the list divided by everyone at the door.</p>
-
-  <div class="panel">
-    <h3>THE THREE LAWS OF THE DOOR</h3>
-    <p class="big"><span class="accent">Mutually exclusive</span> — two guests can't both get in (a card can't be a heart AND a spade). P(A or B) = P(A) + P(B).</p>
-    <p class="big"><span class="cyan">Independent</span> — one guest's entry doesn't change the other's odds. P(A and B) = P(A) × P(B).</p>
-    <p class="big"><span class="gold">Conditional</span> — "given that" changes everything. P(A | B) = P(A and B) / P(B). Read it as: of the guests who got in (B), what fraction were also A?</p>
-    <p>Trigger words: <b>"given that"</b> = conditional. <b>"and"</b> = multiply (if independent). <b>"or"</b> = add (if mutually exclusive). The examiner hides these in plain sight.</p>
-  </div>
-
-  <div class="fig narrow">
-    <svg viewBox="0 0 480 250" role="img" aria-label="venn diagram with intersection shaded">
-      <defs>
-        <filter id="glow3" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <circle cx="180" cy="125" r="80" fill="none" stroke="#ff2ec4" stroke-width="3" filter="url(#glow3)"/>
-      <circle cx="300" cy="125" r="80" fill="none" stroke="#22d3ee" stroke-width="3" filter="url(#glow3)"/>
-      <path d="M180 45 a80 80 0 0 0 0 160 a80 80 0 0 0 0 -160 M300 45 a80 80 0 0 1 0 160 a80 80 0 0 1 0 -160" fill="rgba(168,85,247,.35)" stroke="none"/>
-      <text x="135" y="120" fill="#ff2ec4" font-size="22" font-weight="900">A</text>
-      <text x="335" y="120" fill="#22d3ee" font-size="22" font-weight="900">B</text>
-      <text x="240" y="120" fill="#fff" font-size="14" font-weight="800">A ∩ B</text>
-      <text x="240" y="235" text-anchor="middle" fill="#b9a3d6" font-size="12">the overlap = P(A and B) — the guests on both lists</text>
-    </svg>
-    <div class="cap"><b>THE GUEST LIST</b> · Venn diagrams and tree diagrams are just the same three laws drawn twice. Tree = order matters, Venn = groups overlap.</div>
-  </div>
-
-  <div class="tip"><b>EXAM NOTE</b> — P(A | B) is NOT the same as P(B | A). "Probability it's raining given the ground is wet" ≠ "probability the ground is wet given it's raining". Don't swap them.</div>
-</section>
-<!-- ACT 4 -->
-<section class="act" id="act4">
-  <div class="acttag">Act 4 · 4.10 – 4.11 · distributions</div>
-  <h2>THE LINE OUTSIDE</h2>
-  <p class="aim">Two bouncers run this club: Binomial for the VIP list (counts of successes), Normal for the crowd (a smooth bell of everyone).</p>
+  <div class="acttag">4.2 · 4.3</div>
+  <h2>Summarising data</h2>
+  <p class="aim">Centre and spread — the numbers that describe a whole dataset in a line each.</p>
 
   <div class="grid3">
-    <div class="card">
-      <h4><span class="tag gr">BINOMIAL · B(n, p)</span></h4>
-      <p>Counts <b>successes</b> in n fixed trials, each with the same probability p, independent, two outcomes only.</p>
-      <p>P(X = x) = <b>C(n, x) pˣ (1 − p)ⁿ⁻ˣ</b></p>
-      <p>Mean = np · Variance = np(1 − p)</p>
-    </div>
-    <div class="card">
-      <h4><span class="tag v">NORMAL · N(μ, σ²)</span></h4>
-      <p>Continuous, symmetric bell around the mean μ with spread σ. Heights, test scores, measurement errors.</p>
-      <p>z = (x − μ) / σ</p>
-      <p>P(X &gt; x) = 1 − P(X &lt; x)</p>
-    </div>
-    <div class="card">
-      <h4><span class="tag g">GDC MOVES</span></h4>
-      <p>BinomPDF / BinomCDF for exact and cumulative binomial.</p>
-      <p>NormalCDF for areas, <b>InvNorm</b> to go backwards: probability → x.</p>
+    <div class="card"><div class="tag p">CENTRE</div><h4>Mean</h4><p>x̄ = Σx/n. Uses every value, so it's dragged by outliers.</p></div>
+    <div class="card"><div class="tag v">CENTRE</div><h4>Median</h4><p>The middle value when sorted. Robust — ignores outliers.</p></div>
+    <div class="card"><div class="tag g">CENTRE</div><h4>Mode</h4><p>The most common value. Grouped data → modal class.</p></div>
+    <div class="card"><div class="tag p">SPREAD</div><h4>Range &amp; IQR</h4><p>Range = max − min. IQR = Q3 − Q1 (the middle 50%).</p></div>
+    <div class="card"><div class="tag v">SPREAD</div><h4>Standard deviation σ</h4><p>√ of the mean squared deviation. Same units as the data. Smaller σ = more consistent.</p></div>
+    <div class="card"><div class="tag g">SPREAD</div><h4>Variance σ²</h4><p>Mean of squared deviations from the mean.</p></div>
+  </div>
+
+  <div class="panel">
+    <h3>BOX &amp; WHISKER + OUTLIERS</h3>
+    <p>Five-number summary: <b>min, Q1, median, Q3, max</b>. An outlier sits below <span class="accent">Q1 − 1.5×IQR</span> or above <span class="accent">Q3 + 1.5×IQR</span>.</p>
+    <div class="gdc">
+      <h4>📟 GDC — 1-variable statistics</h4>
+      <ol>
+        <li><kbd>MENU</kbd> → <kbd>2</kbd> (STAT) → enter data in <b>List 1</b></li>
+        <li><kbd>F2</kbd> (CALC) → <kbd>F1</kbd> (1-VAR)</li>
+        <li>Set XList = List1, Freq = 1 → <kbd>EXE</kbd></li>
+        <li>Reads off <b>x̄</b> (mean), <b>σx</b> (population sd), <b>sx</b> (sample sd), <b>min, Q1, Med, Q3, max</b></li>
+      </ol>
+      <p class="note">σx vs sx: the exam usually wants the <b>population</b> standard deviation σx. Check which one the question asks for.</p>
     </div>
   </div>
 
-  <div class="fig">
-    <svg viewBox="0 0 660 250" role="img" aria-label="normal distribution curve with 95 percent shaded">
-      <defs>
-        <filter id="glow4" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <line x1="40" y1="220" x2="640" y2="220" stroke="#22d3ee" stroke-width="2" opacity=".5"/>
-      <path d="M330 220 C 240 220 220 80 330 80 C 440 80 420 220 330 220 Z" fill="none"/>
-      <path d="M330 220 C 240 220 220 80 330 80 C 440 80 420 220 330 220 Z" fill="rgba(168,85,247,.30)" stroke="none"/>
-      <path d="M220 220 C 190 220 185 140 220 140 C 255 140 250 220 220 220 Z" fill="rgba(255,46,196,.18)" stroke="none"/>
-      <path d="M440 220 C 410 220 405 140 440 140 C 475 140 470 220 440 220 Z" fill="rgba(255,46,196,.18)" stroke="none"/>
-      <path d="M330 220 C 240 220 220 80 330 80 C 440 80 420 220 330 220 Z" fill="none" stroke="url(#boxg)" stroke-width="3" filter="url(#glow)"/>
-      <line x1="330" y1="80" x2="330" y2="220" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 4" opacity=".8"/>
-      <line x1="220" y1="140" x2="220" y2="220" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/>
-      <line x1="440" y1="140" x2="440" y2="220" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/>
-      <text x="330" y="240" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="800">μ</text>
-      <text x="220" y="238" text-anchor="middle" fill="#22d3ee" font-size="12">μ − 2σ</text>
-      <text x="440" y="238" text-anchor="middle" fill="#22d3ee" font-size="12">μ + 2σ</text>
-      <text x="330" y="60" text-anchor="middle" fill="#f3e8ff" font-size="13" font-weight="800">95% of guests between μ ± 2σ</text>
-      <text x="330" y="205" text-anchor="middle" fill="#b9a3d6" font-size="11">68% within 1σ · 95% within 2σ · 99.7% within 3σ</text>
-    </svg>
-    <div class="cap"><b>THE BELL CURVE</b> · memorise the 68-95-99.7 rule — it answers half the normal questions without any GDC work.</div>
+  <div class="panel">
+    <h3>EFFECT OF CONSTANT CHANGES (4.3)</h3>
+    <p>Adding/subtracting a constant <b>shifts</b> every measure of centre and position by that amount, but leaves spread (range, IQR, σ) <span class="accent">unchanged</span>. Multiplying by k multiplies both centre and spread by k.</p>
   </div>
-
-  <div class="nos"><b>BINOMIAL CONDITIONS CHECK</b> — fixed n · independent trials · two outcomes (success/fail) · same p every trial. Miss one and it's not binomial; the examiner loves a scenario where the "success" probability changes mid-question.</div>
-
-  <div class="exam"><b>EXAM NOTE</b> — "Find P(X &gt; 12)" on a normal curve? Compute P(X &lt; 12) with your GDC and subtract from 1. Inverse normal (InvNorm) is the same curve walked backwards: area → x.</div>
 </section>
-<!-- CHEAT -->
+
+<!-- ══════════════════════ ACT 3 ══════════════════════ -->
+<section class="act" id="act3">
+  <div class="acttag">4.4</div>
+  <h2>Correlation &amp; regression</h2>
+  <p class="aim">How two variables move together, and the line that predicts one from the other.</p>
+
+  <div class="panel">
+    <h3>PEARSON'S r &amp; THE REGRESSION LINE</h3>
+    <p class="big"><span class="accent">r</span> scores correlation from −1 to +1: sign = direction, |r| = strength. r = −0.9 is a <em>tighter</em> link than r = +0.4.</p>
+    <p>The <b>regression line y on x</b> (least squares) predicts y from x. It's only valid <span class="cyan">inside the range of the data</span> — predicting beyond is extrapolation.</p>
+    <div class="gdc">
+      <h4>📟 GDC — regression line + r</h4>
+      <ol>
+        <li><kbd>MENU</kbd> → <kbd>2</kbd> (STAT) → x-values in <b>List 1</b>, y-values in <b>List 2</b></li>
+        <li><kbd>F2</kbd> (CALC) → <kbd>F3</kbd> (REG) → <kbd>F1</kbd> (X, linear)</li>
+        <li>Reads off <b>a</b>, <b>b</b>, and <b>r</b></li>
+      </ol>
+      <p class="note">⚠️ Casio writes y = a + bx (a = intercept, b = gradient). IB writes y = ax + b. Match by the <em>numbers</em> — the gradient multiplies x.</p>
+    </div>
+  </div>
+
+  <div class="nos"><b>CORRELATION ≠ CAUSATION:</b> ice-cream sales and drownings both rise in summer — huge r, but a third variable (heat) drives both. Exam line: "correlation does not imply causation; a confounding variable may explain the link."</div>
+</section>
+
+<!-- ══════════════════════ ACT 4 ══════════════════════ -->
+<section class="act" id="act4">
+  <div class="acttag">4.5 · 4.6</div>
+  <h2>Probability</h2>
+  <p class="aim">The three laws of combining events, and the diagrams that make them visible.</p>
+
+  <div class="panel">
+    <h3>THE BASICS</h3>
+    <p class="big">P(A) = n(A)/n(U) &nbsp;·&nbsp; complementary: P(A′) = 1 − P(A)</p>
+    <ul class="clean">
+      <li><b>Mutually exclusive</b> (can't both happen): P(A ∪ B) = P(A) + P(B).</li>
+      <li><b>Combined events</b> (general): P(A ∪ B) = P(A) + P(B) − P(A ∩ B).</li>
+      <li><b>Independent</b> (one doesn't affect the other): P(A ∩ B) = P(A) × P(B).</li>
+      <li><b>Conditional</b> ("given that"): P(A | B) = P(A ∩ B) / P(B).</li>
+    </ul>
+    <p class="muted">Trigger words: "and" = ∩ (multiply if independent) · "or" = ∪ (add, minus overlap) · "given that" = conditional.</p>
+  </div>
+
+  <div class="panel">
+    <h3>VENN DIAGRAMS &amp; TREE DIAGRAMS</h3>
+    <p>Venn = groups overlapping (good for ∪ and ∩). Tree = events in sequence (good for conditional and dependent chains — multiply along the branches). Sample-space diagrams and tables of outcomes do the same job for two-step experiments.</p>
+  </div>
+
+  <div class="tip"><b>EXAM TRAP:</b> P(A | B) ≠ P(B | A). "Probability it's raining given the ground is wet" is not "probability the ground is wet given it's raining". Don't swap them.</div>
+</section>
+
+<!-- ══════════════════════ ACT 5 ══════════════════════ -->
+<section class="act" id="act5">
+  <div class="acttag">4.7 · 4.8</div>
+  <h2>Discrete random variables &amp; binomial</h2>
+  <p class="aim">Putting numbers and probabilities together, then the classic count-of-successes distribution.</p>
+
+  <div class="panel">
+    <h3>DISCRETE RANDOM VARIABLES (4.7)</h3>
+    <p>A random variable X takes values each with a probability. Its <span class="accent">expected value</span> (mean) is:</p>
+    <p class="big">E(X) = Σ x · P(X = x)</p>
+    <p>Worked: X = 1 (0.3), 2 (0.5), 3 (0.2) → E(X) = 1(0.3) + 2(0.5) + 3(0.2) = <b>1.9</b>.</p>
+    <div class="gdc">
+      <h4>📟 GDC — expected value</h4>
+      <ol>
+        <li><kbd>MENU</kbd> <kbd>2</kbd> (STAT) → x-values in List 1, P(X=x) in List 2</li>
+        <li><kbd>F2</kbd> (CALC) → <kbd>F1</kbd> (1-VAR) → XList = List1, <b>Freq = List2</b> → <kbd>EXE</kbd></li>
+        <li>The mean x̄ = E(X)</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>BINOMIAL DISTRIBUTION (4.8)</h3>
+    <p class="big">X ~ B(n, p): P(X = x) = <span class="accent">C(n, x) pˣ (1 − p)ⁿ⁻ˣ</span></p>
+    <p>Mean = np · Variance = np(1 − p).</p>
+    <ul class="clean">
+      <li><b>Conditions:</b> fixed n · independent trials · two outcomes (success/fail) · same p every trial.</li>
+      <li><b>Binomial CDF</b> gives P(X ≤ x) — the cumulative "up to and including x".</li>
+    </ul>
+    <div class="gdc">
+      <h4>📟 GDC — binomial probabilities</h4>
+      <ol>
+        <li><kbd>MENU</kbd> <kbd>2</kbd> (STAT) → <kbd>F5</kbd> (DIST) → <kbd>F5</kbd> (BINM)</li>
+        <li><kbd>F1</kbd> (Bpd) for exactly P(X = x) · <kbd>F2</kbd> (Bcd) for P(X ≤ x)</li>
+        <li>Enter x, Numtrial n, p → <kbd>EXE</kbd></li>
+      </ol>
+      <p class="note">P(X &gt; x) = 1 − P(X ≤ x), and P(X ≥ x) = 1 − P(X ≤ x − 1). Use the CDF (Bcd) for "at most / at least".</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 6 ══════════════════════ -->
+<section class="act" id="act6">
+  <div class="acttag">4.8 · 4.9</div>
+  <h2>The normal distribution</h2>
+  <p class="aim">The bell curve, the 68-95-99.7 rule, and working it backwards with inverse normal.</p>
+
+  <div class="panel">
+    <h3>NORMAL DISTRIBUTION N(μ, σ²)</h3>
+    <p class="big">z = (x − μ) / σ</p>
+    <ul class="clean">
+      <li>68% of data within μ ± σ · 95% within μ ± 2σ · 99.7% within μ ± 3σ.</li>
+      <li><b>NormalCDF</b> finds P(a &lt; X &lt; b) — the area under the curve.</li>
+      <li><b>Inverse normal (InvN)</b> works backwards: probability → x.</li>
+    </ul>
+    <div class="gdc">
+      <h4>📟 GDC — normal &amp; inverse normal</h4>
+      <ol>
+        <li><kbd>MENU</kbd> <kbd>2</kbd> (STAT) → <kbd>F5</kbd> (DIST) → <kbd>F1</kbd> (NORM)</li>
+        <li><kbd>F2</kbd> (Ncd) → enter Lower, Upper, σ, μ → <kbd>EXE</kbd> for P(Lower &lt; X &lt; Upper)</li>
+        <li><kbd>F3</kbd> (InvN) → set Tail, Area, σ, μ → <kbd>EXE</kbd> to go probability → x</li>
+      </ol>
+      <p class="note">For a one-sided tail like P(X &lt; 85), set Lower = a very negative number (e.g. −1×10⁹⁹). P(X &gt; x) = 1 − P(X &lt; x).</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>SPEARMAN'S RANK (4.9)</h3>
+    <p class="big">ρ = 1 − 6Σd² / (n(n² − 1))</p>
+    <p>Rank both data sets (1 = smallest), square the rank differences d, and plug in. Use Spearman when the relationship is <span class="cyan">curved or ordinal</span>, or when outliers would wreck Pearson.</p>
+    <p class="muted">Pearson's r is sensitive to outliers (a single extreme point can drag it); Spearman's rank isn't. That's the "limitations" question in 4.9.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════ ACT 7 ══════════════════════ -->
+<section class="act" id="act7">
+  <div class="acttag">4.10 · 4.11</div>
+  <h2>Hypothesis testing</h2>
+  <p class="aim">The framework for deciding whether data is significant — chi-squared, the t-test, and p-values.</p>
+
+  <div class="panel">
+    <h3>THE TESTING FRAMEWORK (4.10)</h3>
+    <ul class="clean">
+      <li><b>H₀ (null)</b> = nothing interesting is happening (no difference, no association).</li>
+      <li><b>H₁ (alternative)</b> = there IS a difference / association.</li>
+      <li><b>Significance level α</b> = the threshold (usually 5% = 0.05).</li>
+      <li><b>p-value</b> = probability of getting results at least this extreme if H₀ were true.</li>
+      <li><b>Decision:</b> if p &lt; α, reject H₀ (result is significant). If p &gt; α, do not reject H₀.</li>
+    </ul>
+    <p class="muted">One-tailed = testing in one direction ("greater than"); two-tailed = either direction ("different"). Two-tailed tests halve the significance in each tail.</p>
+  </div>
+
+  <div class="panel">
+    <h3>CHI-SQUARED (4.10)</h3>
+    <p class="big">χ² = Σ (O − E)² / E</p>
+    <p><b>Test for independence:</b> a contingency table of observed frequencies. Degrees of freedom df = (rows − 1)(columns − 1). Compare χ² to the critical value (or use the p-value).</p>
+    <p><b>Goodness of fit:</b> compare observed frequencies to an expected distribution.</p>
+    <div class="gdc">
+      <h4>📟 GDC — chi-squared</h4>
+      <ol>
+        <li><kbd>MENU</kbd> <kbd>2</kbd> (STAT) → <kbd>F3</kbd> (TEST) → <kbd>F3</kbd> (CHI)</li>
+        <li><kbd>F2</kbd> (2-WAY) for independence — enter the observed matrix first (Observed: Mat A) → <kbd>EXE</kbd></li>
+        <li>or <kbd>F1</kbd> (GOF) for goodness-of-fit — give observed &amp; expected lists</li>
+        <li>Reads off χ², the p-value, and df</li>
+      </ol>
+      <p class="note">To enter the contingency table as a matrix: <kbd>MENU</kbd> <kbd>1</kbd> (RUN·MAT) → <kbd>F3</kbd> (MAT) → set dimensions → type the observed counts.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>THE t-TEST (4.10)</h3>
+    <p>Compares the <span class="cyan">means of two populations</span>. Two-sample t-test: if the p-value &lt; α, the means differ significantly.</p>
+    <div class="gdc">
+      <h4>📟 GDC — t-test</h4>
+      <ol>
+        <li><kbd>MENU</kbd> <kbd>2</kbd> (STAT) → <kbd>F3</kbd> (TEST) → <kbd>F2</kbd> (t)</li>
+        <li><kbd>F2</kbd> (2-Sample) → enter the two data lists (or their stats) → <kbd>EXE</kbd></li>
+        <li>Reads off t and the p-value → compare p to α</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="nos"><b>CONCEPT OF A LIMIT (4.11):</b> a limit is the value a function approaches as its input approaches some point — "as x gets closer to a, f(x) gets closer to L", written f(x) → L as x → a. The normal distribution's tails approach (but never reach) zero as x → ±∞.</div>
+</section>
+
+<!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="map">
+  <div class="acttag">One picture</div>
+  <h2>MIND MAP 🗺</h2>
+  <div class="mind">
+    <div class="node core">STATS &amp; PROB<br><small>Topic 4</small></div>
+    <div class="arrow">→</div>
+    <div class="node">SAMPLING<br><small>population · sample · bias</small></div>
+    <div class="arrow">→</div>
+    <div class="node">SUMMARISE<br><small>mean · median · IQR · σ</small></div>
+    <div class="arrow">→</div>
+    <div class="node">CORRELATION<br><small>r · regression · causation trap</small></div>
+    <div class="arrow">→</div>
+    <div class="node">PROBABILITY<br><small>∪ ∩ · conditional · Venn/tree</small></div>
+    <div class="arrow">→</div>
+    <div class="node">BINOMIAL<br><small>B(n, p) · np · np(1−p)</small></div>
+    <div class="arrow">→</div>
+    <div class="node">NORMAL<br><small>N(μ, σ²) · 68-95-99.7 · InvN</small></div>
+    <div class="arrow">→</div>
+    <div class="node">HYPOTHESIS<br><small>H₀/H₁ · p-value · χ² · t-test</small></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHEAT ══════════════════════ -->
 <section class="act" id="cheat">
-  <div class="acttag">Revision</div>
-  <h2>CHEAT SHEET</h2>
-  <p class="aim">Everything the examiner wants, compressed into 14 lines.</p>
+  <div class="acttag">Last-minute</div>
+  <h2>THE CHEAT MARQUEE ⚡</h2>
   <div class="marquee">
-    <div class="line">1 · MEAN = Σx/n · <span>outlier-sensitive</span> · MEDIAN = middle of sorted data · <span>robust</span> · MODE = most common</div>
-    <div class="line">2 · QUARTILES: Q1 = 25% · Q2 = median · Q3 = 75% · <span>IQR = Q3 − Q1</span></div>
-    <div class="line">3 · OUTLIER: below <span>Q1 − 1.5 × IQR</span> or above <span>Q3 + 1.5 × IQR</span></div>
-    <div class="line">4 · VARIANCE = mean of squared deviations · <span>σ² = Σ(x − x̄)²/n (pop)</span> · s² = .../(n − 1) (sample)</div>
-    <div class="line">5 · STANDARD DEVIATION = √variance · <span>same units as the data</span> · smaller σ = more consistent</div>
-    <div class="line">6 · PEARSON r: <span>−1 ≤ r ≤ +1</span> · sign = direction · |r| = strength · r ≈ 0 = no linear link</div>
-    <div class="line">7 · SPEARMAN ρ = 1 − 6Σd²/(n(n² − 1)) · <span>rank data first</span> · use when not linear or ordinal</div>
-    <div class="line">8 · REGRESSION y on x: y = a + bx · <span>predict y from x · NO extrapolation</span></div>
-    <div class="line">9 · CORRELATION ≠ CAUSATION · <span>third variable alert</span></div>
-    <div class="line">10 · MUTUALLY EXCLUSIVE: P(A ∪ B) = P(A) + P(B) · <span>INDEPENDENT: P(A ∩ B) = P(A)P(B)</span></div>
-    <div class="line">11 · CONDITIONAL: P(A|B) = P(A ∩ B)/P(B) · <span>"given that" = trigger word</span></div>
-    <div class="line">12 · BINOMIAL X ~ B(n, p): P(X=x) = C(n,x)pˣ(1−p)ⁿ⁻ˣ · <span>mean np · var np(1 − p)</span></div>
-    <div class="line">13 · NORMAL: <span>68% within μ ± σ · 95% within μ ± 2σ · 99.7% within μ ± 3σ</span> · z = (x − μ)/σ</div>
-    <div class="line">14 · INVERSE NORMAL: probability → x (InvNorm) · <span>P(X &gt; x) = 1 − P(X &lt; x)</span></div>
+    <div class="line">mean = Σx/n (outlier-sensitive) · median = middle (robust) · <span>mode = most common</span></div>
+    <div class="line">IQR = Q3 − Q1 · outlier below <span>Q1 − 1.5×IQR</span> or above <span>Q3 + 1.5×IQR</span></div>
+    <div class="line">Pearson r: −1 ≤ r ≤ +1 · sign = direction · |r| = strength · <span>correlation ≠ causation</span></div>
+    <div class="line">Spearman ρ = 1 − 6Σd²/(n(n²−1)) · <span>rank first, use when curved/ordinal</span></div>
+    <div class="line">regression y on x predicts y from x · <span>NO extrapolation</span></div>
+    <div class="line">mutually exclusive: P(A∪B) = P(A)+P(B) · <span>independent: P(A∩B) = P(A)P(B)</span></div>
+    <div class="line">conditional: P(A|B) = P(A∩B)/P(B) · <span>"given that" = trigger</span></div>
+    <div class="line">E(X) = Σ x·P(X=x) · <span>binomial: P(X=x) = C(n,x)pˣ(1−p)ⁿ⁻ˣ, mean np, var np(1−p)</span></div>
+    <div class="line">normal: 68/95/99.7 rule · z = (x−μ)/σ · <span>InvN = area → x</span></div>
+    <div class="line">χ² = Σ(O−E)²/E · df = (r−1)(c−1) · <span>p &lt; α → reject H₀</span></div>
   </div>
 </section>
-<!-- SELFTEST -->
-<section class="act" id="selftest">
-  <div class="acttag">Self-test · answers in the data file</div>
-  <h2>DOOR CHECK — 6 QUICK ONES</h2>
-  <p class="aim">Six questions, ten minutes, no notes. The answers and full worked solutions are in <code>IB_Study/data/stats_prob_selftest.md</code>.</p>
-  <ol class="checklist">
-    <li class="done">Q1. 15 songs, 8 of them by your favourite artist. Probability the first two played are both by them?</li>
-    <li class="done">Q2. Heights are N(170, 36). What range holds the middle 68%?</li>
-    <li class="done">Q3. r = 0.9 for hours studied vs score. What does it NOT tell you?</li>
-  </ol>
-  <ol class="checklist" start="4">
-    <li class="done">Q4. Given P(A)=0.6, P(B)=0.5, P(A∩B)=0.3 — are A and B independent? Show it.</li>
-    <li class="done">Q5. X~B(10, 0.3). Find P(X=3).</li>
-    <li class="done">Q6. X~N(100, 15²). Find P(X &lt; 85) with your GDC.</li>
-  </ol>
+
+<!-- ══════════════════════ TEST ══════════════════════ -->
+<section class="act" id="test">
+  <div class="acttag">Prove it</div>
+  <h2>SELF-TEST ✍</h2>
+  <p class="aim">No notes. Pick an answer, get instant feedback.</p>
+
+  <div class="q" data-a="5">
+    <p>1. The mean of 2, 4, 6, 8 is:</p>
+    <label><input type="radio" name="q1" value="5"> 5</label>
+    <label><input type="radio" name="q1" value="4"> 4</label>
+    <label><input type="radio" name="q1" value="20"> 20</label>
+    <div class="fb correct">✅ 5. (2+4+6+8)/4 = 20/4 = 5.</div>
+    <div class="fb wrong">❌ Sum = 20, divided by 4 = 5.</div>
+  </div>
+
+  <div class="q" data-a="4">
+    <p>2. The IQR of 1, 2, 3, 4, 5, 6, 7 is:</p>
+    <label><input type="radio" name="q2" value="6"> 6</label>
+    <label><input type="radio" name="q2" value="4"> 4</label>
+    <label><input type="radio" name="q2" value="2"> 2</label>
+    <div class="fb correct">✅ 4. Q1 = 2, Q3 = 6, so IQR = 6 − 2 = 4.</div>
+    <div class="fb wrong">❌ Q1 = 2 (median of 1,2,3), Q3 = 6 (median of 5,6,7) → IQR = 4.</div>
+  </div>
+
+  <div class="q" data-a="0.6">
+    <p>3. P(A) = 0.4, P(B) = 0.3, P(A ∩ B) = 0.1. Find P(A ∪ B).</p>
+    <label><input type="radio" name="q3" value="0.7"> 0.7</label>
+    <label><input type="radio" name="q3" value="0.6"> 0.6</label>
+    <label><input type="radio" name="q3" value="0.1"> 0.1</label>
+    <div class="fb correct">✅ 0.6. P(A∪B) = 0.4 + 0.3 − 0.1 = 0.6.</div>
+    <div class="fb wrong">❌ P(A∪B) = P(A) + P(B) − P(A∩B) = 0.6.</div>
+  </div>
+
+  <div class="q" data-a="0.4">
+    <p>4. P(A ∩ B) = 0.2 and P(B) = 0.5. Find P(A | B).</p>
+    <label><input type="radio" name="q4" value="0.1"> 0.1</label>
+    <label><input type="radio" name="q4" value="0.4"> 0.4</label>
+    <label><input type="radio" name="q4" value="0.2"> 0.2</label>
+    <div class="fb correct">✅ 0.4. P(A|B) = 0.2/0.5 = 0.4.</div>
+    <div class="fb wrong">❌ P(A|B) = P(A∩B)/P(B) = 0.2/0.5 = 0.4.</div>
+  </div>
+
+  <div class="q" data-a="1.9">
+    <p>5. X takes 1 (prob 0.3), 2 (0.5), 3 (0.2). E(X) = ?</p>
+    <label><input type="radio" name="q5" value="2"> 2</label>
+    <label><input type="radio" name="q5" value="1.9"> 1.9</label>
+    <label><input type="radio" name="q5" value="1.5"> 1.5</label>
+    <div class="fb correct">✅ 1.9. 1(0.3) + 2(0.5) + 3(0.2) = 1.9.</div>
+    <div class="fb wrong">❌ E(X) = 0.3 + 1.0 + 0.6 = 1.9.</div>
+  </div>
+
+  <div class="q" data-a="0.117">
+    <p>6. X ~ B(10, 0.5). Find P(X = 3).</p>
+    <label><input type="radio" name="q6" value="0.117"> 0.117</label>
+    <label><input type="radio" name="q6" value="0.5"> 0.5</label>
+    <label><input type="radio" name="q6" value="0.3"> 0.3</label>
+    <div class="fb correct">✅ 0.117. C(10,3)(0.5)¹⁰ = 120/1024 = 0.117.</div>
+    <div class="fb wrong">❌ C(10,3) = 120, × (0.5)¹⁰ = 120/1024 = 0.117.</div>
+  </div>
+
+  <div class="q" data-a="2">
+    <p>7. For N(100, 15²), the z-score of x = 130 is:</p>
+    <label><input type="radio" name="q7" value="2"> 2</label>
+    <label><input type="radio" name="q7" value="1"> 1</label>
+    <label><input type="radio" name="q7" value="30"> 30</label>
+    <div class="fb correct">✅ 2. z = (130 − 100)/15 = 2.</div>
+    <div class="fb wrong">❌ z = (x − μ)/σ = 30/15 = 2.</div>
+  </div>
+
+  <div class="q" data-a="μ±σ">
+    <p>8. About 68% of a normal distribution lies within:</p>
+    <label><input type="radio" name="q8" value="μ±σ"> μ ± σ</label>
+    <label><input type="radio" name="q8" value="μ±2σ"> μ ± 2σ</label>
+    <label><input type="radio" name="q8" value="μ±3σ"> μ ± 3σ</label>
+    <div class="fb correct">✅ μ ± σ. 68% within 1σ, 95% within 2σ, 99.7% within 3σ.</div>
+    <div class="fb wrong">❌ 68% = μ ± σ (95% = μ ± 2σ, 99.7% = μ ± 3σ).</div>
+  </div>
+</section>
+
+<!-- ══════════════════════ GDC GUIDE ══════════════════════ -->
+<section class="act" id="gdc">
+  <div class="acttag">Casio fx-CG50</div>
+  <h2>BUTTON GUIDE 📟</h2>
+  <p class="aim">The exact key presses for the calculator-heavy questions in Topic 4 — the most GDC-dense part of AI SL.</p>
+  <table>
+    <tr><th>What you want</th><th>Buttons to press (fx-CG50)</th></tr>
+    <tr><td>Mean, sd, quartiles</td><td><kbd>MENU</kbd> <kbd>2</kbd> → data in List 1 → <kbd>F2</kbd> CALC → <kbd>F1</kbd> (1-VAR) → XList List1, Freq 1 → <kbd>EXE</kbd></td></tr>
+    <tr><td>Expected value E(X)</td><td><kbd>MENU</kbd> <kbd>2</kbd> → x in List 1, P in List 2 → <kbd>F2</kbd> CALC → <kbd>F1</kbd> (1-VAR) → Freq = List2 → <kbd>EXE</kbd></td></tr>
+    <tr><td>Regression line + r</td><td><kbd>MENU</kbd> <kbd>2</kbd> → x List 1, y List 2 → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F1</kbd> (X) → a, b, r</td></tr>
+    <tr><td>Spearman's rank</td><td>Rank both lists, then run linear regression on the ranks (r = ρ)</td></tr>
+    <tr><td>Binomial P(X = x)</td><td><kbd>MENU</kbd> <kbd>2</kbd> → <kbd>F5</kbd> DIST → <kbd>F5</kbd> BINM → <kbd>F1</kbd> (Bpd) → x, Numtrial n, p → <kbd>EXE</kbd></td></tr>
+    <tr><td>Binomial P(X ≤ x)</td><td><kbd>F5</kbd> DIST → <kbd>F5</kbd> BINM → <kbd>F2</kbd> (Bcd) → x, Numtrial n, p → <kbd>EXE</kbd></td></tr>
+    <tr><td>Normal P(a &lt; X &lt; b)</td><td><kbd>F5</kbd> DIST → <kbd>F1</kbd> NORM → <kbd>F2</kbd> (Ncd) → Lower, Upper, σ, μ → <kbd>EXE</kbd></td></tr>
+    <tr><td>Inverse normal (area → x)</td><td><kbd>F5</kbd> DIST → <kbd>F1</kbd> NORM → <kbd>F3</kbd> (InvN) → Tail, Area, σ, μ → <kbd>EXE</kbd></td></tr>
+    <tr><td>Chi-squared independence</td><td><kbd>F3</kbd> TEST → <kbd>F3</kbd> CHI → <kbd>F2</kbd> (2-WAY) → observed matrix → <kbd>EXE</kbd></td></tr>
+    <tr><td>Chi-squared goodness of fit</td><td><kbd>F3</kbd> TEST → <kbd>F3</kbd> CHI → <kbd>F1</kbd> (GOF) → observed &amp; expected lists → <kbd>EXE</kbd></td></tr>
+    <tr><td>Two-sample t-test</td><td><kbd>F3</kbd> TEST → <kbd>F2</kbd> (t) → <kbd>F2</kbd> (2-Sample) → two data lists → <kbd>EXE</kbd></td></tr>
+  </table>
+  <div class="tip"><b>TWO TRAPS:</b> (1) For one-sided normal tails use Lower = −1×10⁹⁹ (a huge negative number). (2) Casio regression gives y = a + bx — a is the intercept, b the gradient; IB writes y = ax + b. Read the numbers, not the letters.</div>
+</section>
+
+<!-- ══════════════════════ REVISION VAULT ══════════════════════ -->
+<section class="act" id="vault">
+  <div class="acttag">Read this before the exam</div>
+  <h2>THE REVISION VAULT 🗄️</h2>
+  <p class="aim">Every term, formula, number, and exactly how the examiner wants them worded.</p>
+
+  <div class="panel">
+    <h3>📖 DEFINITIONS — SAY THESE OUT LOUD</h3>
+    <table>
+      <tr><th>Term</th><th>Definition</th></tr>
+      <tr><td>Population / sample</td><td>The whole group of interest / the subset you actually measure.</td></tr>
+      <tr><td>Random sample</td><td>Every member equally likely to be chosen.</td></tr>
+      <tr><td>Discrete / continuous data</td><td>Countable separate values / any value on a scale.</td></tr>
+      <tr><td>Outlier</td><td>A value far from the rest of the data.</td></tr>
+      <tr><td>Mean / median / mode</td><td>Σx/n · the middle sorted value · the most common value.</td></tr>
+      <tr><td>Interquartile range (IQR)</td><td>Q3 − Q1 — the spread of the middle 50%.</td></tr>
+      <tr><td>Standard deviation</td><td>√ of the mean squared deviation from the mean; same units as the data.</td></tr>
+      <tr><td>Correlation coefficient r</td><td>Measures strength (−1 to +1) and direction of a linear relationship.</td></tr>
+      <tr><td>Event / sample space</td><td>A set of outcomes / the set of all possible outcomes.</td></tr>
+      <tr><td>Mutually exclusive</td><td>Events that cannot both happen: P(A ∩ B) = 0.</td></tr>
+      <tr><td>Independent events</td><td>One's outcome does not affect the other: P(A ∩ B) = P(A)P(B).</td></tr>
+      <tr><td>Expected value E(X)</td><td>The long-run average of a random variable: Σ x·P(X = x).</td></tr>
+      <tr><td>Null / alternative hypothesis</td><td>H₀: no effect/difference · H₁: there is an effect/difference.</td></tr>
+      <tr><td>p-value</td><td>The probability of results at least this extreme if H₀ were true.</td></tr>
+      <tr><td>Limit</td><td>The value f(x) approaches as x approaches some point.</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🧮 FORMULA SHEET</h3>
+    <table>
+      <tr><th>Formula</th><th>What it does</th><th>Notes</th></tr>
+      <tr><td>x̄ = Σx/n</td><td>mean</td><td>outlier-sensitive</td></tr>
+      <tr><td>IQR = Q3 − Q1</td><td>interquartile range</td><td>outlier fences: ±1.5×IQR</td></tr>
+      <tr><td>σ² = Σ(x − x̄)²/n</td><td>variance (population)</td><td>sample uses n − 1</td></tr>
+      <tr><td>ρ = 1 − 6Σd²/(n(n² − 1))</td><td>Spearman's rank</td><td>rank both lists first</td></tr>
+      <tr><td>P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</td><td>combined events</td><td>mutually exclusive → drop the − term</td></tr>
+      <tr><td>P(A | B) = P(A ∩ B) / P(B)</td><td>conditional probability</td><td>"given that"</td></tr>
+      <tr><td>E(X) = Σ x·P(X = x)</td><td>expected value</td><td>long-run mean</td></tr>
+      <tr><td>P(X = x) = C(n, x) pˣ (1 − p)ⁿ⁻ˣ</td><td>binomial</td><td>mean np, var np(1 − p)</td></tr>
+      <tr><td>z = (x − μ) / σ</td><td>normal standardisation</td><td>68-95-99.7 rule</td></tr>
+      <tr><td>χ² = Σ (O − E)² / E</td><td>chi-squared</td><td>df = (r−1)(c−1)</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>🔢 DATA BANK — NUMBERS TO OWN</h3>
+    <ul class="clean">
+      <li>Normal rule: <b>68% within μ ± σ · 95% within μ ± 2σ · 99.7% within μ ± 3σ</b></li>
+      <li>Binomial conditions: fixed n · independent · two outcomes · same p</li>
+      <li>r close to ±1 = strong; r near 0 = no linear link; sign = direction</li>
+      <li>Significance: <b>p &lt; α (0.05) → reject H₀</b>; p &gt; α → do not reject</li>
+      <li>df for a chi-squared independence test = (rows − 1)(columns − 1)</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>🎯 EXAM WALKTHROUGHS</h3>
+    <div class="exam">
+      <b>Q1 — CALCULATE [2 marks]</b> "A dataset has mean 50 and standard deviation 4. State the range that holds about 95% of the data."
+      <p><b>Model answer:</b> μ ± 2σ = 50 ± 8, so <b>42 to 58</b> (2 marks).</p>
+    </div>
+    <div class="exam">
+      <b>Q2 — CALCULATE [3 marks]</b> "X ~ B(10, 0.3). Find P(X ≤ 2)."
+      <p><b>Model answer:</b> use the GDC BinomialCDF with n = 10, p = 0.3, x = 2 → <b>0.383</b> (method 1, correct setup 1, answer 1).</p>
+    </div>
+    <div class="exam">
+      <b>Q3 — EXPLAIN [2 marks]</b> "r = 0.9 for ice-cream sales vs drowning deaths. What does this NOT tell you?"
+      <p><b>Model answer:</b> it does not show that ice cream causes drownings (1) — a confounding variable (hot weather) explains both (1).</p>
+    </div>
+    <div class="exam">
+      <b>Q4 — TEST [4 marks]</b> "A χ² test gives p = 0.02 at the 5% level. State the conclusion."
+      <p><b>Model answer:</b> since p = 0.02 &lt; 0.05, we <b>reject H₀</b> (1) — there is significant evidence of an association/difference at the 5% level (1).</p>
+      <p class="muted">Trap: "reject H₀" is not "prove H₁". Say "significant evidence", never "proven".</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus</div>
+  <h2>EXAM-READY CHECKLIST ✅</h2>
+  <p class="aim">Tick them off as you can explain each one out loud without looking. Progress saves on this device.</p>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 11 mastered</div>
+  <ul class="cl" id="cl">
+    <li data-i="0"><span class="box">✓</span><span class="code">4.1</span><span>Population, sample, random sample, discrete/continuous data; reliability, bias in sampling, outliers, sampling techniques.</span></li>
+    <li data-i="1"><span class="box">✓</span><span class="code">4.2</span><span>Presentation: frequency tables, histograms, cumulative frequency, box plots; median, quartiles, percentiles, range, IQR.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">4.3</span><span>Central tendency (mean, median, mode); grouped data, modal class; dispersion (IQR, σ, variance); effect of constant changes.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">4.4</span><span>Linear correlation, Pearson's r, scatter diagrams, regression line y on x, interpretation of a and b, prediction.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">4.5</span><span>Trial, outcome, equally likely outcomes, relative frequency, sample space, event, P(A) = n(A)/n(U), complementary events.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">4.6</span><span>Venn/tree/sample-space diagrams; combined events, mutually exclusive, conditional probability.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">4.7</span><span>Discrete random variables, probability distributions, expected value E(X).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">4.8</span><span>Binomial distribution (mean &amp; variance); normal distribution, properties, normal probability calculations.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">4.9</span><span>Inverse normal calculations; Spearman's rank; limitations of Pearson + effect of outliers.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">4.10</span><span>Null/alternative hypotheses, significance levels, p-values, chi-squared (independence &amp; goodness-of-fit), t-test.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">4.11</span><span>One-tailed and two-tailed tests; introduction to the concept of a limit.</span></li>
+  </ul>
 </section>
 
 <footer>
-  <p>built for the Thu 2026-08-27 Math AI SL assessment — stats &amp; probability paper prep</p>
-  <p>sources: Oxford Math AI SL (2023) ch.4 · your IB_Study schedule · GDC: TI-Nspire CX / fx-CG50</p>
+  <p>Built from the Y12 AI SL topics sheet (Aug 2026) · IB data booklet · Casio fx-CG50</p>
+  <p>📖 open → print to PDF for a poster · part of <a href="../../../index.html">Travis's Study Hub</a></p>
 </footer>
+
 </div>
+
 <script>
-var items=document.querySelectorAll('ol.checklist li');
-var pill=document.getElementById('progPill');
-function upd(){var d=0;items.forEach(function(li){if(li.classList.contains('done'))d++;});pill.textContent=d+'/'+items.length;}
-items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');upd();});});
-upd();
+  var KEY='math-stats-checklist-v1';
+  var items=document.querySelectorAll('#cl li');
+  var fill=document.getElementById('fill');
+  var progText=document.getElementById('progText');
+  var progPill=document.getElementById('progPill');
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function update(){
+    var n=0;
+    items.forEach(function(li){
+      if(saved[li.dataset.i]){li.classList.add('done');n++;}
+      else{li.classList.remove('done');}
+    });
+    var pct=Math.round(n/items.length*100);
+    fill.style.width=pct+'%';
+    progText.textContent=n+' / '+items.length+' mastered';
+    progPill.textContent=n+'/'+items.length;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click',function(){
+      saved[li.dataset.i]=!saved[li.dataset.i];
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      update();
+    });
+  });
+  update();
+  var qs=document.querySelectorAll('.q');
+  qs.forEach(function(q){
+    q.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        q.classList.remove('correct','wrong');
+        if(inp.value===q.dataset.a){q.classList.add('correct');}
+        else{q.classList.add('wrong');}
+      });
+    });
+  });
 </script>
 </body>
 </html>
