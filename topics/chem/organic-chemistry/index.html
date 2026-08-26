@@ -168,6 +168,24 @@
     .act h2{-webkit-text-fill-color:#111;}
     .q .fb{display:block;}
   }
+
+  /* organic structure (classes the shared CSS was missing) */
+  .lead{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px; line-height:1.65;}
+  .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin:14px 0;}
+  .note{color:var(--dim); font-size:14px; margin:12px 0; padding:12px 16px; background:rgba(168,85,247,.06); border-radius:10px; line-height:1.6;}
+  .mini-table{border:1px solid var(--line2); border-radius:12px; overflow:hidden; margin:14px 0; font-size:14.5px; line-height:1.55;}
+  .mtrow{display:flex; flex-wrap:wrap; gap:6px 14px; padding:11px 16px; border-bottom:1px solid var(--line);}
+  .mtrow:last-child{border-bottom:none;}
+  .mtrow.head{background:rgba(168,85,247,.16); font-weight:700; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; color:#fff;}
+  .mtrow span{flex:1 1 0; min-width:80px;}
+  .mtrow:nth-child(even):not(.head){background:rgba(255,255,255,.03);}
+  .svg-wrap{background:var(--panel2); border:1px solid var(--line2); border-radius:16px; padding:18px; margin:16px 0; text-align:center;}
+  .svg-wrap svg{max-width:640px; width:100%; height:auto;}
+  .mindmap{display:flex; flex-direction:column; gap:10px; margin:16px 0;}
+  .mm-root{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px; border-radius:12px; text-align:center;}
+  .mm-branch{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 16px;}
+  .mm-node{color:var(--cyan); font-weight:800; display:block; margin-bottom:4px; font-size:14px;}
+  .mm-leaf{color:var(--dim); font-size:13.5px; line-height:1.6;}
 </style>
 </head>
 <body>
@@ -206,7 +224,7 @@
 <section class="act" id="act1">
   <div class="acttag">S3.2.1 · S3.2.2 · S3.2.3</div>
   <h2>Formulas & functional groups</h2>
-  <p class="lead">Every dish in the organic kitchen is built from carbon. The ingredient shelf is where we sort the ingredients: what a formula tells you, what a functional group is, and how families of compounds line up in homologous series.</p>
+  <p class="lead">Carbon chemistry starts with the formula and the functional group: what a formula tells you, what a functional group is, and how families line up in homologous series.</p>
 
   <h3>S3.2.1 — Four ways to write a formula</h3>
   <div class="cols">
@@ -258,9 +276,9 @@
   <p class="note">Ketones and aldehydes share C<sub>n</sub>H<sub>2n</sub>O — position of the C=O is the only difference.</p>
 
   <div class="svg-wrap">
-    <svg viewBox="0 0 640 300" role="img" aria-label="Functional group ingredient shelf: the carbon backbone with groups attached">
+    <svg viewBox="0 0 640 300" role="img" aria-label="Functional groups: the carbon backbone with groups attached">
       <rect x="20" y="20" width="600" height="260" rx="14" fill="#0e1420" stroke="#00e5ff" stroke-opacity="0.35"/>
-      <text x="40" y="55" fill="#7df9ff" font-size="17" font-weight="bold" font-family="Consolas,monospace">THE INGREDIENT SHELF</text>
+      <text x="40" y="55" fill="#7df9ff" font-size="17" font-weight="bold" font-family="Consolas,monospace">FUNCTIONAL GROUPS</text>
       <g font-family="Consolas,monospace" font-size="14">
         <text x="40" y="95" fill="#e8f6ff">C</text>
         <line x1="55" y1="92" x2="110" y2="92" stroke="#e8f6ff" stroke-width="3"/>
@@ -302,7 +320,7 @@
 <section class="act" id="act2">
   <div class="acttag">S3.2.4 · S3.2.5 · S3.2.6 · S3.2.7 (AHL)</div>
   <h2>Isomerism</h2>
-  <p class="lead">Bigger chains boil hotter, names follow strict rules, and the same ingredients can be arranged into completely different dishes: isomers.</p>
+  <p class="lead">Bigger chains have higher boiling points, names follow strict rules, and the same atoms can be arranged in different ways: isomers.</p>
 
   <h3>S3.2.4 — Boiling point trends</h3>
   <p>Boiling point climbs steadily along a homologous series: each added CH<sub>2</sub> strengthens London (dispersion) forces. Methane −161 °C → ethane −89 → propane −42 → butane −0.5 → pentane 36 → hexane 69 °C. Melting point is noisier — don't rely on it for prediction. Density and viscosity also rise with chain length.</p>
@@ -319,7 +337,7 @@
   <div class="cols">
     <div class="card"><h4>🔗 CHAIN</h4><p>Different carbon skeleton: butane vs methylpropane (both C<sub>4</sub>H<sub>10</sub>).</p></div>
     <div class="card"><h4>📍 POSITIONAL</h4><p>Functional group moves: 1-, 2-, 3-bromopentane (C<sub>5</sub>H<sub>11</sub>Br).</p></div>
-    <div class="card"><h4>🍳 FUNCTIONAL GROUP</h4><p>Same atoms, new group: ethanol vs methoxymethane (C<sub>2</sub>H<sub>6</sub>O); propanal vs propanone (C<sub>3</sub>H<sub>6</sub>O); methyl methanoate vs ethanoic acid (C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>).</p></div>
+    <div class="card"><h4>🧪 FUNCTIONAL GROUP</h4><p>Same atoms, new group: ethanol vs methoxymethane (C<sub>2</sub>H<sub>6</sub>O); propanal vs propanone (C<sub>3</sub>H<sub>6</sub>O); methyl methanoate vs ethanoic acid (C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>).</p></div>
   </div>
   <p class="note">1°, 2°, 3° = number of carbons bonded to the functional-group carbon. For amines count C bonded to N directly (N-methylpropan-1-amine). C<sub>4</sub>H<sub>9</sub>F has exactly 4 structural isomers: 1-fluoro-, 2-fluoro-, 1-fluoro-2-methylpropane, 2-fluoro-2-methylpropane.</p>
 
@@ -333,7 +351,7 @@
   <div class="svg-wrap">
     <svg viewBox="0 0 640 320" role="img" aria-label="Isomer family tree: structural isomers (chain, positional, functional) vs stereoisomers (cis-trans, optical)">
       <rect x="20" y="20" width="600" height="280" rx="14" fill="#0e1420" stroke="#ffd166" stroke-opacity="0.35"/>
-      <text x="40" y="55" fill="#ffd166" font-size="17" font-weight="bold" font-family="Consolas,monospace">SAME FORMULA, DIFFERENT DISH</text>
+      <text x="40" y="55" fill="#ffd166" font-size="17" font-weight="bold" font-family="Consolas,monospace">SAME FORMULA, DIFFERENT STRUCTURE</text>
       <text x="320" y="100" fill="#e8f6ff" font-size="15" text-anchor="middle" font-family="Consolas,monospace">ISOMERS</text>
       <line x1="320" y1="110" x2="160" y2="150" stroke="#e8f6ff" stroke-width="2"/>
       <line x1="320" y1="110" x2="480" y2="150" stroke="#e8f6ff" stroke-width="2"/>
@@ -372,7 +390,7 @@
 <section class="act" id="act3">
   <div class="acttag">S3.2.8 · S3.2.9 · S3.2.10 · S3.2.11 · S3.2.12 (AHL)</div>
   <h2>Spectroscopy</h2>
-  <p class="lead">Can't see the molecule? Scan it. Mass spec weighs the pieces, IR feels the bonds, NMR counts the hydrogen neighbourhoods. Together they identify the dish.</p>
+  <p class="lead">Mass spec weighs the fragments, IR identifies the bonds, NMR counts the hydrogen environments. Together they identify the molecule.</p>
 
   <h3>S3.2.8 — Mass spectrometry: weigh the fragments</h3>
   <p>MS smashes the molecule into charged fragments. Highest m/z = the <strong>molecular ion M⁺</strong> = relative molecular mass. Fragment masses hint at pieces: 15 = CH<sub>3</sub>⁺, 17 = OH⁺, 29 = CHO⁺ or CH<sub>3</sub>CH<sub>2</sub>⁺, 31 = CH<sub>3</sub>O⁺ or CH<sub>2</sub>OH⁺, 45 = COOH⁺.</p>
@@ -395,7 +413,7 @@
   <div class="svg-wrap">
     <svg viewBox="0 0 640 340" role="img" aria-label="Three scanners on one molecule: MS peaks, IR absorption, NMR signals">
       <rect x="20" y="20" width="600" height="300" rx="14" fill="#0e1420" stroke="#4ecdc4" stroke-opacity="0.35"/>
-      <text x="40" y="55" fill="#4ecdc4" font-size="17" font-weight="bold" font-family="Consolas,monospace">THREE SCANNERS, ONE DISH</text>
+      <text x="40" y="55" fill="#4ecdc4" font-size="17" font-weight="bold" font-family="Consolas,monospace">THREE TECHNIQUES, ONE MOLECULE</text>
       <text x="100" y="90" fill="#7df9ff" font-size="14" font-family="Consolas,monospace">MS: m/z</text>
       <g font-family="Consolas,monospace" font-size="11">
         <rect x="150" y="68" width="12" height="18" fill="#7df9ff"/><text x="148" y="100" fill="#7d8ea0" text-anchor="middle">15</text>
@@ -427,7 +445,7 @@
 <section class="act" id="act4">
   <div class="acttag">R3.3.1 · R3.3.2 · R3.3.3</div>
   <h2>Free radicals</h2>
-  <p class="lead">Some chefs work alone with a single electron. Radicals are neutral species with one unpaired electron — formed by homolytic fission, they run the kitchen as a chain reaction.</p>
+  <p class="lead">Radicals are neutral species with one unpaired electron — formed by homolytic fission, they drive reactions as a chain.</p>
 
   <h3>R3.3.1 — The radical: one unpaired electron</h3>
   <p>A <strong>radical</strong> is a chemical entity with an unpaired electron, drawn with a dot: Cl•, •CH<sub>3</sub>, •OH. Unlike ions, radicals exist independently — no counter-ion needed. High reactivity means radicals are usually intermediates, not final products. Radicals are blamed in the free-radical theory of ageing (mitochondria, oxidative stress — still debated).</p>
@@ -478,12 +496,12 @@
 <section class="act" id="act5">
   <div class="acttag">R3.4.1 · R3.4.2 · R3.4.3 · R3.4.4 · R3.4.5 · R3.4.6–3.4.13 (AHL)</div>
   <h2>Reaction mechanisms</h2>
-  <p class="lead">Nucleophiles (electron-rich, donate pairs) meet electrophiles (electron-hungry, accept pairs). The mechanisms have names: SN1, SN2, electrophilic addition — and for AHL, Lewis theory and benzene.</p>
+  <p class="lead">Nucleophiles (electron-rich, donate pairs) meet electrophiles (electron-deficient, accept pairs). The main mechanisms: SN1, SN2, electrophilic addition — and for AHL, Lewis theory and benzene.</p>
 
   <h3>R3.4.1–3.4.4 — Nucleophiles, electrophiles and fission</h3>
   <div class="cols">
-    <div class="card"><h4>🕺 NUCLEOPHILE</h4><p>Electron-rich, lone pair, donates a pair: OH⁻, CN⁻, Cl⁻, H<sub>2</sub>O, NH<sub>3</sub>. (CH<sub>3</sub>)<sub>4</sub>N⁺ can't — no lone pair.</p></div>
-    <div class="card"><h4>💃 ELECTROPHILE</h4><p>Electron-deficient, accepts a pair: cations (CH<sub>3</sub>⁺), δ+ atoms (BF<sub>3</sub>, carbonyl C).</p></div>
+    <div class="card"><h4>⚡ NUCLEOPHILE</h4><p>Electron-rich, lone pair, donates a pair: OH⁻, CN⁻, Cl⁻, H<sub>2</sub>O, NH<sub>3</sub>. (CH<sub>3</sub>)<sub>4</sub>N⁺ can't — no lone pair.</p></div>
+    <div class="card"><h4>🧲 ELECTROPHILE</h4><p>Electron-deficient, accepts a pair: cations (CH<sub>3</sub>⁺), δ+ atoms (BF<sub>3</sub>, carbonyl C).</p></div>
     <div class="card"><h4>✂️ HETEROLYTIC FISSION</h4><p>Both electrons to one atom: CH<sub>3</sub>Br → CH<sub>3</sub>⁺ + Br⁻ (double-barbed arrow to Br). Makes carbocations.</p></div>
   </div>
   <p class="note">Nucleophilic substitution: Nu⁻ + R–X → R–Nu + X⁻. Chloroethane + OH⁻ → ethanol + Cl⁻. The leaving group takes the electron pair.</p>
@@ -545,17 +563,17 @@
   <div class="acttag">One picture</div>
   <h2>MIND MAP 🗺</h2>
   <div class="mindmap">
-    <div class="mm-root">ORGANIC KITCHEN</div>
-    <div class="mm-branch"><span class="mm-node">INGREDIENTS (S3.2)</span>
+    <div class="mm-root">ORGANIC CHEMISTRY</div>
+    <div class="mm-branch"><span class="mm-node">STRUCTURE (S3.2)</span>
       <div class="mm-leaf">formulas · functional groups · homologous series · IUPAC names · isomers (structural → stereo: cis-trans, optical)</div>
     </div>
-    <div class="mm-branch"><span class="mm-node">SCANNERS (S3.2 AHL)</span>
+    <div class="mm-branch"><span class="mm-node">SPECTROSCOPY (S3.2 AHL)</span>
       <div class="mm-leaf">MS (M⁺, fragments) · IR (C=O 1700–1750, O–H 2500–3000) · ¹H NMR (environments, N+1 splitting) · combine all</div>
     </div>
     <div class="mm-branch"><span class="mm-node">RADICALS (R3.3)</span>
       <div class="mm-leaf">unpaired electron · homolytic fission (fish-hook) · initiation → propagation ×2 → termination</div>
     </div>
-    <div class="mm-branch"><span class="mm-node">PARTNERS (R3.4)</span>
+    <div class="mm-branch"><span class="mm-node">MECHANISMS (R3.4)</span>
       <div class="mm-leaf">nucleophile donates pair · electrophile accepts · SN1 vs SN2 · electrophilic addition (Markovnikov) · Lewis acids/bases · complex ions · benzene nitration</div>
     </div>
   </div>
