@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>D1.3 Mutations &amp; Gene Editing</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Continuity &amp; change · D1 (Molecules)</div>
+  <h1>D1.3 MUTATIONS &amp; GENE EDITING</h1>
+  <div class="sub">Gene mutations — substitutions, insertions and deletions — their causes and consequences, and (AHL) gene knockout and CRISPR-Cas9 gene editing.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge ahl">AHL: D1.3.8–10</span><span class="badge">10 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · TYPES OF MUTATION</a><a href="#act2">2 · SUBSTITUTIONS</a><a href="#act3">3 · INSERTIONS/DELETIONS</a><a href="#act4">4 · CAUSES</a><a href="#act5">5 · RANDOMNESS</a><a href="#act6">6 · GERM vs SOMATIC</a><a href="#act7">7 · SOURCE OF VARIATION</a><a href="#act8">8 · GENE KNOCKOUT (AHL)</a><a href="#act9">9 · CRISPR-CAS9 (AHL)</a><a href="#act10">10 · CONSERVED SEQUENCES (AHL)</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/14</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">D1.3.1</div><h2>GENE MUTATIONS</h2>
+  <p class="aim">Gene mutations are structural changes to genes at the molecular level: substitutions, insertions and deletions.</p>
+  <div class="panel"><p>A <span class="accent">gene mutation</span> is a structural change to a gene at the <span class="cyan">molecular level</span>. Three types: <span class="cyan">substitution</span> (one base swapped for another), <span class="cyan">insertion</span> (bases added), and <span class="cyan">deletion</span> (bases removed).</p></div>
+  <div class="fig"><svg viewBox="0 0 640 230" role="img" aria-label="types of gene mutation: normal DNA, a substitution, and an insertion that causes a frameshift">
+    <rect width="640" height="230" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">TYPES OF GENE MUTATION</text>
+    <text x="140" y="62" fill="#4ade80" font-size="10" text-anchor="middle">normal:  ATG CGT TAC</text>
+    <text x="140" y="100" fill="#fbbf24" font-size="10" text-anchor="middle">substitution:  ATG CGA TAC  (one base swapped)</text>
+    <text x="140" y="138" fill="#ff2ec4" font-size="10" text-anchor="middle">insertion:  ATG CCG TTA C  (base added → frameshift)</text>
+    <text x="140" y="176" fill="#a855f7" font-size="10" text-anchor="middle">deletion:  ATG GTT AC  (base removed → frameshift)</text>
+    <text x="320" y="210" fill="#b9a3d6" font-size="11" text-anchor="middle">frameshifts scramble many downstream codons</text>
+  </svg><div class="cap"><b>FIG 1</b> — Gene mutations: substitution changes one base; insertion/deletion shifts the reading frame (frameshift).</div></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">D1.3.2</div><h2>CONSEQUENCES OF BASE SUBSTITUTIONS</h2>
+  <p class="aim">Substitutions can cause single-nucleotide polymorphisms (SNPs); because of degeneracy, often no amino acid changes.</p>
+  <div class="panel"><ul class="clean"><li>A <span class="accent">base substitution</span> changes one base; the result is a <span class="cyan">single-nucleotide polymorphism (SNP)</span>.</li><li>Because the genetic code is <span class="cyan">degenerate</span>, a substitution may <span class="gold">not change the amino acid</span> (silent), or may change one amino acid.</li></ul></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">D1.3.3</div><h2>CONSEQUENCES OF INSERTIONS &amp; DELETIONS</h2>
+  <p class="aim">Insertions and deletions often cause frameshift changes, so the polypeptide ceases to function.</p>
+  <div class="panel"><p>Because the code is read in <span class="accent">triplets</span>, an insertion or deletion shifts the <b>reading frame</b> (<span class="cyan">frameshift mutation</span>) — scrambling all downstream codons. This usually produces a <span class="gold">non-functional polypeptide</span>, or a truncated one.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">D1.3.4</div><h2>CAUSES OF GENE MUTATIONS</h2>
+  <p class="aim">Mutations are caused by mutagens and by errors in DNA replication or repair.</p>
+  <div class="panel"><ul class="clean"><li><b>Mutagens</b> — e.g. <span class="cyan">chemical mutagens</span>, UV and ionising <span class="cyan">radiation</span>.</li><li><b>Errors in DNA replication</b> and <b>errors in DNA repair</b>.</li></ul></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">D1.3.5</div><h2>RANDOMNESS OF MUTATION</h2>
+  <p class="aim">Mutations can occur anywhere in the genome, though some bases have a higher probability of mutating.</p>
+  <div class="panel"><p>Mutations are <span class="accent">random</span> — they can occur anywhere in the <span class="cyan">base sequences</span> of the genome. However, some bases have a <span class="gold">higher probability of mutating</span> (hypermutable sites, e.g. repetitive sequences, CpG sites).</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">D1.3.6</div><h2>GERM CELLS vs SOMATIC CELLS</h2>
+  <p class="aim">Mutations in germ cells are inherited; mutations in somatic cells can cause cancer.</p>
+  <div class="panel"><ul class="clean"><li><b>Germ-cell mutations</b> — occur in gametes, so the mutated gene is <span class="cyan">inherited</span> by offspring.</li><li><b>Somatic-cell mutations</b> — occur in body cells; not inherited, but can cause <span class="cyan">cancer</span> (e.g. from a mutation in a proto-oncogene/tumour-suppressor gene).</li></ul></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">D1.3.7</div><h2>MUTATION AS A SOURCE OF VARIATION</h2>
+  <p class="aim">Gene mutation is the original source of all genetic variation.</p>
+  <div class="panel"><p><span class="accent">Gene mutation</span> is the <span class="cyan">original source</span> of all genetic variation. Most mutations are <span class="cyan">neutral</span> or harmful; only a small minority are <span class="green">advantageous</span>. But without mutation, there would be no variation for selection to act on.</p></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">AHL · D1.3.8</div><h2>GENE KNOCKOUT</h2>
+  <p class="aim">Gene knockout investigates a gene's function by changing it to make it inoperative.</p>
+  <div class="panel"><p><span class="accent">Gene knockout</span> is a technique that alters a gene to make it <span class="cyan">inoperative</span>. By observing what the organism loses, scientists can <span class="gold">infer the gene's function</span>.</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">AHL · D1.3.9</div><h2>CRISPR-Cas9 GENE EDITING</h2>
+  <p class="aim">CRISPR sequences and the enzyme Cas9 are used in gene editing.</p>
+  <div class="panel"><p><span class="accent">CRISPR</span> sequences (with a guide RNA) direct the enzyme <span class="cyan">Cas9</span> to a <span class="gold">specific DNA sequence</span>, where it cuts the DNA. This allows a gene to be <span class="gold">edited</span> (removed, replaced or modified) — a precise gene-editing tool.</p></div>
+</section>
+
+<section class="act" id="act10"><div class="acttag">AHL · D1.3.10</div><h2>CONSERVED &amp; HIGHLY CONSERVED SEQUENCES</h2>
+  <p class="aim">Conserved sequences are similar across species; hypotheses account for them.</p>
+  <div class="panel"><ul class="clean"><li><b>Conserved sequences</b> — identical or similar <span class="cyan">across a species or group</span>; <b>highly conserved</b> = almost unchanged across long evolutionary times.</li><li>These genes have essential functions (e.g. <span class="cyan">ribosomal RNA</span>, <span class="cyan">histone</span>, <span class="cyan">haemoglobin</span> genes) — their sequences are <span class="gold">kept stable by selection</span> (because mutations are usually harmful).</li></ul></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">MUTATIONS<small>D1.3</small></div>
+    <div class="arrow">→</div><div class="node">TYPES<small>substitution · insertion · deletion (frameshift)</small></div>
+    <div class="node">CAUSES<small>mutagens · replication/repair errors</small></div>
+    <div class="node">RANDOM<small>anywhere · some sites higher probability</small></div>
+    <div class="node">GERM vs SOMATIC<small>inherited vs cancer</small></div>
+    <div class="node">VARIATION<small>original source</small></div>
+    <div class="node">AHL: KNOCKOUT + CRISPR<small>investigate · edit genes</small></div>
+    <div class="node">AHL: CONSERVED<small>essential genes kept stable</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Gene mutations: <span>substitution · insertion · deletion</span>.</div>
+    <div class="line">Substitution → <span>SNP</span>; degenerate code may mean no amino-acid change.</div>
+    <div class="line">Insertion/deletion → <span>frameshift</span> → non-functional polypeptide.</div>
+    <div class="line">Causes: <span>mutagens</span> (chemicals, radiation) + <span>replication/repair errors</span>.</div>
+    <div class="line">Mutations are <span>random</span>, but some bases are hypermutable.</div>
+    <div class="line">Germ-cell → <span>inherited</span>; somatic-cell → <span>cancer</span>.</div>
+    <div class="line">Mutation is the <span>original source of variation</span>.</div>
+    <div class="line">AHL: <span>gene knockout</span> (make inoperative) + <span>CRISPR-Cas9</span> editing.</div>
+    <div class="line">AHL: <span>conserved sequences</span> — essential genes kept stable by selection.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">10 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="a base is swapped for another"><p>1. A substitution mutation is when…</p>
+    <label><input type="radio" name="q1" data-a="a base is swapped for another"> one base is swapped for another</label><label><input type="radio" name="q1"> bases are added</label><label><input type="radio" name="q1"> bases are removed</label>
+    <div class="fb correct">Correct — substitution = one base replaced.</div><div class="fb wrong">Substitution = one base swapped for another.</div>
+  </div>
+
+  <div class="q" data-a="it shifts the reading frame, scrambling downstream codons"><p>2. An insertion often causes…</p>
+    <label><input type="radio" name="q2" data-a="it shifts the reading frame, scrambling downstream codons"> a frameshift, scrambling downstream codons</label><label><input type="radio" name="q2"> no change at all</label><label><input type="radio" name="q2"> a new start codon</label>
+    <div class="fb correct">Correct — insertion/deletion shifts the reading frame.</div><div class="fb wrong">Insertion/deletion → frameshift → usually non-functional polypeptide.</div>
+  </div>
+
+  <div class="q" data-a="single-nucleotide polymorphisms"><p>3. Base substitutions give rise to…</p>
+    <label><input type="radio" name="q3" data-a="single-nucleotide polymorphisms"> single-nucleotide polymorphisms (SNPs)</label><label><input type="radio" name="q3"> new chromosomes</label><label><input type="radio" name="q3"> new species</label>
+    <div class="fb correct">Correct — substitutions create SNPs.</div><div class="fb wrong">Substitutions → SNPs; often silent due to degeneracy.</div>
+  </div>
+
+  <div class="q" data-a="mutagens and errors in DNA replication or repair"><p>4. Gene mutations are caused by…</p>
+    <label><input type="radio" name="q4" data-a="mutagens and errors in DNA replication or repair"> mutagens and errors in DNA replication or repair</label><label><input type="radio" name="q4"> transcription</label><label><input type="radio" name="q4"> translation</label>
+    <div class="fb correct">Correct — mutagens + replication/repair errors.</div><div class="fb wrong">Causes: mutagens (chemicals, radiation) + replication/repair errors.</div>
+  </div>
+
+  <div class="q" data-a="in gametes, so the mutated gene is inherited"><p>5. A germ-cell mutation…</p>
+    <label><input type="radio" name="q5" data-a="in gametes, so the mutated gene is inherited"> is in gametes, so the mutated gene is inherited</label><label><input type="radio" name="q5"> causes cancer only</label><label><input type="radio" name="q5"> is never passed on</label>
+    <div class="fb correct">Correct — germ-cell mutations are inherited.</div><div class="fb wrong">Germ-cell mutations are passed to offspring.</div>
+  </div>
+
+  <div class="q" data-a="mutations in somatic cells can cause cancer"><p>6. In somatic cells, mutations…</p>
+    <label><input type="radio" name="q6" data-a="mutations in somatic cells can cause cancer"> can cause cancer (not inherited)</label><label><input type="radio" name="q6"> are always inherited</label><label><input type="radio" name="q6"> never have effects</label>
+    <div class="fb correct">Correct — somatic mutations aren't inherited but can cause cancer.</div><div class="fb wrong">Somatic mutations can cause cancer (not inherited).</div>
+  </div>
+
+  <div class="q" data-a="the original source of all genetic variation"><p>7. Gene mutation is…</p>
+    <label><input type="radio" name="q7" data-a="the original source of all genetic variation"> the original source of all genetic variation</label><label><input type="radio" name="q7"> a rare, harmful event only</label><label><input type="radio" name="q7"> not related to variation</label>
+    <div class="fb correct">Correct — it's the ultimate source of variation.</div><div class="fb wrong">Mutation is the original source of genetic variation.</div>
+  </div>
+
+  <div class="q" data-a="changing a gene so it is inoperative to learn its function"><p>8. AHL — Gene knockout works by…</p>
+    <label><input type="radio" name="q8" data-a="changing a gene so it is inoperative to learn its function"> changing a gene to make it inoperative, to learn its function</label><label><input type="radio" name="q8"> copying a gene many times</label><label><input type="radio" name="q8"> moving a gene between species</label>
+    <div class="fb correct">Correct — knockout reveals function by loss.</div><div class="fb wrong">Knockout inactivates a gene to reveal its function.</div>
+  </div>
+
+  <div class="q" data-a="Cas9 cuts DNA at a sequence directed by CRISPR guide RNA"><p>9. AHL — In CRISPR-Cas9 editing…</p>
+    <label><input type="radio" name="q9" data-a="Cas9 cuts DNA at a sequence directed by CRISPR guide RNA"> Cas9 cuts DNA at a sequence directed by CRISPR guide RNA</label><label><input type="radio" name="q9"> Cas9 makes proteins</label><label><input type="radio" name="q9"> CRISPR adds sugar</label>
+    <div class="fb correct">Correct — guide RNA directs Cas9 to cut a specific DNA sequence.</div><div class="fb wrong">CRISPR guide RNA directs Cas9 to cut specific DNA.</div>
+  </div>
+
+  <div class="q" data-a="sequences kept similar across species because they have essential functions"><p>10. AHL — Conserved sequences are…</p>
+    <label><input type="radio" name="q10" data-a="sequences kept similar across species because they have essential functions"> sequences kept similar across species because of essential functions</label><label><input type="radio" name="q10"> sequences that mutate freely</label><label><input type="radio" name="q10"> only in non-coding DNA</label>
+    <div class="fb correct">Correct — selection keeps essential genes stable.</div><div class="fb wrong">Conserved sequences code for essential functions, kept stable by selection.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 14</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">D1.3.1</span><span>Gene mutations: substitution, insertion, deletion.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">D1.3.2</span><span>Substitution → SNP; degeneracy → often silent.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">D1.3.3</span><span>Insertion/deletion → frameshift → non-functional polypeptide.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">D1.3.4</span><span>Mutagens + replication/repair errors.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">D1.3.5</span><span>Mutations random; some bases hypermutable.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">D1.3.6</span><span>Germ-cell (inherited) vs somatic-cell (cancer).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">D1.3.7</span><span>Mutation = original source of variation.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">D1.3.8</span><span>AHL: gene knockout investigates function.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">D1.3.9</span><span>AHL: CRISPR sequences + Cas9 for gene editing.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">D1.3.10</span><span>AHL: conserved/highly conserved sequences.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">D1.3.1-3</span><span>I can distinguish substitution/insertion/deletion and their effects.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">D1.3.4-5</span><span>I can explain causes and randomness of mutation.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">D1.3.6-7</span><span>I can compare germ vs somatic effects and variation.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">D1.3.8-10</span><span>AHL: I can explain knockout, CRISPR-Cas9 and conserved sequences.</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · D1.3 Mutations &amp; Gene Editing · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='d13-mutations-gene-editing-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
