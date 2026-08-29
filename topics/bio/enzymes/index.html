@@ -80,15 +80,15 @@
   .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
   .fig.narrow svg{max-width:480px;}
 
-  /* Bouncer rows */
-  .bouncer{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+  /* Enzyme rows */
+  .enzyme{display:flex; gap:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
            padding:20px; margin:16px 0;}
-  .bouncer .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
-  .bouncer .body{flex:1;}
-  .bouncer h3{font-size:18px; font-weight:900; margin-bottom:2px;}
-  .bouncer .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
-  .bouncer p, .bouncer li{font-size:15.5px;}
-  @media(max-width:560px){.bouncer{flex-direction:column; gap:8px;}}
+  .enzyme .emoji{font-size:46px; line-height:1; flex:0 0 auto;}
+  .enzyme .body{flex:1;}
+  .enzyme h3{font-size:18px; font-weight:900; margin-bottom:2px;}
+  .enzyme .aka{font-size:12.5px; color:var(--dim); margin-bottom:10px;}
+  .enzyme p, .enzyme li{font-size:15.5px;}
+  @media(max-width:560px){.enzyme{flex-direction:column; gap:8px;}}
 
   /* tables */
   table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
@@ -163,7 +163,7 @@
   @media print{
     nav{display:none;}
     body{background:#fff; color:#111;}
-    .panel,.bouncer,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
+    .panel,.enzyme,.card{background:#fff; border-color:#ccc; box-shadow:none; break-inside:avoid;}
     h1{color:#111; -webkit-text-fill-color:#111; text-shadow:none;}
     .act h2{-webkit-text-fill-color:#111;}
     .q .fb{display:block;}
@@ -213,16 +213,16 @@
   </div>
 </header>
 
-<!-- ══════════════════════ ACT 1 · THE BOUNCER'S JOB ══════════════════════ -->
+<!-- ══════════════════════ ACT 1 · THE ENZYME'S JOB ══════════════════════ -->
 <section class="act" id="act1">
   <div class="acttag">C1.1.1</div>
   <h2>ENZYMES AS CATALYSTS</h2>
-  <p class="aim">A catalyst increases the rate of a chemical reaction but is not changed by it. Enzymes are the biological bouncers: they let the VIPs (substrates) through the door and turn them into partygoers (products) — and the bouncer is never used up, so one enzyme works the whole night, again and again.</p>
+  <p class="aim">A catalyst increases the rate of a chemical reaction but is not changed by it. Enzymes are biological catalysts: they let the substrates through the door and turn them into products — and the enzyme is never used up, so one enzyme works the whole night, again and again.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🚪</div>
     <div class="body">
-      <h3>Who is the bouncer, and why is he never off shift?</h3>
+      <h3>What is an enzyme, and why is it never used up?</h3>
       <p class="aka">catalyst · biological catalyst · substrate → product · reuse</p>
       <p><span class="accent">A catalyst</span> is a substance that increases the rate of a chemical reaction but is <span class="cyan">not changed by the reaction</span>. Because catalysts are not used up, they can catalyse reactions many times — only small amounts are needed relative to the quantity of reactants. Platinum is an inorganic example: it sits in car catalytic converters, converting unburned hydrocarbons in exhaust gases into carbon dioxide and water.</p>
       <p><span class="accent">Enzymes are biological catalysts</span>, made by living cells to speed up biochemical reactions. The general equation: enzyme + substrate → enzyme + products — the enzyme comes out the other side exactly as it went in. If cells didn't make enzymes, respiration, digestion, growth and movement would all crawl at ambient temperatures. Different enzymes accelerate reactions by different amounts — data-based questions love the ratios (up to ~10⁸ for OMP decarboxylase).</p>
@@ -230,21 +230,21 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="club door scene: a substrate VIP approaches the active site door of the enzyme bouncer and is converted into a product that enters the club, while the bouncer itself is unchanged and a loop arrow shows the same enzyme catalysing again and again, never used up">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="enzyme active site scene: a substrate approaches the active site of the enzyme enzyme and is converted into a product that is released, while the enzyme itself is unchanged and a loop arrow shows the same enzyme catalysing again and again, never used up">
       <defs><marker id="ah1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">DOOR POLICY — CATALYSTS: FASTER, NEVER USED UP</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CATALYSTS — CATALYSTS: FASTER, NEVER USED UP</text>
 
       <rect x="30" y="52" width="150" height="90" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
       <text x="105" y="78" fill="#22d3ee" font-size="11" font-weight="800" text-anchor="middle">SUBSTRATE</text>
-      <text x="105" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">the guest with a ticket</text>
+      <text x="105" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">the substrate with a ticket</text>
       <text x="105" y="112" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reactant molecule</text>
       <text x="105" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">needs the door to open</text>
 
       <path d="M 185 97 L 232 97" stroke="#22d3ee" stroke-width="2.5" marker-end="url(#ah1)" fill="none"/>
 
       <rect x="240" y="52" width="180" height="90" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
-      <text x="330" y="78" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">ENZYME · BOUNCER</text>
+      <text x="330" y="78" fill="#ff2ec4" font-size="11" font-weight="800" text-anchor="middle">ENZYME · ENZYME</text>
       <text x="330" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">biological catalyst</text>
       <text x="330" y="112" fill="#b9a3d6" font-size="9.5" text-anchor="middle">active site = the door</text>
       <text x="330" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">NOT changed by the reaction</text>
@@ -253,32 +253,32 @@
 
       <rect x="480" y="52" width="150" height="90" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
       <text x="555" y="78" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle">PRODUCT</text>
-      <text x="555" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">partygoer inside</text>
+      <text x="555" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">product inside</text>
       <text x="555" y="112" fill="#b9a3d6" font-size="9.5" text-anchor="middle">converted from substrate</text>
       <text x="555" y="128" fill="#b9a3d6" font-size="9.5" text-anchor="middle">reaction product</text>
 
       <path d="M 330 190 C 330 250, 60 250, 60 190" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-dasharray="6 5"/>
       <path d="M 60 190 L 60 152" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ah1)" fill="none"/>
-      <text x="120" y="252" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">LOOP: SAME BOUNCER, NEXT GUEST</text>
+      <text x="120" y="252" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">LOOP: SAME ENZYME, NEXT SUBSTRATE</text>
       <text x="330" y="300" fill="#b9a3d6" font-size="10.5" text-anchor="middle">Catalysts are not used up → small amounts catalyse many reactions</text>
       <text x="330" y="322" fill="#4ade80" font-size="10.5" font-weight="700" text-anchor="middle">Without enzymes: respiration, digestion, growth, movement would be very slow</text>
     </svg>
-    <div class="cap"><b>FIG 1</b> — The bouncer's loop: substrate → product through the enzyme, with the enzyme unchanged and reusable. Platinum (in catalytic converters) is the inorganic bouncer; enzymes are the biological ones.</div>
+    <div class="cap"><b>FIG 1</b> — The enzyme's loop: substrate → product through the enzyme, with the enzyme unchanged and reusable. Platinum (in catalytic converters) is an inorganic catalyst; enzymes are the biological ones.</div>
   </div>
 
   <div class="exam"><b>Exam gold:</b> a catalyst's defining property is <b>not being changed by the reaction</b> — that's why it can be reused and why only tiny amounts are needed. Rate data questions (with/without enzyme, e.g. carbonic anhydrase ~10⁶) test whether you can calculate and compare the <b>ratio</b> of rates.</div>
 </section>
 
-<!-- ══════════════════════ ACT 2 · THE CLUB NETWORK ══════════════════════ -->
+<!-- ══════════════════════ ACT 2 · THE METABOLIC PATHWAYS ══════════════════════ -->
 <section class="act" id="act2">
   <div class="acttag">C1.1.2</div>
   <h2>ROLE OF ENZYMES IN METABOLISM</h2>
-  <p class="aim">Metabolism is the club's whole operation — a complex network of interdependent chemical reactions. Almost every step is staffed by a bouncer (enzyme), so the guest list (control over metabolism) is really a staffing decision: make more of an enzyme and that reaction runs hotter.</p>
+  <p class="aim">Metabolism is the cell's whole operation — a complex network of interdependent chemical reactions. Almost every step is staffed by a enzyme (enzyme), so substrate specificity (control over metabolism) is really a staffing decision: make more of an enzyme and that reaction runs hotter.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🕸</div>
     <div class="body">
-      <h3>Thousands of reactions, one bouncer per step</h3>
+      <h3>Thousands of reactions, one enzyme per step</h3>
       <p class="aka">metabolism · metabolic pathway · chains and cycles · enzyme specificity</p>
       <p><span class="accent">Metabolism</span> is the complex network of interdependent and interacting chemical reactions that occurs in living organisms. Most happen inside cells, but some are extracellular — like digestion of food in the intestine. Reactions are organised into <span class="cyan">pathways</span>: one type of molecule is transformed into another by a series of small steps. Most pathways are chains, but some are cycles — the urea cycle (5 reactions, 5 enzymes) is the textbook example.</p>
       <p>Almost all metabolic reactions are catalysed by an enzyme, and enzymes are <span class="cyan">specific</span>: each catalyses one reaction or a small group. That's a huge difference from platinum, which catalyses many different reactions. So organisms must make huge numbers of enzymes — hundreds even in a simple prokaryote, thousands in a liver cell. Because a cell can <span class="cyan">make more or less enzyme</span>, it can control the rate of each reaction, its metabolism, and therefore its activities and chemical composition.</p>
@@ -286,10 +286,10 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="nightclub floor plan showing metabolic pathways as queue lines: a linear VIP chain A to B to C to D each step staffed by a different enzyme bouncer, plus a circular dance cycle where every intermediate is product of one reaction and substrate of the next, with a note that almost every reaction has its own enzyme">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagram of metabolic pathways as linear chains A to B to C to D each step staffed by a different enzyme enzyme, plus a circular dance cycle where every intermediate is product of one reaction and substrate of the next, with a note that almost every reaction has its own enzyme">
       <defs><marker id="ah2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CLUB NETWORK — METABOLIC PATHWAYS</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">METABOLIC PATHWAYS</text>
 
       <rect x="40" y="56" width="90" height="46" rx="9" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="2"/>
       <text x="85" y="83" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">A</text>
@@ -314,22 +314,22 @@
       <path d="M 254 226 A 30 30 0 0 1 256 196" stroke="#4ade80" stroke-width="2" marker-end="url(#ah2)" fill="none"/>
       <text x="330" y="344" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">Almost every reaction has an enzyme · cells control rates by controlling enzyme supply</text>
     </svg>
-    <div class="cap"><b>FIG 2</b> — Pathways are chains or cycles of small steps; each step needs its own specific enzyme. Urea cycle: 5 reactions, 5 enzymes. Control = hiring more or fewer bouncers (making more/less enzyme).</div>
+    <div class="cap"><b>FIG 2</b> — Pathways are chains or cycles of small steps; each step needs its own specific enzyme. Urea cycle: 5 reactions, 5 enzymes. Control = hiring more or fewer enzymes (making more/less enzyme).</div>
   </div>
 
   <div class="nos"><b>Don't mix up:</b> <b>specificity</b> is what forces cells to make thousands of enzymes — one enzyme per reaction (or small group). A non-biological catalyst like platinum gets away with catalysing many reactions; enzymes don't.</div>
 </section>
 
-<!-- ══════════════════════ ACT 3 · THE STAGE BUILDERS ══════════════════════ -->
+<!-- ══════════════════════ ACT 3 · THE ANABOLISM ══════════════════════ -->
 <section class="act" id="act3">
   <div class="acttag">C1.1.3</div>
   <h2>ANABOLIC &amp; CATABOLIC REACTIONS</h2>
-  <p class="aim">Metabolism runs on two crews: the stage builders (anabolism) assemble bigger molecules from small ones and pay for it with ATP; the set breakers (catabolism) smash big molecules into small ones and bank the energy. Condensation builds, hydrolysis breaks — and water tells you which is which.</p>
+  <p class="aim">Metabolism has two paths: anabolism assembles bigger molecules from small ones using ATP; the catabolism (catabolism) smash big molecules into small ones and bank the energy. Condensation builds, hydrolysis breaks — and water tells you which is which.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🔨</div>
     <div class="body">
-      <h3>Building the stage costs energy; tearing down old sets releases it</h3>
+      <h3>Anabolism uses energy; tearing down old sets releases it</h3>
       <p class="aka">anabolism · catabolism · condensation · hydrolysis · ATP coupling</p>
       <p><span class="accent">Anabolic reactions</span> build smaller molecules into larger ones and <span class="cyan">require energy</span>. Macromolecules are made from monomers in <span class="cyan">condensation reactions</span> — water is the by-product — using energy from ATP. Examples: protein synthesis (translation) by ribosomes, DNA replication, synthesis of complex carbohydrates (starch, cellulose, glycogen), and photosynthesis (CO₂ + H₂O → larger molecules, powered by light).</p>
       <p><span class="accent">Catabolic reactions</span> break larger molecules into smaller ones and <span class="cyan">release energy</span> — in some cases captured by coupling the reaction to ATP synthesis. Examples: digestion of food (mouth, stomach, small intestine), cell respiration (glucose or lipids oxidised to CO₂ and water), and decomposers breaking down dead organic matter. Mnemonic: think of the "anabolic steroids" misused for <i>body building</i> — anabolism builds.</p>
@@ -337,13 +337,13 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two crews on a club stage: left the stage builders take monomer blocks and assemble a macromolecule via condensation with ATP energy in and water out; right the set breakers demolish a macromolecule into monomers via hydrolysis with energy released, showing anabolism costs energy and catabolism releases it">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two metabolic pathways: left anabolism assembles monomer blocks and assemble a macromolecule via condensation with ATP energy in and water out; right the catabolism demolish a macromolecule into monomers via hydrolysis with energy released, showing anabolism costs energy and catabolism releases it">
       <defs><marker id="ah3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">STAGE BUILDERS vs SET BREAKERS — AN / CATA BOLISM</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">ANABOLISM VS CATABOLISM</text>
 
       <rect x="30" y="52" width="290" height="140" rx="9" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="2"/>
-      <text x="175" y="74" fill="#4ade80" font-size="11.5" font-weight="800" text-anchor="middle">STAGE BUILDERS · ANABOLISM</text>
+      <text x="175" y="74" fill="#4ade80" font-size="11.5" font-weight="800" text-anchor="middle">ANABOLISM</text>
       <rect x="55" y="88" width="36" height="30" rx="5" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.5"/>
       <rect x="100" y="88" width="36" height="30" rx="5" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.5"/>
       <rect x="145" y="88" width="36" height="30" rx="5" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.5"/>
@@ -358,7 +358,7 @@
       <text x="175" y="180" fill="#fbbf24" font-size="9.5" font-weight="700" text-anchor="middle">COSTS ENERGY ⚡ in</text>
 
       <rect x="340" y="52" width="290" height="140" rx="9" fill="rgba(255,46,196,.1)" stroke="#ff2ec4" stroke-width="2"/>
-      <text x="485" y="74" fill="#ff2ec4" font-size="11.5" font-weight="800" text-anchor="middle">SET BREAKERS · CATABOLISM</text>
+      <text x="485" y="74" fill="#ff2ec4" font-size="11.5" font-weight="800" text-anchor="middle">CATABOLISM · CATABOLISM</text>
       <rect x="360" y="88" width="56" height="30" rx="5" fill="rgba(251,191,36,.3)" stroke="#fbbf24" stroke-width="1.5"/>
       <text x="388" y="106" fill="#fbbf24" font-size="8.5" font-weight="700" text-anchor="middle">BIG</text>
       <path d="M 435 103 L 467 103" stroke="#ff2ec4" stroke-width="2.5" marker-end="url(#ah3)" fill="none"/>
@@ -378,10 +378,10 @@
       <text x="330" y="304" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">REMEMBER: "anabolic steroids" = body building → anabolism BUILDS</text>
       <text x="330" y="322" fill="#b9a3d6" font-size="9.5" text-anchor="middle">condensation releases H₂O · hydrolysis uses H₂O</text>
     </svg>
-    <div class="cap"><b>FIG 3</b> — Anabolism = stage builders (condensation, ATP in, H₂O out). Catabolism = set breakers (hydrolysis, energy out, ATP banked).</div>
+    <div class="cap"><b>FIG 3</b> — Anabolism (condensation, ATP in, H₂O out). Catabolism = catabolism (hydrolysis, energy out, ATP banked).</div>
   </div>
 
-  <div class="tip"><b>Remember:</b> both halves of metabolism run on enzyme bouncers too — the same enzymes that speed everything up. The glycogen question from the book: making glycogen from glucose phosphate is <b>anabolic</b> (building a macromolecule, needs energy), and two different enzymes are needed because glycogen has two kinds of bonds (1,4 and 1,6).</div>
+  <div class="tip"><b>Remember:</b> both halves of metabolism run on enzyme enzymes too — the same enzymes that speed everything up. The glycogen question from the book: making glycogen from glucose phosphate is <b>anabolic</b> (building a macromolecule, needs energy), and two different enzymes are needed because glycogen has two kinds of bonds (1,4 and 1,6).</div>
 </section>
 
 <!-- ══════════════════════ ACT 4 · THE DOOR ══════════════════════ -->
@@ -390,7 +390,7 @@
   <h2>ENZYMES: GLOBULAR PROTEINS WITH AN ACTIVE SITE</h2>
   <p class="aim">Enzymes are globular proteins with a precise 3D structure. The active site — the door — is only a few amino acids, but they are brought together from far apart in the chain by folding. Mess up the folding and you mess up the door.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🚪</div>
     <div class="body">
       <h3>A door built from a few amino acids that aren't even neighbours</h3>
@@ -444,9 +444,9 @@
 <section class="act" id="act5">
   <div class="acttag">C1.1.5</div>
   <h2>SUBSTRATE-ACTIVE SITE BINDING (INDUCED FIT)</h2>
-  <p class="aim">It was once called lock-and-key — a rigid key slotting into a rigid lock. That model is wrong. Binding is induced fit: the bouncer shifts his stance and the guest leans in — BOTH change shape, bond angles and bond lengths alter, and only then does the chemistry happen.</p>
+  <p class="aim">It was once called lock-and-key — a rigid key slotting into a rigid lock. That model is wrong. Binding is induced fit: the enzyme shifts his stance and the substrate leans in — BOTH change shape, bond angles and bond lengths alter, and only then does the chemistry happen.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🕺</div>
     <div class="body">
       <h3>Not a lock and key — a handshake that changes both hands</h3>
@@ -457,7 +457,7 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three frames of a bouncer greeting a guest: frame one the substrate approaches the door; frame two induced fit both the bouncer shifts his stance and the substrate bends as bond angles change and they bind together; frame three the product is released and the bouncer returns to his original stance, with a crossed out lock and key showing the old model was rejected">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three frames of a enzyme greeting a substrate: frame one the substrate approaches the door; frame two induced fit both the enzyme shifts his stance and the substrate bends as bond angles change and they bind together; frame three the product is released and the enzyme returns to his original stance, with a crossed out lock and key showing the old model was rejected">
       <defs><marker id="ah5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE SHIFTING STANCE — INDUCED FIT</text>
@@ -495,7 +495,7 @@
       <text x="282" y="320" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">LOCK-AND-KEY REJECTED</text>
       <text x="420" y="262" fill="#b9a3d6" font-size="10" text-anchor="middle">bond angles + lengths alter in BOTH molecules</text>
       <text x="420" y="280" fill="#b9a3d6" font-size="10" text-anchor="middle">substrate bonds weakened → easier to break</text>
-      <text x="420" y="298" fill="#4ade80" font-size="10" font-weight="700" text-anchor="middle">catalytic cycle repeats: empty site → next guest</text>
+      <text x="420" y="298" fill="#4ade80" font-size="10" font-weight="700" text-anchor="middle">catalytic cycle repeats: empty site → next substrate</text>
     </svg>
     <div class="cap"><b>FIG 5</b> — Induced fit: approach → mutual shape change (bond angles altered) → product release, active site restored. The lock-and-key model fails because it treats both shapes as rigid.</div>
   </div>
@@ -503,13 +503,13 @@
   <div class="nos"><b>Don't mix up:</b> induced fit is NOT the substrate bending to fit a fixed site. The syllabus says it explicitly: <b>both substrate and enzyme change shape</b> — the enzyme surface attracts the substrate, and the handshake changes both hands.</div>
 </section>
 
-<!-- ══════════════════════ ACT 6 · THE DANCE FLOOR ══════════════════════ -->
+<!-- ══════════════════════ ACT 6 · THE COLLISIONS ══════════════════════ -->
 <section class="act" id="act6">
   <div class="acttag">C1.1.6</div>
   <h2>MOLECULAR MOTION &amp; COLLISIONS</h2>
-  <p class="aim">Nothing reaches the door without moving. Molecules in a liquid jiggle randomly; when a substrate molecule happens to collide with an active site at the right angle, it can bind. More molecules or more heat = more collisions = more entries. Sometimes the bouncer is bolted to the floor (immobilised) — then the guest must do all the moving.</p>
+  <p class="aim">Nothing reaches the door without moving. Molecules in a liquid jiggle randomly; when a substrate molecule happens to collide with an active site at the right angle, it can bind. More molecules or more heat = more collisions = more entries. Sometimes the enzyme is immobilised (immobilised) — then the substrate must do all the moving.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🕺</div>
     <div class="body">
       <h3>Random motion, right angle, right moment</h3>
@@ -520,10 +520,10 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="dance floor scene: small substrate molecules jiggling randomly among enzyme bouncers, one substrate collides with an active site at the right angle and gets in, another collides at a wrong angle and bounces off, with a thermometer showing heat makes molecules move faster and more molecules meaning more collisions">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="collision scene: small substrate molecules jiggling randomly among enzyme enzymes, one substrate collides with an active site at the right angle and gets in, another collides at a wrong angle and bounces off, with a thermometer showing heat makes molecules move faster and more molecules meaning more collisions">
       <defs><marker id="ah6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">DANCE FLOOR — COLLISIONS GET YOU THROUGH THE DOOR</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">COLLISIONS &AMP; ACTIVATION</text>
 
       <rect x="40" y="56" width="120" height="40" rx="8" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
       <path d="M 60 68 L 88 68 L 88 84 L 60 84 Z" fill="rgba(34,211,238,.25)" stroke="#22d3ee" stroke-width="1.5"/>
@@ -563,16 +563,16 @@
   <div class="exam"><b>Exam gold:</b> collision rate vs success rate — the syllabus wants both: <b>higher concentration/temperature raises the number of collisions</b>, but only <b>correctly oriented</b> collisions succeed. Big substrates (DNA) flip it: the enzyme moves to them.</div>
 </section>
 
-<!-- ══════════════════════ ACT 7 · WHO GETS IN ══════════════════════ -->
+<!-- ══════════════════════ ACT 7 · SPECIFICITY ══════════════════════ -->
 <section class="act" id="act7">
   <div class="acttag">C1.1.7</div>
   <h2>SPECIFICITY, STRUCTURE &amp; DENATURATION</h2>
-  <p class="aim">The shape and chemistry of the active site decide the guest list: some doors are absolute (glucokinase admits glucose only), others are broad (hexokinase admits any hexose). But the door's structure depends on weak bonds, so heat or acidity can wreck it — that's denaturation, a bouncer too exhausted to work, permanently.</p>
+  <p class="aim">The shape and chemistry of the active site decide which substrates can bind: some doors are absolute (glucokinase admits glucose only), others are broad (hexokinase admits any hexose). But the active site's structure depends on weak bonds, so heat or acidity can wreck it — that's denaturation, a enzyme too exhausted to work, permanently.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🎫</div>
     <div class="body">
-      <h3>Enzyme–substrate specificity, and the bouncer who collapses</h3>
+      <h3>Enzyme–substrate specificity, and the enzyme who collapses</h3>
       <p class="aka">specificity · glucokinase vs hexokinase · weak interactions · denaturation</p>
       <p><span class="accent">Enzyme–substrate specificity</span>: the active site's shape and chemistry allow substrate molecules to bind but not other substances. Some enzymes are <span class="cyan">absolutely specific</span> — glucose is the only substrate that binds glucokinase. Others are less specific: <span class="cyan">hexokinase</span> binds any of a group of hexose sugars. Proteases are broad — a few types can digest polypeptides with any amino acid sequence.</p>
       <p>The enzyme's precise 3D shape depends on <span class="cyan">weak interactions</span> between amino acids — hydrophobic interactions and hydrogen bonds. Heat and acidity disrupt these, so enzymes are easily altered. Even a change <span class="cyan">far from the active site</span> ripples through the protein and changes the door. Small changes prevent binding or catalysis; if the changes are too great to reverse, the enzyme is <span class="accent">denatured</span> — permanently off duty.</p>
@@ -580,10 +580,10 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three doors on a club wall: the glucokinase door is a tight slot that only the glucose guest shape fits while other shapes bounce off; the hexokinase door is a looser slot that admits a whole family of hexose guests; the third door is a collapsed exhausted bouncer slumped against a closed door labelled denatured where no guest can enter">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three active sites on an enzyme: the glucokinase door is a tight slot that only the glucose substrate shape fits while other shapes bounce off; the hexokinase door is a looser slot that admits a whole family of hexose substrates; the third door is a collapsed exhausted enzyme slumped against a closed door labelled denatured where no substrate can enter">
       <defs><marker id="ah7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">WHO GETS IN — SPECIFICITY &amp; DENATURATION</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">SPECIFICITY — SPECIFICITY &amp; DENATURATION</text>
 
       <rect x="30" y="52" width="190" height="130" rx="9" fill="rgba(34,211,238,.08)" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
       <text x="125" y="72" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">GLUCOKINASE</text>
@@ -628,13 +628,13 @@
   <div class="nos"><b>Don't mix up:</b> denaturation ≠ reversible shape wobble. It's the <b>irreversible</b> loss of the enzyme's precise structure when weak bonds break. And specificity is graded — absolute (glucokinase), grouped (hexokinase), broad (proteases) — not one-size-fits-all.</div>
 </section>
 
-<!-- ══════════════════════ ACT 8 · CLUB CONDITIONS ══════════════════════ -->
+<!-- ══════════════════════ ACT 8 · CONDITIONS ══════════════════════ -->
 <section class="act" id="act8">
   <div class="acttag">C1.1.8</div>
   <h2>FACTORS AFFECTING ENZYME ACTIVITY</h2>
-  <p class="aim">Three dials run the club: temperature (heat speeds the dance, then melts the bouncer), pH (a logarithmic scale — one unit is a tenfold change in acidity), and substrate concentration (more guests, faster entry — until every door is busy and the line can't move faster).</p>
+  <p class="aim">Three factors affect enzymes: temperature (heat speeds the rate, then denatures the enzyme), pH (a logarithmic scale — one unit is a tenfold change in acidity), and substrate concentration (more substrates, faster entry — until every door is busy and the line can't move faster).</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🌡</div>
     <div class="body">
       <h3>Two effects of temperature, one logarithmic pH scale, one saturating curve</h3>
@@ -645,10 +645,10 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three neon graphs on a club wall: left a temperature curve rising with kinetic energy then falling with denaturation with the optimum marked and a note that optimum is not always 40 degrees; middle a bell shaped pH curve with a note one unit equals ten times acidity and the detergent protease optimum 9 to 10; right a substrate concentration curve that rises then flattens and never quite reaches a maximum because active sites saturate">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="three graphs on enzyme activity: left a temperature curve rising with kinetic energy then falling with denaturation with the optimum marked and a note that optimum is not always 40 degrees; middle a bell shaped pH curve with a note one unit equals ten times acidity and the detergent protease optimum 9 to 10; right a substrate concentration curve that rises then flattens and never quite reaches a maximum because active sites saturate">
       <defs><marker id="ah8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CLUB CONDITIONS — TEMP · pH · SUBSTRATE</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CONDITIONS — TEMPERATURE · pH · SUBSTRATE</text>
 
       <rect x="30" y="52" width="190" height="170" rx="9" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
       <text x="125" y="72" fill="#22d3ee" font-size="10.5" font-weight="800" text-anchor="middle">TEMPERATURE</text>
@@ -683,7 +683,7 @@
       <text x="330" y="316" fill="#b9a3d6" font-size="10.5" text-anchor="middle">hot-spring organisms: optimum temp much higher than 40°C · alkaline lakes: high-pH enzymes</text>
       <text x="330" y="338" fill="#22d3ee" font-size="10.5" font-weight="700" text-anchor="middle">denaturation at extremes of temp or pH is irreversible</text>
     </svg>
-    <div class="cap"><b>FIG 8</b> — Three club dials: temperature (peak at optimum, denaturation beyond), pH (logarithmic, one unit = 10×; detergent protease optima 9–10), substrate concentration (saturating curve that never quite reaches a maximum).</div>
+    <div class="cap"><b>FIG 8</b> — Three factors: temperature (peak at optimum, denaturation beyond), pH (logarithmic, one unit = 10×; detergent protease optima 9–10), substrate concentration (saturating curve that never quite reaches a maximum).</div>
   </div>
 
   <div class="exam"><b>Exam gold:</b> two classic traps. (1) pH is <b>logarithmic</b> — pH 4 is 100× more acidic than pH 6, not 2×. (2) The substrate curve <b>never quite reaches a maximum</b> — say "approaches a plateau as active sites saturate", never "reaches a maximum". And <b>optimum temperature is not always 40°C</b> — that phrase is examinable.</div>
@@ -693,9 +693,9 @@
 <section class="act" id="act9">
   <div class="acttag">C1.1.9</div>
   <h2>MEASURING ENZYME-CATALYSED REACTIONS</h2>
-  <p class="aim">Science nightclub rules: change one thing (independent variable), keep everything else fixed (control variables), and measure what happens (dependent variable). Reaction rate = amount of chemical changed ÷ time — in millimoles per second. The catalase experiment is the house special: hydrogen peroxide in, water and oxygen out, oxygen collected in a measuring cylinder.</p>
+  <p class="aim">Scien tific method rules: change one thing (independent variable), keep everything else fixed (control variables), and measure what happens (dependent variable). Reaction rate = amount of chemical changed ÷ time — in millimoles per second. The catalase experiment is the house special: hydrogen peroxide in, water and oxygen out, oxygen collected in a measuring cylinder.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🧪</div>
     <div class="body">
       <h3>Variables, rates, and the catalase special</h3>
@@ -730,7 +730,7 @@
       <text x="235" y="194" fill="#b9a3d6" font-size="8.5" text-anchor="middle">→ H₂O + O₂</text>
 
       <rect x="320" y="52" width="300" height="160" rx="9" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.5)" stroke-width="1.5"/>
-      <text x="470" y="72" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">CLUB MANAGER'S BOARD — VARIABLES</text>
+      <text x="470" y="72" fill="#a855f7" font-size="10.5" font-weight="800" text-anchor="middle">VARIABLES</text>
       <text x="340" y="96" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">INDEPENDENT</text>
       <text x="470" y="96" fill="#b9a3d6" font-size="9.5" text-anchor="middle">deliberately varied (temp, [S], pH…)</text>
       <text x="340" y="118" fill="#fbbf24" font-size="9.5" font-weight="800" text-anchor="middle">CONTROL</text>
@@ -755,9 +755,9 @@
 <section class="act" id="act10">
   <div class="acttag">C1.1.10</div>
   <h2>LOWERING ACTIVATION ENERGY</h2>
-  <p class="aim">Before guests become partygoers, they must climb an energy hill — the activation energy, needed to reach the transition state. The bouncer's real trick: he doesn't add energy, he LOWERS the hill. Same start, same finish, smaller climb — and the party starts a million times faster.</p>
+  <p class="aim">Before substrates become products, they must climb an energy hill — the activation energy, needed to reach the transition state. The enzyme's real trick: he doesn't add energy, he LOWERS the hill. Same start, same finish, smaller climb — and the reaction starts a million times faster.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">⛰</div>
     <div class="body">
       <h3>Same net energy, smaller activation energy</h3>
@@ -809,9 +809,9 @@
 <section class="act" id="act11">
   <div class="acttag">C1.1.11</div>
   <h2>INTRACELLULAR VS EXTRACELLULAR ENZYME REACTIONS</h2>
-  <p class="aim">Some bouncers work inside the club (intracellular — glycolysis in the cytoplasm, Krebs in the mitochondria); others work the street outside (extracellular exoenzymes — digestion in the gut). The uniform even tells you where they work: ER-bound ribosomes build exoenzymes, free ribosomes build intracellular ones.</p>
+  <p class="aim">Some enzymes work inside the cell (intracellular — glycolysis in the cytoplasm, Krebs in the mitochondria); others work the street outside (extracellular exoenzymes — digestion in the gut). The uniform even tells you where they work: ER-bound ribosomes build exoenzymes, free ribosomes build intracellular ones.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🌃</div>
     <div class="body">
       <h3>Who works where, and who built them</h3>
@@ -822,13 +822,13 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="split scene of the club building: inside the club a bouncer works the glycolysis queue in the cytoplasm with hexokinase at the first step, and a mitochondrion contains the Krebs cycle with fumarase; outside on the street an exoenzyme bouncer digests big food molecules into small monomers that pass through the membrane, with labels noting ER ribosomes build exoenzymes and free ribosomes build intracellular enzymes">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="split scene of the cell: inside the cell an enzyme runs glycolysis in the cytoplasm with hexokinase at the first step, and a mitochondrion contains the Krebs cycle with fumarase; outside on the street an exoenzyme enzyme digests big food molecules into small monomers that pass through the membrane, with labels noting ER ribosomes build exoenzymes and free ribosomes build intracellular enzymes">
       <defs><marker id="ah11" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">INSIDE VS STREET — INTRA &amp; EXTRACELLULAR</text>
 
       <rect x="30" y="52" width="290" height="250" rx="9" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="2"/>
-      <text x="175" y="74" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">INSIDE THE CLUB · INTRACELLULAR</text>
+      <text x="175" y="74" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">INTRACELLULAR</text>
       <rect x="55" y="90" width="100" height="56" rx="8" fill="rgba(34,211,238,.1)" stroke="#22d3ee" stroke-width="1.5"/>
       <text x="105" y="108" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">GLYCOLYSIS</text>
       <text x="105" y="122" fill="#b9a3d6" font-size="8.5" text-anchor="middle">cytoplasm · 9 steps</text>
@@ -861,7 +861,7 @@
       <text x="330" y="326" fill="#b9a3d6" font-size="10.5" text-anchor="middle">unicellular archaea/bacteria/fungi: cell wall blocks endocytosis → must secrete exoenzymes</text>
       <text x="330" y="348" fill="#4ade80" font-size="10.5" font-weight="700" text-anchor="middle">digestion in the gut = extracellular · glycolysis + Krebs = intracellular</text>
     </svg>
-    <div class="cap"><b>FIG 11</b> — Intracellular bouncers (glycolysis/hexokinase in cytoplasm; Krebs/fumarase in mitochondrial matrix) built by free ribosomes. Street bouncers (exoenzymes) built on ER ribosomes, working outside — gut digestion, and microbial feeding.</div>
+    <div class="cap"><b>FIG 11</b> — Intracellular enzymes (glycolysis/hexokinase in cytoplasm; Krebs/fumarase in mitochondrial matrix) built by free ribosomes. Street enzymes (exoenzymes) built on ER ribosomes, working outside — gut digestion, and microbial feeding.</div>
   </div>
 
   <div class="nos"><b>Don't mix up:</b> the ribosome story is examinable — <b>ER ribosomes → extracellular enzymes</b>, <b>free ribosomes → intracellular enzymes</b>. And don't forget fumarase: fumarate → malate, Krebs cycle, mitochondrial matrix.</div>
@@ -871,12 +871,12 @@
 <section class="act" id="act12">
   <div class="acttag">C1.1.12</div>
   <h2>HEAT GENERATION BY METABOLISM</h2>
-  <p class="aim">Energy conversion is never 100% efficient — some of it always leaks out as heat. That's the club's body heat keeping the dance floor warm. Birds and mammals run on it: they shiver, burn brown fat with uncoupled respiration, and huddle (emperor penguins) to share the warmth.</p>
+  <p class="aim">Energy conversion is never 100% efficient — some of it always leaks out as heat. That is the body heat that keeps the body warm. Birds and mammals run on it: they shiver, burn brown fat with uncoupled respiration, and huddle (emperor penguins) to share the warmth.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🔥</div>
     <div class="body">
-      <h3>Wasted energy? For warm-blooded bouncers, it's the heating bill</h3>
+      <h3>Wasted energy? For warm-blooded enzymes, it's the heating bill</h3>
       <p class="aka">heat from metabolism · shivering · brown fat · uncoupled respiration · emperor penguins</p>
       <p>The conversion of energy from one form to another is <span class="cyan">never 100% efficient</span>: in metabolic reactions, products contain less energy than reactants, and the additional energy is ultimately converted to <span class="accent">heat</span>. Birds and mammals use this metabolic heat to keep body temperature above the environment. When there's too much heat — during exercise — humans sweat and use evaporative cooling to dump the excess.</p>
       <p>When basal metabolism doesn't release enough heat, animals raise their metabolic rate. A human whose core temperature falls experiences <span class="cyan">shivering</span> — involuntary muscle contractions that generate heat. Many mammals have <span class="cyan">brown fat tissue</span>: its cells carry many mitochondria that perform <span class="cyan">uncoupled respiration</span> — oxidising substrates to generate heat <i>without</i> producing ATP. And in very cold conditions, emperor penguins <span class="cyan">huddle together</span> to take advantage of the metabolic heat released by their neighbours. Even compost heaps steam — microbial metabolism at work.</p>
@@ -884,7 +884,7 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the club dance floor glowing with heat: dancers radiate warm waves labelled metabolism, a brown fat cell with many mitochondria doing uncoupled respiration generates heat instead of ATP, a shivering figure with jagged motion lines labelled involuntary muscle contractions, and a huddle of emperor penguins sharing neighbours metabolic heat">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the cell respiring and releasing heat, labelled metabolism, a brown fat cell with many mitochondria doing uncoupled respiration generates heat instead of ATP, a shivering figure with jagged motion lines labelled involuntary muscle contractions, and a huddle of emperor penguins sharing neighbours metabolic heat">
       <defs><marker id="ah12" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">BODY HEAT — METABOLISM KEEPS THE FLOOR WARM</text>
@@ -925,16 +925,16 @@
     <div class="cap"><b>FIG 12</b> — Metabolic heat: inevitable because energy transfer is never 100% efficient. Used for warmth (shivering, brown fat uncoupled respiration, penguin huddles), dumped when excess (sweating).</div>
   </div>
 
-  <div class="exam"><b>Exam gold:</b> the phrase <b>"uncoupled respiration"</b> = oxidising substrates to make heat WITHOUT producing ATP — that's what brown fat mitochondria do (why infants, with relatively more brown fat, need it: they can't shiver effectively). Connect heat to the enzyme theme: warm dance floor → faster molecular motion → faster catalysis.</div>
+  <div class="exam"><b>Exam gold:</b> the phrase <b>"uncoupled respiration"</b> = oxidising substrates to make heat WITHOUT producing ATP — that's what brown fat mitochondria do (why infants, with relatively more brown fat, need it: they can't shiver effectively). Connect heat to the enzyme theme: higher temperature → faster molecular motion → faster catalysis.</div>
 </section>
 
 <!-- ══════════════════════ ACT 13 · QUEUES & LOOPS ══════════════════════ -->
 <section class="act" id="act13">
   <div class="acttag">C1.1.13</div>
   <h2>CYCLICAL &amp; LINEAR METABOLIC PATHWAYS</h2>
-  <p class="aim">Metabolic pathways are choreography: most are one-way queues (linear chains of small steps — glycolysis runs nine reactions), a few are endless dance loops (cycles like Krebs and Calvin) where every intermediate is both a product and a substrate, and some pathways branch like VIP lanes.</p>
+  <p class="aim">Metabolic pathways are mostly linear chains of small steps — glycolysis runs nine reactions), and a few are cycles (like Krebs and Calvin) where every intermediate is both a product and a substrate, and some pathways branch like specific pathways.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🪩</div>
     <div class="body">
       <h3>Nine small steps, or a loop that never ends</h3>
@@ -945,7 +945,7 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two choreography styles on the club floor: left a one way queue of dancers labelled linear pathway with five steps A to E and a note glycolysis has nine reactions each with its own enzyme and the final steps run twice per glucose; right a circular dance loop labelled cyclical pathway where every intermediate is product of one reaction and substrate of the next, with the Krebs and Calvin cycles named">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="two pathway types in the cell: left a one way queue of intermediates labelled linear pathway with five steps A to E and a note glycolysis has nine reactions each with its own enzyme and the final steps run twice per glucose; right a circular dance loop labelled cyclical pathway where every intermediate is product of one reaction and substrate of the next, with the Krebs and Calvin cycles named">
       <defs><marker id="ah13" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">QUEUES &amp; LOOPS — LINEAR vs CYCLICAL</text>
@@ -985,33 +985,33 @@
     <div class="cap"><b>FIG 13</b> — Linear queues (glycolysis: 9 reactions, one split, later steps ×2 per glucose) vs cyclical loops (Krebs, Calvin, urea) where every intermediate is both product and substrate.</div>
   </div>
 
-  <div class="tip"><b>Remember:</b> the word-game analogy (TREAD→BREAD→BREED…) is the book's own model for pathways: each step is a small change, each step needs its enzyme. Cycles "close the loop" — no end product, the dancers go round again.</div>
+  <div class="tip"><b>Remember:</b> the word-game analogy (TREAD→BREAD→BREED…) is the book's own model for pathways: each step is a small change, each step needs its enzyme. Cycles "close the loop" — no end product, the intermediates are regenerated.</div>
 </section>
 
 <!-- ══════════════════════ ACT 14 · THE MANAGER'S SWITCH ══════════════════════ -->
 <section class="act" id="act14">
   <div class="acttag">C1.1.14</div>
   <h2>ALLOSTERIC SITES &amp; NON-COMPETITIVE INHIBITION</h2>
-  <p class="aim">Beyond the main door (active site), many enzymes carry a second door at the back — the allosteric site. It's the manager's override switch: when a specific substance binds there, the bouncer's shape changes and the whole door slams shut. The substrate never competes — this is non-competitive inhibition, and it's reversible.</p>
+  <p class="aim">Beyond the main door (active site), many enzymes carry a second door at the back — the allosteric site. It is allosteric regulation: when a specific substance binds the allosteric site, the enzyme's shape changes and the active site closes. The substrate never competes — this is non-competitive inhibition, and it's reversible.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🎛</div>
     <div class="body">
-      <h3>An override switch that reshapes the whole bouncer</h3>
+      <h3>Allosteric regulation that reshapes the whole enzyme</h3>
       <p class="aka">allosteric site · conformational change · activation or inhibition · non-competitive · reversible</p>
       <p>Every enzyme has an active site, but many have a <span class="cyan">second binding site</span> where a different specific substance can bind and unbind. Because binding changes the enzyme's shape, it's called an <span class="accent">allosteric site</span>. Allosteric sites exist because they let the enzyme be <span class="cyan">regulated</span>: switching between the two states alters the structure and properties of the active site.</p>
-      <p>In some cases allosteric binding <span class="cyan">activates</span> the enzyme; in others it <span class="cyan">prevents catalysis</span> — reversible inhibition. Substances that inhibit by binding the allosteric site rather than the active site <span class="cyan">do not compete with substrates</span>, so they're called <span class="accent">non-competitive inhibitors</span>. Only specific substances fit the allosteric site — it's another VIP-only door.</p>
+      <p>In some cases allosteric binding <span class="cyan">activates</span> the enzyme; in others it <span class="cyan">prevents catalysis</span> — reversible inhibition. Substances that inhibit by binding the allosteric site rather than the active site <span class="cyan">do not compete with substrates</span>, so they're called <span class="accent">non-competitive inhibitors</span>. Only specific substances fit the allosteric site — it's another substrate-specific site.</p>
     </div>
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a bouncer enzyme drawn with a front door active site and a back switch allosteric site: a manager figure flips the back switch, the bouncer changes shape and the front door slams shut, a waiting substrate is turned away, with notes that only a specific substance fits the allosteric site, binding is reversible, and the substrate concentration cannot overcome this inhibition">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a enzyme enzyme drawn with a front door active site and a back switch allosteric site: a manager figure flips the back switch, the enzyme changes shape and the front door slams shut, a waiting substrate is turned away, with notes that only a specific substance fits the allosteric site, binding is reversible, and the substrate concentration cannot overcome this inhibition">
       <defs><marker id="ah14" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE MANAGER'S SWITCH — ALLOSTERIC SITE</text>
 
       <rect x="110" y="70" width="300" height="120" rx="16" fill="rgba(168,85,247,.14)" stroke="#a855f7" stroke-width="2.5"/>
-      <text x="260" y="96" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">ENZYME · BOUNCER</text>
+      <text x="260" y="96" fill="#a855f7" font-size="11" font-weight="800" text-anchor="middle">ENZYME · ENZYME</text>
       <path d="M 190 116 L 230 116 L 230 148 L 190 148 Z" fill="rgba(34,211,238,.35)" stroke="#22d3ee" stroke-width="2.5"/>
       <text x="210" y="136" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">DOOR</text>
       <rect x="360" y="110" width="34" height="34" rx="8" fill="rgba(251,191,36,.3)" stroke="#fbbf24" stroke-width="2.5"/>
@@ -1042,45 +1042,45 @@
   <div class="exam"><b>Exam gold:</b> "non-competitive" literally means the inhibitor <b>doesn't compete for the active site</b> — so raising substrate concentration <b>cannot</b> overcome it. Compare with competitive inhibition's graph: non-competitive lowers the maximum rate; competitive shifts the curve right.</div>
 </section>
 
-<!-- ══════════════════════ ACT 15 · GATECRASHERS ══════════════════════ -->
+<!-- ══════════════════════ ACT 15 · COMPETITIVE INHIBITORS ══════════════════════ -->
 <section class="act" id="act15">
   <div class="acttag">C1.1.15</div>
   <h2>COMPETITIVE INHIBITION</h2>
-  <p class="aim">Competitive inhibitors are gatecrashers who look exactly like the VIPs. They slide into the same door (active site) and sit there — reversibly — blocking the real guests. But they can be outcompeted: flood the queue with genuine VIPs and the gatecrasher loses the race. Statins are the famous example — lookalikes for HMG-CoA, blocking cholesterol production.</p>
+  <p class="aim">Competitive inhibitors are competitive inhibitors who look exactly like the substrates. They sit in the active site reversibly, blocking the real substrates. But they can be outcompeted: flood the queue with genuine substrates and the competitive inhibitor loses the race. Statins are the famous example — lookalikes for HMG-CoA, blocking cholesterol production.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🕵️</div>
     <div class="body">
       <h3>Same face, same door, reversible — and beatable</h3>
       <p class="aka">competitive inhibitor · structurally similar · reversible · statins · HMG-CoA reductase · sarin</p>
-      <p><span class="accent">Competitive inhibitors</span> bind to the active site and, while bound, block the substrate. They are <span class="cyan">structurally similar to the substrate</span>, so they fit the same door — but unlike the substrate they are <span class="cyan">not converted into products</span>, so they remain bound longer. With a vacant active site, substrate or inhibitor can bind — whichever arrives first wins. More inhibitor → more inhibition; but if inhibitor concentration is low and <span class="cyan">substrate concentration rises, inhibition shrinks</span> until the enzyme is effectively uninhibited — real VIPs simply outnumber the fakes.</p>
+      <p><span class="accent">Competitive inhibitors</span> bind to the active site and, while bound, block the substrate. They are <span class="cyan">structurally similar to the substrate</span>, so they fit the same door — but unlike the substrate they are <span class="cyan">not converted into products</span>, so they remain bound longer. With a vacant active site, substrate or inhibitor can bind — whichever arrives first wins. More inhibitor → more inhibition; but if inhibitor concentration is low and <span class="cyan">substrate concentration rises, inhibition shrinks</span> until the enzyme is effectively uninhibited — real substrates simply outnumber the fakes.</p>
       <p><span class="accent">Statins</span> work this way: they bind the active site of <span class="cyan">HMG-CoA reductase</span> (3-hydroxy-3-methyl-glutaryl-coenzyme A reductase), which catalyses the <span class="cyan">rate-limiting step</span> of cholesterol synthesis in liver cells — lower that step, less cholesterol is made, so dosage must be tuned. Also in the family: <span class="cyan">sarin</span>, a competitive inhibitor of acetylcholinesterase — nerve agent chemistry with a dark history.</p>
     </div>
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="club queue scene: a gatecrasher molecule that looks identical to the real substrate VIP sits in the active site door blocking it, real VIPs queue behind; a second panel shows many more real VIPs arriving and winning the race for the door so the gatecrasher is outcompeted, with a statin bottle labelled as a lookalike for HMG CoA blocking cholesterol synthesis">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="club queue scene: a competitive inhibitor molecule that looks identical to the real substrate sits in the active site door blocking it, real substrates queue behind; a second panel shows many more real substrates arriving and winning the race for the door so the competitive inhibitor is outcompeted, with a statin bottle labelled as a lookalike for HMG CoA blocking cholesterol synthesis">
       <defs><marker id="ah15" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">GATECRASHERS — COMPETITIVE INHIBITION</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">COMPETITIVE INHIBITORS — COMPETITIVE INHIBITION</text>
 
       <rect x="30" y="52" width="290" height="150" rx="9" fill="rgba(255,46,196,.07)" stroke="rgba(255,46,196,.4)" stroke-width="1.5"/>
-      <text x="175" y="74" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">GATECRASHER WINS THE RACE</text>
+      <text x="175" y="74" fill="#ff2ec4" font-size="10.5" font-weight="800" text-anchor="middle">COMPETITIVE INHIBITOR WINS THE RACE</text>
       <rect x="60" y="110" width="110" height="52" rx="10" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
       <path d="M 80 122 L 118 122 L 118 148 L 80 148 Z" fill="rgba(255,46,196,.35)" stroke="#ff2ec4" stroke-width="2"/>
       <text x="99" y="140" fill="#ff2ec4" font-size="8.5" font-weight="800" text-anchor="middle">FAKE</text>
-      <text x="115" y="180" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">looks like the VIP → sits in the door</text>
+      <text x="115" y="180" fill="#ff2ec4" font-size="9" font-weight="800" text-anchor="middle">looks like the substrate → sits in the door</text>
       <circle cx="250" cy="120" r="14" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.8"/>
-      <text x="250" y="124" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">VIP</text>
+      <text x="250" y="124" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">substrate</text>
       <circle cx="250" cy="160" r="14" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.8"/>
-      <text x="250" y="164" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">VIP</text>
+      <text x="250" y="164" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">substrate</text>
       <text x="175" y="192" fill="#b9a3d6" font-size="9" text-anchor="middle">queue blocked · not converted → stays longer</text>
 
       <rect x="340" y="52" width="290" height="150" rx="9" fill="rgba(74,222,128,.07)" stroke="rgba(74,222,128,.4)" stroke-width="1.5"/>
       <text x="485" y="74" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">FLOOD THE QUEUE · MORE SUBSTRATE</text>
       <rect x="380" y="110" width="110" height="52" rx="10" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="2"/>
       <path d="M 400 122 L 438 122 L 438 148 L 400 148 Z" fill="rgba(34,211,238,.35)" stroke="#22d3ee" stroke-width="2"/>
-      <text x="419" y="140" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">VIP IN</text>
+      <text x="419" y="140" fill="#22d3ee" font-size="8.5" font-weight="800" text-anchor="middle">SUBSTRATE IN</text>
       <circle cx="520" cy="116" r="12" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.8"/>
       <text x="520" y="120" fill="#22d3ee" font-size="8" font-weight="800" text-anchor="middle">V</text>
       <circle cx="548" cy="130" r="12" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.8"/>
@@ -1089,7 +1089,7 @@
       <text x="560" y="168" fill="#22d3ee" font-size="8" font-weight="800" text-anchor="middle">V</text>
       <circle cx="520" cy="176" r="12" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="1.8"/>
       <text x="520" y="180" fill="#22d3ee" font-size="8" font-weight="800" text-anchor="middle">V</text>
-      <text x="485" y="192" fill="#b9a3d6" font-size="9" text-anchor="middle">real VIPs outnumber fakes → effectively uninhibited</text>
+      <text x="485" y="192" fill="#b9a3d6" font-size="9" text-anchor="middle">real substrates outnumber inhibitors → effectively uninhibited</text>
 
       <rect x="140" y="228" width="380" height="58" rx="9" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/>
       <text x="330" y="250" fill="#fbbf24" font-size="10.5" font-weight="800" text-anchor="middle">STATINS = lookalikes for HMG-CoA</text>
@@ -1097,33 +1097,33 @@
       <text x="330" y="310" fill="#b9a3d6" font-size="10" text-anchor="middle">also in the family: sarin — competitive inhibitor of acetylcholinesterase</text>
       <text x="330" y="336" fill="#4ade80" font-size="10" font-weight="700" text-anchor="middle">reversible binding: when the inhibitor leaves, the door works again</text>
     </svg>
-    <div class="cap"><b>FIG 15</b> — Gatecrashers that look like VIPs sit in the door (reversibly). Flood with real substrate and they're outcompeted — unlike non-competitive inhibitors, which substrate concentration can't overcome. Statins: HMG-CoA lookalikes vs HMG-CoA reductase.</div>
+    <div class="cap"><b>FIG 15</b> — Competitive inhibitors that look like substrates sit in the door (reversibly). Flood with real substrate and they're outcompeted — unlike non-competitive inhibitors, which substrate concentration can't overcome. Statins: HMG-CoA lookalikes vs HMG-CoA reductase.</div>
   </div>
 
   <div class="tip"><b>Remember:</b> the graph test — with a fixed low dose of competitive inhibitor, raising substrate concentration returns the rate to the no-inhibitor curve. With a non-competitive inhibitor it never does (lower maximum). Statins must be dosed carefully: enough to cut cholesterol, not so much it's excessive.</div>
 </section>
 
-<!-- ══════════════════════ ACT 16 · THE GUEST-LIST CAP ══════════════════════ -->
+<!-- ══════════════════════ ACT 16 · THE SUBSTRATE-LIST CAP ══════════════════════ -->
 <section class="act" id="act16">
   <div class="acttag">C1.1.16</div>
   <h2>FEEDBACK INHIBITION &amp; END PRODUCTS</h2>
-  <p class="aim">The club owner's rule: when the club is full, stop letting people in. Feedback inhibition does exactly that — the end product of a pathway binds the allosteric site of the FIRST enzyme and switches the whole chain off. Enough is enough: negative feedback keeps every substance in the right amount.</p>
+  <p class="aim">The rule of feedback inhibition: when the product has built up it switches the pathway off. Feedback inhibition does exactly that — the end product of a pathway binds the allosteric site of the FIRST enzyme and switches the whole chain off. Enough is enough: negative feedback keeps every substance in the right amount.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">📋</div>
     <div class="body">
       <h3>The end product is the manager — it walks back to enzyme 1</h3>
       <p class="aka">feedback inhibition · end product · allosteric site · threonine → isoleucine · threonine deaminase</p>
       <p>Metabolic pathways must make <span class="cyan">enough, but not too much</span>. In feedback inhibition, the <span class="accent">end product of the last reaction inhibits the first reaction</span>: it binds the allosteric site of the first enzyme, changing the active site's shape so catalysis stops <i>while the end product remains bound</i>. This is <span class="cyan">non-competitive inhibition and negative feedback</span> in one mechanism. Too much end product → pathway switched off; too little → minimal inhibition → pathway open. Because the FIRST enzyme is the target, the intermediates between steps never pile up — nothing is wasted.</p>
-      <p>The textbook example: the amino acid <span class="cyan">threonine</span> is converted to <span class="cyan">isoleucine</span> through <span class="cyan">five reactions</span>. As isoleucine accumulates, it binds the allosteric site of the first enzyme, <span class="cyan">threonine deaminase</span>, and acts as a non-competitive inhibitor. Guest list capped — the chain waits for demand.</p>
+      <p>The textbook example: the amino acid <span class="cyan">threonine</span> is converted to <span class="cyan">isoleucine</span> through <span class="cyan">five reactions</span>. As isoleucine accumulates, it binds the allosteric site of the first enzyme, <span class="cyan">threonine deaminase</span>, and acts as a non-competitive inhibitor. Substrate list capped — the chain waits for demand.</p>
     </div>
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VIP chain diagram: threonine enters enzyme 1 threonine deaminase, then passes through four more enzymes and intermediates A B C D to become the end product isoleucine; when isoleucine accumulates it walks back and binds the allosteric switch of enzyme 1, capping the guest list, with a note that this is negative feedback and non-competitive inhibition and intermediates never accumulate">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="substrate chain diagram: threonine enters enzyme 1 threonine deaminase, then passes through four more enzymes and intermediates A B C D to become the end product isoleucine; when isoleucine accumulates it walks back and binds the allosteric switch of enzyme 1, capping the substrate list, with a note that this is negative feedback and non-competitive inhibition and intermediates never accumulate">
       <defs><marker id="ah16" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
-      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE GUEST-LIST CAP — FEEDBACK INHIBITION</text>
+      <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE SUBSTRATE-LIST CAP — FEEDBACK INHIBITION</text>
 
       <rect x="30" y="70" width="92" height="52" rx="9" fill="rgba(34,211,238,.15)" stroke="#22d3ee" stroke-width="2"/>
       <text x="76" y="92" fill="#22d3ee" font-size="9" font-weight="800" text-anchor="middle">THREONINE</text>
@@ -1152,7 +1152,7 @@
       <rect x="120" y="260" width="420" height="58" rx="9" fill="rgba(74,222,128,.08)" stroke="rgba(74,222,128,.4)" stroke-width="1.5"/>
       <text x="330" y="282" fill="#4ade80" font-size="10.5" font-weight="800" text-anchor="middle">TOO MUCH ISOLEUCINE → PATHWAY SWITCHED OFF</text>
       <text x="330" y="302" fill="#b9a3d6" font-size="9.5" text-anchor="middle">too little → minimal inhibition → production resumes · intermediates never accumulate</text>
-      <text x="330" y="336" fill="#b9a3d6" font-size="10" text-anchor="middle">cap the guest list when the club is full — the first enzyme is the gatekeeper</text>
+      <text x="330" y="336" fill="#b9a3d6" font-size="10" text-anchor="middle">switch the pathway off when the product is high — the first enzyme is the rate-limiting step</text>
     </svg>
     <div class="cap"><b>FIG 16</b> — Threonine → (5 steps) → isoleucine. When isoleucine builds up it binds threonine deaminase's allosteric site: the first enzyme switches off, the whole pathway stops, intermediates don't accumulate.</div>
   </div>
@@ -1164,12 +1164,12 @@
 <section class="act" id="act17">
   <div class="acttag">C1.1.17</div>
   <h2>MECHANISM-BASED INHIBITION</h2>
-  <p class="aim">Some inhibitors don't just block the door — they handcuff the bouncer forever. Mechanism-based inhibition: the inhibitor binds irreversibly, forming a permanent covalent bond with the active site. Heavy metals glue any bouncer's cysteine –SH groups; penicillin handcuffs the bacterial bouncer transpeptidase; Novichok agents do the same to acetylcholinesterase.</p>
+  <p class="aim">Some inhibitors don't just block the door — they handcuff the enzyme forever. Mechanism-based inhibition: the inhibitor binds irreversibly, forming a permanent covalent bond with the active site. Heavy metals glue any enzyme's cysteine –SH groups; penicillin handcuffs the bacterial enzyme transpeptidase; Novichok agents do the same to acetylcholinesterase.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">⛓</div>
     <div class="body">
-      <h3>Irreversible: one sticky molecule, one dead bouncer, forever</h3>
+      <h3>Irreversible: one molecule, one permanently inactivated enzyme</h3>
       <p class="aka">mechanism-based · irreversible · covalent bond · Hg/Pb · cysteine –SH · penicillin · transpeptidase · Novichok</p>
       <p><span class="accent">Irreversible inhibition</span> is permanent. <span class="cyan">Heavy metals — mercury and lead — are non-specific</span>: they bind irreversibly to the <span class="cyan">–SH (thiol) groups of cysteine</span> wherever they occur in an enzyme's structure, wrecking a wide range of enzymes — that's why they're so toxic and such dangerous pollutants. Specific irreversible inhibitors are <span class="cyan">structurally similar to the substrate</span>, bind the active site, and are then converted by the enzyme into a form that forms a <span class="cyan">permanent covalent bond</span> — a stable inhibitor–enzyme complex that can never catalyse again. This is <span class="accent">mechanism-based inhibition</span>: every molecule of inhibitor permanently inactivates one enzyme molecule, so a vital enzyme at a lethal concentration means death.</p>
       <p><span class="accent">Penicillin</span> is the classic: it binds the active site of <span class="cyan">transpeptidase</span>, the enzyme that cross-links carbohydrate strands into the giant peptidoglycan molecule forming bacterial cell walls. Penicillin forms a permanent covalent bond with a particular amino acid in the active site — the cross-links can't be remade, the wall weakens, and the bacteria are killed by bursting (lysis). Bacteria that change transpeptidase's active site gain resistance. <span class="cyan">Novichok agents</span> are mechanism-based inhibitors of acetylcholinesterase, lethal in minute quantities.</p>
@@ -1177,7 +1177,7 @@
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a bouncer enzyme handcuffed forever by a sticky inhibitor molecule: the inhibitor forms a permanent covalent bond with the active site shown as handcuffs, the bouncer slumps and cannot work again; side panels show mercury and lead ions gluing to the cysteine SH groups of any enzyme, and penicillin handcuffing transpeptidase so bacterial cell wall cross links fail and the wall bursts">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a enzyme enzyme handcuffed forever by a sticky inhibitor molecule: the inhibitor forms a permanent covalent bond with the active site shown as handcuffs, the enzyme slumps and cannot work again; side panels show mercury and lead ions gluing to the cysteine SH groups of any enzyme, and penicillin handcuffing transpeptidase so bacterial cell wall cross links fail and the wall bursts">
       <defs><marker id="ah17" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE STICKY HANDCUFFS — MECHANISM-BASED INHIBITION</text>
@@ -1221,27 +1221,27 @@
   <div class="nos"><b>Don't mix up:</b> competitive and non-competitive inhibition are <b>reversible</b>; mechanism-based inhibition is <b>irreversible</b> — a covalent bond, a stable inhibitor–enzyme complex, the enzyme can <b>never</b> catalyse again. That one word — covalent — is the exam's favourite discriminator.</div>
 </section>
 
-<!-- ══════════════════════ ACT 18 · THE FULL SHIFT ══════════════════════ -->
+<!-- ══════════════════════ ACT 18 · FULL REVISION ══════════════════════ -->
 <section class="act" id="act18">
   <div class="acttag">C1.1.1 – C1.1.17 · recap</div>
   <h2>ENZYMES — FULL REVISION</h2>
-  <p class="aim">One night at THE CATALYST: the bouncers let the right guests in, speed up every conversion, lower the energy barrier so the party starts, and keep the whole club regulated — until the queue lines, dance loops, gatecrashers, override switches, guest-list caps and sticky handcuffs all make sense as one system.</p>
+  <p class="aim">One night at THE CATALYST: the enzymes let the right substrates in, speed up every conversion, lower the energy barrier so the reaction starts, and keep the whole cell regulated — until the linear pathways, metabolic cycles, competitive inhibitors, override switches, substrate-list caps and sticky handcuffs all make sense as one system.</p>
 
-  <div class="bouncer">
+  <div class="enzyme">
     <div class="emoji">🪩</div>
     <div class="body">
       <h3>Whole-night recap: every statement in one story</h3>
-      <p class="aka">C1.1.1 – C1.1.17 · the bouncer system</p>
-      <p>The night opens with <span class="cyan">catalysts</span> (C1.1.1) — bouncers who never get used up — running the club's whole <span class="cyan">metabolic network</span> (C1.1.2). Stage builders and set breakers do the <span class="cyan">anabolic/catabolic</span> work (C1.1.3) through <span class="cyan">globular-protein doors</span> (C1.1.4) that <span class="cyan">shift shape to fit</span> (C1.1.5) as <span class="cyan">random collisions</span> bring guests over (C1.1.6). The guest list is strict (<span class="cyan">specificity</span>) until heat or acid <span class="cyan">denatures</span> a bouncer for good (C1.1.7); <span class="cyan">temperature, pH and substrate</span> dial the pace (C1.1.8), measured as <span class="cyan">rate = amount ÷ time</span> (C1.1.9). Every entry over a <span class="cyan">lowered energy barrier</span> (C1.1.10) happens inside or outside the club (C1.1.11), generating the <span class="cyan">body heat</span> that warms the floor (C1.1.12) along <span class="cyan">queues and loops</span> (C1.1.13). Regulation: the <span class="cyan">manager's switch</span> (C1.1.14), <span class="cyan">lookalike gatecrashers</span> (C1.1.15), the <span class="cyan">owner's guest-list cap</span> (C1.1.16) — and the <span class="cyan">sticky handcuffs</span> that take a bouncer out forever (C1.1.17).</p>
+      <p class="aka">C1.1.1 – C1.1.17 · the enzyme system</p>
+      <p>The night opens with <span class="cyan">catalysts</span> (C1.1.1) — enzymes who never get used up — running the cell's whole <span class="cyan">metabolic network</span> (C1.1.2). Anabolism and catabolism do the <span class="cyan">anabolic/catabolic</span> work (C1.1.3) through <span class="cyan">globular-protein doors</span> (C1.1.4) that <span class="cyan">shift shape to fit</span> (C1.1.5) as <span class="cyan">random collisions</span> bring substrates over (C1.1.6). The substrate list is strict (<span class="cyan">specificity</span>) until heat or acid <span class="cyan">denatures</span> a enzyme for good (C1.1.7); <span class="cyan">temperature, pH and substrate</span> dial the pace (C1.1.8), measured as <span class="cyan">rate = amount ÷ time</span> (C1.1.9). Every entry over a <span class="cyan">lowered energy barrier</span> (C1.1.10) happens inside or outside the cell (C1.1.11), generating the <span class="cyan">body heat</span> that warms the floor (C1.1.12) along <span class="cyan">queues and loops</span> (C1.1.13). Regulation: the <span class="cyan">manager's switch</span> (C1.1.14), <span class="cyan">lookalike competitive inhibitors</span> (C1.1.15), the <span class="cyan">owner's substrate-list cap</span> (C1.1.16) — and the <span class="cyan">sticky handcuffs</span> that take a enzyme out forever (C1.1.17).</p>
     </div>
   </div>
 
   <div class="fig">
-    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the full club at night: the marquee sign THE CATALYST glows above a floor plan where every element comes together — the active site door with a bouncer, the lowered energy hill, a queue line and a dance loop, the manager's allosteric switch, a gatecrasher, the guest list cap, and a handcuffed bouncer, with a summary line that enzymes are the elite bouncers of the metabolic club">
+    <svg viewBox="0 0 660 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="the full club at night: the marquee sign THE CATALYST glows above a floor plan where every element comes together — the active site door with a enzyme, the lowered energy hill, a queue line and a dance loop, the manager's allosteric switch, a competitive inhibitor, the substrate list cap, and a handcuffed enzyme, with a summary line that enzymes are the elite enzymes of the metabolic club">
       <defs><marker id="ah18" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee"/></marker></defs>
       <rect width="660" height="360" rx="14" fill="#150a26"/>
       <text x="330" y="30" fill="#ff2ec4" font-size="15" font-weight="900" text-anchor="middle">★ THE CATALYST ★</text>
-      <text x="330" y="50" fill="#b9a3d6" font-size="10" text-anchor="middle">one night · one system · enzymes are the elite bouncers</text>
+      <text x="330" y="50" fill="#b9a3d6" font-size="10" text-anchor="middle">one night · one system · enzymes are the elite enzymes</text>
 
       <rect x="30" y="70" width="130" height="120" rx="9" fill="rgba(168,85,247,.12)" stroke="#a855f7" stroke-width="2"/>
       <text x="95" y="90" fill="#a855f7" font-size="9.5" font-weight="800" text-anchor="middle">THE DOOR</text>
@@ -1273,47 +1273,47 @@
       <rect x="480" y="70" width="150" height="120" rx="9" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
       <text x="555" y="90" fill="#ff2ec4" font-size="9.5" font-weight="800" text-anchor="middle">THE RULES</text>
       <text x="555" y="108" fill="#b9a3d6" font-size="8.5" text-anchor="middle">manager's switch (allosteric)</text>
-      <text x="555" y="122" fill="#b9a3d6" font-size="8.5" text-anchor="middle">gatecrashers (competitive)</text>
-      <text x="555" y="136" fill="#b9a3d6" font-size="8.5" text-anchor="middle">guest-list cap (feedback)</text>
+      <text x="555" y="122" fill="#b9a3d6" font-size="8.5" text-anchor="middle">competitive inhibitors (competitive)</text>
+      <text x="555" y="136" fill="#b9a3d6" font-size="8.5" text-anchor="middle">substrate-list cap (feedback)</text>
       <text x="555" y="150" fill="#b9a3d6" font-size="8.5" text-anchor="middle">sticky handcuffs (irreversible)</text>
       <text x="555" y="164" fill="#fbbf24" font-size="8.5" font-weight="800" text-anchor="middle">statins · penicillin · Novichok</text>
       <text x="555" y="180" fill="#b9a3d6" font-size="8.5" text-anchor="middle">C1.1.14-17</text>
 
-      <text x="330" y="252" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">ENZYMES: WHO GETS IN · HOW FAST · WHETHER THE PARTY STARTS AT ALL</text>
+      <text x="330" y="252" fill="#fbbf24" font-size="11" font-weight="800" text-anchor="middle">ENZYMES: SPECIFICITY · HOW FAST · WHETHER THE REACTION STARTS AT ALL</text>
       <text x="330" y="276" fill="#b9a3d6" font-size="10" text-anchor="middle">catalysis = speed (C1.1.1) · control = regulation (C1.1.14-17) · warmth = by-product (C1.1.12)</text>
       <text x="330" y="300" fill="#4ade80" font-size="10.5" font-weight="700" text-anchor="middle">if you can tell the whole story out loud, the shift is yours</text>
-      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">18 acts · 17 statements · 1 club — THE CATALYST is open all night</text>
+      <text x="330" y="330" fill="#b9a3d6" font-size="9.5" text-anchor="middle">18 acts · 17 statements · one system — enzymes at work all night</text>
     </svg>
-    <div class="cap"><b>FIG 18</b> — The full shift: door (C1.1.4–7), hill (C1.1.6–10), floor (C1.1.2–3, 11–13), rules (C1.1.14–17) — one coherent bouncer system.</div>
+    <div class="cap"><b>FIG 18</b> — The full shift: door (C1.1.4–7), hill (C1.1.6–10), floor (C1.1.2–3, 11–13), rules (C1.1.14–17) — one coherent enzyme system.</div>
   </div>
 
-  <div class="exam"><b>Exam gold:</b> synthesis questions ("explain how cells control metabolism") should chain C1.1.2 (enzyme supply) + C1.1.14 (allosteric regulation) + C1.1.16 (feedback inhibition) + C1.1.8 (conditions) — the club runs on all of them at once.</div>
+  <div class="exam"><b>Exam gold:</b> synthesis questions ("explain how cells control metabolism") should chain C1.1.2 (enzyme supply) + C1.1.14 (allosteric regulation) + C1.1.16 (feedback inhibition) + C1.1.8 (conditions) — the cell runs on all of them at once.</div>
 </section>
 
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
 <section class="act extra" id="map">
   <div class="acttag">One-page overview</div>
   <h2>🗺 MIND MAP</h2>
-  <p class="aim">Eighteen nodes: the club and its seventeen statements. Follow the arrows from the door to the handcuffs.</p>
+  <p class="aim">Eighteen nodes: the enzyme system and its seventeen statements. Follow the arrows from the door to the handcuffs.</p>
   <div class="mind">
     <div class="node core">THE CATALYST<small>C1.1 · Enzymes &amp; Metabolism (SL + AHL)</small></div>
     <div class="arrow">▶</div>
-    <div class="node">DOOR POLICY<small>C1.1.1 · catalysts: faster, never used up</small></div>
-    <div class="node">CLUB NETWORK<small>C1.1.2 · metabolism: pathways, one enzyme per step</small></div>
-    <div class="node">STAGE BUILDERS<small>C1.1.3 · anabolic +ATP · catabolic −ATP</small></div>
+    <div class="node">CATALYSTS<small>C1.1.1 · catalysts: faster, never used up</small></div>
+    <div class="node">METABOLIC PATHWAYS<small>C1.1.2 · metabolism: pathways, one enzyme per step</small></div>
+    <div class="node">ANABOLISM<small>C1.1.3 · anabolic +ATP · catabolic −ATP</small></div>
     <div class="node">THE DOOR<small>C1.1.4 · active site: few folded amino acids</small></div>
     <div class="node">SHIFTING STANCE<small>C1.1.5 · induced fit: both change</small></div>
-    <div class="node">DANCE FLOOR<small>C1.1.6 · collisions: heat + concentration</small></div>
-    <div class="node">WHO GETS IN<small>C1.1.7 · specificity vs denaturation</small></div>
-    <div class="node">CLUB CONDITIONS<small>C1.1.8 · temp · pH · substrate</small></div>
+    <div class="node">COLLISIONS<small>C1.1.6 · collisions: heat + concentration</small></div>
+    <div class="node">SPECIFICITY<small>C1.1.7 · specificity vs denaturation</small></div>
+    <div class="node">CONDITIONS<small>C1.1.8 · temp · pH · substrate</small></div>
     <div class="node">DOOR COUNT<small>C1.1.9 · rate = amount ÷ time</small></div>
     <div class="node">LOWER BARRIER<small>C1.1.10 · Ea ↓ · ~million × faster</small></div>
     <div class="node">INSIDE VS STREET<small>C1.1.11 · intra vs exoenzymes</small></div>
     <div class="node">BODY HEAT<small>C1.1.12 · brown fat · shivering · huddle</small></div>
     <div class="node">QUEUES &amp; LOOPS<small>C1.1.13 · linear vs cyclical</small></div>
     <div class="node">MANAGER'S SWITCH<small>C1.1.14 · allosteric · non-competitive</small></div>
-    <div class="node">GATECRASHERS<small>C1.1.15 · competitive · statins</small></div>
-    <div class="node">GUEST-LIST CAP<small>C1.1.16 · feedback inhibition</small></div>
+    <div class="node">COMPETITIVE INHIBITORS<small>C1.1.15 · competitive · statins</small></div>
+    <div class="node">SUBSTRATE-LIST CAP<small>C1.1.16 · feedback inhibition</small></div>
     <div class="node">STICKY HANDCUFFS<small>C1.1.17 · mechanism-based · penicillin</small></div>
   </div>
 </section>
@@ -1324,12 +1324,12 @@
   <h2>⚡ CHEAT</h2>
   <p class="aim">Fifteen one-liners. If you can say them out loud, you know the show.</p>
   <div class="marquee">
-    <div class="line">🚪 <span>Enzymes = elite bouncers</span> — catalysts: speed up reactions, never used up, reused all night.</div>
+    <div class="line">🚪 <span>Enzymes = elite enzymes</span> — catalysts: speed up reactions, never used up, reused all night.</div>
     <div class="line">🎫 <span>Specificity = who gets in</span> — glucokinase admits glucose only; hexokinase admits any hexose.</div>
     <div class="line">⚡ <span>Catalysis = everything faster</span> — often by a factor of a million or more.</div>
-    <div class="line">🧱 <span>Stage builders = anabolism</span> — condensation, needs ATP; set breakers = catabolism — releases energy.</div>
+    <div class="line">🧱 <span>Anabolism</span> — condensation, needs ATP; catabolism = catabolism — releases energy.</div>
     <div class="line">🚪 <span>Active site = the door</span> — just a few amino acids brought together by folding.</div>
-    <div class="line">🤝 <span>Induced fit</span> — bouncer shifts stance: BOTH substrate and enzyme change shape (no lock-and-key).</div>
+    <div class="line">🤝 <span>Induced fit</span> — enzyme shifts stance: BOTH substrate and enzyme change shape (no lock-and-key).</div>
     <div class="line">🕺 <span>Collisions</span> — more molecules or more heat = more chances at the door.</div>
     <div class="line">🌡 <span>Temperature</span> — rise = faster, too hot = denatured; optimum isn't always 40°C.</div>
     <div class="line">🧪 <span>pH is logarithmic</span> — one unit = 10× acidity; detergent protease loves pH 9–10.</div>
@@ -1337,7 +1337,7 @@
     <div class="line">⚖️ <span>Rate = amount ÷ time</span> — mmol s⁻¹; IV changed, CV fixed, DV measured (catalase special).</div>
     <div class="line">⛰ <span>Barrier lowered</span> — enzymes shrink activation energy, never the net energy.</div>
     <div class="line">🔄 <span>Loops vs queues</span> — Krebs/Calvin cycles; glycolysis = 9-step one-way queue.</div>
-    <div class="line">🚫 <span>Three inhibitors</span> — gatecrashers (competitive, beatable with substrate), manager's switch (allosteric), owner's cap (feedback: end product stops enzyme 1).</div>
+    <div class="line">🚫 <span>Three inhibitors</span> — competitive inhibitors (competitive, beatable with substrate), manager's switch (allosteric), owner's cap (feedback: end product stops enzyme 1).</div>
     <div class="line">⛓ <span>Sticky handcuffs</span> — penicillin binds transpeptidase forever (covalent); Hg/Pb glue cysteine –SH.</div>
   </div>
 </section>
