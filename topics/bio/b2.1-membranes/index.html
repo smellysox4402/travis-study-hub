@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>B2.1 Membranes &amp; Membrane Transport</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Form &amp; function · B2 (Cells)</div>
+  <h1>B2.1 MEMBRANES &amp; MEMBRANE TRANSPORT</h1>
+  <div class="sub">The fluid-mosaic membrane, how it acts as a barrier, and the ways substances cross it — diffusion, osmosis, facilitated diffusion, active transport — plus the AHL detail on fluidity, pumps and cell adhesion.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge ahl">AHL: B2.1.11–17</span><span class="badge">17 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · LIPID BILAYERS</a><a href="#act2">2 · BARRIERS</a><a href="#act3">3 · SIMPLE DIFFUSION</a><a href="#act4">4 · PROTEINS</a><a href="#act5">5 · OSMOSIS</a><a href="#act6">6 · CHANNELS</a><a href="#act7">7 · PUMPS</a><a href="#act8">8 · SELECTIVITY</a><a href="#act9">9 · GLYCOPROTEINS</a><a href="#act10">10 · FLUID MOSAIC</a><a href="#act11">11 · FLUIDITY (AHL)</a><a href="#act12">12 · CHOLESTEROL (AHL)</a><a href="#act13">13 · VESICLES (AHL)</a><a href="#act14">14 · GATED CHANNELS (AHL)</a><a href="#act15">15 · Na⁺/K⁺ PUMP (AHL)</a><a href="#act16">16 · COTRANSPORT (AHL)</a><a href="#act17">17 · CELL ADHESION (AHL)</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">B2.1.1</div><h2>LIPID BILAYERS — THE BASIS OF CELL MEMBRANES</h2>
+  <p class="aim">Phospholipids and other amphipathic lipids naturally form continuous sheet-like bilayers in water.</p>
+  <div class="panel"><p>Because <span class="accent">phospholipids</span> are <span class="cyan">amphipathic</span> (hydrophilic head + hydrophobic tails), in water they spontaneously arrange into a <span class="gold">bilayer</span> — the basis of all cell membranes.</p></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">B2.1.2</div><h2>LIPID BILAYERS AS BARRIERS</h2>
+  <p class="aim">The hydrophobic core of the membrane has low permeability to large molecules and hydrophilic (charged) particles.</p>
+  <div class="panel"><p>The <span class="accent">hydrophobic hydrocarbon chains</span> in the membrane core resist water and charged/ionic particles, so the bilayer is <span class="cyan">impermeable</span> to large molecules and ions, and only small non-polar molecules pass freely.</p></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">B2.1.3</div><h2>SIMPLE DIFFUSION</h2>
+  <p class="aim">Oxygen and CO₂ move directly between phospholipids by simple diffusion.</p>
+  <div class="panel"><p>Because <span class="accent">O₂</span> and <span class="cyan">CO₂</span> are small and non-polar, they <span class="gold">diffuse straight through the phospholipid bilayer</span> down their concentration gradient — no protein or energy needed.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">B2.1.4</div><h2>INTEGRAL &amp; PERIPHERAL PROTEINS</h2>
+  <p class="aim">Membrane proteins have diverse structures, locations and functions; integral ones are embedded, peripheral ones are on the surface.</p>
+  <div class="panel"><ul class="clean"><li><b>Integral proteins</b> — embedded in one or both of the bilayer.</li><li><b>Peripheral proteins</b> — attached to the surface (not embedded).</li><li>Functions: transport (channels/pumps), receptors, enzymes, cell recognition (glycoproteins).</li></ul></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">B2.1.5</div><h2>OSMOSIS &amp; AQUAPORINS</h2>
+  <p class="aim">Water moves across membranes by osmosis (random movement) through the bilayer and aquaporins.</p>
+  <div class="panel"><p><span class="accent">Osmosis</span> is the movement of water across a partially permeable membrane from high to low water potential, due to <span class="cyan">random particle movement</span>. Because membranes are <b>impermeable to solutes</b> but permeable to water, water moves to balance concentrations. <span class="gold">Aquaporins</span> are channel proteins that greatly speed up water transport.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">B2.1.6</div><h2>CHANNEL PROTEINS — FACILITATED DIFFUSION</h2>
+  <p class="aim">Channel proteins make membranes selectively permeable by letting specific ions diffuse through.</p>
+  <div class="panel"><p><span class="accent">Channel proteins</span> form a pore through the membrane, allowing <span class="cyan">specific ions</span> to diffuse down their gradient (<span class="gold">facilitated diffusion</span>) — no ATP needed. This makes the membrane selectively permeable.</p></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">B2.1.7</div><h2>PUMP PROTEINS — ACTIVE TRANSPORT</h2>
+  <p class="aim">Pumps use energy from ATP to transfer specific particles across membranes against their gradient.</p>
+  <div class="panel"><p><span class="accent">Pump proteins</span> use <span class="cyan">ATP</span> to move specific <span class="gold">ions or molecules against</span> their concentration gradient (<span class="gold">active transport</span>). This is how cells maintain ion gradients across membranes.</p></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">B2.1.8</div><h2>SELECTIVITY IN MEMBRANE PERMEABILITY</h2>
+  <p class="aim">Facilitated diffusion and active transport are selective; simple diffusion is not selective, only acting per the gradient.</p>
+  <div class="panel"><p>The membrane is <span class="accent">selectively permeable</span> because <span class="cyan">channel and pump proteins</span> let only specific substances through (selective). <b>Simple diffusion</b> is not selective — anything small and non-polar moves by gradient.</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">B2.1.9</div><h2>GLYCOPROTEINS &amp; GLYCOLIPIDS</h2>
+  <p class="aim">Carbohydrate chains attached to proteins (glycoproteins) or lipids (glycolipids) sit on the extracellular surface, involved in recognition.</p>
+  <div class="panel"><p>The <span class="accent">carbohydrate structures</span> of glycoproteins and glycolipids are located on the <span class="cyan">extracellular surface</span> of the membrane. They are used in <span class="gold">cell-cell recognition</span> (e.g. ABO blood antigens).</p></div>
+</section>
+
+<section class="act" id="act10"><div class="acttag">B2.1.10</div><h2>THE FLUID MOSAIC MODEL</h2>
+  <p class="aim">You should be able to draw a 2D representation of the fluid-mosaic model, including phospholipids, integral &amp; peripheral proteins, glycoproteins and cholesterol.</p>
+  <div class="panel"><p>The membrane is a <span class="accent">fluid mosaic</span> — a <b>fluid</b> bilayer (lipids can move) with many <b>mosaic</b> proteins embedded. You should be able to draw the bilayer with: <span class="cyan">phospholipids</span>, <span class="cyan">integral</span> and <span class="cyan">peripheral proteins</span>, <span class="cyan">glycoproteins</span>, <span class="cyan">glycolipids</span> and <span class="cyan">cholesterol</span>.</p></div>
+  <div class="fig"><svg viewBox="0 0 660 300" role="img" aria-label="the fluid mosaic model: phospholipid bilayer with integral proteins, peripheral proteins, glycoprotein, glycolipid and cholesterol">
+    <rect width="660" height="300" rx="14" fill="#150a26"/>
+    <text x="330" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">FLUID MOSAIC MODEL</text>
+    <rect x="60" y="150" width="540" height="22" fill="rgba(34,211,238,.14)" stroke="none"/>
+    <g><circle cx="90" cy="150" r="9" fill="#22d3ee"/><circle cx="140" cy="150" r="9" fill="#22d3ee"/><circle cx="190" cy="150" r="9" fill="#22d3ee"/><circle cx="240" cy="150" r="9" fill="#22d3ee"/><circle cx="290" cy="150" r="9" fill="#22d3ee"/><circle cx="340" cy="150" r="9" fill="#22d3ee"/><circle cx="390" cy="150" r="9" fill="#22d3ee"/><circle cx="440" cy="150" r="9" fill="#22d3ee"/><circle cx="490" cy="150" r="9" fill="#22d3ee"/><circle cx="540" cy="150" r="9" fill="#22d3ee"/></g>
+    <g><line x1="90" y1="160" x2="90" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="140" y1="160" x2="140" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="190" y1="160" x2="190" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="240" y1="160" x2="240" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="290" y1="160" x2="290" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="340" y1="160" x2="340" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="390" y1="160" x2="390" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="440" y1="160" x2="440" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="490" y1="160" x2="490" y2="178" stroke="#fbbf24" stroke-width="2"/><line x1="540" y1="160" x2="540" y2="178" stroke="#fbbf24" stroke-width="2"/></g>
+    <g><line x1="90" y1="140" x2="90" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="140" y1="140" x2="140" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="190" y1="140" x2="190" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="240" y1="140" x2="240" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="290" y1="140" x2="290" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="340" y1="140" x2="340" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="390" y1="140" x2="390" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="440" y1="140" x2="440" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="490" y1="140" x2="490" y2="122" stroke="#fbbf24" stroke-width="2"/><line x1="540" y1="140" x2="540" y2="122" stroke="#fbbf24" stroke-width="2"/></g>
+    <g><circle cx="90" cy="120" r="9" fill="#22d3ee"/><circle cx="140" cy="120" r="9" fill="#22d3ee"/><circle cx="190" cy="120" r="9" fill="#22d3ee"/><circle cx="240" cy="120" r="9" fill="#22d3ee"/><circle cx="290" cy="120" r="9" fill="#22d3ee"/><circle cx="340" cy="120" r="9" fill="#22d3ee"/><circle cx="390" cy="120" r="9" fill="#22d3ee"/><circle cx="440" cy="120" r="9" fill="#22d3ee"/><circle cx="490" cy="120" r="9" fill="#22d3ee"/><circle cx="540" cy="120" r="9" fill="#22d3ee"/></g>
+    <rect x="330" y="70" width="46" height="160" rx="8" fill="rgba(168,85,247,.16)" stroke="#a855f7" stroke-width="2"/>
+    <text x="385" y="120" fill="#a855f7" font-size="9" text-anchor="middle">integral protein</text>
+    <rect x="140" y="96" width="60" height="20" rx="5" fill="rgba(74,222,128,.16)" stroke="#4ade80" stroke-width="2"/>
+    <text x="150" y="90" fill="#4ade80" font-size="8.5" text-anchor="middle">peripheral</text>
+    <rect x="480" y="78" width="52" height="26" rx="5" fill="rgba(251,191,36,.18)" stroke="#fbbf24" stroke-width="2"/>
+    <text x="506" y="76" fill="#fbbf24" font-size="8.5" text-anchor="middle">glycoprotein</text>
+    <rect x="60" y="86" width="52" height="26" rx="5" fill="rgba(255,46,196,.16)" stroke="#ff2ec4" stroke-width="2"/>
+    <text x="86" y="84" fill="#ff2ec4" font-size="8.5" text-anchor="middle">glycolipid</text>
+    <text x="580" y="165" fill="#22d3ee" font-size="9" text-anchor="middle">phospholipid bilayer</text>
+  </svg><div class="cap"><b>FIG 1</b> — The fluid mosaic model: a phospholipid bilayer with embedded integral proteins, peripheral proteins, glycoproteins, glycolipids and cholesterol.</div></div>
+</section>
+
+<section class="act" id="act11"><div class="acttag">AHL · B2.1.11</div><h2>FATTY ACID COMPOSITION &amp; FLUIDITY</h2>
+  <p class="aim">Unsaturated fatty acids have lower melting points, so membranes with more of them are more fluid.</p>
+  <div class="panel"><p><span class="accent">Unsaturated fatty acids</span> (with C=C double bonds) have <span class="cyan">lower melting points</span> and make the bilayer more <span class="gold">fluid</span>; saturated fatty acids pack more tightly and make it less fluid. So the fatty-acid composition controls membrane fluidity.</p></div>
+</section>
+
+<section class="act" id="act12"><div class="acttag">AHL · B2.1.12</div><h2>CHOLESTEROL &amp; MEMBRANE FLUIDITY</h2>
+  <p class="aim">Cholesterol sits in the membrane and acts as a modulator of fluidity in animal cells.</p>
+  <div class="panel"><p><span class="accent">Cholesterol</span> is found between the phospholipids in animal membranes. It acts as a <span class="cyan">modulator of fluidity</span> — at high temperatures it reduces fluidity (stiffens), and at low temperatures it prevents the membrane from becoming too rigid. So it keeps the membrane in the right fluid state.</p></div>
+</section>
+
+<section class="act" id="act13"><div class="acttag">AHL · B2.1.13</div><h2>MEMBRANE FLUIDITY, ENDOCYTOSIS &amp; EXOCYTOSIS</h2>
+  <p class="aim">Membrane fluidity allows vesicles to form and fuse — endocytosis and exocytosis.</p>
+  <div class="panel"><ul class="clean"><li><b>Exocytosis</b> — a vesicle fuses with the membrane, releasing contents (e.g. secretion of proteins, hormones).</li><li><b>Endocytosis</b> — the membrane folds in to engulf material (e.g. phagocytosis of particles, pinocytosis of fluid).</li></ul></div>
+</section>
+
+<section class="act" id="act14"><div class="acttag">AHL · B2.1.14</div><h2>GATED ION CHANNELS IN NEURONS</h2>
+  <p class="aim">Some ion channels open/close (gated) in response to a stimulus; e.g. neurotransmitter-gated nicotinic ACh receptors and voltage-gated Na⁺/K⁺ channels.</p>
+  <div class="panel"><ul class="clean"><li><b>Nicotinic acetylcholine receptors</b> — a neurotransmitter-gated ion channel (opens when ACh binds).</li><li><b>Sodium and potassium channels</b> — voltage-gated, open in response to a change in membrane potential (used in action potentials).</li></ul></div>
+</section>
+
+<section class="act" id="act15"><div class="acttag">AHL · B2.1.15</div><h2>SODIUM-POTASSIUM PUMPS</h2>
+  <p class="aim">The Na⁺/K⁺ pump is an exchange transporter using ATP; it generates membrane potentials.</p>
+  <div class="panel"><p>The <span class="accent">Na⁺/K⁺ pump</span> uses <span class="cyan">ATP</span> to move <span class="gold">3 Na⁺ out</span> and <span class="gold">2 K⁺ in</span> per cycle. It is an <span class="cyan">exchange transporter</span> and is important for <span class="green">generating and maintaining membrane potentials</span> (e.g. the resting potential of neurons).</p></div>
+</section>
+
+<section class="act" id="act16"><div class="acttag">AHL · B2.1.16</div><h2>SODIUM-DEPENDENT GLUCOSE COTRANSPORT</h2>
+  <p class="aim">The Na⁺-glucose cotransporter is an example of indirect active transport, used to absorb glucose in the small intestine.</p>
+  <div class="panel"><p>In <span class="accent">sodium-dependent glucose cotransporters</span>, Na⁺ moves <b>down</b> its gradient (set up by the Na⁺/K⁺ pump) and "pulls" glucose <b>against</b> its gradient at the same time. This is <span class="cyan">indirect active transport</span> — ATP is used indirectly (to maintain the Na⁺ gradient). It's how glucose is absorbed by the <span class="gold">small intestine</span>.</p></div>
+</section>
+
+<section class="act" id="act17"><div class="acttag">AHL · B2.1.17</div><h2>CELL ADHESION</h2>
+  <p class="aim">Cells adhere to form tissues using cell-adhesion molecules (CAMs); different CAMs are used for different types of adhesion.</p>
+  <div class="panel"><p><span class="accent">Cell-adhesion molecules (CAMs)</span> on cell surfaces let cells <span class="cyan">stick together to form tissues</span>. Different forms of CAM are used for different types of cell-cell adhesion, so cells recognise and bind to the correct partners.</p></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">MEMBRANES<small>B2.1</small></div>
+    <div class="arrow">→</div><div class="node">STRUCTURE<small>lipid bilayer + proteins (fluid mosaic)</small></div>
+    <div class="node">BARRIER<small>impermeable to ions/large</small></div>
+    <div class="node">PASSIVE<small>diffusion · osmosis (aquaporins) · facilitated (channels)</small></div>
+    <div class="node">ACTIVE<small>pumps (ATP) · cotransport</small></div>
+    <div class="node">SELECTIVITY<small>channels + pumps</small></div>
+    <div class="node">AHL: FLUIDITY<small>unsaturated + cholesterol</small></div>
+    <div class="node">AHL: VESICLES<small>exo/endocytosis</small></div>
+    <div class="node">AHL: NEURONS<small>gated channels · Na⁺/K⁺ pump</small></div>
+    <div class="node">AHL: ADHESION<small>CAMs</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Membrane = <span>fluid mosaic</span> (amphipathic bilayer + proteins).</div>
+    <div class="line">Bilayer core <span>hydrophobic</span> → impermeable to ions/large molecules.</div>
+    <div class="line"><span>Simple diffusion</span> (O₂, CO₂) · <span>osmosis via aquaporins</span> · <span>facilitated via channels</span>.</div>
+    <div class="line"><span>Active transport</span> via pumps uses ATP; <span>selective</span>.</div>
+    <div class="line">Glyco<span>proteins</span> / glyco<span>lipids</span> → recognition (ABO).</div>
+    <div class="line">AHL: <span>unsaturated + cholesterol</span> modulate fluidity.</div>
+    <div class="line">AHL: <span>exocytosis/endocytosis</span> rely on fluidity.</div>
+    <div class="line">AHL: gated channels (<span>ACh, Na⁺/K⁺</span>) · <span>Na⁺/K⁺ pump</span> (3 out, 2 in, membrane potential).</div>
+    <div class="line">AHL: <span>Na⁺-glucose cotransport</span> = indirect active transport (small intestine).</div>
+    <div class="line">AHL: <span>CAMs</span> let cells adhere to form tissues.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">12 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="a fluid bilayer of phospholipids with embedded proteins"><p>1. The fluid-mosaic model describes a membrane as…</p>
+    <label><input type="radio" name="q1" data-a="a fluid bilayer of phospholipids with embedded proteins"> a fluid bilayer of phospholipids with embedded proteins</label><label><input type="radio" name="q1"> a rigid solid sheet</label><label><input type="radio" name="q1"> a single layer of protein</label>
+    <div class="fb correct">Correct — fluid lipid bilayer + mosaic proteins.</div><div class="fb wrong">Fluid mosaic = fluid phospholipid bilayer + embedded proteins.</div>
+  </div>
+
+  <div class="q" data-a="small non-polar molecules like O2 and CO2"><p>2. Simple diffusion moves which substances through the bilayer?</p>
+    <label><input type="radio" name="q2" data-a="small non-polar molecules like O2 and CO2"> small non-polar molecules (O₂, CO₂)</label><label><input type="radio" name="q2"> large ions</label><label><input type="radio" name="q2"> glucose</label>
+    <div class="fb correct">Correct — O₂ and CO₂ diffuse straight through.</div><div class="fb wrong">Small non-polar molecules (O₂, CO₂) diffuse straight through.</div>
+  </div>
+
+  <div class="q" data-a="channel proteins"><p>3. Facilitated diffusion of specific ions uses…</p>
+    <label><input type="radio" name="q3" data-a="channel proteins"> channel proteins</label><label><input type="radio" name="q3"> ATP pumps</label><label><input type="radio" name="q3"> aquaporins only</label>
+    <div class="fb correct">Correct — channel proteins let specific ions diffuse down their gradient.</div><div class="fb wrong">Channel proteins allow facilitated diffusion of specific ions.</div>
+  </div>
+
+  <div class="q" data-a="down its gradient, no ATP"><p>4. Water moves by osmosis…</p>
+    <label><input type="radio" name="q4" data-a="down its gradient, no ATP"> from high to low water potential, without ATP</label><label><input type="radio" name="q4"> against its gradient using ATP</label><label><input type="radio" name="q4"> only through pumps</label>
+    <div class="fb correct">Correct — osmosis is passive (random particle movement).</div><div class="fb wrong">Osmosis moves water down its gradient passively.</div>
+  </div>
+
+  <div class="q" data-a="ATP to move it against the gradient"><p>5. Active transport requires…</p>
+    <label><input type="radio" name="q5" data-a="ATP to move it against the gradient"> ATP, to move particles against their gradient</label><label><input type="radio" name="q5"> no energy, down the gradient</label><label><input type="radio" name="q5"> a channel</label>
+    <div class="fb correct">Correct — pumps use ATP for active transport.</div><div class="fb wrong">Active transport uses ATP to move particles against their gradient.</div>
+  </div>
+
+  <div class="q" data-a="aquaporins"><p>6. Water moves quickly across membranes via…</p>
+    <label><input type="radio" name="q6" data-a="aquaporins"> aquaporins</label><label><input type="radio" name="q6"> pumps</label><label><input type="radio" name="q6"> glycoproteins</label>
+    <div class="fb correct">Correct — aquaporins are water channels.</div><div class="fb wrong">Aquaporins are the water-channel proteins.</div>
+  </div>
+
+  <div class="q" data-a="carbohydrate chains on the extracellular surface"><p>7. Glycoproteins and glycolipids have their carbohydrates…</p>
+    <label><input type="radio" name="q7" data-a="carbohydrate chains on the extracellular surface"> on the extracellular surface</label><label><input type="radio" name="q7"> on the intracellular surface only</label><label><input type="radio" name="q7"> in the membrane core</label>
+    <div class="fb correct">Correct — they are on the outside, used for cell recognition.</div><div class="fb wrong">Carbohydrates sit on the extracellular surface (cell recognition).</div>
+  </div>
+
+  <div class="q" data-a="the membrane becomes more fluid"><p>8. AHL — More unsaturated fatty acids in a membrane make…</p>
+    <label><input type="radio" name="q8" data-a="the membrane becomes more fluid"> the membrane more fluid</label><label><input type="radio" name="q8"> the membrane more rigid</label><label><input type="radio" name="q8"> no difference</label>
+    <div class="fb correct">Correct — unsaturated fats lower the melting point → more fluid.</div><div class="fb wrong">Unsaturated fatty acids → lower melting point → more fluid.</div>
+  </div>
+
+  <div class="q" data-a="stabilises fluidity (reduces it when hot, stops rigidity when cold)"><p>9. AHL — Cholesterol in animal membranes…</p>
+    <label><input type="radio" name="q9" data-a="stabilises fluidity (reduces it when hot, stops rigidity when cold)"> modulates fluidity (less fluid when hot, less rigid when cold)</label><label><input type="radio" name="q9"> makes it fully rigid</label><label><input type="radio" name="q9"> stops proteins entering</label>
+    <div class="fb correct">Correct — cholesterol is a modulator of fluidity.</div><div class="fb wrong">Cholesterol modulates fluidity in animal membranes.</div>
+  </div>
+
+  <div class="q" data-a="the cell takes material in by the membrane folding in"><p>10. AHL — Endocytosis is when…</p>
+    <label><input type="radio" name="q10" data-a="the cell takes material in by the membrane folding in"> the cell takes material in as the membrane folds in</label><label><input type="radio" name="q10"> the membrane releases contents</label><label><input type="radio" name="q10"> ions are pumped out</label>
+    <div class="fb correct">Correct — endocytosis = taking in (exocytosis = releasing).</div><div class="fb wrong">Endocytosis takes material in; exocytosis releases it.</div>
+  </div>
+
+  <div class="q" data-a="3 Na+ out and 2 K+ in per cycle"><p>11. AHL — The Na⁺/K⁺ pump moves…</p>
+    <label><input type="radio" name="q11" data-a="3 Na+ out and 2 K+ in per cycle"> 3 Na⁺ out and 2 K⁺ in per cycle</label><label><input type="radio" name="q11"> 2 Na⁺ out and 3 K⁺ in</label><label><input type="radio" name="q11"> equal Na⁺ and K⁺</label>
+    <div class="fb correct">Correct — 3 Na⁺ out, 2 K⁺ in, using ATP; generates membrane potential.</div><div class="fb wrong">Na⁺/K⁺ pump: 3 Na⁺ out, 2 K⁺ in (uses ATP).</div>
+  </div>
+
+  <div class="q" data-a="Na+ moves down its gradient pulling glucose in (indirect active transport)"><p>12. AHL — Sodium-dependent glucose cotransport in the small intestine is…</p>
+    <label><input type="radio" name="q12" data-a="Na+ moves down its gradient pulling glucose in (indirect active transport)"> Na⁺ moving down its gradient pulls glucose in (indirect active transport)</label><label><input type="radio" name="q12"> glucose diffusing freely</label><label><input type="radio" name="q12"> simple osmosis</label>
+    <div class="fb correct">Correct — indirect active transport, used to absorb glucose.</div><div class="fb wrong">A Na⁺ gradient drives glucose uptake (indirect active transport).</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">B2.1.1</span><span>Amphipathic lipids form bilayers (basis of membranes).</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">B2.1.2</span><span>Hydrophobic core → low permeability to large/charged particles.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">B2.1.3</span><span>O₂ and CO₂ diffuse simply between phospholipids.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">B2.1.4</span><span>Integral vs peripheral proteins; functions.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">B2.1.5</span><span>Osmosis (random movement) + aquaporins.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">B2.1.6</span><span>Channel proteins → facilitated diffusion (selective).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">B2.1.7</span><span>Pumps use ATP for active transport.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">B2.1.8</span><span>Selective permeability via channels/pumps vs non-selective diffusion.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">B2.1.9</span><span>Glycoproteins/glycolipids, carbohydrates on the outside, recognition.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">B2.1.10</span><span>Draw the fluid-mosaic model (bilayer, proteins, glycoproteins, cholesterol).</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">B2.1.11</span><span>AHL: unsaturated fatty acids → more fluid membrane.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">B2.1.12</span><span>AHL: cholesterol as a modulator of fluidity (animal cells).</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">B2.1.13</span><span>AHL: exocytosis and endocytosis (vesicles).</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">B2.1.14-15</span><span>AHL: gated channels (ACh, Na⁺/K⁺); Na⁺/K⁺ pump &amp; membrane potential.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">B2.1.16</span><span>AHL: Na⁺-glucose cotransport (indirect active transport).</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">B2.1.17</span><span>AHL: cell-adhesion molecules (CAMs) form tissues.</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · B2.1 Membranes &amp; Membrane Transport · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='b21-membranes-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
