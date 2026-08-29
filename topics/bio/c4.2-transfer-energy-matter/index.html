@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>C4.2 Transfer of Energy &amp; Matter</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Interaction &amp; interdependence · C4 (Ecosystems)</div>
+  <h1>C4.2 TRANSFER OF ENERGY &amp; MATTER</h1>
+  <div class="sub">How energy flows through ecosystems and how matter (especially carbon) is recycled — food chains, energy pyramids, primary/secondary production, the carbon cycle and the Keeling Curve.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge">22 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · OPEN SYSTEMS</a><a href="#act2">2 · SUNLIGHT</a><a href="#act3">3 · ENERGY FLOW</a><a href="#act4">4 · FOOD CHAINS</a><a href="#act5">5 · DECOMPOSERS</a><a href="#act6">6 · AUTOTROPHS</a><a href="#act7">7 · PHOTO vs CHEMO</a><a href="#act8">8 · HETEROTROPHS</a><a href="#act9">9 · RESPIRATION</a><a href="#act10">10 · TROPHIC LEVELS</a><a href="#act11">11 · ENERGY PYRAMIDS</a><a href="#act12">12 · ENERGY LOSS</a><a href="#act13">13 · HEAT LOSS</a><a href="#act14">14 · TROPHIC LIMITS</a><a href="#act15">15 · PRIMARY PRODUCTION</a><a href="#act16">16 · SECONDARY PRODUCTION</a><a href="#act17">17 · CARBON CYCLE</a><a href="#act18">18 · SINKS &amp; SOURCES</a><a href="#act19">19 · COMBUSTION</a><a href="#act20">20 · KEELING CURVE</a><a href="#act21">21 · O₂/CO₂ INTERDEPENDENCE</a><a href="#act22">22 · ELEMENT RECYCLING</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">C4.2.1</div><h2>ECOSYSTEMS AS OPEN SYSTEMS</h2>
+  <p class="aim">Ecosystems are open systems — both energy and matter can enter and exit.</p>
+  <div class="panel"><p>An <span class="accent">open system</span> allows both <span class="cyan">energy</span> and <span class="cyan">matter</span> to pass in and out. Ecosystems are open. (In <span class="gold">closed systems</span>, only energy can pass in and out — not matter.)</p></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">C4.2.2</div><h2>SUNLIGHT — THE PRINCIPAL ENERGY SOURCE</h2>
+  <p class="aim">Sunlight is the principal energy source sustaining most ecosystems, with exceptions (caves, deep ocean).</p>
+  <div class="panel"><p><span class="accent">Sunlight</span> is the main energy source for most ecosystems (via photosynthesis). Exceptions: ecosystems in <span class="cyan">caves</span> and <span class="cyan">below light-penetration depth in oceans</span>, where <span class="gold">chemoautotrophs</span> use chemical energy instead.</p></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">C4.2.3</div><h2>FLOW OF CHEMICAL ENERGY</h2>
+  <p class="aim">Chemical energy passes to a consumer as it feeds on the previous stage in a food chain.</p>
+  <div class="panel"><p>Chemical energy in food is passed along a food chain: an organism at one <span class="accent">trophic level</span> is eaten by the next, transferring <span class="cyan">chemical energy</span> to the <span class="gold">consumer</span>.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">C4.2.4</div><h2>FOOD CHAINS &amp; FOOD WEBS</h2>
+  <p class="aim">Food chains and food webs represent feeding relationships; arrows indicate the direction of energy flow.</p>
+  <div class="panel"><ul class="clean"><li>A <b>food chain</b> is a single feeding sequence; a <b>food web</b> is all the interlinked chains in a community.</li><li><b>Arrows</b> show the direction of <span class="cyan">energy flow</span> (from the organism eaten to the one that eats it).</li></ul></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">C4.2.5</div><h2>ENERGY TO DECOMPOSERS</h2>
+  <p class="aim">Decomposers get energy from carbon compounds in dead organic matter.</p>
+  <div class="panel"><p><span class="accent">Decomposers</span> obtain energy from <span class="cyan">carbon compounds</span> in organic matter from <span class="gold">dead organisms</span>, <span class="gold">dead parts</span> and <span class="gold">faeces</span>.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">C4.2.6</div><h2>AUTOTROPHS</h2>
+  <p class="aim">Autotrophs use external energy to synthesise carbon compounds from simple inorganic substances.</p>
+  <div class="panel"><p><span class="accent">Autotrophs</span> are self-feeders: they use an <span class="cyan">external energy source</span> to build <span class="gold">carbon compounds</span> from <span class="gold">simple inorganic substances</span> (CO₂, water).</p></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">C4.2.7</div><h2>PHOTOAUTOTROPHS vs CHEMOAUTOTROPHS</h2>
+  <p class="aim">Photoautotrophs use light; chemoautotrophs use oxidation reactions as their energy source.</p>
+  <div class="panel"><ul class="clean"><li><b>Photoautotrophs</b> — use <span class="cyan">light</span> (plants, algae, cyanobacteria).</li><li><b>Chemoautotrophs</b> — use <span class="cyan">oxidation reactions</span> (e.g. in deep-sea vents: oxidising inorganic compounds to get energy).</li></ul></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">C4.2.8</div><h2>HETEROTROPHS</h2>
+  <p class="aim">Heterotrophs use carbon compounds obtained from other organisms.</p>
+  <div class="panel"><p><span class="accent">Heterotrophs</span> (animals, fungi, most bacteria) get their carbon compounds from <span class="cyan">other organisms</span>, breaking down <span class="gold">complex compounds</span> into simpler ones they can use.</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">C4.2.9</div><h2>RELEASING ENERGY — CELL RESPIRATION</h2>
+  <p class="aim">Both autotrophs and heterotrophs release energy by oxidising carbon compounds in cell respiration.</p>
+  <div class="panel"><p>Both autotrophs and heterotrophs release the energy stored in carbon compounds by <span class="accent">oxidation</span> during <span class="cyan">cell respiration</span> (converting chemical energy into ATP + heat).</p></div>
+</section>
+
+<section class="act" id="act10"><div class="acttag">C4.2.10</div><h2>TROPHIC LEVELS</h2>
+  <p class="aim">Organisms are classified into trophic levels: producer, primary, secondary and tertiary consumer.</p>
+  <div class="panel"><ul class="clean"><li><b>Producer</b> — autotroph (first trophic level).</li><li><b>Primary consumer</b> — eats producers.</li><li><b>Secondary consumer</b> — eats primary consumers.</li><li><b>Tertiary consumer</b> — eats secondary consumers.</li></ul></div>
+</section>
+
+<section class="act" id="act11"><div class="acttag">C4.2.11</div><h2>ENERGY PYRAMIDS</h2>
+  <p class="aim">Construct energy pyramids showing energy transfer and losses between trophic levels.</p>
+  <div class="panel"><p>An <span class="accent">energy pyramid</span> shows the <span class="cyan">energy</span> available at each trophic level, with the producers at the base. Each level is <span class="gold">smaller</span> than the one below because energy is lost between levels.</p></div>
+  <div class="fig"><svg viewBox="0 0 640 230" role="img" aria-label="an energy pyramid: a broad producer base and progressively smaller consumer levels, with energy loss between levels">
+    <rect width="640" height="230" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">ENERGY PYRAMID</text>
+    <polygon points="320,42 370,90 270,90" fill="rgba(168,85,247,.18)" stroke="#a855f7" stroke-width="2"/><text x="320" y="72" fill="#a855f7" font-size="9.5" text-anchor="middle">tertiary</text>
+    <polygon points="180,92 460,92 410,152 230,152" fill="rgba(34,211,238,.16)" stroke="#22d3ee" stroke-width="2"/><text x="320" y="126" fill="#22d3ee" font-size="10" text-anchor="middle">secondary consumers</text>
+    <polygon points="90,155 550,155 500,215 140,215" fill="rgba(74,222,128,.18)" stroke="#4ade80" stroke-width="2"/><text x="320" y="190" fill="#4ade80" font-size="10" text-anchor="middle">primary consumers</text>
+    <polygon points="20,196 620,196 620,216 20,216" fill="rgba(251,191,36,.18)" stroke="#fbbf24" stroke-width="2"/><text x="320" y="208" fill="#fbbf24" font-size="10" text-anchor="middle">producers (greatest energy)</text>
+    <text x="590" y="126" fill="#b9a3d6" font-size="9" text-anchor="middle">energy</text><text x="590" y="138" fill="#b9a3d6" font-size="9" text-anchor="middle">lost each</text><text x="590" y="150" fill="#b9a3d6" font-size="9" text-anchor="middle">level</text>
+  </svg><div class="cap"><b>FIG 1</b> — An energy pyramid: the producer level holds the most energy, with less energy at each higher trophic level.</div></div>
+</section>
+
+<section class="act" id="act12"><div class="acttag">C4.2.12</div><h2>ENERGY LOSS BETWEEN TROPHIC LEVELS</h2>
+  <p class="aim">Energy availability decreases at each successive stage due to large losses between trophic levels.</p>
+  <div class="panel"><p>Much energy is <span class="accent">lost</span> between trophic levels (as heat, in undigested material, etc.), so <span class="cyan">less energy</span> is available at each successive stage. <span class="gold">Decomposers and detritus feeders</span> are not usually counted in energy pyramids.</p></div>
+</section>
+
+<section class="act" id="act13"><div class="acttag">C4.2.13</div><h2>HEAT LOSS TO THE ENVIRONMENT</h2>
+  <p class="aim">Energy transfers are not 100% efficient; chemical energy is converted to heat in respiration.</p>
+  <div class="panel"><p>In both autotrophs and heterotrophs, much of the chemical energy is converted to <span class="accent">heat</span> during <span class="cyan">cell respiration</span>, and <span class="cyan">lost to the environment</span>. Energy transfers are <span class="gold">not 100% efficient</span>.</p></div>
+</section>
+
+<section class="act" id="act14"><div class="acttag">C4.2.14</div><h2>RESTRICTIONS ON TROPHIC LEVELS</h2>
+  <p class="aim">Energy losses restrict the number of trophic levels.</p>
+  <div class="panel"><p>Because so much energy is lost at each level, there is <span class="accent">not enough energy</span> to support many trophic levels. At each successive stage there are <span class="cyan">fewer organisms</span> or <span class="cyan">smaller organisms</span>. Typically only about <span class="gold">4–5 trophic levels</span> are supported.</p></div>
+</section>
+
+<section class="act" id="act15"><div class="acttag">C4.2.15</div><h2>PRIMARY PRODUCTION</h2>
+  <p class="aim">Primary production is the accumulation of carbon compounds in biomass by autotrophs (e.g. g C m⁻² yr⁻¹).</p>
+  <div class="panel"><p><span class="accent">Primary production</span> is the rate at which autotrophs <span class="cyan">accumulate carbon compounds</span> in biomass. It is measured in <span class="gold">mass of carbon per area per time</span> (e.g. g C m⁻² yr⁻¹).</p></div>
+</section>
+
+<section class="act" id="act16"><div class="acttag">C4.2.16</div><h2>SECONDARY PRODUCTION</h2>
+  <p class="aim">Secondary production is the accumulation of carbon compounds in biomass by heterotrophs.</p>
+  <div class="panel"><p><span class="accent">Secondary production</span> is the accumulation of <span class="cyan">carbon compounds in biomass by heterotrophs</span>. Because some biomass is lost when carbon compounds are converted (respiration, waste), secondary production is <span class="gold">much lower</span> than primary production.</p></div>
+</section>
+
+<section class="act" id="act17"><div class="acttag">C4.2.17</div><h2>THE CARBON CYCLE</h2>
+  <p class="aim">Illustrate how carbon is recycled by photosynthesis, feeding and respiration.</p>
+  <div class="panel"><p>Carbon is cycled between the atmosphere, organisms and the environment: <span class="cyan">photosynthesis</span> takes CO₂ out and builds carbon compounds; <span class="cyan">feeding</span> passes carbon along food chains; <span class="cyan">respiration</span> (and decomposition, combustion) returns CO₂ to the atmosphere.</p></div>
+  <div class="fig"><svg viewBox="0 0 640 230" role="img" aria-label="the carbon cycle: photosynthesis draws CO2 from the atmosphere into producers, feeding passes carbon along food chains, and respiration/combustion return CO2">
+    <rect width="640" height="230" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THE CARBON CYCLE</text>
+    <rect x="240" y="40" width="160" height="36" rx="8" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/>
+    <text x="320" y="62" fill="#22d3ee" font-size="10" text-anchor="middle">atmospheric CO₂</text>
+    <line x1="290" y1="76" x2="180" y2="112" stroke="#4ade80" stroke-width="2" marker-end="url(#cc)"/>
+    <text x="180" y="104" fill="#4ade80" font-size="9" text-anchor="middle">photosynthesis</text>
+    <rect x="80" y="112" width="150" height="34" rx="8" fill="rgba(74,222,128,.14)" stroke="#4ade80" stroke-width="2"/>
+    <text x="155" y="132" fill="#4ade80" font-size="10" text-anchor="middle">producers</text>
+    <line x1="230" y1="130" x2="330" y2="130" stroke="#fbbf24" stroke-width="2" marker-end="url(#cc)"/>
+    <text x="280" y="120" fill="#fbbf24" font-size="9" text-anchor="middle">feeding</text>
+    <rect x="330" y="112" width="150" height="34" rx="8" fill="rgba(251,191,36,.14)" stroke="#fbbf24" stroke-width="2"/>
+    <text x="405" y="132" fill="#fbbf24" font-size="10" text-anchor="middle">consumers</text>
+    <line x1="420" y1="112" x2="330" y2="76" stroke="#ff2ec4" stroke-width="2" marker-end="url(#cc)"/>
+    <text x="420" y="90" fill="#ff2ec4" font-size="9" text-anchor="middle">respiration</text>
+    <path d="M130 146 L130 176 L300 176" stroke="#a855f7" stroke-width="2" marker-end="url(#cc)"/>
+    <text x="150" y="190" fill="#a855f7" font-size="9" text-anchor="middle">decomposition / combustion → CO₂</text>
+    <defs><marker id="cc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#f3e8ff"/></marker></defs>
+  </svg><div class="cap"><b>FIG 2</b> — The carbon cycle: photosynthesis removes CO₂, feeding moves carbon along, and respiration/decomposition/combustion return it.</div></div>
+</section>
+
+<section class="act" id="act18"><div class="acttag">C4.2.18</div><h2>CARBON SINKS &amp; SOURCES</h2>
+  <p class="aim">An ecosystem is a carbon sink if photosynthesis exceeds respiration, and a source if respiration exceeds photosynthesis.</p>
+  <div class="panel"><p>If <span class="accent">photosynthesis &gt; respiration</span>, there is a <span class="cyan">net uptake of CO₂</span> → a <span class="gold">carbon sink</span>. If <span class="cyan">respiration &gt; photosynthesis</span>, there is <span class="cyan">net release of CO₂</span> → a <span class="gold">carbon source</span>.</p></div>
+</section>
+
+<section class="act" id="act19"><div class="acttag">C4.2.19</div><h2>CO₂ FROM COMBUSTION</h2>
+  <p class="aim">Burning biomass, peat, coal, oil and natural gas releases CO₂ into the atmosphere.</p>
+  <div class="panel"><p><span class="accent">Combustion</span> of <span class="cyan">biomass, peat, coal, oil and natural gas</span> releases <span class="gold">carbon dioxide</span>. These carbon stores vary in how long they've been locked away (fossil fuels = ancient carbon).</p></div>
+</section>
+
+<section class="act" id="act20"><div class="acttag">C4.2.20</div><h2>THE KEELING CURVE</h2>
+  <p class="aim">Analyse the Keeling Curve for both annual fluctuations and the long-term rising trend.</p>
+  <div class="panel"><ul class="clean"><li><b>Annual fluctuations</b> — CO₂ falls in summer (more photosynthesis in the Northern Hemisphere) and rises in winter (more respiration), giving a sawtooth pattern.</li><li><b>Long-term trend</b> — a <span class="cyan">steady rise</span> in atmospheric CO₂ over decades, due largely to <span class="gold">combustion of fossil fuels</span>.</li></ul></div>
+  <div class="fig"><svg viewBox="0 0 640 210" role="img" aria-label="the Keeling Curve: an upward-sloping sawtooth line showing seasonal oscillations and a long-term rise in CO2">
+    <rect width="640" height="210" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">THE KEELING CURVE (simplified)</text>
+    <line x1="80" y1="60" x2="560" y2="60" stroke="#b9a3d6" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <path d="M90 170 L110 150 L130 168 L150 144 L170 162 L190 138 L210 156 L230 132 L250 150 L270 125 L290 145 L310 120 L330 140 L350 112 L370 134 L390 108 L410 128 L430 104 L450 124 L470 98 L490 120 L510 96 L530 116 L550 92" fill="none" stroke="#ff2ec4" stroke-width="2.5"/>
+    <text x="120" y="188" fill="#b9a3d6" font-size="9" text-anchor="middle">seasonal sawtooth (winter peak)</text>
+    <text x="560" y="52" fill="#b9a3d6" font-size="9" text-anchor="middle">rising long-term trend</text>
+    <text x="320" y="205" fill="#b9a3d6" font-size="10" text-anchor="middle">annual fluctuations (photosynthesis/respiration) + long-term rise (combustion)</text>
+  </svg><div class="cap"><b>FIG 3</b> — The Keeling Curve: a sawtooth (seasonal photosynthesis/respiration) superimposed on a long-term rise driven largely by fossil-fuel combustion.</div></div>
+</section>
+
+<section class="act" id="act21"><div class="acttag">C4.2.21</div><h2>O₂ &amp; CO₂ INTERDEPENDENCE</h2>
+  <p class="aim">Aerobic respiration depends on O₂ from photosynthesis; photosynthesis depends on CO₂ from respiration.</p>
+  <div class="panel"><p><span class="accent">Aerobic respiration</span> uses the <span class="cyan">O₂</span> produced by <span class="cyan">photosynthesis</span>; photosynthesis uses the <span class="cyan">CO₂</span> produced by <span class="cyan">respiration</span>. These two fluxes keep the atmosphere balanced.</p></div>
+</section>
+
+<section class="act" id="act22"><div class="acttag">C4.2.22</div><h2>RECYCLING OF ALL CHEMICAL ELEMENTS</h2>
+  <p class="aim">All chemical elements used by living organisms are recycled in ecosystems (not just carbon).</p>
+  <div class="panel"><p>Not just carbon — <span class="accent">all elements</span> used by organisms (e.g. <span class="cyan">nitrogen</span>, <span class="cyan">phosphorus</span>, <span class="cyan">water</span>) are <span class="gold">recycled</span> in ecosystems through nutrient cycles.</p></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">ENERGY &amp; MATTER<small>C4.2</small></div>
+    <div class="arrow">→</div><div class="node">OPEN SYSTEM<small>energy + matter in/out</small></div>
+    <div class="node">ENERGY SOURCE<small>sunlight (mostly) · chemo exceptions</small></div>
+    <div class="node">AUTOTROPHS<small>photo (light) · chemo (oxidation)</small></div>
+    <div class="node">HETEROTROPHS<small>carbon from others</small></div>
+    <div class="node">FOOD CHAINS<small>trophic levels · energy pyramids</small></div>
+    <div class="node">ENERGY LOSS<small>heat · limits trophic levels</small></div>
+    <div class="node">PRODUCTION<small>primary · secondary</small></div>
+    <div class="node">CARBON CYCLE<small>sinks/sources · Keeling Curve</small></div>
+    <div class="node">RECYCLING<small>all elements</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Ecosystems are <span>open systems</span> (energy + matter in/out).</div>
+    <div class="line">Sunlight is the main <span>energy source</span>; exceptions use <span>chemoautotrophy</span> (vents, caves).</div>
+    <div class="line">Autotrophs: <span>photo</span> (light) vs <span>chemo</span> (oxidation). Heterotrophs eat others.</div>
+    <div class="line">Food chains/webs: <span>arrows = energy flow</span>. Trophic levels: producer → primary → secondary → tertiary.</div>
+    <div class="line"><span>Energy pyramids</span> shrink each level; energy is <span>lost as heat</span> (not 100% efficient).</div>
+    <div class="line">Energy loss <span>limits trophic levels</span> (~4–5).</div>
+    <div class="line"><span>Primary production</span> (by autotrophs) &gt; <span>secondary production</span> (by heterotrophs).</div>
+    <div class="line">Carbon cycle: <span>photosynthesis · feeding · respiration</span>; <span>sinks</span> (photo&gt;resp) vs <span>sources</span> (resp&gt;photo).</div>
+    <div class="line"><span>Combustion</span> (fossil fuels) → CO₂; <span>Keeling Curve</span> = seasonal sawtooth + long-term rise.</div>
+    <div class="line"><span>All elements</span> recycled.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">10 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="both energy and matter can enter and exit"><p>1. An ecosystem is an open system because…</p>
+    <label><input type="radio" name="q1" data-a="both energy and matter can enter and exit"> both energy and matter can enter and exit</label><label><input type="radio" name="q1"> only matter can enter</label><label><input type="radio" name="q1"> nothing enters or leaves</label>
+    <div class="fb correct">Correct — open systems exchange both energy and matter.</div><div class="fb wrong">Open systems allow both energy and matter in and out.</div>
+  </div>
+
+  <div class="q" data-a="makes its own carbon compounds from inorganic substances using an external energy source"><p>2. An autotroph…</p>
+    <label><input type="radio" name="q2" data-a="makes its own carbon compounds from inorganic substances using an external energy source"> makes carbon compounds from inorganic substances using an external energy source</label><label><input type="radio" name="q2"> eats other organisms</label><label><input type="radio" name="q2"> gets carbon from the air only</label>
+    <div class="fb correct">Correct — autotrophs use light or oxidation reactions.</div><div class="fb wrong">Autotrophs synthesise carbon compounds from inorganic substances.</div>
+  </div>
+
+  <div class="q" data-a="uses oxidation reactions as the energy source"><p>3. A chemoautotroph…</p>
+    <label><input type="radio" name="q3" data-a="uses oxidation reactions as the energy source"> uses oxidation reactions as its energy source</label><label><input type="radio" name="q3"> uses light</label><label><input type="radio" name="q3"> eats dead matter</label>
+    <div class="fb correct">Correct — chemoautotrophs use chemical oxidation (e.g. deep-sea vents).</div><div class="fb wrong">Chemoautotrophs use oxidation reactions, not light.</div>
+  </div>
+
+  <div class="q" data-a="producer, primary, secondary, tertiary consumer"><p>4. The correct order of trophic levels is…</p>
+    <label><input type="radio" name="q4" data-a="producer, primary, secondary, tertiary consumer"> producer → primary → secondary → tertiary consumer</label><label><input type="radio" name="q4"> primary → producer → tertiary → secondary</label><label><input type="radio" name="q4"> tertiary → secondary → primary → producer</label>
+    <div class="fb correct">Correct — producers at the base.</div><div class="fb wrong">Producer → primary → secondary → tertiary consumer.</div>
+  </div>
+
+  <div class="q" data-a="energy is lost as heat at each level"><p>5. Energy pyramids get smaller upward because…</p>
+    <label><input type="radio" name="q5" data-a="energy is lost as heat at each level"> energy is lost (as heat) between trophic levels</label><label><input type="radio" name="q5"> consumers gain energy</label><label><input type="radio" name="q5"> producers make less energy</label>
+    <div class="fb correct">Correct — transfers are not 100% efficient.</div><div class="fb wrong">Energy is lost as heat each level, so pyramids narrow.</div>
+  </div>
+
+  <div class="q" data-a="is the accumulation of carbon compounds in biomass by autotrophs"><p>6. Primary production…</p>
+    <label><input type="radio" name="q6" data-a="is the accumulation of carbon compounds in biomass by autotrophs"> is the accumulation of carbon compounds in biomass by autotrophs</label><label><input type="radio" name="q6"> is by heterotrophs</label><label><input type="radio" name="q6"> is the release of CO₂</label>
+    <div class="fb correct">Correct — by autotrophs (g C m⁻² yr⁻¹).</div><div class="fb wrong">Primary production = biomass accumulation by autotrophs.</div>
+  </div>
+
+  <div class="q" data-a="photosynthesis, feeding and respiration"><p>7. The carbon cycle recycles carbon through…</p>
+    <label><input type="radio" name="q7" data-a="photosynthesis, feeding and respiration"> photosynthesis, feeding and respiration</label><label><input type="radio" name="q7"> photosynthesis only</label><label><input type="radio" name="q7"> respiration only</label>
+    <div class="fb correct">Correct — these three processes cycle carbon.</div><div class="fb wrong">Photosynthesis, feeding and respiration cycle carbon.</div>
+  </div>
+
+  <div class="q" data-a="a net uptake of CO2 (photosynthesis exceeds respiration)"><p>8. An ecosystem is a carbon sink when…</p>
+    <label><input type="radio" name="q8" data-a="a net uptake of CO2 (photosynthesis exceeds respiration)"> photosynthesis exceeds respiration (net CO₂ uptake)</label><label><input type="radio" name="q8"> respiration exceeds photosynthesis</label><label><input type="radio" name="q8"> no photosynthesis occurs</label>
+    <div class="fb correct">Correct — sink = net CO₂ uptake.</div><div class="fb wrong">A carbon sink has photosynthesis &gt; respiration.</div>
+  </div>
+
+  <div class="q" data-a="seasonal sawtooth from photosynthesis/respiration on a long-term rise"><p>9. The Keeling Curve shows…</p>
+    <label><input type="radio" name="q9" data-a="seasonal sawtooth from photosynthesis/respiration on a long-term rise"> seasonal fluctuations (photo/respiration) over a long-term rise</label><label><input type="radio" name="q9"> a constant CO₂ level</label><label><input type="radio" name="q9"> rising oxygen only</label>
+    <div class="fb correct">Correct — sawtooth + long-term upward trend.</div><div class="fb wrong">A seasonal sawtooth over a long-term rise (combustion-driven).</div>
+  </div>
+
+  <div class="q" data-a="aerobic respiration uses O2 from photosynthesis, and photosynthesis uses CO2 from respiration"><p>10. Aerobic respiration and photosynthesis are interdependent because…</p>
+    <label><input type="radio" name="q10" data-a="aerobic respiration uses O2 from photosynthesis, and photosynthesis uses CO2 from respiration"> respiration uses O₂ from photosynthesis, and photosynthesis uses CO₂ from respiration</label><label><input type="radio" name="q10"> they are unrelated</label><label><input type="radio" name="q10"> both release O₂</label>
+    <div class="fb correct">Correct — the two gases are exchanged between the two processes.</div><div class="fb wrong">Respiration uses photosynthesis's O₂; photosynthesis uses respiration's CO₂.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">C4.2.1</span><span>Ecosystems are open systems (energy + matter in/out).</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">C4.2.2</span><span>Sunlight = principal energy source (exceptions: caves, deep ocean).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">C4.2.3-4</span><span>Energy flows along food chains; food webs; arrows = flow.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">C4.2.5</span><span>Decomposers get energy from dead organic matter.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">C4.2.6-7</span><span>Autotrophs: photoautotrophs (light) vs chemoautotrophs (oxidation).</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">C4.2.8-9</span><span>Heterotrophs; energy released by respiration (oxidation).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">C4.2.10-11</span><span>Trophic levels; energy pyramids.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">C4.2.12-13</span><span>Energy/heat loss between levels; transfers not 100% efficient.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">C4.2.14</span><span>Energy loss restricts trophic levels.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">C4.2.15-16</span><span>Primary vs secondary production.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">C4.2.17-18</span><span>Carbon cycle; sinks and sources.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">C4.2.19-20</span><span>Combustion → CO₂; Keeling Curve analysis.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">C4.2.21</span><span>O₂/CO₂ interdependence of respiration and photosynthesis.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">C4.2.22</span><span>All chemical elements are recycled.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">C4.2.4,11</span><span>I can construct food chains/webs and energy pyramids.</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">C4.2.17-20</span><span>I can explain the carbon cycle and Keeling Curve.</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · C4.2 Transfer of Energy &amp; Matter · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='c42-transfer-energy-matter-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
