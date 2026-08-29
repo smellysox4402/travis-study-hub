@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>A1.1 Water</title>
+<style>
+  :root{
+    --bg:#0b0214; --panel:#150a26; --panel2:#1d0f33; --ink:#f3e8ff; --dim:#b9a3d6;
+    --pink:#ff2ec4; --violet:#a855f7; --cyan:#22d3ee; --gold:#fbbf24; --green:#4ade80;
+    --line:rgba(255,46,196,.28); --line2:rgba(168,85,247,.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7;}
+  ::selection{background:var(--pink); color:#0b0214;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 18px 80px;}
+  nav{position:sticky; top:0; z-index:50; background:rgba(11,2,20,.92); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); padding:10px 14px; display:flex; gap:8px; overflow-x:auto; align-items:center;}
+  nav a{color:var(--dim); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em;
+        padding:5px 10px; border:1px solid transparent; border-radius:999px; white-space:nowrap; transition:.2s;}
+  nav a:hover{color:var(--pink); border-color:var(--line);}
+  .pill{margin-left:auto; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff;
+        font-size:12px; font-weight:700; padding:5px 12px; border-radius:999px; white-space:nowrap;}
+  header.hero{text-align:center; padding:64px 18px 34px;}
+  .kicker{font-size:12px; letter-spacing:.35em; color:var(--cyan); text-transform:uppercase; font-weight:700;}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:800; line-height:1.1; margin:14px 0 8px; color:#fff; letter-spacing:-.02em;}
+  .sub{color:var(--dim); font-size:17px; max-width:680px; margin:10px auto 0;}
+  .badges{margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:6px 14px; border-radius:999px; border:1px solid var(--line2); color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; border:none;}
+  .badge.ahl{border-color:var(--cyan); color:var(--cyan);}
+  .act{margin-top:56px;}
+  .acttag{font-size:12px; letter-spacing:.28em; color:var(--cyan); font-weight:800; text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,30px); font-weight:750; margin:6px 0 12px; color:#fff; letter-spacing:-.01em;}
+  .act .aim{color:var(--dim); font-size:15.5px; margin-bottom:22px; max-width:720px;}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px 26px; margin:20px 0;}
+  .panel h3{font-size:18px; font-weight:750; margin-bottom:10px; color:#fff;}
+  .panel p{margin:10px 0; color:var(--ink); font-size:16px;}
+  .accent{color:var(--pink); font-weight:700;}
+  .cyan{color:var(--cyan); font-weight:700;}
+  .gold{color:var(--gold); font-weight:700;}
+  .green{color:var(--green); font-weight:700;}
+  .muted{color:var(--dim); font-size:14px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:9px 0 9px 26px; position:relative; font-size:16px;}
+  ul.clean li::before{content:"▸"; position:absolute; left:6px; color:var(--pink); font-weight:700;}
+  ol.steps{list-style:none; counter-reset:s; margin:10px 0;}
+  ol.steps li{counter-increment:s; padding:9px 0 9px 40px; position:relative; font-size:16px;}
+  ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:26px; height:26px;
+        border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff;
+        display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:16px 18px;}
+  .card h4{font-size:15px; font-weight:800; margin-bottom:6px;}
+  .card p{font-size:15px; color:var(--ink); margin:6px 0;}
+  .card .tag{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan);}
+  .card .tag.p{color:var(--pink);} .card .tag.g{color:var(--gold);} .card .tag.v{color:var(--violet);} .card .tag.gr{color:var(--green);}
+  .fig{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:14px 16px; margin:14px 0; text-align:center;}
+  .fig img{max-width:100%; border-radius:10px; border:1px solid var(--line2); display:block; margin:0 auto;}
+  .fig .cap{font-size:13.5px; color:var(--dim); margin-top:12px; line-height:1.6;}
+  .fig .cap b{color:var(--cyan);}
+  .fig .cap a{color:var(--cyan); text-decoration:none;}
+  .fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px; width:100%; height:auto;}
+  .fig.narrow{max-width:480px; margin-left:auto; margin-right:auto;}
+  .fig.narrow svg{max-width:480px;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:15px; line-height:1.6;}
+  th{background:rgba(168,85,247,.16); color:#fff; text-align:left;
+     padding:13px 16px; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+  td:first-child{font-weight:600; color:#fff; white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+  .tip{border-left:4px solid var(--gold); background:rgba(251,191,36,.08); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan); background:rgba(34,211,238,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green); background:rgba(74,222,128,.07); border-radius:0 14px 14px 0; padding:14px 18px; margin:16px 0;}
+  .exam b{color:var(--green);}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12)); border:1px dashed var(--line);
+           border-radius:18px; padding:22px; margin:16px 0; text-align:center;}
+  .marquee .line{font-size:15px; font-weight:700; margin:6px 0; color:#fff;}
+  .marquee .line span{color:var(--pink);}
+  .mind{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0;}
+  .node{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:10px 14px; font-size:14px; font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet)); color:#fff; font-size:16px; font-weight:900; padding:14px 20px;}
+  .node small{display:block; color:var(--dim); font-weight:400; font-size:11.5px; margin-top:2px;}
+  .arrow{color:var(--pink); font-weight:900; align-self:center;}
+  .q{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+  .q p{font-weight:700; font-size:15px; margin-bottom:10px;}
+  .q label{display:block; padding:8px 12px; margin:4px 0; border-radius:10px; cursor:pointer; font-size:15px;
+           border:1px solid rgba(168,85,247,.25); transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}
+  .q input{accent-color:var(--pink); margin-right:8px;}
+  .q .fb{display:none; margin-top:10px; font-size:14px; padding:10px 14px; border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10); color:var(--pink); border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}
+  .q.wrong .fb.wrong{display:block;}
+  .cl{list-style:none;}
+  .cl li{display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid rgba(168,85,247,.2);
+         border-radius:12px; margin:8px 0; cursor:pointer; transition:.15s; font-size:15px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}
+  .cl li.done{background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px; height:22px; border:2px solid var(--violet); border-radius:6px; margin-top:1px;
+           display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:.15s;}
+  .cl li.done .box{background:var(--green); border-color:var(--green); color:#0b0214;}
+  .cl .code{font-weight:800; color:var(--cyan); flex:0 0 64px; font-size:13px; padding-top:1px;}
+  .progress{height:10px; background:rgba(168,85,247,.15); border-radius:999px; overflow:hidden; margin:14px 0 6px;}
+  .progress .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--cyan)); transition:width .3s; border-radius:999px;}
+  .progtext{font-size:13px; color:var(--dim); text-align:right;}
+  .home-btn{position:fixed; left:16px; bottom:16px; z-index:950; display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; letter-spacing:.06em; text-decoration:none;
+    color:var(--cyan); background:rgba(21,10,38,.88); border:1px solid rgba(34,211,238,.55);
+    box-shadow:0 0 18px rgba(34,211,238,.28), inset 0 0 12px rgba(34,211,238,.08);
+    backdrop-filter:blur(4px); transition:all .2s;}
+  .home-btn:hover{background:var(--cyan); color:#0b0214; box-shadow:0 0 28px rgba(34,211,238,.65); transform:translateY(-2px);}
+  @media print{nav,.home-btn{display:none;} body{background:#fff; color:#111;} .panel,.card{background:#fff; border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Unity &amp; diversity · A1 (Molecules)</div>
+  <h1>A1.1 WATER</h1>
+  <div class="sub">Why water is the medium of life. The structure and polarity of the water molecule, and how hydrogen bonding gives rise to cohesion, adhesion, solvent and physical properties that organisms depend on.</div>
+  <div class="badges">
+    <span class="badge">SL</span>
+    <span class="badge ahl">AHL: A1.1.7–8</span>
+    <span class="badge">8 statements</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#act1">1 · MEDIUM FOR LIFE</a>
+  <a href="#act2">2 · STRUCTURE &amp; POLARITY</a>
+  <a href="#act3">3 · HYDROGEN BONDS</a>
+  <a href="#act4">4 · COHESION &amp; TENSION</a>
+  <a href="#act5">5 · ADHESION</a>
+  <a href="#act6">6 · SOLVENT</a>
+  <a href="#act7">7 · PHYSICAL PROPERTIES</a>
+  <a href="#act8">8 · ORIGINS (AHL)</a>
+  <a href="#act9">9 · GOLDILOCKS (AHL)</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ SELF-TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<!-- ACT 1 -->
+<section class="act" id="act1">
+  <div class="acttag">A1.1.1</div>
+  <h2>WATER AS THE MEDIUM FOR LIFE</h2>
+  <p class="aim">The first cells originated in water, and water remains the medium in which most of life's processes take place.</p>
+  <div class="panel">
+    <p>Life is <span class="accent">water-based</span>. Every theory of the origin of life places the first cells in water, and inside almost every living cell the chemical reactions of metabolism take place in an aqueous solution.</p>
+    <ul class="clean">
+      <li>Water is the <b>medium</b> — the solvent — in which most biological reactions occur.</li>
+      <li>It is also the <b>transport medium</b>: blood in animals and xylem/phloem in plants carry dissolved substances in water.</li>
+      <li>Its properties (below) all trace back to the <b>polar covalent bonds</b> and <b>hydrogen bonds</b> between molecules.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ACT 2 -->
+<section class="act" id="act2">
+  <div class="acttag">A1.1.2</div>
+  <h2>STRUCTURE &amp; POLARITY OF WATER</h2>
+  <p class="aim">Water (H₂O) has polar covalent bonds because the shared electrons are pulled more strongly toward oxygen, creating a δ− and a δ+ end. You should be able to draw two or more water molecules with their partial charges.</p>
+  <div class="panel">
+    <p>An oxygen atom forms a <span class="cyan">covalent bond</span> with each of two hydrogen atoms, sharing an electron pair. But oxygen is much more <span class="gold">electronegative</span>, so it pulls the shared electrons closer — the electrons are <span class="accent">unequally shared</span>.</p>
+    <ul class="clean">
+      <li>Oxygen carries a slight <b>negative</b> charge (<b>δ−</b>) — it has the electrons more of the time.</li>
+      <li>Each hydrogen carries a slight <b>positive</b> charge (<b>δ+</b>) — it is left with a partial deficit.</li>
+      <li>Because the two O–H bonds are not opposite, the molecule has a <b>polar</b> shape: a "bent" molecule with a δ− oxygen end and a δ+ hydrogen end.</li>
+    </ul>
+  </div>
+  <div class="fig">
+    <svg viewBox="0 0 640 250" role="img" aria-label="diagram of two water molecules showing the partial negative charge on oxygen and partial positive charge on hydrogen, and the bent shape">
+      <rect width="640" height="250" rx="14" fill="#150a26"/>
+      <!-- left molecule -->
+      <circle cx="180" cy="120" r="26" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="180" y="126" fill="#ff2ec4" font-size="16" font-weight="800" text-anchor="middle">O</text>
+      <text x="180" y="158" fill="#ff2ec4" font-size="11" font-weight="700" text-anchor="middle">δ−</text>
+      <circle cx="130" cy="70" r="14" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="130" y="75" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">H</text>
+      <text x="130" y="50" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">δ+</text>
+      <circle cx="230" cy="70" r="14" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="230" y="75" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">H</text>
+      <text x="230" y="50" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">δ+</text>
+      <line x1="130" y1="70" x2="180" y2="120" stroke="#f3e8ff" stroke-width="2"/>
+      <line x1="230" y1="70" x2="180" y2="120" stroke="#f3e8ff" stroke-width="2"/>
+      <text x="180" y="200" fill="#b9a3d6" font-size="11" text-anchor="middle">bent shape · δ− oxygen end</text>
+      <!-- right molecule -->
+      <circle cx="470" cy="120" r="26" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/>
+      <text x="470" y="126" fill="#ff2ec4" font-size="16" font-weight="800" text-anchor="middle">O</text>
+      <text x="470" y="158" fill="#ff2ec4" font-size="11" font-weight="700" text-anchor="middle">δ−</text>
+      <circle cx="420" cy="70" r="14" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="420" y="75" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">H</text>
+      <text x="420" y="50" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">δ+</text>
+      <circle cx="520" cy="70" r="14" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="520" y="75" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">H</text>
+      <text x="520" y="50" fill="#22d3ee" font-size="10" font-weight="700" text-anchor="middle">δ+</text>
+      <line x1="420" y1="70" x2="470" y2="120" stroke="#f3e8ff" stroke-width="2"/>
+      <line x1="520" y1="70" x2="470" y2="120" stroke="#f3e8ff" stroke-width="2"/>
+      <!-- hydrogen bond between the two molecules -->
+      <line x1="206" y1="110" x2="420" y2="84" stroke="#a855f7" stroke-width="3" stroke-dasharray="6 4"/>
+      <text x="313" y="86" fill="#a855f7" font-size="11" text-anchor="middle">hydrogen bond (δ+ H to δ− O)</text>
+    </svg>
+    <div class="cap"><b>FIG 1</b> — Two water molecules. Each has a δ− oxygen and δ+ hydrogens; a hydrogen bond (dashed, purple) forms between a δ+ hydrogen of one molecule and the δ− oxygen of another.</div>
+  </div>
+</section>
+
+<!-- ACT 3 -->
+<section class="act" id="act3">
+  <div class="acttag">A1.1.2</div>
+  <h2>HYDROGEN BONDING</h2>
+  <p class="aim">Hydrogen bonds are weak intermolecular attractions between a δ+ hydrogen and a δ− oxygen (or nitrogen, fluorine) of another molecule. They explain most of water's special properties.</p>
+  <div class="panel">
+    <p>A <span class="cyan">hydrogen bond</span> forms when a δ+ hydrogen atom of one water molecule is attracted to a δ− oxygen atom of a neighbouring water molecule. Because oxygen, nitrogen and fluorine are the most electronegative elements, these bonds are noticeably stronger than ordinary intermolecular attractions — though still much weaker than covalent bonds.</p>
+    <p>The continuous, ever-shifting network of hydrogen bonds between water molecules gives water its <span class="accent">cohesion</span>, high <span class="gold">specific heat capacity</span>, high <span class="gold">latent heat of vaporisation</span>, and its <span class="green">solvent</span> properties.</p>
+  </div>
+  <div class="fig">
+    <svg viewBox="0 0 640 280" role="img" aria-label="a hydrogen bonding network between several water molecules, showing each molecule linking to neighbours via hydrogen bonds">
+      <rect width="640" height="280" rx="14" fill="#150a26"/>
+      <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">HYDROGEN BONDING NETWORK</text>
+      <!-- row 1 -->
+      <circle cx="120" cy="90" r="20" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/><text x="120" y="95" fill="#ff2ec4" font-size="13" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="80" cy="55" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="80" y="59" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="160" cy="55" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="160" y="59" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <line x1="80" y1="55" x2="120" y2="90" stroke="#f3e8ff" stroke-width="1.6"/><line x1="160" y1="55" x2="120" y2="90" stroke="#f3e8ff" stroke-width="1.6"/>
+      <circle cx="320" cy="90" r="20" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/><text x="320" y="95" fill="#ff2ec4" font-size="13" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="280" cy="55" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="280" y="59" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="360" cy="55" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="360" y="59" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <line x1="280" y1="55" x2="320" y2="90" stroke="#f3e8ff" stroke-width="1.6"/><line x1="360" y1="55" x2="320" y2="90" stroke="#f3e8ff" stroke-width="1.6"/>
+      <circle cx="520" cy="90" r="20" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/><text x="520" y="95" fill="#ff2ec4" font-size="13" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="480" cy="55" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="480" y="59" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="560" cy="55" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="560" y="59" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <line x1="480" y1="55" x2="520" y2="90" stroke="#f3e8ff" stroke-width="1.6"/><line x1="560" y1="55" x2="520" y2="90" stroke="#f3e8ff" stroke-width="1.6"/>
+      <text x="320" y="122" fill="#b9a3d6" font-size="11" text-anchor="middle">row of water molecules (δ+ H up, δ− O centre)</text>
+      <!-- hydrogen bonds between rows -->
+      <line x1="120" y1="110" x2="120" y2="180" stroke="#a855f7" stroke-width="3" stroke-dasharray="6 4"/>
+      <line x1="320" y1="110" x2="320" y2="180" stroke="#a855f7" stroke-width="3" stroke-dasharray="6 4"/>
+      <line x1="520" y1="110" x2="520" y2="180" stroke="#a855f7" stroke-width="3" stroke-dasharray="6 4"/>
+      <!-- row 2 -->
+      <circle cx="120" cy="204" r="20" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/><text x="120" y="209" fill="#ff2ec4" font-size="13" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="80" cy="240" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="80" y="244" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="160" cy="240" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="160" y="244" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <line x1="80" y1="240" x2="120" y2="204" stroke="#f3e8ff" stroke-width="1.6"/><line x1="160" y1="240" x2="120" y2="204" stroke="#f3e8ff" stroke-width="1.6"/>
+      <circle cx="320" cy="204" r="20" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/><text x="320" y="209" fill="#ff2ec4" font-size="13" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="280" cy="240" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="280" y="244" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="360" cy="240" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="360" y="244" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <line x1="280" y1="240" x2="320" y2="204" stroke="#f3e8ff" stroke-width="1.6"/><line x1="360" y1="240" x2="320" y2="204" stroke="#f3e8ff" stroke-width="1.6"/>
+      <circle cx="520" cy="204" r="20" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/><text x="520" y="209" fill="#ff2ec4" font-size="13" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="480" cy="240" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="480" y="244" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="560" cy="240" r="11" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/><text x="560" y="244" fill="#22d3ee" font-size="10" font-weight="800" text-anchor="middle">H</text>
+      <line x1="480" y1="240" x2="520" y2="204" stroke="#f3e8ff" stroke-width="1.6"/><line x1="560" y1="240" x2="520" y2="204" stroke="#f3e8ff" stroke-width="1.6"/>
+      <text x="320" y="266" fill="#b9a3d6" font-size="10.5" text-anchor="middle">purple dashed = hydrogen bonds joining each δ+ H to a δ− O of another molecule</text>
+    </svg>
+    <div class="cap"><b>FIG 2</b> — A hydrogen-bonding network. Each water molecule can hydrogen-bond with up to four neighbours, giving water its strong cohesion and high heat capacity.</div>
+  </div>
+</section>
+
+<!-- ACT 4 -->
+<section class="act" id="act4">
+  <div class="acttag">A1.1.3</div>
+  <h2>COHESION &amp; SURFACE TENSION</h2>
+  <p class="aim">Cohesion is the attraction of water molecules to each other via hydrogen bonds. It drives transport under tension in xylem and creates surface tension.</p>
+  <div class="panel">
+    <p>Water is <span class="accent">cohesive</span> — molecules stick to each other through hydrogen bonds. Within a body of water each molecule is pulled equally in all directions, but at the <span class="cyan">surface</span> the molecules are only pulled downward and inward, making the surface act like a stretched film. This is <span class="gold">surface tension</span>.</p>
+    <ul class="clean">
+      <li><b>Surface tension</b> supports small organisms such as <b>water striders</b>, which distribute their weight over the surface using long legs.</li>
+      <li><b>Transpiration stream / xylem transport:</b> water evaporates from leaves, pulling a continuous chain of cohesive molecules up through narrow xylem vessels under tension.</li>
+    </ul>
+  </div>
+  <div class="fig">
+    <svg viewBox="0 0 640 240" role="img" aria-label="cutaway of water surface showing a water strider on the surface film, and an upward xylem vessel with cohesive water column">
+      <rect width="640" height="240" rx="14" fill="#150a26"/>
+      <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">SURFACE TENSION &amp; XYLEM</text>
+      <!-- left: surface strider -->
+      <rect x="30" y="60" width="270" height="130" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1.5" rx="8"/>
+      <text x="165" y="52" fill="#b9a3d6" font-size="11" text-anchor="middle">left: water surface</text>
+      <line x1="40" y1="100" x2="290" y2="100" stroke="#22d3ee" stroke-width="2"/>
+      <text x="165" y="92" fill="#22d3ee" font-size="10" text-anchor="middle">surface film</text>
+      <path d="M120 70 L200 70" stroke="#4ade80" stroke-width="3"/>
+      <circle cx="160" cy="62" r="7" fill="#4ade80"/>
+      <text x="160" y="110" fill="#4ade80" font-size="10" text-anchor="middle">water strider (supported by tension)</text>
+      <text x="165" y="160" fill="#b9a3d6" font-size="10.5" text-anchor="middle">molecules pull inward → stretched film</text>
+      <!-- right: xylem column -->
+      <rect x="330" y="60" width="100" height="130" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1.5" rx="6"/>
+      <text x="380" y="52" fill="#b9a3d6" font-size="11" text-anchor="middle">right: xylem vessel</text>
+      <line x1="350" y1="60" x2="350" y2="190" stroke="#a855f7" stroke-width="2"/>
+      <line x1="410" y1="60" x2="410" y2="190" stroke="#a855f7" stroke-width="2"/>
+      <circle cx="380" cy="80" r="5" fill="#22d3ee"/><circle cx="380" cy="104" r="5" fill="#22d3ee"/><circle cx="380" cy="128" r="5" fill="#22d3ee"/><circle cx="380" cy="152" r="5" fill="#22d3ee"/><circle cx="380" cy="176" r="5" fill="#22d3ee"/>
+      <text x="380" y="212" fill="#a855f7" font-size="10" text-anchor="middle">cohesive chain pulled up (under tension)</text>
+      <path d="M505 70 L505 190" stroke="#22d3ee" stroke-width="4" marker-end="url(#a1)">
+      <text x="505" y="52" fill="#22d3ee" font-size="11" text-anchor="middle">evaporation pulls column up</text>
+      <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#22d3ee"/></marker></defs>
+    </svg>
+    <div class="cap"><b>FIG 3</b> — Cohesion in action. Left: surface tension supports a water strider. Right: the cohesive column of water in a xylem vessel is pulled upward (under tension) by transpiration.</div>
+  </div>
+</section>
+
+<!-- ACT 5 -->
+<section class="act" id="act5">
+  <div class="acttag">A1.1.4</div>
+  <h2>ADHESION &amp; CAPILLARY ACTION</h2>
+  <p class="aim">Adhesion is the attraction of water to polar or charged surfaces. It produces capillary action in soil and within plant cell walls.</p>
+  <div class="panel">
+    <p>Water is also <span class="accent">adhesive</span> — it sticks to other polar or charged substances (like the cellulose of plant cell walls). The combination of <span class="cyan">adhesion</span> (to the walls) and <span class="cyan">cohesion</span> (between water molecules) allows water to climb narrow tubes against gravity: this is <span class="gold">capillary action</span>.</p>
+    <ul class="clean">
+      <li>In soil, water moves through tiny pores from the deeper water table toward the surface.</li>
+      <li>In plants, adhesion to the narrow xylem walls plus cohesion between molecules helps a pressure gradient draw water up the stem.</li>
+      <li>The narrower the tube, the stronger the capillary action.</li>
+    </ul>
+  </div>
+  <div class="fig">
+    <svg viewBox="0 0 640 240" role="img" aria-label="a narrow glass tube capillary in water, showing the meniscus rising higher than the surrounding water level">
+      <rect width="640" height="240" rx="14" fill="#150a26"/>
+      <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">CAPILLARY ACTION</text>
+      <!-- water tray -->
+      <rect x="40" y="150" width="560" height="50" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="1.5" rx="6"/>
+      <text x="70" y="185" fill="#22d3ee" font-size="11" text-anchor="middle">water (free surface)</text>
+      <line x1="40" y1="150" x2="600" y2="150" stroke="#22d3ee" stroke-width="2"/>
+      <text x="520" y="140" fill="#b9a3d6" font-size="10" text-anchor="middle">free water level</text>
+      <!-- narrow tube -->
+      <rect x="250" y="60" width="46" height="120" fill="rgba(168,85,247,.10)" stroke="#a855f7" stroke-width="1.5" rx="3"/>
+      <rect x="250" y="60" width="46" height="78" fill="rgba(34,211,238,.10)" stroke="none"/>
+      <text x="273" y="124" fill="#22d3ee" font-size="10" text-anchor="middle">meniscus</text>
+      <line x1="248" y1="138" x2="298" y2="138" stroke="#22d3ee" stroke-width="2"/>
+      <path d="M260 60 L260 138" stroke="#a855f7" stroke-width="2"/>
+      <text x="320" y="70" fill="#b9a3d6" font-size="10.5" text-anchor="middle">water rises in narrow tube</text>
+      <text x="320" y="92" fill="#b9a3d6" font-size="10.5" text-anchor="middle">(adhesion to wall + cohesion stays together)</text>
+      <text x="320" y="214" fill="#b9a3d6" font-size="10.5" text-anchor="middle">narrower tube → higher rise</text>
+    </svg>
+    <div class="cap"><b>FIG 4</b> — Capillary action. Water climbs the narrow tube above the surrounding free surface because the water molecules adhere to the walls and cohere to one another.</div>
+  </div>
+</section>
+
+<!-- ACT 6 -->
+<section class="act" id="act6">
+  <div class="acttag">A1.1.5</div>
+  <h2>WATER AS A SOLVENT</h2>
+  <p class="aim">Water dissolves a wide range of hydrophilic molecules, making it the medium for metabolism and for transport. Some molecules must remain hydrophobic and insoluble.</p>
+  <div class="panel">
+    <p>Because water is polar, it dissolves <span class="cyan">hydrophilic</span> substances (polar molecules and ions), which then collide more easily with enzymes and react. This makes water an ideal <span class="accent">metabolic medium</span>: most enzymes catalyse reactions in aqueous solution, and water even absorbs heat from exothermic reactions and helps maintain acid–base neutrality.</p>
+    <ul class="clean">
+      <li><b>Transport:</b> blood plasma carries dissolved amino acids, sugars, urea and small amounts of O₂/CO₂; in plants, xylem carries dissolved minerals and phloem carries dissolved sugars.</li>
+      <li><b>Hydrophobic molecules</b> (e.g. lipids) do not dissolve in water — this insolubility is essential for cell membranes and for some functions. Lipids must be packaged with proteins into lipoproteins to be transported.</li>
+      <li>So water's solvent power is useful <b>because</b> it is polar, and the hydrophobic behaviour of lipids is useful <b>because</b> they are non-polar.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ACT 7 -->
+<section class="act" id="act7">
+  <div class="acttag">A1.1.6</div>
+  <h2>PHYSICAL PROPERTIES &amp; AQUATIC ANIMALS</h2>
+  <p class="aim">Buoyancy, viscosity, thermal conductivity and specific heat capacity differ between water and air, and drive adaptations of aquatic vs terrestrial animals (e.g. the black-throated loon and the ringed seal).</p>
+  <table>
+    <tr><th>Property</th><th>Water vs air</th><th>Consequence for animals</th></tr>
+    <tr><td>Buoyancy</td><td>water is denser → greater upward force</td><td>loon has lighter bones to float and dive; seal has dense bones to stay submerged</td></tr>
+    <tr><td>Viscosity</td><td>water is more viscous (resists flow)</td><td>aquatic animals have streamlined bodies; loon's rear-set legs suit swimming, not walking</td></tr>
+    <tr><td>Thermal conductivity</td><td>water conducts heat better than air</td><td>both animals need insulation (loon's interlocking feathers, seal's fur + blubber) to limit heat loss</td></tr>
+    <tr><td>Specific heat capacity</td><td>water has the highest of any common liquid</td><td>stable water temperature; seal has poor cooling, so is vulnerable to climate change</td></tr>
+  </table>
+  <div class="fig">
+    <svg viewBox="0 0 640 260" role="img" aria-label="comparison of the physical properties of water and air in a table-like layout, and the arctic loon and seal">
+      <rect width="640" height="260" rx="14" fill="#150a26"/>
+      <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">WATER vs AIR</text>
+      <rect x="30" y="44" width="280" height="180" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1.5" rx="8"/>
+      <text x="170" y="68" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">WATER</text>
+      <text x="170" y="94" fill="#f3e8ff" font-size="11" text-anchor="middle">denser → more buoyancy</text>
+      <text x="170" y="116" fill="#f3e8ff" font-size="11" text-anchor="middle">more viscous</text>
+      <text x="170" y="138" fill="#f3e8ff" font-size="11" text-anchor="middle">higher thermal conductivity</text>
+      <text x="170" y="160" fill="#f3e8ff" font-size="11" text-anchor="middle">highest specific heat capacity</text>
+      <text x="170" y="190" fill="#b9a3d6" font-size="10.5" text-anchor="middle">stable temperature; good coolant (sweat)</text>
+      <text x="170" y="210" fill="#b9a3d6" font-size="10.5" text-anchor="middle">organisms need insulation vs heat loss</text>
+      <rect x="330" y="44" width="280" height="180" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1.5" rx="8"/>
+      <text x="470" y="68" fill="#a855f7" font-size="12" font-weight="800" text-anchor="middle">AIR</text>
+      <text x="470" y="94" fill="#f3e8ff" font-size="11" text-anchor="middle">less dense → less buoyancy</text>
+      <text x="470" y="116" fill="#f3e8ff" font-size="11" text-anchor="middle">less viscous (flows easily)</text>
+      <text x="470" y="138" fill="#f3e8ff" font-size="11" text-anchor="middle">lower thermal conductivity</text>
+      <text x="470" y="160" fill="#f3e8ff" font-size="11" text-anchor="middle">lower specific heat capacity</text>
+      <text x="470" y="190" fill="#b9a3d6" font-size="10.5" text-anchor="middle">temperatures swing a lot</text>
+      <text x="470" y="210" fill="#b9a3d6" font-size="10.5" text-anchor="middle">organisms need cooling mechanisms</text>
+    </svg>
+    <div class="cap"><b>FIG 5</b> — Water and air differ in buoyancy, viscosity, thermal conductivity and specific heat capacity. These differences drive the contrasting adaptations of aquatic (ringed seal) and terrestrial/aerial (black-throated loon) species.</div>
+  </div>
+</section>
+
+<!-- ACT 8 -->
+<section class="act" id="act8">
+  <div class="acttag">AHL · A1.1.7</div>
+  <h2>THE ORIGIN OF EARTH'S WATER</h2>
+  <p class="aim">Most of Earth's surface water is hypothesised to have come from asteroids, and was retained because the planet was large enough (gravity) and cool enough for the water to condense.</p>
+  <div class="panel">
+    <p>Water is essential for life: it lets non-polar lipids form membranes, stabilises internal conditions for homeostasis, dissolves the molecules needed for metabolism, and is itself a reagent (in condensation reactions).</p>
+    <p>When Earth first formed, <span class="cyan">water vapour</span> was present but too hot to condense, and the planet's gravity was too weak to hold it — so most of it escaped to space. The large bodies of water we have are therefore thought to have arrived later from <span class="gold">asteroids</span> that formed further from the Sun, where it was cold enough for water to freeze as ice.</p>
+    <ul class="clean">
+      <li><b>Origin:</b> asteroids (icy bodies) that collided with Earth.</li>
+      <li><b>Retention:</b> by then Earth had enough gravity to hold the water, and had cooled enough for it to condense and remain liquid.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ACT 9 -->
+<section class="act" id="act9">
+  <div class="acttag">AHL · A1.1.8</div>
+  <h2>WATER &amp; THE SEARCH FOR EXTRATERRESTRIAL LIFE</h2>
+  <p class="aim">Liquid water is a key target in the search for habitable planets, because it is essential for life as we know it.</p>
+  <div class="panel">
+    <p>The <span class="accent">Goldilocks zone</span> (habitable zone) is the range of distances from a star at which temperatures allow liquid water to exist on a planet's surface. Its distance depends on the star's size and temperature — a hotter star pushes the zone further away.</p>
+    <p>Very few planets found in a Goldilocks zone also have a suitable <span class="cyan">mass</span> and <span class="cyan">atmosphere</span> to actually hold liquid water on the surface. That is why the search for extraterrestrial life focuses on finding liquid water.</p>
+  </div>
+  <div class="fig">
+    <svg viewBox="0 0 640 220" role="img" aria-label="a star with concentric habitable zone bands, the Goldilocks zone labelled as where liquid water is possible">
+      <rect width="640" height="220" rx="14" fill="#150a26"/>
+      <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">GOLDILOCKS ZONE</text>
+      <circle cx="120" cy="120" r="26" fill="#fbbf24"/>
+      <circle cx="120" cy="120" r="26" fill="none" stroke="#fbbf24" stroke-width="2"/>
+      <text x="120" y="125" fill="#0b0214" font-size="12" font-weight="800" text-anchor="middle">star</text>
+      <ellipse cx="320" cy="120" rx="140" ry="58" fill="rgba(74,222,128,.10)" stroke="#4ade80" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="320" y="86" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">GOLDILOCKS ZONE</text>
+      <text x="320" y="104" fill="#b9a3d6" font-size="10.5" text-anchor="middle">liquid water possible</text>
+      <text x="200" y="170" fill="#4ade80" font-size="10.5" text-anchor="middle">too hot</text>
+      <text x="450" y="170" fill="#4ade80" font-size="10.5" text-anchor="middle">too cold</text>
+      <circle cx="320" cy="120" r="10" fill="#22d3ee"/><text x="320" y="146" fill="#22d3ee" font-size="10.5" text-anchor="middle">a planet</text>
+      <text x="320" y="200" fill="#b9a3d6" font-size="11" text-anchor="middle">distance from star set by star size + temperature</text>
+    </svg>
+    <div class="cap"><b>FIG 6</b> — The Goldilocks (habitable) zone. Liquid water can exist at just the right distance from a star; too close and it boils, too far and it freezes.</div>
+  </div>
+</section>
+
+<!-- MIND MAP -->
+<section class="act" id="map">
+  <div class="acttag">One-page overview</div>
+  <h2>🗺 MIND MAP</h2>
+  <p class="aim">One property of water, one consequence — and where it is used.</p>
+  <div class="mind">
+    <div class="node core">WATER<small>A1.1 · the medium of life</small></div>
+    <div class="arrow">→</div>
+    <div class="node">POLARITY<small>unequal e- sharing</small></div>
+    <div class="arrow">→</div>
+    <div class="node">HYDROGEN BONDS<small>weak, many</small></div>
+    <div class="arrow">→</div>
+    <div class="node">COHESION<small>surface tension · xylem</small></div>
+    <div class="node">ADHESION<small>capillary action</small></div>
+    <div class="node">SOLVENT<small>metabolism · transport</small></div>
+    <div class="node">PHYSICAL<small>buoyancy · viscosity · heat</small></div>
+    <div class="node">ORIGIN (AHL)<small>asteroids · gravity</small></div>
+    <div class="node">GOLDILOCKS (AHL)<small>liquid water habitability</small></div>
+  </div>
+</section>
+
+<!-- CHEAT -->
+<section class="act" id="cheat">
+  <div class="acttag">Quick recap</div>
+  <h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Water is <span>polar</span> (δ− O, δ+ H) because oxygen is more electronegative → <span>unequal sharing</span>.</div>
+    <div class="line">Polarity → <span>hydrogen bonds</span> between molecules → cohesion, adhesion, solvent, high heat capacity.</div>
+    <div class="line"><span>Cohesion</span> = molecules stick together → <span>surface tension</span> (water striders) + <span>xylem transport under tension</span>.</div>
+    <div class="line"><span>Adhesion</span> = water sticks to polar/charged surfaces → <span>capillary action</span> (soil, cell walls).</div>
+    <div class="line"><span>Solvent</span> → hydrophilic molecules dissolve, enzymes work in solution, hydrophobic lipids stay insoluble.</div>
+    <div class="line"><span>Physical vs air</span>: more density (buoyancy), more viscous, better thermal conductivity, highest specific heat capacity.</div>
+    <div class="line">Aquatic animals: <span>loon</span> (light bones, rear legs, interlocking feathers) · <span>seal</span> (dense bones, streamlined, fur + blubber).</div>
+    <div class="line">AHL: water came from <span>asteroids</span>; retained by <span>gravity + cooling</span> · <span>Goldilocks zone</span> = liquid water possible.</div>
+  </div>
+</section>
+
+<!-- SELF-TEST -->
+<section class="act" id="test">
+  <div class="acttag">Test yourself</div>
+  <h2>✍ SELF-TEST</h2>
+  <p class="aim">10 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="polar covalent">
+    <p>1. The bonds within a water molecule are…</p>
+    <label><input type="radio" name="q1" data-a="polar covalent"> polar covalent — electrons shared unequally</label>
+    <label><input type="radio" name="q1"> ionic</label>
+    <label><input type="radio" name="q1"> hydrogen bonds</label>
+    <div class="fb correct">Correct — oxygen pulls electrons more strongly, giving δ− and δ+ ends.</div>
+    <div class="fb wrong">Hydrogen bonds are BETWEEN molecules; inside the molecule the bonds are polar covalent.</div>
+  </div>
+
+  <div class="q" data-a="H+ to O- of another molecule">
+    <p>2. A hydrogen bond in water forms between…</p>
+    <label><input type="radio" name="q2" data-a="H+ to O- of another molecule"> a δ+ hydrogen of one molecule and a δ− oxygen of another</label>
+    <label><input type="radio" name="q2"> a δ+ hydrogen and a δ− hydrogen</label>
+    <label><input type="radio" name="q2"> the two hydrogens of the same molecule</label>
+    <div class="fb correct">Correct — opposite partial charges attract between neighbouring molecules.</div>
+    <div class="fb wrong">Hydrogen bonds are between the δ+ H of one molecule and the δ− O of a different molecule.</div>
+  </div>
+
+  <div class="q" data-a="surface tension">
+    <p>3. A water strider can stand on water because of…</p>
+    <label><input type="radio" name="q3" data-a="surface tension"> surface tension from cohesion</label>
+    <label><input type="radio" name="q3"> adhesion to its legs</label>
+    <label><input type="radio" name="q3"> its low density</label>
+    <div class="fb correct">Correct — cohesive hydrogen bonds at the surface form a stretched film.</div>
+    <div class="fb wrong">Surface tension (a cohesion effect) supports the strider, not adhesion or density.</div>
+  </div>
+
+  <div class="q" data-a="adhesion to walls + cohesion">
+    <p>4. Capillary rise in a narrow tube relies on…</p>
+    <label><input type="radio" name="q4" data-a="adhesion to walls + cohesion"> adhesion to the tube walls and cohesion between water molecules</label>
+    <label><input type="radio" name="q4"> cohesion only</label>
+    <label><input type="radio" name="q4"> the solvent power of water</label>
+    <div class="fb correct">Correct — water adheres to the wall and coheres to itself, climbing against gravity.</div>
+    <div class="fb wrong">Capillary action needs BOTH adhesion (to the wall) and cohesion (molecule to molecule).</div>
+  </div>
+
+  <div class="q" data-a="hydrophilic">
+    <p>5. A substance that dissolves readily in water is described as…</p>
+    <label><input type="radio" name="q5" data-a="hydrophilic"> hydrophilic</label>
+    <label><input type="radio" name="q5"> hydrophobic</label>
+    <label><input type="radio" name="q5"> amphipathic</label>
+    <div class="fb correct">Correct — hydrophilic ('water-loving') polar molecules and ions dissolve; hydrophobic ones do not.</div>
+    <div class="fb wrong">Hydrophilic = water-loving and soluble; hydrophobic = water-hating and insoluble.</div>
+  </div>
+
+  <div class="q" data-a="specific heat capacity">
+    <p>6. Water's tendency to stay at a stable temperature is due to its high…</p>
+    <label><input type="radio" name="q6" data-a="specific heat capacity"> specific heat capacity</label>
+    <label><input type="radio" name="q6"> buoyancy</label>
+    <label><input type="radio" name="q6"> viscosity</label>
+    <div class="fb correct">Correct — breaking hydrogen bonds takes a lot of energy, so temperature rises slowly.</div>
+    <div class="fb wrong">Specific heat capacity is the heat needed to raise temperature → stable temperatures.</div>
+  </div>
+
+  <div class="q" data-a="water is denser">
+    <p>7. Why does water exert a greater buoyant force than air?</p>
+    <label><input type="radio" name="q7" data-a="water is denser"> water is denser than air</label>
+    <label><input type="radio" name="q7"> water is less viscous</label>
+    <label><input type="radio" name="q7"> water has a higher heat capacity</label>
+    <div class="fb correct">Correct — buoyancy depends on the density of the medium.</div>
+    <div class="fb wrong">Buoyancy is a result of water's greater density, not viscosity or heat capacity.</div>
+  </div>
+
+  <div class="q" data-a="dense bones to stay submerged">
+    <p>8. The ringed seal has dense bones mainly so it can…</p>
+    <label><input type="radio" name="q8" data-a="dense bones to stay submerged"> stay submerged when diving (less buoyant)</label>
+    <label><input type="radio" name="q8"> float more easily at the surface</label>
+    <label><input type="radio" name="q8"> walk easily on ice</label>
+    <div class="fb correct">Correct — denser bones reduce buoyancy so the seal can stay underwater.</div>
+    <div class="fb wrong">Dense bones make the seal LESS buoyant so it can dive and stay submerged.</div>
+  </div>
+
+  <div class="q" data-a="asteroids">
+    <p>9. AHL — Earth's water is hypothesised to have originated mainly from…</p>
+    <label><input type="radio" name="q9" data-a="asteroids"> icy asteroids that collided with Earth</label>
+    <label><input type="radio" name="q9"> volcanic outgassing only</label>
+    <label><input type="radio" name="q9"> condensation from the Sun</label>
+    <div class="fb correct">Correct — early Earth was too hot and too weakly gravitating to keep its water, so water came from asteroids.</div>
+    <div class="fb wrong">The accepted hypothesis is an extraplanetary (asteroid) origin for most of Earth's water.</div>
+  </div>
+
+  <div class="q" data-a="the range where liquid water can exist">
+    <p>10. AHL — The Goldilocks zone is…</p>
+    <label><input type="radio" name="q10" data-a="the range where liquid water can exist"> the range of distances from a star where liquid water could exist</label>
+    <label><input type="radio" name="q10"> the layer around Earth's core</label>
+    <label><input type="radio" name="q10"> a region of space with no stars</label>
+    <div class="fb correct">Correct — it depends on the star's temperature and size, and is key to the search for life.</div>
+    <div class="fb wrong">The Goldilocks (habitable) zone is where temperatures allow liquid water.</div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="act" id="check">
+  <div class="acttag">Syllabus objectives</div>
+  <h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">A1.1.1</span><span>Water is the medium of life; first cells arose in water.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">A1.1.2</span><span>Water molecule is polar covalent due to unequal electron sharing (δ− O, δ+ H).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">A1.1.2</span><span>I can draw two or more water molecules showing the hydrogen bonds between them.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">A1.1.3</span><span>Cohesion = attraction of water molecules to each other via hydrogen bonds.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">A1.1.3</span><span>Surface tension supports small organisms (water striders).</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">A1.1.3</span><span>Water is transported under tension in xylem (transpiration stream).</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">A1.1.4</span><span>Adhesion = attraction of water to polar or charged surfaces.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">A1.1.4</span><span>Capillary action moves water through soil and in plant cell walls.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">A1.1.5</span><span>Water dissolves hydrophilic molecules; most enzymes work in aqueous solution.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">A1.1.5</span><span>Some molecules need to be hydrophobic and insoluble (e.g. lipids).</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">A1.1.6</span><span>Water vs air: buoyancy, viscosity, thermal conductivity, specific heat capacity.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">A1.1.6</span><span>Black-throated loon adaptations (lighter bones, rear legs, interlocking feathers).</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">A1.1.6</span><span>Ringed seal adaptations (denser bones, streamlined, fur + blubber).</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">A1.1.7</span><span>Origin of water = icy asterodids; retained by gravity + cooling.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">A1.1.8</span><span>Goldilocks zone = range where liquid water can exist.</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">A1.1.8</span><span>Search for extraterrestrial life focuses on the presence of water.</span></li>
+  </ul>
+</section>
+
+</div>
+<footer style="margin-top:56px; padding-top:18px; border-top:1px solid rgba(255,46,196,.28); color:#b9a3d6; font-size:12.5px; text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · A1.1 Water · grounded in BioNinja + the IB syllabus
+</footer>
+
+<script>
+(function(){
+  // checklist persistence
+  var KEY='a11-water-checklist-v1';
+  var cl=document.getElementById('cl'), fill=document.getElementById('fill'), pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'); var N=items.length;
+  function update(){
+    var done=cl.querySelectorAll('li.done').length;
+    fill.style.width=(done/N*100)+'%'; pt.textContent=done+' / '+N;
+    var pill=document.getElementById('progPill'); if(pill) pill.textContent=done+'/'+N;
+    var ids=[]; items.forEach(function(li){ if(li.classList.contains('done')) ids.push(li.dataset.i); });
+    try{ localStorage.setItem(KEY, JSON.stringify(ids)); }catch(e){}
+  }
+  try{
+    var saved=JSON.parse(localStorage.getItem(KEY)||'[]');
+    saved.forEach(function(i){ var li=cl.querySelector('li[data-i="'+i+'"]'); if(li) li.classList.add('done'); });
+  }catch(e){}
+  items.forEach(function(li){ li.addEventListener('click',function(){ li.classList.toggle('done'); update(); }); });
+  update();
+  // quiz
+  document.querySelectorAll('div.q label input').forEach(function(inp){
+    inp.addEventListener('change',function(){
+      var q=inp.closest('div.q');
+      if(q.querySelectorAll('input[data-a]').length!==1) return;
+      var right=q.querySelector('input[data-a]').checked;
+      if(right){ q.classList.add('correct'); q.classList.remove('wrong'); }
+      else{ q.classList.add('wrong'); q.classList.remove('correct'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
