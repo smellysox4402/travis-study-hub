@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>A3.2 Classification &amp; Cladistics</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.nos{border-left:4px solid var(--cyan);background:rgba(34,211,238,.07);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.nos b{color:var(--cyan);}
+.exam{border-left:4px solid var(--green);background:rgba(74,222,128,.07);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.exam b{color:var(--green);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Unity &amp; diversity · A3 (Organisms)</div>
+  <h1>A3.2 CLASSIFICATION &amp; CLADISTICS</h1>
+  <div class="sub">Why we classify organisms, the traditional hierarchy and its problems, and how evolutionary relationships (clades, cladograms, molecular clocks) give the most objective classification.</div>
+  <div class="badges"><span class="badge ahl">AHL ONLY</span><span class="badge">9 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · WHY CLASSIFY</a><a href="#act2">2 · HIERARCHY PROBLEMS</a><a href="#act3">3 · EVOLUTIONARY CLASSIFICATION</a><a href="#act4">4 · CLADES</a><a href="#act5">5 · MOLECULAR CLOCK</a><a href="#act6">6 · CLADOGRAMS</a><a href="#act7">7 · READING CLADOGRAMS</a><a href="#act8">8 · CASE STUDY</a><a href="#act9">9 · THREE DOMAINS</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/12</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">A3.2.1</div><h2>THE NEED FOR CLASSIFICATION</h2>
+  <p class="aim">We classify because of the immense diversity of species, and doing so makes further study easier.</p>
+  <div class="panel"><p>There are <span class="accent">millions of species</span>, so classification groups them logically. Once classified, a wide range of further study — naming, cataloguing, comparing, predicting properties — becomes possible.</p></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">A3.2.2</div><h2>DIFFICULTIES WITH THE TRADITIONAL HIERARCHY</h2>
+  <p class="aim">The traditional hierarchy (kingdom, phylum, class, order, family, genus, species) doesn't always match patterns of divergence.</p>
+  <div class="panel"><p>The old system groups organisms by <span class="cyan">similar appearance</span>, but that doesn't always reflect evolutionary relationships — convergent evolution can make unrelated organisms look alike, and some groups turn out not to be monophyletic. So the traditional hierarchy sometimes misrepresents how life actually diverged.</p></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">A3.2.3</div><h2>CLASSIFICATION SHOULD FOLLOW EVOLUTIONARY RELATIONSHIPS</h2>
+  <p class="aim">The ideal classification reflects evolutionary relationships — every member of a group has evolved from a common ancestor.</p>
+  <div class="panel"><p>Ideally, a taxonomic group is <span class="accent">monophyletic</span>: all its members share a <span class="cyan">common ancestor</span> and include all the descendants of that ancestor. This makes the classification meaningful and consistent with evolution.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">A3.2.4</div><h2>CLADES — DETERMINED BY SEQUENCES</h2>
+  <p class="aim">A clade is a group with common ancestry and shared characteristics. The most objective evidence for placing organisms in a clade is their base sequences or amino acid sequences.</p>
+  <div class="panel"><p>A <span class="accent">clade</span> = a common ancestor and all its descendants. The most objective way to place organisms together is <b>not</b> appearance but their <span class="cyan">base sequences of genes</span> or <span class="cyan">amino acid sequences of proteins</span>.</p></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">A3.2.5</div><h2>THE MOLECULAR CLOCK</h2>
+  <p class="aim">Sequence differences accumulate gradually and can be used to estimate when clades diverged — the "molecular clock".</p>
+  <div class="panel"><p>Mutations accumulate at a roughly steady rate, so the <span class="accent">number of sequence differences</span> between two groups is proportional to the <span class="cyan">time since they shared a common ancestor</span>. This lets scientists estimate divergence times — the <span class="gold">molecular clock</span>.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">A3.2.6</div><h2>CONSTRUCTING CLADOGRAMS FROM SEQUENCES</h2>
+  <p class="aim">Base or amino acid sequence data is used to build cladograms. Simple sample data illustrates the method.</p>
+  <div class="panel"><p>Organisms are grouped according to how many sequence differences they share. The more similar their sequences, the more recent their common ancestor. A <span class="accent">cladogram</span> is the branching diagram that results.</p>
+  <div class="nos"><b>Nature of science:</b> different sequence data (e.g. different genes) can give different results, so conclusions are drawn from as much data as possible — and scientists must recognise and handle this uncertainty.</div></div>
+  <div class="fig"><svg viewBox="0 0 640 240" role="img" aria-label="a simple cladogram showing a root, branches, nodes and terminal branches, and two labelled clades">
+    <rect width="640" height="240" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">A CLADOGRAM</text>
+    <path d="M120 200 L320 70 L520 200" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+    <path d="M320 70 L400 60 L470 200" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+    <circle cx="120" cy="200" r="5" fill="#22d3ee"/><text x="90" y="215" fill="#22d3ee" font-size="10" text-anchor="middle">root</text>
+    <circle cx="320" cy="70" r="5" fill="#fbbf24"/><text x="250" y="50" fill="#fbbf24" font-size="10" text-anchor="middle">node (common ancestor)</text>
+    <circle cx="400" cy="60" r="5" fill="#4ade80"/><text x="410" y="40" fill="#4ade80" font-size="10" text-anchor="middle">node</text>
+    <text x="520" y="212" fill="#ff2ec4" font-size="10" text-anchor="middle">terminal</text><text x="520" y="234" fill="#ff2ec4" font-size="10" text-anchor="middle">branch</text>
+    <text x="470" y="212" fill="#4ade80" font-size="10" text-anchor="middle">terminal</text><text x="470" y="234" fill="#4ade80" font-size="10" text-anchor="middle">branch</text>
+    <text x="200" y="120" fill="#ff2ec4" font-size="10" text-anchor="middle">clade (lineage)</text>
+    <text x="320" y="150" fill="#a855f7" font-size="10" text-anchor="middle">Shared ancestor of the two right-most groups</text>
+  </svg><div class="cap"><b>FIG 1</b> — A cladogram: a root, branching nodes (common ancestors) and terminal branches. Each clade shares a common ancestor.</div></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">A3.2.7</div><h2>ANALYSING CLADOGRAMS</h2>
+  <p class="aim">You should be able to deduce evolutionary relationships, common ancestors and clades from a cladogram, using the terms root, node and terminal branch.</p>
+  <div class="panel"><ul class="clean"><li><b>Root</b> — the most ancient ancestor at the base.</li><li><b>Node</b> — a branching point representing a common ancestor (a speciation event).</li><li><b>Terminal branch</b> — a tip representing a present-day species/taxon.</li><li><b>Clade</b> — a node and all its descendants.</li><li>The more recent a node, the more recently the groups diverged.</li></ul></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">A3.2.8</div><h2>USING CLADISTICS TO CHECK CLASSIFICATION</h2>
+  <p class="aim">Case study: transferring plant species between families when cladistics shows they don't fit the old classification.</p>
+  <div class="panel"><p>Cladistics can reveal groups that the traditional hierarchy got wrong. For example, plant species have been <span class="accent">reassigned between families</span> once sequence data showed they were more closely related to a different family than their morphology suggested — demonstrating that an evidence-based, evolutionary classification can override the traditional one.</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">A3.2.9</div><h2>THE THREE DOMAINS</h2>
+  <p class="aim">Using evidence from rRNA base sequences, all organisms are classified into three domains — a level above kingdoms, proposed in 1977.</p>
+  <div class="panel"><p>Analysis of <span class="cyan">rRNA base sequences</span> led to the now-standard reclassification into <span class="accent">three domains</span>, a higher level than kingdoms: <b>Bacteria</b>, <b>Archaea</b> and <b>Eukarya</b>. This grouping was proposed by Carl Woese in <span class="gold">1977</span> and is based on molecular evidence, not appearance.</p></div>
+  <div class="fig"><svg viewBox="0 0 640 220" role="img" aria-label="a three-domain tree: root at centre, branches to Bacteria, Archaea and Eukarya from rRNA sequence evidence">
+    <rect width="640" height="220" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">THREE DOMAINS</text>
+    <circle cx="320" cy="150" r="6" fill="#fbbf24"/><text x="320" y="176" fill="#b9a3d6" font-size="10" text-anchor="middle">root (common ancestor)</text>
+    <path d="M320 150 L160 70" stroke="#22d3ee" stroke-width="2.5"/><text x="150" y="55" fill="#22d3ee" font-size="12" font-weight="800" text-anchor="middle">Bacteria</text>
+    <path d="M320 150 L320 70" stroke="#ff2ec4" stroke-width="2.5"/><text x="320" y="55" fill="#ff2ec4" font-size="12" font-weight="800" text-anchor="middle">Archaea</text>
+    <path d="M320 150 L480 70" stroke="#4ade80" stroke-width="2.5"/><text x="480" y="55" fill="#4ade80" font-size="12" font-weight="800" text-anchor="middle">Eukarya</text>
+    <text x="320" y="205" fill="#b9a3d6" font-size="11" text-anchor="middle">based on rRNA base sequences · proposed 1977 · above kingdoms</text>
+  </svg><div class="cap"><b>FIG 2</b> — The three domains (Bacteria, Archaea, Eukarya), a level above kingdoms, established from rRNA sequence evidence.</div></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">CLASSIFICATION<small>A3.2 · AHL</small></div>
+    <div class="arrow">→</div><div class="node">WHY<small>diversity → study</small></div>
+    <div class="node">OLD HIERARCHY<small>kingdom → species · problems</small></div>
+    <div class="node">CLADES<small>common ancestor + descendants</small></div>
+    <div class="node">SEQUENCES<small>base/amino acid = objective</small></div>
+    <div class="node">MOLECULAR CLOCK<small>differences → divergence time</small></div>
+    <div class="node">CLADOGRAMS<small>root · node · terminal branch</small></div>
+    <div class="node">THREE DOMAINS<small>Bacteria · Archaea · Eukarya (rRNA)</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Classification needed <span>for the diversity of species</span>; old hierarchy (Kingdom → Species) doesn't always match divergence.</div>
+    <div class="line">Ideal classification follows <span>evolutionary relationships</span> (monophyletic groups).</div>
+    <div class="line">A <span>clade</span> = common ancestor + descendants; best evidence = <span>base/amino acid sequences</span>.</div>
+    <div class="line"><span>Molecular clock</span>: sequence differences estimate divergence time.</div>
+    <div class="line"><span>Cladogram</span>: root · node (common ancestor) · terminal branch · clade.</div>
+    <div class="line">Cladistics can <span>reassign</span> species between families.</div>
+    <div class="line"><span>Three domains</span>: Bacteria · Archaea · Eukarya — from rRNA sequences (1977).</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">8 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="to make sense of the immense diversity and enable study"><p>1. The main reason for classifying organisms is…</p>
+    <label><input type="radio" name="q1" data-a="to make sense of the immense diversity and enable study"> to make sense of the immense diversity and enable further study</label><label><input type="radio" name="q1"> to make species look alike</label><label><input type="radio" name="q1"> to count species only</label>
+    <div class="fb correct">Correct — classification organises enormous diversity and facilitates study.</div><div class="fb wrong">Classification is needed because of the immense diversity of species.</div>
+  </div>
+
+  <div class="q" data-a="a common ancestor and all its descendants"><p>2. A clade is…</p>
+    <label><input type="radio" name="q2" data-a="a common ancestor and all its descendants"> a common ancestor and all its descendants</label><label><input type="radio" name="q2"> any group that looks similar</label><label><input type="radio" name="q2"> the largest kingdom</label>
+    <div class="fb correct">Correct — a clade = common ancestor + all descendants.</div><div class="fb wrong">A clade is a common ancestor and all its descendants.</div>
+  </div>
+
+  <div class="q" data-a="base sequences of genes or amino acid sequences"><p>3. The most objective evidence for placing organisms in the same clade is…</p>
+    <label><input type="radio" name="q3" data-a="base sequences of genes or amino acid sequences"> base sequences of genes or amino acid sequences</label><label><input type="radio" name="q3"> overall appearance</label><label><input type="radio" name="q3"> habitat</label>
+    <div class="fb correct">Correct — molecular sequences are the most objective evidence.</div><div class="fb wrong">Base/amino acid sequences are the most objective evidence.</div>
+  </div>
+
+  <div class="q" data-a="the sequence differences accumulate at a roughly steady rate"><p>4. A molecular clock estimates divergence time because…</p>
+    <label><input type="radio" name="q4" data-a="the sequence differences accumulate at a roughly steady rate"> sequence differences accumulate at a roughly steady rate</label><label><input type="radio" name="q4"> all species mutate at random</label><label><input type="radio" name="q4"> sequences never change</label>
+    <div class="fb correct">Correct — mutations accumulate steadily, so differences ∝ time.</div><div class="fb wrong">The molecular clock works because sequence differences accumulate steadily.</div>
+  </div>
+
+  <div class="q" data-a="the most ancient common ancestor"><p>5. In a cladogram, the root represents…</p>
+    <label><input type="radio" name="q5" data-a="the most ancient common ancestor"> the most ancient common ancestor</label><label><input type="radio" name="q5"> a present-day species</label><label><input type="radio" name="q5"> a terminal branch</label>
+    <div class="fb correct">Correct — the root is the oldest ancestor at the base.</div><div class="fb wrong">The root is the most ancient common ancestor.</div>
+  </div>
+
+  <div class="q" data-a="a branching point representing a common ancestor"><p>6. A node in a cladogram is…</p>
+    <label><input type="radio" name="q6" data-a="a branching point representing a common ancestor"> a branching point representing a common ancestor</label><label><input type="radio" name="q6"> a tip species</label><label><input type="radio" name="q6"> the root only</label>
+    <div class="fb correct">Correct — a node is a common ancestor (speciation event).</div><div class="fb wrong">A node = a common ancestor where branches diverge.</div>
+  </div>
+
+  <div class="q" data-a="the old hierarchy didn't match evolutionary relationships"><p>7. A plant species might be moved to a different family when cladistics shows…</p>
+    <label><input type="radio" name="q7" data-a="the old hierarchy didn't match evolutionary relationships"> the traditional classification doesn't match evolutionary relationships</label><label><input type="radio" name="q7"> it looks exactly like the new family</label><label><input type="radio" name="q7"> it is larger than its family</label>
+    <div class="fb correct">Correct — molecular evidence overrides morphology-based classification.</div><div class="fb wrong">Species are reassigned when sequence data shows closer relationships than morphology.</div>
+  </div>
+
+  <div class="q" data-a="Bacteria, Archaea and Eukarya"><p>8. The three domains are…</p>
+    <label><input type="radio" name="q8" data-a="Bacteria, Archaea and Eukarya"> Bacteria, Archaea and Eukarya</label><label><input type="radio" name="q8"> plants, animals and fungi</label><label><input type="radio" name="q8"> kingdoms and phyla</label>
+    <div class="fb correct">Correct — three domains from rRNA sequence evidence.</div><div class="fb wrong">Bacteria, Archaea and Eukarya, based on rRNA sequences.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 12</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">A3.2.1</span><span>Why classification is needed (immense diversity → study).</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">A3.2.2</span><span>Problems with the traditional hierarchy (doesn't match divergence).</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">A3.2.3</span><span>Ideal classification follows evolutionary relationships (monophyletic).</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">A3.2.4</span><span>Clade = common ancestor + descendants; sequences are the objective evidence.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">A3.2.5</span><span>Molecular clock: sequence differences estimate divergence times.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">A3.2.6</span><span>Base/amino acid sequences used to construct cladograms.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">A3.2.7</span><span>I can read a cladogram: root, node, terminal branch, clade.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">A3.2.8</span><span>Case study: species reassigned between families by cladistics.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">A3.2.9</span><span>Three domains (Bacteria, Archaea, Eukarya) from rRNA sequences.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">A3.2.4-6</span><span>I can explain why sequences are more objective than appearance.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">A3.2.7</span><span>I can deduce relationships and clades from a cladogram.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">A3.2.9</span><span>I can state the three domains and the evidence (rRNA) + date (1977).</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · A3.2 Classification &amp; Cladistics · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='a32-classification-cladistics-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
