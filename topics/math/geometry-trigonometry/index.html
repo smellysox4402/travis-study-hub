@@ -151,6 +151,7 @@
   <a href="#act2">Right-angle trig</a>
   <a href="#act3">Sine &amp; cosine rule</a>
   <a href="#act4">Circles &amp; Voronoi</a>
+  <a href="#method">🎯 METHOD</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -313,6 +314,117 @@
 </section>
 
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="method">
+  <div class="acttag">Question-type guide</div>
+  <h2>HOW TO SOLVE THE COMMON QUESTIONS 🎯</h2>
+  <p class="aim">The method for each question type, the concept to remember, and a worked answer.</p>
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 1 · CALCULATE</div>
+    <h3>3D distance, midpoint, volume / surface area</h3>
+    <ol class="steps">
+      <li>Distance: d = √((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²) — three differences.</li>
+      <li>Midpoint = average of each coordinate.</li>
+      <li>Volume/SA: match the solid (pyramid/cone ⅓Ah, sphere 4/3πr³, hemisphere …).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — distance (1,2,3) to (4,6,15); volume of a radius-6 sphere</b>
+      <p>d = √(3²+4²+12²) = 13; V = 4/3 π(6³) = 288π.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> three differences, not two; radius is cubed for volume, squared for surface area.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 2 · CALCULATE</div>
+    <h3>Right triangle — find a side or an angle</h3>
+    <ol class="steps">
+      <li>Label the triangle: opposite, adjacent, hypotenuse (relative to the angle).</li>
+      <li>Pick SOH/CAH/TOA from what you know and want.</li>
+      <li>For an angle, use the inverse: θ = sin⁻¹(O/H), etc. — <kbd>SHIFT</kbd> + the trig key.</li>
+      <li>Draw the diagram from the written statement first (elevation = up, depression = down).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — a 5 m ladder, foot 3 m from the wall</b>
+      <p>cos θ = 3/5 → θ = cos⁻¹(0.6) = 53.1°.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> angles of elevation/depression are measured from the horizontal; always recall SOH CAH TOA.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 3 · CALCULATE</div>
+    <h3>Sine rule — find a side or an angle</h3>
+    <ol class="steps">
+      <li>Use when you have a side and its opposite angle (plus another side or angle).</li>
+      <li>a/sin A = b/sin B = c/sin C — solve the proportion.</li>
+      <li>If finding an angle, sin A = a·sin B / b. Watch for the AMBIGUOUS case (SSA): two possible angles.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — A = 30°, a = 10, B = 45°; find b</b>
+      <p>b = 10·sin45°/sin30° = 14.14.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> SSA can give TWO angles: θ and 180° − θ (both fit — check if the question wants both).</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 4 · CALCULATE</div>
+    <h3>Cosine rule — side or angle</h3>
+    <ol class="steps">
+      <li>Use with two sides + the included angle, or all three sides.</li>
+      <li>Side: a² = b² + c² − 2bc cos A.</li>
+      <li>Angle: cos A = (b² + c² − a²)/(2bc).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — two sides 5 and 7, included angle 60°, find the third side</b>
+      <p>a² = 25 + 49 − 70 cos 60° = 39 → a = 6.24.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> cosine rule needs the angle BETWEEN the two known sides; area of a triangle = ½ab sin C.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 5 · CALCULATE</div>
+    <h3>Area of a triangle</h3>
+    <ol class="steps">
+      <li>Area = ½·a·b·sin C — two sides and the included angle, or ½ × base × height.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — sides 6 and 8 with included angle 30°</b>
+      <p>Area = ½(6)(8) sin 30° = 12.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> use ½ab sin C when you don't have the height; sin 30° = ½, sin 90° = 1.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 6 · CALCULATE</div>
+    <h3>Arc length & sector area</h3>
+    <ol class="steps">
+      <li>Convert the angle to radians (× π/180).</li>
+      <li>Arc: l = rθ. Sector: A = ½r²θ.</li>
+      <li>Set the GDC to RADIANS first (<kbd>SHIFT</kbd> → SET UP → Angle → Rad).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — radius 8 cm, 45° sector: arc length and area</b>
+      <p>θ = π/4. l = 8(π/4) = 2π ≈ 6.28 cm; A = ½(64)(π/4) = 8π ≈ 25.1 cm².</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> θ must be in radians; sector area is ½r²θ, NOT r²θ (the ½ is the most common slip).</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 7 · PROBLEM-SOLVE</div>
+    <h3>Voronoi — nearest site & the dump problem</h3>
+    <ol class="steps">
+      <li>Mark the sites; each cell = the region closer to that site than any other.</li>
+      <li>Edges are perpendicular bisectors between neighbouring sites; vertices where three edges meet.</li>
+      <li>Nearest-neighbour: the point belongs to the site whose cell it's in.</li>
+      <li>Toxic-waste dump: find the point furthest from every site (a vertex) — maximise the minimum distance.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — where to place a dump so it's as far from all 3 sites as possible</b>
+      <p>Place it at a Voronoi vertex (equidistant from 3 sites) — the point with the largest 'distance to nearest site'.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> an edge = the perpendicular bisector of two sites; adding a site only redraws its immediate neighbours' cells.</div>
+  </div>
+</section>
+
+
 <section class="act" id="map">
   <div class="acttag">One picture</div>
   <h2>MIND MAP 🗺</h2>

@@ -154,6 +154,7 @@
   <a href="#act5">Discrete RVs &amp; binomial</a>
   <a href="#act6">Normal distribution</a>
   <a href="#act7">Hypothesis testing</a>
+  <a href="#method">🎯 METHOD</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -417,6 +418,135 @@
 </section>
 
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="method">
+  <div class="acttag">Question-type guide</div>
+  <h2>HOW TO SOLVE THE COMMON QUESTIONS 🎯</h2>
+  <p class="aim">The method for each question type, the concept to remember, and a worked answer.</p>
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 1 · CALCULATE & COMPARE</div>
+    <h3>Describe a dataset — centre & spread</h3>
+    <ol class="steps">
+      <li>Enter data in List 1 → <kbd>F2</kbd> CALC → <kbd>F1</kbd> 1-VAR.</li>
+      <li>Read x̄ (mean), Min, Q1, Med, Q3, Max, σx (population sd).</li>
+      <li>To compare two groups: state which mean is higher AND which σ is smaller (='more consistent').</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — two groups, which is more consistent?</b>
+      <p>GDC: group A σ = 2.1, group B σ = 3.5 → A is more consistent (smaller standard deviation).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> smaller σ = more consistent; mean is outlier-sensitive, median is robust; σ is in the data's units, variance isn't.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 2 · CALCULATE</div>
+    <h3>Box plot & outliers</h3>
+    <ol class="steps">
+      <li>Five-number summary: min, Q1, median, Q3, max from 1-VAR.</li>
+      <li>IQR = Q3 − Q1. Outlier if below Q1 − 1.5×IQR or above Q3 + 1.5×IQR.</li>
+      <li>Draw the box from Q1 to Q3, the median line, the whiskers to the last in-bounds point, outliers as dots.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — is 90 an outlier in the data 40, 45, 50, 55, 60, 65, 90?</b>
+      <p>Q1 = 45, Q3 = 65, IQR = 20; upper fence 65 + 30 = 95; 90 &lt; 95, so NOT an outlier.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> outlier fences are Q1/−/+1.5×IQR; the median is Q2; whiskers reach the last in-bounds value.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 3 · CALCULATE (GDC)</div>
+    <h3>Regression line & prediction</h3>
+    <ol class="steps">
+      <li>x in List 1, y in List 2 → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F1</kbd> (X, linear).</li>
+      <li>Read a and b (Casio: y = a + bx — a = intercept, b = gradient; mind the swap vs IB's y = ax + b).</li>
+      <li>Check r for strength/direction.</li>
+      <li>Predict only INSIDE the data range — extrapolation is unreliable (say so).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — use the regression line to predict y when x = 8 (data spans x = 2 to 6)</b>
+      <p>This is extrapolation, so the estimate is unreliable — state that, then give the number.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> correlation ≠ causation (confounding variable); r only measures LINEAR association.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 4 · CALCULATE</div>
+    <h3>Probability — tree & Venn diagrams</h3>
+    <ol class="steps">
+      <li>Tree: multiply along branches (sequence), add across branches (alternative paths).</li>
+      <li>Venn: P(A∪B) = P(A) + P(B) − P(A∩B).</li>
+      <li>Mutually exclusive: P(A∩B) = 0. Independent: P(A∩B) = P(A)P(B).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — P(A) = 0.4, P(B) = 0.3, P(A∩B) = 0.1; find P(A∪B)</b>
+      <p>P(A∪B) = 0.4 + 0.3 − 0.1 = 0.6.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> 'and' → multiply (if independent); 'or' → add minus overlap; 'given that' → conditional.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 5 · CALCULATE</div>
+    <h3>Conditional probability & expected value</h3>
+    <ol class="steps">
+      <li>Conditional: P(A|B) = P(A∩B)/P(B) — read as 'of the B's, what fraction are also A'.</li>
+      <li>E(X) = Σ x·P(X = x) — the long-run average. On the GDC: x in List 1, P in List 2 → 1-VAR with Freq = List 2.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — P(A∩B) = 0.2, P(B) = 0.5 → P(A|B); X = 1/2/3 with prob 0.3/0.5/0.2 → E(X)</b>
+      <p>P(A|B) = 0.2/0.5 = 0.4; E(X) = 1(0.3) + 2(0.5) + 3(0.2) = 1.9.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> P(A|B) ≠ P(B|A) — don't swap them; E(X) is a weighted average.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 6 · CALCULATE (GDC)</div>
+    <h3>Binomial distribution</h3>
+    <ol class="steps">
+      <li>Check the conditions: fixed n, independent, two outcomes, same p (this is the marks).</li>
+      <li>P(X = x): GDC <kbd>F5</kbd> DIST → <kbd>F5</kbd> BINM → <kbd>F1</kbd> Bpd.</li>
+      <li>P(X ≤ x): <kbd>F2</kbd> Bcd. Then P(X &gt; x) = 1 − P(X ≤ x); P(X ≥ x) = 1 − P(X ≤ x − 1).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — X ~ B(10, 0.3), find P(X = 3) and P(X ≤ 2)</b>
+      <p>Bpd: P(X = 3) = 0.267; Bcd: P(X ≤ 2) = 0.383.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> mean = np, variance = np(1 − p); check the conditions before calling it binomial.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 7 · CALCULATE (GDC)</div>
+    <h3>Normal distribution & inverse normal</h3>
+    <ol class="steps">
+      <li>P(a &lt; X &lt; b): <kbd>F5</kbd> DIST → <kbd>F1</kbd> NORM → <kbd>F2</kbd> Ncd → enter lower, upper, σ, μ.</li>
+      <li>One tail: use a huge negative lower bound (e.g. −1×10⁹⁹) for X &lt; x, or 1 − P(X &lt; x) for X &gt; x.</li>
+      <li>Inverse normal: <kbd>F3</kbd> InvN → tail, area, σ, μ → gives x (probability → value).</li>
+      <li>z = (x − μ)/σ; remember 68-95-99.7.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — X ~ N(100, 15²), find P(X &lt; 85)</b>
+      <p>Ncd with Lower = −1×10⁹⁹, Upper = 85, σ = 15, μ = 100 → 0.1587.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> standardise with z = (x − μ)/σ; InvN 'undoes' the area; use the 68-95-99.7 rule to sanity-check.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 8 · TEST (GDC)</div>
+    <h3>Hypothesis test — chi-squared & t-test</h3>
+    <ol class="steps">
+      <li>State H₀ (no association/difference) and H₁ (there is).</li>
+      <li>Pick the test: χ² independence (contingency table) or t-test (two means).</li>
+      <li>GDC: <kbd>F3</kbd> TEST → <kbd>F3</kbd> CHI (2-WAY) or <kbd>F2</kbd> t (2-Sample).</li>
+      <li>Compare p-value to α (usually 0.05): p &lt; α → reject H₀ ('significant evidence'); p &gt; α → do not reject.</li>
+      <li>NEVER say 'proved' — say 'significant evidence of …'.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — χ² test gives p = 0.02 at α = 0.05</b>
+      <p>0.02 &lt; 0.05 → reject H₀: significant evidence of an association at the 5% level.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> df for independence = (rows − 1)(columns − 1); the conclusion line is worth 1–2 marks — write it word-perfect.</div>
+  </div>
+</section>
+
+
 <section class="act" id="map">
   <div class="acttag">One picture</div>
   <h2>MIND MAP 🗺</h2>

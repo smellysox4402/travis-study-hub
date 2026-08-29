@@ -151,6 +151,7 @@
   <a href="#act2">Tangents &amp; normals</a>
   <a href="#act3">Integration &amp; area</a>
   <a href="#act4">Max, min &amp; optimisation</a>
+  <a href="#method">🎯 METHOD</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -310,6 +311,118 @@
 </section>
 
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="method">
+  <div class="acttag">Question-type guide</div>
+  <h2>HOW TO SOLVE THE COMMON QUESTIONS 🎯</h2>
+  <p class="aim">The method for each question type, the concept to remember, and a worked answer.</p>
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 1 · DIFFERENTIATE</div>
+    <h3>Differentiate a polynomial</h3>
+    <ol class="steps">
+      <li>Apply the power rule term by term: d/dx(axⁿ) = an xⁿ⁻¹.</li>
+      <li>Constants differentiate to 0.</li>
+      <li>Simplify; keep integer powers (SL).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — differentiate 2x³ − 5x² + x − 7</b>
+      <p>f′(x) = 6x² − 10x + 1 (the −7 becomes 0).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> multiply by the power AND drop it by one; constants vanish.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 2 · CALCULATE</div>
+    <h3>Tangent & normal equation</h3>
+    <ol class="steps">
+      <li>Find the gradient m = f′(x₁) at the point.</li>
+      <li>Find the point's y: y₁ = f(x₁).</li>
+      <li>Tangent: y − y₁ = m(x − x₁). Normal: m = −1/m.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — tangent to f(x) = x² at x = 1</b>
+      <p>f′(x) = 2x → m = 2; point (1, 1); y − 1 = 2(x − 1) → y = 2x − 1.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> you need BOTH the gradient (from f′) and the point (from f) — missing the point loses the intercept.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 3 · CALCULATE</div>
+    <h3>Find & classify stationary points</h3>
+    <ol class="steps">
+      <li>Set f′(x) = 0 and solve for x.</li>
+      <li>Plug x back into f to get the y-coordinate.</li>
+      <li>Classify: sign of f′ (or f″) — + → − max, − → + min.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — f(x) = x² − 4x + 3</b>
+      <p>f′ = 2x − 4 = 0 → x = 2, f(2) = −1; f″ = 2 &gt; 0 → minimum at (2, −1).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> 'stationary point' needs the coordinates AND max/min; use GDC G-SOLVE (F2 MAX / F3 MIN) to check.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 4 · PROBLEM-SOLVE</div>
+    <h3>Optimisation</h3>
+    <ol class="steps">
+      <li>Write the quantity to maximise/minimise as a function of ONE variable.</li>
+      <li>Differentiate, set f′(x) = 0, solve.</li>
+      <li>Confirm max or min.</li>
+      <li>Answer with units.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — find the maximum area of a rectangle with perimeter 40</b>
+      <p>A = x(20 − x) = 20x − x²; A′ = 20 − 2x = 0 → x = 10, A = 100 (a square maximises area).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> set a variable, build the formula, differentiate, set to zero — the recipe never changes.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 5 · CALCULATE</div>
+    <h3>Area under a curve (definite integral)</h3>
+    <ol class="steps">
+      <li>Find the limits (where the region starts/ends — often where the curve meets the x-axis or the given x-values).</li>
+      <li>Evaluate ∫ₐᵇ f(x) dx (GDC: <kbd>OPTN</kbd> <kbd>F4</kbd> CALC → <kbd>F1</kbd> ∫dx).</li>
+      <li>SL keeps f(x) &gt; 0, so the integral is the area directly.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — area under y = x² + 1 between x = 0 and 2</b>
+      <p>∫₀²(x² + 1) dx = [x³/3 + x]₀² = 8/3 + 2 = 4.67.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> definite integral = signed area; the GDC gives it straight away but write the integral for the method mark.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 6 · CALCULATE</div>
+    <h3>Anti-differentiate with a boundary condition</h3>
+    <ol class="steps">
+      <li>Integrate term by term: ∫axⁿ dx = a xⁿ⁺¹/(n+1) + c.</li>
+      <li>Substitute the given point to solve for c.</li>
+      <li>State f(x) fully.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — f′(x) = 4x³ and f(1) = 3</b>
+      <p>f(x) = x⁴ + c; 3 = 1 + c → c = 2; f(x) = x⁴ + 2.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> the + c is mandatory; you only find it from a boundary condition.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 7 · CALCULATE</div>
+    <h3>Trapezoidal rule (estimate an area)</h3>
+    <ol class="steps">
+      <li>Find the strip width h = (b − a)/n.</li>
+      <li>Compute y = f(x) at x₀, x₁, …, xₙ.</li>
+      <li>A ≈ (h/2)[y₀ + 2(y₁ + … + yₙ₋₁) + yₙ] — first and last once, the middle TWICE.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — estimate ∫₀² (x² + 1) dx with 4 strips</b>
+      <p>h = 0.5; y = 1, 1.25, 2, 3.25, 5; A ≈ 0.25[1 + 2(6.5) + 5] = 4.75 (exact 4.67).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> the middle y-values each get a ×2; more strips = a better estimate.</div>
+  </div>
+</section>
+
+
 <section class="act" id="map">
   <div class="acttag">One picture</div>
   <h2>MIND MAP 🗺</h2>

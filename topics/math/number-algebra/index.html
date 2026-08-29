@@ -179,6 +179,7 @@
   <a href="#act2">Sequences &amp; series</a>
   <a href="#act3">Financial maths</a>
   <a href="#act4">Exponents, logs &amp; GDC solving</a>
+  <a href="#method">🎯 METHOD</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -406,6 +407,120 @@
 </section>
 
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="method">
+  <div class="acttag">Question-type guide</div>
+  <h2>HOW TO SOLVE THE COMMON QUESTIONS 🎯</h2>
+  <p class="aim">The method for each question type the examiner actually asks — step by step, with the concept to remember and a worked answer.</p>
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 1 · CALCULATE</div>
+    <h3>Arithmetic sequence — find the n-th term or the sum</h3>
+    <ol class="steps">
+      <li>Confirm it's arithmetic: the terms change by a constant <b>d</b> (add/subtract).</li>
+      <li>Extract u₁ (first term) and d (the common difference).</li>
+      <li>n-th term: uₙ = u₁ + (n − 1)d — use <b>(n − 1)</b>, not n.</li>
+      <li>Sum: Sₙ = n/2 (u₁ + uₙ) — you need uₙ first; or Sₙ = n/2 [2u₁ + (n − 1)d].</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — Find u₁₀ and S₁₀ for 5, 8, 11, …</b>
+      <p>d = 3, u₁ = 5. u₁₀ = 5 + 9(3) = 32. S₁₀ = 10/2(5 + 32) = 185.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> the n-th term uses <b>(n − 1)</b>, not n; "common difference" = d; "common ratio" = r.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 2 · CALCULATE</div>
+    <h3>Geometric sequence — n-th term, sum, sum to infinity</h3>
+    <ol class="steps">
+      <li>Confirm it's geometric: each term multiplied by a constant <b>r</b>.</li>
+      <li>Extract u₁ and r = u₂ ÷ u₁.</li>
+      <li>n-th term: uₙ = u₁ r<sup>n−1</sup>.</li>
+      <li>Sum: Sₙ = u₁(1 − r<sup>n</sup>)/(1 − r). Sum to infinity S∞ = u₁/(1 − r) <b>only if |r| &lt; 1</b>.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — Evaluate 8 + 4 + 2 + 1 + …</b>
+      <p>r = 4/8 = ½, |r| &lt; 1, so S∞ = 8/(1 − ½) = 16.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> S∞ exists only when |r| &lt; 1; find r by u₂/u₁; "doubles" / "halves" / "5% each year" signal geometric.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 3 · CALCULATE (GDC)</div>
+    <h3>Compound interest — find the value</h3>
+    <ol class="steps">
+      <li>Note the present value (PV), annual rate, and number of periods.</li>
+      <li>By formula: FV = PV(1 + i)<sup>n</sup>, with i = rate per period.</li>
+      <li>Or GDC: <kbd>MENU</kbd> → Financial → <kbd>F2</kbd> (CMPD) → set n, I%, PV, PMT, P/Y, C/Y → cursor on FV → <kbd>SOLVE</kbd>.</li>
+      <li><b>Sign rule:</b> money you put IN (PV) is entered negative.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — $2500 at 3.5% p.a. for 6 years</b>
+      <p>FV = 2500(1.035)⁶ = $3073.14 (GDC: PV = −2500, solve FV).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> i = rate per period (divide by 12 if monthly); n = number of periods; PV/PMT signs encode direction.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 4 · CALCULATE (GDC)</div>
+    <h3>Depreciation, annuity or loan</h3>
+    <ol class="steps">
+      <li>Depreciation (value falls): FV = PV(1 − r)<sup>n</sup>.</li>
+      <li>Annuity (saving up, equal payments): GDC TVM → PV = 0, PMT = −payment → solve <b>FV</b>.</li>
+      <li>Loan / amortization (borrowing): GDC TVM → PV = loan, FV = 0 → solve <b>PMT</b>.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — A $1200 laptop depreciates 15% a year; value after 4 years</b>
+      <p>FV = 1200(1 − 0.15)⁴ = 1200(0.85)⁴ = $626.41.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> depreciation multiplies by (1 − r), never (1 + r).</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 5 · CALCULATE</div>
+    <h3>Solve an equation using exponents & logs</h3>
+    <ol class="steps">
+      <li>Isolate the power (get aˣ on its own).</li>
+      <li>Take logs of both sides to bring the exponent down (log aˣ = x log a).</li>
+      <li>Or read it off: aˣ = b → x = log_a b. Evaluate with the GDC <kbd>log</kbd> / <kbd>ln</kbd> key.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — Solve 10ˣ = 500</b>
+      <p>x = log₁₀ 500 ≈ 2.699 (log brings the exponent down; check: 2 = log 100, 3 = log 1000).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> log is the inverse of a power; ln = log to base e; the exponent drops to the front using log aˣ = x log a.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 6 · CALCULATE</div>
+    <h3>Bounds & percentage error</h3>
+    <ol class="steps">
+      <li>Find the rounding place (decimal places or significant figures).</li>
+      <li>Bounds = value ± half a unit in that place. Lower bound inclusive (≥), upper exclusive (&lt;).</li>
+      <li>Max % error = (half a unit) ÷ exact × 100%.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — 6.7 m correct to 1 dp: bounds and max % error</b>
+      <p>6.65 m ≤ L &lt; 6.75 m; % error = 0.05/6.7 × 100 ≈ 0.75%.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> upper bound is exclusive (a value of exactly 6.75 rounds up to 6.8).</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 7 · CALCULATE (GDC)</div>
+    <h3>Systems of equations & polynomials</h3>
+    <ol class="steps">
+      <li>Polynomial: <kbd>MENU</kbd> <kbd>A</kbd> (EQUA) → <kbd>F2</kbd> POLY → degree → type coefficients → <kbd>F1</kbd> SOLVE.</li>
+      <li>Simultaneous: <kbd>MENU</kbd> <kbd>A</kbd> (EQUA) → <kbd>F1</kbd> SIMUL → 2 or 3 unknowns → coefficients → <kbd>F1</kbd> SOLVE.</li>
+      <li>Anything else: <kbd>MENU</kbd> <kbd>1</kbd> → <kbd>OPTN</kbd> <kbd>F4</kbd> → <kbd>F1</kbd> SolveN.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — Solve x² − 5x + 6 = 0</b>
+      <p>EQUA → F2 POLY → degree 2 → a = 1, b = −5, c = 6 → SOLVE → x = 2, 3.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> never solve these by hand — the question is testing your GDC.</div>
+  </div>
+</section>
+
+
 <section class="act" id="map">
   <div class="acttag">One picture</div>
   <h2>MIND MAP 🗺</h2>

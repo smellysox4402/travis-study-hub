@@ -151,6 +151,7 @@
   <a href="#act2">Functions &amp; inverses</a>
   <a href="#act3">Graphs &amp; key features</a>
   <a href="#act4">Models &amp; modelling</a>
+  <a href="#method">🎯 METHOD</a>
   <a href="#map">🗺 MIND MAP</a>
   <a href="#cheat">⚡ CHEAT</a>
   <a href="#test">✍ TEST</a>
@@ -312,6 +313,104 @@
 </section>
 
 <!-- ══════════════════════ MIND MAP ══════════════════════ -->
+<section class="act" id="method">
+  <div class="acttag">Question-type guide</div>
+  <h2>HOW TO SOLVE THE COMMON QUESTIONS 🎯</h2>
+  <p class="aim">The method for each question type, the concept to remember, and a worked answer.</p>
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 1 · CALCULATE</div>
+    <h3>Equation of a line, parallel & perpendicular</h3>
+    <ol class="steps">
+      <li>Find the gradient m = (y₂ − y₁)/(x₂ − x₁) from two points.</li>
+      <li>Use the point-slope form y − y₁ = m(x − x₁).</li>
+      <li>Parallel → same m. Perpendicular → m = −1/m (negative reciprocal).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — line through (1, 2) and (3, 8); perpendicular gradient</b>
+      <p>m = (8 − 2)/(3 − 1) = 3 → y = 3x − 1; a perpendicular line has gradient −1/3.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> perpendicular gradient = −1/m (flip the fraction AND the sign); consistent point ordering (second minus first).</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 2 · CALCULATE</div>
+    <h3>Find the inverse function</h3>
+    <ol class="steps">
+      <li>Write the function as y = ….</li>
+      <li>Swap x and y.</li>
+      <li>Solve for y — that's f⁻¹(x).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — f(x) = 2x + 3 → f⁻¹(x)</b>
+      <p>x = 2y + 3 → 2y = x − 3 → f⁻¹(x) = (x − 3)/2. Check: f(2) = 7, f⁻¹(7) = 2.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> the inverse graph is a reflection in y = x; check it undoes the original.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 3 · STATE</div>
+    <h3>Domain and range</h3>
+    <ol class="steps">
+      <li>Domain = all allowed x (inputs) — look for restrictions (can't divide by 0, can't take a root of a negative, the context may limit it).</li>
+      <li>Range = all possible y (outputs) — for a quadratic, find the vertex and which way it opens.</li>
+      <li>For a model, the domain is usually the sensible physical range.</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — f(x) = x² − 4x + 5</b>
+      <p>It's a parabola opening up with vertex (2, 1), so range is y ≥ 1.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> domain = x-values, range = y-values; 'domain' in a context = what makes sense in the real problem.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 4 · CALCULATE</div>
+    <h3>Parabola features — vertex, axis, roots</h3>
+    <ol class="steps">
+      <li>Axis of symmetry: x = −b/(2a).</li>
+      <li>Vertex: plug that x back in to get y → (−b/2a, f(−b/2a)).</li>
+      <li>Roots (x-intercepts): solve f(x) = 0 (factorise, quadratic formula, or GDC).</li>
+      <li>Opens up (a &gt; 0 → min) or down (a &lt; 0 → max).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — f(x) = x² − 4x + 5</b>
+      <p>axis x = 2; vertex (2, 1) minimum; discriminant b²−4ac = 16−20 = −4 &lt; 0, so no real roots (never crosses the x-axis).</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> axis is a line (x = 2); vertex is a point (2, 1); discriminant tells you how many roots.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 5 · CALCULATE (GDC)</div>
+    <h3>Point of intersection of two curves</h3>
+    <ol class="steps">
+      <li>Graph both functions: <kbd>MENU</kbd> <kbd>5</kbd> (GRAPH) → type Y1, Y2 → <kbd>F6</kbd> DRAW.</li>
+      <li><kbd>F5</kbd> (G-SOLVE) → <kbd>F5</kbd> (ISCT) → reads the intersection (x, y).</li>
+      <li>Checking: the x-value satisfies both equations (where f(x) = g(x)).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — where y = x² − 4x + 5 meets y = 2x − 3</b>
+      <p>G-Solve ISCT gives the intersection point(s); equate x²−4x+5 = 2x−3 and solve for x to check.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> intersection = solving f(x) = g(x); the GDC does this instantly, but write the equation for the method marks.</div>
+  </div>
+
+  <div class="panel">
+    <div class="acttag" style="margin-bottom:6px">TYPE 6 · MODEL & USE</div>
+    <h3>Fit a model and use it to predict</h3>
+    <ol class="steps">
+      <li>Look at the shape of the data → choose linear, quadratic, exponential, cubic or sinusoidal.</li>
+      <li>Enter x in List 1, y in List 2 → <kbd>F2</kbd> CALC → <kbd>F3</kbd> REG → <kbd>F6</kbd> (▸) → choose the model type.</li>
+      <li>Read the parameters (Casio: y = a + bx — a = intercept, b = gradient — mind the letter swap).</li>
+      <li>Use the model only INSIDE the data range (no extrapolation).</li>
+    </ol>
+    <div class="exam">
+      <b>WORKED — fit a line and predict y when x = 8 (data spans x = 2 to 6)</b>
+      <p>You get y = a + bx; predicting at x = 8 is extrapolation — say it's unreliable, then give the number.</p>
+    </div>
+    <div class="tip"><b>🧠 CONCEPTS TO REMEMBER:</b> this is 2.6 — every mark is in 'choose the right model' + 'justify' + 'don't extrapolate'.</div>
+  </div>
+</section>
+
+
 <section class="act" id="map">
   <div class="acttag">One picture</div>
   <h2>MIND MAP 🗺</h2>
