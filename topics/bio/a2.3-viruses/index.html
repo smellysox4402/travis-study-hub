@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>A2.3 Viruses</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.nos{border-left:4px solid var(--cyan);background:rgba(34,211,238,.07);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.nos b{color:var(--cyan);}
+.exam{border-left:4px solid var(--green);background:rgba(74,222,128,.07);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.exam b{color:var(--green);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Unity &amp; diversity · A2 (Cells)</div>
+  <h1>A2.3 VIRUSES</h1>
+  <div class="sub">Viruses: their structure, the lytic and lysogenic cycles, their diverse origins, and why they evolve so rapidly.</div>
+  <div class="badges"><span class="badge ahl">AHL ONLY</span><span class="badge">6 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · STRUCTURE</a><a href="#act2">2 · DIVERSITY</a><a href="#act3">3 · LYTIC CYCLE</a><a href="#act4">4 · LYSOGENIC CYCLE</a><a href="#act5">5 · ORIGINS</a><a href="#act6">6 · RAPID EVOLUTION</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/8</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">A2.3.1</div><h2>STRUCTURAL FEATURES COMMON TO VIRUSES</h2>
+  <p class="aim">All viruses share a few features: small fixed size, nucleic acid as genetic material, a protein capsid, no cytoplasm, and few or no enzymes.</p>
+  <div class="panel"><ul class="clean"><li><b>Small, fixed size</b> (measured in nanometres).</li><li><b>Nucleic acid</b> (DNA or RNA) as the genetic material.</li><li>A <b>capsid</b> made of <b>protein</b> (the outer shell).</li><li><b>No cytoplasm</b>.</li><li><b>Few or no enzymes</b>.</li></ul></div>
+  <div class="fig"><svg viewBox="0 0 640 220" role="img" aria-label="a virus: capsid protein shell enclosing a nucleic acid core, no cytoplasm">
+    <rect width="640" height="220" rx="14" fill="#150a26"/><text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">A VIRUS</text>
+    <circle cx="320" cy="120" r="66" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="2.5"/>
+    <text x="320" y="74" fill="#fbbf24" font-size="10" text-anchor="middle">capsid (protein)</text>
+    <circle cx="320" cy="120" r="28" fill="rgba(255,46,196,.18)" stroke="#ff2ec4" stroke-width="2"/>
+    <text x="320" y="118" fill="#ff2ec4" font-size="9" text-anchor="middle">nucleic acid</text>
+    <text x="320" y="130" fill="#b9a3d6" font-size="8" text-anchor="middle">(DNA or RNA)</text>
+    <text x="320" y="200" fill="#b9a3d6" font-size="11" text-anchor="middle">no cytoplasm · few/no enzymes · very small</text>
+  </svg><div class="cap"><b>FIG 1</b> — A virus: a protein capsid enclosing a nucleic acid core, with no cytoplasm and practically no enzymes.</div></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">A2.3.2</div><h2>DIVERSITY OF STRUCTURE IN VIRUSES</h2>
+  <p class="aim">Viruses are highly diverse in shape and structure. Their genetic material can be RNA or DNA, single- or double-stranded; some also have an envelope.</p>
+  <div class="panel"><ul class="clean"><li><b>Genetic material:</b> DNA or RNA, and each can be <b>single- or double-stranded</b>.</li><li><b>Shape:</b> varies widely (icosahedral, helical, complex).</li><li>Many viruses have an extra outer <b>envelope</b> (a lipid membrane with proteins) around the capsid.</li></ul></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">A2.3.3</div><h2>THE LYTIC CYCLE</h2>
+  <p class="aim">Viruses rely on a host cell for energy, nutrition, protein synthesis and other life functions. In the lytic cycle the virus replicates and destroys the host.</p>
+  <div class="panel"><p>Using <span class="cyan">bacteriophage lambda</span> as an example, the <span class="accent">lytic cycle</span> has these phases: <span class="gold">attachment</span> → <span class="gold">injection</span> of the viral nucleic acid → <span class="gold">replication</span> and <span class="gold">protein synthesis</span> using host machinery → <span class="gold">assembly</span> of new phages → <span class="gold">lysis</span> (the host cell bursts), releasing new viruses.</p></div>
+  <div class="fig"><svg viewBox="0 0 640 210" role="img" aria-label="the lytic cycle of a bacteriophage: attachment, injection, replication, assembly, lysis, releasing new phages">
+    <rect width="640" height="210" rx="14" fill="#150a26"/><text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">LYTIC CYCLE</text>
+    <ellipse cx="120" cy="130" rx="46" ry="20" fill="rgba(34,211,238,.10)" stroke="#22d3ee" stroke-width="2"/><text x="120" y="128" fill="#22d3ee" font-size="9" text-anchor="middle">host cell</text>
+    <g stroke="#f3e8ff" stroke-width="1.6"><line x1="150" y1="120" x2="185" y2="112"/></g>
+    <text x="180" y="80" fill="#fbbf24" font-size="10" text-anchor="middle">attach + inject</text>
+    <line x1="200" y1="130" x2="300" y2="130" stroke="#4ade80" stroke-width="2" marker-end="url(#a2)"/>
+    <text x="250" y="112" fill="#4ade80" font-size="10" text-anchor="middle">replicate + assemble</text>
+    <ellipse cx="340" cy="130" rx="46" ry="20" fill="rgba(168,85,247,.10)" stroke="#a855f7" stroke-width="2"/>
+    <line x1="390" y1="130" x2="470" y2="130" stroke="#ff2ec4" stroke-width="2" marker-end="url(#a3)"/>
+    <text x="430" y="108" fill="#ff2ec4" font-size="10" text-anchor="middle">lysis → release</text>
+    <circle cx="520" cy="110" r="7" fill="#fbbf24"/><circle cx="550" cy="140" r="7" fill="#fbbf24"/><circle cx="505" cy="150" r="7" fill="#fbbf24"/><text x="540" y="90" fill="#fbbf24" font-size="9" text-anchor="middle">new phages</text>
+    <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#4ade80"/></marker><marker id="a3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#ff2ec4"/></marker></defs>
+  </svg><div class="cap"><b>FIG 2</b> — The lytic cycle: the phage attaches, injects its nucleic acid, hijacks the host to make new phages, then lyses the cell to release them.</div></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">A2.3.4</div><h2>THE LYSOGENIC CYCLE</h2>
+  <p class="aim">In the lysogenic cycle the viral genome integrates into the host DNA and is copied with it, without immediately destroying the host.</p>
+  <div class="panel"><p>Again using <span class="cyan">bacteriophage lambda</span>: after injection the viral DNA can instead <span class="accent">integrate</span> into the host chromosome (becoming a <b>prophage</b>). It is then <b>replicated</b> and passed on every time the host divides — no lysis occurs. Later it may switch to the lytic cycle and destroy the host.</p></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">A2.3.5</div><h2>EVIDENCE FOR SEVERAL ORIGINS OF VIRUSES</h2>
+  <p class="aim">The diversity of viruses suggests several possible origins from other organisms.</p>
+  <div class="panel"><p>Viruses share an extreme form of <span class="cyan">obligate parasitism</span> — they can only survive inside a host. Their great diversity (different genetic material, shapes, hosts) suggests that viruses have arisen <b>several times</b>, from <b>genetic material of other organisms</b> that became able to replicate independently and be transmitted.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">A2.3.6</div><h2>RAPID EVOLUTION IN VIRUSES</h2>
+  <p class="aim">Some viruses evolve very rapidly, with important consequences for treatment.</p>
+  <div class="panel"><ul class="clean"><li><b>Why so fast:</b> very short generation times, huge numbers, high mutation rates (especially RNA viruses), and strong selection (from immune systems, drugs, vaccines).</li></ul></div>
+  <div class="grid2">
+    <div class="card"><div class="tag p">INFLUENZA</div><h4>Antigenic drift &amp; shift</h4><p>Rapid mutation changes surface proteins (haemagglutinin/neuraminidase), so the immune system no longer recognises it → new strains each season, needing new vaccines.</p></div>
+    <div class="card"><div class="tag v">HIV</div><h4>High mutation + resistance</h4><p>Reverse transcriptase makes copying errors frequently → rapid mutation → resistance to drugs and immune evasion, so treatment must use combinations.</p></div>
+  </div>
+  <div class="tip"><b>Consequence for treatment:</b> because viruses mutate fast, a single drug or vaccine can quickly stop working — that is why we need combination therapy and updated vaccines.</div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">VIRUSES<small>A2.3 · AHL</small></div>
+    <div class="arrow">→</div><div class="node">STRUCTURE<small>capsid + nucleic acid · no cytoplasm</small></div>
+    <div class="node">DIVERSITY<small>DNA/RNA · single/double · some enveloped</small></div>
+    <div class="node">LYTIC<small>replicate + lyse host</small></div><div class="node">LYSOGENIC<small>integrate into host DNA</small></div>
+    <div class="node">ORIGINS<small>several, from other organisms</small></div><div class="node">FAST EVOLUTION<small>influenza · HIV → treatment</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Virus: <span>capsid (protein) + nucleic acid (DNA/RNA) · no cytoplasm · few enzymes</span>.</div>
+    <div class="line"><span>Lytic</span>: attach → inject → replicate → assemble → <span>lyse</span> host.</div>
+    <div class="line"><span>Lysogenic</span>: viral DNA integrates into host DNA (prophage), copied with the host.</div>
+    <div class="line">Viruses are <span>obligate parasites</span>; origins <span>several</span> from other organisms' genes.</div>
+    <div class="line">Rapid evolution: <span>short generations + high mutation</span> → influenza + HIV; <span>combination therapy / new vaccines</span>.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">8 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="capsid protein + nucleic acid, no cytoplasm"><p>1. All viruses share…</p>
+    <label><input type="radio" name="q1" data-a="capsid protein + nucleic acid, no cytoplasm"> a protein capsid, nucleic acid, no cytoplasm</label><label><input type="radio" name="q1"> nucleus and mitochondria</label><label><input type="radio" name="q1"> 80S ribosomes</label>
+    <div class="fb correct">Correct — capsid + nucleic acid, no cytoplasm, few enzymes.</div><div class="fb wrong">Viruses have a protein capsid + nucleic acid, no cytoplasm.</div>
+  </div>
+
+  <div class="q" data-a="the host cell is destroyed"><p>2. In the lytic cycle…</p>
+    <label><input type="radio" name="q2" data-a="the host cell is destroyed"> the host cell is destroyed</label><label><input type="radio" name="q2"> viral DNA integrates into the host chromosome</label><label><input type="radio" name="q2"> the virus never replicates</label>
+    <div class="fb correct">Correct — the host is lysed (burst) to release new phages.</div><div class="fb wrong">In the lytic cycle the host cell is destroyed (lysed).</div>
+  </div>
+
+  <div class="q" data-a="prophage"><p>3. In the lysogenic cycle, the inserted viral DNA in the host chromosome is called a…</p>
+    <label><input type="radio" name="q3" data-a="prophage"> prophage</label><label><input type="radio" name="q3"> capsid</label><label><input type="radio" name="q3"> virion</label>
+    <div class="fb correct">Correct — a prophage, copied along with the host DNA.</div><div class="fb wrong">The integrated viral genome is a prophage.</div>
+  </div>
+
+  <div class="q" data-a="it has a higher mutation rate and short generation time"><p>4. The main reason some viruses evolve so fast is…</p>
+    <label><input type="radio" name="q4" data-a="it has a higher mutation rate and short generation time"> high mutation rates and very short generation times</label><label><input type="radio" name="q4"> they have large genomes</label><label><input type="radio" name="q4"> they reproduce sexually</label>
+    <div class="fb correct">Correct — fast replication + mutation → rapid evolution.</div><div class="fb wrong">Rapid evolution comes from frequent mutation and fast generation times.</div>
+  </div>
+
+  <div class="q" data-a="influenza"><p>5. An example of a rapidly evolving virus that requires updated vaccines is…</p>
+    <label><input type="radio" name="q5" data-a="influenza"> influenza</label><label><input type="radio" name="q5"> bacteriophage lambda</label><label><input type="radio" name="q5"> tobacco mosaic virus</label>
+    <div class="fb correct">Correct — influenza mutates its surface proteins (drift/shift), needing new vaccines.</div><div class="fb wrong">Influenza (and HIV) evolve rapidly.</div>
+  </div>
+
+  <div class="q" data-a="reverse transcriptase makes copying errors"><p>6. HIV evolves rapidly partly because…</p>
+    <label><input type="radio" name="q6" data-a="reverse transcriptase makes copying errors"> its reverse transcriptase makes many copying errors</label><label><input type="radio" name="q6"> it never mutates</label><label><input type="radio" name="q6"> it has many genes</label>
+    <div class="fb correct">Correct — error-prone reverse transcription → many mutations.</div><div class="fb wrong">HIV's reverse transcriptase is error-prone → high mutation.</div>
+  </div>
+
+  <div class="q" data-a="combination therapy"><p>7. Because viruses evolve fast, treatment often uses…</p>
+    <label><input type="radio" name="q7" data-a="combination therapy"> a combination of drugs</label><label><input type="radio" name="q7"> a single drug</label><label><input type="radio" name="q7"> vaccines only, never drugs</label>
+    <div class="fb correct">Correct — combination therapy reduces resistance.</div><div class="fb wrong">Combination therapy helps counter resistance from rapid mutation.</div>
+  </div>
+
+  <div class="q" data-a="obligate parasitism"><p>8. The term for viruses being unable to live outside a host cell is…</p>
+    <label><input type="radio" name="q8" data-a="obligate parasitism"> obligate parasitism</label><label><input type="radio" name="q8"> free-living</label><label><input type="radio" name="q8"> autotrophy</label>
+    <div class="fb correct">Correct — obligate parasites can only survive inside host cells.</div><div class="fb wrong">Viruses are obligate parasites (cannot live independently).</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 8</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">A2.3.1</span><span>Common features: small fixed size, nucleic acid, protein capsid, no cytoplasm, few enzymes.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">A2.3.2</span><span>Diversity: DNA/RNA, single/double-stranded, some enveloped, varied shapes.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">A2.3.3</span><span>Lytic cycle (bacteriophage lambda): attach → inject → replicate → assemble → lyse.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">A2.3.4</span><span>Lysogenic cycle: viral DNA integrates (prophage), copied with host.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">A2.3.5</span><span>Evidence for several origins of viruses from other organisms.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">A2.3.6</span><span>Why viruses evolve fast: short generations + high mutation.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">A2.3.6</span><span>Examples: influenza (drift/shift), HIV (reverse transcriptase errors).</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">A2.3.6</span><span>Consequences for treatment: combination therapy, updated vaccines.</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · A2.3 Viruses · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='a23-viruses-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
