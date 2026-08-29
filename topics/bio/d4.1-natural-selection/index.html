@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>D4.1 Natural Selection</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Continuity &amp; change · D4 (Ecosystems)</div>
+  <h1>D4.1 NATURAL SELECTION</h1>
+  <div class="sub">How natural selection drives evolutionary change, the role of variation, sexual selection, and (AHL) the gene pool, allele frequencies, selection types and the Hardy–Weinberg equation.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge ahl">AHL: D4.1.9–15</span><span class="badge">15 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · NATURAL SELECTION</a><a href="#act2">2 · VARIATION</a><a href="#act3">3 · OVERPRODUCTION</a><a href="#act4">4 · ABIOTIC PRESSURES</a><a href="#act5">5 · DIFFERENCES</a><a href="#act6">6 · HERITABILITY</a><a href="#act7">7 · SEXUAL SELECTION</a><a href="#act8">8 · MODELLING</a><a href="#act9">9 · GENE POOL (AHL)</a><a href="#act10">10 · ALLELE FREQUENCIES (AHL)</a><a href="#act11">11 · FREQUENCY CHANGE (AHL)</a><a href="#act12">12 · SELECTION TYPES (AHL)</a><a href="#act13">13 · HARDY–WEINBERG (AHL)</a><a href="#act14">14 · HW CONDITIONS (AHL)</a><a href="#act15">15 · ARTIFICIAL SELECTION (AHL)</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">D4.1.1</div><h2>NATURAL SELECTION</h2>
+  <p class="aim">Natural selection is the mechanism driving evolutionary change.</p>
+  <div class="panel"><p><span class="accent">Natural selection</span> is the mechanism of evolutionary change: individuals with <span class="cyan">advantageous heritable traits</span> survive and reproduce more, so those traits <span class="gold">increase in frequency</span> in the population over generations.</p></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">D4.1.2</div><h2>VARIATION — MUTATION &amp; SEXUAL REPRODUCTION</h2>
+  <p class="aim">Mutation and sexual reproduction generate the variation on which natural selection acts.</p>
+  <div class="panel"><p><span class="accent">Mutation</span> is the original source of variation; <span class="cyan">sexual reproduction</span> (recombination, crossing over, independent assortment) <span class="cyan">shuffles</span> it into new combinations. Together they provide the <span class="gold">differing traits</span> that selection acts on.</p></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">D4.1.3</div><h2>OVERPRODUCTION &amp; COMPETITION</h2>
+  <p class="aim">Overproduction of offspring and competition for resources promote natural selection.</p>
+  <div class="panel"><p>Organisms <span class="accent">produce more offspring</span> than can survive, so there is <span class="cyan">competition for limited resources</span>. Only some survive and reproduce — this <span class="gold">differential survival</span> drives natural selection.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">D4.1.4</div><h2>ABIOTIC SELECTION PRESSURES</h2>
+  <p class="aim">Abiotic factors (density-independent, e.g. temperature) act as selection pressures.</p>
+  <div class="panel"><p><span class="accent">Abiotic factors</span> such as <span class="cyan">temperature</span> extremes, low water or <span class="cyan">salinity</span> are selection pressures. They are often <span class="cyan">density-independent</span> — affecting a population regardless of its size.</p></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">D4.1.5</div><h2>DIFFERENCES IN ADAPTATION &amp; SURVIVAL</h2>
+  <p class="aim">Differences between individuals in adaptation, survival and reproduction are the basis of natural selection.</p>
+  <div class="panel"><p>Because individuals differ in their <span class="accent">adaptations</span>, they differ in <span class="cyan">survival and reproduction</span>. The better-adapted individuals pass on more genes — this differential is the <span class="gold">basis of natural selection</span>.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">D4.1.6</div><h2>TRAITS MUST BE HERITABLE</h2>
+  <p class="aim">Only heritable characteristics can change a population by evolution.</p>
+  <div class="panel"><p>For <span class="accent">evolutionary change</span> to occur, a trait must be <span class="cyan">heritable</span> (determined by genes). Acquired characteristics (not inherited) <span class="gold">cannot</span> drive evolutionary change.</p></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">D4.1.7</div><h2>SEXUAL SELECTION</h2>
+  <p class="aim">Sexual selection is a selection pressure in animal species, based on differences in physical/behavioural traits.</p>
+  <div class="panel"><p><span class="accent">Sexual selection</span> acts on differences in <span class="cyan">physical and behavioural traits</span> that improve <span class="cyan">mating success</span> (e.g. a peacock's tail, courtship displays). It can lead to traits that help obtain mates even if they reduce survival.</p></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">D4.1.8</div><h2>MODELLING SELECTION</h2>
+  <p class="aim">Model sexual and natural selection by experimentally controlling selection pressures.</p>
+  <div class="panel"><p>You can <span class="accent">model selection</span> by <span class="cyan">controlling a selection pressure</span> experimentally — e.g. varying a predator or mate-choice factor, and measuring how things like <span class="cyan">colour or size</span> change in the population (e.g. counting survivors of different variants).</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">AHL · D4.1.9</div><h2>THE GENE POOL</h2>
+  <p class="aim">A gene pool is all the genes and their different alleles present in a population.</p>
+  <div class="panel"><p>The <span class="accent">gene pool</span> is the <span class="cyan">sum of all genes and alleles</span> in a <span class="cyan">population</span>. Its composition is described by <span class="gold">allele frequencies</span>.</p></div>
+</section>
+
+<section class="act" id="act10"><div class="acttag">AHL · D4.1.10</div><h2>ALLELE FREQUENCIES OF ISOLATED POPULATIONS</h2>
+  <p class="aim">Use databases to compare allele frequencies of geographically isolated populations, and identify conditions that change them.</p>
+  <div class="panel"><p>Geographically isolated populations of the same species can have <span class="accent">different allele frequencies</span> (from <span class="cyan">genetic drift, selection, mutation, migration</span>). You should use databases to compare these and identify the conditions that <span class="gold">change allele frequencies</span>.</p></div>
+</section>
+
+<section class="act" id="act11"><div class="acttag">AHL · D4.1.11</div><h2>CHANGES IN ALLELE FREQUENCY</h2>
+  <p class="aim">Natural selection changes allele frequency in the gene pool according to survival and reproduction.</p>
+  <div class="panel"><p>Because individuals with an advantageous allele <span class="cyan">survive and reproduce more</span>, that allele's <span class="accent">frequency increases</span> in the gene pool over generations — this is evolution at the <span class="gold">population-genetics level</span>.</p></div>
+</section>
+
+<section class="act" id="act12"><div class="acttag">AHL · D4.1.12</div><h2>DIRECTIONAL, DISRUPTIVE &amp; STABILIZING SELECTION</h2>
+  <p class="aim">Three types of natural selection shift the phenotype distribution differently.</p>
+  <div class="panel"><table><tr><th>Type</th><th>Effect on distribution</th><th>Example</th></tr>
+    <tr><td>Directional</td><td>favours one extreme → curve shifts</td><td>larger body size</td></tr>
+    <tr><td>Disruptive</td><td>favours both extremes → splits</td><td>large &amp; small beaks</td></tr>
+    <tr><td>Stabilizing</td><td>favours the middle → narrows</td><td>average birth weight</td></tr></table></div>
+  <div class="fig"><svg viewBox="0 0 640 210" role="img" aria-label="three selection types: directional shifts the curve, disruptive splits it, stabilizing narrows it">
+    <rect width="640" height="210" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">TYPES OF SELECTION</text>
+    <text x="120" y="52" fill="#22d3ee" font-size="10" text-anchor="middle">directional</text>
+    <path d="M70 150 C 100 80 130 80 160 150" fill="none" stroke="#22d3ee" stroke-width="2"/>
+    <path d="M80 150 C 120 90 180 90 220 150" fill="none" stroke="#4ade80" stroke-width="2"/>
+    <text x="320" y="52" fill="#ff2ec4" font-size="10" text-anchor="middle">disruptive</text>
+    <path d="M270 150 C 300 90 330 90 360 150" fill="none" stroke="#ff2ec4" stroke-width="2"/>
+    <path d="M290 150 C 300 120 315 120 325 150" fill="none" stroke="#4ade80" stroke-width="2"/>
+    <path d="M335 150 C 345 120 360 120 370 150" fill="none" stroke="#4ade80" stroke-width="2"/>
+    <text x="520" y="52" fill="#fbbf24" font-size="10" text-anchor="middle">stabilizing</text>
+    <path d="M470 150 C 510 70 550 70 590 150" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <path d="M490 150 C 515 110 545 110 570 150" fill="none" stroke="#4ade80" stroke-width="2"/>
+  </svg><div class="cap"><b>FIG 1</b> — Directional, disruptive and stabilizing selection shift or narrow the phenotype distribution (green shows the selected outcome).</div></div>
+</section>
+
+<section class="act" id="act13"><div class="acttag">AHL · D4.1.13</div><h2>THE HARDY–WEINBERG EQUATION</h2>
+  <p class="aim">Use p and q for two alleles: p + q = 1, and (in equilibrium) p² + 2pq + q² = 1.</p>
+  <div class="panel"><p>For two alleles (A and a) with frequencies <span class="accent">p</span> and <span class="cyan">q</span>: <span class="gold">p + q = 1</span>. Under Hardy–Weinberg equilibrium, genotype frequencies are <span class="gold">p² (AA) + 2pq (Aa) + q² (aa) = 1</span>. Use these to calculate allele/genotype frequencies.</p></div>
+</section>
+
+<section class="act" id="act14"><div class="acttag">AHL · D4.1.14</div><h2>HARDY–WEINBERG CONDITIONS</h2>
+  <p class="aim">A population is in genetic equilibrium only if certain conditions are maintained.</p>
+  <div class="panel"><ul class="clean"><li>No mutation, no natural selection, no migration (gene flow), <span class="cyan">random mating</span>, and a <span class="cyan">large population</span> (no genetic drift).</li><li>If any of these is violated, <span class="gold">allele frequencies change</span> (evolution occurs).</li></ul></div>
+</section>
+
+<section class="act" id="act15"><div class="acttag">AHL · D4.1.15</div><h2>ARTIFICIAL SELECTION</h2>
+  <p class="aim">Artificial selection deliberately chooses traits — in crop plants and domesticated animals.</p>
+  <div class="panel"><p><span class="accent">Artificial selection</span> is when humans <span class="cyan">deliberately choose which organisms reproduce</span> to select for desired traits — carried out in <span class="gold">crop plants</span> and <span class="gold">domesticated animals</span> (e.g. selective breeding of dogs, wheat).</p></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">NATURAL SELECTION<small>D4.1</small></div>
+    <div class="arrow">→</div><div class="node">MECHANISM<small>variation · overproduction · competition · survival</small></div>
+    <div class="node">VARIATION<small>mutation + sexual reproduction (heritable)</small></div>
+    <div class="node">PRESSURES<small>abiotic · sexual selection</small></div>
+    <div class="node">AHL: GENE POOL<small>allele frequencies</small></div>
+    <div class="node">AHL: SELECTION<small>directional · disruptive · stabilizing</small></div>
+    <div class="node">AHL: HARDY-WEINBERG<small>p+q=1 · p²+2pq+q²=1</small></div>
+    <div class="node">AHL: ARTIFICIAL<small>crops + domesticated animals</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Natural selection = <span>differential survival/reproduction</span> of best-adapted.</div>
+    <div class="line">Variation comes from <span>mutation</span> + <span>sexual reproduction</span>; traits must be <span>heritable</span>.</div>
+    <div class="line">Overproduction → <span>competition</span>; <span>abiotic pressures</span> + <span>sexual selection</span>.</div>
+    <div class="line">AHL: <span>gene pool</span> = all alleles; selection changes allele frequency.</div>
+    <div class="line">AHL: <span>directional · disruptive · stabilizing</span> selection.</div>
+    <div class="line">AHL: <span>p+q=1</span>, <span>p²+2pq+q²=1</span> (Hardy–Weinberg, under 5 conditions).</div>
+    <div class="line">AHL: <span>artificial selection</span> = human choice (crops, livestock).</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">10 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="differential survival and reproduction of the best-adapted"><p>1. Natural selection works by…</p>
+    <label><input type="radio" name="q1" data-a="differential survival and reproduction of the best-adapted"> differential survival and reproduction of the best-adapted</label><label><input type="radio" name="q1"> random mutation</label><label><input type="radio" name="q1"> inheritance of acquired traits</label>
+    <div class="fb correct">Correct — better-adapted individuals pass on more genes.</div><div class="fb wrong">Natural selection = differential survival/reproduction.</div>
+  </div>
+
+  <div class="q" data-a="mutation and sexual reproduction"><p>2. Variation on which selection acts comes from…</p>
+    <label><input type="radio" name="q2" data-a="mutation and sexual reproduction"> mutation and sexual reproduction</label><label><input type="radio" name="q2"> mutation only</label><label><input type="radio" name="q2"> diet</label>
+    <div class="fb correct">Correct — mutation (new) + sexual reproduction (shuffle).</div><div class="fb wrong">Mutation + sexual reproduction generate variation.</div>
+  </div>
+
+  <div class="q" data-a="it must be heritable"><p>3. For evolutionary change, a trait…</p>
+    <label><input type="radio" name="q3" data-a="it must be heritable"> must be heritable</label><label><input type="radio" name="q3"> must be acquired</label><label><input type="radio" name="q3"> must be new</label>
+    <div class="fb correct">Correct — only heritable traits can be selected.</div><div class="fb wrong">Traits must be heritable for evolution.</div>
+  </div>
+
+  <div class="q" data-a="sexual selection"><p>4. A peacock's tail is an example of…</p>
+    <label><input type="radio" name="q4" data-a="sexual selection"> sexual selection</label><label><input type="radio" name="q4"> stabilising selection</label><label><input type="radio" name="q4"> herd immunity</label>
+    <div class="fb correct">Correct — traits that improve mating success.</div><div class="fb wrong">Peacock's tail = sexual selection for mating success.</div>
+  </div>
+
+  <div class="q" data-a="all the genes and alleles in a population"><p>5. AHL — A gene pool is…</p>
+    <label><input type="radio" name="q5" data-a="all the genes and alleles in a population"> all the genes and their alleles in a population</label><label><input type="radio" name="q5"> all the species in an ecosystem</label><label><input type="radio" name="q5"> all the phenotypes</label>
+    <div class="fb correct">Correct — gene pool = all alleles in a population.</div><div class="fb wrong">Gene pool = all genes/alleles in a population.</div>
+  </div>
+
+  <div class="q" data-a="it favours one extreme, shifting the curve"><p>6. AHL — Directional selection…</p>
+    <label><input type="radio" name="q6" data-a="it favours one extreme, shifting the curve"> favours one extreme, shifting the distribution</label><label><input type="radio" name="q6"> favours the middle</label><label><input type="radio" name="q6"> favours both extremes</label>
+    <div class="fb correct">Correct — directional shifts toward one extreme.</div><div class="fb wrong">Directional = favours one extreme (curve shifts).</div>
+  </div>
+
+  <div class="q" data-a="it favours both extremes, splitting the distribution"><p>7. AHL — Disruptive selection…</p>
+    <label><input type="radio" name="q7" data-a="it favours both extremes, splitting the distribution"> favours both extremes, splitting the distribution</label><label><input type="radio" name="q7"> favours the middle</label><label><input type="radio" name="q7"> does nothing</label>
+    <div class="fb correct">Correct — disruptive favours both extremes.</div><div class="fb wrong">Disruptive = favours both extremes → bimodal.</div>
+  </div>
+
+  <div class="q" data-a="p2 + 2pq + q2 = 1"><p>8. AHL — The Hardy–Weinberg genotype equation is…</p>
+    <label><input type="radio" name="q8" data-a="p2 + 2pq + q2 = 1"> p² + 2pq + q² = 1</label><label><input type="radio" name="q8"> p + q = 2</label><label><input type="radio" name="q8"> pq = 1</label>
+    <div class="fb correct">Correct — genotype frequencies sum to 1.</div><div class="fb wrong">p² + 2pq + q² = 1 (and p + q = 1).</div>
+  </div>
+
+  <div class="q" data-a="no mutation, no selection, no migration, random mating, large population"><p>9. AHL — Hardy–Weinberg equilibrium requires…</p>
+    <label><input type="radio" name="q9" data-a="no mutation, no selection, no migration, random mating, large population"> no mutation, no selection, no migration, random mating, large population</label><label><input type="radio" name="q9"> strong selection and small population</label><label><input type="radio" name="q9"> non-random mating</label>
+    <div class="fb correct">Correct — all five conditions for equilibrium.</div><div class="fb wrong">No mutation, no selection, no migration, random mating, large population.</div>
+  </div>
+
+  <div class="q" data-a="humans deliberately select traits (crops, livestock)"><p>10. AHL — Artificial selection is when…</p>
+    <label><input type="radio" name="q10" data-a="humans deliberately select traits (crops, livestock)"> humans deliberately choose traits (crops, domesticated animals)</label><label><input type="radio" name="q10"> nature selects randomly</label><label><input type="radio" name="q10"> mutation is blocked</label>
+    <div class="fb correct">Correct — human-directed selection.</div><div class="fb wrong">Artificial selection = human choice of traits.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">D4.1.1</span><span>Natural selection drives evolutionary change.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">D4.1.2</span><span>Mutation + sexual reproduction generate variation.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">D4.1.3</span><span>Overproduction + competition promote selection.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">D4.1.4</span><span>Abiotic factors (density-independent) = selection pressures.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">D4.1.5</span><span>Differences in adaptation → differential survival/reproduction.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">D4.1.6</span><span>Traits must be heritable for evolution.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">D4.1.7</span><span>Sexual selection: physical/behavioural traits for mating.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">D4.1.8</span><span>Model selection by controlling a selection pressure.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">D4.1.9-11</span><span>AHL: gene pool; allele frequencies; changes via selection.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">D4.1.12</span><span>AHL: directional, disruptive, stabilizing selection.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">D4.1.13</span><span>AHL: Hardy–Weinberg (p+q=1, p²+2pq+q²=1).</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">D4.1.14</span><span>AHL: five conditions for genetic equilibrium.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">D4.1.15</span><span>AHL: artificial selection (crops, domesticated animals).</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">D4.1.1-8</span><span>I can explain the mechanism of natural selection.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">D4.1.9-12</span><span>AHL: I can use allele frequencies and selection types.</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">D4.1.13-15</span><span>AHL: I can use Hardy–Weinberg and explain artificial selection.</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · D4.1 Natural Selection · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='d41-natural-selection-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
