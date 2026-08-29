@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>C3.2 Defence Against Disease</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Interaction &amp; interdependence · C3 (Organisms)</div>
+  <h1>C3.2 DEFENCE AGAINST DISEASE</h1>
+  <div class="sub">Pathogens and infectious disease, the body's defences (innate and adaptive immunity), HIV/AIDS, antibiotics, vaccines and herd immunity.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge">18 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · PATHOGENS</a><a href="#act2">2 · SKIN &amp; MUCOSA</a><a href="#act3">3 · BLOOD CLOTTING</a><a href="#act4">4 · INNATE vs ADAPTIVE</a><a href="#act5">5 · PHAGOCYTES</a><a href="#act6">6 · LYMPHOCYTES</a><a href="#act7">7 · ANTIGENS</a><a href="#act8">8 · B &amp; T CELLS</a><a href="#act9">9 · PLASMA CELLS</a><a href="#act10">10 · MEMORY &amp; IMMUNITY</a><a href="#act11">11 · HIV TRANSMISSION</a><a href="#act12">12 · HIV &amp; AIDS</a><a href="#act13">13 · ANTIBIOTICS</a><a href="#act14">14 · ANTIBIOTIC RESISTANCE</a><a href="#act15">15 · ZOONOSES</a><a href="#act16">16 · VACCINES</a><a href="#act17">17 · HERD IMMUNITY</a><a href="#act18">18 · COVID DATA</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">C3.2.1</div><h2>PATHOGENS &amp; INFECTIOUS DISEASE</h2>
+  <p class="aim">A broad range of disease-causing organisms (pathogens) can infect humans.</p>
+  <div class="panel"><p>A <span class="accent">pathogen</span> is a disease-causing organism. A broad range can infect humans — <span class="cyan">bacteria</span>, <span class="cyan">viruses</span>, <span class="cyan">fungi</span>, <span class="cyan">protists</span>. They cause <span class="gold">infectious (communicable) diseases</span>.</p></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">C3.2.2</div><h2>SKIN &amp; MUCOUS MEMBRANES — PRIMARY DEFENCE</h2>
+  <p class="aim">The skin acts as a physical and chemical barrier to pathogens, as do mucous membranes.</p>
+  <div class="panel"><ul class="clean"><li><b>Physical barrier</b> — the skin and mucous membranes block entry. (You are not required to draw/label the skin.)</li><li><b>Chemical barrier</b> — sweat and secretions contain antimicrobial chemicals; the stomach's acid and lysozyme in tears/mucus destroy pathogens.</li></ul></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">C3.2.3</div><h2>BLOOD CLOTTING SEALS CUTS</h2>
+  <p class="aim">Platelets release clotting factors that trigger a cascade, forming a clot rapidly to seal a cut.</p>
+  <div class="panel"><p>When a cut occurs, <span class="accent">platelets</span> release <span class="cyan">clotting factors</span> which trigger a <span class="cyan">cascade pathway</span>. This converts soluble <span class="gold">fibrinogen</span> into insoluble <span class="gold">fibrin</span> threads, which form a clot to <b>seal the wound</b> and stop pathogen entry + blood loss.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">C3.2.4</div><h2>INNATE vs ADAPTIVE IMMUNITY</h2>
+  <p class="aim">The innate system responds to broad pathogen categories and doesn't change with repeated exposure; the adaptive system is specific and improves.</p>
+  <div class="panel"><table><tr><th>Feature</th><th>Innate</th><th>Adaptive</th></tr>
+    <tr><td>Specificity</td><td>broad (categories)</td><td>specific (to a pathogen)</td></tr>
+    <tr><td>Change with exposure</td><td>no</td><td>yes (memory)</td></tr>
+    <tr><td>Speed</td><td>fast</td><td>slower first time, fast later</td></tr></table>
+  <div class="tip"><b>Examples:</b> innate = skin, phagocytes; adaptive = lymphocytes (B &amp; T cells), antibodies.</div></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">C3.2.5</div><h2>PHAGOCYTES</h2>
+  <p class="aim">Phagocytes move to infection sites, recognise pathogens, engulf them by endocytosis and digest them using lysosomes.</p>
+  <div class="panel"><p><span class="accent">Phagocytes</span> move by <span class="cyan">amoeboid movement</span> from the blood to infection sites. They <span class="cyan">recognise</span> the pathogen, <span class="cyan">engulf it by endocytosis</span>, and <span class="gold">digest it using lysosomal enzymes</span>.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">C3.2.6</div><h2>LYMPHOCYTES</h2>
+  <p class="aim">Lymphocytes are the cells of the adaptive immune system that cooperate to produce antibodies.</p>
+  <div class="panel"><p><span class="accent">Lymphocytes</span> are the key adaptive cells. They <span class="cyan">circulate in the blood</span> and are also <span class="cyan">contained in lymph nodes and the spleen</span>. They <span class="gold">cooperate</span> (helper T-cells activate B-cells) to produce <span class="gold">antibodies</span>.</p></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">C3.2.7</div><h2>ANTIGENS</h2>
+  <p class="aim">Antigens are recognition molecules (usually glycoproteins or other proteins) that trigger antibody production.</p>
+  <div class="panel"><p>An <span class="accent">antigen</span> is a molecule (often a <span class="cyan">glycoprotein</span> or other protein) that the immune system recognises. It is usually on the <span class="cyan">surface of a pathogen</span> (or an infected cell). When detected, it <span class="gold">triggers antibody production</span>.</p></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">C3.2.8</div><h2>ACTIVATION OF B-CELLS BY HELPER T-CELLS</h2>
+  <p class="aim">There are antigen-specific B-cells and helper T-cells; helper T-cells activate B-cells.</p>
+  <div class="panel"><p>There are <span class="accent">antigen-specific B-cells</span> and <span class="accent">helper T-cells</span>. A <span class="cyan">helper T-cell</span> that recognises the antigen <span class="cyan">activates the matching B-cell</span>. B-cells then <span class="gold">produce antibodies</span> and become memory + plasma cells.</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">C3.2.9</div><h2>B-CELLS MULTIPLY INTO PLASMA CELLS</h2>
+  <p class="aim">Activated B-lymphocytes multiply to form clones of antibody-secreting plasma cells.</p>
+  <div class="panel"><p>Only <span class="cyan">small numbers</span> of B-cells respond to a specific antigen. The activated B-cell <span class="accent">multiplies (clonal expansion)</span> to form many <span class="gold">plasma cells</span>, which secrete large amounts of <span class="gold">antibodies</span> specific to that antigen.</p></div>
+</section>
+
+<section class="act" id="act10"><div class="acttag">C3.2.10</div><h2>IMMUNITY FROM MEMORY CELLS</h2>
+  <p class="aim">Immunity is the ability to eliminate an infection, due to retained memory cells.</p>
+  <div class="panel"><p><span class="accent">Immunity</span> is the ability to eliminate an infectious disease from the body. It results from the retention of <span class="cyan">memory cells</span> after an infection — on a second exposure, the response is <span class="gold">faster and stronger</span>.</p></div>
+</section>
+
+<section class="act" id="act11"><div class="acttag">C3.2.11</div><h2>HIV TRANSMISSION</h2>
+  <p class="aim">HIV is transmitted in body fluids.</p>
+  <div class="panel"><p><span class="accent">HIV</span> is transmitted in <span class="cyan">body fluids</span> such as <span class="cyan">blood</span>, <span class="cyan">semen</span>, <span class="cyan">vaginal fluids</span> and <span class="cyan">breast milk</span>. Modes: <span class="gold">unprotected sex</span>, <span class="gold">sharing needles</span>, <span class="gold">mother-to-child</span> (during birth/breastfeeding), and <span class="gold">blood transfusion</span>.</p></div>
+</section>
+
+<section class="act" id="act12"><div class="acttag">C3.2.12</div><h2>HIV INFECTS LYMPHOCYTES → AIDS</h2>
+  <p class="aim">HIV infects and kills certain lymphocytes; the resulting lymphocyte reduction leads to AIDS.</p>
+  <div class="panel"><p><span class="accent">HIV</span> infects and kills <span class="cyan">helper T-lymphocytes</span> (CD4+ cells). As these are destroyed, the immune system weakens. When the reduction in lymphocytes becomes severe, the person has <span class="gold">AIDS</span> — vulnerable to opportunistic infections.</p></div>
+</section>
+
+<section class="act" id="act13"><div class="acttag">C3.2.13</div><h2>ANTIBIOTICS</h2>
+  <p class="aim">Antibiotics block processes that occur in bacteria but not in eukaryotic cells — so they fail against viruses.</p>
+  <div class="panel"><p><span class="accent">Antibiotics</span> block <span class="cyan">bacterial</span> processes (e.g. cell-wall synthesis, protein synthesis) that are different from eukaryotic ones — so they kill bacteria but not human cells. Because <span class="gold">viruses</span> don't have these bacterial processes, <span class="gold">antibiotics are ineffective against viral infections</span>.</p></div>
+</section>
+
+<section class="act" id="act14"><div class="acttag">C3.2.14</div><h2>EVOLUTION OF ANTIBIOTIC RESISTANCE</h2>
+  <p class="aim">Bacteria can evolve resistance to several antibiotics; careful antibiotic use slows this.</p>
+  <div class="panel"><p>Random <span class="cyan">mutations</span> can make some bacteria <span class="cyan">resistant</span> to an antibiotic. In the presence of the antibiotic, these survive and multiply, so the population becomes resistant — e.g. <span class="gold">MRSA</span>. <span class="gold">Careful/appropriate use</span> of antibiotics slows the emergence of multi-resistant strains.</p></div>
+</section>
+
+<section class="act" id="act15"><div class="acttag">C3.2.15</div><h2>ZOONOSES</h2>
+  <p class="aim">Zoonoses are infectious diseases that transfer from other species to humans.</p>
+  <div class="panel"><p>A <span class="accent">zoonosis</span> is an infectious disease that can <span class="cyan">transfer from other species to humans</span> (e.g. <span class="gold">COVID-19</span>, <span class="gold">rabies</span>, <span class="gold">influenza</span>). Zoonoses are a large fraction of human infectious diseases and have varied modes of transmission.</p></div>
+</section>
+
+<section class="act" id="act16"><div class="acttag">C3.2.16</div><h2>VACCINES &amp; IMMUNIZATION</h2>
+  <p class="aim">Vaccines contain antigens (or nucleic acids coding for antigens) that stimulate the immune system to produce memory cells.</p>
+  <div class="panel"><p>A <span class="accent">vaccine</span> contains <span class="cyan">antigens</span> (or <span class="cyan">nucleic acids</span> — DNA or RNA — with sequences coding for antigens). It <span class="gold">stimulates</span> the immune system to produce <span class="gold">memory cells</span> and antibodies — giving immunity <b>without</b> the disease.</p></div>
+</section>
+
+<section class="act" id="act17"><div class="acttag">C3.2.17</div><h2>HERD IMMUNITY</h2>
+  <p class="aim">If a sufficient percentage of a population is immune, the pathogen cannot spread effectively — protecting the whole population.</p>
+  <div class="panel"><p><span class="accent">Herd immunity</span> occurs when a sufficient percentage of a population is <span class="cyan">immune</span>, so transmission is interrupted and <span class="gold">epidemics are prevented</span> — including for unvaccinated individuals (who are protected indirectly). <span class="muted">Members of a population are interdependent in building herd immunity.</span></p></div>
+  <div class="fig"><svg viewBox="0 0 640 200" role="img" aria-label="herd immunity: with a high percentage immune, the pathogen cannot spread from person to person">
+    <rect width="640" height="200" rx="14" fill="#150a26"/>
+    <text x="320" y="26" fill="#ff2ec4" font-size="13" font-weight="900" text-anchor="middle">HERD IMMUNITY</text>
+    <g><circle cx="120" cy="90" r="12" fill="#4ade80"/><circle cx="160" cy="120" r="12" fill="#4ade80"/><circle cx="120" cy="150" r="12" fill="#4ade80"/><circle cx="200" cy="90" r="12" fill="#4ade80"/><circle cx="230" cy="130" r="12" fill="#4ade80"/><circle cx="200" cy="160" r="12" fill="#4ade80"/><circle cx="260" cy="100" r="12" fill="#4ade80"/><circle cx="280" cy="140" r="12" fill="#4ade80"/><circle cx="250" cy="60" r="12" fill="#ff2ec4"/></g>
+    <circle cx="160" cy="60" r="12" fill="#4ade80"/><circle cx="90" cy="120" r="12" fill="#4ade80"/>
+    <text x="300" y="90" fill="#b9a3d6" font-size="10" text-anchor="middle">most are immune (green)</text>
+    <text x="300" y="108" fill="#b9a3d6" font-size="10" text-anchor="middle">one susceptible (red)</text>
+    <text x="300" y="140" fill="#4ade80" font-size="10" text-anchor="middle">pathogen cannot spread →</text>
+    <text x="300" y="158" fill="#4ade80" font-size="10" text-anchor="middle">the vulnerable are protected</text>
+    <text x="320" y="185" fill="#b9a3d6" font-size="10" text-anchor="middle">herd immunity = joint protection of the whole population</text>
+  </svg><div class="cap"><b>FIG 1</b> — Herd immunity: when enough people are immune, the pathogen can't spread, protecting even the non-immune.</div></div>
+</section>
+
+<section class="act" id="act18"><div class="acttag">C3.2.18</div><h2>EVALUATING COVID-19 DATA</h2>
+  <p class="aim">You should calculate percentage difference and percentage change from COVID-19 (and other) data.</p>
+  <div class="panel"><ul class="clean"><li><b>Percentage change</b> = (new − original) ÷ original × 100.</li><li><b>Percentage difference</b> = (difference between two values) ÷ reference × 100.</li><li>Use these to compare case numbers, deaths, vaccination rates, etc. and evaluate the data.</li></ul></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">DEFENCE<small>C3.2</small></div>
+    <div class="arrow">→</div><div class="node">PATHOGENS<small>bacteria · viruses · fungi · protists</small></div>
+    <div class="node">1ST LINE<small>skin + mucous membranes · clotting</small></div>
+    <div class="node">INNATE<small>broad · phagocytes</small></div>
+    <div class="node">ADAPTIVE<small>specific · B &amp; T cells · antibodies · memory</small></div>
+    <div class="node">HIV/AIDS<small>body fluids · kills helper T cells</small></div>
+    <div class="node">ANTIBIOTICS<small>bacterial only · resistance</small></div>
+    <div class="node">VACCINES/HERD<small>memory · herd immunity</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Defence: <span>primary = skin/mucosa</span> + <span>clotting</span> → <span>innate</span> then <span>adaptive</span>.</div>
+    <div class="line">Innate = <span>broad, no memory</span> (phagocytes); Adaptive = <span>specific, memory</span> (lymphocytes).</div>
+    <div class="line">Adaptive: <span>antigen → helper T → B-cell → plasma cells → antibodies + memory</span>.</div>
+    <div class="line"><span>Immunity</span> = retained memory cells after exposure.</div>
+    <div class="line">HIV: <span>body fluids</span> → kills <span>helper T-cells</span> → <span>AIDS</span>.</div>
+    <div class="line"><span>Antibiotics</span> target bacterial processes → <span>useless vs viruses</span>; resistance evolves.</div>
+    <div class="line"><span>Zoonoses</span> = from other species; <span>vaccines</span> make memory; <span>herd immunity</span> = joint protection.</div>
+    <div class="line">Data: <span>% change</span> and <span>% difference</span> for COVID evaluations.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">12 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="a disease-causing organism"><p>1. A pathogen is…</p>
+    <label><input type="radio" name="q1" data-a="a disease-causing organism"> a disease-causing organism</label><label><input type="radio" name="q1"> a type of white blood cell</label><label><input type="radio" name="q1"> an antibody</label>
+    <div class="fb correct">Correct — a pathogen causes infectious disease.</div><div class="fb wrong">A pathogen is a disease-causing organism.</div>
+  </div>
+
+  <div class="q" data-a="a physical and chemical barrier"><p>2. The skin protects as…</p>
+    <label><input type="radio" name="q2" data-a="a physical and chemical barrier"> a physical and chemical barrier</label><label><input type="radio" name="q2"> only a physical barrier</label><label><input type="radio" name="q2"> a source of antibodies</label>
+    <div class="fb correct">Correct — skin is both physical and chemical.</div><div class="fb wrong">The skin acts as both a physical and chemical barrier.</div>
+  </div>
+
+  <div class="q" data-a="platelets release clotting factors that trigger a cascade"><p>3. A cut is sealed by blood clotting, where…</p>
+    <label><input type="radio" name="q3" data-a="platelets release clotting factors that trigger a cascade"> platelets release clotting factors that trigger a cascade</label><label><input type="radio" name="q3"> red blood cells form the clot</label><label><input type="radio" name="q3"> antibodies seal it</label>
+    <div class="fb correct">Correct — platelet clotting factors → cascade → fibrin clot.</div><div class="fb wrong">Platelets release clotting factors that trigger the cascade, forming a fibrin clot.</div>
+  </div>
+
+  <div class="q" data-a="innate system responds broadly and doesn't change with exposure"><p>4. The key difference between innate and adaptive immunity is that the…</p>
+    <label><input type="radio" name="q4" data-a="innate system responds broadly and doesn't change with exposure"> innate system responds broadly and doesn't change with exposure</label><label><input type="radio" name="q4"> innate system is specific</label><label><input type="radio" name="q4"> adaptive system has no memory</label>
+    <div class="fb correct">Correct — innate = broad, no memory; adaptive = specific, with memory.</div><div class="fb wrong">Innate: broad, no change; adaptive: specific, with memory.</div>
+  </div>
+
+  <div class="q" data-a="engulf pathogens by endocytosis and digest with lysosomes"><p>5. Phagocytes destroy pathogens by…</p>
+    <label><input type="radio" name="q5" data-a="engulf pathogens by endocytosis and digest with lysosomes"> engulfing them by endocytosis and digesting with lysosomes</label><label><input type="radio" name="q5"> releasing antibodies</label><label><input type="radio" name="q5"> producing memory cells</label>
+    <div class="fb correct">Correct — endocytosis + lysosomal digestion.</div><div class="fb wrong">Phagocytes engulf pathogens (endocytosis) and digest them in lysosomes.</div>
+  </div>
+
+  <div class="q" data-a="helper T-cells activate B-cells"><p>6. B-lymphocytes are activated by…</p>
+    <label><input type="radio" name="q6" data-a="helper T-cells activate B-cells"> helper T-lymphocytes</label><label><input type="radio" name="q6"> phagocytes</label><label><input type="radio" name="q6"> red blood cells</label>
+    <div class="fb correct">Correct — helper T-cells activate antigen-specific B-cells.</div><div class="fb wrong">Helper T-cells activate B-lymphocytes.</div>
+  </div>
+
+  <div class="q" data-a="multiply into plasma cells that secrete antibodies"><p>7. Activated B-cells…</p>
+    <label><input type="radio" name="q7" data-a="multiply into plasma cells that secrete antibodies"> multiply into clones of plasma cells that secrete antibodies</label><label><input type="radio" name="q7"> become memory cells only</label><label><input type="radio" name="q7"> digest pathogens</label>
+    <div class="fb correct">Correct — clonal expansion into antibody-secreting plasma cells.</div><div class="fb wrong">Activated B-cells multiply into plasma cells producing antibodies.</div>
+  </div>
+
+  <div class="q" data-a="retention of memory cells"><p>8. Immunity results from…</p>
+    <label><input type="radio" name="q8" data-a="retention of memory cells"> the retention of memory cells</label><label><input type="radio" name="q8"> having no white blood cells</label><label><input type="radio" name="q8"> fever</label>
+    <div class="fb correct">Correct — memory cells give fast, strong secondary responses.</div><div class="fb wrong">Immunity comes from retained memory cells.</div>
+  </div>
+
+  <div class="q" data-a="it infects and kills helper T-lymphocytes"><p>9. HIV leads to AIDS because…</p>
+    <label><input type="radio" name="q9" data-a="it infects and kills helper T-lymphocytes"> it infects and kills helper T-lymphocytes</label><label><input type="radio" name="q9"> it attacks red blood cells</label><label><input type="radio" name="q9"> it is a bacterium</label>
+    <div class="fb correct">Correct — loss of helper T-cells cripples adaptive immunity → AIDS.</div><div class="fb wrong">HIV kills helper T-lymphocytes, weakening immunity → AIDS.</div>
+  </div>
+
+  <div class="q" data-a="they block bacterial processes, not eukaryotic ones"><p>10. Antibiotics work against bacteria but not viruses because…</p>
+    <label><input type="radio" name="q10" data-a="they block bacterial processes, not eukaryotic ones"> they block bacterial processes that differ from eukaryotic ones</label><label><input type="radio" name="q10"> they kill viruses directly</label><label><input type="radio" name="q10"> viruses have cell walls</label>
+    <div class="fb correct">Correct — viruses lack the bacterial targets, so antibiotics don't affect them.</div><div class="fb wrong">Antibiotics target bacterial processes; viruses lack these, so are unaffected.</div>
+  </div>
+
+  <div class="q" data-a="an infectious disease that transfers from other species to humans"><p>11. A zoonosis is…</p>
+    <label><input type="radio" name="q11" data-a="an infectious disease that transfers from other species to humans"> an infectious disease transmissible from other species to humans</label><label><input type="radio" name="q11"> a disease of plants only</label><label><input type="radio" name="q11"> a vaccination</label>
+    <div class="fb correct">Correct — e.g. COVID-19, rabies, influenza.</div><div class="fb wrong">A zoonosis transfers from other species to humans.</div>
+  </div>
+
+  <div class="q" data-a="stimulate the immune system to produce memory cells"><p>12. A vaccine works by…</p>
+    <label><input type="radio" name="q12" data-a="stimulate the immune system to produce memory cells"> stimulating the immune system to produce memory cells</label><label><input type="radio" name="q12"> directly killing all pathogens</label><label><input type="radio" name="q12"> raising body temperature</label>
+    <div class="fb correct">Correct — vaccines create memory cells (immunity without disease).</div><div class="fb wrong">Vaccines stimulate memory-cell production.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">C3.2.1</span><span>Pathogens cause infectious diseases (bacteria, viruses, fungi, protists).</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">C3.2.2</span><span>Skin + mucous membranes as physical/chemical barriers.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">C3.2.3</span><span>Blood clotting seals cuts (platelets, clotting factors, cascade).</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">C3.2.4</span><span>Innate vs adaptive immunity.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">C3.2.5</span><span>Phagocytes: amoeboid movement, endocytosis, lysosomal digestion.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">C3.2.6</span><span>Lymphocytes: circulate in blood + in lymph nodes/spleen.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">C3.2.7</span><span>Antigens (glycoproteins/proteins) trigger antibody production.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">C3.2.8</span><span>Helper T-cells activate B-cells.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">C3.2.9</span><span>B-cells multiply into plasma cells (clonal expansion).</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">C3.2.10</span><span>Immunity from retained memory cells.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">C3.2.11-12</span><span>HIV transmission (body fluids) and lymphocyte infection → AIDS.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">C3.2.13-14</span><span>Antibiotics target bacteria (not viruses); resistance evolves.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">C3.2.15</span><span>Zoonoses transfer from other species.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">C3.2.16</span><span>Vaccines: antigens (or nucleic acids) → memory cells.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">C3.2.17</span><span>Herd immunity prevents epidemics.</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">C3.2.18</span><span>Evaluate COVID-19 data (% change, % difference).</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · C3.2 Defence Against Disease · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='c32-defence-disease-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
