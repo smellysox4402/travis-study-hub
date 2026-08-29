@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32"><link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>B4.1 Adaptation to Environment</title>
+<style>/* house style */
+:root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+.sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+.badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+.badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+.act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+.act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+.act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+.panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+.accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+.fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+.fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+.fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}
+.fig svg{max-width:660px;width:100%;height:auto;}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+.marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+.marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+.mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+.node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+.node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+.node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+.q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+.q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+.q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+.q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+.q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+.q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+.q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+.cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+.cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+.cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+.cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+.progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+.progtext{font-size:13px;color:var(--dim);text-align:right;}
+.home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+.home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+@media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Form &amp; function · B4 (Ecosystems)</div>
+  <h1>B4.1 ADAPTATION TO ENVIRONMENT</h1>
+  <div class="sub">Habitats, how organisms adapt to abiotic conditions, abiotic variables and tolerance, biome distribution, and specific adaptations to deserts and rainforests.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge">8 statements</span></div>
+</header>
+<nav>
+  <a href="#act1">1 · HABITAT</a><a href="#act2">2 · ADAPTATIONS TO ABIOTIC</a><a href="#act3">3 · ABIOTIC VARIABLES</a><a href="#act4">4 · RANGE OF TOLERANCE</a><a href="#act5">5 · CORAL REEFS</a><a href="#act6">6 · BIOME DISTRIBUTION</a><a href="#act7">7 · BIOMES</a><a href="#act8">8 · DESERT &amp; RAINFOREST</a>
+  <a href="#map">🗺 MIND MAP</a><a href="#cheat">⚡ CHEAT</a><a href="#test">✍ SELF-TEST</a><a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/12</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">B4.1.1</div><h2>HABITAT</h2>
+  <p class="aim">A habitat is the place in which a community, species, population or organism lives — described geographically and physically.</p>
+  <div class="panel"><p>A <span class="accent">habitat</span> is the place where an organism, population, species or community lives. Its description includes both the <span class="cyan">geographical location</span> (where) and the <span class="cyan">physical conditions</span> (e.g. temperature, moisture, soil).</p></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">B4.1.2</div><h2>ADAPTATIONS TO THE ABIOTIC ENVIRONMENT</h2>
+  <p class="aim">Organisms are adapted to the abiotic conditions of their habitat — e.g. a grass of sand dunes and a tree of mangrove swamps.</p>
+  <div class="panel"><div class="grid2">
+    <div class="card"><div class="tag g">SAND DUNES</div><h4>A dune grass</h4><p>Adapted to <span class="cyan">low water</span>, moving sand and high salt exposure — e.g. deep roots, rolled leaves and waxy cuticles to reduce water loss.</p></div>
+    <div class="card"><div class="tag gr">MANGROVE</div><h4>A mangrove tree</h4><p>Adapted to <span class="cyan">waterlogged, salty</span> swamps — e.g. aerial prop roots for support and breathing, and salt-excreting glands, plus vivipary (seed germinates on the tree).</p></div>
+  </div></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">B4.1.3</div><h2>ABIOTIC VARIABLES AFFECTING DISTRIBUTION</h2>
+  <p class="aim">Abiotic variables determine where species can live. Adaptations give a species its distribution.</p>
+  <div class="panel"><ul class="clean"><li><b>Plants:</b> light, temperature, water, soil pH, mineral availability, salinity.</li><li><b>Animals:</b> temperature, water, salinity, oxygen levels, light.</li><li>A species' <span class="accent">adaptations</span> determine which set of <span class="cyan">abiotic conditions</span> it can survive in — giving it its <span class="gold">distribution</span>.</li></ul></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">B4.1.4</div><h2>RANGE OF TOLERANCE &amp; TRANSECTS</h2>
+  <p class="aim">Each species has a range of tolerance of a limiting factor. You should use transect data to correlate distribution with an abiotic variable.</p>
+  <div class="panel"><ul class="clean"><li>A species can tolerate a <span class="accent">range</span> of values of a <span class="cyan">limiting factor</span>; outside this range it cannot survive or reproduce.</li><li>For a <b>limiting factor</b> (the factor nearest its limit), a small change has a big effect.</li><li><b>Application:</b> use a <b>transect</b> (a line across the habitat) to record species presence and the abiotic variable (e.g. pH, moisture, salinity), then correlate them.</li></ul></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">B4.1.5</div><h2>CONDITIONS FOR CORAL REEF FORMATION</h2>
+  <p class="aim">Coral reefs form under specific conditions: water depth, pH, salinity, clarity and temperature.</p>
+  <div class="panel"><ul class="clean"><li><b>Temperature:</b> warm (typically 23–29 °C).</li><li><b>Water depth:</b> shallow, so light reaches the zooxanthellae.</li><li><b>Salinity:</b> stable, normal seawater salinity.</li><li><b>Clarity:</b> clear water (little sediment) for light.</li><li><b>pH:</b> near seawater pH (avoid acidification).</li></ul></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">B4.1.6</div><h2>ABIOTIC FACTORS DETERMINE BIOME DISTRIBUTION</h2>
+  <p class="aim">For a given temperature and rainfall pattern, one natural ecosystem is expected — temperature and water determine biomes.</p>
+  <div class="panel"><p>Terrestrial <span class="accent">biomes</span> are determined mainly by <span class="cyan">temperature</span> and <span class="cyan">rainfall</span>. For any combination of the two, one natural ecosystem type is likely — e.g. hot + wet = tropical rainforest; hot + dry = desert; cold + wet = tundra.</p></div>
+  <div class="fig"><svg viewBox="0 0 640 240" role="img" aria-label="abiotic factors determining biomes: temperature vs rainfall grid showing desert, grassland, rainforest, tundra">
+    <rect width="640" height="240" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">TEMPERATURE × RAINFALL → BIOME</text>
+    <rect x="110" y="60" width="120" height="70" fill="rgba(251,191,36,.16)" stroke="#fbbf24" stroke-width="2"/><text x="170" y="92" fill="#fbbf24" font-size="10" text-anchor="middle">hot + dry</text><text x="170" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">desert</text>
+    <rect x="250" y="60" width="120" height="70" fill="rgba(74,222,128,.16)" stroke="#4ade80" stroke-width="2"/><text x="310" y="92" fill="#4ade80" font-size="10" text-anchor="middle">hot + wet</text><text x="310" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">rainforest</text>
+    <rect x="390" y="60" width="120" height="70" fill="rgba(34,211,238,.16)" stroke="#22d3ee" stroke-width="2"/><text x="450" y="92" fill="#22d3ee" font-size="10" text-anchor="middle">cold + wet</text><text x="450" y="106" fill="#b9a3d6" font-size="9" text-anchor="middle">tundra</text>
+    <rect x="110" y="150" width="120" height="50" fill="rgba(168,85,247,.12)" stroke="#a855f7" stroke-width="2"/><text x="170" y="176" fill="#a855f7" font-size="10" text-anchor="middle">temperate (grassland/forest)</text>
+    <text x="320" y="216" fill="#b9a3d6" font-size="11" text-anchor="middle">temperature (vertical) and rainfall (horizontal) set the biome</text>
+  </svg><div class="cap"><b>FIG 1</b> — Temperature and rainfall determine which biome (ecosystem type) forms in a region.</div></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">B4.1.7</div><h2>BIOMES</h2>
+  <p class="aim">Biomes are groups of ecosystems with similar communities due to similar abiotic conditions and convergent evolution.</p>
+  <div class="panel"><p><span class="accent">Biomes</span> are large regions with similar communities, arising from <span class="cyan">similar abiotic conditions</span>. Because the physical conditions are similar, species in different biomes of the same type often show <span class="gold">convergent evolution</span> — similar adaptations. You should know the climate conditions that characterise each biome.</p></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">B4.1.8</div><h2>ADAPTATIONS TO HOT DESERTS &amp; TROPICAL RAINFORESTS</h2>
+  <p class="aim">Give examples of adaptations in named species of plants and animals in each habitat.</p>
+  <div class="panel"><div class="grid2">
+    <div class="card"><div class="tag g">HOT DESERT</div><h4>Adaptations</h4><p><b>Plant (e.g. a cactus):</b> thick waxy cuticle, reduced/spiny leaves, deep or extensive roots, water storage in succulent stem, CAM photosynthesis.<br><b>Animal (e.g. camel):</b> stores fat in hump, tolerance to water loss, efficient kidneys, large surface area for heat loss.</p></div>
+    <div class="card"><div class="tag gr">RAINFOREST</div><h4>Adaptations</h4><p><b>Plant (e.g. a tall emergent tree):</b> buttress roots, tall trunk, large leaves, dense canopy position.<br><b>Animal (e.g. a sloth):</b> camouflage with algae in fur, slow movement, claws for gripping trees.</p></div>
+  </div></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <div class="mind">
+    <div class="node core">ADAPTATION<small>B4.1</small></div>
+    <div class="arrow">→</div><div class="node">HABITAT<small>geographical + physical</small></div>
+    <div class="node">ADAPTATIONS<small>abiotic conditions (dune grass, mangrove)</small></div>
+    <div class="node">ABIOTIC VARIABLES<small>temperature, water, salinity…</small></div>
+    <div class="node">TOLERANCE<small>range of a limiting factor · transects</small></div>
+    <div class="node">CORAL REEFS<small>depth · pH · salinity · clarity · temperature</small></div>
+    <div class="node">BIOMES<small>temperature + rainfall → biome</small></div>
+    <div class="node">DESERT/RAINFOREST<small>named species adaptations</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Habitat = <span>geographical + physical</span> place an organism lives.</div>
+    <div class="line">Abiotic adaptations: <span>dune grass</span> (low water) &amp; <span>mangrove</span> (salty waterlogged).</div>
+    <div class="line">Abiotic variables (temp, water, salinity) set species <span>distribution</span>.</div>
+    <div class="line"><span>Range of tolerance</span> of a limiting factor; use <span>transects</span> to correlate with an abiotic variable.</div>
+    <div class="line">Coral reefs need <span>warm, shallow, clear, stable-salinity, near-neutral pH</span> water.</div>
+    <div class="line">Biomes set by <span>temperature + rainfall</span>; similar conditions → convergent evolution.</div>
+    <div class="line">Desert: cactus + camel (water loss). Rainforest: buttress-root trees + sloth.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">8 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="the place an organism lives, described by geography and physical conditions"><p>1. A habitat is…</p>
+    <label><input type="radio" name="q1" data-a="the place an organism lives, described by geography and physical conditions"> the place an organism lives (geographical + physical)</label><label><input type="radio" name="q1"> the climate only</label><label><input type="radio" name="q1"> a single species only</label>
+    <div class="fb correct">Correct — habitat = the place + its physical conditions.</div><div class="fb wrong">A habitat is the place, described geographically and physically.</div>
+  </div>
+
+  <div class="q" data-a="a tree with aerial roots adapted to salty waterlogged swamps"><p>2. A mangrove tree is adapted to…</p>
+    <label><input type="radio" name="q2" data-a="a tree with aerial roots adapted to salty waterlogged swamps"> salty, waterlogged mangrove swamps</label><label><input type="radio" name="q2"> dry sand dunes</label><label><input type="radio" name="q2"> cold tundra</label>
+    <div class="fb correct">Correct — mangroves have aerial roots and salt glands for salty, anoxic soil.</div><div class="fb wrong">Mangroves are adapted to salty, waterlogged swamps.</div>
+  </div>
+
+  <div class="q" data-a="its adaptations to the abiotic conditions"><p>3. A species' distribution is determined mainly by…</p>
+    <label><input type="radio" name="q3" data-a="its adaptations to the abiotic conditions"> its adaptations to the abiotic conditions</label><label><input type="radio" name="q3"> how large it is</label><label><input type="radio" name="q3"> its colour</label>
+    <div class="fb correct">Correct — adaptations let a species live within a set of abiotic conditions.</div><div class="fb wrong">Adaptations to the abiotic environment determine a species' distribution.</div>
+  </div>
+
+  <div class="q" data-a="a range of tolerance of a limiting factor"><p>4. The concept that a species survives within limits of an abiotic factor is its…</p>
+    <label><input type="radio" name="q4" data-a="a range of tolerance of a limiting factor"> range of tolerance of a limiting factor</label><label><input type="radio" name="q4"> carrying capacity</label><label><input type="radio" name="q4"> niche width</label>
+    <div class="fb correct">Correct — a species survives within a range of values of a limiting factor.</div><div class="fb wrong">Range of tolerance of a limiting factor.</div>
+  </div>
+
+  <div class="q" data-a="they need warm, clear, shallow, stable-salinity water"><p>5. Coral reefs form where…</p>
+    <label><input type="radio" name="q5" data-a="they need warm, clear, shallow, stable-salinity water"> water is warm, clear, shallow, with stable salinity</label><label><input type="radio" name="q5"> water is cold and deep</label><label><input type="radio" name="q5"> water is very acidic</label>
+    <div class="fb correct">Correct — warm, shallow, clear, stable salinity and near-neutral pH.</div><div class="fb wrong">Coral reefs need warm, shallow, clear, stable-salinity water (and suitable pH/depth).</div>
+  </div>
+
+  <div class="q" data-a="temperature and rainfall"><p>6. Terrestrial biomes are determined mainly by…</p>
+    <label><input type="radio" name="q6" data-a="temperature and rainfall"> temperature and rainfall</label><label><input type="radio" name="q6"> longitude only</label><label><input type="radio" name="q6"> population size</label>
+    <div class="fb correct">Correct — temperature + rainfall set the biome.</div><div class="fb wrong">Temperature and rainfall determine biome distribution.</div>
+  </div>
+
+  <div class="q" data-a="similar communities due to similar abiotic conditions and convergent evolution"><p>7. A biome is a group of ecosystems with…</p>
+    <label><input type="radio" name="q7" data-a="similar communities due to similar abiotic conditions and convergent evolution"> similar communities, from similar abiotic conditions and convergent evolution</label><label><input type="radio" name="q7"> identical species</label><label><input type="radio" name="q7"> no abiotic conditions</label>
+    <div class="fb correct">Correct — biome = similar communities from similar conditions (+ convergent evolution).</div><div class="fb wrong">Similar abiotic conditions → similar communities (biome), often with convergent evolution.</div>
+  </div>
+
+  <div class="q" data-a="a cactus (wax, spines) and a camel (fat store, water tolerance)"><p>8. Which pair gives a hot-desert example?</p>
+    <label><input type="radio" name="q8" data-a="a cactus (wax, spines) and a camel (fat store, water tolerance)"> a cactus + a camel</label><label><input type="radio" name="q8"> a mangrove + a sloth</label><label><input type="radio" name="q8"> a fern + a fish</label>
+    <div class="fb correct">Correct — cactus and camel are hot-desert examples.</div><div class="fb wrong">Desert: a cactus (plant) and a camel (animal); rainforest: a buttress-root tree and a sloth.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 12</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">B4.1.1</span><span>Habitat = place (geographical + physical).</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">B4.1.2</span><span>Adaptations: dune grass + mangrove tree.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">B4.1.3</span><span>Abiotic variables affect distribution (plants + animals).</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">B4.1.4</span><span>Range of tolerance of a limiting factor; transect data.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">B4.1.5</span><span>Coral reef conditions: depth, pH, salinity, clarity, temperature.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">B4.1.6</span><span>Temperature + rainfall determine biomes.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">B4.1.7</span><span>Biomes: similar communities, convergent evolution.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">B4.1.8</span><span>Desert adaptations (cactus, camel) — named species.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">B4.1.8</span><span>Rainforest adaptations (buttress-root tree, sloth) — named species.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">B4.1.3-4</span><span>I can explain how abiotic variables and tolerance affect distribution.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">B4.1.6-7</span><span>I can link temperature/rainfall to biome type.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">B4.1.5,8</span><span>I can state coral reef conditions and give desert/rainforest examples.</span></li>
+  </ul>
+</section>
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · B4.1 Adaptation to Environment · grounded in BioNinja + the IB syllabus
+</footer>
+<script>(function(){
+  var KEY='b41-adaptation-environment-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
