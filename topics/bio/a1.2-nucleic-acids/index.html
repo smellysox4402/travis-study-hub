@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<title>A1.2 Nucleic Acids</title>
+<style>/* same house style as A1.1 */
+  :root{--bg:#0b0214;--panel:#150a26;--panel2:#1d0f33;--ink:#f3e8ff;--dim:#b9a3d6;--pink:#ff2ec4;--violet:#a855f7;--cyan:#22d3ee;--gold:#fbbf24;--green:#4ade80;--line:rgba(255,46,196,.28);--line2:rgba(168,85,247,.35);}
+  *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.7;}
+  ::selection{background:var(--pink);color:#0b0214;}.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,2,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;align-items:center;}
+  nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.04em;padding:5px 10px;border:1px solid transparent;border-radius:999px;white-space:nowrap;transition:.2s;}
+  nav a:hover{color:var(--pink);border-color:var(--line);}.pill{margin-left:auto;background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+  header.hero{text-align:center;padding:64px 18px 34px;}.kicker{font-size:12px;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;font-weight:700;}
+  h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.1;margin:14px 0 8px;color:#fff;letter-spacing:-.02em;}
+  .sub{color:var(--dim);font-size:17px;max-width:680px;margin:10px auto 0;}
+  .badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .badge{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line2);color:var(--violet);}
+  .badge.hl{background:linear-gradient(90deg,var(--pink),var(--violet));color:#fff;border:none;}.badge.ahl{border-color:var(--cyan);color:var(--cyan);}
+  .act{margin-top:56px;}.acttag{font-size:12px;letter-spacing:.28em;color:var(--cyan);font-weight:800;text-transform:uppercase;}
+  .act h2{font-size:clamp(24px,4vw,30px);font-weight:750;margin:6px 0 12px;color:#fff;letter-spacing:-.01em;}
+  .act .aim{color:var(--dim);font-size:15.5px;margin-bottom:22px;max-width:720px;}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:20px 0;}
+  .panel h3{font-size:18px;font-weight:750;margin-bottom:10px;color:#fff;}.panel p{margin:10px 0;color:var(--ink);font-size:16px;}
+  .accent{color:var(--pink);font-weight:700;}.cyan{color:var(--cyan);font-weight:700;}.gold{color:var(--gold);font-weight:700;}.green{color:var(--green);font-weight:700;}.muted{color:var(--dim);font-size:14px;}
+  ul.clean{list-style:none;}ul.clean li{padding:9px 0 9px 26px;position:relative;font-size:16px;}ul.clean li::before{content:"▸";position:absolute;left:6px;color:var(--pink);font-weight:700;}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .card{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;}.card h4{font-size:15px;font-weight:800;margin-bottom:6px;}.card p{font-size:15px;color:var(--ink);margin:6px 0;}
+  .card .tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);}.card .tag.p{color:var(--pink);}.card .tag.g{color:var(--gold);}.card .tag.v{color:var(--violet);}.card .tag.gr{color:var(--green);}
+  .fig{background:var(--panel2);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;margin:14px 0;text-align:center;}
+  .fig img{max-width:100%;border-radius:10px;border:1px solid var(--line2);display:block;margin:0 auto;}
+  .fig .cap{font-size:13.5px;color:var(--dim);margin-top:12px;line-height:1.6;}.fig .cap b{color:var(--cyan);}.fig .cap a{color:var(--cyan);text-decoration:none;}.fig .cap a:hover{text-decoration:underline;}
+  .fig svg{max-width:660px;width:100%;height:auto;}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;line-height:1.6;}
+  th{background:rgba(168,85,247,.16);color:#fff;text-align:left;padding:13px 16px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid var(--line2);}
+  td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;}td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+  tr:hover td{background:rgba(168,85,247,.06);}tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+  .tip{border-left:4px solid var(--gold);background:rgba(251,191,36,.08);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.tip b{color:var(--gold);}
+  .nos{border-left:4px solid var(--cyan);background:rgba(34,211,238,.07);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.nos b{color:var(--cyan);}
+  .exam{border-left:4px solid var(--green);background:rgba(74,222,128,.07);border-radius:0 14px 14px 0;padding:14px 18px;margin:16px 0;}.exam b{color:var(--green);}
+  .marquee{background:linear-gradient(90deg,rgba(255,46,196,.12),rgba(168,85,247,.12));border:1px dashed var(--line);border-radius:18px;padding:22px;margin:16px 0;text-align:center;}
+  .marquee .line{font-size:15px;font-weight:700;margin:6px 0;color:#fff;}.marquee .line span{color:var(--pink);}
+  .mind{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0;}
+  .node{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;}
+  .node.core{background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-size:16px;font-weight:900;padding:14px 20px;}
+  .node small{display:block;color:var(--dim);font-weight:400;font-size:11.5px;margin-top:2px;}.arrow{color:var(--pink);font-weight:900;align-self:center;}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0;}
+  .q p{font-weight:700;font-size:15px;margin-bottom:10px;}
+  .q label{display:block;padding:8px 12px;margin:4px 0;border-radius:10px;cursor:pointer;font-size:15px;border:1px solid rgba(168,85,247,.25);transition:.15s;}
+  .q label:hover{background:rgba(168,85,247,.1);}.q input{accent-color:var(--pink);margin-right:8px;}
+  .q .fb{display:none;margin-top:10px;font-size:14px;padding:10px 14px;border-radius:10px;}
+  .q .fb.correct{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.35);}
+  .q .fb.wrong{background:rgba(255,46,196,.10);color:var(--pink);border:1px solid rgba(255,46,196,.35);}
+  .q.correct .fb.correct{display:block;}.q.wrong .fb.wrong{display:block;}
+  .cl{list-style:none;}.cl li{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:8px 0;cursor:pointer;transition:.15s;font-size:15px;}
+  .cl li:hover{background:rgba(168,85,247,.08);}.cl li.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.4);}
+  .cl .box{flex:0 0 22px;height:22px;border:2px solid var(--violet);border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.15s;}
+  .cl li.done .box{background:var(--green);border-color:var(--green);color:#0b0214;}.cl .code{font-weight:800;color:var(--cyan);flex:0 0 64px;font-size:13px;padding-top:1px;}
+  .progress{height:10px;background:rgba(168,85,247,.15);border-radius:999px;overflow:hidden;margin:14px 0 6px;}.progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--cyan));transition:width .3s;border-radius:999px;}
+  .progtext{font-size:13px;color:var(--dim);text-align:right;}
+  .home-btn{position:fixed;left:16px;bottom:16px;z-index:950;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;color:var(--cyan);background:rgba(21,10,38,.88);border:1px solid rgba(34,211,238,.55);box-shadow:0 0 18px rgba(34,211,238,.28),inset 0 0 12px rgba(34,211,238,.08);backdrop-filter:blur(4px);transition:all .2s;}
+  .home-btn:hover{background:var(--cyan);color:#0b0214;box-shadow:0 0 28px rgba(34,211,238,.65);transform:translateY(-2px);}
+  @media print{nav,.home-btn{display:none;}body{background:#fff;color:#111;}.panel,.card{background:#fff;border-color:#ccc;}}
+</style>
+</head>
+<body>
+<a class="home-btn" href="../../../index.html">🏠 HOME</a>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Unity &amp; diversity · A1 (Molecules)</div>
+  <h1>A1.2 NUCLEIC ACIDS</h1>
+  <div class="sub">DNA and RNA — the molecules that store and carry genetic information. Nucleotide structure, the double helix, base pairing, and the evidence (Hershey–Chase, Chargaff) that DNA is the genetic material.</div>
+  <div class="badges"><span class="badge">SL</span><span class="badge ahl">AHL: A1.2.11–15</span><span class="badge">15 statements</span></div>
+</header>
+
+<nav>
+  <a href="#act1">1 · GENETIC MATERIAL</a>
+  <a href="#act2">2 · NUCLEOTIDES</a>
+  <a href="#act3">3 · BACKBONE</a>
+  <a href="#act4">4 · BASES</a>
+  <a href="#act5">5 · RNA POLYMER</a>
+  <a href="#act6">6 · DOUBLE HELIX</a>
+  <a href="#act7">7 · DNA vs RNA</a>
+  <a href="#act8">8 · BASE PAIRING</a>
+  <a href="#act9">9 · INFO CAPACITY</a>
+  <a href="#act10">10 · UNIVERSAL CODE</a>
+  <a href="#act11">11 · DIRECTIONALITY (AHL)</a>
+  <a href="#act12">12 · HELIX STABILITY (AHL)</a>
+  <a href="#act13">13 · NUCLEOSOME (AHL)</a>
+  <a href="#act14">14 · HERSHEY-CHASE (AHL)</a>
+  <a href="#act15">15 · CHARGAF (AHL)</a>
+  <a href="#map">🗺 MIND MAP</a>
+  <a href="#cheat">⚡ CHEAT</a>
+  <a href="#test">✍ SELF-TEST</a>
+  <a href="#check">✅ CHECKLIST</a>
+  <span class="pill" id="progPill">0/16</span>
+</nav>
+
+<section class="act" id="act1"><div class="acttag">A1.2.1</div><h2>DNA AS THE GENETIC MATERIAL</h2>
+  <p class="aim">DNA is the genetic material of all living organisms. Some viruses use RNA instead, but viruses are not considered living.</p>
+  <div class="panel"><p>Every living organism stores its <span class="accent">genetic information</span> in DNA — the instructions for building and running the body. The only exception is a group of viruses that use <span class="cyan">RNA</span> as their genetic material, but because viruses cannot reproduce on their own and lack cell structure, they are not classified as living.</p>
+  <ul class="clean"><li>DNA = the hereditary molecule in all <b>living</b> organisms.</li><li>Some viruses use RNA — but viruses are <b>not living</b>, so DNA is still the genetic material of life.</li></ul></div>
+</section>
+
+<section class="act" id="act2"><div class="acttag">A1.2.2</div><h2>COMPONENTS OF A NUCLEOTIDE</h2>
+  <p class="aim">A nucleotide is made of a phosphate group, a pentose (5-carbon) sugar and a nitrogenous base. Draw phosphate as a circle, the sugar as a pentagon and the base as a rectangle.</p>
+  <div class="panel"><p>DNA and RNA are polymers of <span class="accent">nucleotides</span>. Each nucleotide has three parts:</p>
+  <ul class="clean"><li><b>Phosphate group</b> (−PO₄) — drawn as a <span class="cyan">circle</span>.</li><li><b>Pentose sugar</b> (5 carbons) — drawn as a <span class="cyan">pentagon</span>. In DNA it is deoxyribose; in RNA it is ribose.</li><li><b>Nitrogenous base</b> — drawn as a <span class="cyan">rectangle</span>. One or two rings of carbon and nitrogen.</li></ul></div>
+  <div class="fig"><svg viewBox="0 0 640 230" role="img" aria-label="diagram of a single nucleotide showing phosphate circle, pentose pentagon and base rectangle">
+    <rect width="640" height="230" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">A NUCLEOTIDE</text>
+    <circle cx="130" cy="120" r="34" fill="rgba(255,46,196,.14)" stroke="#ff2ec4" stroke-width="2"/>
+    <text x="130" y="115" fill="#ff2ec4" font-size="11" text-anchor="middle">PO₄</text>
+    <text x="130" y="133" fill="#b9a3d6" font-size="10" text-anchor="middle">phosphate</text>
+    <line x1="164" y1="120" x2="210" y2="120" stroke="#f3e8ff" stroke-width="2"/>
+    <polygon points="265,90 305,120 265,150 225,120" fill="rgba(34,211,238,.14)" stroke="#22d3ee" stroke-width="2"/>
+    <text x="265" y="118" fill="#22d3ee" font-size="10" text-anchor="middle">sugar</text>
+    <text x="265" y="132" fill="#b9a3d6" font-size="9.5" text-anchor="middle">(pentose, 5C)</text>
+    <line x1="305" y1="120" x2="370" y2="120" stroke="#f3e8ff" stroke-width="2"/>
+    <rect x="370" y="95" width="140" height="50" rx="8" fill="rgba(168,85,247,.14)" stroke="#a855f7" stroke-width="2"/>
+    <text x="440" y="116" fill="#a855f7" font-size="10" text-anchor="middle">N base</text>
+    <text x="440" y="132" fill="#b9a3d6" font-size="9.5" text-anchor="middle">(A, T, G, C / U)</text>
+    <text x="320" y="195" fill="#b9a3d6" font-size="11" text-anchor="middle">circle = phosphate · pentagon = sugar · rectangle = base</text>
+  </svg><div class="cap"><b>FIG 1</b> — A nucleotide: phosphate (circle), pentose sugar (pentagon), nitrogenous base (rectangle).</div></div>
+</section>
+
+<section class="act" id="act3"><div class="acttag">A1.2.3</div><h2>THE SUGAR-PHOSPHATE BACKBONE</h2>
+  <p class="aim">Sugar–phosphate bonding forms a continuous, strong chain of covalently bonded atoms along each strand — the 'backbone' of DNA and RNA.</p>
+  <div class="panel"><p>In a chain of nucleotides, the <span class="accent">phosphate group</span> of one nucleotide bonds to the <span class="cyan">sugar</span> of the next. This creates a long, continuous chain of <b>covalently</b> bonded sugar–phosphate–sugar–phosphate units.</p>
+  <p>The sugar–phosphate <span class="gold">backbone</span> is very strong because the bonds are covalent. The bases stick out from the backbone and carry the genetic code.</p></div>
+</section>
+
+<section class="act" id="act4"><div class="acttag">A1.2.4</div><h2>THE NITROGENOUS BASES</h2>
+  <p class="aim">The bases form the code. You need to know their names for both DNA and RNA.</p>
+  <div class="panel"><p>The four bases in <span class="cyan">DNA</span> are <span class="accent">adenine</span>, <span class="accent">thymine</span>, <span class="accent">guanine</span> and <span class="accent">cytosine</span> (A, T, G, C). In <span class="cyan">RNA</span>, thymine is replaced by uracil (U), giving A, U, G, C.</p>
+  <ul class="clean"><li><b>Purines</b> (two rings): adenine (A) and guanine (G).</li><li><b>Pyrimidines</b> (one ring): thymine (T), cytosine (C) and uracil (U).</li></ul></div>
+</section>
+
+<section class="act" id="act5"><div class="acttag">A1.2.5</div><h2>RNA — A POLYMER OF NUCLEOTIDES</h2>
+  <p class="aim">RNA is a polymer formed by condensation reactions linking nucleotide monomers. You should be able to draw and recognise single nucleotides and RNA polymers.</p>
+  <div class="panel"><p>RNA is built by <span class="accent">condensation</span> of nucleotides — each bond forms with the loss of a water molecule. It is usually <b>single-stranded</b> and much shorter than DNA. RNA's sugar is <span class="cyan">ribose</span>.</p></div>
+</section>
+
+<section class="act" id="act6"><div class="acttag">A1.2.6</div><h2>THE DNA DOUBLE HELIX</h2>
+  <p class="aim">DNA is a double helix of two antiparallel strands linked by hydrogen bonds between complementary base pairs (A–T, G–C). Draw the strands antiparallel.</p>
+  <div class="panel"><p>DNA is <span class="accent">double-stranded</span>. The two strands run in <b>antiparallel</b> directions and are held together by <span class="cyan">hydrogen bonds</span> between complementary bases: <span class="green">A pairs with T</span> and <span class="green">G pairs with C</span>.</p>
+  <ul class="clean"><li>You do NOT need to draw the helical twist — a straight ladder arrangement showing the two <b>antiparallel</b> strands is enough.</li><li>You do NOT need the relative lengths of purines/pyrimidines or the exact number of hydrogen bonds.</li></ul></div>
+  <div class="fig"><svg viewBox="0 0 640 300" role="img" aria-label="diagram of a DNA double strand, two antiparallel strands with sugar-phosphate backbones and base pairs A-T and G-C">
+    <rect width="640" height="300" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">DNA — TWO ANTIPARALLEL STRANDS</text>
+    <!-- left strand backbones (top: 5' to 3') -->
+    <line x1="180" y1="50" x2="180" y2="270" stroke="#22d3ee" stroke-width="5"/>
+    <text x="180" y="54" fill="#22d3ee" font-size="11" text-anchor="middle">strand 1 (5′ → 3′)</text>
+    <line x1="460" y1="50" x2="460" y2="270" stroke="#ff2ec4" stroke-width="5"/>
+    <text x="460" y="54" fill="#ff2ec4" font-size="11" text-anchor="middle">strand 2 (3′ → 5′)</text>
+    <!-- base pairs -->
+    <rect x="205" y="62" width="230" height="20" rx="4" fill="rgba(74,222,128,.12)" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="320" y="76" fill="#4ade80" font-size="10" text-anchor="middle">A — T</text>
+    <rect x="205" y="112" width="230" height="20" rx="4" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="320" y="126" fill="#fbbf24" font-size="10" text-anchor="middle">G — C</text>
+    <rect x="205" y="162" width="230" height="20" rx="4" fill="rgba(74,222,128,.12)" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="320" y="176" fill="#4ade80" font-size="10" text-anchor="middle">T — A</text>
+    <rect x="205" y="212" width="230" height="20" rx="4" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="320" y="226" fill="#fbbf24" font-size="10" text-anchor="middle">C — G</text>
+    <text x="320" y="278" fill="#b9a3d6" font-size="11" text-anchor="middle">hydrogen bonds between base pairs; strands are antiparallel</text>
+  </svg><div class="cap"><b>FIG 2</b> — DNA as two antiparallel strands. A pairs with T and G pairs with C, linked by hydrogen bonds (the base-pair "rungs").</div></div>
+</section>
+
+<section class="act" id="act7"><div class="acttag">A1.2.7</div><h2>DIFFERENCES BETWEEN DNA AND RNA</h2>
+  <p class="aim">DNA and RNA differ in the number of strands, the bases used and the pentose sugar. You should be able to sketch ribose vs deoxyribose.</p>
+  <table>
+    <tr><th>Feature</th><th>DNA</th><th>RNA</th></tr>
+    <tr><td>Strands</td><td>double-stranded (double helix)</td><td>single-stranded</td></tr>
+    <tr><td>Bases</td><td>A, T, G, C</td><td>A, U, G, C (uracil replaces thymine)</td></tr>
+    <tr><td>Pentose sugar</td><td>deoxyribose (missing one O on carbon 2)</td><td>ribose (has −OH on carbon 2)</td></tr>
+  </table>
+  <div class="fig"><svg viewBox="0 0 640 200" role="img" aria-label="ribose and deoxyribose structures side by side, showing ribose has an OH group on carbon 2 while deoxyribose has only H">
+    <rect width="640" height="200" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">RIBOSE vs DEOXYRIBOSE</text>
+    <!-- ribose -->
+    <polygon points="200,120 240,80 300,80 330,120 290,160 230,160" fill="rgba(34,211,238,.12)" stroke="#22d3ee" stroke-width="2"/>
+    <text x="265" y="62" fill="#22d3ee" font-size="12" text-anchor="middle">ribose (RNA)</text>
+    <circle cx="240" cy="80" r="10" fill="rgba(74,222,128,.2)" stroke="#4ade80" stroke-width="2"/><text x="240" y="84" fill="#4ade80" font-size="8" text-anchor="middle">OH</text>
+    <text x="465" y="62" fill="#ff2ec4" font-size="12" text-anchor="middle">deoxyribose (DNA)</text>
+    <polygon points="400,120 440,80 500,80 530,120 490,160 430,160" fill="rgba(255,46,196,.12)" stroke="#ff2ec4" stroke-width="2"/>
+    <circle cx="440" cy="80" r="10" fill="rgba(255,46,196,.2)" stroke="#ff2ec4" stroke-width="2"/><text x="440" y="84" fill="#ff2ec4" font-size="8" text-anchor="middle">H</text>
+    <text x="320" y="184" fill="#b9a3d6" font-size="11" text-anchor="middle">carbon 2: ribose carries −OH, deoxyribose carries only −H</text>
+  </svg><div class="cap"><b>FIG 3</b> — Ribose (RNA) has an −OH group on carbon 2; deoxyribose (DNA) has just −H there, hence "deoxy".</div></div>
+</section>
+
+<section class="act" id="act8"><div class="acttag">A1.2.8</div><h2>COMPLEMENTARY BASE PAIRING</h2>
+  <p class="aim">Complementary base pairing (A–T, G–C) — based on hydrogen bonding — lets genetic information be replicated and expressed.</p>
+  <div class="panel"><p>Because A always pairs with T and G always pairs with C, knowing one strand lets you know the other. This <span class="accent">complementarity</span> is what makes it possible to <span class="cyan">replicate</span> DNA (each strand is a template for a new one) and to <span class="cyan">transcribe</span> it into RNA (a complementary copy).</p></div>
+</section>
+
+<section class="act" id="act9"><div class="acttag">A1.2.9</div><h2>THE CAPACITY OF DNA FOR INFORMATION</h2>
+  <p class="aim">Because a DNA molecule can be any length with any base sequence, DNA can store an enormous amount of information with great economy.</p>
+  <div class="panel"><p>The number of possible sequences is <span class="accent">practically limitless</span>. A sequence of <b>n</b> bases has <span class="cyan">4ⁿ</span> possible arrangements — so even a moderately long molecule can encode an astronomical amount of information in a tiny space.</p></div>
+</section>
+
+<section class="act" id="act10"><div class="acttag">A1.2.10</div><h2>A UNIVERSAL GENETIC CODE</h2>
+  <p class="aim">The genetic code is essentially the same across all life forms, which is evidence of universal common ancestry.</p>
+  <div class="panel"><p>The same codon → amino acid rules apply in bacteria, plants and animals. This <span class="accent">universality</span> is strong evidence that all life shares a <span class="cyan">common ancestor</span>. (You are not required to memorise specific examples.)</p></div>
+</section>
+
+<section class="act" id="act11"><div class="acttag">AHL · A1.2.11</div><h2>DIRECTIONALITY — 5′ TO 3′</h2>
+  <p class="aim">DNA and RNA are built with 5′ to 3′ linkages in the sugar-phosphate backbone, which matters for replication, transcription and translation.</p>
+  <div class="panel"><p>Each nucleotide has a <span class="accent">5′ end</span> (where the phosphate attaches to the sugar's carbon 5) and a <span class="cyan">3′ end</span> (where there is a free −OH on carbon 3). New nucleotides are always added to the <b>3′ end</b> of the growing strand.</p>
+  <ul class="clean"><li>The two DNA strands are <b>antiparallel</b>: one runs 5′→3′, the other 3′→5′.</li><li>DNA polymerase reads the template 3′→5′ and builds the new strand <b>5′→3′</b>.</li><li>RNA is transcribed and read 5′→3′, and at the ribosome mRNA is read 5′→3′.</li></ul></div>
+  <div class="fig"><svg viewBox="0 0 640 220" role="img" aria-label="two antiparallel strands labelled with 5 prime and 3 prime ends showing opposite direction">
+    <rect width="640" height="220" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">ANTIPARALLEL STRANDS (5′ · 3′)</text>
+    <line x1="120" y1="60" x2="520" y2="195" stroke="#22d3ee" stroke-width="5"/>
+    <text x="110" y="70" fill="#22d3ee" font-size="12" text-anchor="middle">5′</text>
+    <text x="530" y="205" fill="#22d3ee" font-size="12" text-anchor="middle">3′</text>
+    <line x1="520" y1="60" x2="120" y2="195" stroke="#ff2ec4" stroke-width="5"/>
+    <text x="530" y="70" fill="#ff2ec4" font-size="12" text-anchor="middle">5′</text>
+    <text x="110" y="205" fill="#ff2ec4" font-size="12" text-anchor="middle">3′</text>
+    <text x="320" y="120" fill="#b9a3d6" font-size="11" text-anchor="middle">strand 1 runs 5′→3′</text>
+    <text x="320" y="178" fill="#b9a3d6" font-size="11" text-anchor="middle">strand 2 runs 3′→5′</text>
+  </svg><div class="cap"><b>FIG 4</b> — Antiparallel strands: one runs 5′→3′, the other 3′→5′. New nucleotides are added at the 3′ end.</div></div>
+</section>
+
+<section class="act" id="act12"><div class="acttag">AHL · A1.2.12</div><h2>PURINE-PYRIMIDINE BONDING &amp; HELIX STABILITY</h2>
+  <p class="aim">A–T and G–C pairs have equal length, so the DNA helix has the same three-dimensional structure whatever the base sequence.</p>
+  <div class="panel"><p>A <span class="accent">purine</span> (A or G) always pairs with a <span class="cyan">pyrimidine</span> (T or C). Because a purine+tiny pyrimidine pair has the <b>same width</b> as every other pair, the two backbones stay a constant distance apart — keeping the helix a uniform shape regardless of the sequence.</p>
+  <div class="tip"><b>Exam point:</b> if a purine paired with a purine, the helix would bulge; if a pyrimidine paired with a pyrimidine, it would pinch. The purine-pyrimidine rule keeps it even-width.</div></div>
+</section>
+
+<section class="act" id="act13"><div class="acttag">AHL · A1.2.13</div><h2>THE NUCLEOSOME</h2>
+  <p class="aim">A nucleosome is DNA wrapped around a core of eight histone proteins, with a linker histone holding the strands together.</p>
+  <div class="panel"><p>In eukaryotes, DNA is packaged by wrapping around proteins called <span class="accent">histones</span>. A <span class="cyan">nucleosome</span> = <b>DNA coiled around a core of eight histones</b> (an octamer), plus an <b>additional histone</b> (H1) attached to the <span class="gold">linker DNA</span> that connects neighbouring nucleosomes.</p></div>
+  <div class="fig"><svg viewBox="0 0 640 230" role="img" aria-label="a nucleosome: DNA wound around an eight-histone core, with linker DNA and an H1 histone">
+    <rect width="640" height="230" rx="14" fill="#150a26"/>
+    <text x="320" y="28" fill="#ff2ec4" font-size="14" font-weight="900" text-anchor="middle">A NUCLEOSOME</text>
+    <circle cx="320" cy="120" r="46" fill="rgba(251,191,36,.18)" stroke="#fbbf24" stroke-width="2"/>
+    <text x="320" y="118" fill="#fbbf24" font-size="10" text-anchor="middle">8 histones</text>
+    <text x="320" y="132" fill="#b9a3d6" font-size="9" text-anchor="middle">(core octamer)</text>
+    <ellipse cx="320" cy="120" rx="80" ry="66" fill="none" stroke="#22d3ee" stroke-width="3"/>
+    <text x="320" y="60" fill="#22d3ee" font-size="10" text-anchor="middle">DNA coiled around the core</text>
+    <line x1="400" y1="120" x2="540" y2="120" stroke="#22d3ee" stroke-width="3"/>
+    <rect x="535" y="108" width="80" height="24" rx="4" fill="rgba(168,85,247,.18)" stroke="#a855f7" stroke-width="2"/>
+    <text x="575" y="124" fill="#a855f7" font-size="10" text-anchor="middle">H1 histone</text>
+    <text x="498" y="150" fill="#b9a3d6" font-size="10" text-anchor="middle">linker DNA</text>
+    <text x="320" y="205" fill="#b9a3d6" font-size="11" text-anchor="middle">DNA wraps around 8 histone proteins; H1 joins the linker DNA</text>
+  </svg><div class="cap"><b>FIG 5</b> — A nucleosome: DNA wrapped around a core of eight histones, with an H1 histone on the linker DNA.</div></div>
+</section>
+
+<section class="act" id="act14"><div class="acttag">AHL · A1.2.14</div><h2>THE HERSHEY-CHASE EXPERIMENT</h2>
+  <p class="aim">Hershey and Chase showed DNA (not protein) is the genetic material by using radioisotopes to label the two parts of a bacteriophage.</p>
+  <div class="panel"><p>They grew bacteriophages (viruses that infect bacteria) in media containing <span class="cyan">radioisotopes</span>: <span class="gold">³²P</span> labels DNA (phosphorus is in DNA, not protein) and <span class="gold">³⁵S</span> labels protein (sulfur is in protein, not DNA).</p>
+  <ul class="clean"><li>Infected bacteria were then separated from the empty viral shells.</li><li>The <b>³²P (DNA)</b> was found <b>inside</b> the bacteria — confirming that DNA enters and carries the genetic instructions.</li><li>The <b>³⁵S (protein)</b> stayed in the shells <b>outside</b>.</li><li>Conclusion: <b>DNA is the genetic material</b>, not protein.</li></ul>
+  <div class="nos"><b>Nature of science:</b> the experiment became possible only once <b>radioisotopes</b> were available as research tools — technology can open up new experiments.</div></div>
+</section>
+
+<section class="act" id="act15"><div class="acttag">AHL · A1.2.15</div><h2>CHARGAF'S DATA &amp; FALSIFICATION</h2>
+  <p class="aim">Chargaff found the amounts of adenine and thymine (and of guanine and cytosine) are roughly equal across diverse organisms. This falsified the tetranucleotide hypothesis.</p>
+  <div class="panel"><p>Across many species, <span class="accent">A ≈ T</span> and <span class="accent">G ≈ C</span>. This is exactly what you'd expect from complementary pairing, and it helped Watson and Crick build the correct model.</p>
+  <p>Chargaff's data also <span class="cyan">falsified</span> the earlier <b>tetranucleotide hypothesis</b> (which claimed DNA was a repeating sequence of the same four bases). The idea of falsification — a hypothesis is accepted until evidence disproves it — is central to the nature of science.</p>
+  <div class="nos"><b>Nature of science:</b> the "problem of induction" (no amount of confirming data proves a theory) is addressed by the "certainty of falsification" — one decisive contradictory result can reject a hypothesis.</div></div>
+</section>
+
+<section class="act" id="map"><div class="acttag">One-page overview</div><h2>🗺 MIND MAP</h2>
+  <p class="aim">One idea leads to the next: from nucleotides to the double helix, then to the evidence.</p>
+  <div class="mind">
+    <div class="node core">NUCLEIC ACIDS<small>A1.2 · DNA &amp; RNA</small></div>
+    <div class="arrow">→</div>
+    <div class="node">NUCLEOTIDE<small>phosphate + sugar + base</small></div>
+    <div class="arrow">→</div>
+    <div class="node">POLYMER<small>sugar-phosphate backbone</small></div>
+    <div class="node">DNA DOUBLE HELIX<small>antiparallel · A-T · G-C</small></div>
+    <div class="node">DNA vs RNA<small>2/1 strands · T/U · deoxyribose/ribose</small></div>
+    <div class="node">UNIVERSAL CODE<small>common ancestry</small></div>
+    <div class="node">AHL: DIRECTIONALITY<small>5′→3′</small></div>
+    <div class="node">AHL: NUCLEOSOME<small>8 histones + H1</small></div>
+    <div class="node">AHL: HERSHEY-CHASE<small>³²P DNA proves it</small></div>
+    <div class="node">AHL: CHARGAF<small>A=T, G=C</small></div>
+  </div>
+</section>
+
+<section class="act" id="cheat"><div class="acttag">Quick recap</div><h2>⚡ CHEAT</h2>
+  <div class="marquee">
+    <div class="line">Nucleotide = <span>phosphate + pentose sugar + N base</span> (circle · pentagon · rectangle).</div>
+    <div class="line">Sugar-phosphate <span>backbone</span> = strong covalent chain.</div>
+    <div class="line">DNA bases <span>A T G C</span>; RNA bases <span>A U G C</span> (uracil replaces thymine).</div>
+    <div class="line">DNA <span>double, antiparallel</span>, A–T &amp; G–C by hydrogen bonds.</div>
+    <div class="line">RNA <span>single</span> strand, sugar = ribose; DNA sugar = deoxyribose.</div>
+    <div class="line">Complementary pairing → <span>replication + expression</span>.</div>
+    <div class="line">4ⁿ sequences → <span>limitless info storage</span>; universal code → common ancestor.</div>
+    <div class="line">AHL: built/broken at the <span>3′ end</span>; purine-pyrimidine keeps helix even-width.</div>
+    <div class="line">AHL: nucleosome = DNA around <span>8 histones</span> + H1 on linker DNA.</div>
+    <div class="line">AHL: Hershey-Chase used <span>³²P (DNA)</span> vs <span>³⁵S (protein)</span> → DNA is genetic material.</div>
+    <div class="line">AHL: Chargaff <span>A=T, G=C</span> falsified the tetranucleotide hypothesis.</div>
+  </div>
+</section>
+
+<section class="act" id="test"><div class="acttag">Test yourself</div><h2>✍ SELF-TEST</h2>
+  <p class="aim">10 questions. Pick an answer — instant feedback.</p>
+
+  <div class="q" data-a="2"><p>1. How many hydrogen bonds pair adenine with thymine (A–T)?</p>
+    <label><input type="radio" name="q1"> 3</label><label><input type="radio" name="q1" data-a="2"> 2</label><label><input type="radio" name="q1"> 1</label>
+    <div class="fb correct">Correct — A–T has 2 hydrogen bonds; G–C has 3.</div><div class="fb wrong">A–T has 2 hydrogen bonds; G–C has 3.</div>
+  </div>
+
+  <div class="q" data-a="adenine, thymine, guanine, cytosine"><p>2. The four bases in DNA are…</p>
+    <label><input type="radio" name="q2" data-a="adenine, thymine, guanine, cytosine"> adenine, thymine, guanine, cytosine</label><label><input type="radio" name="q2"> adenine, uracil, guanine, cytosine</label><label><input type="radio" name="q2"> adenine, thymine, guanine, uracil</label>
+    <div class="fb correct">Correct — DNA uses A, T, G, C; RNA replaces T with U.</div><div class="fb wrong">DNA = A, T, G, C. Uracil (U) is used in RNA instead of thymine.</div>
+  </div>
+
+  <div class="q" data-a="one ring (C, T, U)"><p>3. Pyrimidines are the bases with…</p>
+    <label><input type="radio" name="q3" data-a="one ring (C, T, U)"> a single ring (cytosine, thymine, uracil)</label><label><input type="radio" name="q3"> two rings (adenine, guanine)</label><label><input type="radio" name="q3"> no nitrogen atoms</label>
+    <div class="fb correct">Correct — pyrimidines (C, T, U) have one ring; purines (A, G) have two.</div><div class="fb wrong">Pyrimidines = one ring (C, T, U); purines = two rings (A, G).</div>
+  </div>
+
+  <div class="q" data-a="deoxyribose (no -OH on C2)"><p>4. DNA's sugar differs from RNA's because DNA uses…</p>
+    <label><input type="radio" name="q4" data-a="deoxyribose (no -OH on C2)"> deoxyribose, which lacks the −OH on carbon 2</label><label><input type="radio" name="q4"> ribose, which has an extra phosphate</label><label><input type="radio" name="q4"> the same ribose but double-stranded</label>
+    <div class="fb correct">Correct — deoxyribose has −H at carbon 2 instead of −OH.</div><div class="fb wrong">DNA = deoxyribose (−H at C2); RNA = ribose (−OH at C2).</div>
+  </div>
+
+  <div class="q" data-a="two antiparallel strands with A-T and G-C"><p>5. Which best describes the structure of DNA?</p>
+    <label><input type="radio" name="q5" data-a="two antiparallel strands with A-T and G-C"> two antiparallel strands joined by hydrogen bonds between complementar</label><label><input type="radio" name="q5"> a single twisted strand</label><label><input type="radio" name="q5"> two identical parallel strands with A-G pairs</label>
+    <div class="fb correct">Correct — antiparallel, with A–T and G–C base pairs.</div><div class="fb wrong">DNA is two antiparallel strands with complementary A–T / G–C base pairs.</div>
+  </div>
+
+  <div class="q" data-a="it lets each strand act as a template"><p>6. Complementary base pairing is important because…</p>
+    <label><input type="radio" name="q6" data-a="it lets each strand act as a template"> it lets each strand act as a template for replication/transcription</label><label><input type="radio" name="q6"> it makes the backbone covalent</label><label><input type="radio" name="q6"> it makes DNA single-stranded</label>
+    <div class="fb correct">Correct — complementarity (A–T, G–C) allows accurate copying and expression.</div><div class="fb wrong">Complementarity lets each strand be a template for a complementary copy.</div>
+  </div>
+
+  <div class="q" data-a="a purine with a pyrimidine"><p>7. AHL — In a stable DNA helix, A pairs with T because…</p>
+    <label><input type="radio" name="q7" data-a="a purine with a pyrimidine"> a purine always pairs with a pyrimidine, keeping the helix even-width</label><label><input type="radio" name="q7"> purines repel each other</label><label><input type="radio" name="q7"> thymine is a purine</label>
+    <div class="fb correct">Correct — purine-pyrimidine pairs have equal width, giving a uniform helix.</div><div class="fb wrong">A (purine) pairs with T (pyrimidine) so every base pair is the same width.</div>
+  </div>
+
+  <div class="q" data-a="DNA coiled around a core of 8 histones with H1 on linker DNA"><p>8. AHL — A nucleosome is…</p>
+    <label><input type="radio" name="q8" data-a="DNA coiled around a core of 8 histones with H1 on linker DNA"> DNA coiled around a core of 8 histones, with H1 on the linker DNA</label><label><input type="radio" name="q8"> DNA wrapped around a single histone</label><label><input type="radio" name="q8"> RNA folded into a ribosome</label>
+    <div class="fb correct">Correct — an octamer of 8 histones, plus H1 on the linker DNA.</div><div class="fb wrong">A nucleosome = DNA around 8 histones (octamer) + H1 on linker DNA.</div>
+  </div>
+
+  <div class="q" data-a="35S stayed outside in the protein shells"><p>9. AHL — In Hershey–Chase, the result that showed DNA is genetic material was…</p>
+    <label><input type="radio" name="q9" data-a="35S stayed outside in the protein shells"> ³²P (DNA) entered the bacteria while ³⁵S (protein) stayed outside</label><label><input type="radio" name="q9"> ³⁵S entered the bacteria and ³²P stayed out</label><label><input type="radio" name="q9"> both isotopes entered the bacteria</label>
+    <div class="fb correct">Correct — ³²P (DNA) got inside, ³⁵S (protein) stayed out → DNA is the genetic material.</div><div class="fb wrong">³²P labels DNA and entered; ³⁵S labels protein and stayed outside.</div>
+  </div>
+
+  <div class="q" data-a="A = T and G = C, falsifying the tetranucleotide hypothesis"><p>10. AHL — Chargaff's data showed…</p>
+    <label><input type="radio" name="q10" data-a="A = T and G = C, falsifying the tetranucleotide hypothesis"> A ≈ T and G ≈ C, falsifying the tetranucleotide hypothesis</label><label><input type="radio" name="q10"> A = G and T = C</label><label><input type="radio" name="q10"> all four bases are equal</label>
+    <div class="fb correct">Correct — A ≈ T and G ≈ C, which contradicted the repeating tetranucleotide idea.</div><div class="fb wrong">A ≈ T and G ≈ C; this falsified the tetranucleotide hypothesis.</div>
+  </div>
+</section>
+
+<section class="act" id="check"><div class="acttag">Syllabus objectives</div><h2>✅ CHECKLIST</h2>
+  <div class="progress"><div class="fill" id="fill"></div></div>
+  <div class="progtext" id="progText">0 / 16</div>
+  <ul class="cl" id="cl">
+    <li data-i="1"><span class="box">✓</span><span class="code">A1.2.1</span><span>DNA is the genetic material of all living organisms; some viruses use RNA but are not living.</span></li>
+    <li data-i="2"><span class="box">✓</span><span class="code">A1.2.2</span><span>A nucleotide = phosphate + pentose sugar + nitrogenous base.</span></li>
+    <li data-i="3"><span class="box">✓</span><span class="code">A1.2.2</span><span>I can draw a nucleotide: phosphate circle, sugar pentagon, base rectangle.</span></li>
+    <li data-i="4"><span class="box">✓</span><span class="code">A1.2.3</span><span>Sugar-phosphate bonding forms the strong covalent backbone.</span></li>
+    <li data-i="5"><span class="box">✓</span><span class="code">A1.2.4</span><span>I know the bases: DNA = A, T, G, C; RNA = A, U, G, C.</span></li>
+    <li data-i="6"><span class="box">✓</span><span class="code">A1.2.5</span><span>RNA is a polymer of nucleotides joined by condensation.</span></li>
+    <li data-i="7"><span class="box">✓</span><span class="code">A1.2.6</span><span>DNA is a double helix of two antiparallel strands linked by hydrogen bonds.</span></li>
+    <li data-i="8"><span class="box">✓</span><span class="code">A1.2.6</span><span>I can draw the strands antiparallel with A–T and G–C base pairs.</span></li>
+    <li data-i="9"><span class="box">✓</span><span class="code">A1.2.7</span><span>DNA vs RNA: strands, bases and pentose sugar.</span></li>
+    <li data-i="10"><span class="box">✓</span><span class="code">A1.2.7</span><span>I can sketch ribose vs deoxyribose.</span></li>
+    <li data-i="11"><span class="box">✓</span><span class="code">A1.2.8</span><span>Complementary base pairing allows replication and expression.</span></li>
+    <li data-i="12"><span class="box">✓</span><span class="code">A1.2.9</span><span>Any length/sequence → enormous information-storage capacity.</span></li>
+    <li data-i="13"><span class="box">✓</span><span class="code">A1.2.10</span><span>Universal genetic code is evidence of common ancestry.</span></li>
+    <li data-i="14"><span class="box">✓</span><span class="code">A1.2.11</span><span>AHL: 5′→3′ directionality and its role in replication/transcription.</span></li>
+    <li data-i="15"><span class="box">✓</span><span class="code">A1.2.12-13</span><span>AHL: purine-pyrimidine even-width helix; nucleosome (8 histones + H1).</span></li>
+    <li data-i="16"><span class="box">✓</span><span class="code">A1.2.14-15</span><span>AHL: Hershey–Chase and Chargaff's data as evidence/falsification.</span></li>
+  </ul>
+</section>
+
+</div>
+<footer style="margin-top:56px;padding-top:18px;border-top:1px solid rgba(255,46,196,.28);color:#b9a3d6;font-size:12.5px;text-align:center;">
+  Part of <a href="../../../index.html" style="color:#22d3ee">Travis's Study Hub</a> · A1.2 Nucleic Acids · grounded in BioNinja + the IB syllabus
+</footer>
+
+<script>(function(){
+  var KEY='a12-nucleic-acids-checklist-v1';
+  var cl=document.getElementById('cl'),fill=document.getElementById('fill'),pt=document.getElementById('progText');
+  var items=cl.querySelectorAll('li'),N=items.length;
+  function update(){var done=cl.querySelectorAll('li.done').length;fill.style.width=(done/N*100)+'%';pt.textContent=done+' / '+N;var pill=document.getElementById('progPill');if(pill)pill.textContent=done+'/'+N;var ids=[];items.forEach(function(li){if(li.classList.contains('done'))ids.push(li.dataset.i);});try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');saved.forEach(function(i){var li=cl.querySelector('li[data-i="'+i+'"]');if(li)li.classList.add('done');});}catch(e){}
+  items.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');update();});});update();
+  document.querySelectorAll('div.q label input').forEach(function(inp){inp.addEventListener('change',function(){var q=inp.closest('div.q');if(q.querySelectorAll('input[data-a]').length!==1)return;var right=q.querySelector('input[data-a]').checked;if(right){q.classList.add('correct');q.classList.remove('wrong');}else{q.classList.add('wrong');q.classList.remove('correct');}});});
+})();</script>
+</body>
+</html>
